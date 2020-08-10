@@ -1,0 +1,36 @@
+<div [formGroup]="form">
+  <div class="d__flex d__flex--direction-column">
+    <span class="text text__sm text__color--1 text__fw--600">Title</span>
+    <app-input class="m__top--10" [type]="'inner'" [placeholder]="'Job Title'" formControlName="title"></app-input>
+  </div>
+
+  <div class="d__flex d__flex--direction-column m__top--20">
+    <span class="text text__sm text__color--1 text__fw--600">Description</span>
+    <app-textarea class="m__top--10" [placeholder]="'Job Description'" formControlName="description"></app-textarea>
+  </div>
+
+  <div class="d__flex d__flex--direction-column">
+    <span class="text text__sm text__color--1 text__fw--600">Categories</span>
+    <app-input class="m__top--10" [type]="'inner'" [placeholder]="'Job Title'" formControlName="categories"></app-input>
+  </div>
+
+  <div class="d__flex d__flex--direction-column">
+    <span class="text text__sm text__color--1 text__fw--600">Requirements</span>
+    <app-input class="m__top--10" [type]="'inner'" [placeholder]="'Requirements'" formControlName="requirements"></app-input>
+  </div>
+
+  <div class="d__flex d__flex--direction-column">
+    <span class="text text__sm text__color--1 text__fw--600">Duration</span>
+    <app-input class="m__top--10" [type]="'inner'" [placeholder]="'Duration'" formControlName="duration"></app-input>
+  </div>
+
+  <div class="d__flex d__flex--direction-column">
+    <span class="text text__sm text__color--1 text__fw--600">Price</span>
+    <app-input class="m__top--10" [type]="'inner'" [placeholder]="'Price'" formControlName="price"></app-input>
+  </div>
+</div>
+
+<div class="m__top--10 text__right">
+  <app-button [type]="'transparent'" [text]="'Cancel'" (buttonClick)="onCancelClick()"></app-button>
+  <app-button [text]="'Post'" (buttonClick)="onPostClick()"></app-button>
+</div>

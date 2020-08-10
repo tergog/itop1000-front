@@ -1,1 +1,153 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~normalize.css';
+@import 'assets/scss/icons';
+@import 'assets/scss/fonts';
+@import 'assets/scss/variables';
+@import 'assets/scss/spacing';
+@import 'assets/scss/display';
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$itop1000-front-primary: mat-palette($mat-color-1);
+$itop1000-front-accent: mat-palette($mat-color-2, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$itop1000-front-warn: mat-palette($mat-color-2);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$itop1000-front-theme: mat-light-theme($itop1000-front-primary, $itop1000-front-accent, $itop1000-front-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($itop1000-front-theme);
+
+body {
+  height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.error {
+  display: inline-block;
+  padding: 10px;
+  background-color: $color-1;
+}
+
+i {
+  display: inline-block;
+}
+
+.text {
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: bold;
+
+  &__title {
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  &__center {
+    text-align: center;
+  }
+
+  &__right {
+    text-align: right;
+  }
+
+  &__uppercase {
+    text-transform: uppercase;
+  }
+
+  &__color--1 {
+    color: $text-color-1;
+  }
+
+  &__color--2 {
+    color: $text-color-2;
+  }
+
+  &__color--3 {
+    color: $text-color-3;
+  }
+
+  &__color--4 {
+    color: $text-color-4;
+  }
+
+  &__color--5 {
+    color: $text-color-5;
+  }
+
+  &__color--6 {
+    color: $text-color-6;
+  }
+
+  &__xs {
+    font-size: 9px;
+  }
+
+  &__sm {
+    font-size: 12px;
+  }
+
+  &__md {
+    font-size: 14px;
+  }
+
+  &__lg {
+    font-size: 16px;
+  }
+
+  &__xlg {
+    font-size: 20px;
+  }
+
+  &__xxlg {
+    font-size: 24px;
+  }
+
+  &__xxxlg {
+    font-size: 28px;
+  }
+
+  &__bold {
+    font-weight: bold;
+  }
+
+  &__fw {
+    &--500 {
+      font-weight: 600;
+    }
+
+    &--600 {
+      font-weight: 600;
+    }
+  }
+}
+
+.cursor {
+  &__pointer {
+    cursor: pointer;
+  }
+}
+
+.mat-dialog-container {
+  padding: 0 !important;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

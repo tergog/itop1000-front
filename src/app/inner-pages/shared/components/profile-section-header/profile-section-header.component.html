@@ -1,0 +1,5 @@
+<span class="text text__md text__fw--500 text__color--3 text__uppercase">{{ title }}</span>
+
+<ng-container *ngIf="canEdit">
+  <i class="edit cursor__pointer" (click)="onEditClick()"></i>
+</ng-container>

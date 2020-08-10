@@ -1,0 +1,15 @@
+@import 'assets/scss/variables';
+
+.notification-popup {
+  min-width: 369px;
+  display: flex;
+  position: fixed;
+  top: 85px;
+  right: 10px;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px;
+  background-color: $color-1;
+  box-shadow: 1px 1px 4px rgba(255, 255, 255);
+  border-radius: 5px;
+}

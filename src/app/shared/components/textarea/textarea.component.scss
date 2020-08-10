@@ -1,0 +1,42 @@
+@import 'assets/scss/variables';
+
+:host {
+  position: relative;
+  width: 100%;
+  display: inline-block;
+  padding: 10px 20px;
+  border: 1px solid $color-4;
+  border-radius: 5px;
+
+  textarea {
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    width: 100%;
+    height: auto;
+    color: $text-color-1;
+    outline: none;
+    background-color: transparent;
+    border: none;
+
+    &::placeholder {
+      opacity: 1;
+      color: $text-color-6;
+    }
+  }
+
+  &:after {
+    position: absolute;
+    background: $color-3;
+    opacity: 0.24;
+    content: '';
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 5px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
+  }
+}

@@ -1,0 +1,6 @@
+@import 'assets/scss/variables';
+
+:host {
+  background: $color-3;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}

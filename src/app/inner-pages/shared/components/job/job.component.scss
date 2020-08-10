@@ -1,0 +1,9 @@
+@import 'assets/scss/variables';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid $color-4;
+  padding-bottom: 20px;
+  margin-bottom: 40px;
+}

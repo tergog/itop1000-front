@@ -1,0 +1,85 @@
+$color-1: #000000;
+$color-2: #F31D42;
+$color-2-hover: #92060D;
+$color-2-active: #C52B33;
+$color-3: #fff;
+$color-4: #E0E0E0;
+$color-5: #F1D261;
+
+$text-color-1: #000000;
+$text-color-2: #F31D42;
+$text-color-3: #fff;
+$text-color-4: #E0E0E0;
+$text-color-5: #F1D261;
+$text-color-6: #828282;
+$text-color-7: #26B52B;
+
+$bg-color-opacity: #3D3D3D;
+$bg-color-dark: #1E1D1D;
+
+$mat-color-1: (
+  50 : #e0e0e0,
+  100 : #b3b3b3,
+  200 : #808080,
+  300 : #4d4d4d,
+  400 : #262626,
+  500 : #000000,
+  600 : #000000,
+  700 : #000000,
+  800 : #000000,
+  900 : #000000,
+  A100 : #a6a6a6,
+  A200 : #8c8c8c,
+  A400 : #737373,
+  A700 : #666666,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #ffffff,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #ffffff,
+    A700 : #ffffff,
+  )
+);
+
+$mat-color-2: (
+  50 : #f5e5e6,
+  100 : #e6bec0,
+  200 : #d69396,
+  300 : #c6676c,
+  400 : #b9474d,
+  500 : #ad262d,
+  600 : #a62228,
+  700 : #9c1c22,
+  800 : #93171c,
+  900 : #830d11,
+  A100 : #ffb4b6,
+  A200 : #ff8183,
+  A400 : #ff4e51,
+  A700 : #ff3538,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #ffffff,
+  )
+);
+

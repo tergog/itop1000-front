@@ -1,0 +1,19 @@
+<div [@slideIn] *ngIf="section === DevProfileSections.ContactInfo">
+  <app-dev-contact-info></app-dev-contact-info>
+</div>
+
+<div [@slideIn] *ngIf="section === DevProfileSections.ProfileSettings">
+  <app-dev-profile-settings></app-dev-profile-settings>
+</div>
+
+<div [@slideIn] *ngIf="section === DevProfileSections.CategoriesAndSkills">
+  <app-dev-categories-and-skills></app-dev-categories-and-skills>
+</div>
+
+<div [@slideIn] *ngIf="section === DevProfileSections.Balance">
+  <app-dev-profile-balance></app-dev-profile-balance>
+</div>
+
+<div [@slideIn] *ngIf="section === DevProfileSections.PasswordAndSecurity">
+  <app-profile-change-password></app-profile-change-password>
+</div>

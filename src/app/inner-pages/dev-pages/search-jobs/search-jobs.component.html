@@ -1,0 +1,7 @@
+<ng-container *ngIf="(jobs$ | async)?.length">
+  <app-job *ngFor="let job of jobs$ | async" [job]="job"></app-job>
+</ng-container>
+
+<ng-container *ngIf="!(jobs$ | async)?.length">
+  No jobs found
+</ng-container>

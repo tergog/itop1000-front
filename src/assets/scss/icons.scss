@@ -1,0 +1,220 @@
+@import 'variables';
+
+.logo {
+  width: 60px;
+  height: 60px;
+  background-image: url(assets/icons/logo.svg);
+}
+
+.edit {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: url(assets/icons/edit.svg) no-repeat $color-3 center center;
+}
+
+.plus {
+  width: 37px;
+  height: 37px;
+  border-radius: 50%;
+  background: url(assets/icons/plus.svg) no-repeat $color-1 center center;
+}
+
+.close {
+  width: 15px;
+  height: 15px;
+  background: url(assets/icons/close.svg);
+}
+
+.user {
+  width: 15px;
+  height: 15px;
+  background: url(assets/icons/user.svg);
+}
+
+.user {
+  width: 15px;
+  height: 15px;
+  background: url(assets/icons/user.svg);
+}
+
+.profile-photo {
+  width: 154px;
+  height: 154px;
+  background: url(assets/icons/profile-photo.svg);
+}
+
+.email {
+  width: 15px;
+  height: 15px;
+  background: url(assets/icons/email.svg);
+}
+
+.search {
+  width: 15px;
+  height: 15px;
+  background: url(assets/icons/search.svg);
+}
+
+.phone {
+  width: 15px;
+  height: 15px;
+  background: url(assets/icons/phone.svg);
+}
+
+.checked {
+  width: 15px;
+  height: 15px;
+  background: url(assets/icons/checked.svg);
+}
+
+.eye {
+  width: 15px;
+  height: 10px;
+  background: url(assets/icons/eye.svg);
+}
+
+.eye-line {
+  width: 15px;
+  height: 14px;
+  background: url(assets/icons/eye-line.svg);
+}
+
+.logo-preview-1 {
+  width: 240px;
+  height: 106px;
+  background-image: url(assets/icons/logo-preview-1.svg);
+}
+
+.logo-preview-2 {
+  display: block;
+  width: 118px;
+  height: 52px;
+  background-image: url(assets/icons/logo-preview-2.svg);
+  background-size: contain;
+}
+
+.contact-info {
+  width: 15px;
+  height: 15px;
+  opacity: 0.25;
+  background-image: url(assets/icons/contact-info.svg);
+}
+
+.settings {
+  width: 15px;
+  height: 15px;
+  opacity: 0.25;
+  background-image: url(assets/icons/settings.svg);
+}
+
+.payments {
+  width: 15px;
+  height: 11px;
+  opacity: 0.25;
+  background-image: url(assets/icons/payments.svg);
+}
+
+.security {
+  width: 11px;
+  height: 15px;
+  opacity: 0.25;
+  background-image: url(assets/icons/security.svg);
+}
+
+.categories {
+  width: 15px;
+  height: 15px;
+  opacity: 0.25;
+  background-image: url(assets/icons/categories.svg);
+}
+
+.categories-light {
+  width: 15px;
+  height: 15px;
+  background-image: url(assets/icons/categories-light.svg);
+}
+
+.education-light {
+  width: 15px;
+  height: 10px;
+  background-image: url(assets/icons/education-light.svg);
+}
+
+.soft-skills-light {
+  width: 15px;
+  height: 15px;
+  background-image: url(assets/icons/soft-skills-light.svg);
+}
+
+.books {
+  width: 15px;
+  height: 12px;
+  background-image: url(assets/icons/books-light.svg);
+}
+
+.certificates {
+  width: 15px;
+  height: 15px;
+  background-image: url(assets/icons/certificates-light.svg);
+}
+
+.reviews {
+  width: 15px;
+  height: 15px;
+  background-image: url(assets/icons/reviews-light.svg);
+}
+
+.location {
+  width: 20px;
+  height: 20px;
+  background-image: url(assets/icons/location.svg);
+}
+
+.active {
+  .contact-info {
+    opacity: 1;
+    background-image: url(assets/icons/contact-info-active.svg);
+  }
+
+  .settings {
+    opacity: 1;
+    background-image: url(assets/icons/settings-active.svg);
+  }
+
+  .payments {
+    opacity: 1;
+    background-image: url(assets/icons/payments-active.svg);
+  }
+
+  .security {
+    opacity: 1;
+    background-image: url(assets/icons/security-active.svg);
+  }
+
+  .categories, .categories-light {
+    opacity: 1;
+    background-image: url(assets/icons/categories-active.svg);
+  }
+
+  .education-light {
+    background-image: url(assets/icons/education-active.svg);
+  }
+
+  .soft-skills-light {
+    background-image: url(assets/icons/soft-skills-active.svg);
+  }
+
+  .books {
+    background-image: url(assets/icons/books-active.svg);
+  }
+
+  .certificates {
+    background-image: url(assets/icons/certificates-active.svg);
+  }
+
+  .reviews {
+    background-image: url(assets/icons/reviews-active.svg);
+  }
+}
+

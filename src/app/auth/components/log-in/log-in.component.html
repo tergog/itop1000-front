@@ -1,0 +1,29 @@
+<app-auth-container>
+  <span class="text text__title text__color--3 text__uppercase m__top--30">
+    Log in
+  </span>
+
+  <div [formGroup]="form">
+    <div class="m__top--36">
+      <span class="text text__sm text__color--3 text__fw--600">Email address</span>
+      <app-input formControlName="email" [placeholder]="'email@example.com'" class="m__top--10"></app-input>
+    </div>
+
+    <div class="m__top--25">
+      <span class="text text__sm text__color--3 text__fw--600">Password</span>
+      <app-input formControlName="password" (enterKey)="onLogInClick()" [isHiddenPassword]="isPasswordHidden" [placeholder]="'password'" class="m__top--10">
+        <i [class.eye]="!isPasswordHidden" [class.eye-line]="isPasswordHidden" (click)="passwordHiddenToggle()"></i>
+      </app-input>
+    </div>
+
+    <div class="m__top--10 w__594">
+      <app-checkbox [label]="'Remember me'"></app-checkbox>
+    </div>
+  </div>
+
+  <span *ngIf="errorMessage" class="error text text__md text__color--2 m__top--25">
+    {{ errorMessage }}
+  </span>
+
+  <app-button class="m__top--60" (buttonClick)="onLogInClick()" [type]="'main'" [text]="'Login'"></app-button>
+</app-auth-container>

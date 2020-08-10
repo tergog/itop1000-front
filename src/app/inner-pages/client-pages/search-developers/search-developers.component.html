@@ -1,0 +1,11 @@
+<app-standard-bg-wrap>
+  <app-developer-resume
+    *ngFor="let developer of developers$ | async"
+    [developer]="developer"
+    (profile)="onProfileClick($event)">
+  </app-developer-resume>
+
+  <ng-container *ngIf="!(developers$ | async)?.length">
+    <span class="text text__color--2 text__xlg">No Developers found</span>
+  </ng-container>
+</app-standard-bg-wrap>

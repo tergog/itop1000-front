@@ -1,0 +1,19 @@
+<div [@slideIn] *ngIf="section === ClientProfileSections.ContactInfo">
+  <app-client-contact-info></app-client-contact-info>
+</div>
+
+<div [@slideIn] *ngIf="section === ClientProfileSections.Billings">
+  <app-client-billings></app-client-billings>
+</div>
+
+<div [@slideIn] *ngIf="section === ClientProfileSections.PostedJobs">
+  <app-client-posted-jobs></app-client-posted-jobs>
+</div>
+
+<div [@slideIn] *ngIf="section === ClientProfileSections.Payments">
+  <app-client-payments></app-client-payments>
+</div>
+
+<div [@slideIn] *ngIf="section === ClientProfileSections.PasswordAndSecurity">
+  <app-profile-change-password></app-profile-change-password>
+</div>

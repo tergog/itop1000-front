@@ -1,0 +1,37 @@
+<div class="dialog-header">
+  <span class="text text__lg text__color--3 text__uppercase">Edit photo</span>
+  <i class="close cursor__pointer" mat-dialog-close></i>
+</div>
+
+<div class="p__20">
+
+  <div class="d__flex">
+    <ng-container *ngIf="imageSrc">
+      <img [src]="croppedImage" alt="Profile image" />
+    </ng-container>
+
+    <image-cropper
+      [imageChangedEvent]="imageChangedEvent"
+      [maintainAspectRatio]="true"
+      [roundCropper]="true"
+      format="png"
+      (imageCropped)="imageCropped($event)"
+      (imageLoaded)="imageLoaded()"
+      (cropperReady)="cropperReady()"
+      (loadImageFailed)="loadImageFailed()"
+    ></image-cropper>
+
+    <input
+      class="d__none"
+      type="file"
+      (change)="fileChangeEvent($event)"
+      #fileInput>
+
+    <app-button [type]="'secondary'" [text]="'Select Profile Image'" (buttonClick)="fileInput.click()"></app-button>
+  </div>
+
+  <div class="text__center m__top--50">
+    <app-button [type]="'transparent'" [text]="'Cancel'" mat-dialog-close></app-button>
+    <app-button [text]="'Save'" (buttonClick)="closeDialog()"></app-button>
+  </div>
+</div>

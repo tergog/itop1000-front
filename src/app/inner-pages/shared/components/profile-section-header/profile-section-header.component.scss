@@ -1,0 +1,16 @@
+@import '../../../../../assets/scss/variables';
+
+:host {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  background-color: $color-1;
+}
+
+.edit {
+  position: absolute;
+  right: 30px;
+}
+

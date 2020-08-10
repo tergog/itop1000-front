@@ -1,0 +1,17 @@
+.profile-photo-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 228px;
+  height: 228px;
+  border-radius: 50%;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+
+  .plus {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+}

@@ -1,0 +1,8 @@
+<input
+  (keyup.enter)="enterKeyClick()"
+  class="{{ type }}"
+  [type]="isHiddenPassword ? 'password' : 'text'"
+  [(ngModel)]="value"
+  [placeholder]="placeholder">
+
+<ng-content></ng-content>

@@ -1,0 +1,41 @@
+<ul>
+  <li class="d__flex"
+      [class.active]="activeSection === DevProfileSections.ContactInfo"
+      (click)="onSectionCLick(DevProfileSections.ContactInfo)"
+  >
+    <i class="contact-info m__right--10"></i>
+    <span class="text text__lg">Contact info</span>
+  </li>
+
+  <li class="d__flex"
+      [class.active]="activeSection === DevProfileSections.ProfileSettings"
+      (click)="onSectionCLick(DevProfileSections.ProfileSettings)"
+  >
+    <i class="settings m__right--10"></i>
+    <span class="text text__lg text__color--1">Profile settings</span>
+  </li>
+
+  <li class="d__flex"
+      [class.active]="activeSection === DevProfileSections.CategoriesAndSkills"
+      (click)="onSectionCLick(DevProfileSections.CategoriesAndSkills)"
+  >
+    <i class="categories m__right--10"></i>
+    <span class="text text__lg text__color--1">Categories & Skills</span>
+  </li>
+
+  <li class="d__flex d__flex--items-center"
+      [class.active]="activeSection === DevProfileSections.Balance"
+      (click)="onSectionCLick(DevProfileSections.Balance)"
+  >
+    <i class="payments m__right--10"></i>
+    <span class="text text__lg text__color--1">Balance</span>
+  </li>
+
+  <li class="d__flex"
+      [class.active]="activeSection === DevProfileSections.PasswordAndSecurity"
+      (click)="onSectionCLick(DevProfileSections.PasswordAndSecurity)"
+  >
+    <i class="security m__right--10"></i>
+    <span class="text text__lg text__color--1">Password & Security</span>
+  </li>
+</ul>
