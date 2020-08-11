@@ -7,6 +7,7 @@ import { LogInComponent } from './components/log-in/log-in.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { SharedModule } from 'app/shared/shared.module';
 import { AuthContainerComponent } from './components/auth-container/auth-container.component';
+import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 
 
 const routes: Routes = [
@@ -15,7 +16,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [LogInComponent, SignUpComponent, AuthContainerComponent],
+  declarations: [LogInComponent, SignUpComponent, AuthContainerComponent, VerifyEmailComponent],
     imports: [
         CommonModule,
         ReactiveFormsModule,
