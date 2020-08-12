@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { untilDestroyed } from 'ngx-take-until-destroy';
+import { switchMap } from 'rxjs/operators';
 
 import { UserService } from 'app/shared/services';
 
@@ -20,13 +21,12 @@ export class VerifyEmailComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(
-      ({ token }) => {
-         this.userService.verifyToken(token).pipe(untilDestroyed(this)).subscribe(() => {
-            this.router.navigate(['/auth', 'login']);
-        });
-      }
-    );
+    this.route.queryParams.pipe(
+      untilDestroyed(this),
+      switchMap(({ token }) => this.userService.verifyToken(token))
+    ).subscribe(() => {
+      this.router.navigate(['/auth', 'login']);
+    });
   }
 
   ngOnDestroy(): void { }
