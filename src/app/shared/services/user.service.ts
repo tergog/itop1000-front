@@ -25,6 +25,10 @@ export class UserService {
       .pipe(map(res => !!res));
   }
 
+  public verifyToken(token: string): Observable<object> {
+    return this.http.post(`${environment.apiUrl}${ApiConstants.accounts.verifyEmail}`, { token });
+  }
+
   public userRegistration(userInfo: UserRegistrationInfo): Observable<object> {
     return this.http.post(`${this.apiUrl}${ApiConstants.accounts.register}/`, userInfo);
   }

@@ -1,30 +1,34 @@
-import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Subscription} from 'rxjs';
-import {ApiConstants} from '../../../constants/api.constants';
-import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../../environments/environment';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
+import { untilDestroyed } from 'ngx-take-until-destroy';
+
+import { UserService } from 'app/shared/services';
 
 @Component({
   selector: 'app-verify-email',
   templateUrl: './verify-email.component.html',
-  styleUrls: ['./verify-email.component.scss']
+  styleUrls: ['./verify-email.component.scss'],
 })
-export class VerifyEmailComponent implements OnInit {
-  private querySubscription: Subscription;
+export class VerifyEmailComponent implements OnInit, OnDestroy {
 
-  constructor(private route: ActivatedRoute,
+  constructor(
+              private route: ActivatedRoute,
               private http: HttpClient,
-              private router: Router) {
-    this.querySubscription = route.queryParams.subscribe(
-      (queryParam: any) => {
-        this.http.post(`${environment.apiUrl}${ApiConstants.accounts.verifyEmail}`, { token: queryParam.token }).subscribe();
-        this.router.navigate(['/auth', 'login']).then();
+              private router: Router,
+              private userService: UserService,
+  ) { }
+
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(
+      ({ token }) => {
+         this.userService.verifyToken(token).pipe(untilDestroyed(this)).subscribe(() => {
+            this.router.navigate(['/auth', 'login']);
+        });
       }
     );
   }
 
-  ngOnInit(): void {
-  }
+  ngOnDestroy(): void { }
 
 }
