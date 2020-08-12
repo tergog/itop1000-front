@@ -5,4 +5,5 @@ export interface UserRegistrationInfo {
   password: string;
   confirmPassword: string;
   acceptTerms: string;
+  role: string;
 }
