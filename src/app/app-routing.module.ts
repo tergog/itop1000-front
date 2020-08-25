@@ -5,7 +5,8 @@ import { LandingPageComponent } from './core/components/landing-page/landing-pag
 import { AuthGuard } from 'app/shared/guards/auth.guard';
 import { ClientPagesGuard } from 'app/shared/guards/client-pages.guard';
 import { VerifyEmailComponent } from './auth/components/verify-email/verify-email.component';
-import { InfoPagesComponent } from './info-pages/info-pages.component';
+import { TermsPageComponent } from './info-pages/terms-page/terms-page.component';
+import { PrivacyPageComponent } from './info-pages/privacy-page/privacy-page.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: LandingPageComponent },
@@ -24,7 +25,11 @@ const routes: Routes = [
   },
   {
     path: 'terms',
-    component: InfoPagesComponent,
+    component: TermsPageComponent,
+  },
+  {
+    path: 'privacy',
+    component: PrivacyPageComponent,
   },
 ];
 
