@@ -14,7 +14,6 @@ import { DeveloperResumeComponent } from './components/developer-resume/develope
 import { DeveloperResumeFullComponent } from './components/developer-resume-full/developer-resume-full.component';
 import { StandardBgWrapComponent } from './components/standard-bg-wrap/standard-bg-wrap.component';
 
-
 @NgModule({
   declarations: [
     ChangePasswordDialogComponent,
@@ -24,24 +23,22 @@ import { StandardBgWrapComponent } from './components/standard-bg-wrap/standard-
     UploadPhotoDialogComponent,
     DeveloperResumeComponent,
     DeveloperResumeFullComponent,
-    StandardBgWrapComponent
+    StandardBgWrapComponent,
   ],
   imports: [
-      CommonModule,
-      SharedModule,
-      ReactiveFormsModule,
-      ImageCropperModule,
-      InViewportModule
+    CommonModule,
+    SharedModule,
+    ReactiveFormsModule,
+    ImageCropperModule,
+    InViewportModule,
   ],
-    exports: [
-        ChangePasswordDialogComponent,
-        ProfileChangePasswordComponent,
-        ProfileSectionHeaderComponent,
-        JobComponent,
-        DeveloperResumeComponent,
-        StandardBgWrapComponent
-    ]
+  exports: [
+    ChangePasswordDialogComponent,
+    ProfileChangePasswordComponent,
+    ProfileSectionHeaderComponent,
+    JobComponent,
+    DeveloperResumeComponent,
+    StandardBgWrapComponent,
+  ],
 })
-export class PagesSharedModule {
-
-}
+export class PagesSharedModule {}

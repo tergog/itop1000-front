@@ -1,23 +1,41 @@
 <div class="d__flex d__flex--direction-column d__flex--items-center photo-wrap">
-  <img [src]="developer.photo" alt="photo">
+  <img [src]="developer.photo" alt="photo" />
 
-  <div class="d__flex d__flex--direction-column d__flex--justify-center text__center m__top--10 cursor__pointer" (click)="onProfileClick()">
-    <span class="text text__color--3 text__xxlg text__uppercase">{{ developer.firstName }}</span>
-    <span class="text text__color--3 text__xxlg text__uppercase">{{ developer.lastName }}</span>
+  <div
+    class="d__flex d__flex--direction-column d__flex--justify-center text__center m__top--10 cursor__pointer"
+    (click)="onProfileClick()"
+  >
+    <span class="text text__color--3 text__xxlg text__uppercase">{{
+      developer.firstName
+    }}</span>
+    <span class="text text__color--3 text__xxlg text__uppercase">{{
+      developer.lastName
+    }}</span>
   </div>
 
-  <span class="text text__color--5 text__xlg m__top--10">${{ developer.hourlyRate }}/hr </span>
+  <span class="text text__color--5 text__xlg m__top--10"
+    >${{ developer.hourlyRate }}/hr
+  </span>
 </div>
 
 <div class="d__flex d__flex--direction-column content-wrap">
   <div class="d__flex">
-    <span class="text text__color--3 text__xxlg m__right--30 cursor__pointer" (click)="onProfileClick()">{{ developer.title }}</span>
+    <span
+      class="text text__color--3 text__xxlg m__right--30 cursor__pointer"
+      (click)="onProfileClick()"
+      >{{ developer.title }}</span
+    >
     <div class="status-free text text__lg text__uppercase">FREE</div>
   </div>
-  <span class="text text__color--4 text__lg m__top--10">{{ developer.description }}</span>
+  <span class="text text__color--4 text__lg m__top--10">{{
+    developer.description
+  }}</span>
 
   <div class="m__top--20">
-    <span class="text text__color--3 text__sm text__uppercase m__right--10" *ngFor="let skill of developer.skills">
+    <span
+      class="text text__color--3 text__sm text__uppercase m__right--10"
+      *ngFor="let skill of developer.skills"
+    >
       {{ skill.name }}
     </span>
   </div>
@@ -30,6 +48,8 @@
       <span class="text text__md text__color--3">{{ developer.location }}</span>
     </div>
 
-    <span class="text text__md text__color--3">{{ developer.dateUpdated }}</span>
+    <span class="text text__md text__color--3">{{
+      developer.dateUpdated
+    }}</span>
   </div>
 </div>

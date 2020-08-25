@@ -1,4 +1,4 @@
-@import 'assets/scss/variables';
+@import "assets/scss/variables";
 
 .content {
   display: flex;
@@ -18,7 +18,7 @@
 
   img {
     max-width: 135px;
-    max-height:135px;
+    max-height: 135px;
     border-radius: 50%;
   }
 
@@ -89,6 +89,60 @@
       width: 35px;
       height: 35px;
       border-radius: 50%;
+    }
+  }
+}
+
+.softskills {
+  width: 60%;
+
+  &__wrap {
+    margin: 3rem 0;
+  }
+
+  &__skill {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    &__name {
+      width: 30%;
+      font-family: Work Sans;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 24px;
+
+      text-align: right;
+      text-transform: uppercase;
+
+      color: #ffffff;
+    }
+
+    &__percent {
+      @extend .softskills__skill__name;
+      width: 10%;
+      text-align: left;
+    }
+  }
+
+  &__progressbar {
+    &__full {
+      display: flex;
+      align-items: center;
+      margin: 0 1.5rem;
+      width: 60%;
+      height: 3px;
+      background: #c4c4c4;
+      border-radius: 5px;
+    }
+
+    &__filled {
+      width: 40%;
+      height: 5px;
+      background: #f21d42;
+      border-radius: 5px;
     }
   }
 }

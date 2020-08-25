@@ -1,56 +1,101 @@
 <app-standard-bg-wrap>
   <div *ngIf="developer$ | async as developer">
-    <div class="d__inline-flex d__flex--direction-column d__flex--items-center resume-nav p__20">
+    <div
+      class="d__inline-flex d__flex--direction-column d__flex--items-center resume-nav p__20"
+    >
       <div class="d__flex d__flex--direction-column d__flex--items-center">
-        <img [src]="developer.photo" alt="photo">
+        <img [src]="developer.photo" alt="photo" />
 
-        <div class="d__flex d__flex--direction-column d__flex--justify-center text__center m__top--10">
-          <span class="text text__color--3 text__xxlg text__uppercase">{{ developer.firstName }}</span>
-          <span class="text text__color--3 text__xxlg text__uppercase">{{ developer.lastName }}</span>
+        <div
+          class="d__flex d__flex--direction-column d__flex--justify-center text__center m__top--10"
+        >
+          <span class="text text__color--3 text__xxlg text__uppercase">{{
+            developer.firstName
+          }}</span>
+          <span class="text text__color--3 text__xxlg text__uppercase">{{
+            developer.lastName
+          }}</span>
         </div>
 
-        <span class="text text__color--5 text__xlg m__top--10">${{ developer.hourlyRate }}/hr </span>
+        <span class="text text__color--5 text__xlg m__top--10"
+          >${{ developer.hourlyRate }}/hr
+        </span>
       </div>
 
       <ul class="m__top--30">
-        <li class="d__flex"
-            [class.active]="activeSection === DeveloperResumeSections.ProfessionalSkills"
-            (click)="onSectionCLick(DeveloperResumeSections.ProfessionalSkills, professionalSkillsRef)"
+        <li
+          class="d__flex"
+          [class.active]="
+            activeSection === DeveloperResumeSections.ProfessionalSkills
+          "
+          (click)="
+            onSectionCLick(
+              DeveloperResumeSections.ProfessionalSkills,
+              professionalSkillsRef
+            )
+          "
         >
           <i class="categories-light m__right--10"></i>
           <span class="text text__lg text__color--3">Professional Skills</span>
         </li>
-        <li class="d__flex d__flex--items-center"
-            [class.active]="activeSection === DeveloperResumeSections.Education"
-            (click)="onSectionCLick(DeveloperResumeSections.Education, educationRef)"
+        <li
+          class="d__flex d__flex--items-center"
+          [class.active]="activeSection === DeveloperResumeSections.Education"
+          (click)="
+            onSectionCLick(DeveloperResumeSections.Education, educationRef)
+          "
         >
           <i class="education-light m__right--10"></i>
           <span class="text text__lg text__color--3">Education</span>
         </li>
-        <li class="d__flex"
-            [class.active]="activeSection === DeveloperResumeSections.SoftSkillsLanguages"
-            (click)="onSectionCLick(DeveloperResumeSections.SoftSkillsLanguages, softSkillsRef)"
+        <li
+          class="d__flex"
+          [class.active]="
+            activeSection === DeveloperResumeSections.SoftSkillsLanguages
+          "
+          (click)="
+            onSectionCLick(
+              DeveloperResumeSections.SoftSkillsLanguages,
+              softSkillsRef
+            )
+          "
         >
           <i class="soft-skills-light m__right--10"></i>
-          <span class="text text__lg text__color--3">Soft Skills | Languages</span>
+          <span class="text text__lg text__color--3"
+            >Soft Skills | Languages</span
+          >
         </li>
-        <li class="d__flex d__flex--items-center"
-            [class.active]="activeSection === DeveloperResumeSections.IWantToLearn"
-            (click)="onSectionCLick(DeveloperResumeSections.IWantToLearn, iWantToLearnRef)"
+        <li
+          class="d__flex d__flex--items-center"
+          [class.active]="
+            activeSection === DeveloperResumeSections.IWantToLearn
+          "
+          (click)="
+            onSectionCLick(
+              DeveloperResumeSections.IWantToLearn,
+              iWantToLearnRef
+            )
+          "
         >
           <i class="books m__right--10"></i>
           <span class="text text__lg text__color--3">I Want To Learn</span>
         </li>
-        <li class="d__flex"
-            [class.active]="activeSection === DeveloperResumeSections.Certificates"
-            (click)="onSectionCLick(DeveloperResumeSections.Certificates, certificates)"
+        <li
+          class="d__flex"
+          [class.active]="
+            activeSection === DeveloperResumeSections.Certificates
+          "
+          (click)="
+            onSectionCLick(DeveloperResumeSections.Certificates, certificates)
+          "
         >
           <i class="certificates m__right--10"></i>
           <span class="text text__lg text__color--3">Certificates</span>
         </li>
-        <li class="d__flex"
-            [class.active]="activeSection === DeveloperResumeSections.Reviews"
-            (click)="onSectionCLick(DeveloperResumeSections.Reviews, reviews)"
+        <li
+          class="d__flex"
+          [class.active]="activeSection === DeveloperResumeSections.Reviews"
+          (click)="onSectionCLick(DeveloperResumeSections.Reviews, reviews)"
         >
           <i class="reviews m__right--10"></i>
           <span class="text text__lg text__color--3">Reviews</span>
@@ -58,129 +103,258 @@
       </ul>
     </div>
 
-    <div class="resume-content"
-         #professionalSkillsRef
-         snInViewport
-         [inViewportOptions]=" { threshold: 1 }"
-         (inViewportChange)="inViewport($event, DeveloperResumeSections.ProfessionalSkills)">
+    <div
+      class="resume-content"
+      #professionalSkillsRef
+      snInViewport
+      [inViewportOptions]="{ threshold: 1 }"
+      (inViewportChange)="
+        inViewport($event, DeveloperResumeSections.ProfessionalSkills)
+      "
+    >
       <div class="location-wrap">
         <div class="d__flex m__right--30">
           <i class="location m__right--10"></i>
-          <span class="text text__md text__color--3">{{ developer.location }}</span>
+          <span class="text text__md text__color--3">{{
+            developer.location
+          }}</span>
         </div>
 
         <div class="separator m__right--30"></div>
 
-        <span class="text text__md text__color--3"> {{ developer.dateUpdated }} </span>
+        <span class="text text__md text__color--3">
+          {{ developer.dateUpdated }}
+        </span>
       </div>
 
       <div class="professional-skills m__top--20">
         <div>
-          <span class="text text__color--3 text__xlg text__uppercase">Professional Skills</span>
-          <div class="section-underline m__top--10" [class.section-underline-active]="activeSection === DeveloperResumeSections.ProfessionalSkills"></div>
-          <span class="d__flex text text__color--4 text__lg m__top--10">{{ developer.description }}</span>
+          <span class="text text__color--3 text__xlg text__uppercase"
+            >Professional Skills</span
+          >
+          <div
+            class="section-underline m__top--10"
+            [class.section-underline-active]="
+              activeSection === DeveloperResumeSections.ProfessionalSkills
+            "
+          ></div>
+          <span class="d__flex text text__color--4 text__lg m__top--10">{{
+            developer.description
+          }}</span>
         </div>
 
         <div></div>
       </div>
 
-      <div class="separator m__top--20"
-           #educationRef
-           snInViewport
-           [inViewportOptions]=" { threshold: 1 }"
-           (inViewportChange)="inViewport($event, DeveloperResumeSections.Education)">
-      </div>
+      <div
+        class="separator m__top--20"
+        #educationRef
+        snInViewport
+        [inViewportOptions]="{ threshold: 1 }"
+        (inViewportChange)="
+          inViewport($event, DeveloperResumeSections.Education)
+        "
+      ></div>
 
       <div class="m__top--20">
-        <span class="text text__color--3 text__xlg text__uppercase">Education</span>
-        <div class="section-underline m__top--10" [class.section-underline-active]="activeSection === DeveloperResumeSections.Education"></div>
+        <span class="text text__color--3 text__xlg text__uppercase"
+          >Education</span
+        >
+        <div
+          class="section-underline m__top--10"
+          [class.section-underline-active]="
+            activeSection === DeveloperResumeSections.Education
+          "
+        ></div>
       </div>
 
-      <div class="separator m__top--20"
-           #softSkillsRef
-           snInViewport
-           [inViewportOptions]=" { threshold: 1 }"
-           (inViewportChange)="inViewport($event, DeveloperResumeSections.Education)">
-      </div>
+      <div
+        class="separator m__top--20"
+        #softSkillsRef
+        snInViewport
+        [inViewportOptions]="{ threshold: 1 }"
+        (inViewportChange)="
+          inViewport($event, DeveloperResumeSections.Education)
+        "
+      ></div>
 
-      <div class="d__flex m__top--20">
-        <div>
-          <span class="text text__color--3 text__xlg text__uppercase">Soft Skills</span>
-          <div class="section-underline m__top--10" [class.section-underline-active]="activeSection === DeveloperResumeSections.SoftSkillsLanguages"></div>
+      <div class="d__flex d__flex--justify-between m__top--20">
+        <div class="softskills">
+          <span class="text text__color--3 text__xlg text__uppercase"
+            >Soft Skills</span
+          >
+          <div class="softskills__wrap">
+            <div class="softskills__skill">
+              <span class="softskills__skill__name">Creativity</span>
+
+              <div class="softskills__progressbar__full">
+                <div class="softskills__progressbar__filled"></div>
+              </div>
+
+              <span class="softskills__skill__percent">40%</span>
+            </div>
+            <div class="softskills__skill">
+              <span class="softskills__skill__name">Mentoring</span>
+
+              <div class="softskills__progressbar__full">
+                <div class="softskills__progressbar__filled"></div>
+              </div>
+
+              <span class="softskills__skill__percent">40%</span>
+            </div>
+            <div class="softskills__skill">
+              <span class="softskills__skill__name">Communication</span>
+
+              <div class="softskills__progressbar__full">
+                <div class="softskills__progressbar__filled"></div>
+              </div>
+
+              <span class="softskills__skill__percent">40%</span>
+            </div>
+            <div class="softskills__skill">
+              <span class="softskills__skill__name">Lorem Lorem</span>
+
+              <div class="softskills__progressbar__full">
+                <div class="softskills__progressbar__filled"></div>
+              </div>
+
+              <span class="softskills__skill__percent">40%</span>
+            </div>
+          </div>
+          <div
+            class="section-underline m__top--10"
+            [class.section-underline-active]="
+              activeSection === DeveloperResumeSections.SoftSkillsLanguages
+            "
+          ></div>
         </div>
 
         <div>
-          <span class="text text__color--3 text__xlg text__uppercase">Languages</span>
+          <span class="text text__color--3 text__xlg text__uppercase"
+            >Languages</span
+          >
         </div>
       </div>
 
-      <div class="separator m__top--20"
-           #iWantToLearnRef
-           snInViewport
-           [inViewportOptions]=" { threshold: 1 }"
-           (inViewportChange)="inViewport($event, DeveloperResumeSections.IWantToLearn)"></div>
+      <div
+        class="separator m__top--20"
+        #iWantToLearnRef
+        snInViewport
+        [inViewportOptions]="{ threshold: 1 }"
+        (inViewportChange)="
+          inViewport($event, DeveloperResumeSections.IWantToLearn)
+        "
+      ></div>
 
       <div class="m__top--20">
-        <span class="text text__color--3 text__xlg text__uppercase">I want to learn</span>
-        <div class="section-underline m__top--10" [class.section-underline-active]="activeSection === DeveloperResumeSections.IWantToLearn"></div>
-        <span class="d__flex text text__color--4 text__lg m__top--10">{{ developer.description }}</span>
+        <span class="text text__color--3 text__xlg text__uppercase"
+          >I want to learn</span
+        >
+        <div
+          class="section-underline m__top--10"
+          [class.section-underline-active]="
+            activeSection === DeveloperResumeSections.IWantToLearn
+          "
+        ></div>
+        <span class="d__flex text text__color--4 text__lg m__top--10">{{
+          developer.description
+        }}</span>
       </div>
 
-      <div class="separator m__top--20"
-           #certificates
-           snInViewport
-           [inViewportOptions]=" { threshold: 1 }"
-           (inViewportChange)="inViewport($event, DeveloperResumeSections.Certificates)">
-      </div>
+      <div
+        class="separator m__top--20"
+        #certificates
+        snInViewport
+        [inViewportOptions]="{ threshold: 1 }"
+        (inViewportChange)="
+          inViewport($event, DeveloperResumeSections.Certificates)
+        "
+      ></div>
 
       <div class="m__top--20">
-        <span class="text text__color--3 text__xlg text__uppercase">certificates</span>
-        <div class="section-underline m__top--10" [class.section-underline-active]="activeSection === DeveloperResumeSections.Certificates"></div>
+        <span class="text text__color--3 text__xlg text__uppercase"
+          >certificates</span
+        >
+        <div
+          class="section-underline m__top--10"
+          [class.section-underline-active]="
+            activeSection === DeveloperResumeSections.Certificates
+          "
+        ></div>
 
         <div class="d__flex m__top--20">
-          <img class="m__right--10" src="assets/img/cert-1.png" alt="">
-          <img class="m__right--10" src="assets/img/cert-2.png" alt="">
-          <img src="assets/img/cert-1.png" alt="">
+          <img class="m__right--10" src="assets/img/cert-1.png" alt="" />
+          <img class="m__right--10" src="assets/img/cert-2.png" alt="" />
+          <img src="assets/img/cert-1.png" alt="" />
         </div>
       </div>
 
-      <div class="separator m__top--20"
-           #reviews
-           snInViewport
-           [inViewportOptions]=" { threshold: 1 }"
-           (inViewportChange)="inViewport($event, DeveloperResumeSections.Reviews)">
-      </div>
+      <div
+        class="separator m__top--20"
+        #reviews
+        snInViewport
+        [inViewportOptions]="{ threshold: 1 }"
+        (inViewportChange)="inViewport($event, DeveloperResumeSections.Reviews)"
+      ></div>
 
       <div class="m__top--20">
-        <span class="text text__color--3 text__xlg text__uppercase">reviews</span>
-        <div class="section-underline m__top--10" [class.section-underline-active]="activeSection === DeveloperResumeSections.Reviews"></div>
+        <span class="text text__color--3 text__xlg text__uppercase"
+          >reviews</span
+        >
+        <div
+          class="section-underline m__top--10"
+          [class.section-underline-active]="
+            activeSection === DeveloperResumeSections.Reviews
+          "
+        ></div>
 
         <div class="d__flex m__top--20">
           <div class="review m__right--10">
             <div class="d__flex d__flex--justify-between">
-              <img [src]="developer.photo" alt="">
-              <span class="text text__xs text__color--6">{{ developer.dateUpdated }}</span>
+              <img [src]="developer.photo" alt="" />
+              <span class="text text__xs text__color--6">{{
+                developer.dateUpdated
+              }}</span>
             </div>
-            <span class="d__flex text text__sm text__color--4 m__top--10">{{ developer.firstName }} {{ developer.lastName }}</span>
-            <span class="d__flex text text__sm text__color--4 m__top--10">ous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, </span>
+            <span class="d__flex text text__sm text__color--4 m__top--10"
+              >{{ developer.firstName }} {{ developer.lastName }}</span
+            >
+            <span class="d__flex text text__sm text__color--4 m__top--10"
+              >ous indignation and dislike men who are so beguiled and
+              demoralized by the charms of pleasure of the moment,
+            </span>
           </div>
 
           <div class="review m__right--10">
             <div class="d__flex d__flex--justify-between">
-              <img [src]="developer.photo" alt="">
-              <span class="text text__xs text__color--6">{{ developer.dateUpdated }}</span>
+              <img [src]="developer.photo" alt="" />
+              <span class="text text__xs text__color--6">{{
+                developer.dateUpdated
+              }}</span>
             </div>
-            <span class="d__flex text text__sm text__color--4 m__top--10">{{ developer.firstName }} {{ developer.lastName }}</span>
-            <span class="d__flex text text__sm text__color--4 m__top--10">ous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, </span>
+            <span class="d__flex text text__sm text__color--4 m__top--10"
+              >{{ developer.firstName }} {{ developer.lastName }}</span
+            >
+            <span class="d__flex text text__sm text__color--4 m__top--10"
+              >ous indignation and dislike men who are so beguiled and
+              demoralized by the charms of pleasure of the moment,
+            </span>
           </div>
 
           <div class="review">
             <div class="d__flex d__flex--justify-between">
-              <img [src]="developer.photo" alt="">
-              <span class="text text__xs text__color--6">{{ developer.dateUpdated }}</span>
+              <img [src]="developer.photo" alt="" />
+              <span class="text text__xs text__color--6">{{
+                developer.dateUpdated
+              }}</span>
             </div>
-            <span class="d__flex text text__sm text__color--4 m__top--10">{{ developer.firstName }} {{ developer.lastName }}</span>
-            <span class="d__flex text text__sm text__color--4 m__top--10">ous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, </span>
+            <span class="d__flex text text__sm text__color--4 m__top--10"
+              >{{ developer.firstName }} {{ developer.lastName }}</span
+            >
+            <span class="d__flex text text__sm text__color--4 m__top--10"
+              >ous indignation and dislike men who are so beguiled and
+              demoralized by the charms of pleasure of the moment,
+            </span>
           </div>
         </div>
       </div>
