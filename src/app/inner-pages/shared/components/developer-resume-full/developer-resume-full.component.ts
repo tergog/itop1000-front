@@ -49,18 +49,22 @@ export class DeveloperResumeFullComponent implements OnInit {
     {
       title: 'Russian',
       progress: 6,
+      fullProgress: 6,
     },
     {
       title: 'English',
       progress: 5,
+      fullProgress: 6,
     },
     {
       title: 'French',
       progress: 3,
+      fullProgress: 6,
     },
     {
       title: 'Italian',
-      progress: 3,
+      progress: 4,
+      fullProgress: 6,
     },
   ];
 
@@ -98,5 +102,14 @@ export class DeveloperResumeFullComponent implements OnInit {
       this.activeSection = section;
     }
     this.inViewportChange.next({ isInViewport, section });*/
+  }
+
+  fillProgress(progress: number, fullProgress: number): boolean[] {
+    const arr = Array(progress).fill(true);
+    for (let i = 0; i < fullProgress - progress; i++) {
+      arr.push(false);
+    }
+
+    return arr;
   }
 }

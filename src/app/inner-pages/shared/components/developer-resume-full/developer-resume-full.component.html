@@ -213,96 +213,25 @@
             >Languages</span
           >
           <div class="languages__wrap">
-            <div class="languages__item__wrap">
-              <span class="languages__item__text">Russian</span>
+            <div
+              class="languages__item__wrap"
+              *ngFor="let language of languagesData"
+            >
+              <span class="languages__item__text">{{ language.title }}</span>
 
               <div class="languages__item__points">
-                <div class="languages__item__points__point">
-                  <span class="languages__item__points__fill">&bull;</span>
-                </div>
-                <div class="languages__item__points__point">
-                  <span class="languages__item__points__fill">&bull;</span>
-                </div>
-                <div class="languages__item__points__point">
-                  <span class="languages__item__points__fill">&bull;</span>
-                </div>
-                <div class="languages__item__points__point">
-                  <span class="languages__item__points__fill">&bull;</span>
-                </div>
-                <div class="languages__item__points__point">
-                  <span class="languages__item__points__fill">&bull;</span>
-                </div>
-                <div class="languages__item__points__point">
-                  <span class="languages__item__points__fill">&bull;</span>
-                </div>
-              </div>
-            </div>
-            <div class="languages__item__wrap">
-              <span class="languages__item__text">English</span>
-              <div class="languages__item__points">
-                <div class="languages__item__points__point">
-                  <span class="languages__item__points__fill">&bull;</span>
-                </div>
-                <div class="languages__item__points__point">
-                  <span class="languages__item__points__fill">&bull;</span>
-                </div>
-                <div class="languages__item__points__point">
-                  <span class="languages__item__points__fill">&bull;</span>
-                </div>
-                <div class="languages__item__points__point">
-                  <span class="languages__item__points__fill">&bull;</span>
-                </div>
-                <div class="languages__item__points__point">
-                  <span class="languages__item__points">&bull;</span>
-                </div>
-                <div class="languages__item__points__point">
-                  <span class="languages__item__points">&bull;</span>
-                </div>
-              </div>
-            </div>
-            <div class="languages__item__wrap">
-              <span class="languages__item__text">French</span>
-              <div class="languages__item__points">
-                <div class="languages__item__points__point">
-                  <span class="languages__item__points__fill">&bull;</span>
-                </div>
-                <div class="languages__item__points__point">
-                  <span class="languages__item__points">&bull;</span>
-                </div>
-                <div class="languages__item__points__point">
-                  <span class="languages__item__points">&bull;</span>
-                </div>
-                <div class="languages__item__points__point">
-                  <span class="languages__item__points">&bull;</span>
-                </div>
-                <div class="languages__item__points__point">
-                  <span class="languages__item__points">&bull;</span>
-                </div>
-                <div class="languages__item__points__point">
-                  <span class="languages__item__points">&bull;</span>
-                </div>
-              </div>
-            </div>
-            <div class="languages__item__wrap">
-              <span class="languages__item__text">Italian</span>
-              <div class="languages__item__points">
-                <div class="languages__item__points__point">
-                  <span class="languages__item__points__fill">&bull;</span>
-                </div>
-                <div class="languages__item__points__point">
-                  <span class="languages__item__points__fill">&bull;</span>
-                </div>
-                <div class="languages__item__points__point">
-                  <span class="languages__item__points">&bull;</span>
-                </div>
-                <div class="languages__item__points__point">
-                  <span class="languages__item__points">&bull;</span>
-                </div>
-                <div class="languages__item__points__point">
-                  <span class="languages__item__points">&bull;</span>
-                </div>
-                <div class="languages__item__points__point">
-                  <span class="languages__item__points">&bull;</span>
+                <div
+                  class="languages__item__points__point"
+                  *ngFor="
+                    let item of fillProgress(
+                      language.progress,
+                      language.fullProgress
+                    )
+                  "
+                >
+                  <span [class.languages__item__points__fill]="item"
+                    >&bull;</span
+                  >
                 </div>
               </div>
             </div>
