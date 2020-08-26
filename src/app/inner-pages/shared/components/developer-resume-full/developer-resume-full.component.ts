@@ -81,10 +81,7 @@ export class DeveloperResumeFullComponent implements OnInit {
     this.inViewportChange.subscribe((sections) => console.log(sections));
   }
 
-  public onSectionCLick(
-    selectedSection: DeveloperResumeSections,
-    element: HTMLElement
-  ): void {
+  public onSectionCLick( selectedSection: DeveloperResumeSections, element: HTMLElement): void {
     this.activeSection = selectedSection;
     element.scrollIntoView({
       behavior: 'smooth',
@@ -93,10 +90,7 @@ export class DeveloperResumeFullComponent implements OnInit {
     });
   }
 
-  public inViewport(
-    isInViewport: boolean,
-    section: DeveloperResumeSections
-  ): void {
+  public inViewport(isInViewport: boolean, section: DeveloperResumeSections): void {
     /*console.log(isInViewport)
     if (isInViewport) {
       this.activeSection = section;
