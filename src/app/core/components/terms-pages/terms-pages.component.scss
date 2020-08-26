@@ -15,7 +15,6 @@
     font-weight: bold;
     font-size: 38px;
     line-height: 16px;
-    /* or 42% */
 
     text-align: center;
     text-transform: uppercase;
@@ -46,6 +45,8 @@
   &__card {
     width: 60%;
     height: auto;
+    padding-bottom: 1rem;
+    border-bottom: 0.5px solid #bdbdbd;
 
     color: #000000;
     font-family: Raleway;
@@ -57,11 +58,5 @@
       line-height: 38px;
       text-transform: uppercase;
     }
-  }
-
-  &__divider {
-    margin: 29px;
-    width: 60%;
-    border: 0.5px solid #bdbdbd;
   }
 }

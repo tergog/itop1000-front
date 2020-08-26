@@ -1,0 +1,14 @@
+<header class="header">
+  <h2 class="header__heading">
+    {{ data.title }}
+  </h2>
+  <span class="header__date">{{ data.date }}</span>
+</header>
+<main class="main">
+  <div class="main__card" *ngFor="let article of data.articles">
+    <h2 class="main__card__heading">{{ article.title }}</h2>
+    <p class="main__card__text">
+      {{ article.text }}
+    </p>
+  </div>
+</main>
