@@ -8,6 +8,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatOptionModule } from '@angular/material/core';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { MatDialogModule } from '@angular/material/dialog';
+import { NgCircleProgressModule, CircleProgressOptions } from 'ng-circle-progress';
 
 import { InputComponent } from './components/input/input.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
@@ -33,6 +34,7 @@ import { TextareaComponent } from './components/textarea/textarea.component';
     MatOptionModule,
     OverlayModule,
     TextareaComponent,
+    NgCircleProgressModule
   ],
   imports: [
     CommonModule,
@@ -44,7 +46,8 @@ import { TextareaComponent } from './components/textarea/textarea.component';
     MatIconModule,
     MatOptionModule,
     OverlayModule,
+    NgCircleProgressModule
   ],
-  providers: [],
+  providers: [CircleProgressOptions],
 })
 export class SharedModule {}
