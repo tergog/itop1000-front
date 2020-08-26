@@ -223,13 +223,13 @@
                 <div
                   class="languages__item__points__point"
                   *ngFor="
-                    let item of fillProgress(
+                    let point of createArrayFromProgress(
                       language.progress,
                       language.fullProgress
                     )
                   "
                 >
-                  <span [class.languages__item__points__fill]="item"
+                  <span [class.languages__item__points__fill]="point"
                     >&bull;</span
                   >
                 </div>

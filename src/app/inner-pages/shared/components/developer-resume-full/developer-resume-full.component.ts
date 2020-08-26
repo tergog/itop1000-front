@@ -104,7 +104,7 @@ export class DeveloperResumeFullComponent implements OnInit {
     this.inViewportChange.next({ isInViewport, section });*/
   }
 
-  fillProgress(progress: number, fullProgress: number): boolean[] {
+  createArrayFromProgress(progress: number, fullProgress: number): boolean[] {
     const arr = Array(progress).fill(true);
     for (let i = 0; i < fullProgress - progress; i++) {
       arr.push(false);
