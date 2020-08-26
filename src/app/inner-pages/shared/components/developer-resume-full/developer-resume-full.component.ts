@@ -12,40 +12,87 @@ export enum DeveloperResumeSections {
   SoftSkillsLanguages,
   IWantToLearn,
   Certificates,
-  Reviews
+  Reviews,
 }
 
 @Component({
   selector: 'app-developer-resume-full',
   templateUrl: './developer-resume-full.component.html',
-  styleUrls: ['./developer-resume-full.component.scss']
+  styleUrls: ['./developer-resume-full.component.scss'],
 })
 export class DeveloperResumeFullComponent implements OnInit {
-
   public developer$: Observable<Developer>;
   public DeveloperResumeSections = DeveloperResumeSections;
   public activeSection = DeveloperResumeSections.ProfessionalSkills;
   private inViewportChange;
 
-  constructor(private store: Store<State>) { }
+  softSkillsData = [
+    {
+      title: 'Creativity',
+      progress: '60%',
+    },
+    {
+      title: 'Mentoring',
+      progress: '30%',
+    },
+    {
+      title: 'Communication',
+      progress: '85%',
+    },
+    {
+      title: 'Lorem lorem',
+      progress: '10%',
+    },
+  ];
+
+  languagesData = [
+    {
+      title: 'Russian',
+      progress: 6,
+    },
+    {
+      title: 'English',
+      progress: 5,
+    },
+    {
+      title: 'French',
+      progress: 3,
+    },
+    {
+      title: 'Italian',
+      progress: 3,
+    },
+  ];
+
+  constructor(private store: Store<State>) {}
 
   ngOnInit(): void {
     this.developer$ = this.store.select(getDeveloper);
 
-    this.inViewportChange = new Subject<{ isInViewport: boolean, section: DeveloperResumeSections }>()
-      .pipe(
-        bufferTime(300)
-      )
+    this.inViewportChange = new Subject<{
+      isInViewport: boolean;
+      section: DeveloperResumeSections;
+    }>().pipe(bufferTime(300));
 
-    this.inViewportChange.subscribe(sections => console.log(sections))
+    this.inViewportChange.subscribe((sections) => console.log(sections));
   }
 
-  public onSectionCLick(selectedSection: DeveloperResumeSections, element: HTMLElement): void {
+  public onSectionCLick(
+    selectedSection: DeveloperResumeSections,
+    element: HTMLElement
+  ): void {
     this.activeSection = selectedSection;
-    element.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+    element.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+      inline: 'nearest',
+    });
   }
 
-  public inViewport(isInViewport: boolean, section: DeveloperResumeSections): void {
+  public inViewport(
+    isInViewport: boolean,
+    section: DeveloperResumeSections
+  ): void {
     /*console.log(isInViewport)
     if (isInViewport) {
       this.activeSection = section;

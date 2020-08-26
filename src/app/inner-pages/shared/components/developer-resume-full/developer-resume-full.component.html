@@ -184,41 +184,19 @@
             >Soft Skills</span
           >
           <div class="softskills__wrap">
-            <div class="softskills__skill">
-              <span class="softskills__skill__name">Creativity</span>
+            <div class="softskills__skill" *ngFor="let skill of softSkillsData">
+              <span class="softskills__skill__name">{{ skill.title }}</span>
 
               <div class="softskills__progressbar__full">
-                <div class="softskills__progressbar__filled"></div>
+                <div
+                  class="softskills__progressbar__filled"
+                  [ngStyle]="{ width: skill.progress }"
+                ></div>
               </div>
 
-              <span class="softskills__skill__percent">40%</span>
-            </div>
-            <div class="softskills__skill">
-              <span class="softskills__skill__name">Mentoring</span>
-
-              <div class="softskills__progressbar__full">
-                <div class="softskills__progressbar__filled"></div>
-              </div>
-
-              <span class="softskills__skill__percent">40%</span>
-            </div>
-            <div class="softskills__skill">
-              <span class="softskills__skill__name">Communication</span>
-
-              <div class="softskills__progressbar__full">
-                <div class="softskills__progressbar__filled"></div>
-              </div>
-
-              <span class="softskills__skill__percent">40%</span>
-            </div>
-            <div class="softskills__skill">
-              <span class="softskills__skill__name">Lorem Lorem</span>
-
-              <div class="softskills__progressbar__full">
-                <div class="softskills__progressbar__filled"></div>
-              </div>
-
-              <span class="softskills__skill__percent">40%</span>
+              <span class="softskills__skill__percent">
+                {{ skill.progress }}</span
+              >
             </div>
           </div>
           <div
@@ -229,6 +207,7 @@
           ></div>
         </div>
 
+        <div></div>
         <div class="languages">
           <span class="text text__color--3 text__xlg text__uppercase"
             >Languages</span
