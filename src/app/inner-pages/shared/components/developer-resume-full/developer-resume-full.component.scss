@@ -95,6 +95,7 @@
 
 .professional-skills {
   display: flex;
+  justify-content: space-between;
 
   &__text-block {
     width: 45%;
@@ -109,7 +110,9 @@
     &__wrap {
       display: flex;
       flex-wrap: wrap;
-      width: 55%;
+      align-items: center;
+      justify-content: center;
+      width: 50%;
       background: #201f1f;
       opacity: 0.9;
       box-shadow: 0px 2px 4px #000000;
