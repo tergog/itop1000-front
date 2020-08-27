@@ -85,7 +85,7 @@ export class DevCategoriesAndSkillsComponent implements OnInit {
       .subscribe(
         (userInfo: UserInfo) => this.handleSuccessResponse(),
         ({ error }) => this.handleErrorResponse(error)
-      )
+      );
   }
 
   private updateCategoriesAndSkills({ categories, skills }): void {

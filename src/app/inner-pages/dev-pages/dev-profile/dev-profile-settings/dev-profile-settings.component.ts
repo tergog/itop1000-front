@@ -1,9 +1,10 @@
+import { UserInfo } from 'app/shared/models';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { filter, first } from 'rxjs/operators';
 
 import { UploadPhotoDialogComponent } from 'app/inner-pages/shared/components/upload-photo-dialog/upload-photo-dialog.component';
-import { UserService } from 'app/shared/services';
+import { UserService, NotificationsService } from 'app/shared/services';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -15,9 +16,11 @@ export class DevProfileSettingsComponent implements OnInit {
 
   public form: FormGroup;
   public imageUrl: string;
+  public isEdit: boolean;
 
   constructor(
     private userService: UserService,
+    private notificationsService: NotificationsService,
     private matDialog: MatDialog
   ) { }
 
@@ -25,7 +28,9 @@ export class DevProfileSettingsComponent implements OnInit {
     this.initForm();
   }
 
-  public onEditClick(): void {}
+  public onEditClick(): void {
+    this.isEdit = !this.isEdit;
+  }
 
   public openUploadPhotoDialog(): void {
     this.matDialog.open(UploadPhotoDialogComponent)
@@ -42,6 +47,18 @@ export class DevProfileSettingsComponent implements OnInit {
   }
 
   public onSaveClick(): void {
+    const formData: Partial<UserInfo> = {};
+    const controlKeys = Object.keys(this.form.controls);
+    for (const key of controlKeys) {
+      if (this.form.controls[key].dirty) {
+        formData[key] = this.form.controls[key].value;
+      }
+    }
+    this.userService.updateProfile(formData).pipe(first())
+      .subscribe(
+        (userInfo: UserInfo) => this.handleSuccessResponse(),
+        ({ error }) => this.handleErrorResponse(error)
+      );
     this.disableEmptyFields();
   }
 
@@ -52,7 +69,8 @@ export class DevProfileSettingsComponent implements OnInit {
       address: new FormControl('', []),
       phone: new FormControl('', []),
       email: new FormControl('', []),
-    })
+      timezone: new FormControl('', [])
+    });
   }
 
   private disableEmptyFields(): void {
@@ -68,6 +86,21 @@ export class DevProfileSettingsComponent implements OnInit {
         ({ url }) => this.imageUrl = url,
         ({ error }) => console.log(error.message)
       )
+  }
+
+  private handleSuccessResponse(): void {
+    this.isEdit = false;
+    this.notificationsService.message.emit({
+      message: 'Profile updated successfully',
+      type: 'success'
+    });
+  }
+
+  private handleErrorResponse(error) {
+    this.notificationsService.message.emit({
+      message: error.message,
+      type: 'error'
+    });
   }
 
 }

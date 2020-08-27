@@ -39,7 +39,8 @@ export class DevContactInfoEditComponent implements OnInit {
       address: new FormControl('', []),
       phone: new FormControl('', []),
       email: new FormControl('', []),
-    })
+      timezone: new FormControl('', [])
+    });
   }
 
   private disableEmptyFields(): void {
