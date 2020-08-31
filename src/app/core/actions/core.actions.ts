@@ -7,6 +7,9 @@ export const SAVE_TOKEN = '[Core] Saves user\'s auth token';
 export const ON_LOGIN = '[Core] On login';
 export const ON_LOGOUT = '[Core] On logout';
 
+export const SET_TOKEN_ON_PROFILE_UPDATE = '[Core] Set token on profile update';
+export const UPDATE_USER_PROFILE = '[Core] Update user profile';
+
 export const SEARCH_JOBS = '[Core] Search jobs';
 export const SEARCH_JOBS_SUCCESS = '[Core] Search jobs success';
 
@@ -20,7 +23,7 @@ export const ON_VALID_SESSION = '[Core] On valid session';
  */
 export class SaveTokenAction implements Action {
   readonly type = SAVE_TOKEN;
-  constructor(public payload: string) {}
+  constructor(public payload: any) {}
 }
 
 export class SetOnLoginAction implements Action {
@@ -30,6 +33,16 @@ export class SetOnLoginAction implements Action {
 
 export class SetOnLogoutAction implements Action {
   readonly type = ON_LOGOUT;
+}
+
+export class SetTokenOnProfileUpdateAction implements Action {
+  readonly type = SET_TOKEN_ON_PROFILE_UPDATE;
+  constructor(public payload: UserInfo) {}
+}
+
+export class UpdateUserProfileAction implements Action {
+  readonly type = UPDATE_USER_PROFILE;
+  constructor(public payload: UserInfo) {}
 }
 
 export class OnValidSessionAction implements Action {
@@ -64,6 +77,8 @@ export type Actions =
   | SaveTokenAction
   | SetOnLoginAction
   | SetOnLogoutAction
+  | SetTokenOnProfileUpdateAction
+  | UpdateUserProfileAction
   | OnValidSessionAction
   | SearchJobsAction
   | SearchJobsSuccessAction

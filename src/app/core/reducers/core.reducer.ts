@@ -275,7 +275,7 @@ export const developers = [
       location: 'Ukraine, Kyiv',
       dateUpdated: '19 July 2020',
       photo : 'http://localhost:4000/1594974664857.png'
-    }]
+    }];
 
 export interface State {
   isAuthenticated: boolean;
@@ -302,6 +302,10 @@ export function reducer(state: State = INIT_STATE, action: coreActions.Actions) 
       return { ...state, userInfo: action.payload, isAuthenticated: true };
     case coreActions.ON_LOGOUT:
       return { ...state, userInfo: null, isAuthenticated: false };
+    case coreActions.SET_TOKEN_ON_PROFILE_UPDATE:
+      return { ...state, userInfo: action.payload};
+    case coreActions.UPDATE_USER_PROFILE:
+      return {...state, userInfo: action.payload};
     case coreActions.ON_VALID_SESSION:
       return { ...state, isAuthenticated: action.payload };
     case coreActions.SEARCH_JOBS_SUCCESS:

@@ -1,5 +1,5 @@
 <div [@slideIn] *ngIf="section === DevProfileSections.ContactInfo">
-  <app-dev-contact-info></app-dev-contact-info>
+  <app-dev-contact-info (updateProfileInfo)="onUpdateProfileInfo($event)"></app-dev-contact-info>
 </div>
 
 <div [@slideIn] *ngIf="section === DevProfileSections.ProfileSettings">
@@ -7,7 +7,7 @@
 </div>
 
 <div [@slideIn] *ngIf="section === DevProfileSections.CategoriesAndSkills">
-  <app-dev-categories-and-skills></app-dev-categories-and-skills>
+  <app-dev-categories-and-skills (updateProfileInfo)="onUpdateProfileInfo($event)"></app-dev-categories-and-skills>
 </div>
 
 <div [@slideIn] *ngIf="section === DevProfileSections.Balance">

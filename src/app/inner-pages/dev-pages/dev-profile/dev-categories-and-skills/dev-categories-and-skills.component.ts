@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs/operators';
 import xorBy from 'lodash.xorby';
 
+import * as jwtDecode from 'jwt-decode';
+import * as coreActions from 'app/core/actions/core.actions';
+import { TOKEN } from 'app/constants/constants';
 import { NotificationsService, UserService } from 'app/shared/services';
 import { NameValueModel, UserInfo } from 'app/shared/models';
 import * as fromCore from 'app/core/reducers';
@@ -43,6 +46,8 @@ export class DevCategoriesAndSkillsComponent implements OnInit {
     { name: 'Angular 2+', value: 11 },
   ];
 
+  @Output() updateProfileInfo = new EventEmitter();
+
   constructor(
     private userService: UserService,
     private notificationsService: NotificationsService,
@@ -52,7 +57,20 @@ export class DevCategoriesAndSkillsComponent implements OnInit {
   ngOnInit(): void {
     this.store.select(fromCore.getUserInfo)
       .pipe(first())
-      .subscribe((userInfo: UserInfo) => this.updateCategoriesAndSkills(userInfo));
+      .subscribe((userInfo: UserInfo) => {
+        if (userInfo.token) {
+          userInfo = this.decodeToken(userInfo.token);
+        }
+        this.updateCategoriesAndSkills(userInfo);
+      }
+      );
+  }
+
+  public decodeToken(token = localStorage.getItem(TOKEN)) {
+    // const token = localStorage.getItem(TOKEN);
+    const userInfo = jwtDecode(token);
+    this.store.dispatch(new coreActions.UpdateUserProfileAction(userInfo));
+    return userInfo;
   }
 
   public onEditClick(): void {
@@ -83,24 +101,26 @@ export class DevCategoriesAndSkillsComponent implements OnInit {
     this.userService.updateProfile({ skills: this.selectedSkills, categories: this.selectedCategories})
       .pipe(first())
       .subscribe(
-        (userInfo: UserInfo) => this.handleSuccessResponse(),
+        (userInfo: UserInfo) => this.handleSuccessResponse(userInfo),
         ({ error }) => this.handleErrorResponse(error)
       );
   }
 
-  private updateCategoriesAndSkills({ categories, skills }): void {
+  private updateCategoriesAndSkills({ categories, skills }) {
     this.selectedCategories = [ ...categories ] || [];
     this.selectedSkills = [ ...skills ] || [];
+
     this.availableCategories = xorBy(this.selectedCategories, this.availableCategories, 'name');
     this.availableSkills = xorBy(this.selectedSkills, this.availableSkills, 'name');
   }
 
-  private handleSuccessResponse(): void {
+  private handleSuccessResponse(userInfo): void {
     this.isEdit = false;
     this.notificationsService.message.emit({
       message: 'Profile updated successfully',
       type: 'success'
     });
+    this.updateProfileInfo.emit(userInfo);
   }
 
   private handleErrorResponse(error) {

@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 
 import { UserInfo } from 'app/shared/models';
+import * as fromCore from 'app/core/reducers';
 
 @Component({
   selector: 'app-dev-contact-info-preview',
@@ -11,9 +13,12 @@ export class DevContactInfoPreviewComponent implements OnInit {
 
   @Input() userInfo: UserInfo;
 
-  constructor() { }
+  constructor(
+    private store: Store<fromCore.State>
+  ) { }
 
   ngOnInit(): void {
+
   }
 
 }
