@@ -1,14 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { first } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
 
-import * as jwtDecode from 'jwt-decode';
-import * as coreActions from 'app/core/actions/core.actions';
-import { TOKEN } from 'app/constants/constants';
-import { NotificationsService, UserService } from 'app/shared/services';
-import { NameValueModel, UserInfo } from 'app/shared/models';
-import * as fromCore from 'app/core/reducers';
+import { DevProfileService } from './../../dev-profile.service';
+import { UserInfo } from 'app/shared/models';
 
 @Component({
   selector: 'app-dev-contact-info-edit',
@@ -25,9 +19,7 @@ export class DevContactInfoEditComponent implements OnInit {
   @Output() save = new EventEmitter();
 
   constructor(
-    private notificationsService: NotificationsService,
-    private store: Store<fromCore.State>,
-    private userService: UserService
+    private devProfileService: DevProfileService
   ) { }
 
   ngOnInit(): void {
@@ -42,12 +34,7 @@ export class DevContactInfoEditComponent implements OnInit {
   public onSaveClick(): void {
     this.disableEmptyFields();
     this.save.emit(this.form.value);
-    this.userService.updateProfile(this.form.value)
-      .pipe(first())
-      .subscribe(
-        (userInfo: UserInfo) => this.handleSuccessResponse(userInfo),
-        ({ error }) => this.handleErrorResponse(error)
-      );
+    this.devProfileService.onSaveClick(this.form.value);
   }
 
   private initForm(): void {
@@ -64,21 +51,6 @@ export class DevContactInfoEditComponent implements OnInit {
   private disableEmptyFields(): void {
     Object.keys(this.form.controls).forEach(field => {
       return this.form.controls[field].value || this.form.controls[field].disable();
-    });
-  }
-
-  private handleSuccessResponse(userInfo): void {
-    this.notificationsService.message.emit({
-      message: 'Profile updated successfully',
-      type: 'success'
-    });
-    this.updateProfileInfo.emit(userInfo);
-  }
-
-  private handleErrorResponse(error) {
-    this.notificationsService.message.emit({
-      message: error.message,
-      type: 'error'
     });
   }
 

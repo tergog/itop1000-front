@@ -1,15 +1,11 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FormControl, FormGroup } from '@angular/forms';
 import { filter, first } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
-import * as jwtDecode from 'jwt-decode';
 
-import * as coreActions from 'app/core/actions/core.actions';
-import * as fromCore from 'app/core/reducers';
-import { TOKEN } from 'app/constants/constants';
 import { UploadPhotoDialogComponent } from 'app/inner-pages/shared/components/upload-photo-dialog/upload-photo-dialog.component';
-import { UserService, NotificationsService } from 'app/shared/services';
+import { UserService } from 'app/shared/services';
+import { DevProfileService } from './../dev-profile.service';
 import { UserInfo } from 'app/shared/models';
 
 @Component({
@@ -23,26 +19,15 @@ export class DevProfileSettingsComponent implements OnInit {
   public imageUrl: string;
   public isEdit: boolean;
 
-  @Output() updateProfileInfo = new EventEmitter();
-
   constructor(
-    private store: Store<fromCore.State>,
+    private devProfileService: DevProfileService,
     private userService: UserService,
-    private notificationsService: NotificationsService,
     private matDialog: MatDialog
   ) { }
 
   ngOnInit(): void {
     this.initForm();
-    this.store.select(fromCore.getUserInfo)
-      .pipe(first())
-      .subscribe(
-        (userInfo: UserInfo) => {
-          if (userInfo.token) {
-            userInfo = this.decodeToken(userInfo.token);
-          }
-        }
-      );
+    this.devProfileService.initUpdateProfileService();
   }
 
   public onEditClick(): void {
@@ -63,15 +48,9 @@ export class DevProfileSettingsComponent implements OnInit {
   public onCancelClick(): void {
   }
 
-  public onSaveClick(userInfo: Partial<UserInfo>): void {
+  public onSaveClick(): void {
     this.disableEmptyFields();
-
-    this.userService.updateProfile(this.form.value)
-      .pipe(first())
-      .subscribe(
-        (userInfo: UserInfo) => this.handleSuccessResponse(userInfo),
-        ({ error }) => this.handleErrorResponse(error)
-      );
+    this.devProfileService.onSaveClick(this.form.value);
   }
 
   private initForm(): void {
@@ -97,29 +76,7 @@ export class DevProfileSettingsComponent implements OnInit {
       .subscribe(
         ({ url }) => this.imageUrl = url,
         ({ error }) => console.log(error.message)
-      )
-  }
-
-  public decodeToken(token = localStorage.getItem(TOKEN)) {
-    const userInfo = jwtDecode(token);
-    this.store.dispatch(new coreActions.UpdateUserProfileAction(userInfo));
-    return userInfo;
-  }
-
-  private handleSuccessResponse(userInfo): void {
-    this.isEdit = false;
-    this.notificationsService.message.emit({
-      message: 'Profile updated successfully',
-      type: 'success'
-    });
-    this.updateProfileInfo.emit(userInfo);
-  }
-
-  private handleErrorResponse(error) {
-    this.notificationsService.message.emit({
-      message: error.message,
-      type: 'error'
-    });
+      );
   }
 
 }
