@@ -15,9 +15,7 @@ import { HttpErrorHandlerService } from 'app/shared/services/http-error-handler.
 import { TokenInterceptor } from 'app/shared/interceptors/token.interceptor';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -29,19 +27,23 @@ import { TokenInterceptor } from 'app/shared/interceptors/token.interceptor';
       runtimeChecks: {
         strictStateImmutability: true,
         strictActionImmutability: true,
-      }
+      },
     }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorHandlerService, multi: true },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorHandlerService,
+      multi: true,
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
-      multi: true
+      multi: true,
     },
-    AuthGuard
+    AuthGuard,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

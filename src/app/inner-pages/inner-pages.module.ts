@@ -10,35 +10,33 @@ import { SharedModule } from 'app/shared/shared.module';
 import { DevPagesGuard } from 'app/shared/guards/dev-pages.guard';
 import { ClientPagesGuard } from 'app/shared/guards/client-pages.guard';
 
-
 const routes: Routes = [
   {
     path: 'd',
     canActivate: [DevPagesGuard],
     component: InnerPagesComponent,
-    loadChildren: () => import('./dev-pages/dev-pages.module').then(m => m.DevPagesModule)
+    loadChildren: () =>
+      import('./dev-pages/dev-pages.module').then((m) => m.DevPagesModule),
   },
   {
     path: 'c',
     canActivate: [ClientPagesGuard],
     component: InnerPagesComponent,
-    loadChildren: () => import('./client-pages/client-pages.module').then(m => m.ClientPagesModule)
-  }
+    loadChildren: () =>
+      import('./client-pages/client-pages.module').then(
+        (m) => m.ClientPagesModule
+      ),
+  },
 ];
 
-
 @NgModule({
-  declarations: [
-    HeaderComponent,
-    FooterComponent,
-    InnerPagesComponent
-  ],
+  declarations: [HeaderComponent, FooterComponent, InnerPagesComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     SharedModule,
     FormsModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+  ],
 })
-export class InnerPagesModule { }
+export class InnerPagesModule {}
