@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { UtilsService, UserService } from 'app/shared/services';
+import { UtilsService, UserService, NotificationsService } from 'app/shared/services';
+import { NotificationMessage } from '../../../shared/models';
 
 @Component({
   selector: 'app-sign-up',
@@ -16,7 +17,8 @@ export class SignUpComponent implements OnInit {
 
   constructor(
     private utilsService: UtilsService,
-    private userService: UserService
+    private userService: UserService,
+    private notificationsService: NotificationsService
   ) { }
 
   ngOnInit(): void {
@@ -62,8 +64,21 @@ export class SignUpComponent implements OnInit {
 
   onSignUpClick(): void {
     this.userService.userRegistration(this.form.value)
-        .pipe(first())
-        .subscribe(res => console.log(res));
+      .pipe(first())
+      .subscribe(
+        (res: Partial<NotificationMessage>) => {
+          this.notificationsService.message.emit({
+            message: res.message,
+            type: 'success'
+          });
+        },
+        (err) => {
+          this.notificationsService.message.emit({
+            message: err.message,
+            type: 'error'
+          });
+        }
+      );
   }
 
 }
