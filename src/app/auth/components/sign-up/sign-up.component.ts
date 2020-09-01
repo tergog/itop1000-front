@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 import { first } from 'rxjs/operators';
 
 import { UtilsService, UserService, NotificationsService } from 'app/shared/services';
-import { HttpErrorResponse } from '@angular/common/http';
 import { NotificationMessage } from 'app/shared/models';
 
 @Component({
