@@ -67,7 +67,6 @@ export class DevCategoriesAndSkillsComponent implements OnInit {
   }
 
   public decodeToken(token = localStorage.getItem(TOKEN)) {
-    // const token = localStorage.getItem(TOKEN);
     const userInfo = jwtDecode(token);
     this.store.dispatch(new coreActions.UpdateUserProfileAction(userInfo));
     return userInfo;

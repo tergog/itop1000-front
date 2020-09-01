@@ -3,7 +3,7 @@
 </div>
 
 <div [@slideIn] *ngIf="section === DevProfileSections.ProfileSettings">
-  <app-dev-profile-settings></app-dev-profile-settings>
+  <app-dev-profile-settings (updateProfileInfo)="onUpdateProfileInfo($event)"></app-dev-profile-settings>
 </div>
 
 <div [@slideIn] *ngIf="section === DevProfileSections.CategoriesAndSkills">
