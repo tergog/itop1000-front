@@ -23,7 +23,7 @@ export const ON_VALID_SESSION = '[Core] On valid session';
  */
 export class SaveTokenAction implements Action {
   readonly type = SAVE_TOKEN;
-  constructor(public payload: any) {}
+  constructor(public payload: string) {}
 }
 
 export class SetOnLoginAction implements Action {
