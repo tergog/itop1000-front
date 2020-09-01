@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 
 import { UtilsService, UserService, NotificationsService } from 'app/shared/services';
-import { NotificationMessage } from 'app/shared/models';
 
 @Component({
   selector: 'app-sign-up',
@@ -73,7 +72,7 @@ export class SignUpComponent implements OnInit {
       );
   }
 
-  handleUserRegistrationSuccessResponse(res: Partial<NotificationMessage>): void {
+  handleUserRegistrationSuccessResponse(res): void {
     this.router.navigate(['/auth', 'login']).then(() => {
       this.notificationsService.message.emit({
         message: res.message,
