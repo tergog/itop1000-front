@@ -4,6 +4,7 @@ import { first } from 'rxjs/operators';
 
 import { UtilsService, UserService, NotificationsService } from 'app/shared/services';
 import { NotificationMessage } from '../../../shared/models';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -18,7 +19,8 @@ export class SignUpComponent implements OnInit {
   constructor(
     private utilsService: UtilsService,
     private userService: UserService,
-    private notificationsService: NotificationsService
+    private notificationsService: NotificationsService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -67,9 +69,11 @@ export class SignUpComponent implements OnInit {
       .pipe(first())
       .subscribe(
         (res: Partial<NotificationMessage>) => {
-          this.notificationsService.message.emit({
-            message: res.message,
-            type: 'success'
+          this.router.navigate(['/auth', 'login']).then(() => {
+            this.notificationsService.message.emit({
+              message: res.message,
+              type: 'success'
+            });
           });
         },
         (err) => {
