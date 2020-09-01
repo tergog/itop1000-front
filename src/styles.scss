@@ -139,6 +139,31 @@ i {
   }
 }
 
+.background {
+  &__color--1 {
+    background-color: $color-1;
+  }
+}
+
+.border {
+  border-style: solid;
+
+  &__bottom {
+    border-bottom-style: solid;
+  }
+
+  &__w {
+    &--1 {
+      border-width: 1px;
+    }
+  }
+  &__color {
+    &--6 {
+      border-color: $color-6;
+    }
+  }
+}
+
 .cursor {
   &__pointer {
     cursor: pointer;

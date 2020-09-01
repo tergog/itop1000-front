@@ -29,6 +29,12 @@
     }
   }
 
+  &__bottom {
+    &--75 {
+      margin-bottom: 75px;
+    }
+  }
+
   &__right {
     &--5 {
       margin-right: 5px;
@@ -54,9 +60,30 @@
   &__20 {
     padding: 20px;
   }
+
+  &__bottom {
+    &--1 {
+      padding-bottom: 1rem;
+    }
+  }
+}
+
+.h {
+
+  &__250 {
+    height: 250px;
+  }
 }
 
 .w {
+  &__60-percent {
+    width: 60% !important;
+  }
+
+  &__100-percent {
+    width: 100% !important;
+  }
+
   &__280 {
     width: 280px !important;
   }
