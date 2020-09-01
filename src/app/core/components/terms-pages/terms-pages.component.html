@@ -1,0 +1,14 @@
+<header class="header d__flex d__flex--direction-column d__flex--items-center d__flex--justify-center">
+  <h2 class="text text__xxxlg text__bold text__color--3 text__uppercase">
+    {{ data.title }}
+  </h2>
+  <span class="text text__sm text__color--4">{{ data.date }}</span>
+</header>
+<main class="d__flex d__flex--direction-column d__flex--items-center">
+  <div class="card" *ngFor="let article of data.articles">
+    <h2 class="text text__title text__uppercase">{{ article.title }}</h2>
+    <p class="text">
+      {{ article.text }}
+    </p>
+  </div>
+</main>

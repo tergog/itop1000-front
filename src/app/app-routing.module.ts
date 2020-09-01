@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -5,8 +6,7 @@ import { LandingPageComponent } from './core/components/landing-page/landing-pag
 import { AuthGuard } from 'app/shared/guards/auth.guard';
 import { ClientPagesGuard } from 'app/shared/guards/client-pages.guard';
 import { VerifyEmailComponent } from './auth/components/verify-email/verify-email.component';
-import { TermsPageComponent } from './info-pages/terms-page/terms-page.component';
-import { PrivacyPageComponent } from './info-pages/privacy-page/privacy-page.component';
+import { TermsPagesComponent } from './core/components/terms-pages/terms-pages.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: LandingPageComponent },
@@ -25,16 +25,16 @@ const routes: Routes = [
   },
   {
     path: 'terms',
-    component: TermsPageComponent,
+    component: TermsPagesComponent,
   },
   {
     path: 'privacy',
-    component: PrivacyPageComponent,
+    component: TermsPagesComponent,
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes), CommonModule],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
