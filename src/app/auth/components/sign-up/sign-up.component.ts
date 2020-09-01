@@ -68,21 +68,25 @@ export class SignUpComponent implements OnInit {
     this.userService.userRegistration(this.form.value)
       .pipe(first())
       .subscribe(
-        (res: Partial<NotificationMessage>) => {
-          this.router.navigate(['/auth', 'login']).then(() => {
-            this.notificationsService.message.emit({
-              message: res.message,
-              type: 'success'
-            });
-          });
-        },
-        (err) => {
-          this.notificationsService.message.emit({
-            message: err.message,
-            type: 'error'
-          });
-        }
+        res => this.handleUserRegistrationSuccessResponse(res),
+        err => this.handleUserRegistrationErrorResponse(err)
       );
+  }
+
+  handleUserRegistrationSuccessResponse(res: Partial<NotificationMessage>): void {
+    this.router.navigate(['/auth', 'login']).then(() => {
+      this.notificationsService.message.emit({
+        message: res.message,
+        type: 'success'
+      });
+    });
+  }
+
+  handleUserRegistrationErrorResponse(err): void {
+    this.notificationsService.message.emit({
+      message: err.message,
+      type: 'error'
+    });
   }
 
 }
