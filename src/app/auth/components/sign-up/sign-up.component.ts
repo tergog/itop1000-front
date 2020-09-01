@@ -4,7 +4,7 @@ import { first } from 'rxjs/operators';
 
 import { UtilsService, UserService, NotificationsService } from 'app/shared/services';
 import { NotificationMessage } from '../../../shared/models';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
