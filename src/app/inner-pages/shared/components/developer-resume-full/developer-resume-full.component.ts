@@ -81,7 +81,7 @@ export class DeveloperResumeFullComponent implements OnInit {
     this.inViewportChange.subscribe((sections) => console.log(sections));
   }
 
-  public onSectionCLick( selectedSection: DeveloperResumeSections, element: HTMLElement): void {
+  public onSectionCLick(selectedSection: DeveloperResumeSections, element: HTMLElement): void {
     this.activeSection = selectedSection;
     element.scrollIntoView({
       behavior: 'smooth',
