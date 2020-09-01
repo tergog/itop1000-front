@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 import { first } from 'rxjs/operators';
 
-import { UtilsService, UserService } from 'app/shared/services';
+import { UtilsService, UserService, NotificationsService } from 'app/shared/services';
+import { NotificationMessage } from 'app/shared/models';
 
 @Component({
   selector: 'app-sign-up',
@@ -16,7 +19,9 @@ export class SignUpComponent implements OnInit {
 
   constructor(
     private utilsService: UtilsService,
-    private userService: UserService
+    private userService: UserService,
+    private notificationsService: NotificationsService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -62,8 +67,25 @@ export class SignUpComponent implements OnInit {
 
   onSignUpClick(): void {
     this.userService.userRegistration(this.form.value)
-        .pipe(first())
-        .subscribe(res => console.log(res));
+      .pipe(first())
+      .subscribe(
+        (res: NotificationMessage) => this.handleUserRegistrationSuccessResponse(res),
+        (err: HttpErrorResponse) => this.handleUserRegistrationErrorResponse(err)
+      );
+  }
+
+  private handleUserRegistrationSuccessResponse(res: NotificationMessage): void {
+    this.router.navigate(['/auth', 'login']).then(() => {
+      res.type = 'success';
+      this.notificationsService.message.emit(res);
+    });
+  }
+
+  private handleUserRegistrationErrorResponse({ message }): void {
+    this.notificationsService.message.emit({
+      message,
+      type: 'error'
+    });
   }
 
 }

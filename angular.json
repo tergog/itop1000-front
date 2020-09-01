@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "itop1000-front"
+    }
+  },
+  "defaultProject": "itop1000-front",
+  "cli": {
+    "analytics": "83edc9d6-09d4-4cd5-8f5f-ac523a5cb116"
+  }
 }
