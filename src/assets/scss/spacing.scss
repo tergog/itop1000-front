@@ -29,12 +29,6 @@
     }
   }
 
-  &__bottom {
-    &--75 {
-      margin-bottom: 75px;
-    }
-  }
-
   &__right {
     &--5 {
       margin-right: 5px;
@@ -63,23 +57,7 @@
 
 }
 
-.h {
-  &__250 {
-    height: 250px;
-  }
-}
-
 .w {
-
-  &__p {
-    &--60 {
-      width: 60% !important;
-    }
-    &--100 {
-      width: 100% !important;
-    }
-  }
-
   &__280 {
     width: 280px !important;
   }
