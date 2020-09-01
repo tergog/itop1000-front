@@ -61,27 +61,23 @@
     padding: 20px;
   }
 
-  &__bottom {
-    &--1 {
-      padding-bottom: 1rem;
-    }
-  }
 }
 
 .h {
-
   &__250 {
     height: 250px;
   }
 }
 
 .w {
-  &__60-percent {
-    width: 60% !important;
-  }
 
-  &__100-percent {
-    width: 100% !important;
+  &__p {
+    &--60 {
+      width: 60% !important;
+    }
+    &--100 {
+      width: 100% !important;
+    }
   }
 
   &__280 {

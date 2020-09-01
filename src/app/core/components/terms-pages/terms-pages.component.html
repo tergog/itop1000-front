@@ -14,13 +14,7 @@
   <span class="text text__sm text__color--4">{{ data.date }}</span>
 </header>
 <main class="d__flex d__flex--direction-column d__flex--items-center">
-  <div class="
-    p__bottom--1
-    w__60-percent
-    border__bottom
-    border__w--1
-    border__color--6"
-    *ngFor="let article of data.articles">
+  <div class="card w__p--60" *ngFor="let article of data.articles">
     <h2 class="text text__title text__uppercase">{{ article.title }}</h2>
     <p class="text">
       {{ article.text }}
