@@ -1,0 +1,14 @@
+@import 'assets/scss/variables';
+
+.header {
+  margin-bottom: 75px;
+  width: 100%;
+  height: 250px;
+  background-color: $color-1;
+}
+
+.card {
+  width: 60%;
+  padding-bottom: 1rem;
+  border-bottom: 0.5px solid $color-6;
+}
