@@ -8,6 +8,8 @@ export interface Developer {
   title: string;
   description: string;
   skills: NameValueModel[];
+  softSkills: NameValueModel[];
+  languages: NameValueModel[];
   hourlyRate: string;
   monthRate: string;
   location: string;

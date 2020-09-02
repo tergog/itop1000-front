@@ -182,24 +182,24 @@
               d__flex--justify-between
               d__flex--items-center
               "
-              *ngFor="let skill of softSkillsData">
+              *ngFor="let skill of developer.softSkills">
               <span class="
                 softskills__skill__name
                 text__right
                 text__sm
                 text__uppercase
                 text__color--3
-                ">{{ skill.title }}</span>
+                ">{{ skill.name }}</span>
 
               <div class="softskills__progressbar__full">
                 <div
                   class="softskills__progressbar__filled"
-                  [ngStyle]="{ width: skill.progress }"
+                  [ngStyle]="{ width: skill.value }"
                 ></div>
               </div>
 
               <span class="softskills__skill__percent text__sm text__color--3">
-                {{ skill.progress }}</span
+                {{ skill.value }}</span
               >
             </div>
           </div>
@@ -219,22 +219,19 @@
           <div class="languages__wrap d__flex d__flex--direction-column">
             <div
               class="languages__item__wrap d__flex d__flex--justify-between d__flex--items-center"
-              *ngFor="let language of languagesData"
+              *ngFor="let language of developer.languages"
             >
               <span class="
                 languages__item__text
                 text__sm text__right
                 text__uppercase
-                text__color--3">{{ language.title }}</span>
+                text__color--3">{{ language.name }}</span>
 
               <div class="languages__item__points d__flex">
                 <div
                   class="languages__item__points__point text__xxlg"
                   *ngFor="
-                    let point of createArrayFromProgress(
-                      language.progress,
-                      language.fullProgress
-                    )
+                    let point of createArrayFromProgress(language.value, 6)
                   "
                 >
                   <span [class.languages__item__points__fill]="point"
