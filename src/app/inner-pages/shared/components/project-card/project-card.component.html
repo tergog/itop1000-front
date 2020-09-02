@@ -1,0 +1,46 @@
+<div class="d__flex d__flex--direction-column d__flex--items-center photo-wrap">
+  <img [src]="project.photo" alt="photo" />
+
+  <div
+    class="d__flex d__flex--direction-column d__flex--justify-center text__center m__top--10 cursor__pointer"
+
+  >
+    <span class="text text__color--3 text__xxlg text__uppercase">{{ project.firstName }}</span>
+    <span class="text text__color--3 text__xxlg text__uppercase">{{ project.lastName }}</span>
+  </div>
+
+  <span class="text text__color--5 text__xlg m__top--10"
+    >${{ project.hourlyRate }}/hr
+  </span>
+</div>
+
+<div class="d__flex d__flex--direction-column content-wrap">
+  <div class="d__flex">
+    <span
+      class="text text__color--3 text__xxlg m__right--30 cursor__pointer"
+      >{{ project.title }}</span
+    >
+    <div class="status-free text text__lg text__uppercase">FREE</div>
+  </div>
+  <span class="text text__color--4 text__lg m__top--10">{{ project.description }}</span>
+
+  <div class="m__top--20">
+    <span
+      class="text text__color--3 text__sm text__uppercase m__right--10"
+      *ngFor="let skill of project.skills"
+    >
+      {{ skill.name }}
+    </span>
+  </div>
+
+  <div class="separator m__top--25"></div>
+
+  <div class="d__flex m__top--20">
+    <div class="d__flex m__right--30">
+      <i class="location m__right--10"></i>
+      <span class="text text__md text__color--3">{{ project.location }}</span>
+    </div>
+
+    <span class="text text__md text__color--3">{{ project.dateUpdated }}</span>
+  </div>
+</div>
