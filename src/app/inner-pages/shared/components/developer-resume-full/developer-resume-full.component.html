@@ -35,6 +35,18 @@
           <span class="text text__lg text__color--3">Professional Skills</span>
         </li>
         <li
+          class="d__flex"
+          [class.active]="
+            activeSection === DeveloperResumeSections.WorkExperience
+          "
+          (click)="
+            onSectionCLick(DeveloperResumeSections.WorkExperience, workExperience)
+          "
+        >
+          <i class="work-experience m__right--10"></i>
+          <span class="text text__lg text__color--3">Work Experience</span>
+        </li>
+        <li
           class="d__flex d__flex--items-center"
           [class.active]="activeSection === DeveloperResumeSections.Education"
           (click)="
@@ -167,6 +179,33 @@
         </div>
 
         <div></div>
+      </div>
+      <div
+        class="separator m__top--20"
+        #workExperience
+        snInViewport
+        [inViewportOptions]="{ threshold: 1 }"
+        (inViewportChange)="
+          inViewport($event, DeveloperResumeSections.WorkExperience)
+        "
+      ></div>
+
+      <div class="m__top--20">
+        <span class="text text__color--3 text__xlg text__uppercase"
+          >Work Experience</span
+        >
+        <div
+          class="section-underline m__top--10"
+          [class.section-underline-active]="
+            activeSection === DeveloperResumeSections.WorkExperience
+          "
+        ></div>
+
+        <div class="d__flex m__top--20">
+          <img class="m__right--10" src="assets/img/cert-1.png" alt="" />
+          <img class="m__right--10" src="assets/img/cert-2.png" alt="" />
+          <img src="assets/img/cert-1.png" alt="" />
+        </div>
       </div>
 
       <div

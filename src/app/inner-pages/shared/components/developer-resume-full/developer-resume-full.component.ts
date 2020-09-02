@@ -8,6 +8,7 @@ import { getDeveloper, State } from 'app/core/reducers';
 
 export enum DeveloperResumeSections {
   ProfessionalSkills,
+  WorkExperience,
   Education,
   SoftSkillsLanguages,
   IWantToLearn,
