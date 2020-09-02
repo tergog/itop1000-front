@@ -1,0 +1,67 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 252px;
+  margin-bottom: 77px;
+
+  background: #000000;
+
+  &__heading {
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 38px;
+    line-height: 16px;
+    /* or 42% */
+
+    text-align: center;
+    text-transform: uppercase;
+
+    color: #ffffff;
+  }
+
+  &__date {
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 16px;
+    /* or 89% */
+
+    text-align: center;
+    text-transform: capitalize;
+
+    color: #bdbdbd;
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__card {
+    width: 60%;
+    height: auto;
+
+    color: #000000;
+    font-family: Raleway;
+    font-style: normal;
+
+    &__heading {
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 38px;
+      text-transform: uppercase;
+    }
+  }
+
+  &__divider {
+    margin: 29px;
+    width: 60%;
+    border: 0.5px solid #bdbdbd;
+  }
+}

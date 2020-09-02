@@ -8,6 +8,8 @@ export interface UserInfo {
   role: string;
   dateCreated: string;
   phone: string;
+  address: string;
+  timezone: string;
   categories: NameValueModel[];
   skills: NameValueModel[];
   photo: string;
