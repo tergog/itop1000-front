@@ -50,7 +50,7 @@
   display: inline-block;
   padding: 20px 40px;
   background-color: rgba(0, 0, 0, 0.65);
-  box-shadow: 0 2px 4px #000000;
+  box-shadow: 0 2px 4px $color-1;
   width: calc(100% - 300px);
   min-height: 100%;
   border-left: 2px solid $color-5;
@@ -122,7 +122,7 @@
       margin: 0 1.5rem;
       width: 60%;
       height: 3px;
-      background: #c4c4c4;
+      background: $color-4;
       border-radius: 5px;
     }
 
@@ -140,7 +140,7 @@
   &__wrap {
     margin: 1rem 0;
     padding: 2rem;
-    background: #201f1f;
+    background: $bg-color-dark;
     opacity: 0.9;
     box-shadow: 0px 2px 4px $color-1;
     border-radius: 10px;
@@ -162,7 +162,7 @@
 
       &__point {
         max-width: 1000px;
-        color: #c4c4c4;
+        color: $color-4;
         margin: 0 0.5rem;
       }
 
