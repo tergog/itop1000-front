@@ -14,29 +14,65 @@ export const developers = [
       description: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame...',
       skills: [
         {
-          "name" : "Typescript",
-          "value" : 2
+          name : 'Typescript',
+          value : 2
         },
         {
-          "name" : "Javascript",
-          "value" : 1
+          name : 'Javascript',
+          value : 1
         },
         {
-          "name" : "HTML5",
-          "value" : 5
+          name : 'HTML5',
+          value : 5
         },
         {
-          "name" : "Angular",
-          "value" : 2
+          name : 'Angular',
+          value : 2
         },
         {
-          "name" : "Angular 10",
-          "value" : 1
+          name : 'Angular 10',
+          value : 1
         },
         {
-          "name" : "CSS3",
-          "value" : 5
+          name : 'CSS3',
+          value : 5
         }
+      ],
+      softSkills: [
+        {
+          name: 'Creativity',
+          value: '60%',
+        },
+        {
+          name: 'Mentoring',
+          value: '30%',
+        },
+        {
+          name: 'Communication',
+          value: '85%',
+        },
+        {
+          name: 'Lorem lorem',
+          value: '10%',
+        },
+      ],
+      languages: [
+        {
+          name: 'Russian',
+          value: 6,
+        },
+        {
+          name: 'English',
+          value: 5,
+        },
+        {
+          name: 'French',
+          value: 3,
+        },
+        {
+          name: 'Italian',
+          value: 4,
+        },
       ],
       location: 'Ukraine, Kyiv',
       dateUpdated: '19 July 2020',
@@ -53,29 +89,65 @@ export const developers = [
       description: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame...',
       skills: [
         {
-          "name" : "Typescript",
-          "value" : 2
+          name : 'Typescript',
+          value : 2
         },
         {
-          "name" : "Javascript",
-          "value" : 1
+          name : 'Javascript',
+          value : 1
         },
         {
-          "name" : "HTML5",
-          "value" : 5
+          name : 'HTML5',
+          value : 5
         },
         {
-          "name" : "Angular",
-          "value" : 2
+          name : 'Angular',
+          value : 2
         },
         {
-          "name" : "Angular 10",
-          "value" : 1
+          name : 'Angular 10',
+          value : 1
         },
         {
-          "name" : "CSS3",
-          "value" : 5
+          name : 'CSS3',
+          value : 5
         }
+      ],
+      softSkills: [
+        {
+          name: 'Creativity',
+          value: '60%',
+        },
+        {
+          name: 'Mentoring',
+          value: '30%',
+        },
+        {
+          name: 'Communication',
+          value: '85%',
+        },
+        {
+          name: 'Lorem lorem',
+          value: '10%',
+        },
+      ],
+      languages: [
+        {
+          name: 'Russian',
+          value: 6,
+        },
+        {
+          name: 'English',
+          value: 5,
+        },
+        {
+          name: 'French',
+          value: 3,
+        },
+        {
+          name: 'Italian',
+          value: 4,
+        },
       ],
       location: 'Ukraine, Kyiv',
       dateUpdated: '19 July 2020',
@@ -92,29 +164,65 @@ export const developers = [
       description: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame...',
       skills: [
         {
-          "name" : "Typescript",
-          "value" : 2
+          name : 'Typescript',
+          value : 2
         },
         {
-          "name" : "Javascript",
-          "value" : 1
+          name : 'Javascript',
+          value : 1
         },
         {
-          "name" : "HTML5",
-          "value" : 5
+          name : 'HTML5',
+          value : 5
         },
         {
-          "name" : "Angular",
-          "value" : 2
+          name : 'Angular',
+          value : 2
         },
         {
-          "name" : "Angular 10",
-          "value" : 1
+          name : 'Angular 10',
+          value : 1
         },
         {
-          "name" : "CSS3",
-          "value" : 5
+          name : 'CSS3',
+          value : 5
         }
+      ],
+      softSkills: [
+        {
+          name: 'Creativity',
+          value: '60%',
+        },
+        {
+          name: 'Mentoring',
+          value: '30%',
+        },
+        {
+          name: 'Communication',
+          value: '85%',
+        },
+        {
+          name: 'Lorem lorem',
+          value: '10%',
+        },
+      ],
+      languages: [
+        {
+          name: 'Russian',
+          value: 6,
+        },
+        {
+          name: 'English',
+          value: 5,
+        },
+        {
+          name: 'French',
+          value: 3,
+        },
+        {
+          name: 'Italian',
+          value: 4,
+        },
       ],
       location: 'Ukraine, Kyiv',
       dateUpdated: '19 July 2020',
@@ -131,29 +239,65 @@ export const developers = [
       description: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame...',
       skills: [
         {
-          "name" : "Typescript",
-          "value" : 2
+          name : 'Typescript',
+          value : 2
         },
         {
-          "name" : "Javascript",
-          "value" : 1
+          name : 'Javascript',
+          value : 1
         },
         {
-          "name" : "HTML5",
-          "value" : 5
+          name : 'HTML5',
+          value : 5
         },
         {
-          "name" : "Angular",
-          "value" : 2
+          name : 'Angular',
+          value : 2
         },
         {
-          "name" : "Angular 10",
-          "value" : 1
+          name : 'Angular 10',
+          value : 1
         },
         {
-          "name" : "CSS3",
-          "value" : 5
+          name : 'CSS3',
+          value : 5
         }
+      ],
+      softSkills: [
+        {
+          name: 'Creativity',
+          value: '60%',
+        },
+        {
+          name: 'Mentoring',
+          value: '30%',
+        },
+        {
+          name: 'Communication',
+          value: '85%',
+        },
+        {
+          name: 'Lorem lorem',
+          value: '10%',
+        },
+      ],
+      languages: [
+        {
+          name: 'Russian',
+          value: 6,
+        },
+        {
+          name: 'English',
+          value: 5,
+        },
+        {
+          name: 'French',
+          value: 3,
+        },
+        {
+          name: 'Italian',
+          value: 4,
+        },
       ],
       location: 'Ukraine, Kyiv',
       dateUpdated: '19 July 2020',
@@ -170,29 +314,65 @@ export const developers = [
       description: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame...',
       skills: [
         {
-          "name" : "Typescript",
-          "value" : 2
+          name : 'Typescript',
+          value : 2
         },
         {
-          "name" : "Javascript",
-          "value" : 1
+          name : 'Javascript',
+          value : 1
         },
         {
-          "name" : "HTML5",
-          "value" : 5
+          name : 'HTML5',
+          value : 5
         },
         {
-          "name" : "Angular",
-          "value" : 2
+          name : 'Angular',
+          value : 2
         },
         {
-          "name" : "Angular 10",
-          "value" : 1
+          name : 'Angular 10',
+          value : 1
         },
         {
-          "name" : "CSS3",
-          "value" : 5
+          name : 'CSS3',
+          value : 5
         }
+      ],
+      softSkills: [
+        {
+          name: 'Creativity',
+          value: '60%',
+        },
+        {
+          name: 'Mentoring',
+          value: '30%',
+        },
+        {
+          name: 'Communication',
+          value: '85%',
+        },
+        {
+          name: 'Lorem lorem',
+          value: '10%',
+        },
+      ],
+      languages: [
+        {
+          name: 'Russian',
+          value: 6,
+        },
+        {
+          name: 'English',
+          value: 5,
+        },
+        {
+          name: 'French',
+          value: 3,
+        },
+        {
+          name: 'Italian',
+          value: 4,
+        },
       ],
       location: 'Ukraine, Kyiv',
       dateUpdated: '19 July 2020',
@@ -209,29 +389,65 @@ export const developers = [
       description: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame...',
       skills: [
         {
-          "name" : "Typescript",
-          "value" : 2
+          name : 'Typescript',
+          value : 2
         },
         {
-          "name" : "Javascript",
-          "value" : 1
+          name : 'Javascript',
+          value : 1
         },
         {
-          "name" : "HTML5",
-          "value" : 5
+          name : 'HTML5',
+          value : 5
         },
         {
-          "name" : "Angular",
-          "value" : 2
+          name : 'Angular',
+          value : 2
         },
         {
-          "name" : "Angular 10",
-          "value" : 1
+          name : 'Angular 10',
+          value : 1
         },
         {
-          "name" : "CSS3",
-          "value" : 5
+          name : 'CSS3',
+          value : 5
         }
+      ],
+      softSkills: [
+        {
+          name: 'Creativity',
+          value: '60%',
+        },
+        {
+          name: 'Mentoring',
+          value: '30%',
+        },
+        {
+          name: 'Communication',
+          value: '85%',
+        },
+        {
+          name: 'Lorem lorem',
+          value: '10%',
+        },
+      ],
+      languages: [
+        {
+          name: 'Russian',
+          value: 6,
+        },
+        {
+          name: 'English',
+          value: 5,
+        },
+        {
+          name: 'French',
+          value: 3,
+        },
+        {
+          name: 'Italian',
+          value: 4,
+        },
       ],
       location: 'Ukraine, Kyiv',
       dateUpdated: '19 July 2020',
@@ -248,34 +464,70 @@ export const developers = [
       description: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame...',
       skills: [
         {
-          "name" : "Typescript",
-          "value" : 2
+          name : 'Typescript',
+          value : 2
         },
         {
-          "name" : "Javascript",
-          "value" : 1
+          name : 'Javascript',
+          value : 1
         },
         {
-          "name" : "HTML5",
-          "value" : 5
+          name : 'HTML5',
+          value : 5
         },
         {
-          "name" : "Angular",
-          "value" : 2
+          name : 'Angular',
+          value : 2
         },
         {
-          "name" : "Angular 10",
-          "value" : 1
+          name : 'Angular 10',
+          value : 1
         },
         {
-          "name" : "CSS3",
-          "value" : 5
+          name : 'CSS3',
+          value : 5
         }
+      ],
+      softSkills: [
+        {
+          name: 'Creativity',
+          value: '60%',
+        },
+        {
+          name: 'Mentoring',
+          value: '30%',
+        },
+        {
+          name: 'Communication',
+          value: '85%',
+        },
+        {
+          name: 'Lorem lorem',
+          value: '10%',
+        },
+      ],
+      languages: [
+        {
+          name: 'Russian',
+          value: 6,
+        },
+        {
+          name: 'English',
+          value: 5,
+        },
+        {
+          name: 'French',
+          value: 3,
+        },
+        {
+          name: 'Italian',
+          value: 4,
+        },
       ],
       location: 'Ukraine, Kyiv',
       dateUpdated: '19 July 2020',
       photo : 'http://localhost:4000/1594974664857.png'
-    }]
+    }];
 
 export interface State {
   isAuthenticated: boolean;
@@ -289,7 +541,7 @@ export const INIT_STATE: State = {
   isAuthenticated: null,
   userInfo: null,
   jobs: [],
-  developers: developers,
+  developers,
   developer: developers[0]
 };
 
@@ -307,7 +559,7 @@ export function reducer(state: State = INIT_STATE, action: coreActions.Actions) 
     case coreActions.SEARCH_JOBS_SUCCESS:
       return { ...state, jobs: action.payload };
     case coreActions.SEARCH_DEVELOPERS_SUCCESS:
-      return { ...state, developers: developers };
+      return { ...state, developers };
     default:
       return state;
   }
