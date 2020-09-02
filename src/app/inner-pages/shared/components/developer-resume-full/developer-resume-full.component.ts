@@ -31,10 +31,8 @@ export class DeveloperResumeFullComponent implements OnInit {
   ngOnInit(): void {
     this.developer$ = this.store.select(getDeveloper);
 
-    this.inViewportChange = new Subject<{
-      isInViewport: boolean;
-      section: DeveloperResumeSections;
-    }>().pipe(bufferTime(300));
+    this.inViewportChange = new Subject<{ isInViewport: boolean, section: DeveloperResumeSections }>()
+      .pipe(bufferTime(300));
 
     this.inViewportChange.subscribe((sections) => console.log(sections));
   }
