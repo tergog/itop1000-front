@@ -49,5 +49,6 @@ import { TextareaComponent } from './components/textarea/textarea.component';
     NgCircleProgressModule
   ],
   providers: [CircleProgressOptions],
+
 })
 export class SharedModule {}
