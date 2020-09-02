@@ -1,41 +1,38 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 import * as jwtDecode from 'jwt-decode';
 
 import * as coreActions from 'app/core/actions/core.actions';
 import { TOKEN } from 'app/constants/constants';
-import { NotificationsService, UserService } from 'app/shared/services';
-import { NameValueModel, UserInfo } from 'app/shared/models';
+import { UserService } from 'app/shared/services';
+import { UserInfo } from 'app/shared/models';
 import * as fromCore from 'app/core/reducers';
+import { NotificationsService } from 'app/shared/services/notifications.service';
 
-import { DevProfileSections } from 'app/inner-pages/dev-pages/dev-profile/dev-profile-sections/dev-profile-sections.enum';
-import { slideInAnimation } from 'app/shared/animations';
-
-@Component({
-  selector: 'app-dev-profile-sections',
-  templateUrl: './dev-profile-sections.component.html',
-  styleUrls: ['./dev-profile-sections.component.scss'],
-  animations: [slideInAnimation]
-})
-export class DevProfileSectionsComponent implements OnInit {
-
-  @Input() public section: DevProfileSections;
-  @Output() updateProfileInfo = new EventEmitter();
-
-
-  public DevProfileSections = DevProfileSections;
+@Injectable()
+export class DevProfileService {
 
   constructor(
     private store: Store<fromCore.State>,
-    private userService: UserService,
-    private notificationsService: NotificationsService
+    private notificationsService: NotificationsService,
+    private userService: UserService
   ) { }
 
-  ngOnInit(): void {
+  initUpdateProfileService() {
+    this.store.select(fromCore.getUserInfo)
+      .pipe(first())
+      .subscribe(
+        (userInfo: UserInfo) => {
+          if (userInfo.token) {
+            userInfo = this.decodeToken(userInfo.token);
+          }
+        }
+      );
   }
 
-  onSaveClick(userInfo) {
+  onSaveClick(userInfo: Partial<UserInfo>): void {
     this.userService.updateProfile(userInfo)
       .pipe(first())
       .subscribe(
@@ -60,7 +57,7 @@ export class DevProfileSectionsComponent implements OnInit {
       message: 'Profile updated successfully',
       type: 'success'
     });
-    this.updateProfileInfo.emit(userInfo);
+    this.onUpdateProfileInfo(userInfo);
   }
 
   handleErrorResponse(error) {
@@ -69,5 +66,4 @@ export class DevProfileSectionsComponent implements OnInit {
       type: 'error'
     });
   }
-
 }

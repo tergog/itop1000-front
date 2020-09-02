@@ -1,32 +1,32 @@
 <div [formGroup]="form">
   <div class="w__350 d__inline-flex d__flex--justify-between d__flex--items-center m__right--10 m__bottom--10">
     <span class="text text__sm text__bold text__uppercase">First Name</span>
-    <app-input [type]="'inner'" formControlName="firstName" [placeholder]="'First Name'"></app-input>
+    <app-input [type]="'inner'" formControlName="firstName" [placeholder]="'First Name'" [value]="this.form.get('firstName').value"></app-input>
   </div>
 
   <div class="w__350 d__inline-flex d__flex--justify-between d__flex--items-center m__right--10 m__bottom--10">
     <span class="text text__sm text__bold text__uppercase">Last Name</span>
-    <app-input [type]="'inner'" formControlName="lastName" [placeholder]="'Last Name'"></app-input>
+    <app-input [type]="'inner'" formControlName="lastName" [placeholder]="'Last Name'" [value]="this.form.get('lastName').value"></app-input>
   </div>
 
   <div class="w__350 d__inline-flex d__flex--justify-between d__flex--items-center m__right--10 m__bottom--10">
     <span class="text text__sm text__bold text__uppercase">Email</span>
-    <app-input [type]="'inner'" formControlName="email" [placeholder]="'Email'"></app-input>
+    <app-input [type]="'inner'" formControlName="email" [placeholder]="'Email'" [value]="this.form.get('email').value"></app-input>
   </div>
 
   <div class="w__350 d__inline-flex d__flex--justify-between d__flex--items-center m__right--10 m__bottom--10">
     <span class="text text__sm text__bold text__uppercase">Time Zone</span>
-    <app-input [type]="'inner'" [placeholder]="'Time Zone'"></app-input>
+    <app-input [type]="'inner'" formControlName="timezone" [placeholder]="'Time Zone'" [value]="this.form.get('timezone').value"></app-input>
   </div>
 
   <div class="w__350 d__inline-flex d__flex--justify-between d__flex--items-center m__right--10 m__bottom--10">
     <span class="text text__sm text__bold text__uppercase">Address</span>
-    <app-input [type]="'inner'" formControlName="address" [placeholder]="'Address'"></app-input>
+    <app-input [type]="'inner'" formControlName="address" [placeholder]="'Address'" [value]="this.form.get('address').value"></app-input>
   </div>
 
   <div class="w__350 d__inline-flex d__flex--justify-between d__flex--items-center m__right--10 m__bottom--10">
     <span class="text text__sm text__bold text__uppercase">Phone</span>
-    <app-input [type]="'inner'" formControlName="phone" [placeholder]="'Phone'"></app-input>
+    <app-input [type]="'inner'" formControlName="phone" [placeholder]="'Phone'" [value]="this.form.get('phone').value"></app-input>
   </div>
 </div>
 

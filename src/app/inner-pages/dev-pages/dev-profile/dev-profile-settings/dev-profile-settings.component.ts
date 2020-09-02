@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { FormControl, FormGroup } from '@angular/forms';
 import { filter, first } from 'rxjs/operators';
 
 import { UploadPhotoDialogComponent } from 'app/inner-pages/shared/components/upload-photo-dialog/upload-photo-dialog.component';
 import { UserService } from 'app/shared/services';
-import { FormControl, FormGroup } from '@angular/forms';
+import { DevProfileService } from './../dev-profile.service';
+import { UserInfo } from 'app/shared/models';
 
 @Component({
   selector: 'app-dev-profile-settings',
@@ -15,17 +17,22 @@ export class DevProfileSettingsComponent implements OnInit {
 
   public form: FormGroup;
   public imageUrl: string;
+  public isEdit: boolean;
 
   constructor(
+    private devProfileService: DevProfileService,
     private userService: UserService,
     private matDialog: MatDialog
   ) { }
 
   ngOnInit(): void {
     this.initForm();
+    this.devProfileService.initUpdateProfileService();
   }
 
-  public onEditClick(): void {}
+  public onEditClick(): void {
+    this.isEdit = !this.isEdit;
+  }
 
   public openUploadPhotoDialog(): void {
     this.matDialog.open(UploadPhotoDialogComponent)
@@ -34,7 +41,7 @@ export class DevProfileSettingsComponent implements OnInit {
         filter(result => !!result),
         first()
       )
-      .subscribe((image: string) => this.uploadImage(image))
+      .subscribe((image: string) => this.uploadImage(image));
   }
 
 
@@ -43,6 +50,7 @@ export class DevProfileSettingsComponent implements OnInit {
 
   public onSaveClick(): void {
     this.disableEmptyFields();
+    this.devProfileService.onSaveClick(this.form.value);
   }
 
   private initForm(): void {
@@ -52,7 +60,8 @@ export class DevProfileSettingsComponent implements OnInit {
       address: new FormControl('', []),
       phone: new FormControl('', []),
       email: new FormControl('', []),
-    })
+      timezone: new FormControl('', [])
+    });
   }
 
   private disableEmptyFields(): void {
@@ -67,7 +76,7 @@ export class DevProfileSettingsComponent implements OnInit {
       .subscribe(
         ({ url }) => this.imageUrl = url,
         ({ error }) => console.log(error.message)
-      )
+      );
   }
 
 }

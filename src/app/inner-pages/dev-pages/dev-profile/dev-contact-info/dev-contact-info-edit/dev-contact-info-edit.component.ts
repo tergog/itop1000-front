@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
+import { DevProfileService } from './../../dev-profile.service';
 import { UserInfo } from 'app/shared/models';
 
 @Component({
@@ -13,10 +14,13 @@ export class DevContactInfoEditComponent implements OnInit {
   public form: FormGroup;
 
   @Input() userInfo: UserInfo;
+  @Output() updateProfileInfo = new EventEmitter();
   @Output() cancel = new EventEmitter();
   @Output() save = new EventEmitter();
 
-  constructor() { }
+  constructor(
+    private devProfileService: DevProfileService
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -30,6 +34,7 @@ export class DevContactInfoEditComponent implements OnInit {
   public onSaveClick(): void {
     this.disableEmptyFields();
     this.save.emit(this.form.value);
+    this.devProfileService.onSaveClick(this.form.value);
   }
 
   private initForm(): void {
@@ -39,7 +44,8 @@ export class DevContactInfoEditComponent implements OnInit {
       address: new FormControl('', []),
       phone: new FormControl('', []),
       email: new FormControl('', []),
-    })
+      timezone: new FormControl('', [])
+    });
   }
 
   private disableEmptyFields(): void {

@@ -35,7 +35,7 @@ export class LogInComponent implements OnInit, OnDestroy {
       .subscribe(
         (userInfo: UserInfo) => this.loginSuccess(userInfo),
         ({ error }) => this.errorMessage = error.message
-      )
+      );
   }
 
   public passwordHiddenToggle(): void {
@@ -62,6 +62,6 @@ export class LogInComponent implements OnInit, OnDestroy {
         Validators.maxLength(20),
         this.utilsService.passwordCombinationValidator()
       ])
-    })
+    });
   }
 }

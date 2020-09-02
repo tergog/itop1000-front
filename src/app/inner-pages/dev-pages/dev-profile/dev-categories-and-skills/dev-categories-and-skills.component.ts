@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { first } from 'rxjs/operators';
 import xorBy from 'lodash.xorby';
 
-import { NotificationsService, UserService } from 'app/shared/services';
+import { DevProfileService } from './../dev-profile.service';
 import { NameValueModel, UserInfo } from 'app/shared/models';
 import * as fromCore from 'app/core/reducers';
 
@@ -44,15 +44,20 @@ export class DevCategoriesAndSkillsComponent implements OnInit {
   ];
 
   constructor(
-    private userService: UserService,
-    private notificationsService: NotificationsService,
-    private store: Store<fromCore.State>
+    private store: Store<fromCore.State>,
+    private devProfileService: DevProfileService
   ) { }
 
   ngOnInit(): void {
     this.store.select(fromCore.getUserInfo)
       .pipe(first())
-      .subscribe((userInfo: UserInfo) => this.updateCategoriesAndSkills(userInfo));
+      .subscribe((userInfo: UserInfo) => {
+        if (userInfo.token) {
+          userInfo = this.devProfileService.decodeToken(userInfo.token);
+        }
+        this.updateCategoriesAndSkills(userInfo);
+      }
+      );
   }
 
   public onEditClick(): void {
@@ -80,33 +85,15 @@ export class DevCategoriesAndSkillsComponent implements OnInit {
   }
 
   public onSaveClick(): void {
-    this.userService.updateProfile({ skills: this.selectedSkills, categories: this.selectedCategories})
-      .pipe(first())
-      .subscribe(
-        (userInfo: UserInfo) => this.handleSuccessResponse(),
-        ({ error }) => this.handleErrorResponse(error)
-      )
+    this.devProfileService.onSaveClick({ skills: this.selectedSkills, categories: this.selectedCategories});
+    this.isEdit = false;
   }
 
-  private updateCategoriesAndSkills({ categories, skills }): void {
+  private updateCategoriesAndSkills({ categories, skills }) {
     this.selectedCategories = [ ...categories ] || [];
     this.selectedSkills = [ ...skills ] || [];
+
     this.availableCategories = xorBy(this.selectedCategories, this.availableCategories, 'name');
     this.availableSkills = xorBy(this.selectedSkills, this.availableSkills, 'name');
-  }
-
-  private handleSuccessResponse(): void {
-    this.isEdit = false;
-    this.notificationsService.message.emit({
-      message: 'Profile updated successfully',
-      type: 'success'
-    });
-  }
-
-  private handleErrorResponse(error) {
-    this.notificationsService.message.emit({
-      message: error.message,
-      type: 'error'
-    });
   }
 }
