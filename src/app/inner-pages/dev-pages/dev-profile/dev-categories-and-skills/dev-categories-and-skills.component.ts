@@ -85,7 +85,8 @@ export class DevCategoriesAndSkillsComponent implements OnInit {
   }
 
   public onSaveClick(): void {
-    this.devProfileService.onSaveClick({ skills: this.selectedSkills, categories: this.selectedCategories})
+    this.devProfileService.onSaveClick({ skills: this.selectedSkills, categories: this.selectedCategories});
+    this.isEdit = false;
   }
 
   private updateCategoriesAndSkills({ categories, skills }) {

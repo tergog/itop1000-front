@@ -37,6 +37,7 @@ export class DevContactInfoComponent implements OnInit {
 
   public onSaveClick(userInfo: Partial<UserInfo>): void {
     this.devProfileService.onSaveClick(userInfo);
+    this.isEdit = false;
   }
 
 }
