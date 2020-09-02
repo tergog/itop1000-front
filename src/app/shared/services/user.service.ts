@@ -38,7 +38,6 @@ export class UserService {
   }
 
   public updateProfile(userInfo: Partial<UserInfo>): Observable<object> {
-    // console.log(userInfo);
     return this.http.post(`${this.apiUrl}${ApiConstants.accounts.updateProfile}`, userInfo);
   }
 

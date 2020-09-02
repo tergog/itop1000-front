@@ -20,7 +20,7 @@ export class DevProfileService {
     private userService: UserService
   ) { }
 
-  initUpdateProfileService() {
+  public initUpdateProfileService() {
     this.store.select(fromCore.getUserInfo)
       .pipe(first())
       .subscribe(
@@ -32,7 +32,7 @@ export class DevProfileService {
       );
   }
 
-  onSaveClick(userInfo: Partial<UserInfo>): void {
+  public onSaveClick(userInfo: Partial<UserInfo>): void {
     this.userService.updateProfile(userInfo)
       .pipe(first())
       .subscribe(
@@ -41,18 +41,18 @@ export class DevProfileService {
       );
   }
 
-  onUpdateProfileInfo(userInfo) {
+  private onUpdateProfileInfo(userInfo) {
     this.store.dispatch(new coreActions.SetTokenOnProfileUpdateAction(userInfo));
     localStorage.setItem(TOKEN, userInfo.token);
   }
 
-  decodeToken(token = localStorage.getItem(TOKEN)) {
+  public decodeToken(token = localStorage.getItem(TOKEN)) {
     const userInfo = jwtDecode(token);
     this.store.dispatch(new coreActions.UpdateUserProfileAction(userInfo));
     return userInfo;
   }
 
-  handleSuccessResponse(userInfo): void {
+  private handleSuccessResponse(userInfo): void {
     this.notificationsService.message.emit({
       message: 'Profile updated successfully',
       type: 'success'
@@ -60,7 +60,7 @@ export class DevProfileService {
     this.onUpdateProfileInfo(userInfo);
   }
 
-  handleErrorResponse(error) {
+  private handleErrorResponse(error) {
     this.notificationsService.message.emit({
       message: error.message,
       type: 'error'
