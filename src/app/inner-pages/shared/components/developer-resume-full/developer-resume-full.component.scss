@@ -18,7 +18,7 @@
 
   img {
     max-width: 135px;
-    max-height:135px;
+    max-height: 135px;
     border-radius: 50%;
   }
 
@@ -50,7 +50,7 @@
   display: inline-block;
   padding: 20px 40px;
   background-color: rgba(0, 0, 0, 0.65);
-  box-shadow: 0 2px 4px #000000;
+  box-shadow: 0 2px 4px $color-1;
   width: calc(100% - 300px);
   min-height: 100%;
   border-left: 2px solid $color-5;
@@ -89,6 +89,86 @@
       width: 35px;
       height: 35px;
       border-radius: 50%;
+    }
+  }
+}
+
+.softskills {
+  width: 55%;
+
+  &__wrap {
+    margin: 3rem 0;
+  }
+
+  &__skill {
+
+    &__name {
+      width: 30%;
+      font-family: Work Sans;
+      font-style: normal;
+      line-height: 24px;
+    }
+
+    &__percent {
+      @extend .softskills__skill__name;
+      width: 10%;
+    }
+  }
+
+  &__progressbar {
+    &__full {
+      display: flex;
+      align-items: center;
+      margin: 0 1.5rem;
+      width: 60%;
+      height: 3px;
+      background: $color-4;
+      border-radius: 5px;
+    }
+
+    &__filled {
+      height: 5px;
+      background: $color-2;
+      border-radius: 5px;
+    }
+  }
+}
+
+.languages {
+  width: 40%;
+
+  &__wrap {
+    margin: 1rem 0;
+    padding: 2rem;
+    background: $bg-color-dark;
+    opacity: 0.9;
+    box-shadow: 0px 2px 4px $color-1;
+    border-radius: 10px;
+  }
+
+  &__item {
+    &__wrap {
+      width: 100%;
+    }
+
+    &__text {
+      width: 30%;
+      font-family: Work Sans;
+      font-style: normal;
+    }
+
+    &__points {
+      width: 60%;
+
+      &__point {
+        max-width: 1000px;
+        color: $color-4;
+        margin: 0 0.5rem;
+      }
+
+      &__fill {
+        color: $color-5;
+      }
     }
   }
 }
