@@ -121,8 +121,8 @@
         </span>
       </div>
 
-      <div class="professional-skills m__top--20">
-        <div>
+      <div class="d__flex d__flex--justify-between m__top--20">
+        <div class="professional-skills__text-block">
           <span class="text text__color--3 text__xlg text__uppercase"
             >Professional Skills</span
           >
@@ -132,7 +132,38 @@
               activeSection === DeveloperResumeSections.ProfessionalSkills
             "
           ></div>
-          <span class="d__flex text text__color--4 text__lg m__top--10">{{ developer.description }}</span>
+          <span class="d__flex text text__color--4 text__lg m__top--10">
+            {{ developer.description }}</span
+          >
+        </div>
+        <div class="
+          professional-skills__progress__wrap
+          d__flex
+          d__flex--items-center
+          d__flex--justify-center
+          ">
+          <div
+            class="professional-skills__progress d__flex d__flex--direction-column d__flex--items-center"
+            *ngFor="let skill of developer.skills"
+          >
+            <circle-progress
+              [percent]="skill.value * 20"
+              [radius]="50"
+              [space]="-4"
+              [titleColor]="'#ffffff'"
+              [titleFontSize]="30"
+              [unitsColor]="'#ffffff'"
+              [unitsFontSize]="30"
+              [showSubtitle]="false"
+              [innerStrokeWidth]="4"
+              [outerStrokeWidth]="4"
+              [innerStrokeColor]="'#565656'"
+              [outerStrokeColor]="'#F31D42'"
+            ></circle-progress>
+            <span class="professional-skills__progress__name text__md text__uppercase text__color--3">
+              {{ skill.name }}
+            </span>
+          </div>
         </div>
 
         <div></div>
@@ -185,6 +216,7 @@
               *ngFor="let skill of developer.softSkills">
               <span class="
                 softskills__skill__name
+                text__alt
                 text__right
                 text__sm
                 text__uppercase
@@ -194,12 +226,12 @@
               <div class="softskills__progressbar__full">
                 <div
                   class="softskills__progressbar__filled"
-                  [ngStyle]="{ width: skill.value }"
+                  [ngStyle]="{ width: skill.value + '%' }"
                 ></div>
               </div>
 
               <span class="softskills__skill__percent text__sm text__color--3">
-                {{ skill.value }}</span
+                {{ skill.value }}%</span
               >
             </div>
           </div>

@@ -41,19 +41,19 @@ export const developers = [
       softSkills: [
         {
           name: 'Creativity',
-          value: '60%',
+          value: 60,
         },
         {
           name: 'Mentoring',
-          value: '30%',
+          value: 30,
         },
         {
           name: 'Communication',
-          value: '85%',
+          value: 85,
         },
         {
           name: 'Lorem lorem',
-          value: '10%',
+          value: 10,
         },
       ],
       languages: [
@@ -116,19 +116,19 @@ export const developers = [
       softSkills: [
         {
           name: 'Creativity',
-          value: '60%',
+          value: 60,
         },
         {
           name: 'Mentoring',
-          value: '30%',
+          value: 30,
         },
         {
           name: 'Communication',
-          value: '85%',
+          value: 85,
         },
         {
           name: 'Lorem lorem',
-          value: '10%',
+          value: 10,
         },
       ],
       languages: [
@@ -191,19 +191,19 @@ export const developers = [
       softSkills: [
         {
           name: 'Creativity',
-          value: '60%',
+          value: 60,
         },
         {
           name: 'Mentoring',
-          value: '30%',
+          value: 30,
         },
         {
           name: 'Communication',
-          value: '85%',
+          value: 85,
         },
         {
           name: 'Lorem lorem',
-          value: '10%',
+          value: 10,
         },
       ],
       languages: [
@@ -266,19 +266,19 @@ export const developers = [
       softSkills: [
         {
           name: 'Creativity',
-          value: '60%',
+          value: 60,
         },
         {
           name: 'Mentoring',
-          value: '30%',
+          value: 30,
         },
         {
           name: 'Communication',
-          value: '85%',
+          value: 85,
         },
         {
           name: 'Lorem lorem',
-          value: '10%',
+          value: 10,
         },
       ],
       languages: [
@@ -341,19 +341,19 @@ export const developers = [
       softSkills: [
         {
           name: 'Creativity',
-          value: '60%',
+          value: 60,
         },
         {
           name: 'Mentoring',
-          value: '30%',
+          value: 30,
         },
         {
           name: 'Communication',
-          value: '85%',
+          value: 85,
         },
         {
           name: 'Lorem lorem',
-          value: '10%',
+          value: 10,
         },
       ],
       languages: [
@@ -416,19 +416,19 @@ export const developers = [
       softSkills: [
         {
           name: 'Creativity',
-          value: '60%',
+          value: 60,
         },
         {
           name: 'Mentoring',
-          value: '30%',
+          value: 30,
         },
         {
           name: 'Communication',
-          value: '85%',
+          value: 85,
         },
         {
           name: 'Lorem lorem',
-          value: '10%',
+          value: 10,
         },
       ],
       languages: [
@@ -491,19 +491,19 @@ export const developers = [
       softSkills: [
         {
           name: 'Creativity',
-          value: '60%',
+          value: 60,
         },
         {
           name: 'Mentoring',
-          value: '30%',
+          value: 30,
         },
         {
           name: 'Communication',
-          value: '85%',
+          value: 85,
         },
         {
           name: 'Lorem lorem',
-          value: '10%',
+          value: 10,
         },
       ],
       languages: [
