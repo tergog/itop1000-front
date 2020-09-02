@@ -2,17 +2,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ClientProfileComponent } from './client-profile.component';
-import { ClientProfileSidenavComponent } from './client-profile-sidenav/client-profile-sidenav.component';
-import { ClientProfileSectionsComponent } from './client-profile-sections/client-profile-sections.component';
+import { ClientProfileComponent } from 'app/inner-pages/client-pages/client-profile/client-profile.component';
+import { ClientProfileSidenavComponent } from 'app/inner-pages/client-pages/client-profile/client-profile-sidenav/client-profile-sidenav.component';
+import { ClientProfileSectionsComponent } from 'app/inner-pages/client-pages/client-profile/client-profile-sections/client-profile-sections.component';
 import { PagesSharedModule } from 'app/inner-pages/shared/pages-shared.module';
-import { ClientContactInfoComponent } from './client-contact-info/client-contact-info.component';
+import { ClientContactInfoComponent } from 'app/inner-pages/client-pages/client-profile/client-contact-info/client-contact-info.component';
 import { SharedModule } from 'app/shared/shared.module';
 import { ClientPostedJobsComponent } from 'app/inner-pages/client-pages/client-profile/client-posted-jobs/client-posted-jobs.component';
-import { CreateJobComponent } from './client-posted-jobs/create-job/create-job.component';
+import { CreateJobComponent } from 'app/inner-pages/client-pages/client-profile/client-posted-jobs/create-job/create-job.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ClientPaymentsComponent } from './client-payments/client-payments.component';
-import { ClientBillingsComponent } from './client-billings/client-billings.component';
+import { ClientPaymentsComponent } from 'app/inner-pages/client-pages/client-profile/client-payments/client-payments.component';
+import { ClientBillingsComponent } from 'app/inner-pages/client-pages/client-profile/client-billings/client-billings.component';
 
 export const routes: Routes = [
   { path: '', component: ClientProfileComponent }

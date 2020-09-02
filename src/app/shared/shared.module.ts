@@ -10,10 +10,10 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgCircleProgressModule, CircleProgressOptions } from 'ng-circle-progress';
 
-import { InputComponent } from './components/input/input.component';
-import { CheckboxComponent } from './components/checkbox/checkbox.component';
-import { ButtonComponent } from './components/button/button.component';
-import { TextareaComponent } from './components/textarea/textarea.component';
+import { InputComponent } from 'app/shared/components/input/input.component';
+import { CheckboxComponent } from 'app/shared/components/checkbox/checkbox.component';
+import { ButtonComponent } from 'app/shared/components/button/button.component';
+import { TextareaComponent } from 'app/shared/components/textarea/textarea.component';
 
 @NgModule({
   declarations: [

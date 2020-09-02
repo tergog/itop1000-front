@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HeaderComponent } from 'app/inner-pages/components/header/header.component';
 import { FooterComponent } from 'app/inner-pages/components/footer/footer.component';
-import { InnerPagesComponent } from './inner-pages.component';
+import { InnerPagesComponent } from 'app/inner-pages/inner-pages.component';
 import { SharedModule } from 'app/shared/shared.module';
 import { DevPagesGuard } from 'app/shared/guards/dev-pages.guard';
 import { ClientPagesGuard } from 'app/shared/guards/client-pages.guard';
@@ -16,14 +16,14 @@ const routes: Routes = [
     canActivate: [DevPagesGuard],
     component: InnerPagesComponent,
     loadChildren: () =>
-      import('./dev-pages/dev-pages.module').then((m) => m.DevPagesModule),
+      import('app/inner-pages/dev-pages/dev-pages.module').then((m) => m.DevPagesModule),
   },
   {
     path: 'c',
     canActivate: [ClientPagesGuard],
     component: InnerPagesComponent,
     loadChildren: () =>
-      import('./client-pages/client-pages.module').then(
+      import('app/inner-pages/client-pages/client-pages.module').then(
         (m) => m.ClientPagesModule
       ),
   },

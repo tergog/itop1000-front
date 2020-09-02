@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { first } from 'rxjs/operators';
 import xorBy from 'lodash.xorby';
 
-import { DevProfileService } from './../dev-profile.service';
+import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
 import { NameValueModel, UserInfo } from 'app/shared/models';
 import * as fromCore from 'app/core/reducers';
 

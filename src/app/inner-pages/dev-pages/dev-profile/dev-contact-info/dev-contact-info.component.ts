@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { DevProfileService } from './../dev-profile.service';
+import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
 import { UserService } from 'app/shared/services';
 import { UserInfo } from 'app/shared/models';
 import * as fromCore from 'app/core/reducers';

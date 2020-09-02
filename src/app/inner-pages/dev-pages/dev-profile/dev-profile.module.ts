@@ -9,11 +9,11 @@ import { DevContactInfoComponent } from 'app/inner-pages/dev-pages/dev-profile/d
 import { DevProfileSettingsComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-profile-settings/dev-profile-settings.component';
 import { DevCategoriesAndSkillsComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-categories-and-skills/dev-categories-and-skills.component';
 import { DevProfileBalanceComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-profile-balance/dev-profile-balance.component';
-import { DevProfileService } from './dev-profile.service';
+import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
 import { PagesSharedModule } from 'app/inner-pages/shared/pages-shared.module';
 import { SharedModule } from 'app/shared/shared.module';
-import { DevContactInfoEditComponent } from './dev-contact-info/dev-contact-info-edit/dev-contact-info-edit.component';
-import { DevContactInfoPreviewComponent } from './dev-contact-info/dev-contact-info-preview/dev-contact-info-preview.component';
+import { DevContactInfoEditComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-contact-info/dev-contact-info-edit/dev-contact-info-edit.component';
+import { DevContactInfoPreviewComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-contact-info/dev-contact-info-preview/dev-contact-info-preview.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 

@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 
-import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { LandingPageComponent } from 'app/core/components/landing-page/landing-page.component';
 import { CoreEffects } from 'app/core/effects/core.effects';
-import { NotificationComponent } from './components/notification/notification.component';
-import { TermsPagesComponent } from './components/terms-pages/terms-pages.component';
+import { NotificationComponent } from 'app/core/components/notification/notification.component';
+import { TermsPagesComponent } from 'app/core/components/terms-pages/terms-pages.component';
 
 @NgModule({
   declarations: [

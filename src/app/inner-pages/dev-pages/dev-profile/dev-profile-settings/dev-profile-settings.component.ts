@@ -5,7 +5,7 @@ import { filter, first } from 'rxjs/operators';
 
 import { UploadPhotoDialogComponent } from 'app/inner-pages/shared/components/upload-photo-dialog/upload-photo-dialog.component';
 import { UserService } from 'app/shared/services';
-import { DevProfileService } from './../dev-profile.service';
+import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
 import { UserInfo } from 'app/shared/models';
 
 @Component({

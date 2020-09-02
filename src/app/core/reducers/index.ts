@@ -3,7 +3,7 @@ import { ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { createSelector } from 'reselect';
 
 // Imports from reducers
-import * as fromCore from './core.reducer';
+import * as fromCore from 'app/core/reducers/core.reducer';
 import { environment } from 'environments/environment';
 
 export const metaReducers: MetaReducer<any, any>[] = !environment.production ? [] : [];

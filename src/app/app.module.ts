@@ -5,8 +5,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { AppRoutingModule } from 'app/app-routing.module';
+import { AppComponent } from 'app/app.component';
 import { metaReducers, reducers } from 'app/core/reducers';
 import { environment } from 'environments/environment';
 import { AuthGuard } from 'app/shared/guards/auth.guard';
