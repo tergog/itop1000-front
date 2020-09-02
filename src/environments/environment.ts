@@ -3,8 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 export const environment = {
   production: false,
-  // apiUrl: 'https://itop1000-back.herokuapp.com/'
-  apiUrl: 'http://localhost:4000/'
+  apiUrl: 'https://itop1000-back.herokuapp.com/'
+  // apiUrl: 'http://localhost:4000/'
 };
 
 /*
