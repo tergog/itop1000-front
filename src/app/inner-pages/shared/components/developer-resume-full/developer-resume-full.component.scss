@@ -102,6 +102,7 @@
     padding: 2rem;
 
     &__wrap {
+      flex-direction: row;
       flex-wrap: wrap;
       width: 50%;
       background: $bg-color-dark;
@@ -110,8 +111,8 @@
       border-radius: 10px;
     }
 
-    &__title {
-      font-family: Work Sans;
+    &__name {
+      font-family: $font-2;
     }
   }
 }
@@ -127,8 +128,7 @@
 
     &__name {
       width: 30%;
-      font-family: Work Sans;
-      font-style: normal;
+      font-family: $font-2;
       line-height: 24px;
     }
 

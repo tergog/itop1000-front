@@ -160,7 +160,7 @@
               [innerStrokeColor]="'#565656'"
               [outerStrokeColor]="'#F31D42'"
             ></circle-progress>
-            <span class="professional-skills__progress__title text__md text__uppercase text__color--3">
+            <span class="professional-skills__progress__name text__md text__uppercase text__color--3">
               {{ skill.name }}
             </span>
           </div>
@@ -216,6 +216,7 @@
               *ngFor="let skill of developer.softSkills">
               <span class="
                 softskills__skill__name
+                text__alt
                 text__right
                 text__sm
                 text__uppercase
@@ -225,12 +226,12 @@
               <div class="softskills__progressbar__full">
                 <div
                   class="softskills__progressbar__filled"
-                  [ngStyle]="{ width: skill.value }"
+                  [ngStyle]="{ width: skill.value + '%' }"
                 ></div>
               </div>
 
               <span class="softskills__skill__percent text__sm text__color--3">
-                {{ skill.value }}</span
+                {{ skill.value }}%</span
               >
             </div>
           </div>
