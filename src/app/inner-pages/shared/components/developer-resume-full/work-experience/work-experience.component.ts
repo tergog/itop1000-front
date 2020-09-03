@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 
+import { Developer } from 'app/shared/models';
+import { DevProjectModel } from 'app/shared/models/dev-project.model';
 import { State, getDeveloper } from 'app/core/reducers';
 
 @Component({
@@ -11,8 +13,8 @@ import { State, getDeveloper } from 'app/core/reducers';
 })
 export class WorkExperienceComponent implements OnInit, OnDestroy {
 
-  public developer$: Observable<any>;
-  public projects$: Observable<any>;
+  public developer$: Observable<Developer>;
+  public projects: DevProjectModel[];
   devSub: Subscription;
 
   constructor(
@@ -21,7 +23,7 @@ export class WorkExperienceComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.developer$ = this.store.select(getDeveloper);
-    this.devSub = this.developer$.subscribe((data) => this.projects$ = data.projects);
+    this.devSub = this.developer$.subscribe((data) => this.projects = data.projects);
   }
 
   ngOnDestroy(): void {

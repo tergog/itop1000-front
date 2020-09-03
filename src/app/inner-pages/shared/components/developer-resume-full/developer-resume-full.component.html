@@ -202,9 +202,7 @@
         ></div>
 
         <div class="d__flex m__top--20">
-          <img class="m__right--10" src="assets/img/cert-1.png" alt="" />
-          <img class="m__right--10" src="assets/img/cert-2.png" alt="" />
-          <img src="assets/img/cert-1.png" alt="" />
+          <app-project-card class="m__right--10" *ngFor="let project of developer.projects" [project]="project"></app-project-card>
         </div>
       </div>
 

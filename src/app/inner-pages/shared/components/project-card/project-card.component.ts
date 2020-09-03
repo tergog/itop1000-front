@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
-import { Developer } from 'app/shared/models';
+import { DevProjectModel } from 'app/shared/models/dev-project.model';
 
 @Component({
   selector: 'app-project-card',
@@ -10,7 +10,7 @@ import { Developer } from 'app/shared/models';
 
 export class ProjectCardComponent implements OnInit {
 
-  @Input() project;
+  @Input() project: DevProjectModel;
 
   constructor() { }
 
