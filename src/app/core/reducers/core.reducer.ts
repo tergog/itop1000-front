@@ -74,6 +74,20 @@ export const developers = [
           value: 4,
         },
       ],
+      projects: [
+        {
+          title: 'Project 1 title',
+          description: 'Project 1 description lorem ipsum dolor sit amet',
+          technologies: ['Angular', 'Node JS', 'NGRX'],
+          link: 'https://github.com/'
+        },
+        {
+          title: 'Project 2 title',
+          description: 'Project 2 description lorem ipsum dolor sit amet',
+          technologies: ['Angular', 'Node JS', 'NGRX', 'Express', 'Typescript'],
+          link: 'https://github.com/'
+        }
+      ],
       location: 'Ukraine, Kyiv',
       dateUpdated: '19 July 2020',
       photo : 'http://localhost:4000/1594974664857.png'
@@ -148,6 +162,20 @@ export const developers = [
           name: 'Italian',
           value: 4,
         },
+      ],
+      projects: [
+        {
+          title: 'Project 1 title',
+          description: 'Project 1 description lorem ipsum dolor sit amet',
+          technologies: ['Angular', 'Node JS', 'NGRX'],
+          link: 'https://github.com/'
+        },
+        {
+          title: 'Project 2 title',
+          description: 'Project 2 description lorem ipsum dolor sit amet',
+          technologies: ['Angular', 'Node JS', 'NGRX', 'Express', 'Typescript'],
+          link: 'https://github.com/'
+        }
       ],
       location: 'Ukraine, Kyiv',
       dateUpdated: '19 July 2020',
@@ -224,6 +252,20 @@ export const developers = [
           value: 4,
         },
       ],
+      projects: [
+        {
+          title: 'Project 1 title',
+          description: 'Project 1 description lorem ipsum dolor sit amet',
+          technologies: ['Angular', 'Node JS', 'NGRX'],
+          link: 'https://github.com/'
+        },
+        {
+          title: 'Project 2 title',
+          description: 'Project 2 description lorem ipsum dolor sit amet',
+          technologies: ['Angular', 'Node JS', 'NGRX', 'Express', 'Typescript'],
+          link: 'https://github.com/'
+        }
+      ],
       location: 'Ukraine, Kyiv',
       dateUpdated: '19 July 2020',
       photo : 'http://localhost:4000/1594974664857.png'
@@ -298,6 +340,20 @@ export const developers = [
           name: 'Italian',
           value: 4,
         },
+      ],
+      projects: [
+        {
+          title: 'Project 1 title',
+          description: 'Project 1 description lorem ipsum dolor sit amet',
+          technologies: ['Angular', 'Node JS', 'NGRX'],
+          link: 'https://github.com/'
+        },
+        {
+          title: 'Project 2 title',
+          description: 'Project 2 description lorem ipsum dolor sit amet',
+          technologies: ['Angular', 'Node JS', 'NGRX', 'Express', 'Typescript'],
+          link: 'https://github.com/'
+        }
       ],
       location: 'Ukraine, Kyiv',
       dateUpdated: '19 July 2020',
@@ -374,6 +430,20 @@ export const developers = [
           value: 4,
         },
       ],
+      projects: [
+        {
+          title: 'Project 1 title',
+          description: 'Project 1 description lorem ipsum dolor sit amet',
+          technologies: ['Angular', 'Node JS', 'NGRX'],
+          link: 'https://github.com/'
+        },
+        {
+          title: 'Project 2 title',
+          description: 'Project 2 description lorem ipsum dolor sit amet',
+          technologies: ['Angular', 'Node JS', 'NGRX', 'Express', 'Typescript'],
+          link: 'https://github.com/'
+        }
+      ],
       location: 'Ukraine, Kyiv',
       dateUpdated: '19 July 2020',
       photo : 'http://localhost:4000/1594974664857.png'
@@ -449,6 +519,20 @@ export const developers = [
           value: 4,
         },
       ],
+      projects: [
+        {
+          title: 'Project 1 title',
+          description: 'Project 1 description lorem ipsum dolor sit amet',
+          technologies: ['Angular', 'Node JS', 'NGRX'],
+          link: 'https://github.com/'
+        },
+        {
+          title: 'Project 2 title',
+          description: 'Project 2 description lorem ipsum dolor sit amet',
+          technologies: ['Angular', 'Node JS', 'NGRX', 'Express', 'Typescript'],
+          link: 'https://github.com/'
+        }
+      ],
       location: 'Ukraine, Kyiv',
       dateUpdated: '19 July 2020',
       photo : 'http://localhost:4000/1594974664857.png'
@@ -523,6 +607,20 @@ export const developers = [
           name: 'Italian',
           value: 4,
         },
+      ],
+      projects: [
+        {
+          title: 'Project 1 title',
+          description: 'Project 1 description lorem ipsum dolor sit amet',
+          technologies: ['Angular', 'Node JS', 'NGRX'],
+          link: 'https://github.com/'
+        },
+        {
+          title: 'Project 2 title',
+          description: 'Project 2 description lorem ipsum dolor sit amet',
+          technologies: ['Angular', 'Node JS', 'NGRX', 'Express', 'Typescript'],
+          link: 'https://github.com/'
+        }
       ],
       location: 'Ukraine, Kyiv',
       dateUpdated: '19 July 2020',

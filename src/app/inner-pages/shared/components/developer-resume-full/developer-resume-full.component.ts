@@ -36,7 +36,7 @@ export class DeveloperResumeFullComponent implements OnInit {
     this.inViewportChange = new Subject<{ isInViewport: boolean, section: DeveloperResumeSections }>()
       .pipe(bufferTime(300));
 
-    this.inViewportChange.subscribe((sections) => console.log(sections));
+    // this.inViewportChange.subscribe((sections) => console.log(sections));
   }
 
   public onSectionCLick(selectedSection: DeveloperResumeSections, element: HTMLElement): void {

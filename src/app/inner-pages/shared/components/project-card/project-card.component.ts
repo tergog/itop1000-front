@@ -11,7 +11,6 @@ import { Developer } from 'app/shared/models';
 export class ProjectCardComponent implements OnInit {
 
   @Input() project;
-  @Output() profile = new EventEmitter<string>();
 
   constructor() { }
 
