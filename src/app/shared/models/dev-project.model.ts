@@ -1,4 +1,4 @@
-export interface DevProjectModel {
+export interface DevProject {
   title: string;
   description: string;
   technologies: string[];

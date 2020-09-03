@@ -1,17 +1,15 @@
 <div class="d__flex d__flex--direction-column content-wrap">
   <div class="d__flex">
-    <span
-      class="text text__color--3 text__xxlg m__right--30"
-      >{{ project.title }}</span
-    >
+    <span class="text text__color--3 text__xxlg m__right--30">
+      {{ project.title }}
+    </span>
   </div>
-  <span class="text text__color--4 text__lg m__top--10">{{ project.description }}</span>
+  <span class="text text__color--4 text__lg m__top--10">
+    {{ project.description }}
+  </span>
 
   <div class="m__top--20">
-    <span
-      class="text text__color--3 text__sm text__uppercase m__right--10"
-      *ngFor="let technology of project.technologies"
-    >
+    <span class="text text__color--3 text__sm text__uppercase m__right--10" *ngFor="let technology of project.technologies">
       {{ technology }}
     </span>
   </div>
@@ -20,7 +18,7 @@
 
   <div class="d__flex m__top--20">
     <div class="d__flex m__right--30">
-      <a href="{{project.link}}" class="text text__md text__color--3">Link to the project</a>
+      <a href="{{ project.link }}" class="text text__md text__color--3">Link to the project</a>
     </div>
   </div>
 </div>

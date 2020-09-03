@@ -3,7 +3,6 @@ import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { Developer } from 'app/shared/models';
-import { DevProjectModel } from 'app/shared/models/dev-project.model';
 import { State, getDeveloper } from 'app/core/reducers';
 
 @Component({
@@ -11,11 +10,9 @@ import { State, getDeveloper } from 'app/core/reducers';
   templateUrl: './work-experience.component.html',
   styleUrls: ['./work-experience.component.scss']
 })
-export class WorkExperienceComponent implements OnInit, OnDestroy {
+export class WorkExperienceComponent implements OnInit {
 
   public developer$: Observable<Developer>;
-  public projects: DevProjectModel[];
-  devSub: Subscription;
 
   constructor(
     private store: Store<State>
@@ -23,11 +20,6 @@ export class WorkExperienceComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.developer$ = this.store.select(getDeveloper);
-    this.devSub = this.developer$.subscribe((data) => this.projects = data.projects);
-  }
-
-  ngOnDestroy(): void {
-    this.devSub.unsubscribe();
   }
 
 }
