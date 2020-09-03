@@ -23,7 +23,6 @@ export class DevProfileSectionsComponent implements OnInit {
   @Input() public section: DevProfileSections;
   @Output() updateProfileInfo = new EventEmitter();
 
-
   public DevProfileSections = DevProfileSections;
 
   constructor(

@@ -45,6 +45,7 @@ import { ProjectCardComponent } from './components/project-card/project-card.com
     JobComponent,
     DeveloperResumeComponent,
     StandardBgWrapComponent,
+    ProjectCardComponent
   ],
 })
 export class PagesSharedModule {}
