@@ -55,7 +55,7 @@ export class DevCategoriesAndSkillsComponent implements OnInit {
         if (userInfo.token) {
           userInfo = this.devProfileService.decodeToken(userInfo.token);
         }
-        this.updateCategoriesAndSkills(userInfo);
+        this.updateCategoriesAndSkills(this.devProfileService.devProperties);
       }
       );
   }
@@ -85,13 +85,14 @@ export class DevCategoriesAndSkillsComponent implements OnInit {
   }
 
   public onSaveClick(): void {
-    this.devProfileService.onSaveClick({ skills: this.selectedSkills, categories: this.selectedCategories});
+    this.devProfileService.devProperties = { skills: this.selectedSkills, categories: this.selectedCategories }
+    this.devProfileService.onSaveClick({ devProperties: this.devProfileService.devProperties });
     this.isEdit = false;
   }
 
-  private updateCategoriesAndSkills({ categories, skills }) {
-    this.selectedCategories = [ ...categories ] || [];
-    this.selectedSkills = [ ...skills ] || [];
+  private updateCategoriesAndSkills(devProperties) {
+    this.selectedCategories = [ ...devProperties.categories ] || [];
+    this.selectedSkills = [ ...devProperties.skills ] || [];
 
     this.availableCategories = xorBy(this.selectedCategories, this.availableCategories, 'name');
     this.availableSkills = xorBy(this.selectedSkills, this.availableSkills, 'name');

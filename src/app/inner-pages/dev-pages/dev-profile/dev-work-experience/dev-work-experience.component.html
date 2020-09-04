@@ -1,42 +1,15 @@
-<app-profile-section-header [title]="'Work experience'" (edit)="onEditClick()"></app-profile-section-header>
+<app-profile-section-header [title]="'Work experience'" [canEdit]="false"></app-profile-section-header>
 
-<div class="card d__flex d__flex--direction-column p__20" *ngFor="let project of (developer$ | async).projects">
-  <span class="text text__title" *ngIf="!isEdit">{{ project.title }}</span>
-  <p class="text text__md" *ngIf="!isEdit">{{ project.description }}</p>
-
-  <mat-form-field class="m__top--10" [class.edit-mode]="isEdit">
-    <mat-chip-list #chipListTechnologies>
-      <mat-chip *ngFor="let technology of project.technologies"
-                [selectable]="false"
-                [removable]="isEdit"
-                (removed)="onCategoryRemove(technology)">
-        {{ technology }}
-        <mat-icon matChipRemove *ngIf="isEdit">cancel</mat-icon>
-      </mat-chip>
-      <input placeholder="Add category..."
-             [readOnly]="!isEdit"
-             [matChipInputFor]="chipListTechnologies"
-             [matAutocomplete]="autoCategories"
-             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-             [matChipInputAddOnBlur]="true">
-    </mat-chip-list>
-
-    <mat-autocomplete #autoCategories="matAutocomplete" (optionSelected)="onCategorySelect($event)">
-      <mat-option *ngFor="let technology of project.technologies" [value]="technology">
-        {{ technology }}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
-
-  <a href="{{ project.link }}" class="text text__md"> Link </a>
-
-  <div class="text__right" *ngIf="isEdit">
-    <app-button [type]="'transparent'" [text]="'Cancel'" (buttonClick)="onEditClick()"></app-button>
-    <app-button [text]="'Save'" (buttonClick)="onSaveClick()"></app-button>
-  </div>
-</div>
+<app-dev-project-card
+  *ngFor="let project of (developer$ | async).projects"
+  [project]="project"
+  [availableTechnologies]="availableTechnologies"
+  (save)="onSaveClick()"
+  (cancel)="onCancelClick()"
+  (removeTechnology)="onTechnologyRemove($event)"
+  ></app-dev-project-card>
 
 <ng-container *ngIf="!(developer$ | async).projects.length">
   <span>Projects are not added</span>
-  <app-button [text]="'Add new project'" (buttonClick)="onEditClick()"></app-button>
+  <app-button [text]="'Add new project'" (buttonClick)="onCancelClick()"></app-button>
 </ng-container>

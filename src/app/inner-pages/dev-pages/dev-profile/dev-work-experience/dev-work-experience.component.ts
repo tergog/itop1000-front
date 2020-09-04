@@ -19,10 +19,20 @@ export class DevWorkExperienceComponent implements OnInit {
 
   public isEdit: boolean;
   public developer$: Observable<Developer>;
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   public selectedTechnologies = [];
-  public availableTechnologies = [];
+  public availableTechnologies: NameValueModel[] = [
+    { name: 'Javascript', value: 1 },
+    { name: 'Typescript', value: 2 },
+    { name: 'CSS3', value: 3 },
+    { name: 'HTML5', value: 5 },
+    { name: 'AngularJS', value: 6 },
+    { name: 'Angular 9', value: 7 },
+    { name: 'Angular 10', value: 8 },
+    { name: 'Angular 7', value: 9 },
+    { name: 'Angular 8', value: 10 },
+    { name: 'Angular 2+', value: 11 },
+  ];
 
   constructor(
     private store: Store<fromCore.State>,
@@ -30,14 +40,8 @@ export class DevWorkExperienceComponent implements OnInit {
 
   ngOnInit(): void {
     this.developer$ = this.store.select(getDeveloper);
-    this.developer$.subscribe((developer) => this.availableTechnologies = developer.projects[0].technologies);
-    this.updateTechnologies(this.availableTechnologies);
+    this.updateTechnologies([]);
   }
-
-  // constructor(
-  //   private store: Store<fromCore.State>,
-  //   private devProfileService: DevProfileService
-  // ) { }
 
   // ngOnInit(): void {
   //   this.store.select(fromCore.getUserInfo)
@@ -51,18 +55,13 @@ export class DevWorkExperienceComponent implements OnInit {
   //     );
   // }
 
-  public onEditClick(): void {
-    this.isEdit = !this.isEdit;
+  public onCancelClick() {
+    console.log('cancel');
   }
 
-  public onCategoryRemove(category: NameValueModel): void {
-    this.selectedTechnologies = this.selectedTechnologies.filter(item => item.value !== category.value);
-    this.availableTechnologies.push(category);
-  }
-
-  public onCategorySelect({ option }): void {
-    this.availableTechnologies = this.availableTechnologies.filter(category => category.value !== option.value.value);
-    this.selectedTechnologies.push(option.value);
+  public onTechnologyRemove(technology: NameValueModel): void {
+    this.selectedTechnologies = this.selectedTechnologies.filter(item => item.value !== technology.value);
+    this.availableTechnologies.push(technology);
   }
 
   public onSaveClick(): void {

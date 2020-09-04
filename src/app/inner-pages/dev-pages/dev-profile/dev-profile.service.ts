@@ -14,6 +14,8 @@ import { NotificationsService } from 'app/shared/services/notifications.service'
 @Injectable()
 export class DevProfileService {
 
+  public devProperties: UserInfo['devProperties'];
+
   constructor(
     private store: Store<fromCore.State>,
     private notificationsService: NotificationsService,

@@ -1,3 +1,4 @@
+import { DevProject } from 'app/shared/models/dev-project.model';
 import { NameValueModel } from 'app/shared/models';
 
 export interface UserInfo {
@@ -10,8 +11,13 @@ export interface UserInfo {
   phone: string;
   address: string;
   timezone: string;
-  categories: NameValueModel[];
-  skills: NameValueModel[];
+  devProperties: {
+    categories?: NameValueModel[],
+    skills?: NameValueModel[],
+    softSkills?: NameValueModel[],
+    languages?: NameValueModel[],
+    projects?: DevProject[],
+  };
   photo: string;
   token?: string;
 }

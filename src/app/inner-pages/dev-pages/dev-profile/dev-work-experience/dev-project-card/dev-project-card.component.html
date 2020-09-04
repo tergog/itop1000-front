@@ -1,0 +1,39 @@
+<div class="card d__flex d__flex--direction-column p__20">
+  <i class="edit cursor__pointer" (click)="onEditClick()"></i>
+  <ng-container *ngIf="!isEdit">
+    <span class="text text__title">{{ project.title }}</span>
+    <p class="text text__md">{{ project.description }}</p>
+  </ng-container>
+
+
+  <mat-form-field class="m__top--10" [class.edit-mode]="isEdit">
+    <mat-chip-list #chipListTechnologies>
+      <mat-chip *ngFor="let technology of selectedTechnologies"
+                [selectable]="false"
+                [removable]="isEdit"
+                (removed)="onTechnologyRemove(technology)">
+        {{ technology.name }}
+        <mat-icon matChipRemove *ngIf="isEdit">cancel</mat-icon>
+      </mat-chip>
+      <input placeholder="Add Technology..."
+             [readOnly]="!isEdit"
+             [matChipInputFor]="chipListTechnologies"
+             [matAutocomplete]="autoTechnologies"
+             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+             [matChipInputAddOnBlur]="true">
+    </mat-chip-list>
+
+    <mat-autocomplete #autoTechnologies="matAutocomplete" (optionSelected)="onTechnologySelect($event)">
+      <mat-option *ngFor="let technology of availableTechnologies" [value]="technology">
+        {{ technology.name }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <a href="{{ project.link }}" class="text text__md"> Link </a>
+
+  <div class="text__right" *ngIf="isEdit">
+    <app-button [type]="'transparent'" [text]="'Cancel'" (buttonClick)="onEditClick()"></app-button>
+    <app-button [text]="'Save'" (buttonClick)="onSaveClick()"></app-button>
+  </div>
+</div>
