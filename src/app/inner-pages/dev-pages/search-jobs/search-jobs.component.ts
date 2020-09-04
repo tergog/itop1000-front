@@ -13,7 +13,7 @@ import { getJobs, State } from 'app/core/reducers';
 })
 export class SearchJobsComponent implements OnInit {
 
-  public jobs$ : Observable<Job[]>;
+  public jobs$: Observable<Job[]>;
 
   constructor(private jobsService: JobsService, private store: Store<State>) { }
 

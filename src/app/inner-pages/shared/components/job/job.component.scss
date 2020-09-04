@@ -1,9 +1,149 @@
 @import 'assets/scss/variables';
 
+$min-height: 290px;
+$min-width-left: 170px;
+
 :host {
   display: flex;
-  flex-direction: column;
   border-bottom: 1px solid $color-4;
-  padding-bottom: 20px;
   margin-bottom: 40px;
+
+  color: white;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  padding: 0 4.5%;
+  width: 100%;
+  background-color: $color-1;
+  box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.left-side {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2% 4.5% 2% 0;
+  min-height: $min-height;
+  width: 30%;
+  min-width: $min-width-left;
+  border-right: 2px solid #F1D261;
+}
+
+.client-photo {
+  min-height: 100px;
+  min-width: 100px;
+  height: 10vmin;
+  width: 10vmin;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.company-name {
+  margin-top: 10px;
+  display: table-caption;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration-line: underline;
+  font-family: 'Raleway Light', sans-serif;
+  font-style: normal;
+  font-weight: lighter;
+  font-size: 2em;
+}
+
+.price {
+  margin-top: 10px;
+  text-align: center;
+  text-transform: capitalize;
+  color: #F1D261;
+  font-family: 'Work Sans', sans-serif;
+}
+
+.border-point {
+  --size: 10px;
+
+  position: absolute;
+  background-color: #F1D261;
+  box-shadow: 0 0 5px 5px rgba(237, 216, 140, 0.7);
+  border-radius: 50%;
+  width: var(--size);
+  height: var(--size);
+  right: calc(-1px - var(--size) / 2);
+
+  &.first {
+    top: calc(20% - var(--size) / 2);
+  }
+
+  &.second {
+    top: calc(50% - var(--size) / 2);
+  }
+
+  &.third {
+    top: calc(80% - var(--size) / 2);
+  }
+}
+
+.right-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 70%;
+  padding: 2% 0 2% 4.5%;
+  font-family: 'Work Sans', sans-serif;
+
+  div {
+    margin-bottom: 4px;
+  }
+}
+
+
+.job-title {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+
+.job-duration {
+  color: #F1D261;
+
+  span {
+    color: white;
+    text-decoration-line: underline;
+  }
+}
+
+.job-description {
+  font-family: 'Raleway ExtraLight', sans-serif;
+  font-style: normal;
+  font-weight: 200;
+  color: #E2E3E3;
+}
+
+.requirements, .job-categories {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+
+  span {
+    text-transform: uppercase;
+    margin: 5px;
+  }
+}
+
+hr.splitter-line {
+  height: 0;
+  width: 100%;
+  border-bottom: 1px solid #4B4949;
+}
+
+.job-info-wrapper {
+  font-size: 0.9rem;
+
+  .job-date {
+    margin-left: 5%;
+    font-weight: 300;
+    font-family: 'Work Sans Light', sans-serif;
+    text-transform: capitalize;
+  }
 }

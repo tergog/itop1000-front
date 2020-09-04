@@ -1,7 +1,36 @@
-<span class="text text__lg text__color--2 text__fw--600">{{ job.title }}</span>
-<span class="text text__md text__color--1 text__fw--600">{{ job.description }}</span>
-<span class="text text__md text__color--1 text__fw--600">{{ job.categories }}</span>
-<span class="text text__md text__color--1 text__fw--600">{{ job.requirements }}</span>
-<span class="text text__md text__color--1 text__fw--600">{{ job.duration }}</span>
-<span class="text text__md text__color--1 text__fw--600">{{ job.price }}</span>
-
+<div class="left-side">
+  <img src="./assets/img/default-client-photo.svg" alt="client-photo" class="client-photo">
+  <div class="company-name">
+    {{job.company || 'No Company'}}
+  </div>
+  <div class="price">
+    ${{job.price}}/Mth
+  </div>
+  <div class="border-point first"></div>
+  <div class="border-point second"></div>
+  <div class="border-point third"></div>
+</div>
+<div class="right-side">
+  <div>
+    <div class="job-title">{{job.title}}</div>
+    <div class="job-duration"><span>Project duration</span> {{ job.duration }} months</div>
+  </div>
+  <div class="job-description">{{ job.description }}</div>
+  <div>
+    <div class="requirements">
+      <span *ngFor="let req of job.requirements.split(' ')">{{req}}</span> <!-- TODO change logic-->
+    </div>
+    <hr class="splitter-line">
+  </div>
+  <div>
+    <div class="job-categories">
+      <span *ngFor="let req of job.categories.split(' ')">{{req}}</span> <!-- TODO change logic-->
+    </div>
+    <hr class="splitter-line">
+  </div>
+  <div class="job-info-wrapper">
+    <img src="/assets/icons/location.svg" alt="location">
+    <span>{{job.city}}, {{job.country}}</span>
+    <span class="job-date">{{ job.dateCreated | date:'dd MMMM'}}</span>
+  </div>
+</div>

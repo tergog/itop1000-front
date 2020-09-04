@@ -5,4 +5,8 @@ export interface Job {
   requirements: string;
   duration: number;
   price: number;
+  country: string;
+  city: string;
+  dateCreated: string;
+  company: string;
 }
