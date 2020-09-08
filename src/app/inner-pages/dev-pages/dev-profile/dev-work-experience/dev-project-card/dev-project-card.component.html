@@ -3,7 +3,7 @@
   <ng-container *ngIf="!isEdit">
     <h2 class="text text__title">{{ project.title }}</h2>
     <p class="text text__md">{{ project.description }}</p>
-
+    <a href="{{ project.link }}">Link</a>
       <mat-chip-list #chipListTechnologies>
         <mat-chip *ngFor="let technology of selectedTechnologies"
                   [selectable]="false"
