@@ -34,7 +34,6 @@ export class DevContactInfoEditComponent implements OnInit {
   public onSaveClick(): void {
     this.disableEmptyFields();
     this.save.emit(this.form.value);
-    this.devProfileService.onSaveClick(this.form.value);
   }
 
   private initForm(): void {

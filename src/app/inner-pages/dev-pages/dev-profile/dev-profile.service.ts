@@ -7,14 +7,75 @@ import * as jwtDecode from 'jwt-decode';
 import * as coreActions from 'app/core/actions/core.actions';
 import { TOKEN } from 'app/constants/constants';
 import { UserService } from 'app/shared/services';
-import { UserInfo } from 'app/shared/models';
+import { UserInfo, NameValueModel } from 'app/shared/models';
 import * as fromCore from 'app/core/reducers';
+import { DevProperties } from 'app/shared/models/user-info.model';
 import { NotificationsService } from 'app/shared/services/notifications.service';
 
 @Injectable()
 export class DevProfileService {
 
-  public devProperties: UserInfo['devProperties'];
+  public devProperties: DevProperties;
+
+  selectedCategories: NameValueModel[] = [];
+  selectedSkills: NameValueModel[] = [];
+  selectedSoftSkills: NameValueModel[] = [];
+  selectedLanguages: NameValueModel[] = [];
+  selectedTechnologies: NameValueModel[] = [];
+
+  availableCategories: NameValueModel[] = [
+    { name: 'Web Development', value: 1 },
+    { name: 'Software Development', value: 2 },
+    { name: 'Mobile Development', value: 3 },
+    { name: 'Ecommerce Development', value: 5 },
+    { name: 'Information Security', value: 6 },
+    { name: 'Game Development', value: 7 },
+  ];
+
+  availableTechnologies: NameValueModel[] = [
+    { name: 'Javascript', value: 1 },
+    { name: 'Typescript', value: 2 },
+    { name: 'CSS3', value: 3 },
+    { name: 'HTML5', value: 5 },
+    { name: 'AngularJS', value: 6 },
+    { name: 'Angular 9', value: 7 },
+    { name: 'Angular 10', value: 8 },
+    { name: 'Angular 7', value: 9 },
+    { name: 'Angular 8', value: 10 },
+    { name: 'Angular 2+', value: 11 },
+  ];
+
+  availableSkills: NameValueModel[] = [
+    { name: 'Javascript', value: 1 },
+    { name: 'Typescript', value: 2 },
+    { name: 'CSS3', value: 3 },
+    { name: 'HTML5', value: 5 },
+    { name: 'AngularJS', value: 6 },
+    { name: 'Angular 9', value: 7 },
+    { name: 'Angular 10', value: 8 },
+    { name: 'Angular 7', value: 9 },
+    { name: 'Angular 8', value: 10 },
+    { name: 'Angular 2+', value: 11 },
+  ];
+
+  availableSoftSkills: NameValueModel[] = [
+    { name: 'Communication', value: 1 },
+    { name: 'Teamwork', value: 2 },
+    { name: 'Creativity', value: 3 },
+    { name: 'Problem Solving', value: 5 },
+    { name: 'Time Management', value: 6 },
+    { name: 'Negotiating', value: 9 },
+    { name: 'Responsibility', value: 10 },
+    { name: 'Leadership', value: 11 },
+  ];
+
+  availableLanguages: NameValueModel[] = [
+    { name: 'Russian', value: 1 },
+    { name: 'Ukrainian', value: 2 },
+    { name: 'English', value: 3 },
+    { name: 'Spanish', value: 5 },
+    { name: 'French', value: 6 },
+  ];
 
   constructor(
     private store: Store<fromCore.State>,

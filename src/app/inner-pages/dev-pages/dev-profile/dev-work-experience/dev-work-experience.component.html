@@ -1,15 +1,14 @@
 <app-profile-section-header [title]="'Work experience'" [canEdit]="false"></app-profile-section-header>
 
-<app-dev-project-card
-  *ngFor="let project of (developer$ | async).projects"
-  [project]="project"
-  [availableTechnologies]="availableTechnologies"
-  (save)="onSaveClick()"
-  (cancel)="onCancelClick()"
-  (removeTechnology)="onTechnologyRemove($event)"
+<ng-container *ngIf="(userInfo$ | async).devProperties.projects?.length">
+  <app-dev-project-card
+    *ngFor="let project of (userInfo$ | async).devProperties.projects"
+    [project]="project"
   ></app-dev-project-card>
-
-<ng-container *ngIf="!(developer$ | async).projects.length">
-  <span>Projects are not added</span>
-  <app-button [text]="'Add new project'" (buttonClick)="onCancelClick()"></app-button>
 </ng-container>
+
+<ng-container *ngIf="!(userInfo$ | async).devProperties.projects">
+  <app-button *ngIf="!isNewProject" [text]="'Add project'" (buttonClick)="onAddClick()"></app-button>
+  <app-edit-form *ngIf="isNewProject" [sectionName]="'projects'" [isEdit]="isNewProject"></app-edit-form>
+</ng-container>
+

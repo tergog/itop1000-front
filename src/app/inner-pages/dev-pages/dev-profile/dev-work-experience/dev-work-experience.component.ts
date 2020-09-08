@@ -1,3 +1,4 @@
+import { FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Store } from '@ngrx/store';
@@ -17,8 +18,9 @@ import { getDeveloper } from 'app/core/reducers/index';
 })
 export class DevWorkExperienceComponent implements OnInit {
 
-  public isEdit: boolean;
-  public developer$: Observable<Developer>;
+  public isNewProject: boolean;
+  public form: FormGroup;
+  public userInfo$: Observable<UserInfo>;
 
   public selectedTechnologies = [];
   public availableTechnologies: NameValueModel[] = [
@@ -39,39 +41,25 @@ export class DevWorkExperienceComponent implements OnInit {
     private devProfileService: DevProfileService) {}
 
   ngOnInit(): void {
-    this.developer$ = this.store.select(getDeveloper);
-    this.updateTechnologies([]);
+    this.initForm();
+    this.userInfo$ = this.store.select(fromCore.getUserInfo);
+    this.userInfo$.subscribe((data) => console.log(data));
+    debugger;
+    this.devProfileService.initUpdateProfileService();
+
   }
 
-  // ngOnInit(): void {
-  //   this.store.select(fromCore.getUserInfo)
-  //     .pipe(first())
-  //     .subscribe((userInfo: UserInfo) => {
-  //       if (userInfo.token) {
-  //         userInfo = this.devProfileService.decodeToken(userInfo.token);
-  //       }
-  //       this.updateCategoriesAndSkills(userInfo);
-  //     }
-  //     );
-  // }
-
-  public onCancelClick() {
-    console.log('cancel');
+  private initForm() {
+    this.form = new FormGroup({
+      title: new FormControl('', []),
+      description: new FormControl('', []),
+      technologies: new FormControl([], []),
+      link: new FormControl('', [])
+    });
   }
 
-  public onTechnologyRemove(technology: NameValueModel): void {
-    this.selectedTechnologies = this.selectedTechnologies.filter(item => item.value !== technology.value);
-    this.availableTechnologies.push(technology);
+  onAddClick() {
+    this.isNewProject = true;
   }
 
-  public onSaveClick(): void {
-    // this.devProfileService.onSaveClick(this.availableTechnologies);
-    this.isEdit = false;
-  }
-
-  private updateTechnologies(technologies) {
-    this.selectedTechnologies = [ ...technologies ] || [];
-
-    this.availableTechnologies = xorBy(this.selectedTechnologies, this.availableTechnologies);
-  }
 }

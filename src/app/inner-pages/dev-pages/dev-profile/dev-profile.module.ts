@@ -17,6 +17,7 @@ import { DevContactInfoPreviewComponent } from 'app/inner-pages/dev-pages/dev-pr
 import { ReactiveFormsModule } from '@angular/forms';
 import { DevWorkExperienceComponent } from './dev-work-experience/dev-work-experience.component';
 import { DevProjectCardComponent } from './dev-work-experience/dev-project-card/dev-project-card.component';
+import { EditFormComponent } from './shared/edit-form/edit-form.component';
 
 
 const routes: Routes = [
@@ -36,7 +37,8 @@ const routes: Routes = [
     DevContactInfoEditComponent,
     DevContactInfoPreviewComponent,
     DevWorkExperienceComponent,
-    DevProjectCardComponent
+    DevProjectCardComponent,
+    EditFormComponent
   ],
   imports: [
     CommonModule,

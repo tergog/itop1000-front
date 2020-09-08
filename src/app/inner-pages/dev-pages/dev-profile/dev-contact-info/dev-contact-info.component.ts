@@ -28,6 +28,7 @@ export class DevContactInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.userInfo$ = this.store.select(fromCore.getUserInfo);
+
     this.devProfileService.initUpdateProfileService();
   }
 

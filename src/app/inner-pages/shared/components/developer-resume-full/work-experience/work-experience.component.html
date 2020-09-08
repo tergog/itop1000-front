@@ -1,7 +1,7 @@
 <app-standard-bg-wrap>
   <app-project-card
   class="m__top--60"
-  *ngFor="let project of (developer$ | async).projects"
+  *ngFor="let project of (developer$ | async).devProperties.projects"
   [project]="project"
   >
 </app-project-card>
