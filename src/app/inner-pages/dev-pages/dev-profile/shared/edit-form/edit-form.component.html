@@ -65,53 +65,6 @@
     </div>
   </ng-container>
 
-  <ng-container *ngIf="sectionName === 'projects'">
-    <!-- work-experience -->
-    <div class="d__inline-flex d__flex--justify-between d__flex--items-center m__right--30 m__bottom--10">
-      <span class="text text__sm text__bold text__uppercase m__right--10">Title</span>
-      <app-input [type]="'inner'" formControlName="title" [placeholder]="'Title'"></app-input>
-    </div>
-
-    <div class="d__inline-flex d__flex--justify-between d__flex--items-center m__right--30 m__bottom--10">
-      <span class="text text__sm text__bold text__uppercase m__right--10">Description</span>
-      <app-input [type]="'inner'" formControlName="description" [placeholder]="'Description'" ></app-input>
-    </div>
-
-    <div class="d__inline-flex d__flex--justify-between d__flex--items-center m__right--30 m__bottom--10">
-      <span class="text text__sm text__bold text__uppercase m__right--10">Link</span>
-      <app-input [type]="'inner'" formControlName="link" [placeholder]="'Link'"></app-input>
-    </div>
-
-    <mat-form-field class="chip-list m__top--10" [class.edit-mode]="isEdit">
-      <mat-chip-list #chipListTechnologies formControlName="technologies">
-        <mat-chip *ngFor="let technology of devProfileService.selectedTechnologies"
-                  [selectable]="false"
-                  [removable]="isEdit"
-                  (removed)="onChipRemove(technology, devProfileService.selectedTechnologies, devProfileService.availableTechnologies)">
-          {{ technology.name }}
-          <mat-icon matChipRemove *ngIf="isEdit">cancel</mat-icon>
-        </mat-chip>
-        <input placeholder="Add Technology..."
-              [readOnly]="!isEdit"
-              [matChipInputFor]="chipListTechnologies"
-              [matAutocomplete]="autoTechnologies"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-              [matChipInputAddOnBlur]="true">
-      </mat-chip-list>
-
-      <mat-autocomplete #autoTechnologies="matAutocomplete" (optionSelected)="onChipSelect($event, devProfileService.selectedTechnologies, devProfileService.availableTechnologies)">
-        <mat-option *ngFor="let technology of devProfileService.availableTechnologies" [value]="technology">
-          {{ technology.name }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-
-    <div class="text__right" *ngIf="isEdit">
-      <app-button [type]="'transparent'" [text]="'Cancel'" (buttonClick)="onEditClick()"></app-button>
-      <app-button [text]="'Save'" (buttonClick)="onSaveClick()"></app-button>
-    </div>
-  </ng-container>
-
   <ng-container *ngIf="sectionName === 'languages'">
     <!-- languages -->
     <mat-form-field class="chip-list m__top--10" [class.edit-mode]="isEdit">

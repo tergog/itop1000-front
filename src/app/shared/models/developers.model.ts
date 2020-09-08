@@ -1,4 +1,4 @@
-import { DevProperties } from 'app/shared/models/user-info.model';
+import { DevProperties } from 'app/shared/models/dev-properties.model';
 
 export interface Developer {
   id: string;

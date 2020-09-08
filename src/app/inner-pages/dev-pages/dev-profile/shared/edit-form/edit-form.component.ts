@@ -3,7 +3,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { Store } from '@ngrx/store';
 import { first, tap } from 'rxjs/operators';
-import { xorBy } from 'lodash.xorby';
 import * as jwtDecode from 'jwt-decode';
 
 import { TOKEN } from 'app/constants/constants';
@@ -12,6 +11,7 @@ import * as fromCore from 'app/core/reducers';
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
 import { UserService, NotificationsService } from 'app/shared/services';
 import { UserInfo } from 'app/shared/models/user-info.model';
+import { DevProperties } from 'app/shared/models/dev-properties.model';
 import { DevProject } from 'app/shared/models/dev-project.model';
 import { NameValueModel } from 'app/shared/models/name-value.model';
 
@@ -23,8 +23,6 @@ import { NameValueModel } from 'app/shared/models/name-value.model';
 export class EditFormComponent implements OnInit {
 
   public form: FormGroup;
-
-
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   @Input() sectionName: string;
@@ -62,11 +60,6 @@ export class EditFormComponent implements OnInit {
       timezone: new FormControl('', []),
       categories: new FormControl('', []),
       skills: new FormControl('', []),
-      // languages: new FormControl('', []),
-      title: new FormControl('', []),
-      description: new FormControl('', []),
-      technologies: new FormControl([], []),
-      link: new FormControl('', []),
     });
   }
 
@@ -76,27 +69,26 @@ export class EditFormComponent implements OnInit {
     });
   }
 
-  onEditClick() {
+  public onEditClick(): void {
     this.editToggle.emit();
   }
 
-  onCancelClick() {
+  public onCancelClick(): void {
     // this.isEdit = !this.isEdit;
     console.log('cancel');
 
   }
 
-  onSaveClick() {
+  public onSaveClick(): void {
     this.devProfileService.devProperties = {
+      ...this.devProfileService.devProperties,
       skills: this.devProfileService.selectedSkills,
       categories: this.devProfileService.selectedCategories,
       // softSkills: this.devProfileService.selectedSoftSkills,
       // languages: this.devProfileService.selectedLanguages,
-      // projects: this.devProfileService.devProperties.projects
     };
     this.disableEmptyFields();
-    this.devProfileService.onSaveClick(this.form.value);
-    debugger;
+    this.devProfileService.onSaveClick({devProperties: this.devProfileService.devProperties});
     this.isEdit = false;
 
   }
@@ -111,7 +103,7 @@ export class EditFormComponent implements OnInit {
     this.devProfileService[availableChips].push(chip);
   }
 
-  private updateChips(devProperties) {
+  private updateChips(devProperties: DevProperties): void {
     // selectedChips = [ ...chips ] || [];
     // availableChips = xorBy(selectedChips, availableChips);
 
@@ -119,8 +111,6 @@ export class EditFormComponent implements OnInit {
     this.devProfileService.selectedSkills = [...devProperties.skills] || [];
     // this.devProfileService.selectedSoftSkills = [...devProperties.softSkills] || [];
     // this.devProfileService.selectedLanguages = [...devProperties.languages] || [];
-    // devProperties.projects.forEach((project) => this.devProfileService.selectedTechnologies = project.technologies);
-
 
     this.devProfileService.availableCategories = this.devProfileService.availableCategories
       .filter(

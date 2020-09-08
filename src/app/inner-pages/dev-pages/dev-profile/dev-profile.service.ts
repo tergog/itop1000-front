@@ -9,7 +9,7 @@ import { TOKEN } from 'app/constants/constants';
 import { UserService } from 'app/shared/services';
 import { UserInfo, NameValueModel } from 'app/shared/models';
 import * as fromCore from 'app/core/reducers';
-import { DevProperties } from 'app/shared/models/user-info.model';
+import { DevProperties } from 'app/shared/models/dev-properties.model';
 import { NotificationsService } from 'app/shared/services/notifications.service';
 
 @Injectable()
@@ -17,13 +17,12 @@ export class DevProfileService {
 
   public devProperties: DevProperties;
 
-  selectedCategories: NameValueModel[] = [];
-  selectedSkills: NameValueModel[] = [];
-  selectedSoftSkills: NameValueModel[] = [];
-  selectedLanguages: NameValueModel[] = [];
-  selectedTechnologies: NameValueModel[] = [];
+  public selectedCategories: NameValueModel[] = [];
+  public selectedSkills: NameValueModel[] = [];
+  public selectedSoftSkills: NameValueModel[] = [];
+  public selectedLanguages: NameValueModel[] = [];
 
-  availableCategories: NameValueModel[] = [
+  public availableCategories: NameValueModel[] = [
     { name: 'Web Development', value: 1 },
     { name: 'Software Development', value: 2 },
     { name: 'Mobile Development', value: 3 },
@@ -32,7 +31,7 @@ export class DevProfileService {
     { name: 'Game Development', value: 7 },
   ];
 
-  availableTechnologies: NameValueModel[] = [
+  public availableSkills: NameValueModel[] = [
     { name: 'Javascript', value: 1 },
     { name: 'Typescript', value: 2 },
     { name: 'CSS3', value: 3 },
@@ -45,20 +44,7 @@ export class DevProfileService {
     { name: 'Angular 2+', value: 11 },
   ];
 
-  availableSkills: NameValueModel[] = [
-    { name: 'Javascript', value: 1 },
-    { name: 'Typescript', value: 2 },
-    { name: 'CSS3', value: 3 },
-    { name: 'HTML5', value: 5 },
-    { name: 'AngularJS', value: 6 },
-    { name: 'Angular 9', value: 7 },
-    { name: 'Angular 10', value: 8 },
-    { name: 'Angular 7', value: 9 },
-    { name: 'Angular 8', value: 10 },
-    { name: 'Angular 2+', value: 11 },
-  ];
-
-  availableSoftSkills: NameValueModel[] = [
+  public availableSoftSkills: NameValueModel[] = [
     { name: 'Communication', value: 1 },
     { name: 'Teamwork', value: 2 },
     { name: 'Creativity', value: 3 },
@@ -69,7 +55,7 @@ export class DevProfileService {
     { name: 'Leadership', value: 11 },
   ];
 
-  availableLanguages: NameValueModel[] = [
+  public availableLanguages: NameValueModel[] = [
     { name: 'Russian', value: 1 },
     { name: 'Ukrainian', value: 2 },
     { name: 'English', value: 3 },
@@ -83,7 +69,7 @@ export class DevProfileService {
     private userService: UserService
   ) { }
 
-  public initUpdateProfileService() {
+  public initUpdateProfileService(): void {
     this.store.select(fromCore.getUserInfo)
       .pipe(first())
       .subscribe(
@@ -104,12 +90,15 @@ export class DevProfileService {
       );
   }
 
-  private onUpdateProfileInfo(userInfo) {
+  private onUpdateProfileInfo(userInfo): void {
     this.store.dispatch(new coreActions.SetTokenOnProfileUpdateAction(userInfo));
     localStorage.setItem(TOKEN, userInfo.token);
   }
 
-  public decodeToken(token = localStorage.getItem(TOKEN)) {
+  // todo: set and decode token in same method
+  // todo: use set and decode token method same as in on login
+
+  public decodeToken(token = localStorage.getItem(TOKEN)): UserInfo {
     const userInfo = jwtDecode(token);
     this.store.dispatch(new coreActions.UpdateUserProfileAction(userInfo));
     return userInfo;
@@ -123,7 +112,7 @@ export class DevProfileService {
     this.onUpdateProfileInfo(userInfo);
   }
 
-  private handleErrorResponse(error) {
+  private handleErrorResponse(error): void {
     this.notificationsService.message.emit({
       message: error.message,
       type: 'error'

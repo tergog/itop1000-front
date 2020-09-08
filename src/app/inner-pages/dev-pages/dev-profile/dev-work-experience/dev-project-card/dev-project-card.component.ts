@@ -45,23 +45,23 @@ export class DevProjectCardComponent implements OnInit {
   constructor(
     private notificationsService: NotificationsService,
     private userService: UserService,
-    // private devProfileService: DevProfileService,
     private store: Store<fromCore.State>
   ) { }
 
   ngOnInit(): void {
     this.initForm();
     this.store.select(fromCore.getUserInfo)
-    .pipe(first())
-    .subscribe((userInfo: UserInfo) => {
-      if (userInfo.token) {
-        userInfo = this.decodeToken(userInfo.token);
+      .pipe(first())
+      .subscribe((userInfo: UserInfo) => {
+        if (userInfo.token) {
+          userInfo = this.decodeToken(userInfo.token);
         }
+
         this.updateTechnologies(this.selectedTechnologies);
       });
   }
 
-  private initForm() {
+  private initForm(): void {
     this.form = new FormGroup({
       title: new FormControl('', []),
       description: new FormControl('', []),
@@ -76,15 +76,15 @@ export class DevProjectCardComponent implements OnInit {
     });
   }
 
-  onEditClick() {
+  public onEditClick(): void {
     this.isEdit = !this.isEdit;
   }
 
-  onCancelClick() {
+  public onCancelClick(): void {
     this.isEdit = !this.isEdit;
   }
 
-  onSaveClick(userInfo: Partial<UserInfo>) {
+  public onSaveClick(userInfo: Partial<UserInfo>): void {
     this.disableEmptyFields();
     this.userService.updateProfile(userInfo)
       .pipe(first())
@@ -94,7 +94,6 @@ export class DevProjectCardComponent implements OnInit {
       );
 
     this.isEdit = false;
-    // this.devProfileService.onSaveClick(this.form.value);
   }
 
   public onTechnologySelect({ option }): void {
@@ -107,24 +106,27 @@ export class DevProjectCardComponent implements OnInit {
     this.availableTechnologies.push(technology);
   }
 
-  private updateTechnologies(technologies) {
+  private updateTechnologies(technologies: DevProject['technologies']): void {
     this.selectedTechnologies = [ ...technologies ] || [];
 
     this.availableTechnologies = xorBy(this.selectedTechnologies, this.availableTechnologies);
   }
 
-  private onUpdateProfileInfo(userInfo) {
+  private onUpdateProfileInfo(userInfo: UserInfo): void {
     this.store.dispatch(new coreActions.SetTokenOnProfileUpdateAction(userInfo));
     localStorage.setItem(TOKEN, userInfo.token);
   }
 
-  public decodeToken(token = localStorage.getItem(TOKEN)) {
+  // todo: set and decode token in same method
+  // todo: use set and decode token method same as in on login
+
+  public decodeToken(token = localStorage.getItem(TOKEN)): UserInfo {
     const userInfo = jwtDecode(token);
     this.store.dispatch(new coreActions.UpdateUserProfileAction(userInfo));
     return userInfo;
   }
 
-  private handleSuccessResponse(userInfo): void {
+  private handleSuccessResponse(userInfo: UserInfo): void {
     this.notificationsService.message.emit({
       message: 'Profile updated successfully',
       type: 'success'
@@ -132,7 +134,7 @@ export class DevProjectCardComponent implements OnInit {
     this.onUpdateProfileInfo(userInfo);
   }
 
-  private handleErrorResponse(error) {
+  private handleErrorResponse(error: Error): void {
     this.notificationsService.message.emit({
       message: error.message,
       type: 'error'

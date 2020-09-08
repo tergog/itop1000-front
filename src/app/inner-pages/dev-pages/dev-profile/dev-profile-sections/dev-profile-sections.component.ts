@@ -31,10 +31,9 @@ export class DevProfileSectionsComponent implements OnInit {
     private notificationsService: NotificationsService
   ) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  onSaveClick(userInfo) {
+  public onSaveClick(userInfo) {
     this.userService.updateProfile(userInfo)
       .pipe(first())
       .subscribe(
@@ -43,18 +42,20 @@ export class DevProfileSectionsComponent implements OnInit {
       );
   }
 
-  onUpdateProfileInfo(userInfo) {
+  public onUpdateProfileInfo(userInfo: UserInfo): void {
     this.store.dispatch(new coreActions.SetTokenOnProfileUpdateAction(userInfo));
     localStorage.setItem(TOKEN, userInfo.token);
   }
 
-  decodeToken(token = localStorage.getItem(TOKEN)) {
+  // todo: set and decode token in the same method
+
+  public decodeToken(token = localStorage.getItem(TOKEN)): UserInfo {
     const userInfo = jwtDecode(token);
     this.store.dispatch(new coreActions.UpdateUserProfileAction(userInfo));
     return userInfo;
   }
 
-  handleSuccessResponse(userInfo): void {
+  public handleSuccessResponse(userInfo: UserInfo): void {
     this.notificationsService.message.emit({
       message: 'Profile updated successfully',
       type: 'success'
@@ -62,7 +63,7 @@ export class DevProfileSectionsComponent implements OnInit {
     this.updateProfileInfo.emit(userInfo);
   }
 
-  handleErrorResponse(error) {
+  public handleErrorResponse(error: Error): void {
     this.notificationsService.message.emit({
       message: error.message,
       type: 'error'
