@@ -78,23 +78,19 @@ export class DevProfileService {
       );
   }
 
-  private onUpdateProfileInfo(userInfo: UserInfo): UserInfo {
-    this.store.dispatch(new coreActions.SetTokenOnProfileUpdateAction(userInfo));
-    localStorage.setItem(TOKEN, userInfo.token);
+  private onUpdateProfileInfo(token: string): void {
+    localStorage.setItem(TOKEN, token);
 
-    userInfo = jwtDecode(userInfo.token);
+    const userInfo = jwtDecode(token);
     this.store.dispatch(new coreActions.UpdateUserProfileAction(userInfo));
-    return userInfo;
   }
-
-  // todo: use set and decode token method same as in on login
 
   private handleSuccessResponse(userInfo: UserInfo): void {
     this.notificationsService.message.emit({
       message: 'Profile updated successfully',
       type: 'success'
     });
-    this.onUpdateProfileInfo(userInfo);
+    this.onUpdateProfileInfo(userInfo.token);
   }
 
   private handleErrorResponse(error: Error): void {

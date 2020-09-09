@@ -7,7 +7,6 @@ export const SAVE_TOKEN = '[Core] Saves user\'s auth token';
 export const ON_LOGIN = '[Core] On login';
 export const ON_LOGOUT = '[Core] On logout';
 
-export const SET_TOKEN_ON_PROFILE_UPDATE = '[Core] Set token on profile update';
 export const UPDATE_USER_PROFILE = '[Core] Update user profile';
 
 export const SEARCH_JOBS = '[Core] Search jobs';
@@ -33,11 +32,6 @@ export class SetOnLoginAction implements Action {
 
 export class SetOnLogoutAction implements Action {
   readonly type = ON_LOGOUT;
-}
-
-export class SetTokenOnProfileUpdateAction implements Action {
-  readonly type = SET_TOKEN_ON_PROFILE_UPDATE;
-  constructor(public payload: UserInfo) {}
 }
 
 export class UpdateUserProfileAction implements Action {
@@ -77,7 +71,6 @@ export type Actions =
   | SaveTokenAction
   | SetOnLoginAction
   | SetOnLogoutAction
-  | SetTokenOnProfileUpdateAction
   | UpdateUserProfileAction
   | OnValidSessionAction
   | SearchJobsAction

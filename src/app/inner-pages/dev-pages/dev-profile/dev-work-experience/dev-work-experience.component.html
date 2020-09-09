@@ -21,49 +21,49 @@
 
 
 
-  <div [formGroup]="form" *ngIf="isNewProject" class="d__flex d__flex--direction-column d__flex--items-center p__20">
-    <div class="d__inline-flex d__flex--justify-between d__flex--items-center m__bottom--10 w__350">
-      <span class="text text__sm text__bold text__uppercase m__right--10">Title</span>
-      <app-input [type]="'inner'" formControlName="title" [placeholder]="'Title'"></app-input>
-    </div>
-
-    <div class="d__inline-flex d__flex--justify-between d__flex--items-center m__bottom--10 w__350">
-      <span class="text text__sm text__bold text__uppercase m__right--10">Description</span>
-      <app-input [type]="'inner'" formControlName="description" [placeholder]="'Description'" ></app-input>
-    </div>
-
-    <div class="d__inline-flex d__flex--justify-between d__flex--items-center m__bottom--10 w__350">
-      <span class="text text__sm text__bold text__uppercase m__right--10">Link</span>
-      <app-input [type]="'inner'" formControlName="link" [placeholder]="'Link'"></app-input>
-    </div>
-
-    <mat-form-field class="chip-list m__top--10 w__350" [class.edit-mode]="isNewProject">
-      <mat-chip-list #chipListTechnologies formControlName="technologies">
-        <mat-chip *ngFor="let technology of selectedTechnologies"
-                  [selectable]="false"
-                  [removable]="isNewProject"
-                  (removed)="onTechnologyRemove(technology)">
-          {{ technology.name }}
-          <mat-icon matChipRemove *ngIf="isNewProject">cancel</mat-icon>
-        </mat-chip>
-        <input placeholder="Add Technology..."
-              [readOnly]="!isNewProject"
-              [matChipInputFor]="chipListTechnologies"
-              [matAutocomplete]="autoTechnologies"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-              [matChipInputAddOnBlur]="true">
-      </mat-chip-list>
-
-      <mat-autocomplete #autoTechnologies="matAutocomplete" (optionSelected)="onTechnologySelect($event)">
-        <mat-option *ngFor="let technology of availableTechnologies" [value]="technology">
-          {{ technology.name }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-
-    <div class="text__right" *ngIf="isNewProject">
-      <app-button [type]="'transparent'" [text]="'Cancel'" (buttonClick)="onCancelClick()"></app-button>
-      <app-button [text]="'Save'" (buttonClick)="onSaveClick()"></app-button>
-    </div>
+<div [formGroup]="form" *ngIf="isNewProject" class="d__flex d__flex--direction-column d__flex--items-center p__20">
+  <div class="d__inline-flex d__flex--justify-between d__flex--items-center m__bottom--10 w__350">
+    <span class="text text__sm text__bold text__uppercase m__right--10">Title</span>
+    <app-input [type]="'inner'" formControlName="title" [placeholder]="'Title'"></app-input>
   </div>
+
+  <div class="d__inline-flex d__flex--justify-between d__flex--items-center m__bottom--10 w__350">
+    <span class="text text__sm text__bold text__uppercase m__right--10">Description</span>
+    <app-input [type]="'inner'" formControlName="description" [placeholder]="'Description'" ></app-input>
+  </div>
+
+  <div class="d__inline-flex d__flex--justify-between d__flex--items-center m__bottom--10 w__350">
+    <span class="text text__sm text__bold text__uppercase m__right--10">Link</span>
+    <app-input [type]="'inner'" formControlName="link" [placeholder]="'Link'"></app-input>
+  </div>
+
+  <mat-form-field class="chip-list m__top--10 w__350" [class.edit-mode]="isNewProject">
+    <mat-chip-list #chipListTechnologies formControlName="technologies">
+      <mat-chip *ngFor="let technology of selectedTechnologies"
+                [selectable]="false"
+                [removable]="isNewProject"
+                (removed)="onTechnologyRemove(technology)">
+        {{ technology.name }}
+        <mat-icon matChipRemove *ngIf="isNewProject">cancel</mat-icon>
+      </mat-chip>
+      <input placeholder="Add Technology..."
+            [readOnly]="!isNewProject"
+            [matChipInputFor]="chipListTechnologies"
+            [matAutocomplete]="autoTechnologies"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="true">
+    </mat-chip-list>
+
+    <mat-autocomplete #autoTechnologies="matAutocomplete" (optionSelected)="onTechnologySelect($event)">
+      <mat-option *ngFor="let technology of availableTechnologies" [value]="technology">
+        {{ technology.name }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <div class="text__right" *ngIf="isNewProject">
+    <app-button [type]="'transparent'" [text]="'Cancel'" (buttonClick)="onCancelClick()"></app-button>
+    <app-button [text]="'Save'" (buttonClick)="onSaveClick()"></app-button>
+  </div>
+</div>
 

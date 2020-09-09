@@ -4,7 +4,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { filter, first } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
-
 import * as fromCore from 'app/core/reducers';
 import { UploadPhotoDialogComponent } from 'app/inner-pages/shared/components/upload-photo-dialog/upload-photo-dialog.component';
 import { UserService } from 'app/shared/services';

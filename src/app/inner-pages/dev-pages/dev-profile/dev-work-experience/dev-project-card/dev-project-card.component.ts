@@ -52,11 +52,11 @@ export class DevProjectCardComponent implements OnInit {
     this.updateTechnologies(this.selectedTechnologies);
   }
 
-  // private disableEmptyFields(): void {
-    //   Object.keys(this.form.controls).forEach(field => {
-      //     return this.form.controls[field].value || this.form.controls[field].disable();
-      //   });
-      // }
+  private disableEmptyFields(): void {
+      Object.keys(this.form.controls).forEach(field => {
+          return this.form.controls[field].value || this.form.controls[field].disable();
+        });
+      }
 
   public onEditClick(): void {
     this.isEdit = !this.isEdit;
@@ -67,10 +67,14 @@ export class DevProjectCardComponent implements OnInit {
   }
 
   public onSaveClick(): void {
-    // this.disableEmptyFields();
+    this.disableEmptyFields();
+    const arr = [...this.devProfileService.devProperties.projects];
+    const idx = arr.indexOf(this.form.value);
+    arr.splice(idx, 1, this.form.value);
+
     this.devProfileService.devProperties = {
       ...this.devProfileService.devProperties,
-      projects: [this.form.value]
+      projects: arr
     };
     this.devProfileService.onSaveClick({ devProperties: this.devProfileService.devProperties });
     this.isEdit = false;

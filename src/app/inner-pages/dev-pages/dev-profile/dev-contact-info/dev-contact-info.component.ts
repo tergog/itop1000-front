@@ -14,8 +14,6 @@ import * as fromCore from 'app/core/reducers';
 })
 export class DevContactInfoComponent implements OnInit {
 
-  @Output() updateProfileInfo = new EventEmitter();
-
   public userInfo$: Observable<UserInfo>;
   public isEdit: boolean;
 
