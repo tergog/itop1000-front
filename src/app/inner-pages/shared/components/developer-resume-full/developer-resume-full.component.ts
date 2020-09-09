@@ -48,7 +48,7 @@ export class DeveloperResumeFullComponent implements OnInit {
     });
   }
 
-  public onWorkExperienceClick(id: string) {
+  public onWorkExperienceClick(id: string): void {
     this.router.navigate([`in/c/search-developers/${id}/work-experience`]);
   }
 

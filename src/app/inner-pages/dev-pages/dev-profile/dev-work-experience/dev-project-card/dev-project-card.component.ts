@@ -19,6 +19,8 @@ import { NameValueModel } from 'app/shared/models/name-value.model';
 })
 export class DevProjectCardComponent implements OnInit {
 
+  @Input() project: DevProject;
+
   public form: FormGroup;
   public isEdit = false;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -37,8 +39,6 @@ export class DevProjectCardComponent implements OnInit {
     { name: 'Angular 2+', value: 11 },
   ];
 
-  @Input() project: DevProject;
-
   constructor(
     private devProfileService: DevProfileService,
     private notificationsService: NotificationsService,
@@ -48,24 +48,15 @@ export class DevProjectCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.devProfileService.initUpdateProfileService();
+    this.store.select(fromCore.getUserInfo);
     this.updateTechnologies(this.selectedTechnologies);
   }
 
-  private initForm(): void {
-    this.form = new FormGroup({
-      title: new FormControl('', []),
-      description: new FormControl('', []),
-      technologies: new FormControl([], []),
-      link: new FormControl('', [])
-    });
-  }
-
-  private disableEmptyFields(): void {
-    Object.keys(this.form.controls).forEach(field => {
-      return this.form.controls[field].value || this.form.controls[field].disable();
-    });
-  }
+  // private disableEmptyFields(): void {
+    //   Object.keys(this.form.controls).forEach(field => {
+      //     return this.form.controls[field].value || this.form.controls[field].disable();
+      //   });
+      // }
 
   public onEditClick(): void {
     this.isEdit = !this.isEdit;
@@ -76,19 +67,12 @@ export class DevProjectCardComponent implements OnInit {
   }
 
   public onSaveClick(): void {
-    this.disableEmptyFields();
+    // this.disableEmptyFields();
     this.devProfileService.devProperties = {
       ...this.devProfileService.devProperties,
-      projects: [
-        {
-          title: this.form.get('title').value,
-          description: this.form.get('description').value,
-          link: this.form.get('link').value,
-          technologies: this.form.get('technologies').value
-        }
-      ]
+      projects: [this.form.value]
     };
-    this.devProfileService.onSaveClick({ devProperties: this.devProfileService.devProperties })
+    this.devProfileService.onSaveClick({ devProperties: this.devProfileService.devProperties });
     this.isEdit = false;
   }
 
@@ -102,7 +86,16 @@ export class DevProjectCardComponent implements OnInit {
     this.availableTechnologies.push(technology);
   }
 
-  private updateTechnologies(technologies: DevProject['technologies']): void {
+  private initForm(): void {
+    this.form = new FormGroup({
+      title: new FormControl('', []),
+      description: new FormControl('', []),
+      technologies: new FormControl([], []),
+      link: new FormControl('', [])
+    });
+  }
+
+  private updateTechnologies(technologies: NameValueModel[]): void {
     this.selectedTechnologies = [ ...technologies ] || [];
 
     this.availableTechnologies = this.availableTechnologies

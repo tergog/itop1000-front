@@ -11,12 +11,13 @@ import { UserInfo } from 'app/shared/models';
 })
 export class DevContactInfoEditComponent implements OnInit {
 
-  public form: FormGroup;
 
   @Input() userInfo: UserInfo;
   @Output() updateProfileInfo = new EventEmitter();
   @Output() cancel = new EventEmitter();
   @Output() save = new EventEmitter();
+
+  public form: FormGroup;
 
   constructor(
     private devProfileService: DevProfileService

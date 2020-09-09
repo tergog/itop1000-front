@@ -52,8 +52,45 @@ export class DevWorkExperienceComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     this.userInfo$ = this.store.select(fromCore.getUserInfo);
-    this.devProfileService.initUpdateProfileService();
-    this.updateTechnologies(this.selectedTechnologies);
+    this.store.select(fromCore.getUserInfo)
+      .pipe(first())
+      .subscribe((userInfo: UserInfo) => {
+        this.devProfileService.devProperties = userInfo.devProperties;
+        this.updateTechnologies(this.selectedTechnologies);
+      });
+  }
+
+  public onAddClick(): void {
+    this.isNewProject = !this.isNewProject;
+  }
+
+  public onCancelClick(): void {
+    this.isNewProject = !this.isNewProject;
+  }
+
+  public onSaveClick(): void {
+    this.disableEmptyFields();
+    debugger
+    this.devProfileService.devProperties = {
+      ...this.devProfileService.devProperties,
+      projects: [
+        ...this.devProfileService.devProperties.projects,
+        this.form.value
+      ]
+    };
+
+    this.devProfileService.onSaveClick({devProperties: this.devProfileService.devProperties });
+    this.isNewProject = false;
+  }
+
+  public onTechnologySelect({ option }): void {
+    this.availableTechnologies = this.availableTechnologies.filter(technology => technology.value !== option.value.value);
+    this.selectedTechnologies.push(option.value);
+  }
+
+  public onTechnologyRemove(technology: NameValueModel): void {
+    this.selectedTechnologies = this.selectedTechnologies.filter(item => item.value !== technology.value);
+    this.availableTechnologies.push(technology);
   }
 
   private initForm(): void {
@@ -69,41 +106,6 @@ export class DevWorkExperienceComponent implements OnInit {
     Object.keys(this.form.controls).forEach(field => {
       return this.form.controls[field].value || this.form.controls[field].disable();
     });
-  }
-
-  public onAddClick(): void {
-    this.isNewProject = !this.isNewProject;
-  }
-
-  public onCancelClick(): void {
-    this.isNewProject = !this.isNewProject;
-  }
-
-  public onSaveClick(): void {
-    this.disableEmptyFields();
-    this.devProfileService.devProperties = {
-      ...this.devProfileService.devProperties,
-      projects: [
-        {
-          title: this.form.get('title').value,
-          description: this.form.get('description').value,
-          link: this.form.get('link').value,
-          technologies: this.form.get('technologies').value
-        }
-      ]
-    };
-    this.devProfileService.onSaveClick({devProperties: this.devProfileService.devProperties });
-    this.isNewProject = false;
-  }
-
-  public onTechnologySelect({ option }): void {
-    this.availableTechnologies = this.availableTechnologies.filter(technology => technology.value !== option.value.value);
-    this.selectedTechnologies.push(option.value);
-  }
-
-  public onTechnologyRemove(technology: NameValueModel): void {
-    this.selectedTechnologies = this.selectedTechnologies.filter(item => item.value !== technology.value);
-    this.availableTechnologies.push(technology);
   }
 
   private updateTechnologies(technologies: DevProject['technologies']): void {

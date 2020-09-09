@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Store } from '@ngrx/store';
-import { first } from 'rxjs/operators';
-import xorBy from 'lodash.xorby';
 
-import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
-import { NameValueModel, UserInfo } from 'app/shared/models';
-import * as fromCore from 'app/core/reducers';
+import { DevProfileSectionNames } from 'app/inner-pages/dev-pages/dev-profile/shared/enums/devProfileSectionNames';
+
 
 @Component({
   selector: 'app-dev-categories-and-skills',
@@ -16,6 +11,7 @@ import * as fromCore from 'app/core/reducers';
 export class DevCategoriesAndSkillsComponent implements OnInit {
 
   public isEdit: boolean;
+  public DevProfileSectionNames = DevProfileSectionNames;
 
   constructor() { }
 

@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FormControl, FormGroup } from '@angular/forms';
 import { filter, first } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
 
+
+import * as fromCore from 'app/core/reducers';
 import { UploadPhotoDialogComponent } from 'app/inner-pages/shared/components/upload-photo-dialog/upload-photo-dialog.component';
 import { UserService } from 'app/shared/services';
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
@@ -22,12 +25,13 @@ export class DevProfileSettingsComponent implements OnInit {
   constructor(
     private devProfileService: DevProfileService,
     private userService: UserService,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    private store: Store<fromCore.State>
   ) { }
 
   ngOnInit(): void {
     this.initForm();
-    this.devProfileService.initUpdateProfileService();
+    this.store.select(fromCore.getUserInfo);
   }
 
   public onEditClick(): void {
@@ -45,8 +49,7 @@ export class DevProfileSettingsComponent implements OnInit {
   }
 
 
-  public onCancelClick(): void {
-  }
+  public onCancelClick(): void {}
 
   public onSaveClick(): void {
     this.disableEmptyFields();

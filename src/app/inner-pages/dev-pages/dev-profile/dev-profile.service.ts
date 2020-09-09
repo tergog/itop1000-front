@@ -69,18 +69,6 @@ export class DevProfileService {
     private userService: UserService
   ) { }
 
-  public initUpdateProfileService(): void {
-    this.store.select(fromCore.getUserInfo)
-      .pipe(first())
-      .subscribe(
-        (userInfo: UserInfo) => {
-          if (userInfo.token) {
-            userInfo = this.decodeToken(userInfo.token);
-          }
-        }
-      );
-  }
-
   public onSaveClick(userInfo: Partial<UserInfo>): void {
     this.userService.updateProfile(userInfo)
       .pipe(first())
@@ -90,21 +78,18 @@ export class DevProfileService {
       );
   }
 
-  private onUpdateProfileInfo(userInfo): void {
+  private onUpdateProfileInfo(userInfo: UserInfo): UserInfo {
     this.store.dispatch(new coreActions.SetTokenOnProfileUpdateAction(userInfo));
     localStorage.setItem(TOKEN, userInfo.token);
-  }
 
-  // todo: set and decode token in same method
-  // todo: use set and decode token method same as in on login
-
-  public decodeToken(token = localStorage.getItem(TOKEN)): UserInfo {
-    const userInfo = jwtDecode(token);
+    userInfo = jwtDecode(userInfo.token);
     this.store.dispatch(new coreActions.UpdateUserProfileAction(userInfo));
     return userInfo;
   }
 
-  private handleSuccessResponse(userInfo): void {
+  // todo: use set and decode token method same as in on login
+
+  private handleSuccessResponse(userInfo: UserInfo): void {
     this.notificationsService.message.emit({
       message: 'Profile updated successfully',
       type: 'success'
@@ -112,7 +97,7 @@ export class DevProfileService {
     this.onUpdateProfileInfo(userInfo);
   }
 
-  private handleErrorResponse(error): void {
+  private handleErrorResponse(error: Error): void {
     this.notificationsService.message.emit({
       message: error.message,
       type: 'error'

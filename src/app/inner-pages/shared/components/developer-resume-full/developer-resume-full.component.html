@@ -107,7 +107,7 @@
           ">
           <div
             class="professional-skills__progress d__flex d__flex--direction-column d__flex--items-center"
-            *ngFor="let skill of developer.skills"
+            *ngFor="let skill of developer.devProperties.skills"
           >
             <circle-progress
               [percent]="skill.value * 20"
@@ -147,7 +147,7 @@
         ></div>
 
         <div class="d__flex m__top--20">
-          <app-project-card class="m__right--10" *ngFor="let project of developer.projects" [project]="project"></app-project-card>
+          <app-project-card class="m__right--10" *ngFor="let project of developer.devProperties.projects" [project]="project"></app-project-card>
         </div>
       </div>
 
@@ -185,7 +185,7 @@
               d__flex--justify-between
               d__flex--items-center
               "
-              *ngFor="let skill of developer.softSkills">
+              *ngFor="let skill of developer.devProperties.softSkills">
               <span class="
                 softskills__skill__name
                 text__alt
@@ -211,7 +211,7 @@
           <div class="languages__wrap d__flex d__flex--direction-column">
             <div
               class="languages__item__wrap d__flex d__flex--justify-between d__flex--items-center"
-              *ngFor="let language of developer.languages"
+              *ngFor="let language of developer.devProperties.languages"
             >
               <span class="
                 languages__item__text
