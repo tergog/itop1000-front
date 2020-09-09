@@ -15,7 +15,7 @@ import { getDevelopers, State } from 'app/core/reducers';
 })
 export class SearchDevelopersComponent implements OnInit {
 
-  public developers$ : Observable<Developer[]>;
+  public developers$: Observable<Developer[]>;
 
   constructor(
     private jobsService: JobsService,
@@ -28,7 +28,7 @@ export class SearchDevelopersComponent implements OnInit {
   }
 
   public onProfileClick(id: string): void {
-    this.router.navigate(['in/c/search-developers', id])
+    this.router.navigate(['in/c/search-developers', id]);
   }
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
@@ -15,10 +16,15 @@ export class SearchJobsComponent implements OnInit {
 
   public jobs$: Observable<Job[]>;
 
-  constructor(private jobsService: JobsService, private store: Store<State>) { }
+  constructor(private jobsService: JobsService,
+              private store: Store<State>,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.jobs$ = this.store.select(getJobs);
   }
 
+  onJobClick(id: string) {
+    this.router.navigate(['in/d/search-jobs', id]);
+  }
 }

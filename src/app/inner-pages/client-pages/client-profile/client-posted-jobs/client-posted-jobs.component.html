@@ -7,7 +7,10 @@
   </ng-container>
 
   <ng-container *ngIf="(jobs$ | async)?.length">
-    <app-job *ngFor="let job of jobs$ | async" [job]="job"></app-job>
+    <app-job *ngFor="let job of jobs$ | async"
+             [job]="job"
+             (click)="onJobClick(job.id)">
+    </app-job>
 
     <app-button [text]="'Post new Job'" (buttonClick)="postJobClick()"></app-button>
   </ng-container>

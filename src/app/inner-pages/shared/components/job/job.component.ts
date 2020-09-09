@@ -10,8 +10,6 @@ import { Job } from 'app/shared/models';
 export class JobComponent implements OnInit {
   @Input() job: Job;
 
-  now = new Date();
-
   constructor() { }
 
   ngOnInit(): void {
