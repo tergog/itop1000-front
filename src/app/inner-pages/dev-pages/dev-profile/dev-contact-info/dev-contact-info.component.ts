@@ -15,10 +15,7 @@ import * as fromCore from 'app/core/reducers';
 export class DevContactInfoComponent implements OnInit {
 
   public userInfo$: Observable<UserInfo>;
-
   public isEdit: boolean;
-
-  @Output() updateProfileInfo = new EventEmitter();
 
   constructor(
     private devProfileService: DevProfileService,
@@ -28,7 +25,6 @@ export class DevContactInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.userInfo$ = this.store.select(fromCore.getUserInfo);
-    this.devProfileService.initUpdateProfileService();
   }
 
   public editToggle(): void {

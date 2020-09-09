@@ -15,7 +15,7 @@ import { getDevelopers, State } from 'app/core/reducers';
 })
 export class SearchDevelopersComponent implements OnInit {
 
-  public developers$ : Observable<Developer[]>;
+  public developers$: Observable<Developer[]>;
 
   constructor(
     private jobsService: JobsService,

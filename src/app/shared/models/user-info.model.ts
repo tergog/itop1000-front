@@ -1,4 +1,4 @@
-import { NameValueModel } from 'app/shared/models';
+import { DevProperties } from 'app/shared/models/dev-properties.model';
 
 export interface UserInfo {
   title: string;
@@ -10,8 +10,8 @@ export interface UserInfo {
   phone: string;
   address: string;
   timezone: string;
-  categories: NameValueModel[];
-  skills: NameValueModel[];
+  devProperties: DevProperties;
   photo: string;
   token?: string;
 }
+

@@ -10,6 +10,10 @@
   <app-dev-categories-and-skills></app-dev-categories-and-skills>
 </div>
 
+<div [@slideIn] *ngIf="section === DevProfileSections.WorkExperience">
+  <app-dev-work-experience></app-dev-work-experience>
+</div>
+
 <div [@slideIn] *ngIf="section === DevProfileSections.Balance">
   <app-dev-profile-balance></app-dev-profile-balance>
 </div>

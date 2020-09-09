@@ -1,0 +1,62 @@
+<div class="card d__flex d__flex--direction-column p__20">
+  <i class="edit cursor__pointer" (click)="onEditClick()"></i>
+  <ng-container *ngIf="!isEdit">
+    <h2 class="text text__title">{{ project.title }}</h2>
+    <p class="text text__md">{{ project.description }}</p>
+    <a href="{{ project.link }}">Link</a>
+      <mat-chip-list #chipListTechnologies>
+        <mat-chip *ngFor="let technology of selectedTechnologies"
+                  [selectable]="false"
+                  [removable]="isEdit"
+                  (removed)="onTechnologyRemove(technology)">
+          {{ technology.name }}
+        </mat-chip>
+      </mat-chip-list>
+  </ng-container>
+
+  <div [formGroup]="form" *ngIf="isEdit">
+    <div class="d__inline-flex d__flex--justify-between d__flex--items-center m__right--30 m__bottom--10">
+      <span class="text text__sm text__bold text__uppercase m__right--10">Title</span>
+      <app-input [type]="'inner'" formControlName="title" [placeholder]="'Title'" [value]="form.get('title').value"></app-input>
+    </div>
+
+    <div class="d__inline-flex d__flex--justify-between d__flex--items-center m__right--30 m__bottom--10">
+      <span class="text text__sm text__bold text__uppercase m__right--10">Description</span>
+      <app-input [type]="'inner'" formControlName="description" [placeholder]="'Description'" [value]="form.get('description').value"></app-input>
+    </div>
+
+    <div class="d__inline-flex d__flex--justify-between d__flex--items-center m__right--30 m__bottom--10">
+      <span class="text text__sm text__bold text__uppercase m__right--10">Link</span>
+      <app-input [type]="'inner'" formControlName="link" [placeholder]="'Link'" [value]="form.get('link').value"></app-input>
+    </div>
+
+    <mat-form-field class="chip-list m__top--10" [class.edit-mode]="isEdit">
+      <mat-chip-list #chipListTechnologies formControlName="technologies">
+        <mat-chip *ngFor="let technology of selectedTechnologies"
+                  [selectable]="false"
+                  [removable]="isEdit"
+                  (removed)="onTechnologyRemove(technology)">
+          {{ technology.name }}
+          <mat-icon matChipRemove *ngIf="isEdit">cancel</mat-icon>
+        </mat-chip>
+        <input placeholder="Add Technology..."
+              [readOnly]="!isEdit"
+              [matChipInputFor]="chipListTechnologies"
+              [matAutocomplete]="autoTechnologies"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="true">
+      </mat-chip-list>
+
+      <mat-autocomplete #autoTechnologies="matAutocomplete" (optionSelected)="onTechnologySelect($event)">
+        <mat-option *ngFor="let technology of availableTechnologies" [value]="technology">
+          {{ technology.name }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+
+  <div class="text__right" *ngIf="isEdit">
+    <app-button [type]="'transparent'" [text]="'Cancel'" (buttonClick)="onEditClick()"></app-button>
+    <app-button [text]="'Save'" (buttonClick)="onSaveClick()"></app-button>
+  </div>
+</div>
