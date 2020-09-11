@@ -7,7 +7,7 @@ $min-width-left: 170px;
   display: flex;
   margin-bottom: 40px;
 
-  color: white;
+  color: $text-color-3;
   justify-content: flex-start;
   box-sizing: border-box;
   padding: 0 4.5%;
@@ -27,7 +27,7 @@ $min-width-left: 170px;
   min-height: $min-height;
   width: 30%;
   min-width: $min-width-left;
-  border-right: 2px solid #F1D261;
+  border-right: 2px solid $color-5;
 }
 
 .client-photo {
@@ -36,34 +36,14 @@ $min-width-left: 170px;
   height: 10vmin;
   width: 10vmin;
   border-radius: 50%;
-  background-color: white;
-}
-
-.company-name {
-  margin-top: 10px;
-  display: table-caption;
-  text-align: center;
-  text-transform: uppercase;
-  text-decoration-line: underline;
-  font-family: 'Raleway Light', sans-serif;
-  font-style: normal;
-  font-weight: lighter;
-  font-size: 2em;
-}
-
-.price {
-  margin-top: 10px;
-  text-align: center;
-  text-transform: capitalize;
-  color: #F1D261;
-  font-family: 'Work Sans', sans-serif;
+  background-color: $color-3;
 }
 
 .border-point {
   --size: 10px;
 
   position: absolute;
-  background-color: #F1D261;
+  background-color: $color-5;
   box-shadow: 0 0 5px 5px rgba(237, 216, 140, 0.7);
   border-radius: 50%;
   width: var(--size);
@@ -96,33 +76,14 @@ $min-width-left: 170px;
   }
 }
 
-
-.job-title {
-  font-style: normal;
-  font-weight: 500;
-  font-size: 2rem;
-  text-transform: uppercase;
-}
-
-.job-duration {
-  color: #F1D261;
-
-  span {
-    color: white;
-    text-decoration-line: underline;
-  }
-}
-
 .job-description {
   font-family: 'Raleway ExtraLight', sans-serif;
-  font-style: normal;
-  font-weight: 200;
-  color: #E2E3E3;
+  color: $text-color-8;
 }
 
-.requirements, .job-categories {
+.requirements,
+.job-categories {
   display: flex;
-  justify-content: flex-start;
   flex-wrap: wrap;
 
   span {

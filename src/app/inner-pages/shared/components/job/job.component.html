@@ -1,11 +1,13 @@
 <div class="left-side">
   <img src="./assets/img/default-client-photo.svg" alt="client-photo" class="client-photo">
-  <div class="company-name">
-    {{job.company || 'No Company'}}
+  <div
+    class="m__top--10 d__table-caption text__font--3 text__x4lg text__center text__uppercase text__underline text__lighter">
+    {{ job.company || 'No Company' }}
   </div>
-  <div class="price">
-    ${{job.price}}/Mth
+  <div class="m__top--10 text__center text__capitalize text__color--5 text__font--2">
+    ${{ job.price }}/Mth
   </div>
+  <!--  TODO separate point styles, replace to assets/scss-->
   <p class="border-point first"></p>
   <p class="border-point second"></p>
   <p class="border-point third"></p>
@@ -13,25 +15,27 @@
 
 <div class="right-side">
   <div>
-    <div class="job-title">{{job.title}}</div>
-    <div class="job-duration"><span>Project duration</span> {{ job.duration }} months</div>
+    <div class="text__uppercase text__x4lg">{{ job.title }}</div>
+    <div class="text__color--5">
+      <span class="text__underline text__color--3">Project duration</span> {{ job.duration }} months
+    </div>
   </div>
-  <div class="job-description">{{ job.description }}</div>
+  <div class="text__font--4 text__color--8 ">{{ job.description }}</div>
   <div>
     <div class="requirements">
-      <span *ngFor="let req of job.requirements.split(' ')">{{req}}</span> <!-- TODO change logic-->
+      <span *ngFor="let requirement of job.requirements.split(' ')">{{ requirement }}</span> <!-- TODO change logic-->
     </div>
     <hr class="splitter-line">
   </div>
   <div>
     <div class="job-categories">
-      <span *ngFor="let cat of job.categories.split(' ')">{{cat}}</span> <!-- TODO change logic-->
+      <span *ngFor="let category of job.categories.split(' ')">{{ category }}</span> <!-- TODO change logic-->
     </div>
     <hr class="splitter-line">
   </div>
   <div class="job-info-wrapper">
     <img src="/assets/icons/location.svg" alt="location">
-    <span>{{job.city}}, {{job.country}}</span>
-    <span class="job-date">{{ job.dateCreated | date:'dd MMMM'}}</span>
+    <span>{{ job.city }}, {{ job.country }}</span>
+    <span class="job-date">{{ job.dateCreated | date:'dd MMMM' }}</span>
   </div>
 </div>

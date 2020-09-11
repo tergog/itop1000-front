@@ -16,15 +16,17 @@ export class SearchJobsComponent implements OnInit {
 
   public jobs$: Observable<Job[]>;
 
-  constructor(private jobsService: JobsService,
-              private store: Store<State>,
-              private router: Router) { }
+  constructor(
+    private jobsService: JobsService,
+    private store: Store<State>,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.jobs$ = this.store.select(getJobs);
   }
 
-  onJobClick(id: string) {
+  public onJobClick(id: string): void {
     this.router.navigate(['in/d/search-jobs', id]);
   }
 }
