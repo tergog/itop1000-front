@@ -4,18 +4,21 @@
     No Company
   </div>
   <div class="price">
-    $1000/Mth
+    ${{job.price}}/Mth
   </div>
   <ul class="job-nav">
-    <li class="active">
+    <li [class.active]="activeSection === JobSections.Project"
+        (click)="onSectionCLick(JobSections.Project, jobDescriptionRef)">
       <i class="job-nav-icon project"></i>
       <span>Project</span>
     </li>
-    <li>
+    <li [class.active]="activeSection === JobSections.Duration"
+        (click)="onSectionCLick(JobSections.Duration, durationRef)">
       <i class="job-nav-icon duration"></i>
       <span>Duration</span>
     </li>
-    <li>
+    <li [class.active]="activeSection === JobSections.KeySkills"
+        (click)="onSectionCLick(JobSections.KeySkills, keySkillsRef)">
       <i class="job-nav-icon idea"></i>
       <span>Key Skills</span>
     </li>
@@ -23,53 +26,46 @@
 </div>
 
 <div class="right-side">
-  <!--  <div class="job-info-wrapper">-->
-  <!--    <img src="/assets/icons/location.svg" alt="location">-->
-  <!--    <span class="job-location">kyiv, ukraine</span>-->
-  <!--    <hr>-->
-  <!--    <span class="job-date">{{ '07.02.1996' | date:'dd MMMM'}}</span>-->
-  <!--  </div>-->
-
   <div class="location-wrap">
     <div class="d__flex m__right--30">
       <i class="location m__right--10"></i>
-      <span class="text text__md text__color--3">kyiv, ukraine</span>
+      <span class="text text__md text__color--3">{{job.city}}, {{job.country}}</span>
     </div>
 
     <div class="separator m__right--30"></div>
 
-    <span class="text text__md text__color--3">{{ '07.02.1996' | date:'dd MMMM'}}</span>
+    <span class="text text__md text__color--3">{{ job.dateCreated | date:'dd MMMM'}}</span>
   </div>
 
-  <div>
+  <div #jobDescriptionRef>
     <div class="job-title">job title</div>
-    <div class="job-duration"><span>Project duration</span> 333 months</div>
-    <div class="job-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aliquid amet at autem
-      blanditiis debitis, deserunt dolores, et expedita hic itaque minima molestiae natus nihil nisi obcaecati placeat
-      quam quia quod saepe similique velit voluptate voluptatibus? Ad, assumenda at doloremque fuga iure laborum maiores
-      minima molestias officiis sequi! Odit, sed!
-    </div>
+    <div class="job-duration" #durationRef><span>Project duration</span> {{job.duration}} months</div>
+    <div class="job-description">{{job.description}}</div>
     <hr class="splitter-line">
   </div>
 
 
-  <div> <!-- TODO -->
+  <div #keySkillsRef> <!-- TODO -->
     <div class="job-categories">
-      <span>Node</span>
-      <span>Node</span>
-      <span>Node</span>
-      <span>Node</span>
-      <span>Node</span>
+      <div *ngFor="let req of job.requirements.split(' ')">{{req}}</div>
+    </div>
+    <hr class="splitter-line">
+  </div>
+
+  <div> <!-- TODO -->
+    <div class="job-requirements">
+      <div *ngFor="let category of job.categories.split(' ')">{{category}}</div>
     </div>
     <hr class="splitter-line">
   </div>
 
   <div class="job-pluses">
     <div class="pluses-title">will be a plus</div>
+    <div class="section-underline"></div>
     <ul>
-      <li><span>adasda</span></li>
-      <li><span>sdasdas</span></li>
-      <li><span>sdada</span></li>
+      <li><span>Expirience Working Linux/Unix Development Environment, Shell Scripting Skill</span></li>
+      <li><span>Expirience with Python</span></li>
+      <li><span>Expirience with CI, Jenkins</span></li>
     </ul>
   </div>
 
@@ -87,7 +83,7 @@
   <p class="border-point n10"></p>
 </div>
 
-<!--TODO yellow spheres-->
+
 <!--TODO redline under header-->
-<!--TODO navigation-->
+
 

@@ -22,6 +22,10 @@ export class JobsService {
     return this.http.get<Job[]>(`${this.apiUrl}${ApiConstants.jobs.search}?searchTerm=${searchTerm}`);
   }
 
+  public findJob(id: string): Observable<Job> {
+    return this.http.get<Job>(`${this.apiUrl}${ApiConstants.jobs.search}/${id}`);
+  }
+
   public createJob(jobData): Observable<object> {
     return this.http.post(`${this.apiUrl}${ApiConstants.jobs.main}`, jobData);
   }

@@ -138,7 +138,7 @@
 
 
   > div {
-    margin: 5% 0;
+    margin: 0 0 5%;
   }
 }
 
@@ -190,7 +190,8 @@ hr.splitter-line {
 }
 
 
-.job-categories {
+.job-categories,
+.job-requirements {
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
@@ -202,7 +203,7 @@ hr.splitter-line {
 }
 
 .job-pluses {
-  div {
+  .pluses-title {
     font-family: Work Sans, sans-serif;
     font-style: normal;
     font-weight: 500;
@@ -210,13 +211,21 @@ hr.splitter-line {
     text-transform: uppercase;
   }
 
+  .section-underline {
+    height: 5px;
+    width: 100px;
+    background-color: #F21D42;
+  }
+
   ul {
     font-family: Raleway, sans-serif;
-    color: red;
+    color: #F21D42;
 
     span {
-      color: white;
+      font-weight: 200;
+      color: #E2E3E3;
       text-transform: capitalize;
+
     }
   }
 }
