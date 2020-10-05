@@ -39,51 +39,51 @@
     </div>
 
     <div #jobDescriptionRef>
-      <div class="job-title">job title</div>
+      <div class="text text__font--2 text__fw--500 text__uppercase text__x4lg">{{ job.title }}</div>
       <div class="job-duration" #durationRef>
         <span>Project duration</span> {{ job.duration }} months
       </div>
-      <div class="job-description">{{ job.description }}</div>
+      <div class="text text__font--4 text__fw--200 text__color--8 m__top--15">{{ job.description }}</div>
       <hr class="splitter-line">
     </div>
 
 
     <div #keySkillsRef> <!-- TODO -->
-      <div class="job-categories">
-        <span *ngFor="let requirement of job.requirements.split(' ')">{{ requirement }}</span>
+      <div class="d__flex d__flex--flex-start d__flex--flex-wrap">
+        <span class="text__uppercase m--5" *ngFor="let requirement of job.requirements.split(' ')">{{ requirement }}</span>
       </div>
       <hr class="splitter-line">
     </div>
 
     <div> <!-- TODO -->
-      <div class="job-requirements">
-        <span *ngFor="let category of job.categories.split(' ')">{{ category }}</span>
+      <div class="d__flex d__flex--flex-start d__flex--flex-wrap">
+        <span class="text__uppercase m--5" *ngFor="let category of job.categories.split(' ')">{{ category }}</span>
       </div>
       <hr class="splitter-line">
     </div>
 
     <div class="job-pluses">
-      <div class="pluses-title">will be a plus</div>
+      <div class="text text__font--2 text__fw--500 text__uppercase text__xxxlg">will be a plus</div>
       <div class="section-underline"></div>
-      <ul>
-        <li><span>Expirience Working Linux/Unix Development Environment, Shell Scripting Skill</span></li>
-        <li><span>Expirience with Python</span></li>
-        <li><span>Expirience with CI, Jenkins</span></li>
+      <ul class="text text__font--1 text__color--10">
+        <li><span class="text text__color--8 text__fw--200 text__capitalize">Expirience Working Linux/Unix Development Environment, Shell Scripting Skill</span></li>
+        <li><span class="text text__color--8 text__fw--200 text__capitalize">Expirience with Python</span></li>
+        <li><span class="text text__color--8 text__fw--200 text__capitalize">Expirience with CI, Jenkins</span></li>
       </ul>
     </div>
 
     <button class="btn-respond">RESPOND</button>
 
-    <p class="border-point n1"></p>
-    <p class="border-point n2"></p>
-    <p class="border-point n3"></p>
-    <p class="border-point n4"></p>
-    <p class="border-point n5"></p>
-    <p class="border-point n6"></p>
-    <p class="border-point n7"></p>
-    <p class="border-point n8"></p>
-    <p class="border-point n9"></p>
-    <p class="border-point n10"></p>
+    <p class="border-point border-point--left border-point--1"></p>
+    <p class="border-point border-point--left border-point--2"></p>
+    <p class="border-point border-point--left border-point--3"></p>
+    <p class="border-point border-point--left border-point--4"></p>
+    <p class="border-point border-point--left border-point--5"></p>
+    <p class="border-point border-point--left border-point--6"></p>
+    <p class="border-point border-point--left border-point--7"></p>
+    <p class="border-point border-point--left border-point--8"></p>
+    <p class="border-point border-point--left border-point--9"></p>
+    <p class="border-point border-point--left border-point--10"></p>
   </div>
 </ng-container>
 

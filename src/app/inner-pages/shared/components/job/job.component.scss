@@ -41,24 +41,19 @@ $min-width-left: 170px;
 
 .border-point {
   --size: 10px;
-
-  position: absolute;
-  background-color: $color-5;
-  box-shadow: 0 0 5px 5px rgba(237, 216, 140, 0.7);
-  border-radius: 50%;
   width: var(--size);
   height: var(--size);
   right: calc(-1px - var(--size) / 2);
 
-  &.first {
+  &--1 {
     top: calc(20% - var(--size) / 2);
   }
 
-  &.second {
+  &--2 {
     top: calc(50% - var(--size) / 2);
   }
 
-  &.third {
+  &--3 {
     top: calc(80% - var(--size) / 2);
   }
 }
@@ -76,35 +71,8 @@ $min-width-left: 170px;
   }
 }
 
-.job-description {
-  font-family: 'Raleway ExtraLight', sans-serif;
-  color: $text-color-8;
-}
-
-.requirements,
-.job-categories {
-  display: flex;
-  flex-wrap: wrap;
-
-  span {
-    text-transform: uppercase;
-    margin: 5px;
-  }
-}
-
 hr.splitter-line {
   height: 0;
   width: 100%;
   border-bottom: 1px solid #4B4949;
-}
-
-.job-info-wrapper {
-  font-size: 0.9rem;
-
-  .job-date {
-    margin-left: 5%;
-    font-weight: 300;
-    font-family: 'Work Sans Light', sans-serif;
-    text-transform: capitalize;
-  }
 }

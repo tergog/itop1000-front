@@ -96,7 +96,7 @@
 
     &:hover,
     &.active {
-      color: #EE1C41;
+      color: $text-color-9;
 
       .job-nav-icon {
 
@@ -116,7 +116,7 @@
 
     &.active {
       border: 1px solid $color-3;
-      border-left: 3px solid #EE1C41;
+      border-left: 3px solid $text-color-9;
     }
   }
 }
@@ -157,76 +157,17 @@
   background-color: $color-4;
 }
 
-
-.job-title {
-  font-family: 'Work Sans', sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 2rem;
-  text-transform: uppercase;
-}
-
-.job-duration {
-  color: $text-color-5;
-
-  span {
-    color: $text-color-3;
-    text-decoration-line: underline;
-  }
-}
-
-.job-description {
-  font-family: 'Raleway ExtraLight', sans-serif;
-  font-style: normal;
-  font-weight: 200;
-  color: $text-color-8;
-  margin-top: 2%;
-}
-
 hr.splitter-line {
   height: 0;
   width: 100%;
   border-bottom: 1px solid #4B4949;
 }
 
-
-.job-categories,
-.job-requirements {
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-
-  span {
-    text-transform: uppercase;
-    margin: 5px;
-  }
-}
-
 .job-pluses {
-  .pluses-title {
-    font-family: Work Sans, sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 1.8rem;
-    text-transform: uppercase;
-  }
-
   .section-underline {
     height: 5px;
     width: 100px;
-    background-color: #F21D42;
-  }
-
-  ul {
-    font-family: Raleway, sans-serif;
-    color: #F21D42;
-
-    span {
-      font-weight: 200;
-      color: $text-color-8;
-      text-transform: capitalize;
-
-    }
+    background-color: $color-9;
   }
 }
 
@@ -243,7 +184,7 @@ hr.splitter-line {
   width: 30%;
 
   text-align: center;
-  background: #E81C3F;
+  background: $color-10;
   box-shadow: inset 0 6px 5px rgba(255, 255, 255, 0.3);
   border-radius: 30px;
 
@@ -256,51 +197,47 @@ hr.splitter-line {
 .border-point {
   --size: 8px;
 
-  position: absolute;
-  background-color: $color-5;
-  box-shadow: 0 0 4px 4px rgba(237, 216, 140, 0.7);
-  border-radius: 50%;
   width: var(--size);
   height: var(--size);
   left: calc(-1px - var(--size) / 2);
 
-  &.n1 {
+  &--1 {
     top: calc(1% - var(--size) / 2);
   }
 
-  &.n2 {
+  &--2 {
     top: calc(11% - var(--size) / 2);
   }
 
-  &.n3 {
+  &--3 {
     top: calc(21% - var(--size) / 2);
   }
 
-  &.n4 {
+  &--4 {
     top: calc(31% - var(--size) / 2);
   }
 
-  &.n5 {
+  &--5 {
     top: calc(41% - var(--size) / 2);
   }
 
-  &.n6 {
+  &--6 {
     top: calc(51% - var(--size) / 2);
   }
 
-  &.n7 {
+  &--7 {
     top: calc(61% - var(--size) / 2);
   }
 
-  &.n8 {
+  &--8 {
     top: calc(71% - var(--size) / 2);
   }
 
-  &.n9 {
+  &--9 {
     top: calc(81% - var(--size) / 2);
   }
 
-  &.n10 {
+  &--10 {
     top: calc(91% - var(--size) / 2);
   }
 }

@@ -1,7 +1,14 @@
 .m {
+  &--5 {
+    margin: 5px;
+  }
   &__top {
     &--10 {
       margin-top: 10px;
+    }
+
+    &--15 {
+      margin-top: 15px;
     }
 
     &--20 {
@@ -40,6 +47,12 @@
 
     &--30 {
       margin-right: 30px;
+    }
+  }
+
+  &__left {
+    &--30 {
+      margin-left: 30px;
     }
   }
 
