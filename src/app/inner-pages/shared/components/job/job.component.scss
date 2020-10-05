@@ -1,9 +1,78 @@
 @import 'assets/scss/variables';
 
+$min-height: 290px;
+$min-width-left: 170px;
+
 :host {
   display: flex;
-  flex-direction: column;
-  border-bottom: 1px solid $color-4;
-  padding-bottom: 20px;
   margin-bottom: 40px;
+
+  color: $text-color-3;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  padding: 0 4.5%;
+  width: 100%;
+  background-color: $color-1;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.left-side {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2% 4.5% 2% 0;
+  min-height: $min-height;
+  width: 30%;
+  min-width: $min-width-left;
+  border-right: 2px solid $color-5;
+}
+
+.client-photo {
+  min-height: 100px;
+  min-width: 100px;
+  height: 10vmin;
+  width: 10vmin;
+  border-radius: 50%;
+  background-color: $color-3;
+}
+
+.border-point {
+  --size: 10px;
+  width: var(--size);
+  height: var(--size);
+  right: calc(-1px - var(--size) / 2);
+
+  &--1 {
+    top: calc(20% - var(--size) / 2);
+  }
+
+  &--2 {
+    top: calc(50% - var(--size) / 2);
+  }
+
+  &--3 {
+    top: calc(80% - var(--size) / 2);
+  }
+}
+
+.right-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 70%;
+  padding: 2% 0 2% 4.5%;
+  font-family: 'Work Sans', sans-serif;
+
+  div {
+    margin-bottom: 4px;
+  }
+}
+
+hr.splitter-line {
+  height: 0;
+  width: 100%;
+  border-bottom: 1px solid #4B4949;
 }

@@ -15,14 +15,18 @@ export class JobsService {
   constructor(private http: HttpClient) { }
 
   public getJobs(): Observable<Job[]> {
-    return this.http.get<Job[]>(`${this.apiUrl}${ApiConstants.jobs.main}`)
+    return this.http.get<Job[]>(`${this.apiUrl}${ApiConstants.jobs.main}`);
   }
 
   public searchJobs(searchTerm: string): Observable<Job[]> {
-    return this.http.get<Job[]>(`${this.apiUrl}${ApiConstants.jobs.search}?searchTerm=${searchTerm}`)
+    return this.http.get<Job[]>(`${this.apiUrl}${ApiConstants.jobs.search}?searchTerm=${searchTerm}`);
+  }
+
+  public findJob(id: string): Observable<Job> {
+    return this.http.get<Job>(`${this.apiUrl}${ApiConstants.jobs.search}/${id}`);
   }
 
   public createJob(jobData): Observable<object> {
-    return this.http.post(`${this.apiUrl}${ApiConstants.jobs.main}`, jobData)
+    return this.http.post(`${this.apiUrl}${ApiConstants.jobs.main}`, jobData);
   }
 }
