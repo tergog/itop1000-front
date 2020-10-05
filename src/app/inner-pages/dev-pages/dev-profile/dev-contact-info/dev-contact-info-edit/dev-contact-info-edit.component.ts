@@ -11,12 +11,13 @@ import { UserInfo } from 'app/shared/models';
 })
 export class DevContactInfoEditComponent implements OnInit {
 
-  public form: FormGroup;
 
   @Input() userInfo: UserInfo;
   @Output() updateProfileInfo = new EventEmitter();
   @Output() cancel = new EventEmitter();
   @Output() save = new EventEmitter();
+
+  public form: FormGroup;
 
   constructor(
     private devProfileService: DevProfileService
@@ -34,7 +35,6 @@ export class DevContactInfoEditComponent implements OnInit {
   public onSaveClick(): void {
     this.disableEmptyFields();
     this.save.emit(this.form.value);
-    this.devProfileService.onSaveClick(this.form.value);
   }
 
   private initForm(): void {

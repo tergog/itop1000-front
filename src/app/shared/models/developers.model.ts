@@ -1,4 +1,4 @@
-import { NameValueModel } from 'app/shared/models/name-value.model';
+import { DevProperties } from 'app/shared/models/dev-properties.model';
 
 export interface Developer {
   id: string;
@@ -7,9 +7,7 @@ export interface Developer {
   photo: string;
   title: string;
   description: string;
-  skills: NameValueModel[];
-  softSkills: NameValueModel[];
-  languages: NameValueModel[];
+  devProperties: DevProperties;
   hourlyRate: string;
   monthRate: string;
   location: string;
