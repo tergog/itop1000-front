@@ -14,6 +14,7 @@ import { InputComponent } from 'app/shared/components/input/input.component';
 import { CheckboxComponent } from 'app/shared/components/checkbox/checkbox.component';
 import { ButtonComponent } from 'app/shared/components/button/button.component';
 import { TextareaComponent } from 'app/shared/components/textarea/textarea.component';
+import { ClickedOutsideDirective } from './directives/click-outside.directive';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { TextareaComponent } from 'app/shared/components/textarea/textarea.compo
     CheckboxComponent,
     ButtonComponent,
     TextareaComponent,
+    ClickedOutsideDirective
   ],
   exports: [
     InputComponent,
@@ -34,7 +36,8 @@ import { TextareaComponent } from 'app/shared/components/textarea/textarea.compo
     MatOptionModule,
     OverlayModule,
     TextareaComponent,
-    NgCircleProgressModule
+    NgCircleProgressModule,
+    ClickedOutsideDirective
   ],
   imports: [
     CommonModule,

@@ -39,3 +39,10 @@
     display: table-caption;
   }
 }
+
+.list-style {
+  &__none {
+    list-style-type: none;
+    padding: 0;
+  }
+}

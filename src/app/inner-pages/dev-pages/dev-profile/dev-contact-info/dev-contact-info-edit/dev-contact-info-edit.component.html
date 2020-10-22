@@ -14,9 +14,23 @@
     <app-input [type]="'inner'" formControlName="email" [placeholder]="'Email'" [value]="form.get('email').value"></app-input>
   </div>
 
-  <div class="w__350 d__inline-flex d__flex--justify-between d__flex--items-center m__right--10 m__bottom--10">
+  <div (clickOutside)="onHidePopup()" class="w__350 pos__relative d__inline-flex d__flex--justify-between d__flex--items-center m__right--10 m__bottom--10">
     <span class="text text__sm text__bold text__uppercase">Time Zone</span>
-    <app-input [type]="'inner'" formControlName="timezone" [placeholder]="'Time Zone'" [value]="form.get('timezone').value"></app-input>
+    <app-input (onFocusField)="onShowPopup()" [type]="'inner'" formControlName="timezone" [placeholder]="'Time Zone'" [value]="form.get('timezone').value"></app-input>
+    <div class="timezone" *ngIf="isPopupShown" clickOutside>
+      <div class="p__15 text__center text text__color--1 text__sm" *ngIf="!filteredTimezones.length">
+        No elements found
+      </div>
+      <ul class="d__flex m--0 d__flex--direction-column list-style__none w__100p">
+        <li
+          *ngFor="let timezone of filteredTimezones"
+          class="p__15 text__center text text__color--1 text__sm cursor__pointer"
+          (click)="onTimezoneSelect(timezone)"
+        >
+          {{ timezone }}
+        </li>
+      </ul>
+    </div>
   </div>
 
   <div class="w__350 d__inline-flex d__flex--justify-between d__flex--items-center m__right--10 m__bottom--10">
@@ -26,8 +40,15 @@
 
   <div class="w__350 d__inline-flex d__flex--justify-between d__flex--items-center m__right--10 m__bottom--10">
     <span class="text text__sm text__bold text__uppercase">Phone</span>
-    <app-input [type]="'inner'" formControlName="phone" [placeholder]="'Phone'" [value]="form.get('phone').value"></app-input>
+    <div class="d__flex d__flex--direction-column">
+      <app-input [type]="'inner'" formControlName="phone" [placeholder]="'Phone'" [value]="form.get('phone').value"></app-input>
+      <div class="m__top--10" *ngIf="form.get('phone').invalid && form.get('phone').dirty">
+        <span *ngIf="form.get('phone').errors.required" class="text text__color--2 text__sm">Field is required</span>
+        <span *ngIf="form.get('phone').errors.pattern" class="text text__color--2 text__sm">Invalid phone format</span>
+      </div>
+    </div>
   </div>
+
 </div>
 
 <div class="text__right">

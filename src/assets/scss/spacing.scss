@@ -1,4 +1,7 @@
 .m {
+  &--0 {
+    margin: 0;
+  }
   &--5 {
     margin: 5px;
   }
@@ -64,10 +67,22 @@
 }
 
 .p {
+  &__15 {
+    padding: 15px;
+  }
   &__20 {
     padding: 20px;
   }
 
+}
+
+.pos {
+  &__absolute {
+    position: absolute;
+  }
+  &__relative {
+    position: relative;
+  }
 }
 
 .w {
@@ -81,5 +96,9 @@
 
   &__594 {
     width: 594px !important;
+  }
+
+  &__100p {
+    width: 100%;
   }
 }

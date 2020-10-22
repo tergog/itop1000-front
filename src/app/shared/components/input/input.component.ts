@@ -20,6 +20,7 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   @Input() placeholder;
   @Input() isHiddenPassword: boolean;
   @Output() enterKey = new EventEmitter();
+  @Output() onFocusField = new EventEmitter();
 
   constructor() { }
 
@@ -58,4 +59,7 @@ export class InputComponent implements OnInit, ControlValueAccessor {
     this.enterKey.emit();
   }
 
+  public onFocus(): void {
+    this.onFocusField.emit();
+  }
 }
