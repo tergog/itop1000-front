@@ -2,12 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { untilDestroyed } from 'ngx-take-until-destroy';
-import {first, switchMap} from 'rxjs/operators';
+import { first, switchMap } from 'rxjs/operators';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import {UserService, UtilsService} from 'app/shared/services';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {UserInfo} from '../../../shared/models';
-import {log} from 'util';
+import { UserService, UtilsService } from 'app/shared/services';
+import { UserInfo } from '../../../shared/models';
 
 @Component({
   selector: 'app-verify-email',

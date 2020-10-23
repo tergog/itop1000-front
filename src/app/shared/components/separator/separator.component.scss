@@ -1,3 +1,5 @@
+@import 'assets/scss/variables';
+
 :host {
   width: 100%;
 }
@@ -7,7 +9,7 @@
   width: 10px;
   height: 10px;
   margin: 0 auto;
-  background-color: #fff;
+  background-color: $color-3;
   border-radius: 50%;
 
   &:after, &:before {
