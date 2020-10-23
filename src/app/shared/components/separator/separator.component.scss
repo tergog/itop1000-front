@@ -1,0 +1,28 @@
+@import 'assets/scss/variables';
+
+:host {
+  width: 100%;
+}
+
+.separator {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  margin: 0 auto;
+  background-color: $color-3;
+  border-radius: 50%;
+
+  &:after, &:before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    right: 27px;
+    width: 275px;
+    height: 1px;
+    background-color: #fff
+  }
+
+  &:before {
+    left: 27px;
+  }
+}
