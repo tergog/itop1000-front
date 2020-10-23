@@ -26,4 +26,14 @@
   &__none {
     display: none;
   }
+
+  &__block {
+    display: block;
+  }
+}
+
+.overflow {
+  &--hidden {
+    overflow: hidden;
+  }
 }
