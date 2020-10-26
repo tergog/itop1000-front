@@ -56,6 +56,10 @@
     }
   }
 
+  &.ng-invalid.ng-dirty {
+    border-color: $color-2;
+  }
+
   ::ng-deep {
     i {
       cursor: pointer;

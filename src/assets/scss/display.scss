@@ -2,6 +2,10 @@
   &__flex {
     display: flex;
 
+    &--flex-start {
+      justify-content: flex-start;
+    }
+
     &--justify-between {
       justify-content: space-between;
     }
@@ -17,6 +21,10 @@
     &--items-center {
       align-items: center;
     }
+
+    &--wrap {
+      flex-wrap: wrap;
+    }
   }
 
   &__inline-flex {
@@ -27,6 +35,16 @@
     display: none;
   }
 
+  &__table-caption {
+    display: table-caption;
+  }
+}
+
+.list-style {
+  &__none {
+    list-style-type: none;
+    padding: 0;
+    
   &__block {
     display: block;
   }

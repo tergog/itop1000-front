@@ -1,8 +1,10 @@
 <input
   (keyup.enter)="enterKeyClick()"
+  (focus)="onFocus()"
   class="{{ type }}"
   [type]="isHiddenPassword ? 'password' : 'text'"
   [(ngModel)]="value"
-  [placeholder]="placeholder">
+  [placeholder]="placeholder"
+>
 
 <ng-content></ng-content>

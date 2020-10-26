@@ -23,6 +23,14 @@
     <span class="text text__lg text__color--1">Categories & Skills</span>
   </li>
 
+  <li class="d__flex"
+      [class.active]="activeSection === DevProfileSections.WorkExperience"
+      (click)="onSectionCLick(DevProfileSections.WorkExperience)"
+  >
+    <i class="categories m__right--10"></i>
+    <span class="text text__lg text__color--1">Work Experience</span>
+  </li>
+
   <li class="d__flex d__flex--items-center"
       [class.active]="activeSection === DevProfileSections.Balance"
       (click)="onSectionCLick(DevProfileSections.Balance)"

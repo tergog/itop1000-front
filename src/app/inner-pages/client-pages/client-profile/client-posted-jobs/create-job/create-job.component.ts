@@ -34,7 +34,9 @@ export class CreateJobComponent implements OnInit {
       requirements: new FormControl('', []),
       duration: new FormControl('', []),
       price: new FormControl('', []),
-    })
+      country: new FormControl('', []),
+      city: new FormControl('', []),
+    });
   }
 
 }

@@ -55,6 +55,19 @@ i {
   font-style: normal;
   font-weight: normal;
 
+
+  &__font--2 {
+    font-family: $font-2;
+  }
+
+  &__font--3 {
+    font-family: $font-3;
+  }
+
+  &__font--4 {
+    font-family: $font-4;
+  }
+
   &__title {
     font-size: 24px;
     line-height: 28px;
@@ -72,6 +85,13 @@ i {
     text-transform: uppercase;
   }
 
+  &__capitalize {
+    text-transform: capitalize;
+  }
+
+  &__underline {
+    text-decoration-line: underline;
+    
   &__decoration--none {
     text-decoration: none;
   }
@@ -98,6 +118,18 @@ i {
 
   &__color--6 {
     color: $text-color-6;
+  }
+
+  &__color--8 {
+    color: $text-color-8;
+  }
+
+  &__color--9 {
+    color: $text-color-9;
+  }
+
+  &__color--10 {
+    color: $text-color-10;
   }
 
   &__xs {
@@ -127,12 +159,27 @@ i {
   &__xxxlg {
     font-size: 28px;
   }
+  &__x4lg {
+    font-size: 30px;
+  }
 
   &__bold {
     font-weight: bold;
   }
 
+  &__lighter {
+    font-weight: lighter;
+  }
+
   &__fw {
+    &--200 {
+      font-weight: 200;
+    }
+
+    &--300 {
+      font-weight: 300;
+    }
+
     &--500 {
       font-weight: 500;
     }
@@ -151,6 +198,13 @@ i {
 
 .mat-dialog-container {
   padding: 0 !important;
+}
+
+.border-point {
+  position: absolute;
+  background-color: $color-5;
+  box-shadow: 0 0 4px 4px rgba(237, 216, 140, 0.7);
+  border-radius: 50%;
 }
 
 html, body { height: 100%; }

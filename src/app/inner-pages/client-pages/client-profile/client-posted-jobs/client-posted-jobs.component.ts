@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 
@@ -15,7 +16,10 @@ export class ClientPostedJobsComponent implements OnInit {
   public isCreateJob: boolean;
   public jobs$: Observable<Job[]>;
 
-  constructor(private jobsService: JobsService) { }
+  constructor(
+    private jobsService: JobsService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.jobs$ = this.jobsService.getJobs()
@@ -26,4 +30,7 @@ export class ClientPostedJobsComponent implements OnInit {
     this.isCreateJob = true;
   }
 
+  public onJobClick(id: string): void {
+    this.router.navigate(['/in/c/profile/job', id]);
+  }
 }
