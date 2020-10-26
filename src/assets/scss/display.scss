@@ -44,5 +44,14 @@
   &__none {
     list-style-type: none;
     padding: 0;
+    
+  &__block {
+    display: block;
+  }
+}
+
+.overflow {
+  &--hidden {
+    overflow: hidden;
   }
 }

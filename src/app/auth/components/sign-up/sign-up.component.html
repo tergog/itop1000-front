@@ -10,18 +10,15 @@
     </div>
 
     <div class="m__top--25 d__flex d__flex--justify-between">
-      <div class="w__280">
+      <div class="w__280 input__half">
         <span class="text text__sm text__color--3 text__fw--600">First Name</span>
-        <app-input formControlName="firstName" [placeholder]="'First Name'" class="m__top--10"></app-input>
+        <app-input formControlName="firstName" [placeholder]="'First Name'" class="m__top--10 h__auto"></app-input>
       </div>
 
-      <div class="w__280">
+      <div class="w__280 m__right--0">
         <span class="text text__sm text__color--3 text__fw--600">Last Name</span>
-        <app-input formControlName="lastName" [placeholder]="'Last Name'" class="m__top--10 w_250"></app-input>
+        <app-input formControlName="lastName" [placeholder]="'Last Name'" class="m__top--10 w_250 h__auto"></app-input>
       </div>
-    </div>
-
-    <div class="m__top--25">
     </div>
 
     <div class="m__top--25">
@@ -34,10 +31,17 @@
       <app-input formControlName="confirmPassword" [placeholder]="'Confirm Password'" class="m__top--10"></app-input>
     </div>
 
-    <div class="m__top--10">
+    <div class="m__top--25">
       <app-checkbox formControlName="acceptTerms" [label]="'Accept Terms of Use'"></app-checkbox>
     </div>
   </div>
 
-  <app-button class="m__top--60" (buttonClick)="onSignUpClick()" [type]="'main'" [text]="'Sign Up'"></app-button>
+  <app-button class="m__top--30" (buttonClick)="onSignUpClick()" [type]="'main'" [text]="'Sign Up'"></app-button>
+
+  <div class="w__594 m__top--60 overflow--hidden">
+    <app-separator></app-separator>
+  </div>
+
+  <p class="text text__sm text__color--3 text__fw--600 m__top--50">Already have an account?</p>
+  <p class="text text__sm text__color--3 text__fw--600 m__top--30 text__uppercase"><a routerLink="../login" class="text__color--3 text__decoration--none">Sign in</a></p>
 </app-auth-container>

@@ -40,6 +40,10 @@
   }
 
   &__right {
+    &--0 {
+      margin-right: 0 !important;
+    }
+
     &--5 {
       margin-right: 5px;
     }
@@ -88,6 +92,11 @@
 .w {
   &__280 {
     width: 280px !important;
+
+    @media (max-width: 992px) {
+      width: calc(50% - 10px) !important;
+      margin-right: 10px;
+    }
   }
 
   &__350 {
@@ -96,6 +105,16 @@
 
   &__594 {
     width: 594px !important;
+
+    @media (max-width: 992px) {
+      width: 80% !important;
+    }
+  }
+}
+
+.h {
+  &__auto {
+    height: auto !important;
   }
 
   &__100p {
