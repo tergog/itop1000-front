@@ -15,6 +15,10 @@ import { SharedModule } from 'app/shared/shared.module';
 import { DevContactInfoEditComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-contact-info/dev-contact-info-edit/dev-contact-info-edit.component';
 import { DevContactInfoPreviewComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-contact-info/dev-contact-info-preview/dev-contact-info-preview.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DevContactInfoAccountPreviewComponent } from './dev-contact-info/dev-contact-info-account-preview/dev-contact-info-account-preview.component';
+import { DevContactInfoLocationPreviewComponent } from './dev-contact-info/dev-contact-info-location-preview/dev-contact-info-location-preview.component';
+import { DevContactInfoLocationEditComponent } from './dev-contact-info/dev-contact-info-location-edit/dev-contact-info-location-edit.component';
+import { DevContactInfoAccountEditComponent } from './dev-contact-info/dev-contact-info-account-edit/dev-contact-info-account-edit.component';
 
 
 const routes: Routes = [
@@ -32,7 +36,11 @@ const routes: Routes = [
     DevProfileBalanceComponent,
     DevProfileSectionsComponent,
     DevContactInfoEditComponent,
-    DevContactInfoPreviewComponent
+    DevContactInfoPreviewComponent,
+    DevContactInfoAccountPreviewComponent,
+    DevContactInfoLocationPreviewComponent,
+    DevContactInfoLocationEditComponent,
+    DevContactInfoAccountEditComponent
   ],
   imports: [
     CommonModule,

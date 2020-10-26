@@ -18,6 +18,9 @@ export class DevContactInfoComponent implements OnInit {
 
   public isEdit: boolean;
 
+  public isAccountEdit: boolean;
+  public isLocationEdit: boolean;
+
   @Output() updateProfileInfo = new EventEmitter();
 
   constructor(
@@ -31,8 +34,26 @@ export class DevContactInfoComponent implements OnInit {
     this.devProfileService.initUpdateProfileService();
   }
 
+  public editAccountToggle(): void {
+    this.isAccountEdit = !this.isAccountEdit;
+  }
+
+  public editLocationToggle(): void {
+    this.isLocationEdit = !this.isLocationEdit;
+  }
+
   public editToggle(): void {
     this.isEdit = !this.isEdit;
+  }
+
+  public onSaveAccountClick(userInfo: Partial<UserInfo>): void {
+    this.devProfileService.onSaveClick(userInfo);
+    this.isAccountEdit = false;
+  }
+
+  public onSaveLocationClick(userInfo: Partial<UserInfo>): void {
+    this.devProfileService.onSaveClick(userInfo);
+    this.isLocationEdit = false;
   }
 
   public onSaveClick(userInfo: Partial<UserInfo>): void {
