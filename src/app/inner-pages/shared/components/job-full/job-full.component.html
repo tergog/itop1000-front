@@ -73,11 +73,6 @@
         <div *ngFor="let category of job.categories.split(' ')" class="m_">
           <div
             class="d__flex d__flex--justify-between d__flex--direction-column d__flex--items-center d__flex--justify-center">
-            <div>
-              <mat-progress-spinner [value]="75" [color]="'accent'">
-
-              </mat-progress-spinner>
-            </div>
             <div class="m__top--10">
               <span class="text__uppercase text__font--2 text__center text__uppercase font__md">{{ category }}</span>
             </div>
