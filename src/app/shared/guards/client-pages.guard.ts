@@ -22,7 +22,7 @@ export class ClientPagesGuard implements CanActivate {
   canActivate(): Observable<boolean> {
     return this.store.select(getUserInfo).pipe(
       map((userInfo: UserInfo) => userInfo.role === UserRole.Client),
-      tap((isClient : boolean) => (isClient || this.router.navigate(['/in/d/profile'])))
+      tap((isClient: boolean) => (isClient || this.router.navigate(['/in/d/profile'])))
     );
   }
 
