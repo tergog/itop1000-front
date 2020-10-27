@@ -39,7 +39,7 @@ import { SeparatorComponent } from './components/separator/separator.component';
     OverlayModule,
     TextareaComponent,
     NgCircleProgressModule,
-    ClickedOutsideDirective
+    ClickedOutsideDirective,
     SeparatorComponent
   ],
   imports: [

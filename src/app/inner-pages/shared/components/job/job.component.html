@@ -1,7 +1,9 @@
 <div class="left-side">
-  <img src="./assets/img/default-client-photo.svg" alt="client-photo" class="client-photo">
+  <div class="client-photo">
+    <img src="./assets/img/default-client-photo.svg" alt="client-photo">
+  </div>
   <div
-    class="m__top--10 d__table-caption text__font--3 text__x4lg text__center text__uppercase text__underline text__lighter">
+    class="m__top--10 d__table-caption text text__x4lg text__center text__uppercase text__underline text__lighter">
     {{ job.company || 'No Company' }}
   </div>
   <div class="m__top--10 text__center text__capitalize text__color--5 text__font--2">
@@ -24,13 +26,15 @@
   <div class="text text__font--4 text__color--8">{{ job.description }}</div>
   <div>
     <div class="d__flex d__flex--flex-start d__flex--flex-wrap">
-      <span class="text__uppercase m--5" *ngFor="let requirement of job.requirements.split(' ')">{{ requirement }}</span> <!-- TODO change logic-->
+      <span class="text__uppercase m--5"
+            *ngFor="let requirement of job.requirements.split(' ')">{{ requirement }}</span> <!-- TODO change logic-->
     </div>
     <hr class="splitter-line">
   </div>
   <div>
     <div class="d__flex d__flex--flex-start d__flex--flex-wrap">
-      <span class="text__uppercase m--5" *ngFor="let category of job.categories.split(' ')">{{ category }}</span> <!-- TODO change logic-->
+      <span class="text__uppercase m--5" *ngFor="let category of job.categories.split(' ')">{{ category }}</span>
+      <!-- TODO change logic-->
     </div>
     <hr class="splitter-line">
   </div>

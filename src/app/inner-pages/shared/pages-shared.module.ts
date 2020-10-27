@@ -18,6 +18,7 @@ import { StandardBgWrapComponent } from 'app/inner-pages/shared/components/stand
 import { JobFullComponent } from './components/job-full/job-full.component';
 import { WorkExperienceComponent } from './components/developer-resume-full/work-experience/work-experience.component';
 import { ProjectCardComponent } from './components/project-card/project-card.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -33,13 +34,14 @@ import { ProjectCardComponent } from './components/project-card/project-card.com
     WorkExperienceComponent,
     ProjectCardComponent,
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    ReactiveFormsModule,
-    ImageCropperModule,
-    InViewportModule,
-  ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        ReactiveFormsModule,
+        ImageCropperModule,
+        InViewportModule,
+        MatProgressSpinnerModule,
+    ],
   exports: [
     ChangePasswordDialogComponent,
     ProfileChangePasswordComponent,
