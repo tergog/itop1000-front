@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ClientProfileComponent } from 'app/inner-pages/client-pages/client-profile/client-profile.component';
 import { ClientProfileSidenavComponent } from 'app/inner-pages/client-pages/client-profile/client-profile-sidenav/client-profile-sidenav.component';
 import { ClientProfileSectionsComponent } from 'app/inner-pages/client-pages/client-profile/client-profile-sections/client-profile-sections.component';
+import { JobFullComponent } from 'app/inner-pages/shared/components/job-full/job-full.component';
 import { PagesSharedModule } from 'app/inner-pages/shared/pages-shared.module';
 import { ClientContactInfoComponent } from 'app/inner-pages/client-pages/client-profile/client-contact-info/client-contact-info.component';
 import { SharedModule } from 'app/shared/shared.module';
@@ -15,7 +16,8 @@ import { ClientPaymentsComponent } from 'app/inner-pages/client-pages/client-pro
 import { ClientBillingsComponent } from 'app/inner-pages/client-pages/client-profile/client-billings/client-billings.component';
 
 export const routes: Routes = [
-  { path: '', component: ClientProfileComponent }
+  { path: '', component: ClientProfileComponent },
+  { path: 'job/:id', component: JobFullComponent}
 ];
 
 @NgModule({

@@ -12,522 +12,115 @@ export const developers = [
       title: 'Angular Developer',
       availability: true,
       description: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame...',
-      skills: [
-        {
-          name : 'Typescript',
-          value : 2
-        },
-        {
-          name : 'Javascript',
-          value : 1
-        },
-        {
-          name : 'HTML5',
-          value : 5
-        },
-        {
-          name : 'Angular',
-          value : 2
-        },
-        {
-          name : 'Angular 10',
-          value : 1
-        },
-        {
-          name : 'CSS3',
-          value : 5
-        }
-      ],
-      softSkills: [
-        {
-          name: 'Creativity',
-          value: 60,
-        },
-        {
-          name: 'Mentoring',
-          value: 30,
-        },
-        {
-          name: 'Communication',
-          value: 85,
-        },
-        {
-          name: 'Lorem lorem',
-          value: 10,
-        },
-      ],
-      languages: [
-        {
-          name: 'Russian',
-          value: 6,
-        },
-        {
-          name: 'English',
-          value: 5,
-        },
-        {
-          name: 'French',
-          value: 3,
-        },
-        {
-          name: 'Italian',
-          value: 4,
-        },
-      ],
+      devProperties: {
+        skills: [
+          {
+            name : 'Typescript',
+            value : 2
+          },
+          {
+            name : 'Javascript',
+            value : 1
+          },
+          {
+            name : 'HTML5',
+            value : 5
+          },
+          {
+            name : 'Angular',
+            value : 2
+          },
+          {
+            name : 'Angular 10',
+            value : 1
+          },
+          {
+            name : 'CSS3',
+            value : 5
+          }
+        ],
+        softSkills: [
+          {
+            name: 'Creativity',
+            value: 60,
+          },
+          {
+            name: 'Mentoring',
+            value: 30,
+          },
+          {
+            name: 'Communication',
+            value: 85,
+          },
+          {
+            name: 'Lorem lorem',
+            value: 10,
+          },
+        ],
+        languages: [
+          {
+            name: 'Russian',
+            value: 6,
+          },
+          {
+            name: 'English',
+            value: 5,
+          },
+          {
+            name: 'French',
+            value: 3,
+          },
+          {
+            name: 'Italian',
+            value: 4,
+          },
+        ],
+        projects: [
+          {
+            title: 'Project 1 title',
+            description: 'Project 1 description lorem ipsum dolor sit amet',
+            technologies: [
+              {
+                name : 'Javascript',
+                value : 1
+              },
+              {
+                name : 'HTML5',
+                value : 5
+              },
+              {
+                name : 'Angular',
+                value : 2
+              },
+            ],
+            link: 'https://github.com/'
+          },
+          {
+            title: 'Project 2 title',
+            description: 'Project 2 description lorem ipsum dolor sit amet',
+            technologies: [
+              {
+                name : 'Javascript',
+                value : 1
+              },
+              {
+                name : 'CSS3',
+                value : 5
+              },
+              {
+                name : 'Angular',
+                value : 2
+              },
+            ],
+            link: 'https://github.com/'
+          }
+        ],
+      },
       location: 'Ukraine, Kyiv',
       dateUpdated: '19 July 2020',
       photo : 'http://localhost:4000/1594974664857.png'
-    },
-    {
-      id: '2',
-      firstName: 'Yevhen',
-      lastName: 'Hohol',
-      hourlyRate: '40',
-      monthRate: '2500',
-      title: 'Angular Developer',
-      availability: true,
-      description: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame...',
-      skills: [
-        {
-          name : 'Typescript',
-          value : 2
-        },
-        {
-          name : 'Javascript',
-          value : 1
-        },
-        {
-          name : 'HTML5',
-          value : 5
-        },
-        {
-          name : 'Angular',
-          value : 2
-        },
-        {
-          name : 'Angular 10',
-          value : 1
-        },
-        {
-          name : 'CSS3',
-          value : 5
-        }
-      ],
-      softSkills: [
-        {
-          name: 'Creativity',
-          value: 60,
-        },
-        {
-          name: 'Mentoring',
-          value: 30,
-        },
-        {
-          name: 'Communication',
-          value: 85,
-        },
-        {
-          name: 'Lorem lorem',
-          value: 10,
-        },
-      ],
-      languages: [
-        {
-          name: 'Russian',
-          value: 6,
-        },
-        {
-          name: 'English',
-          value: 5,
-        },
-        {
-          name: 'French',
-          value: 3,
-        },
-        {
-          name: 'Italian',
-          value: 4,
-        },
-      ],
-      location: 'Ukraine, Kyiv',
-      dateUpdated: '19 July 2020',
-      photo : 'http://localhost:4000/1594974664857.png'
-    },
-    {
-      id: '3',
-      firstName: 'Yevhen',
-      lastName: 'Hohol',
-      hourlyRate: '40',
-      monthRate: '2500',
-      title: 'Angular Developer',
-      availability: true,
-      description: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame...',
-      skills: [
-        {
-          name : 'Typescript',
-          value : 2
-        },
-        {
-          name : 'Javascript',
-          value : 1
-        },
-        {
-          name : 'HTML5',
-          value : 5
-        },
-        {
-          name : 'Angular',
-          value : 2
-        },
-        {
-          name : 'Angular 10',
-          value : 1
-        },
-        {
-          name : 'CSS3',
-          value : 5
-        }
-      ],
-      softSkills: [
-        {
-          name: 'Creativity',
-          value: 60,
-        },
-        {
-          name: 'Mentoring',
-          value: 30,
-        },
-        {
-          name: 'Communication',
-          value: 85,
-        },
-        {
-          name: 'Lorem lorem',
-          value: 10,
-        },
-      ],
-      languages: [
-        {
-          name: 'Russian',
-          value: 6,
-        },
-        {
-          name: 'English',
-          value: 5,
-        },
-        {
-          name: 'French',
-          value: 3,
-        },
-        {
-          name: 'Italian',
-          value: 4,
-        },
-      ],
-      location: 'Ukraine, Kyiv',
-      dateUpdated: '19 July 2020',
-      photo : 'http://localhost:4000/1594974664857.png'
-    },
-    {
-      id: '4',
-      firstName: 'Yevhen',
-      lastName: 'Hohol',
-      hourlyRate: '40',
-      monthRate: '2500',
-      title: 'Angular Developer',
-      availability: true,
-      description: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame...',
-      skills: [
-        {
-          name : 'Typescript',
-          value : 2
-        },
-        {
-          name : 'Javascript',
-          value : 1
-        },
-        {
-          name : 'HTML5',
-          value : 5
-        },
-        {
-          name : 'Angular',
-          value : 2
-        },
-        {
-          name : 'Angular 10',
-          value : 1
-        },
-        {
-          name : 'CSS3',
-          value : 5
-        }
-      ],
-      softSkills: [
-        {
-          name: 'Creativity',
-          value: 60,
-        },
-        {
-          name: 'Mentoring',
-          value: 30,
-        },
-        {
-          name: 'Communication',
-          value: 85,
-        },
-        {
-          name: 'Lorem lorem',
-          value: 10,
-        },
-      ],
-      languages: [
-        {
-          name: 'Russian',
-          value: 6,
-        },
-        {
-          name: 'English',
-          value: 5,
-        },
-        {
-          name: 'French',
-          value: 3,
-        },
-        {
-          name: 'Italian',
-          value: 4,
-        },
-      ],
-      location: 'Ukraine, Kyiv',
-      dateUpdated: '19 July 2020',
-      photo : 'http://localhost:4000/1594974664857.png'
-    },
-    {
-      id: '5',
-      firstName: 'Yevhen',
-      lastName: 'Hohol',
-      hourlyRate: '40',
-      monthRate: '2500',
-      title: 'Angular Developer',
-      availability: true,
-      description: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame...',
-      skills: [
-        {
-          name : 'Typescript',
-          value : 2
-        },
-        {
-          name : 'Javascript',
-          value : 1
-        },
-        {
-          name : 'HTML5',
-          value : 5
-        },
-        {
-          name : 'Angular',
-          value : 2
-        },
-        {
-          name : 'Angular 10',
-          value : 1
-        },
-        {
-          name : 'CSS3',
-          value : 5
-        }
-      ],
-      softSkills: [
-        {
-          name: 'Creativity',
-          value: 60,
-        },
-        {
-          name: 'Mentoring',
-          value: 30,
-        },
-        {
-          name: 'Communication',
-          value: 85,
-        },
-        {
-          name: 'Lorem lorem',
-          value: 10,
-        },
-      ],
-      languages: [
-        {
-          name: 'Russian',
-          value: 6,
-        },
-        {
-          name: 'English',
-          value: 5,
-        },
-        {
-          name: 'French',
-          value: 3,
-        },
-        {
-          name: 'Italian',
-          value: 4,
-        },
-      ],
-      location: 'Ukraine, Kyiv',
-      dateUpdated: '19 July 2020',
-      photo : 'http://localhost:4000/1594974664857.png'
-    },
-    {
-      id: '8',
-      firstName: 'Yevhen',
-      lastName: 'Hohol',
-      hourlyRate: '40',
-      monthRate: '2500',
-      title: 'Angular Developer',
-      availability: true,
-      description: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame...',
-      skills: [
-        {
-          name : 'Typescript',
-          value : 2
-        },
-        {
-          name : 'Javascript',
-          value : 1
-        },
-        {
-          name : 'HTML5',
-          value : 5
-        },
-        {
-          name : 'Angular',
-          value : 2
-        },
-        {
-          name : 'Angular 10',
-          value : 1
-        },
-        {
-          name : 'CSS3',
-          value : 5
-        }
-      ],
-      softSkills: [
-        {
-          name: 'Creativity',
-          value: 60,
-        },
-        {
-          name: 'Mentoring',
-          value: 30,
-        },
-        {
-          name: 'Communication',
-          value: 85,
-        },
-        {
-          name: 'Lorem lorem',
-          value: 10,
-        },
-      ],
-      languages: [
-        {
-          name: 'Russian',
-          value: 6,
-        },
-        {
-          name: 'English',
-          value: 5,
-        },
-        {
-          name: 'French',
-          value: 3,
-        },
-        {
-          name: 'Italian',
-          value: 4,
-        },
-      ],
-      location: 'Ukraine, Kyiv',
-      dateUpdated: '19 July 2020',
-      photo : 'http://localhost:4000/1594974664857.png'
-    },
-    {
-      id: '6',
-      firstName: 'Yevhen',
-      lastName: 'Hohol',
-      hourlyRate: '40',
-      monthRate: '2500',
-      title: 'Angular Developer',
-      availability: true,
-      description: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame...',
-      skills: [
-        {
-          name : 'Typescript',
-          value : 2
-        },
-        {
-          name : 'Javascript',
-          value : 1
-        },
-        {
-          name : 'HTML5',
-          value : 5
-        },
-        {
-          name : 'Angular',
-          value : 2
-        },
-        {
-          name : 'Angular 10',
-          value : 1
-        },
-        {
-          name : 'CSS3',
-          value : 5
-        }
-      ],
-      softSkills: [
-        {
-          name: 'Creativity',
-          value: 60,
-        },
-        {
-          name: 'Mentoring',
-          value: 30,
-        },
-        {
-          name: 'Communication',
-          value: 85,
-        },
-        {
-          name: 'Lorem lorem',
-          value: 10,
-        },
-      ],
-      languages: [
-        {
-          name: 'Russian',
-          value: 6,
-        },
-        {
-          name: 'English',
-          value: 5,
-        },
-        {
-          name: 'French',
-          value: 3,
-        },
-        {
-          name: 'Italian',
-          value: 4,
-        },
-      ],
-      location: 'Ukraine, Kyiv',
-      dateUpdated: '19 July 2020',
-      photo : 'http://localhost:4000/1594974664857.png'
-    }];
+    }
+  ];
 
 export interface State {
   isAuthenticated: boolean;
@@ -554,8 +147,6 @@ export function reducer(state: State = INIT_STATE, action: coreActions.Actions) 
       return { ...state, userInfo: action.payload, isAuthenticated: true };
     case coreActions.ON_LOGOUT:
       return { ...state, userInfo: null, isAuthenticated: false };
-    case coreActions.SET_TOKEN_ON_PROFILE_UPDATE:
-      return { ...state, userInfo: action.payload};
     case coreActions.UPDATE_USER_PROFILE:
       return {...state, userInfo: action.payload};
     case coreActions.ON_VALID_SESSION:

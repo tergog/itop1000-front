@@ -8,12 +8,10 @@ import { Job } from 'app/shared/models';
   styleUrls: ['./job.component.scss']
 })
 export class JobComponent implements OnInit {
-
   @Input() job: Job;
 
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { buffer, bufferTime, debounceTime, take, tap } from 'rxjs/operators';
 
@@ -8,6 +9,7 @@ import { getDeveloper, State } from 'app/core/reducers';
 
 export enum DeveloperResumeSections {
   ProfessionalSkills,
+  WorkExperience,
   Education,
   SoftSkillsLanguages,
   IWantToLearn,
@@ -26,7 +28,7 @@ export class DeveloperResumeFullComponent implements OnInit {
   public activeSection = DeveloperResumeSections.ProfessionalSkills;
   private inViewportChange;
 
-  constructor(private store: Store<State>) {}
+  constructor(private store: Store<State>, private router: Router) {}
 
   ngOnInit(): void {
     this.developer$ = this.store.select(getDeveloper);
@@ -34,7 +36,7 @@ export class DeveloperResumeFullComponent implements OnInit {
     this.inViewportChange = new Subject<{ isInViewport: boolean, section: DeveloperResumeSections }>()
       .pipe(bufferTime(300));
 
-    this.inViewportChange.subscribe((sections) => console.log(sections));
+    // this.inViewportChange.subscribe((sections) => console.log(sections));
   }
 
   public onSectionCLick(selectedSection: DeveloperResumeSections, element: HTMLElement): void {
@@ -44,6 +46,10 @@ export class DeveloperResumeFullComponent implements OnInit {
       block: 'start',
       inline: 'nearest',
     });
+  }
+
+  public onWorkExperienceClick(id: string): void {
+    this.router.navigate([`in/c/search-developers/${id}/work-experience`]);
   }
 
   public inViewport(isInViewport: boolean, section: DeveloperResumeSections): void {

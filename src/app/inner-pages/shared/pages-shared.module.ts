@@ -15,6 +15,10 @@ import { UploadPhotoDialogComponent } from 'app/inner-pages/shared/components/up
 import { DeveloperResumeComponent } from 'app/inner-pages/shared/components/developer-resume/developer-resume.component';
 import { DeveloperResumeFullComponent } from 'app/inner-pages/shared/components/developer-resume-full/developer-resume-full.component';
 import { StandardBgWrapComponent } from 'app/inner-pages/shared/components/standard-bg-wrap/standard-bg-wrap.component';
+import { JobFullComponent } from './components/job-full/job-full.component';
+import { WorkExperienceComponent } from './components/developer-resume-full/work-experience/work-experience.component';
+import { ProjectCardComponent } from './components/project-card/project-card.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -26,14 +30,18 @@ import { StandardBgWrapComponent } from 'app/inner-pages/shared/components/stand
     DeveloperResumeComponent,
     DeveloperResumeFullComponent,
     StandardBgWrapComponent,
+    JobFullComponent,
+    WorkExperienceComponent,
+    ProjectCardComponent,
   ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    ReactiveFormsModule,
-    ImageCropperModule,
-    InViewportModule,
-  ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        ReactiveFormsModule,
+        ImageCropperModule,
+        InViewportModule,
+        MatProgressSpinnerModule,
+    ],
   exports: [
     ChangePasswordDialogComponent,
     ProfileChangePasswordComponent,
@@ -41,6 +49,7 @@ import { StandardBgWrapComponent } from 'app/inner-pages/shared/components/stand
     JobComponent,
     DeveloperResumeComponent,
     StandardBgWrapComponent,
+    ProjectCardComponent
   ],
 })
 export class PagesSharedModule {}
