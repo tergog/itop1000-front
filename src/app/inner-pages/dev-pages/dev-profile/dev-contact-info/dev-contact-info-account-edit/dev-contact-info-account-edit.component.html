@@ -1,11 +1,11 @@
 <div [formGroup]="form">
-  <div class="w__320 d__inline-flex d__flex--justify-between d__flex--items-center m__right--10 m__bottom--10">
+  <div class="w__320 d__inline-flex d__flex--justify-between d__flex--items-center m__right--30 m__bottom--10">
     <i class="user"></i>
     <span class="text text__sm text__bold text__uppercase">User id</span>
     <app-input [type]="'inner'" formControlName="userId" [placeholder]="'User id'" [value]="form.get('userId').value"></app-input>
   </div>
 
-  <div class="w__320 d__inline-flex d__flex--justify-between d__flex--items-center m__right--10 m__bottom--10">
+  <div class="w__320 d__inline-flex d__flex--justify-between d__flex--items-center m__right--30 m__bottom--10">
     <i class="email"></i>
     <span class="text text__sm text__bold text__uppercase">Email</span>
     <app-input [type]="'inner'" formControlName="email" [placeholder]="'Email'" [value]="form.get('email').value"></app-input>
