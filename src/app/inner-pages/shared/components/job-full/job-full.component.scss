@@ -157,7 +157,7 @@
     opacity: 0.85;
     padding: 5%;
 
-    > div{
+    > div {
       margin: 0 auto;
     }
   }
@@ -219,8 +219,11 @@ hr.splitter-line {
 
 
   &:active, &:focus {
-    box-shadow: inset 2px 2px #1E1D1D;
     outline: none !important;
+  }
+
+  &:active {
+    box-shadow: inset 2px 2px $bg-color-dark;
   }
 }
 

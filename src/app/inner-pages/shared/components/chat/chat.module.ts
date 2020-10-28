@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { SharedModule } from 'app/shared/shared.module';
 import { PagesSharedModule } from 'app/inner-pages/shared/pages-shared.module';
-import {ChatComponent} from './chat.component';
+import { ChatComponent } from './chat.component';
 
 const routes: Routes = [
   { path: '', component: ChatComponent },
@@ -19,4 +19,5 @@ const routes: Routes = [
     PagesSharedModule
   ]
 })
-export class ChatModule { }
+export class ChatModule {
+}

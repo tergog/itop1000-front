@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { Job } from 'app/shared/models';
 
 @Component({
   selector: 'app-job',
@@ -8,7 +7,6 @@ import { Job } from 'app/shared/models';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
-  @Input() job: Job;
 
   constructor() { }
 
