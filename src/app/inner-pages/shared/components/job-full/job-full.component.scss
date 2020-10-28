@@ -219,6 +219,7 @@ hr.splitter-line {
 
 
   &:active, &:focus {
+    box-shadow: inset 2px 2px #1E1D1D;
     outline: none !important;
   }
 }
