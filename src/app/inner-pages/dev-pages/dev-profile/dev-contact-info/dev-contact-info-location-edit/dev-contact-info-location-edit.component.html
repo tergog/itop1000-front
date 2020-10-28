@@ -1,18 +1,18 @@
 <div [formGroup]="form">
   <div class="w__320 d__inline-flex d__flex--justify-between d__flex--items-center m__right--30 m__bottom--10">
-    <i class="contact-info"></i>
+    <i class="contact-info contact-info-gray"></i>
     <span class="text text__sm text__bold text__uppercase">TIME ZONE</span>
     <app-input [type]="'inner'" formControlName="timezone" [placeholder]="'UTC + 02:00 Kyiv'" [value]="form.get('timezone').value"></app-input>
   </div>
 
   <div class="w__320 d__inline-flex d__flex--justify-between d__flex--items-center m__right--30 m__bottom--10">
-    <i class="location"></i>
+    <i class="location location-gray"></i>
     <span class="text text__sm text__bold text__uppercase">ADDRESS</span>
     <app-input [type]="'inner'" formControlName="address" [placeholder]="'Address'" [value]="form.get('address').value"></app-input>
   </div>
 
   <div class="w__320 d__inline-flex d__flex--justify-between d__flex--items-center m__right--30 m__bottom--10">
-    <i class="phone"></i>
+    <i class="phone phone-gray"></i>
     <span class="text text__sm text__bold text__uppercase">PHONE</span>
     <app-input [type]="'inner'" formControlName="phone" [placeholder]="'Phone'" [value]="form.get('phone').value"></app-input>
   </div>
