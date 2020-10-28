@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   { path: 'profile', loadChildren: () => import('app/inner-pages/dev-pages/dev-profile/dev-profile.module').then(m => m.DevProfileModule) },
   { path: 'search-jobs', loadChildren: () => import('app/inner-pages/dev-pages/search-jobs/search-jobs.module').then(m => m.SearchJobsModule) },
-  { path: 'chat', loadChildren: () => import('app/inner-pages/shared/pages-shared.module').then(m => m.PagesSharedModule) }
+  { path: 'chat', loadChildren: () => import('app/inner-pages/shared/components/chat/chat.module').then(m => m.ChatModule) }
 ];
 
 @NgModule({

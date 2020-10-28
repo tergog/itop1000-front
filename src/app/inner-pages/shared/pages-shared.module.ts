@@ -19,12 +19,7 @@ import {JobFullComponent} from './components/job-full/job-full.component';
 import {WorkExperienceComponent} from './components/developer-resume-full/work-experience/work-experience.component';
 import {ProjectCardComponent} from './components/project-card/project-card.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {ChatComponent} from './components/chat/chat.component';
-import {RouterModule, Routes} from '@angular/router';
 
-const routes: Routes = [
-  {path: '', component: ChatComponent},
-];
 
 @NgModule({
   declarations: [
@@ -39,7 +34,6 @@ const routes: Routes = [
     JobFullComponent,
     WorkExperienceComponent,
     ProjectCardComponent,
-    ChatComponent
   ],
   imports: [
     CommonModule,
@@ -48,7 +42,6 @@ const routes: Routes = [
     ImageCropperModule,
     InViewportModule,
     MatProgressSpinnerModule,
-    RouterModule.forChild(routes),
   ],
   exports: [
     ChangePasswordDialogComponent,
