@@ -52,7 +52,7 @@ export class DevContactInfoAccountEditComponent implements OnInit {
 
   private initForm(): void {
     this.form = new FormGroup({
-      userId: new FormControl('', []),
+      id: new FormControl('', []),
       email: new FormControl('', []),
       firstName: new FormControl('', [])
     });

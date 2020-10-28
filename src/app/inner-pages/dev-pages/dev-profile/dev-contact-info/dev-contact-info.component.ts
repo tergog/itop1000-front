@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, OnDestroy} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
@@ -12,7 +12,7 @@ import * as fromCore from 'app/core/reducers';
   templateUrl: './dev-contact-info.component.html',
   styleUrls: ['./dev-contact-info.component.scss']
 })
-export class DevContactInfoComponent implements OnInit {
+export class DevContactInfoComponent implements OnInit, OnDestroy {
 
   public userInfo$: Observable<UserInfo>;
   public isEdit: boolean;
@@ -59,4 +59,5 @@ export class DevContactInfoComponent implements OnInit {
     this.isEdit = false;
   }
 
+  ngOnDestroy(): void {}
 }
