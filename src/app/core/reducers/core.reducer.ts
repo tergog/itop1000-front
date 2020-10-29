@@ -7,11 +7,8 @@ export const developers = [
       id: '1',
       firstName: 'Yevhen',
       lastName: 'Hohol',
-      hourlyRate: '40',
-      monthRate: '2500',
       title: 'Angular Developer',
       availability: true,
-      description: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame...',
       devProperties: {
         skills: [
           {
@@ -115,6 +112,10 @@ export const developers = [
             link: 'https://github.com/'
           }
         ],
+        description: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame...',
+        hourlyRate: 100,
+        monthRate: 20000,
+        duration: 12,
       },
       location: 'Ukraine, Kyiv',
       dateUpdated: '19 July 2020',
@@ -154,7 +155,7 @@ export function reducer(state: State = INIT_STATE, action: coreActions.Actions) 
     case coreActions.SEARCH_JOBS_SUCCESS:
       return { ...state, jobs: action.payload };
     case coreActions.SEARCH_DEVELOPERS_SUCCESS:
-      return { ...state, developers };
+      return { ...state, developers: action.payload };
     default:
       return state;
   }

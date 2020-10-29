@@ -15,10 +15,10 @@ export class DevelopersService {
   constructor(private http: HttpClient) { }
 
   public getDevelopers(): Observable<Developer[]> {
-    return this.http.get<Developer[]>(`${this.apiUrl}${ApiConstants.developers.main}`)
+    return this.http.get<Developer[]>(`${this.apiUrl}${ApiConstants.developers.main}`);
   }
 
   public searchDevelopers(searchTerm: string): Observable<Developer[]> {
-    return this.http.get<Developer[]>(`${this.apiUrl}${ApiConstants.developers.search}?searchTerm=${searchTerm}`)
+    return this.http.get<Developer[]>(`${this.apiUrl}${ApiConstants.accounts.searchDevelopers}?searchTerm=${searchTerm}`);
   }
 }

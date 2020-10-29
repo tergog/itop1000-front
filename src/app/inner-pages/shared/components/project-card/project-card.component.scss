@@ -2,7 +2,7 @@
 
 :host {
   display: flex;
-  background: $color-1;
+  background: #201F1F;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 
   img {
@@ -12,13 +12,14 @@
   }
 
   .content-wrap {
-    padding: 20px 60px;
+    padding: 20px 30px;
   }
 
-  .separator {
-    width: 100%;
-    border-top: 1px solid $color-4;
-    opacity: 0.5;
+  .logo-star {
+    width: 100px;
+    height: 100px;
+    border: 1px solid $color-5;
+    border-radius: 50%;
   }
 
 }

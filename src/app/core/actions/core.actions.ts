@@ -1,4 +1,4 @@
-import { Action } from '@ngrx/store';
+import { Action, createAction, props } from '@ngrx/store';
 
 import { Developer, Job, UserInfo } from 'app/shared/models';
 
@@ -14,6 +14,8 @@ export const SEARCH_JOBS_SUCCESS = '[Core] Search jobs success';
 
 export const SEARCH_DEVELOPERS = '[Core] Search developers';
 export const SEARCH_DEVELOPERS_SUCCESS = '[Core] Search developers success';
+
+export const SET_DEVELOPER = '[Core] Set developer';
 
 export const ON_VALID_SESSION = '[Core] On valid session';
 

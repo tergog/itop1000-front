@@ -6,12 +6,8 @@ export interface Developer {
   lastName: string;
   photo: string;
   title: string;
-  description: string;
   devProperties: DevProperties;
-  hourlyRate: string;
-  monthRate: string;
   location: string;
   dateUpdated: string;
   availability?: boolean;
-  duration?: number;
 }

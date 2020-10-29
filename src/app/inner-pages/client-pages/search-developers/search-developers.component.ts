@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { Developer } from 'app/shared/models';
-import { JobsService } from 'app/shared/services';
+import { DevelopersService, JobsService } from 'app/shared/services';
 import { getDevelopers, State } from 'app/core/reducers';
 
 @Component({
@@ -18,7 +18,7 @@ export class SearchDevelopersComponent implements OnInit {
   public developers$: Observable<Developer[]>;
 
   constructor(
-    private jobsService: JobsService,
+    private developersService: DevelopersService,
     private store: Store<State>,
     private router: Router
   ) { }
