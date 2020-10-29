@@ -18,9 +18,6 @@ export class DevContactInfoAccountEditComponent implements OnInit {
   @Output() cancel = new EventEmitter();
   @Output() save = new EventEmitter();
 
-  /*@Output() cancelAccountEdit = new EventEmitter();
-  @Output() saveAccountEdit = new EventEmitter();
-*/
   constructor(
     private devProfileService: DevProfileService
   ) { }

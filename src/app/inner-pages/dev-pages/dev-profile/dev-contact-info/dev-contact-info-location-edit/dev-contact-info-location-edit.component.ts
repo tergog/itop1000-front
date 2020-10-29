@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { of } from 'rxjs';
+import { map, debounceTime, switchMap, distinctUntilChanged, filter } from 'rxjs/operators';
+import { untilDestroyed } from 'ngx-take-until-destroy';
 
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
 import { UserInfo } from 'app/shared/models';
 import { timezones } from 'app/constants/constants';
-import { of } from 'rxjs';
-import { map, debounceTime, switchMap, distinctUntilChanged, filter } from 'rxjs/operators';
-import { untilDestroyed } from 'ngx-take-until-destroy';
 
 @Component({
   selector: 'app-dev-contact-info-location-edit',

@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as fromCore from '../../../core/reducers';
-import { NotificationsService, UserService } from '../../../shared/services';
-import { UserInfo } from '../../../shared/models';
 import { first } from 'rxjs/operators';
-import { TOKEN } from '../../../constants/constants';
-import * as coreActions from '../../../core/actions/core.actions';
 import * as jwtDecode from 'jwt-decode';
+
+import { NotificationsService, UserService } from 'app/shared/services';
+import { UserInfo } from 'app/shared/models';
+import { TOKEN } from 'app/constants/constants';
+import * as coreActions from 'app/core/actions/core.actions';
+import * as fromCore from 'app/core/reducers';
 
 @Injectable({
   providedIn: 'root'

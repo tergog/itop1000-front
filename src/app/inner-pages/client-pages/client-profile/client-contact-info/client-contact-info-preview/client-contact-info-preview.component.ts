@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { UserInfo } from '../../../../../shared/models';
+
+import { UserInfo } from 'app/shared/models';
 
 @Component({
   selector: 'app-client-contact-info-preview',

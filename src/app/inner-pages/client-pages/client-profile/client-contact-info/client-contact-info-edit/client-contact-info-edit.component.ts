@@ -1,11 +1,12 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { UserInfo } from '../../../../../shared/models';
-import { timezones } from '../../../../../constants/constants';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { debounceTime, distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { untilDestroyed } from 'ngx-take-until-destroy';
-import { ClientProfileService } from '../../client-profile.service';
+
+import { UserInfo } from 'app/shared/models';
+import { timezones } from 'app/constants/constants';
+import { ClientProfileService } from 'app/inner-pages/client-pages/client-profile/client-profile.service';
 
 @Component({
   selector: 'app-client-contact-info-edit',

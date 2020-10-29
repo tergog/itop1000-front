@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'app/shared/services';
 import { Observable } from 'rxjs';
-import { UserInfo } from '../../../../shared/models';
 import { Store } from '@ngrx/store';
-import * as fromCore from '../../../../core/reducers';
+
+import { UserService } from 'app/shared/services';
+import { UserInfo } from 'app/shared/models';
+import * as fromCore from 'app/core/reducers';
 
 @Component({
   selector: 'app-client-contact-info',
