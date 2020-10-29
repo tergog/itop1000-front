@@ -8,7 +8,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class ProfileSectionHeaderComponent implements OnInit {
 
   @Input() title: string;
-  @Input() subtitle: string;
   @Input() canEdit = true;
   @Output() edit = new EventEmitter();
 

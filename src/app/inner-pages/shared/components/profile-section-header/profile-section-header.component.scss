@@ -1,4 +1,4 @@
-@import '../../../../../assets/scss/variables';
+@import '~assets/scss/variables';
 
 :host {
   display: flex;
@@ -12,10 +12,5 @@
 .edit {
   position: absolute;
   right: 30px;
-}
-
-.subtitle {
-  position: absolute;
-  right: 90px;
 }
 

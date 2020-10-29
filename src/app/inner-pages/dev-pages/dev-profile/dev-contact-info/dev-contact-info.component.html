@@ -10,7 +10,7 @@
   </ng-container>
 </div>-->
 
-<app-profile-section-header [title]="'Account'" [subtitle]="'Add a location'" (edit)="editAccountToggle()"></app-profile-section-header>
+<app-profile-section-header [title]="'Account'" (edit)="editAccountToggle()"></app-profile-section-header>
 
 <div class="p__20">
   <ng-container *ngIf="isAccountEdit">
@@ -22,7 +22,7 @@
   </ng-container>
 </div>
 
-<app-profile-section-header [title]="'Location'" [subtitle]="'Add a location'" (edit)="editLocationToggle()"></app-profile-section-header>
+<app-profile-section-header [title]="'Location'" (edit)="editLocationToggle()"></app-profile-section-header>
 
 <div class="p__20">
   <ng-container *ngIf="isLocationEdit">
