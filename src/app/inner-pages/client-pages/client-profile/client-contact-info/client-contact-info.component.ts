@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+
 import { UserService } from 'app/shared/services';
+import { UserInfo } from 'app/shared/models';
+import * as fromCore from 'app/core/reducers';
 
 @Component({
   selector: 'app-client-contact-info',
@@ -9,30 +13,23 @@ import { UserService } from 'app/shared/services';
 })
 export class ClientContactInfoComponent implements OnInit {
 
-  public form: FormGroup;
   public isEdit: boolean;
+  public userInfo$: Observable<UserInfo>;
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private userService: UserService,
+    private store: Store<fromCore.State>,
+  ) { }
 
   ngOnInit(): void {
-    this.initForm();
+    this.userInfo$ = this.store.select(fromCore.getUserInfo);
   }
 
-  public onEditClick(): void {
+  public editToggle(): void {
     this.isEdit = !this.isEdit;
   }
 
-  public onSaveClick(): void {
-    this.userService.updateProfile(this.form.value)
-      .subscribe();
-  }
-
-  private initForm(): void {
-    this.form = new FormGroup({
-      firstName: new FormControl('Eugene', []),
-      lastName: new FormControl('2', []),
-      address: new FormControl('3', []),
-      phone: new FormControl('', [])
-    })
+  public onSaveClick(userInfo: Partial<UserInfo>): void {
+    this.isEdit = false;
   }
 }

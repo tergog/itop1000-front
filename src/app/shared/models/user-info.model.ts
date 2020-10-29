@@ -1,6 +1,7 @@
 import { DevProperties } from 'app/shared/models/dev-properties.model';
 
 export interface UserInfo {
+  id: string;
   title: string;
   firstName: string;
   lastName: string;

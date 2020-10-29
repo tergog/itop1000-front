@@ -1,4 +1,4 @@
-<app-profile-section-header [title]="'Account'" (edit)="editToggle()"></app-profile-section-header>
+<!--<app-profile-section-header [title]="'Account'" (edit)="editToggle()"></app-profile-section-header>
 
 <div class="p__20">
   <ng-container *ngIf="isEdit">
@@ -7,5 +7,29 @@
 
   <ng-container *ngIf="!isEdit">
     <app-dev-contact-info-preview [userInfo]="userInfo$ | async"></app-dev-contact-info-preview>
+  </ng-container>
+</div>-->
+
+<app-profile-section-header [title]="'Account'" (edit)="editAccountToggle()"></app-profile-section-header>
+
+<div class="p__20">
+  <ng-container *ngIf="isAccountEdit">
+    <app-dev-contact-info-account-edit [userInfo]="userInfo$ | async" (cancel)="editAccountToggle()" (save)="onSaveAccountClick($event)"></app-dev-contact-info-account-edit>
+  </ng-container>
+
+  <ng-container *ngIf="!isAccountEdit">
+    <app-dev-contact-info-account-preview [userInfo]="userInfo$ | async"></app-dev-contact-info-account-preview>
+  </ng-container>
+</div>
+
+<app-profile-section-header [title]="'Location'" (edit)="editLocationToggle()"></app-profile-section-header>
+
+<div class="p__20">
+  <ng-container *ngIf="isLocationEdit">
+    <app-dev-contact-info-location-edit [userInfo]="userInfo$ | async" (cancel)="editLocationToggle()" (save)="onSaveLocationClick($event)"></app-dev-contact-info-location-edit>
+  </ng-container>
+
+  <ng-container *ngIf="!isLocationEdit">
+    <app-dev-contact-info-location-preview [userInfo]="userInfo$ | async"></app-dev-contact-info-location-preview>
   </ng-container>
 </div>

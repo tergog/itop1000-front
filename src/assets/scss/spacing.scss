@@ -55,6 +55,10 @@
     &--30 {
       margin-right: 30px;
     }
+
+    &--50 {
+      margin-right: 60px;
+    }
   }
 
   &__left {
@@ -97,6 +101,10 @@
       width: calc(50% - 10px) !important;
       margin-right: 10px;
     }
+  }
+
+  &__320 {
+    width: 320px !important;
   }
 
   &__350 {
