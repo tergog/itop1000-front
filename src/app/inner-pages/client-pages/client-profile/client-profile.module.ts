@@ -14,6 +14,8 @@ import { CreateJobComponent } from 'app/inner-pages/client-pages/client-profile/
 import { ReactiveFormsModule } from '@angular/forms';
 import { ClientPaymentsComponent } from 'app/inner-pages/client-pages/client-profile/client-payments/client-payments.component';
 import { ClientBillingsComponent } from 'app/inner-pages/client-pages/client-profile/client-billings/client-billings.component';
+import { ClientContactInfoPreviewComponent } from './client-contact-info/client-contact-info-preview/client-contact-info-preview.component';
+import { ClientContactInfoEditComponent } from './client-contact-info/client-contact-info-edit/client-contact-info-edit.component';
 
 export const routes: Routes = [
   { path: '', component: ClientProfileComponent },
@@ -29,7 +31,9 @@ export const routes: Routes = [
     ClientPostedJobsComponent,
     CreateJobComponent,
     ClientPaymentsComponent,
-    ClientBillingsComponent
+    ClientBillingsComponent,
+    ClientContactInfoPreviewComponent,
+    ClientContactInfoEditComponent
   ],
   imports: [
     CommonModule,
