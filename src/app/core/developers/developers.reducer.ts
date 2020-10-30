@@ -91,7 +91,8 @@ export const developers = [
                 value : 2
               },
             ],
-            link: 'https://github.com/'
+            link: 'https://github.com/',
+            photo: null,
           },
           {
             title: 'Project 2 title',
@@ -110,7 +111,8 @@ export const developers = [
                 value : 2
               },
             ],
-            link: 'https://github.com/'
+            link: 'https://github.com/',
+            photo: null,
           }
         ],
         description: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame...',

@@ -108,9 +108,11 @@ export class DevWorkExperienceComponent implements OnInit {
   }
 
   private updateTechnologies(technologies: NameValueModel[]): void {
-    this.selectedTechnologies = [ ...technologies ] || [];
+    this.selectedTechnologies = [ ...technologies ];
 
     this.availableTechnologies = xorBy(this.selectedTechnologies, this.availableTechnologies);
   }
+
+
 
 }

@@ -70,8 +70,9 @@ export class DevProfileService {
   ) { }
 
   public onSaveClick(userInfo: Partial<UserInfo>): void {
+
     this.userService.updateProfile(userInfo)
-      .pipe(first())
+      .pipe()
       .subscribe(
         (userInfo: UserInfo) => this.handleSuccessResponse(userInfo),
         ({ error }) => this.handleErrorResponse(error)
@@ -79,6 +80,7 @@ export class DevProfileService {
   }
 
   private onUpdateProfileInfo(token: string): void {
+
     localStorage.setItem(TOKEN, token);
 
     const userInfo = jwtDecode(token);
