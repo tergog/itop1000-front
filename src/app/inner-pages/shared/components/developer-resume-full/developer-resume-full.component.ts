@@ -1,11 +1,12 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { buffer, bufferTime, debounceTime, take, tap } from 'rxjs/operators';
 
 import { Developer } from 'app/shared/models';
 import { getDeveloper, State } from 'app/core/developers';
+import { setDeveloper } from 'app/core/developers/developers.actions';
 
 export enum DeveloperResumeSections {
   ProfessionalSkills,
@@ -28,10 +29,13 @@ export class DeveloperResumeFullComponent implements OnInit {
   public activeSection = DeveloperResumeSections.ProfessionalSkills;
   private inViewportChange;
 
-  constructor(private store: Store<State>, private router: Router) {}
+  constructor(private store: Store<State>, private router: Router, private route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
-    this.developer$ = this.store.select(getDeveloper);
+    this.store.select(getDeveloper).subscribe( (dev) => !dev
+      ? this.store.dispatch(setDeveloper({id: this.route.snapshot.params.id}))
+      : this.developer$ = this.store.select(getDeveloper));
 
     this.inViewportChange = new Subject<{ isInViewport: boolean, section: DeveloperResumeSections }>()
       .pipe(bufferTime(300));

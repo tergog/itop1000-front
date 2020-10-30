@@ -131,15 +131,11 @@ export interface State {
 
 const INIT_STATE: State = {
   developers,
-  developer: developers[0]
+  developer: null // developers[0]
 };
 
 export const reducer = createReducer(
   INIT_STATE,
-  on(
-    actions.searchDevelopers,
-    state => ({...state})
-  ),
   on(
     actions.searchDevelopersSuccess,
     (state, {developersList}) => ({
@@ -148,7 +144,7 @@ export const reducer = createReducer(
     })
   ),
   on(
-    actions.setDeveloper,
+    actions.updateDeveloper,
     (state, {id}) => {
       const developerById: Developer = state.developers.find((dev: Developer) => dev.id === id);
       return {
@@ -156,7 +152,14 @@ export const reducer = createReducer(
         developer: developerById
       };
     }
-  )
+  ),
+  on(
+    actions.setDeveloperSuccess,
+    (state, {developer}) => ({
+      ...state,
+      developer
+    })
+  ),
 );
 
 /** Selector return is Authenticated */

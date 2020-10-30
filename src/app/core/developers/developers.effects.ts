@@ -25,4 +25,11 @@ export class DevelopersEffects {
     tap(() => this.router.navigate(['in/c/search-developers']))
   ));
 
+  onSetDeveloper$ = createEffect(() => this.actions$.pipe(
+    ofType(actions.SET_DEVELOPER),
+    mergeMap(( {id} ) => this.developersService.getDeveloper(id)),
+    map((developer: Developer) => actions.setDeveloperSuccess(developer)),
+    tap((obj) => this.router.navigate([`in/c/search-developers/${obj.developer.id}`]))
+  ));
+
 }

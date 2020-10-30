@@ -14,8 +14,8 @@ export class DevelopersService {
 
   constructor(private http: HttpClient) { }
 
-  public getDevelopers(): Observable<Developer[]> {
-    return this.http.get<Developer[]>(`${this.apiUrl}${ApiConstants.developers.main}`);
+  public getDeveloper(id): Observable<Developer> {
+    return this.http.get<Developer>(`${this.apiUrl}${ApiConstants.accounts.getDeveloperById}/${id}`);
   }
 
   public searchDevelopers(searchTerm: string): Observable<Developer[]> {
