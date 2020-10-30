@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { UserService } from 'app/shared/services';
 import { UserInfo } from 'app/shared/models';
 import * as fromCore from 'app/core/reducers';
 
@@ -17,7 +16,6 @@ export class ClientContactInfoComponent implements OnInit {
   public userInfo$: Observable<UserInfo>;
 
   constructor(
-    private userService: UserService,
     private store: Store<fromCore.State>,
   ) { }
 
@@ -29,7 +27,7 @@ export class ClientContactInfoComponent implements OnInit {
     this.isEdit = !this.isEdit;
   }
 
-  public onSaveClick(userInfo: Partial<UserInfo>): void {
+  public onSaveClick(): void {
     this.isEdit = false;
   }
 }

@@ -2,7 +2,7 @@
 
 <div class="p__20">
   <ng-container *ngIf="isEdit">
-    <app-client-contact-info-edit [userInfo]="userInfo$ | async" (cancel)="editToggle()" (save)="onSaveClick($event)"></app-client-contact-info-edit>
+    <app-client-contact-info-edit [userInfo]="userInfo$ | async" (cancel)="editToggle()" (save)="onSaveClick()"></app-client-contact-info-edit>
   </ng-container>
 
   <ng-container *ngIf="!isEdit">
