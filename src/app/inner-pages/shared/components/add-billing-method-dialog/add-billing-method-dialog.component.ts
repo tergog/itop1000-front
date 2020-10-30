@@ -1,24 +1,24 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { StripeService, StripeCardComponent } from 'ngx-stripe';
 import { StripeCardElementOptions, StripeElementsOptions } from '@stripe/stripe-js';
 import { MatDialogRef } from '@angular/material/dialog';
+import { untilDestroyed } from "ngx-take-until-destroy";
 
-import { UserService } from '../../../../shared/services';
-import { PaymentService } from '../../../../shared/services/payment.service';
+import { UserService } from 'app/shared/services';
+import { PaymentService } from 'app/shared/services/payment.service';
 
 @Component({
   selector: 'app-add-billing-method-dialog',
   templateUrl: './add-billing-method-dialog.component.html',
   styleUrls: ['./add-billing-method-dialog.component.scss']
 })
-export class AddBillingMethodDialogComponent implements OnInit {
+export class AddBillingMethodDialogComponent implements OnInit, OnDestroy {
 
   @ViewChild(StripeCardComponent) card: StripeCardComponent;
 
   public form: FormGroup;
   public errorMessage: string;
-
 
   cardOptions: StripeCardElementOptions = {
     style: {
@@ -40,7 +40,7 @@ export class AddBillingMethodDialogComponent implements OnInit {
   };
 
   elementsOptions: StripeElementsOptions = {
-    locale: 'es',
+    locale: 'auto',
   };
 
   constructor(private stripeService: StripeService,
@@ -54,11 +54,9 @@ export class AddBillingMethodDialogComponent implements OnInit {
   }
 
   public createPaymentToken(): void {
-      this.stripeService
-        .createToken(this.card.element, {name: `${this.form.controls.firstName.value} ${this.form.controls.lastName.value}`})
-        .subscribe(result => {
-          this.createPaymentMethod(result.token.id);
-        });
+      this.stripeService.createToken(this.card.element, {name: `${this.form.controls.firstName.value} ${this.form.controls.lastName.value}`})
+        .pipe(untilDestroyed(this))
+        .subscribe(result => this.createPaymentMethod(result.token.id));
   }
 
   public createPaymentMethod(token) {
@@ -70,13 +68,10 @@ export class AddBillingMethodDialogComponent implements OnInit {
     };
 
     this.paymentService.createPaymentMethod(cardToken)
+      .pipe(untilDestroyed(this))
       .subscribe(
-        (paymentMethods) => {
-          this.dialogRef.close(paymentMethods);
-        },
-        ({error}) => console.log(error)
-      );
-
+        (paymentMethods) => this.dialogRef.close(paymentMethods),
+        ({error}) => console.log(error));
   }
 
   private initForm(): void {
@@ -99,4 +94,6 @@ export class AddBillingMethodDialogComponent implements OnInit {
       }),
     });
   }
+
+  ngOnDestroy(): void { }
 }

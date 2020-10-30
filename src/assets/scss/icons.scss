@@ -171,13 +171,44 @@
   background-image: url(assets/icons/location.svg);
 }
 
-.mastercard {
-  width: 35px;
-  height: 35px;
-  background-image: url(assets/icons/mastercard.svg);
-  background-size: cover;
-}
 
+.card {
+  width: 32px;
+  height: 32px;
+  background-size: cover;
+
+  &.amex {
+    background-image: url(assets/icons/amex-card.png);
+  }
+
+  &.diners {
+    background-image: url(assets/icons/diners-card.png);
+  }
+
+  &.discover {
+    background-image: url(assets/icons/discover-card.png);
+  }
+
+  &.jcb {
+    background-image: url(assets/icons/jcb-card.png);
+  }
+
+  &.mastercard {
+    background-image: url(assets/icons/mastercard-card.png);
+  }
+
+  &.unionpay {
+    background-image: url(assets/icons/unionpay-card.png);
+  }
+
+  &.visa {
+    background-image: url(assets/icons/visa-card.png);
+  }
+
+  &.unknown {
+    background-image: url(assets/icons/unknown-card.png);
+  }
+}
 
 .active {
   .contact-info {
