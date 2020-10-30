@@ -30,6 +30,10 @@
   }
 
   &__right {
+    &--auto {
+      margin-right: auto;
+    }
+
     &--5 {
       margin-right: 5px;
     }
@@ -38,8 +42,18 @@
       margin-right: 10px;
     }
 
+    &--20 {
+      margin-right: 10px;
+    }
+
     &--30 {
       margin-right: 30px;
+    }
+  }
+
+  &__left {
+    &--auto {
+      margin-left: auto;
     }
   }
 
@@ -68,5 +82,13 @@
 
   &__594 {
     width: 594px !important;
+  }
+
+  &__494 {
+    width: 494px !important;
+  }
+
+  &__50per {
+    width: 50%;
   }
 }

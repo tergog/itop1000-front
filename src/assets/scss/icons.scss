@@ -171,6 +171,14 @@
   background-image: url(assets/icons/location.svg);
 }
 
+.mastercard {
+  width: 35px;
+  height: 35px;
+  background-image: url(assets/icons/mastercard.svg);
+  background-size: cover;
+}
+
+
 .active {
   .contact-info {
     opacity: 1;

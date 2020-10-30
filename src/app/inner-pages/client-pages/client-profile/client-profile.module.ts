@@ -13,6 +13,7 @@ import { CreateJobComponent } from 'app/inner-pages/client-pages/client-profile/
 import { ReactiveFormsModule } from '@angular/forms';
 import { ClientPaymentsComponent } from 'app/inner-pages/client-pages/client-profile/client-payments/client-payments.component';
 import { ClientBillingsComponent } from 'app/inner-pages/client-pages/client-profile/client-billings/client-billings.component';
+import { BillingMethodComponent } from './client-billings/billing-method/billing-method.component';
 
 export const routes: Routes = [
   { path: '', component: ClientProfileComponent }
@@ -27,7 +28,8 @@ export const routes: Routes = [
     ClientPostedJobsComponent,
     CreateJobComponent,
     ClientPaymentsComponent,
-    ClientBillingsComponent
+    ClientBillingsComponent,
+    BillingMethodComponent
   ],
   imports: [
     CommonModule,

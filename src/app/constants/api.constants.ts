@@ -7,7 +7,9 @@ export const ApiConstants = {
     isEmailAvailable: 'accounts/is-email-available',
     updateProfile: 'accounts/update-profile',
     changePassword: 'accounts/change-password',
-    upload: 'accounts/upload'
+    upload: 'accounts/upload',
+    createPaymentMethod: 'accounts/create-payment-method',
+    getPaymentMethods: 'accounts/get-payment-methods',
   },
   jobs: {
     main: 'jobs',
