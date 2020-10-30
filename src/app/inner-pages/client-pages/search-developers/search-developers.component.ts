@@ -4,8 +4,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { Developer } from 'app/shared/models';
-import { DevelopersService, JobsService } from 'app/shared/services';
-import { getDevelopers, State } from 'app/core/reducers';
+import { DevelopersService } from 'app/shared/services';
+import { getDevelopers, State } from 'app/core/developers';
 
 @Component({
   selector: 'app-search-developers',
