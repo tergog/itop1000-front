@@ -2,68 +2,52 @@ import { Component, EventEmitter, Input, OnInit, OnDestroy, Output } from '@angu
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { UserInfo } from 'app/shared/models';
-import { timezones } from 'app/constants/constants';
-import { of } from 'rxjs';
-import { map, debounceTime, switchMap, distinctUntilChanged, filter } from 'rxjs/operators';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
 
 @Component({
   selector: 'app-dev-contact-info-edit',
   templateUrl: './dev-contact-info-edit.component.html',
   styleUrls: ['./dev-contact-info-edit.component.scss']
 })
-export class DevContactInfoEditComponent implements OnInit, OnDestroy {
-  public isPopupShown: boolean;
+export class DevContactInfoEditComponent implements OnInit {
+
+  public isTimezoneShown: boolean;
+  public form: FormGroup;
 
   @Input() userInfo: UserInfo;
   @Output() cancel = new EventEmitter();
   @Output() save = new EventEmitter();
 
-  public form: FormGroup;
-  public filteredTimezones = timezones;
+  constructor(
+    private devProfileService: DevProfileService
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
     this.form.patchValue(this.userInfo);
-    this.form.get('timezone').valueChanges.pipe(
-      debounceTime(500),
-      distinctUntilChanged(),
-      map((value) => value.trim()),
-      switchMap((value) =>
-        of(timezones.filter((timezone) => timezone.includes(value)))
-      ),
-      filter((timezone) => !timezone.includes(this.form.get('timezone').value)),
-      untilDestroyed(this),
-    ).subscribe((timezones: string[]) => this.setFilteredTimezones(timezones))
   }
 
-  public onCancelClick(): void {
+  public saveChanges(): void {
+    this.disableEmptyFields();
+    this.save.emit();
+    this.devProfileService.onSaveClick(this.form.value);
+  }
+
+  public cancelChanges(): void {
     this.cancel.emit();
   }
 
-  public setFilteredTimezones(timezones: string[]): void {
-    this.onShowPopup();
-    this.filteredTimezones = timezones;
+  public showTimezone(): void {
+    this.isTimezoneShown = true;
   }
 
-  public onTimezoneSelect(timezone: string): void {
+  public hideTimezone(): void {
+    this.isTimezoneShown = false;
+  }
+
+  public setTimezone(timezone: string): void {
     this.form.get('timezone').setValue(timezone, { emitModelToViewChange: false });
-    this.onHidePopup();
-  }
-
-  public onShowPopup(): void {
-    this.isPopupShown = true;
-  }
-
-  public onHidePopup(): void {
-    this.isPopupShown = false;
-  }
-
-  public onSaveClick(): void {
-    if(this.form.valid) {
-      this.disableEmptyFields();
-      this.save.emit(this.form.value);
-    }
+    this.hideTimezone();
   }
 
   private initForm(): void {
@@ -83,5 +67,4 @@ export class DevContactInfoEditComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {}
 }

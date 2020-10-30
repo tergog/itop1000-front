@@ -13,7 +13,6 @@ import * as fromCore from 'app/core/reducers';
 export class DevContactInfoComponent implements OnInit {
 
   public userInfo$: Observable<UserInfo>;
-  public isEdit: boolean;
 
   public isAccountEdit: boolean;
   public isLocationEdit: boolean;
