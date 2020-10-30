@@ -7,7 +7,7 @@ import { filter, tap } from 'rxjs/operators';
 import * as fromCore from 'app/core/reducers';
 import { UserInfo } from 'app/shared/models';
 import { getUserInfo } from 'app/core/reducers';
-import { SearchDevelopersAction, SearchJobsAction, SetOnLogoutAction } from 'app/core/actions/core.actions';
+import { SearchJobsAction, SetOnLogoutAction } from 'app/core/actions/core.actions';
 import { opacityInOutAnimation } from 'app/shared/animations';
 import { UserRole } from 'app/shared/enums';
 import { searchDevelopers } from 'app/core/developers/developers.actions';

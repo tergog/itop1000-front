@@ -3,7 +3,7 @@ import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { Developer } from 'app/shared/models';
-import { State, getDeveloper } from 'app/core/reducers';
+import { State, getDeveloper } from 'app/core/developers/developers.reducer';
 
 @Component({
   selector: 'app-work-experience',

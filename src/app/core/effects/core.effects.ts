@@ -47,13 +47,6 @@ export class CoreEffects {
     tap(() => this.router.navigate(['in/d/search-jobs']))
   ));
 
-  onSearchDevelopers$ = createEffect(() => this.actions$.pipe(
-    ofType(coreActions.SEARCH_DEVELOPERS),
-    switchMap(({ payload }) => this.developersService.searchDevelopers(payload)),
-    map((developers: Developer[]) => new coreActions.SearchDevelopersSuccessAction(developers)),
-    tap(() => this.router.navigate(['in/c/search-developers']))
-  ));
-
   private setUserInfoToLocalStorage({ payload }): void {
     if (payload.token) {
       localStorage.setItem(TOKEN, payload.token);

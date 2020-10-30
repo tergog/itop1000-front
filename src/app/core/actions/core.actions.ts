@@ -1,6 +1,6 @@
 import { Action, createAction, props } from '@ngrx/store';
 
-import { Developer, Job, UserInfo } from 'app/shared/models';
+import { Job, UserInfo } from 'app/shared/models';
 
 export const SAVE_TOKEN = '[Core] Saves user\'s auth token';
 
@@ -11,11 +11,6 @@ export const UPDATE_USER_PROFILE = '[Core] Update user profile';
 
 export const SEARCH_JOBS = '[Core] Search jobs';
 export const SEARCH_JOBS_SUCCESS = '[Core] Search jobs success';
-
-export const SEARCH_DEVELOPERS = '[Core] Search developers';
-export const SEARCH_DEVELOPERS_SUCCESS = '[Core] Search developers success';
-
-export const SET_DEVELOPER = '[Core] Set developer';
 
 export const ON_VALID_SESSION = '[Core] On valid session';
 
@@ -56,15 +51,6 @@ export class SearchJobsSuccessAction implements Action {
   constructor(public payload: Job[]) {}
 }
 
-export class SearchDevelopersAction implements Action {
-  readonly type = SEARCH_DEVELOPERS;
-  constructor(public payload: string) {}
-}
-
-export class SearchDevelopersSuccessAction implements Action {
-  readonly type = SEARCH_DEVELOPERS_SUCCESS;
-  constructor(public payload: Developer[]) {}
-}
 
 /**
  * Exports possible core action types
@@ -76,6 +62,4 @@ export type Actions =
   | UpdateUserProfileAction
   | OnValidSessionAction
   | SearchJobsAction
-  | SearchJobsSuccessAction
-  | SearchDevelopersAction
-  | SearchDevelopersSuccessAction;
+  | SearchJobsSuccessAction;
