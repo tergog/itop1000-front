@@ -21,7 +21,7 @@ import { timezones } from 'app/constants/constants';
 export class TimezoneComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
   public currentTimezones: string[] = timezones;
-  private unitFormControl: FormControl;
+  private timezoneFormControl: FormControl;
 
   @Output() selectedTimezone = new EventEmitter();
   @Output() filteredTimezones = new EventEmitter();
@@ -29,14 +29,14 @@ export class TimezoneComponent implements OnInit, OnDestroy, ControlValueAccesso
   constructor() { }
 
   ngOnInit(): void {
-    this.unitFormControl.valueChanges.pipe(
+    this.timezoneFormControl.valueChanges.pipe(
       debounceTime(500),
       distinctUntilChanged(),
       map((value) => value.trim()),
       switchMap((value) =>
         of(timezones.filter((timezone) => timezone.includes(value)))
       ),
-      filter((timezone) => !timezone.includes(this.unitFormControl.value)),
+      filter((timezone) => !timezone.includes(this.timezoneFormControl.value)),
       untilDestroyed(this),
     ).subscribe((timezonesArr: string[]) => this.setFilteredTimezones(timezonesArr));
   }
@@ -55,12 +55,12 @@ export class TimezoneComponent implements OnInit, OnDestroy, ControlValueAccesso
 
   @Input()
   set formControl(obj) {
-    this.unitFormControl = obj;
-    this.registerOnChange(this.unitFormControl);
+    this.timezoneFormControl = obj;
+    this.registerOnChange(this.timezoneFormControl);
   }
 
   get formControl() {
-    return this.unitFormControl;
+    return this.timezoneFormControl;
   }
 
   registerOnChange(fn: any): void {
