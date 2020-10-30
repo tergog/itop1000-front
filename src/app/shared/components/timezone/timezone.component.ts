@@ -1,5 +1,5 @@
 import { Component, EventEmitter, forwardRef, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { untilDestroyed } from 'ngx-take-until-destroy';
@@ -23,7 +23,6 @@ export class TimezoneComponent implements OnInit, OnDestroy, ControlValueAccesso
   public currentTimezones: string[] = timezones;
   private unitFormControl: FormControl;
 
-  @Input() formGroup: FormGroup;
   @Output() selectedTimezone = new EventEmitter();
   @Output() filteredTimezones = new EventEmitter();
 
