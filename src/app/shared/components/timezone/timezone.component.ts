@@ -16,7 +16,6 @@ export class TimezoneComponent implements OnInit, OnDestroy {
   public currentTimezones: string[] = timezones;
 
   @Input() show: boolean;
-  @Input() timezones: string[];
   @Input() formGroup: FormGroup;
   @Output() selectedTimezone = new EventEmitter();
   @Output() filteredTimezones = new EventEmitter();
@@ -33,16 +32,16 @@ export class TimezoneComponent implements OnInit, OnDestroy {
       ),
       filter((timezone) => !timezone.includes(this.formGroup.get('timezone').value)),
       untilDestroyed(this),
-    ).subscribe((timezones: string[]) => this.setFilteredTimezones(timezones));
+    ).subscribe((timezonesArr: string[]) => this.setFilteredTimezones(timezonesArr));
   }
 
   public selectTimezone(timezone: string): void {
     this.selectedTimezone.emit(timezone);
   }
 
-  public setFilteredTimezones(timezones: string[]): void {
+  public setFilteredTimezones(timezonesArr: string[]): void {
     this.filteredTimezones.emit();
-    this.currentTimezones = timezones;
+    this.currentTimezones = timezonesArr;
   }
 
   ngOnDestroy() {
