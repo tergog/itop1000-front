@@ -21,9 +21,8 @@ import { timezones } from 'app/constants/constants';
 export class TimezoneComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
   public currentTimezones: string[] = timezones;
-  private timezoneFormControl: FormControl;
 
-  private timezoneSource: BehaviorSubject<FormControl> = new BehaviorSubject<FormControl>(null);
+  private timezoneSource = new BehaviorSubject<FormControl>(null);
   /*private timezoneSource$: Observable<FormControl> = this.timezoneSource.asObservable();*/
 
   @Output() selectedTimezone = new EventEmitter();
@@ -57,22 +56,20 @@ export class TimezoneComponent implements OnInit, OnDestroy, ControlValueAccesso
   }
 
   @Input()
-  set formControl(obj: BehaviorSubject<FormControl>) {
-    /*this.timezoneFormControl = obj;
-    this.writeValue(this.timezoneFormControl);*/
-    this.timezoneSource.next(obj.value);
-    this.writeValue(this.timezoneSource);
+  set formControl(obj: FormControl) {
+    this.timezoneSource.next(obj);
+    this.writeValue(this.timezoneSource.value);
   }
 
   get formControl() {
-    return this.timezoneSource;
+    return this.timezoneSource.value;
   }
 
-  private onChange = (obj: BehaviorSubject<FormControl>) => {};
+  private onChange = (obj: FormControl) => {};
 
   private onTouched = () => {};
 
-  public registerOnChange(fn: (obj: BehaviorSubject<FormControl>) => void): void {
+  public registerOnChange(fn: (obj: FormControl) => void): void {
     this.onChange = fn;
   }
 
@@ -80,7 +77,7 @@ export class TimezoneComponent implements OnInit, OnDestroy, ControlValueAccesso
     this.onTouched = fn;
   }
 
-  public writeValue(obj: BehaviorSubject<FormControl>): void {
-    this.onChange(this.timezoneSource);
+  public writeValue(obj: FormControl): void {
+    this.onChange(this.timezoneSource.value);
   }
 }
