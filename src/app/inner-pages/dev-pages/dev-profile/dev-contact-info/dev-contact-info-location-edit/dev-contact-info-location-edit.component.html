@@ -3,7 +3,7 @@
     <i class="contact-info contact-info-gray"></i>
     <span class="text text__sm text__bold text__uppercase">TIME ZONE</span>
     <app-input (onFocusField)="showTimezone()" [type]="'inner'" formControlName="timezone" [placeholder]="'Time Zone'" [value]="form.get('timezone').value"></app-input>
-    <app-timezone [show]="isTimezoneShown" [formGroup]="form" (filteredTimezones)="showTimezone()" (selectedTimezone)="setTimezone($event)"></app-timezone>
+    <app-timezone *ngIf="isTimezoneShown" [formGroup]="form" (filteredTimezones)="showTimezone()" (selectedTimezone)="setTimezone($event)"></app-timezone>
   </div>
 
   <div class="w__320 d__inline-flex d__flex--justify-between d__flex--items-center m__right--30 m__bottom--10">

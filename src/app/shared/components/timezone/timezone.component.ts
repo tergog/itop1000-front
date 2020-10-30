@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, EventEmitter, forwardRef, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ControlValueAccessor, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { untilDestroyed } from 'ngx-take-until-destroy';
@@ -9,13 +9,19 @@ import { timezones } from 'app/constants/constants';
 @Component({
   selector: 'app-timezone',
   templateUrl: './timezone.component.html',
-  styleUrls: ['./timezone.component.scss']
+  styleUrls: ['./timezone.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => TimezoneComponent),
+      multi: true
+    }
+  ]
 })
-export class TimezoneComponent implements OnInit, OnDestroy {
+export class TimezoneComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
   public currentTimezones: string[] = timezones;
 
-  @Input() show: boolean;
   @Input() formGroup: FormGroup;
   @Output() selectedTimezone = new EventEmitter();
   @Output() filteredTimezones = new EventEmitter();
@@ -45,5 +51,14 @@ export class TimezoneComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+  }
+
+  registerOnChange(fn: any): void {
+  }
+
+  registerOnTouched(fn: any): void {
+  }
+
+  writeValue(obj: any): void {
   }
 }
