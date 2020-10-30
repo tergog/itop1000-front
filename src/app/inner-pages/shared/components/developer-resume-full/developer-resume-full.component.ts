@@ -5,7 +5,7 @@ import { Observable, Subject } from 'rxjs';
 import { buffer, bufferTime, debounceTime, take, tap } from 'rxjs/operators';
 
 import { Developer } from 'app/shared/models';
-import { getDeveloper, State } from 'app/core/reducers';
+import { getDeveloper, State } from 'app/core/developers';
 
 export enum DeveloperResumeSections {
   ProfessionalSkills,

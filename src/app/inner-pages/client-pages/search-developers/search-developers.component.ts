@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Developer } from 'app/shared/models';
 import { DevelopersService } from 'app/shared/services';
 import { getDevelopers, State } from 'app/core/developers';
+import { setDeveloper } from 'app/core/developers/developers.actions';
 
 @Component({
   selector: 'app-search-developers',
@@ -28,6 +29,7 @@ export class SearchDevelopersComponent implements OnInit {
   }
 
   public onProfileClick(id: string): void {
+    this.store.dispatch(setDeveloper({id}));
     this.router.navigate(['in/c/search-developers', id]);
   }
 
