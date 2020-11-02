@@ -3,7 +3,7 @@ import { ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { createSelector } from 'reselect';
 
 // Imports from reducers
-import * as fromCore from 'app/core/reducers/core.reducer';
+import * as fromDevelopers from './developers.reducer';
 import { environment } from 'environments/environment';
 
 export const metaReducers: MetaReducer<any, any>[] = !environment.production ? [] : [];
@@ -12,7 +12,7 @@ export const metaReducers: MetaReducer<any, any>[] = !environment.production ? [
  * Top level state declaration
  */
 export interface State {
-  core: fromCore.State;
+  developers: fromDevelopers.State;
 }
 
 export interface RouterStateUrl {
@@ -22,28 +22,23 @@ export interface RouterStateUrl {
 
 // Map of the reducers
 export const reducers: ActionReducerMap<State> = {
-  core: fromCore.reducer
+  developers: fromDevelopers.reducer
 };
 
 /**
  * Selectors returns smaller piece of state out of the root state
  */
-export const getCoreState = (state: State) => state.core;
+export const getCoreState = (state: State) => state.developers;
 
 /**
- * Selectors from Core module
+ * Selectors from Developers module
  */
-export const getIsAuthenticated = createSelector(
-    getCoreState,
-    fromCore.getIsAuthenticatedSelector
-);
-
-export const getUserInfo = createSelector(
-    getCoreState,
-    fromCore.getUserInfoSelector
-);
-
-export const getJobs = createSelector(
+export const getDevelopers = createSelector(
   getCoreState,
-  fromCore.getJobs
+  fromDevelopers.getDevelopers
+);
+
+export const getDeveloper = createSelector(
+  getCoreState,
+  fromDevelopers.getDeveloper
 );

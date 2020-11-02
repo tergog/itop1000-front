@@ -14,7 +14,7 @@ import { NameValueModel, UserInfo, Developer } from 'app/shared/models';
 import { DevProject } from 'app/shared/models/dev-project.model';
 import * as fromCore from 'app/core/reducers';
 import * as coreActions from 'app/core/actions/core.actions';
-import { getDeveloper } from 'app/core/reducers/index';
+import { getDeveloper } from 'app/core/developers/developers.reducer';
 import { TOKEN } from 'app/constants/constants';
 
 @Component({
@@ -70,7 +70,7 @@ export class DevWorkExperienceComponent implements OnInit {
 
   public onSaveClick(): void {
     this.disableEmptyFields();
-    debugger
+    console.log(this.form.value);
     this.devProfileService.devProperties = {
       ...this.devProfileService.devProperties,
       projects: [
@@ -109,9 +109,11 @@ export class DevWorkExperienceComponent implements OnInit {
   }
 
   private updateTechnologies(technologies: NameValueModel[]): void {
-    this.selectedTechnologies = [ ...technologies ] || [];
+    this.selectedTechnologies = [ ...technologies ];
 
     this.availableTechnologies = xorBy(this.selectedTechnologies, this.availableTechnologies);
   }
+
+
 
 }

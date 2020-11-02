@@ -7,7 +7,7 @@
           <span class="text text__color--3 text__xxlg text__uppercase">{{ developer.firstName }}</span>
           <span class="text text__color--3 text__xxlg text__uppercase">{{ developer.lastName }}</span>
         </div>
-        <span class="text text__color--5 text__xlg m__top--10">${{ developer.hourlyRate }}/hr</span>
+        <span class="text text__color--5 text__xlg m__top--10">${{ developer.devProperties.hourlyRate }}/hr</span>
       </div>
 
       <ul class="m__top--30">
@@ -97,7 +97,7 @@
             [class.section-underline-active]="activeSection === DeveloperResumeSections.ProfessionalSkills"
           >
           </div>
-          <span class="d__flex text text__color--4 text__lg m__top--10">{{ developer.description }}</span>
+          <span class="d__flex text text__color--4 text__lg m__top--10">{{ developer.devProperties.description }}</span>
         </div>
         <div class="
           professional-skills__progress__wrap
@@ -146,8 +146,8 @@
           [class.section-underline-active]="activeSection === DeveloperResumeSections.WorkExperience"
         ></div>
 
-        <div class="d__flex m__top--20">
-          <app-project-card class="m__right--10" *ngFor="let project of developer.devProperties.projects" [project]="project"></app-project-card>
+        <div class="d__flex m__top--20 d__flex d__flex--direction-column">
+          <app-project-card class="m__right--10 m__top--30" *ngFor="let project of developer.devProperties.projects" [project]="project"></app-project-card>
         </div>
       </div>
 
@@ -246,7 +246,7 @@
           class="section-underline m__top--10"
           [class.section-underline-active]="activeSection === DeveloperResumeSections.IWantToLearn"
         ></div>
-        <span class="d__flex text text__color--4 text__lg m__top--10">{{ developer.description }}</span>
+        <span class="d__flex text text__color--4 text__lg m__top--10">{{ developer.devProperties.description }}</span>
       </div>
 
       <div

@@ -49,7 +49,7 @@ export class DevProjectCardComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     this.store.select(fromCore.getUserInfo);
-    this.updateTechnologies(this.selectedTechnologies);
+    this.updateTechnologies(this.project.technologies);
   }
 
   private disableEmptyFields(): void {
@@ -74,7 +74,7 @@ export class DevProjectCardComponent implements OnInit {
 
     this.devProfileService.devProperties = {
       ...this.devProfileService.devProperties,
-      projects: arr
+      projects: arr,
     };
     this.devProfileService.onSaveClick({ devProperties: this.devProfileService.devProperties });
     this.isEdit = false;
@@ -95,17 +95,16 @@ export class DevProjectCardComponent implements OnInit {
       title: new FormControl('', []),
       description: new FormControl('', []),
       technologies: new FormControl([], []),
-      link: new FormControl('', [])
+      link: new FormControl('', []),
     });
   }
 
   private updateTechnologies(technologies: NameValueModel[]): void {
-    this.selectedTechnologies = [ ...technologies ] || [];
+    this.selectedTechnologies = [ ...technologies ];
 
     this.availableTechnologies = this.availableTechnologies
       .filter(
         (technology) => !this.selectedTechnologies.find(selectedTechnology => selectedTechnology.value === technology.value)
       );
   }
-
 }

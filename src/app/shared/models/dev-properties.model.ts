@@ -7,4 +7,8 @@ export interface DevProperties {
   softSkills?: NameValueModel[];
   languages?: NameValueModel[];
   projects?: DevProject[];
+  description?: string;
+  hourlyRate?: number;
+  monthRate?: number;
+  duration?: number;
 }

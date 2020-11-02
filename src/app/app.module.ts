@@ -11,6 +11,7 @@ import { metaReducers, reducers } from 'app/core/reducers';
 import { environment } from 'environments/environment';
 import { AuthGuard } from 'app/shared/guards/auth.guard';
 import { CoreModule } from 'app/core/core.module';
+import { DevelopersModule } from 'app/core/developers/developers.module';
 import { HttpErrorHandlerService } from 'app/shared/services/http-error-handler.service';
 import { TokenInterceptor } from 'app/shared/interceptors/token.interceptor';
 
@@ -21,6 +22,7 @@ import { TokenInterceptor } from 'app/shared/interceptors/token.interceptor';
     AppRoutingModule,
     HttpClientModule,
     CoreModule,
+    DevelopersModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(reducers, {
       metaReducers,

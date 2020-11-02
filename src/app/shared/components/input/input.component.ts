@@ -40,7 +40,7 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   _value: any;
 
   writeValue(value: number): void {
-    this.onChange(this.value)
+    this.onChange(this.value);
   }
 
   private onChange = (value: number) => {};

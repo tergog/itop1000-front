@@ -70,6 +70,7 @@ export class DevProfileService {
   ) { }
 
   public onSaveClick(userInfo: Partial<UserInfo>): void {
+
     this.userService.updateProfile(userInfo)
       .pipe(first())
       .subscribe(
@@ -79,6 +80,7 @@ export class DevProfileService {
   }
 
   private onUpdateProfileInfo(token: string): void {
+
     localStorage.setItem(TOKEN, token);
 
     const userInfo = jwtDecode(token);
