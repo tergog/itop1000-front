@@ -1,16 +1,20 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { Store } from '@ngrx/store';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { TOKEN } from 'app/constants/constants';
 import * as coreActions from 'app/core/actions/core.actions';
 import * as fromCore from 'app/core/reducers';
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
-import { UserService, NotificationsService } from 'app/shared/services';
+import { UserService, NotificationsService, DevelopersService } from 'app/shared/services';
 import { UserInfo } from 'app/shared/models/user-info.model';
 import { DevProject } from 'app/shared/models/dev-project.model';
 import { NameValueModel } from 'app/shared/models/name-value.model';
+import { filter, first } from 'rxjs/operators';
+import { UploadPhotoDialogComponent } from '../../../../shared/components/upload-photo-dialog/upload-photo-dialog.component';
+
 
 @Component({
   selector: 'app-dev-project-card',
@@ -20,7 +24,9 @@ import { NameValueModel } from 'app/shared/models/name-value.model';
 export class DevProjectCardComponent implements OnInit {
 
   @Input() project: DevProject;
+  @Input() id: number;
 
+  public imageUrl: string;
   public form: FormGroup;
   public isEdit = false;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -43,7 +49,9 @@ export class DevProjectCardComponent implements OnInit {
     private devProfileService: DevProfileService,
     private notificationsService: NotificationsService,
     private userService: UserService,
-    private store: Store<fromCore.State>
+    private store: Store<fromCore.State>,
+    private matDialog: MatDialog,
+    private developersService: DevelopersService
   ) { }
 
   ngOnInit(): void {
@@ -69,8 +77,7 @@ export class DevProjectCardComponent implements OnInit {
   public onSaveClick(): void {
     this.disableEmptyFields();
     const arr = [...this.devProfileService.devProperties.projects];
-    const idx = arr.indexOf(this.form.value);
-    arr.splice(idx, 1, this.form.value);
+    arr.splice(this.id, 1, this.form.value);
 
     this.devProfileService.devProperties = {
       ...this.devProfileService.devProperties,
@@ -90,6 +97,17 @@ export class DevProjectCardComponent implements OnInit {
     this.availableTechnologies.push(technology);
   }
 
+  public openUploadPhotoDialog(): void {
+
+    this.matDialog.open(UploadPhotoDialogComponent)
+      .afterClosed()
+      .pipe(
+        filter(result => !!result),
+        first()
+      )
+      .subscribe((image: string) => this.uploadImage(image));
+  }
+
   private initForm(): void {
     this.form = new FormGroup({
       title: new FormControl('', []),
@@ -105,6 +123,16 @@ export class DevProjectCardComponent implements OnInit {
     this.availableTechnologies = this.availableTechnologies
       .filter(
         (technology) => !this.selectedTechnologies.find(selectedTechnology => selectedTechnology.value === technology.value)
+      );
+  }
+
+  private uploadImage(image: string): void {
+    this.developersService.uploadProjectImage(this.id, image)
+      .subscribe(
+        (url) => {
+          this.imageUrl = url;
+        },
+        ({ error }) => console.log(error)
       );
   }
 }

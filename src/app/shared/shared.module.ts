@@ -24,7 +24,7 @@ import { SeparatorComponent } from './components/separator/separator.component';
     ButtonComponent,
     TextareaComponent,
     ClickedOutsideDirective,
-    SeparatorComponent
+    SeparatorComponent,
   ],
   exports: [
     InputComponent,
@@ -40,7 +40,7 @@ import { SeparatorComponent } from './components/separator/separator.component';
     TextareaComponent,
     NgCircleProgressModule,
     ClickedOutsideDirective,
-    SeparatorComponent
+    SeparatorComponent,
   ],
   imports: [
     CommonModule,

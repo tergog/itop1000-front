@@ -1,6 +1,7 @@
 <div class="card d__flex d__flex--direction-column p__20">
   <i class="edit cursor__pointer" (click)="onEditClick()"></i>
   <ng-container *ngIf="!isEdit">
+    <img [src]="project.photo" alt="projectImage">
     <h2 class="text text__title">{{ project.title }}</h2>
     <p class="text text__md">{{ project.description }}</p>
     <a href="{{ project.link }}">Link</a>
@@ -18,6 +19,17 @@
   </ng-container>
 
   <div [formGroup]="form" *ngIf="isEdit">
+
+    <div class="profile-photo-wrap" (click)="openUploadPhotoDialog()" *ngIf="!imageUrl">
+      <i class="profile-photo"></i>
+      <i class="plus"></i>
+    </div>
+
+    <div class="profile-photo-wrap" (click)="openUploadPhotoDialog()" *ngIf="imageUrl">
+      <img [src]=imageUrl alt="projectImageUrl">
+      <i class="plus"></i>
+    </div>
+
     <div class="d__inline-flex d__flex--justify-between d__flex--items-center m__right--30 m__bottom--10">
       <span class="text text__sm text__bold text__uppercase m__right--10">Title</span>
       <app-input [type]="'inner'" formControlName="title" [placeholder]="'Title'" [value]="form.get('title').value"></app-input>

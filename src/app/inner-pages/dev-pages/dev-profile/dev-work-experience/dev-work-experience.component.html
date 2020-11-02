@@ -1,8 +1,9 @@
 <app-profile-section-header [title]="'Work experience'" [canEdit]="false"></app-profile-section-header>
 
 <app-dev-project-card
-  *ngFor="let project of (userInfo$ | async).devProperties.projects"
+  *ngFor="let project of (userInfo$ | async).devProperties.projects; index as i"
   [project]="project"
+  [id]="i"
 ></app-dev-project-card>
 
 <app-button

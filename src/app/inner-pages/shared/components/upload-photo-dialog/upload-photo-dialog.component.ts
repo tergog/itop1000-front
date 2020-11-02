@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { DevelopersService } from '../../../../shared/services';
+import { first } from "rxjs/operators";
 
 @Component({
   selector: 'app-upload-photo-dialog',
@@ -14,8 +16,18 @@ export class UploadPhotoDialogComponent implements OnInit {
   imageChangedEvent: any = '';
   croppedImage: any = '';
 
+  public inputData: {
+    destination: 'project',
+    id: number
+  };
+
+
   constructor(private dialogRef: MatDialogRef<UploadPhotoDialogComponent>,
-  ) { }
+              @Inject(MAT_DIALOG_DATA) data,
+              private developersService: DevelopersService
+  ) {
+    this.inputData = data;
+  }
 
   ngOnInit(): void {
   }
@@ -24,9 +36,8 @@ export class UploadPhotoDialogComponent implements OnInit {
     this.selectedFile = event.target.files[0];
 
     const reader = new FileReader();
-    reader.onload = e => this.imageSrc = reader.result;
-
     reader.readAsDataURL(this.selectedFile);
+    reader.onload = e => this.imageSrc = reader.result;
   }
 
 
@@ -49,7 +60,13 @@ export class UploadPhotoDialogComponent implements OnInit {
   }
 
   public onUpload(): void {
-    // upload code goes here
+    // if (this.inputData.destination === 'project')  {
+    //   this.developersService.uploadProjectImage(this.inputData.id, this.imageSrc)
+    //     .pipe(first())
+    //     .subscribe(
+    //       ({url}) => console.log(url)
+    //     );
+    // }
   }
 
   public closeDialog(): void {

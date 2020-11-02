@@ -24,7 +24,7 @@
     <input
       class="d__none"
       type="file"
-      (change)="fileChangeEvent($event)"
+      (change)="fileChangeEvent($event); onFileChanged($event)"
       #fileInput>
 
     <app-button [type]="'secondary'" [text]="'Select Profile Image'" (buttonClick)="fileInput.click()"></app-button>
@@ -32,6 +32,6 @@
 
   <div class="text__center m__top--50">
     <app-button [type]="'transparent'" [text]="'Cancel'" mat-dialog-close></app-button>
-    <app-button [text]="'Save'" (buttonClick)="closeDialog()"></app-button>
+    <app-button [text]="'Save'" (buttonClick)="closeDialog(); onUpload()"></app-button>
   </div>
 </div>
