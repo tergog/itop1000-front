@@ -70,6 +70,7 @@ export class DevWorkExperienceComponent implements OnInit {
 
   public onSaveClick(): void {
     this.disableEmptyFields();
+    console.log(this.form.value);
     this.devProfileService.devProperties = {
       ...this.devProfileService.devProperties,
       projects: [

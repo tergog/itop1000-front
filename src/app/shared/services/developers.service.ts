@@ -14,7 +14,7 @@ export class DevelopersService {
 
   constructor(private http: HttpClient) { }
 
-  public getDeveloper(id): Observable<Developer> {
+  public getDeveloper(id: string): Observable<Developer> {
     return this.http.get<Developer>(`${this.apiUrl}${ApiConstants.accounts.getDeveloperById}/${id}`);
   }
 

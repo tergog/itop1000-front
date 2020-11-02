@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit, Renderer2, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
@@ -7,7 +7,7 @@ import { buffer, bufferTime, debounceTime, take, takeUntil, tap } from 'rxjs/ope
 import { Developer } from 'app/shared/models';
 import { getDeveloper, State } from 'app/core/developers';
 import { setDeveloper } from 'app/core/developers/developers.actions';
-import { untilDestroyed } from "ngx-take-until-destroy";
+import { untilDestroyed } from 'ngx-take-until-destroy';
 
 export enum DeveloperResumeSections {
   ProfessionalSkills,
@@ -24,7 +24,7 @@ export enum DeveloperResumeSections {
   templateUrl: './developer-resume-full.component.html',
   styleUrls: ['./developer-resume-full.component.scss'],
 })
-export class DeveloperResumeFullComponent implements OnInit {
+export class DeveloperResumeFullComponent implements OnInit, OnDestroy {
   public developer$: Observable<Developer>;
   public DeveloperResumeSections = DeveloperResumeSections;
   public activeSection = DeveloperResumeSections.ProfessionalSkills;
@@ -43,6 +43,10 @@ export class DeveloperResumeFullComponent implements OnInit {
       .pipe(bufferTime(300));
 
     // this.inViewportChange.subscribe((sections) => console.log(sections));
+  }
+
+  ngOnDestroy() {
+
   }
 
 

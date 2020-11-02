@@ -72,7 +72,7 @@ export class DevProfileService {
   public onSaveClick(userInfo: Partial<UserInfo>): void {
 
     this.userService.updateProfile(userInfo)
-      .pipe()
+      .pipe(first())
       .subscribe(
         (userInfo: UserInfo) => this.handleSuccessResponse(userInfo),
         ({ error }) => this.handleErrorResponse(error)

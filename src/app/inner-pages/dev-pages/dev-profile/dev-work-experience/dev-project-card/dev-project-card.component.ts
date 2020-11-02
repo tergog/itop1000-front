@@ -25,8 +25,6 @@ export class DevProjectCardComponent implements OnInit {
   public isEdit = false;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
-  public projectPhoto: File;
-
   public selectedTechnologies = [];
   public availableTechnologies: NameValueModel[] = [
     { name: 'Javascript', value: 1 },
