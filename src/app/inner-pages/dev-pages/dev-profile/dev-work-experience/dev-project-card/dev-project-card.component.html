@@ -1,21 +1,9 @@
 <div class="card d__flex d__flex--direction-column p__20">
   <i class="edit cursor__pointer" (click)="onEditClick()"></i>
   <ng-container *ngIf="!isEdit">
-    <img *ngIf="imageUrl" [src]="imageUrl" alt="projectImage" class="project-image">
-    <h2 class="text text__title">{{ project.title }}</h2>
-    <p class="text text__md">{{ project.description }}</p>
-    <a href="{{ project.link }}">Link</a>
-    <mat-chip-list #chipListTechnologies>
-      <mat-chip *ngFor="let technology of selectedTechnologies"
-                [selectable]="false"
-                [removable]="isEdit"
-                (removed)="onTechnologyRemove(technology)">
-        {{ technology.name }}
-      </mat-chip>
-    </mat-chip-list>
-    <!--    <div class="d__flex m__top&#45;&#45;20 d__flex d__flex&#45;&#45;direction-column">-->
-    <!--      <app-project-card class="m__right&#45;&#45;10 m__top&#45;&#45;30" [project]="project"></app-project-card>-->
-    <!--    </div>-->
+        <div class="d__flex d__flex d__flex--direction-column">
+          <app-project-card class="m__right--10" [project]="project"></app-project-card>
+        </div>
   </ng-container>
 
   <div [formGroup]="form" *ngIf="isEdit">

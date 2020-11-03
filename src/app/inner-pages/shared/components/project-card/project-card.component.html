@@ -1,8 +1,6 @@
 <div class="d__flex content-wrap">
   <div>
-    <div class="logo-star">
-
-    </div>
+    <img *ngIf="project.photo" [src]="project.photo" alt="projectImage" class="project-image">
   </div>
   <div class="d__flex d__flex--direction-column m__left--30">
     <div class="d__flex">
@@ -10,6 +8,9 @@
         {{ project.title }}
       </span>
     </div>
+    <span class="text__color--4 text__font--2">
+        {{ project.link }}
+      </span>
     <span class="text text__color--4 text__lg m__top--10">
     {{ project.description }}
   </span>
