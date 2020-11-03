@@ -5,5 +5,5 @@ export interface DevProject {
   description: string;
   technologies: NameValueModel[];
   link: string;
-  photo: string;
+  photo?: string;
 }

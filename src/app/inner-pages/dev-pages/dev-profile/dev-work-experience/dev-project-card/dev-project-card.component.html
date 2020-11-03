@@ -1,7 +1,7 @@
 <div class="card d__flex d__flex--direction-column p__20">
   <i class="edit cursor__pointer" (click)="onEditClick()"></i>
   <ng-container *ngIf="!isEdit">
-    <img [src]="project.photo" alt="projectImage">
+    <img *ngIf="imageUrl" [src]="imageUrl" alt="projectImage" class="project-image">
     <h2 class="text text__title">{{ project.title }}</h2>
     <p class="text text__md">{{ project.description }}</p>
     <a href="{{ project.link }}">Link</a>

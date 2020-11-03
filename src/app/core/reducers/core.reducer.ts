@@ -1,7 +1,7 @@
 import * as coreActions from '../actions/core.actions';
 
 import { Job, UserInfo } from 'app/shared/models';
-
+import { DevProperties } from '../../shared/models/dev-properties.model';
 
 export interface State {
   isAuthenticated: boolean;
@@ -28,6 +28,15 @@ export function reducer(state: State = INIT_STATE, action: coreActions.Actions) 
       return {...state, userInfo: action.payload};
     case coreActions.ON_VALID_SESSION:
       return { ...state, isAuthenticated: action.payload };
+    case coreActions.UPDATE_PROJECT_IMAGE:
+      const account = {
+        ...state.userInfo,
+        devProperties: {
+          ...state.userInfo.devProperties,
+          projects: [
+            ...state.userInfo.devProperties.projects
+            .map((obj, index) =>  index === action.id ? {...obj, photo: action.image} : obj)]}};
+      return {...state, userInfo: account};
     default:
       return state;
   }

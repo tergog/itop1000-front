@@ -1,8 +1,13 @@
-import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+} from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { Store } from '@ngrx/store';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { filter, first } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
 
 import { TOKEN } from 'app/constants/constants';
 import * as coreActions from 'app/core/actions/core.actions';
@@ -12,7 +17,6 @@ import { UserService, NotificationsService, DevelopersService } from 'app/shared
 import { UserInfo } from 'app/shared/models/user-info.model';
 import { DevProject } from 'app/shared/models/dev-project.model';
 import { NameValueModel } from 'app/shared/models/name-value.model';
-import { filter, first } from 'rxjs/operators';
 import { UploadPhotoDialogComponent } from '../../../../shared/components/upload-photo-dialog/upload-photo-dialog.component';
 
 
@@ -58,6 +62,7 @@ export class DevProjectCardComponent implements OnInit {
     this.initForm();
     this.store.select(fromCore.getUserInfo);
     this.updateTechnologies(this.project.technologies);
+    this.imageUrl = this.project.photo;
   }
 
   private disableEmptyFields(): void {
@@ -77,13 +82,15 @@ export class DevProjectCardComponent implements OnInit {
   public onSaveClick(): void {
     this.disableEmptyFields();
     const arr = [...this.devProfileService.devProperties.projects];
-    arr.splice(this.id, 1, this.form.value);
+    const updatedProject = {...this.form.value, technologies: [...this.selectedTechnologies], photo: this.imageUrl};
+    arr.splice(this.id, 1, updatedProject);
 
     this.devProfileService.devProperties = {
       ...this.devProfileService.devProperties,
-      projects: arr,
+      projects: arr
     };
     this.devProfileService.onSaveClick({ devProperties: this.devProfileService.devProperties });
+    this.store.dispatch(new coreActions.UpdateProjectImageAction(this.imageUrl, this.id));
     this.isEdit = false;
   }
 
@@ -110,10 +117,10 @@ export class DevProjectCardComponent implements OnInit {
 
   private initForm(): void {
     this.form = new FormGroup({
-      title: new FormControl('', []),
-      description: new FormControl('', []),
+      title: new FormControl(this.project.title, []),
+      description: new FormControl(this.project.description, []),
       technologies: new FormControl([], []),
-      link: new FormControl('', []),
+      link: new FormControl(this.project.link, []),
     });
   }
 
@@ -135,4 +142,6 @@ export class DevProjectCardComponent implements OnInit {
         ({ error }) => console.log(error)
       );
   }
+
+
 }

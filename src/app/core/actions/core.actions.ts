@@ -8,6 +8,7 @@ export const ON_LOGIN = '[Core] On login';
 export const ON_LOGOUT = '[Core] On logout';
 
 export const UPDATE_USER_PROFILE = '[Core] Update user profile';
+export const UPDATE_PROJECT_IMAGE = '[Core] Update project image';
 
 export const SEARCH_JOBS = '[Core] Search jobs';
 export const SEARCH_JOBS_SUCCESS = '[Core] Search jobs success';
@@ -51,6 +52,10 @@ export class SearchJobsSuccessAction implements Action {
   constructor(public payload: Job[]) {}
 }
 
+export class UpdateProjectImageAction implements Action {
+  readonly type = UPDATE_PROJECT_IMAGE;
+  constructor(public image: string, public id: number) {}
+}
 
 /**
  * Exports possible core action types
@@ -62,4 +67,5 @@ export type Actions =
   | UpdateUserProfileAction
   | OnValidSessionAction
   | SearchJobsAction
-  | SearchJobsSuccessAction;
+  | SearchJobsSuccessAction
+  | UpdateProjectImageAction;

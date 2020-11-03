@@ -2,7 +2,7 @@ import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { DevelopersService } from '../../../../shared/services';
-import { first } from "rxjs/operators";
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-upload-photo-dialog',
@@ -60,13 +60,7 @@ export class UploadPhotoDialogComponent implements OnInit {
   }
 
   public onUpload(): void {
-    // if (this.inputData.destination === 'project')  {
-    //   this.developersService.uploadProjectImage(this.inputData.id, this.imageSrc)
-    //     .pipe(first())
-    //     .subscribe(
-    //       ({url}) => console.log(url)
-    //     );
-    // }
+
   }
 
   public closeDialog(): void {
