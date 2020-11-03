@@ -5,11 +5,11 @@
   <app-button class="m__left--auto" [type]="'secondary'" [text]="'Add method'" (click)="onAddClick()"></app-button>
 </div>
 
-
 <div class="p__20">
   <span *ngIf="!billingMethods.length" class="text text__color--1 text__sm">No Billings yet</span>
 
   <ng-container *ngFor="let billingMethod of billingMethods">
-    <app-billing-method [billingMethod]="billingMethod"></app-billing-method>
+    <app-billing-method [paymentMethod]="billingMethod"
+                        (onMethodChanged)="getPaymentMethods()" ></app-billing-method>
   </ng-container>
 </div>

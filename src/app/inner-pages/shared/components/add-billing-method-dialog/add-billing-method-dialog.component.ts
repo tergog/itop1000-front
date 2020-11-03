@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { StripeService, StripeCardComponent } from 'ngx-stripe';
 import { StripeCardElementOptions, StripeElementsOptions } from '@stripe/stripe-js';
@@ -46,8 +46,7 @@ export class AddBillingMethodDialogComponent implements OnInit, OnDestroy {
   constructor(private stripeService: StripeService,
               private userService: UserService,
               private paymentService: PaymentService,
-              private dialogRef: MatDialogRef<AddBillingMethodDialogComponent>) {
-  }
+              private dialogRef: MatDialogRef<AddBillingMethodDialogComponent>) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -70,8 +69,8 @@ export class AddBillingMethodDialogComponent implements OnInit, OnDestroy {
     this.paymentService.createPaymentMethod(cardToken)
       .pipe(untilDestroyed(this))
       .subscribe(
-        (paymentMethods) => this.dialogRef.close(paymentMethods),
-        ({error}) => console.log(error));
+        () => this.dialogRef.close(),
+        (error) => this.errorMessage = error.message);
   }
 
   private initForm(): void {

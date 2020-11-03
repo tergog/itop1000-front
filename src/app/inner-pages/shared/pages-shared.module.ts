@@ -16,7 +16,8 @@ import { UploadPhotoDialogComponent } from 'app/inner-pages/shared/components/up
 import { DeveloperResumeComponent } from 'app/inner-pages/shared/components/developer-resume/developer-resume.component';
 import { DeveloperResumeFullComponent } from 'app/inner-pages/shared/components/developer-resume-full/developer-resume-full.component';
 import { StandardBgWrapComponent } from 'app/inner-pages/shared/components/standard-bg-wrap/standard-bg-wrap.component';
-import { AddBillingMethodDialogComponent } from './components/add-billing-method-dialog/add-billing-method-dialog.component';
+import { AddBillingMethodDialogComponent } from 'app/inner-pages/shared/components/add-billing-method-dialog/add-billing-method-dialog.component';
+import { UpdateBillingMethodDialogComponent } from 'app/inner-pages/shared/components/update-billing-method-dialog/update-billing-method-dialog.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { AddBillingMethodDialogComponent } from './components/add-billing-method
     DeveloperResumeFullComponent,
     StandardBgWrapComponent,
     AddBillingMethodDialogComponent,
+    UpdateBillingMethodDialogComponent,
   ],
   imports: [
     CommonModule,

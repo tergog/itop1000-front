@@ -1,11 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { untilDestroyed } from "ngx-take-until-destroy";
 
 import { AddBillingMethodDialogComponent } from 'app/inner-pages/shared/components/add-billing-method-dialog/add-billing-method-dialog.component';
 import { PaymentService } from 'app/shared/services/payment.service';
-import {Observable} from "rxjs";
-import {PaymentMethod} from "@stripe/stripe-js";
 
 @Component({
   selector: 'app-client-billings',
@@ -28,18 +26,13 @@ export class ClientBillingsComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed()
       .pipe(untilDestroyed(this))
-      .subscribe((newBillingMethods) => {
-        if (newBillingMethods) {
-          this.billingMethods = newBillingMethods;
-        }
-      });
+      .subscribe(() => this.getPaymentMethods());
   }
 
   public getPaymentMethods(): void  {
     this.paymentService.getPaymentMethods()
       .pipe(untilDestroyed(this))
-      .subscribe(
-        (billingsMethods) => this.billingMethods = billingsMethods,
+      .subscribe((billingsMethods) => this.billingMethods = billingsMethods,
         ({error}) => console.log(error)
       );
   }

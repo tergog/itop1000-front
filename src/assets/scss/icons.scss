@@ -11,6 +11,25 @@
   height: 30px;
   border-radius: 50%;
   background: url(assets/icons/edit.svg) no-repeat $color-3 center center;
+  border: 1px solid $color-4;
+  box-shadow: inset 0px 6px 5px rgba(255, 255, 255, 0.3);
+
+  &:hover {
+    border-color: $color-2-hover;
+  }
+}
+
+.delete {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: url(assets/icons/delete.svg) no-repeat $color-3 center center;
+  border: 1px solid $color-4;
+  box-shadow: inset 0px 6px 5px rgba(255, 255, 255, 0.3);
+
+  &:hover {
+    border-color: $color-2-hover;
+  }
 }
 
 .plus {

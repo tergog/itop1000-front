@@ -1,7 +1,13 @@
 <div class="d__flex d__flex--items-center m__bottom--10">
-  <span><i [ngClass]="billingMethod.card.brand" class="card m__right--20"></i></span>
+  <span><i [ngClass]="paymentMethod.card.brand" class="card m__right--20"></i></span>
+
   <div class="text text__color--1 text__sm">
-    <span class="text__transform--capitalize">{{ billingMethod.card.brand }}</span> ending in
-    <span class="text__bold">{{ billingMethod.card.last4 }}</span>
+    <span class="text__transform--capitalize">{{ paymentMethod.card.brand }}</span> ending in
+    <span class="text__bold">{{ paymentMethod.card.last4 }}</span>
+  </div>
+
+  <div class="m__left--auto m__right--30">
+    <i class="edit cursor__pointer m__right--20" (click)="onEditClick(paymentMethod.id)"></i>
+    <i class="delete cursor__pointer" (click)="onDeleteClick(paymentMethod.id)"></i>
   </div>
 </div>
