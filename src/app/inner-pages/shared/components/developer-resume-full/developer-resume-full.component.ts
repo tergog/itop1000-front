@@ -2,7 +2,7 @@ import { Component, OnInit, Renderer2, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
-import { buffer, bufferTime, debounceTime, take, takeUntil, tap } from 'rxjs/operators';
+import { bufferTime } from 'rxjs/operators';
 
 import { Developer } from 'app/shared/models';
 import { getDeveloper, State } from 'app/core/developers';
@@ -59,8 +59,8 @@ export class DeveloperResumeFullComponent implements OnInit, OnDestroy {
     });
   }
 
-  public onWorkExperienceClick(id: string): void {
-    this.router.navigate([`in/c/search-developers/${id}/work-experience`]);
+  public onWorkExperienceClick(id: string, projectId: number): void {
+    this.router.navigate([`in/c/search-developers/${id}/project/${projectId}`]);
   }
 
   public inViewport(isInViewport: boolean, section: DeveloperResumeSections): void {

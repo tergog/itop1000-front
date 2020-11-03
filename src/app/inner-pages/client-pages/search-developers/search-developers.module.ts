@@ -9,9 +9,11 @@ import { DeveloperResumeFullComponent } from 'app/inner-pages/shared/components/
 import { WorkExperienceComponent } from 'app/inner-pages/shared/components/developer-resume-full/work-experience/work-experience.component';
 
 const routes: Routes = [
-  { path: '', component: SearchDevelopersComponent },
+  { path: ':id/project/:projectId', component: WorkExperienceComponent },
   { path: ':id', component: DeveloperResumeFullComponent },
-  { path: ':id/work-experience', component: WorkExperienceComponent }
+  { path: '', component: SearchDevelopersComponent },
+
+
 ];
 
 @NgModule({

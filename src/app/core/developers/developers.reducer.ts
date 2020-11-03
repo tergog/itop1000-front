@@ -166,4 +166,7 @@ export const reducer = createReducer(
 
 /** Selector return is Authenticated */
 export const getDevelopers = (state: State): Developer[] => state.developers;
-export const getDeveloper = (state: State): Developer => state.developer;
+export const getDeveloper = (state: State): Developer => {
+  console.log(state.developer);
+  return state.developer;
+};

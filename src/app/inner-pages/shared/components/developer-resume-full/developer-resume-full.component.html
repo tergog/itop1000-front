@@ -139,7 +139,7 @@
         (inViewportChange)="inViewport($event, DeveloperResumeSections.WorkExperience)"
       ></div>
 
-      <div class="m__top--20 cursor__pointer" (click)="onWorkExperienceClick(developer.id)">
+      <div class="m__top--20">
         <span class="text text__color--3 text__xlg text__uppercase">Work Experience</span>
         <div
           class="section-underline m__top--10"
@@ -147,7 +147,8 @@
         ></div>
 
         <div class="d__flex m__top--20 d__flex d__flex--direction-column">
-          <app-project-card class="m__right--10 m__top--30" *ngFor="let project of developer.devProperties.projects" [project]="project"></app-project-card>
+          <app-project-card class="m__right--10 m__top--30  cursor__pointer" *ngFor="let project of developer.devProperties.projects; index as i"
+                            (click)="onWorkExperienceClick(developer.id, i)" [project]="project"></app-project-card>
         </div>
       </div>
 
