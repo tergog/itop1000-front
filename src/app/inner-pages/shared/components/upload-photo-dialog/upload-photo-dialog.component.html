@@ -27,7 +27,7 @@
       (change)="fileChangeEvent($event); onFileChanged($event)"
       #fileInput>
 
-    <app-button [type]="'secondary'" [text]="'Select Profile Image'" (buttonClick)="fileInput.click()"></app-button>
+    <app-button [type]="'secondary'" [text]="'Select ' + inputData.destination + ' Image'" (buttonClick)="fileInput.click()"></app-button>
   </div>
 
   <div class="text__center m__top--50">

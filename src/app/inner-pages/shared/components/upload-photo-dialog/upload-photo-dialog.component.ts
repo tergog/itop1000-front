@@ -17,14 +17,12 @@ export class UploadPhotoDialogComponent implements OnInit {
   croppedImage: any = '';
 
   public inputData: {
-    destination: 'project',
-    id: number
+    destination: 'Profile' | 'Project',
   };
 
 
   constructor(private dialogRef: MatDialogRef<UploadPhotoDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) data,
-              private developersService: DevelopersService
+              @Inject(MAT_DIALOG_DATA) data
   ) {
     this.inputData = data;
   }
@@ -58,6 +56,7 @@ export class UploadPhotoDialogComponent implements OnInit {
   loadImageFailed() {
     // show message
   }
+
 
   public onUpload(): void {
 

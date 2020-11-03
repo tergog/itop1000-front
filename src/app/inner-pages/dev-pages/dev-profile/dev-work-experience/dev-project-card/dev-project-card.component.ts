@@ -7,7 +7,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { Store } from '@ngrx/store';
 import { filter, first } from 'rxjs/operators';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { TOKEN } from 'app/constants/constants';
 import * as coreActions from 'app/core/actions/core.actions';
@@ -73,10 +73,7 @@ export class DevProjectCardComponent implements OnInit {
 
   public onEditClick(): void {
     this.isEdit = !this.isEdit;
-  }
-
-  public onCancelClick(): void {
-    this.isEdit = !this.isEdit;
+    this.imageUrl = this.project.photo;
   }
 
   public onSaveClick(): void {
@@ -106,13 +103,22 @@ export class DevProjectCardComponent implements OnInit {
 
   public openUploadPhotoDialog(): void {
 
-    this.matDialog.open(UploadPhotoDialogComponent)
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      destination: 'Project'
+    };
+
+    this.matDialog.open(UploadPhotoDialogComponent, dialogConfig)
       .afterClosed()
       .pipe(
         filter(result => !!result),
         first()
       )
       .subscribe((image: string) => this.uploadImage(image));
+  }
+
+  deleteImage() {
+    this.imageUrl = '';
   }
 
   private initForm(): void {
