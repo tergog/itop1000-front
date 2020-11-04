@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { StripeService, StripeCardComponent } from 'ngx-stripe';
 import { StripeCardElementOptions, StripeElementsOptions } from '@stripe/stripe-js';
 import { MatDialogRef } from '@angular/material/dialog';
-import { untilDestroyed } from "ngx-take-until-destroy";
+import { untilDestroyed } from 'ngx-take-until-destroy';
 
 import { UserService } from 'app/shared/services';
 import { PaymentService } from 'app/shared/services/payment.service';

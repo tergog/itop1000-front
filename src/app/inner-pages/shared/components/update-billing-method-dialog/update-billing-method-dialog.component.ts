@@ -1,9 +1,9 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
-import { untilDestroyed } from "ngx-take-until-destroy";
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { untilDestroyed } from 'ngx-take-until-destroy';
 
-import { PaymentService } from "app/shared/services/payment.service";
+import { PaymentService } from 'app/shared/services/payment.service';
 
 @Component({
   selector: 'app-update-billing-method-dialog',

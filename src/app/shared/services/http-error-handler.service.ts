@@ -19,9 +19,9 @@ export class HttpErrorHandlerService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError((error) => {
-        // if (error.status === 401) {
-        //   this.store.dispatch(new SetOnLogoutAction())
-        // }
+        if (error.status === 401) {
+          this.store.dispatch(new SetOnLogoutAction())
+        }
         throw error;
       })
     )
