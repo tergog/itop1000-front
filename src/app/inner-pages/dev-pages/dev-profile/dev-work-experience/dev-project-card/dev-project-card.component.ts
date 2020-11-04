@@ -9,12 +9,10 @@ import { Store } from '@ngrx/store';
 import { filter, first } from 'rxjs/operators';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
-import { TOKEN } from 'app/constants/constants';
 import * as coreActions from 'app/core/actions/core.actions';
 import * as fromCore from 'app/core/reducers';
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
 import { UserService, NotificationsService, DevelopersService } from 'app/shared/services';
-import { UserInfo } from 'app/shared/models/user-info.model';
 import { DevProject } from 'app/shared/models/dev-project.model';
 import { NameValueModel } from 'app/shared/models/name-value.model';
 import { UploadPhotoDialogComponent } from '../../../../shared/components/upload-photo-dialog/upload-photo-dialog.component';
