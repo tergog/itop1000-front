@@ -14,6 +14,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ClientPaymentsComponent } from 'app/inner-pages/client-pages/client-profile/client-payments/client-payments.component';
 import { ClientBillingsComponent } from 'app/inner-pages/client-pages/client-profile/client-billings/client-billings.component';
 import { BillingMethodComponent } from './client-billings/billing-method/billing-method.component';
+import { MatTableModule } from "@angular/material/table";
+import { MatPaginatorModule } from "@angular/material/paginator";
 
 export const routes: Routes = [
   { path: '', component: ClientProfileComponent }
@@ -36,7 +38,9 @@ export const routes: Routes = [
     RouterModule.forChild(routes),
     PagesSharedModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule,
+    MatPaginatorModule
   ]
 })
 export class ClientProfileModule { }

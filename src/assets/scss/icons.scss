@@ -19,6 +19,13 @@
   }
 }
 
+.arrow-down {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: url(assets/icons/arrow-down.svg) no-repeat $color-3 center center;
+}
+
 .delete {
   width: 30px;
   height: 30px;
