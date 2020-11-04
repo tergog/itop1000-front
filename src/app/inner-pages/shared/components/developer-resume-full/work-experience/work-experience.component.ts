@@ -1,18 +1,19 @@
-import { Component, OnInit, OnDestroy, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-
-import { Developer } from 'app/shared/models';
-import { State, getDeveloper } from 'app/core/developers';
 import { ActivatedRoute, Router } from '@angular/router';
+
+import { State, getDeveloper } from 'app/core/developers';
+import { DevProject } from 'app/shared/models/dev-project.model';
+import { setDeveloper } from 'app/core/developers/developers.actions';
 
 @Component({
   selector: 'app-work-experience',
   templateUrl: './work-experience.component.html',
   styleUrls: ['./work-experience.component.scss']
 })
-export class WorkExperienceComponent implements OnInit, OnDestroy, OnChanges {
+export class WorkExperienceComponent implements OnInit {
 
-  public developer: Developer;
+  public project: DevProject;
   public projectId: number;
 
   constructor(
@@ -22,16 +23,9 @@ export class WorkExperienceComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnInit(): void {
     this.projectId = this.route.snapshot.params.projectId;
-    this.store.select(getDeveloper).subscribe(developer => this.developer = developer);
-    console.log(this.developer);
-  }
-
-  ngOnChanges(): void {
-    debugger;
-    console.log(this.developer);
-  }
-
-  ngOnDestroy(): void {
+    this.store.select(getDeveloper).subscribe(developer => developer
+      ? this.project = developer.devProperties.projects[this.projectId]
+      : this.store.dispatch(setDeveloper({id: this.route.snapshot.params.id})));
   }
 
 }

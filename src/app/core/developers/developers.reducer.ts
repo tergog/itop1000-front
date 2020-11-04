@@ -169,6 +169,5 @@ export const getDevelopers = (state: State): Developer[] => {
   return state.developers;
 };
 export const getDeveloper = (state: State): Developer => {
-  debugger;
   return state.developer;
 };
