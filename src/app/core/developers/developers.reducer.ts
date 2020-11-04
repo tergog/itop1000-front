@@ -159,14 +159,16 @@ export const reducer = createReducer(
     actions.setDeveloperSuccess,
     (state, {developer}) => ({
       ...state,
-      developer
+      developer: {...developer}
     })
   ),
 );
 
 /** Selector return is Authenticated */
-export const getDevelopers = (state: State): Developer[] => state.developers;
+export const getDevelopers = (state: State): Developer[] => {
+  return state.developers;
+};
 export const getDeveloper = (state: State): Developer => {
-  console.log(state.developer);
+  debugger;
   return state.developer;
 };

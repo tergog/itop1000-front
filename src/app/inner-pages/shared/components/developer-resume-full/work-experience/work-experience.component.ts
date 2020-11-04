@@ -1,11 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy, OnChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { Developer } from 'app/shared/models';
-import { State, getDeveloper } from 'app/core/developers/developers.reducer';
-import { untilDestroyed } from 'ngx-take-until-destroy';
-import { setDeveloper } from '../../../../../core/developers/developers.actions';
+import { State, getDeveloper } from 'app/core/developers';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -13,9 +10,9 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './work-experience.component.html',
   styleUrls: ['./work-experience.component.scss']
 })
-export class WorkExperienceComponent implements OnInit, OnDestroy {
+export class WorkExperienceComponent implements OnInit, OnDestroy, OnChanges {
 
-  public developer: Observable<Developer>;
+  public developer: Developer;
   public projectId: number;
 
   constructor(
@@ -25,13 +22,16 @@ export class WorkExperienceComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.projectId = this.route.snapshot.params.projectId;
-    this.store.select(getDeveloper)
-      .subscribe((dev) => {
-        console.log(dev);
-      });
+    this.store.select(getDeveloper).subscribe(developer => this.developer = developer);
+    console.log(this.developer);
   }
 
-  ngOnDestroy() {
+  ngOnChanges(): void {
+    debugger;
+    console.log(this.developer);
+  }
+
+  ngOnDestroy(): void {
   }
 
 }

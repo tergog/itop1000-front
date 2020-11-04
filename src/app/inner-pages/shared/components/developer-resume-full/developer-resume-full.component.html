@@ -147,8 +147,12 @@
         ></div>
 
         <div class="d__flex m__top--20 d__flex d__flex--direction-column">
-          <app-project-card class="m__right--10 m__top--30  cursor__pointer" *ngFor="let project of developer.devProperties.projects; index as i"
+          <app-button [text]="projectCounter < developer.devProperties.projects.length ? 'Show more' : 'Hide'"
+                      [type]="'secondary'" (buttonClick)="onShowMoreClick()"></app-button>
+          <div *ngFor="let project of developer.devProperties.projects; index as i">
+          <app-project-card class="m__right--10 m__top--30  cursor__pointer" *ngIf="i < projectCounter"
                             (click)="onWorkExperienceClick(developer.id, i)" [project]="project"></app-project-card>
+          </div>
         </div>
       </div>
 

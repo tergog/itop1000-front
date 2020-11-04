@@ -40,5 +40,4 @@ export const getDevelopers = createSelector(
 
 export const getDeveloper = createSelector(
   getDevelopersState,
-  fromDevelopers.getDeveloper
-);
+  fromDevelopers.getDeveloper);
