@@ -77,7 +77,7 @@ export class DevProjectCardComponent implements OnInit {
   public onSaveClick(): void {
     this.disableEmptyFields();
     const arr = [...this.devProfileService.devProperties.projects];
-    const updatedProject = {...this.form.value, technologies: [...this.selectedTechnologies], photo: this.imageUrl};
+    const updatedProject = {...this.form.value, technologies: [...this.selectedTechnologies], logo: this.imageUrl};
     arr.splice(this.id, 1, updatedProject);
 
     this.devProfileService.devProperties = {
@@ -138,7 +138,7 @@ export class DevProjectCardComponent implements OnInit {
   }
 
   private uploadImage(image: string): void {
-    this.developersService.uploadProjectLogo(this.id, image)
+    this.developersService.uploadProjectLogo(image)
       .subscribe(
         (url) => {
           this.imageUrl = url;
