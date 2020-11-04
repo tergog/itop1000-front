@@ -1,0 +1,8 @@
+<app-project-card
+  class="m__top--30"
+  *ngFor="let project of (developer$ | async).devProperties.projects"
+  [project]="project"
+>
+</app-project-card>
+
+

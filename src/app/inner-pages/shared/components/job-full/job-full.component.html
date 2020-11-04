@@ -1,0 +1,120 @@
+<ng-container *ngIf="job">
+  <div class="under-header-line">
+  </div>
+
+  <div class="left-side">
+    <div class="client-photo">
+      <img src="./assets/img/default-client-photo.svg" alt="client-photo">
+    </div>
+    <div class="m__top--10 text text__x4lg text__center text__uppercase text__underline">
+      {{ job.company || 'No Company' }}
+    </div>
+    <div class="m__top--10 text__center text__capitalize text__color--5 text__font--2">
+      ${{ job.price }}/Mth
+    </div>
+    <ul class="job-nav">
+      <li [class.active]="activeSection === JobSections.Project"
+          (click)="onSectionCLick(JobSections.Project, jobDescriptionRef)">
+        <i class="job-nav-icon project"></i>
+        <span>Project</span>
+      </li>
+      <li [class.active]="activeSection === JobSections.Duration"
+          (click)="onSectionCLick(JobSections.Duration, durationRef)">
+        <i class="job-nav-icon duration"></i>
+        <span>Duration</span>
+      </li>
+      <li [class.active]="activeSection === JobSections.KeySkills"
+          (click)="onSectionCLick(JobSections.KeySkills, keySkillsRef)">
+        <i class="job-nav-icon idea"></i>
+        <span>Key Skills</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="d__flex d__flex--justify-between right-side">
+    <div class="right-side-content">
+      <div class="location-wrap">
+        <div class="d__flex m__right--30">
+          <i class="location m__right--10"></i>
+          <span class="text text__md text__color--3">{{ job.city }}, {{ job.country }}</span>
+        </div>
+
+        <div class="separator"></div>
+      </div>
+
+      <div #jobDescriptionRef>
+        <div class="d__flex d__flex--justify-between">
+          <div>
+            <div class="text text__font--2 text__fw--500 text__uppercase text__title">{{ job.title }}</div>
+            <div class="job-duration text__color--5 text__color--5 text__font--2 m__top--10" #durationRef>
+              <span class="text__underline text__color--3 text__font--2">Project duration</span> {{ job.duration }}
+              Months
+            </div>
+          </div>
+          <div (click)="onRespondClick()">
+            <button class="btn-respond">RESPOND</button>
+          </div>
+        </div>
+        <div class="text text__font--4 text__fw--200 text__color--8 m__top--60">{{ job.description }}</div>
+        <hr class="splitter-line m__top--36">
+      </div>
+
+
+      <div #keySkillsRef> <!-- TODO -->
+        <div class="d__flex d__flex--flex-start d__flex--flex-wrap">
+        <span class="text__uppercase m--5"
+              *ngFor="let requirement of job.requirements.split(' ')">{{ requirement }}</span>
+        </div>
+        <hr class="splitter-line">
+      </div>
+
+      <!-- TODO -->
+      <div class="d__flex d__flex--justify-around skills-spinners">
+        <div *ngFor="let category of job.categories.split(' ')" class="m_">
+          <div
+            class="d__flex d__flex--justify-between d__flex--direction-column d__flex--items-center d__flex--justify-center">
+            <div class="m__top--10">
+              <span class="text__uppercase text__font--2 text__center text__uppercase font__md">{{ category }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="splitter-line">
+
+
+      <div class="job-pluses m__top--30">
+        <span class="text text__font--2 text__fw--500 text__uppercase text__title">will be a plus</span>
+        <div class="section-underline"></div>
+        <ul class="text text__font--1 text__color--10">
+          <li><span class="text text__color--8 text__fw--200 text__capitalize text__lg">Experience Working Linux/Unix Development Environment, Shell Scripting Skill</span>
+          </li>
+          <li><span class="text text__color--8 text__fw--200 text__capitalize">Experience with Python</span></li>
+          <li><span class="text text__color--8 text__fw--200 text__capitalize">Experience with CI, Jenkins</span></li>
+        </ul>
+      </div>
+
+      <p class="border-point border-point--left border-point--1"></p>
+      <p class="border-point border-point--left border-point--2"></p>
+      <p class="border-point border-point--left border-point--3"></p>
+      <p class="border-point border-point--left border-point--4"></p>
+      <p class="border-point border-point--left border-point--5"></p>
+      <p class="border-point border-point--left border-point--6"></p>
+      <p class="border-point border-point--left border-point--7"></p>
+      <p class="border-point border-point--left border-point--8"></p>
+      <p class="border-point border-point--left border-point--9"></p>
+      <p class="border-point border-point--left border-point--10"></p>
+
+    </div>
+
+    <div class="m__top--15 m__right--30">
+      <span class="text text__font--2 text__sm text__color--3 text__fw--300">{{ job.dateCreated | date:'dd MMMM' }}</span>
+    </div>
+
+  </div>
+
+
+</ng-container>
+
+
+<!--TODO redline under header-->
+

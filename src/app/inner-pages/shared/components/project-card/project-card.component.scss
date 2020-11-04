@@ -1,0 +1,25 @@
+@import 'assets/scss/variables';
+
+:host {
+  display: flex;
+  background: $color-1;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+
+  img {
+    max-width: 135px;
+    max-height:135px;
+    border-radius: 50%;
+  }
+
+  .content-wrap {
+    padding: 20px 30px;
+  }
+
+  .logo-star {
+    width: 100px;
+    height: 100px;
+    border: 1px solid $color-5;
+    border-radius: 50%;
+  }
+
+}

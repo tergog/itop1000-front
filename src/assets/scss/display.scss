@@ -2,8 +2,16 @@
   &__flex {
     display: flex;
 
+    &--flex-start {
+      justify-content: flex-start;
+    }
+
     &--justify-between {
       justify-content: space-between;
+    }
+
+    &--justify-around {
+      justify-content: space-around;
     }
 
     &--justify-center {
@@ -17,6 +25,10 @@
     &--items-center {
       align-items: center;
     }
+
+    &--wrap {
+      flex-wrap: wrap;
+    }
   }
 
   &__inline-flex {
@@ -29,5 +41,26 @@
 
   &__block {
     display: block;
+  }
+
+  &__table-caption {
+    display: table-caption;
+  }
+}
+
+.list-style {
+  &__none {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  &__block {
+    display: block;
+  }
+}
+
+.overflow {
+  &--hidden {
+    overflow: hidden;
   }
 }

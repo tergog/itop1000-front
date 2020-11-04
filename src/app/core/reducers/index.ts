@@ -47,13 +47,3 @@ export const getJobs = createSelector(
   getCoreState,
   fromCore.getJobs
 );
-
-export const getDevelopers = createSelector(
-  getCoreState,
-  fromCore.getDevelopers
-);
-
-export const getDeveloper = createSelector(
-  getCoreState,
-  fromCore.getDeveloper
-);

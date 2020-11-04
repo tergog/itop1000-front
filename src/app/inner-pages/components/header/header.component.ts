@@ -7,9 +7,10 @@ import { filter, tap } from 'rxjs/operators';
 import * as fromCore from 'app/core/reducers';
 import { UserInfo } from 'app/shared/models';
 import { getUserInfo } from 'app/core/reducers';
-import { SearchDevelopersAction, SearchJobsAction, SetOnLogoutAction } from 'app/core/actions/core.actions';
+import { SearchJobsAction, SetOnLogoutAction } from 'app/core/actions/core.actions';
 import { opacityInOutAnimation } from 'app/shared/animations';
 import { UserRole } from 'app/shared/enums';
+import { searchDevelopers } from 'app/core/developers/developers.actions';
 
 @Component({
   selector: 'app-header',
@@ -25,13 +26,14 @@ export class HeaderComponent implements OnInit {
   public userRole: string;
   public searchTerm = new FormControl();
 
-  constructor(private store: Store<fromCore.State>) { }
+  constructor(private store: Store<fromCore.State>) {
+  }
 
   ngOnInit(): void {
     this.userInfo$ = this.store.select(getUserInfo)
       .pipe(
-          filter(user => !!user),
-          tap(({ role }) => this.userRole = role)
+        filter(user => !!user),
+        tap(({role}) => this.userRole = role)
       );
   }
 
@@ -47,7 +49,7 @@ export class HeaderComponent implements OnInit {
     if (this.userRole === this.UserRole.Dev) {
       this.store.dispatch(new SearchJobsAction(this.searchTerm.value));
     } else {
-      this.store.dispatch(new SearchDevelopersAction(this.searchTerm.value));
+      this.store.dispatch(searchDevelopers({payload: this.searchTerm.value}));
     }
   }
 

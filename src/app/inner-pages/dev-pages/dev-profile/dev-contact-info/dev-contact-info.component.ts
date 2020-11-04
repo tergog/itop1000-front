@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy   } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
@@ -12,11 +12,13 @@ import * as fromCore from 'app/core/reducers';
   templateUrl: './dev-contact-info.component.html',
   styleUrls: ['./dev-contact-info.component.scss']
 })
-export class DevContactInfoComponent implements OnInit {
+export class DevContactInfoComponent implements OnInit, OnDestroy {
 
   public userInfo$: Observable<UserInfo>;
-
   public isEdit: boolean;
+
+  public isAccountEdit: boolean;
+  public isLocationEdit: boolean;
 
   @Output() updateProfileInfo = new EventEmitter();
 
@@ -28,11 +30,28 @@ export class DevContactInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.userInfo$ = this.store.select(fromCore.getUserInfo);
-    this.devProfileService.initUpdateProfileService();
+  }
+
+  public editAccountToggle(): void {
+    this.isAccountEdit = !this.isAccountEdit;
+  }
+
+  public editLocationToggle(): void {
+    this.isLocationEdit = !this.isLocationEdit;
   }
 
   public editToggle(): void {
     this.isEdit = !this.isEdit;
+  }
+
+  public onSaveAccountClick(userInfo: Partial<UserInfo>): void {
+    this.devProfileService.onSaveClick(userInfo);
+    this.isAccountEdit = false;
+  }
+
+  public onSaveLocationClick(userInfo: Partial<UserInfo>): void {
+    this.devProfileService.onSaveClick(userInfo);
+    this.isLocationEdit = false;
   }
 
   public onSaveClick(userInfo: Partial<UserInfo>): void {
@@ -40,4 +59,5 @@ export class DevContactInfoComponent implements OnInit {
     this.isEdit = false;
   }
 
+  ngOnDestroy(): void {}
 }

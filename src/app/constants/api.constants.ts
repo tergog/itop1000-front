@@ -10,6 +10,8 @@ export const ApiConstants = {
     upload: 'accounts/upload',
     paymentMethod: 'accounts/payment-method',
     paymentMethods: 'accounts/payment-methods',
+    searchDevelopers: 'accounts/search',
+    getDeveloperById: 'accounts/get-developer'
   },
   jobs: {
     main: 'jobs',

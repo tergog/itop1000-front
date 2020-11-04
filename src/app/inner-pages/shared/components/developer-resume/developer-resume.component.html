@@ -10,7 +10,7 @@
   </div>
 
   <span class="text text__color--5 text__xlg m__top--10"
-    >${{ developer.hourlyRate }}/hr
+    >${{ developer.devProperties.hourlyRate }}/hr
   </span>
 </div>
 
@@ -23,12 +23,12 @@
     >
     <div class="status-free text text__lg text__uppercase">FREE</div>
   </div>
-  <span class="text text__color--4 text__lg m__top--10">{{ developer.description }}</span>
+  <span class="text text__color--4 text__lg m__top--10">{{ developer.devProperties.description }}</span>
 
   <div class="m__top--20">
     <span
       class="text text__color--3 text__sm text__uppercase m__right--10"
-      *ngFor="let skill of developer.skills"
+      *ngFor="let skill of developer.devProperties.skills"
     >
       {{ skill.name }}
     </span>

@@ -1,20 +1,16 @@
-import { Action } from '@ngrx/store';
+import { Action, createAction, props } from '@ngrx/store';
 
-import { Developer, Job, UserInfo } from 'app/shared/models';
+import { Job, UserInfo } from 'app/shared/models';
 
 export const SAVE_TOKEN = '[Core] Saves user\'s auth token';
 
 export const ON_LOGIN = '[Core] On login';
 export const ON_LOGOUT = '[Core] On logout';
 
-export const SET_TOKEN_ON_PROFILE_UPDATE = '[Core] Set token on profile update';
 export const UPDATE_USER_PROFILE = '[Core] Update user profile';
 
 export const SEARCH_JOBS = '[Core] Search jobs';
 export const SEARCH_JOBS_SUCCESS = '[Core] Search jobs success';
-
-export const SEARCH_DEVELOPERS = '[Core] Search developers';
-export const SEARCH_DEVELOPERS_SUCCESS = '[Core] Search developers success';
 
 export const ON_VALID_SESSION = '[Core] On valid session';
 
@@ -33,11 +29,6 @@ export class SetOnLoginAction implements Action {
 
 export class SetOnLogoutAction implements Action {
   readonly type = ON_LOGOUT;
-}
-
-export class SetTokenOnProfileUpdateAction implements Action {
-  readonly type = SET_TOKEN_ON_PROFILE_UPDATE;
-  constructor(public payload: UserInfo) {}
 }
 
 export class UpdateUserProfileAction implements Action {
@@ -60,15 +51,6 @@ export class SearchJobsSuccessAction implements Action {
   constructor(public payload: Job[]) {}
 }
 
-export class SearchDevelopersAction implements Action {
-  readonly type = SEARCH_DEVELOPERS;
-  constructor(public payload: string) {}
-}
-
-export class SearchDevelopersSuccessAction implements Action {
-  readonly type = SEARCH_DEVELOPERS_SUCCESS;
-  constructor(public payload: Developer[]) {}
-}
 
 /**
  * Exports possible core action types
@@ -77,10 +59,7 @@ export type Actions =
   | SaveTokenAction
   | SetOnLoginAction
   | SetOnLogoutAction
-  | SetTokenOnProfileUpdateAction
   | UpdateUserProfileAction
   | OnValidSessionAction
   | SearchJobsAction
-  | SearchJobsSuccessAction
-  | SearchDevelopersAction
-  | SearchDevelopersSuccessAction;
+  | SearchJobsSuccessAction;

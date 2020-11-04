@@ -1,0 +1,24 @@
+<app-auth-container>
+  <span class="text text__title text__color--3 text__uppercase m__top--30">
+    Sign up
+  </span>
+
+  <div [formGroup]="form" class="w__594">
+
+    <div class="m__top--36">
+      <span class="text text__sm text__color--3 text__fw--600">Email address</span>
+      <app-input formControlName="email" [placeholder]="'email@example.com'" class="m__top--10"></app-input>
+    </div>
+
+   </div>
+
+  <app-button class="m__top--60 d__block" (buttonClick)="onEmailSend()" [type]="'main'" [text]="'Send email'"></app-button>
+
+  <div class="w__594 m__top--60 overflow--hidden">
+    <app-separator></app-separator>
+  </div>
+
+  <p class="text text__sm text__color--3 text__fw--600 m__top--50">Already have an account?</p>
+  <p class="text text__sm text__color--3 text__fw--600 m__top--30"><a routerLink="../login" class="text__color--3 text__decoration--none">Sign in</a></p>
+
+</app-auth-container>

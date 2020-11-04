@@ -4,8 +4,9 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { Developer } from 'app/shared/models';
-import { JobsService } from 'app/shared/services';
-import { getDevelopers, State } from 'app/core/reducers';
+import { DevelopersService } from 'app/shared/services';
+import { getDevelopers, State } from 'app/core/developers';
+import { updateDeveloper } from 'app/core/developers/developers.actions';
 
 @Component({
   selector: 'app-search-developers',
@@ -15,10 +16,10 @@ import { getDevelopers, State } from 'app/core/reducers';
 })
 export class SearchDevelopersComponent implements OnInit {
 
-  public developers$ : Observable<Developer[]>;
+  public developers$: Observable<Developer[]>;
 
   constructor(
-    private jobsService: JobsService,
+    private developersService: DevelopersService,
     private store: Store<State>,
     private router: Router
   ) { }
@@ -28,7 +29,8 @@ export class SearchDevelopersComponent implements OnInit {
   }
 
   public onProfileClick(id: string): void {
-    this.router.navigate(['in/c/search-developers', id])
+    this.store.dispatch(updateDeveloper({id}));
+    this.router.navigate(['in/c/search-developers', id]);
   }
 
 }

@@ -62,6 +62,10 @@
   width: 15px;
   height: 15px;
   background: url(assets/icons/user.svg);
+
+  &-gray {
+    background: url(~assets/icons/user-gray.svg);
+  }
 }
 
 .profile-photo {
@@ -74,6 +78,10 @@
   width: 15px;
   height: 15px;
   background: url(assets/icons/email.svg);
+
+  &-gray {
+    background: url(~assets/icons/email-gray.svg);
+  }
 }
 
 .search {
@@ -86,6 +94,10 @@
   width: 15px;
   height: 15px;
   background: url(assets/icons/phone.svg);
+
+  &-gray {
+    background-image: url(~assets/icons/phone-gray.svg);
+  }
 }
 
 .checked {
@@ -102,7 +114,7 @@
 
 .eye-line {
   width: 15px;
-  height: 14px;
+  height: 13px;
   background: url(assets/icons/eye-line.svg);
 }
 
@@ -125,6 +137,11 @@
   height: 15px;
   opacity: 0.25;
   background-image: url(assets/icons/contact-info.svg);
+
+  &-gray {
+    opacity: 1;
+    background-image: url(~assets/icons/contact-info-gray.svg);
+  }
 }
 
 .settings {
@@ -195,6 +212,10 @@
   width: 20px;
   height: 20px;
   background-image: url(assets/icons/location.svg);
+
+  &-gray {
+    background-image: url(~assets/icons/location-gray.svg);
+  }
 }
 
 

@@ -21,53 +21,10 @@ import { slideInAnimation } from 'app/shared/animations';
 export class DevProfileSectionsComponent implements OnInit {
 
   @Input() public section: DevProfileSections;
-  @Output() updateProfileInfo = new EventEmitter();
-
 
   public DevProfileSections = DevProfileSections;
 
-  constructor(
-    private store: Store<fromCore.State>,
-    private userService: UserService,
-    private notificationsService: NotificationsService
-  ) { }
+  constructor() { }
 
-  ngOnInit(): void {
-  }
-
-  onSaveClick(userInfo) {
-    this.userService.updateProfile(userInfo)
-      .pipe(first())
-      .subscribe(
-        (userInfo: UserInfo) => this.handleSuccessResponse(userInfo),
-        ({ error }) => this.handleErrorResponse(error)
-      );
-  }
-
-  onUpdateProfileInfo(userInfo) {
-    this.store.dispatch(new coreActions.SetTokenOnProfileUpdateAction(userInfo));
-    localStorage.setItem(TOKEN, userInfo.token);
-  }
-
-  decodeToken(token = localStorage.getItem(TOKEN)) {
-    const userInfo = jwtDecode(token);
-    this.store.dispatch(new coreActions.UpdateUserProfileAction(userInfo));
-    return userInfo;
-  }
-
-  handleSuccessResponse(userInfo): void {
-    this.notificationsService.message.emit({
-      message: 'Profile updated successfully',
-      type: 'success'
-    });
-    this.updateProfileInfo.emit(userInfo);
-  }
-
-  handleErrorResponse(error) {
-    this.notificationsService.message.emit({
-      message: error.message,
-      type: 'error'
-    });
-  }
-
+  ngOnInit(): void {}
 }
