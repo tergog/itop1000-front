@@ -62,7 +62,7 @@ export class DevProjectCardComponent implements OnInit {
     this.initForm();
     this.store.select(fromCore.getUserInfo);
     this.updateTechnologies(this.project.technologies);
-    this.imageUrl = this.project.photo;
+    this.imageUrl = this.project.logo;
   }
 
   private disableEmptyFields(): void {
@@ -73,7 +73,7 @@ export class DevProjectCardComponent implements OnInit {
 
   public onEditClick(): void {
     this.isEdit = !this.isEdit;
-    this.imageUrl = this.project.photo;
+    this.imageUrl = this.project.logo;
   }
 
   public onSaveClick(): void {
@@ -140,7 +140,7 @@ export class DevProjectCardComponent implements OnInit {
   }
 
   private uploadImage(image: string): void {
-    this.developersService.uploadProjectImage(this.id, image)
+    this.developersService.uploadProjectLogo(this.id, image)
       .subscribe(
         (url) => {
           this.imageUrl = url;

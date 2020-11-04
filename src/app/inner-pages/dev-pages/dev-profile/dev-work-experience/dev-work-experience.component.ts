@@ -6,16 +6,11 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 import xorBy from 'lodash.xorby';
-import * as jwtDecode from 'jwt-decode';
 
 
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
-import { NameValueModel, UserInfo, Developer } from 'app/shared/models';
-import { DevProject } from 'app/shared/models/dev-project.model';
+import { NameValueModel, UserInfo } from 'app/shared/models';
 import * as fromCore from 'app/core/reducers';
-import * as coreActions from 'app/core/actions/core.actions';
-import { getDeveloper } from 'app/core/developers/developers.reducer';
-import { TOKEN } from 'app/constants/constants';
 
 @Component({
   selector: 'app-dev-work-experience',

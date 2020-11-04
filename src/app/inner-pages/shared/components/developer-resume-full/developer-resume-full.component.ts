@@ -8,7 +8,6 @@ import { Developer } from 'app/shared/models';
 import { getDeveloper, State } from 'app/core/developers';
 import { setDeveloper } from 'app/core/developers/developers.actions';
 import { untilDestroyed } from 'ngx-take-until-destroy';
-import { DevProject } from 'app/shared/models/dev-project.model';
 
 export enum DeveloperResumeSections {
   ProfessionalSkills,
