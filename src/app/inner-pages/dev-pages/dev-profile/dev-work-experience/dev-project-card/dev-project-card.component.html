@@ -8,13 +8,28 @@
 
   <div [formGroup]="form" *ngIf="isEdit">
 
-    <div class="m__bottom--10">
-      <div class="profile-photo-wrap" (click)="openUploadPhotoDialog()">
-        <i class="profile-photo" *ngIf="!imageUrl"></i>
-        <img [src]=imageUrl alt="projectImageUrl" *ngIf="imageUrl">
-        <i class="plus"></i>
+    <div class="m__bottom--10 d__flex d__flex--justify-between">
+      <div class="profile-photo-wrap" (click)="openUploadPhotoDialog(true)">
+        <i class="profile-photo" *ngIf="!logoUrl"></i>
+        <i class="plus" *ngIf="!logoUrl"></i>
+        <img class="cursor__pointer" [src]=logoUrl alt="projectImageUrl" *ngIf="logoUrl">
       </div>
-      <app-button [type]="'secondary'" [text]="'Delete Image'" (buttonClick)="deleteImage()"></app-button>
+
+      <div class="m__bottom--10">
+        <div class="profile-photo-wrap">
+          <div *ngIf="!projectImages" (click)="openUploadPhotoDialog(false)">
+          <i class="profile-photo" ></i>
+          <i class="plus"></i>
+          </div>
+          <div *ngFor="let image of projectImages; index as i">
+          <img class="cursor__pointer"
+               [src]=image alt="projectImage"
+               (click)="openUploadPhotoDialog(false, i)"
+               *ngIf="image"
+               >
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="d__inline-flex d__flex--justify-between d__flex--items-center m__right--30 m__bottom--10">
@@ -33,6 +48,19 @@
       <span class="text text__sm text__bold text__uppercase m__right--10">Link</span>
       <app-input [type]="'inner'" formControlName="link" [placeholder]="'Link'"
                  [value]="form.get('link').value"></app-input>
+    </div>
+
+    <div>
+      <mat-form-field appearance="fill">
+        <input matInput formControlName="from" [placeholder]="'From'" [matDatepicker]="pickerFrom">
+        <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+        <mat-datepicker #pickerFrom></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput formControlName="to" [placeholder]="'To'" [matDatepicker]="pickerTo">
+        <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+        <mat-datepicker #pickerTo></mat-datepicker>
+      </mat-form-field>
     </div>
 
     <mat-form-field class="chip-list m__top--10" [class.edit-mode]="isEdit">

@@ -18,6 +18,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DevWorkExperienceComponent } from './dev-work-experience/dev-work-experience.component';
 import { DevProjectCardComponent } from './dev-work-experience/dev-project-card/dev-project-card.component';
 import { DevProfileEditFormComponent } from './shared/dev-profile-edit-form/dev-profile-edit-form.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerInput, MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 const routes: Routes = [
@@ -38,17 +41,20 @@ const routes: Routes = [
     DevContactInfoPreviewComponent,
     DevWorkExperienceComponent,
     DevProjectCardComponent,
-    DevProfileEditFormComponent
+    DevProfileEditFormComponent,
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     PagesSharedModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule
   ],
   providers: [
     DevProfileService
-  ]
+  ],
 })
 export class DevProfileModule { }

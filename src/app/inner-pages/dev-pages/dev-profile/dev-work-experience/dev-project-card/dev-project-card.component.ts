@@ -28,7 +28,8 @@ export class DevProjectCardComponent implements OnInit {
   @Input() project: DevProject;
   @Input() id: number;
 
-  public imageUrl: string;
+  public logoUrl: string;
+  public projectImages: string[];
   public form: FormGroup;
   public isEdit = false;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -54,13 +55,14 @@ export class DevProjectCardComponent implements OnInit {
     private store: Store<fromCore.State>,
     private matDialog: MatDialog,
     private developersService: DevelopersService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
     this.store.select(fromCore.getUserInfo);
     this.updateTechnologies(this.project.technologies);
-    this.imageUrl = this.project.logo;
+    this.logoUrl = this.project.logo;
+    this.projectImages = this.project.images;
   }
 
   private disableEmptyFields(): void {
@@ -71,13 +73,18 @@ export class DevProjectCardComponent implements OnInit {
 
   public onEditClick(): void {
     this.isEdit = !this.isEdit;
-    this.imageUrl = this.project.logo;
+    this.logoUrl = this.project.logo;
   }
 
   public onSaveClick(): void {
     this.disableEmptyFields();
     const arr = [...this.devProfileService.devProperties.projects];
-    const updatedProject = {...this.form.value, technologies: [...this.selectedTechnologies], logo: this.imageUrl};
+    const updatedProject = {
+      ...this.form.value,
+      technologies: [...this.selectedTechnologies],
+      logo: this.logoUrl,
+      images: this.projectImages
+    };
     arr.splice(this.id, 1, updatedProject);
 
     this.devProfileService.devProperties = {
@@ -85,7 +92,7 @@ export class DevProjectCardComponent implements OnInit {
       projects: arr
     };
     this.devProfileService.onSaveClick({ devProperties: this.devProfileService.devProperties });
-    this.store.dispatch(new coreActions.UpdateProjectImageAction(this.imageUrl, this.id));
+    this.store.dispatch(new coreActions.UpdateProjectImageAction(this.logoUrl, this.id));
     this.isEdit = false;
   }
 
@@ -99,7 +106,7 @@ export class DevProjectCardComponent implements OnInit {
     this.availableTechnologies.push(technology);
   }
 
-  public openUploadPhotoDialog(): void {
+  public openUploadPhotoDialog(forLogo: boolean = false, id?: number): void {
 
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
@@ -112,11 +119,24 @@ export class DevProjectCardComponent implements OnInit {
         filter(result => !!result),
         first()
       )
-      .subscribe((image: string) => this.uploadImage(image));
+      .subscribe((image: string) => image === 'delete' ? this.deleteImage(forLogo, id) : this.uploadImage(image, forLogo) );
   }
 
-  deleteImage() {
-    this.imageUrl = '';
+  private deleteImage(forLogo: boolean, id?: number): void {
+    forLogo ? this.deleteLogo() : this.deleteFromProjectImages(id);
+  }
+
+  private deleteLogo(): void {
+    this.logoUrl = '';
+  }
+
+  private deleteFromProjectImages(id: number): void {
+    this.projectImages = this.projectImages.filter( (image, index) =>  index !== id);
+  }
+
+
+  private updateProjectImage(projectImage: string, id: number): void {
+    this.projectImages = this.projectImages.map( (image, index) =>  index === id ? projectImage : image);
   }
 
   private initForm(): void {
@@ -125,6 +145,8 @@ export class DevProjectCardComponent implements OnInit {
       description: new FormControl(this.project.description, []),
       technologies: new FormControl([], []),
       link: new FormControl(this.project.link, []),
+      from: new FormControl(this.project.from, []),
+      to: new FormControl(this.project.to, []),
     });
   }
 
@@ -137,13 +159,13 @@ export class DevProjectCardComponent implements OnInit {
       );
   }
 
-  private uploadImage(image: string): void {
-    this.developersService.uploadProjectLogo(image)
+  private uploadImage(image: string, forLogo: boolean): void {
+    this.developersService.uploadProjectImage(image)
       .subscribe(
         (url) => {
-          this.imageUrl = url;
+          forLogo ? this.logoUrl = url : this.projectImages.push(url);
         },
-        ({ error }) => console.log(error)
+        ({error}) => console.log(error)
       );
   }
 

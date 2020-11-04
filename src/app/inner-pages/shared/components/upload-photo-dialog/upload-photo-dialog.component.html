@@ -24,10 +24,11 @@
     <input
       class="d__none"
       type="file"
-      (change)="fileChangeEvent($event); onFileChanged($event)"
+      (change)="fileChangeEvent($event);"
       #fileInput>
 
     <app-button [type]="'secondary'" [text]="'Select ' + inputData.destination + ' Image'" (buttonClick)="fileInput.click()"></app-button>
+    <app-button [type]="'secondary'" [text]="'Delete Image'" (buttonClick)="deleteImage(); closeDialog()"></app-button>
   </div>
 
   <div class="text__center m__top--50">

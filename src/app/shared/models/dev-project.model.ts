@@ -7,6 +7,6 @@ export interface DevProject {
   link: string;
   logo?: string;
   images?: string[];
-  from?: number;
-  to?: number;
+  from?: Date;
+  to?: Date;
 }

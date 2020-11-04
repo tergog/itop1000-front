@@ -22,7 +22,7 @@ export class DevelopersService {
     return this.http.get<Developer[]>(`${this.apiUrl}${ApiConstants.accounts.searchDevelopers}?searchTerm=${searchTerm}`);
   }
 
-  public uploadProjectLogo(image: string | ArrayBuffer): Observable<string> {
-    return this.http.post<string>(`${this.apiUrl}accounts/upload-project-logo`, {image});
+  public uploadProjectImage(image: string | ArrayBuffer): Observable<string> {
+    return this.http.post<string>(`${this.apiUrl}${ApiConstants.accounts.uploadProjectImage}`, {image});
   }
 }

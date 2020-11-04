@@ -94,8 +94,8 @@ export const developers = [
             link: 'https://github.com/',
             logo: null,
             images: [],
-            from: Date.now(),
-            to: Date.now()
+            from: null,
+            to: null
           },
           {
             title: 'Project 2 title',
@@ -117,8 +117,8 @@ export const developers = [
             link: 'https://github.com/',
             logo: null,
             images: [],
-            from: Date.now(),
-            to: Date.now()
+            from: null,
+            to: null
           }
         ],
         description: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame...',
