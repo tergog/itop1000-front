@@ -74,11 +74,17 @@ export class DevProjectCardComponent implements OnInit {
   public onEditClick(): void {
     this.isEdit = !this.isEdit;
     this.logoUrl = this.project.logo;
+    console.log(this.projectImages, this.project.images);
+    this.projectImages = this.project.images;
+
   }
 
   public onSaveClick(): void {
+
     this.disableEmptyFields();
+
     const arr = [...this.devProfileService.devProperties.projects];
+
     const updatedProject = {
       ...this.form.value,
       technologies: [...this.selectedTechnologies],
@@ -91,6 +97,7 @@ export class DevProjectCardComponent implements OnInit {
       ...this.devProfileService.devProperties,
       projects: arr
     };
+
     this.devProfileService.onSaveClick({ devProperties: this.devProfileService.devProperties });
     this.store.dispatch(new coreActions.UpdateProjectImageAction(this.logoUrl, this.id));
     this.isEdit = false;
@@ -119,7 +126,7 @@ export class DevProjectCardComponent implements OnInit {
         filter(result => !!result),
         first()
       )
-      .subscribe((image: string) => image === 'delete' ? this.deleteImage(forLogo, id) : this.uploadImage(image, forLogo) );
+      .subscribe((image: string) => image === 'delete' ? this.deleteImage(forLogo, id) : this.uploadProjectImages(image, forLogo, id) );
   }
 
   private deleteImage(forLogo: boolean, id?: number): void {
@@ -132,11 +139,6 @@ export class DevProjectCardComponent implements OnInit {
 
   private deleteFromProjectImages(id: number): void {
     this.projectImages = this.projectImages.filter( (image, index) =>  index !== id);
-  }
-
-
-  private updateProjectImage(projectImage: string, id: number): void {
-    this.projectImages = this.projectImages.map( (image, index) =>  index === id ? projectImage : image);
   }
 
   private initForm(): void {
@@ -159,11 +161,27 @@ export class DevProjectCardComponent implements OnInit {
       );
   }
 
-  private uploadImage(image: string, forLogo: boolean): void {
+  private uploadProjectImages(image: string, forLogo: boolean = false, id?: number): void {
+    forLogo ? this.uploadLogo(image) : this.uploadImage(image, id);
+  }
+
+  private uploadLogo(image: string): void {
     this.developersService.uploadProjectImage(image)
       .subscribe(
         (url) => {
-          forLogo ? this.logoUrl = url : this.projectImages.push(url);
+            this.logoUrl = url;
+        },
+        ({error}) => console.log(error)
+      );
+  }
+
+  private uploadImage(image: string, id?: number): void {
+    this.developersService.uploadProjectImage(image)
+      .subscribe(
+        (url) => {
+          const project = Object.assign([], this.projectImages);
+          (id || project[id]) ? project[id] = url : project.push(url);
+          this.projectImages = project;
         },
         ({error}) => console.log(error)
       );

@@ -17,9 +17,8 @@
 
       <div class="m__bottom--10">
         <div class="profile-photo-wrap">
-          <div *ngIf="!projectImages" (click)="openUploadPhotoDialog(false)">
+          <div *ngIf="!projectImages || projectImages.length === 0" (click)="openUploadPhotoDialog(false)">
           <i class="profile-photo" ></i>
-          <i class="plus"></i>
           </div>
           <div *ngFor="let image of projectImages; index as i">
           <img class="cursor__pointer"
@@ -28,6 +27,7 @@
                *ngIf="image"
                >
           </div>
+          <i class="plus" (click)="openUploadPhotoDialog(false)"></i>
         </div>
       </div>
     </div>
