@@ -55,7 +55,9 @@ export class AddBillingMethodDialogComponent implements OnInit, OnDestroy {
   public createPaymentToken(): void {
       this.stripeService.createToken(this.card.element, {name: `${this.form.controls.firstName.value} ${this.form.controls.lastName.value}`})
         .pipe(untilDestroyed(this))
-        .subscribe(result => this.createPaymentMethod(result.token.id));
+        .subscribe(
+          result => this.createPaymentMethod(result.token.id),
+          error => console.log(error));
   }
 
   public createPaymentMethod(token) {
@@ -77,20 +79,10 @@ export class AddBillingMethodDialogComponent implements OnInit, OnDestroy {
     this.form = new FormGroup({
 
       firstName: new FormControl('', {
-        validators: [
-          Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(20),
-        ],
-      }),
+        validators: [Validators.required,],}),
 
       lastName: new FormControl('', {
-        validators: [
-          Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(20),
-        ],
-      }),
+        validators: [Validators.required,],}),
     });
   }
 

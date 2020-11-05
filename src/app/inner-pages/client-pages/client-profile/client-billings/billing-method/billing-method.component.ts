@@ -1,9 +1,12 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { untilDestroyed } from "ngx-take-until-destroy";
-import { MatDialog } from "@angular/material/dialog";
+import { untilDestroyed } from 'ngx-take-until-destroy';
+import { MatDialog } from '@angular/material/dialog';
+import { PaymentMethod } from '@stripe/stripe-js';
 
-import { PaymentService } from "app/shared/services/payment.service";
-import { UpdateBillingMethodDialogComponent } from "app/inner-pages/shared/components/update-billing-method-dialog/update-billing-method-dialog.component";
+
+import { PaymentService } from 'app/shared/services/payment.service';
+import { UpdateBillingMethodDialogComponent } from 'app/inner-pages/shared/components/update-billing-method-dialog/update-billing-method-dialog.component';
+import { DeleteBillingMethodDialogComponent } from 'app/inner-pages/shared/components/delete-billing-method-dialog/delete-billing-method-dialog.component';
 
 @Component({
   selector: 'app-billing-method',
@@ -12,7 +15,7 @@ import { UpdateBillingMethodDialogComponent } from "app/inner-pages/shared/compo
 })
 export class BillingMethodComponent implements OnInit, OnDestroy {
 
-  @Input() paymentMethod: any;
+  @Input() paymentMethod: PaymentMethod;
   @Output() onMethodChanged = new EventEmitter();
 
   constructor(private paymentService: PaymentService,
@@ -21,14 +24,15 @@ export class BillingMethodComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
 
-  onDeleteClick(paymentMethodId: string): void {
-    this.paymentService.deletePaymentMethod(paymentMethodId)
+  onDeleteClick(): void {
+    const deleteDialogRef = this.matDialog.open(DeleteBillingMethodDialogComponent, {data: {paymentMethod: this.paymentMethod}})
+
+    deleteDialogRef.afterClosed()
       .pipe(untilDestroyed(this))
-      .subscribe(() => this.onMethodChanged.emit(),
-        error => console.log(error))
+      .subscribe(() => this.onMethodChanged.emit());
   }
 
-  onEditClick(paymentMethodId) {
+  onEditClick() {
     const dialogRef =  this.matDialog.open(UpdateBillingMethodDialogComponent, {data: {paymentMethod: this.paymentMethod}});
 
     dialogRef.afterClosed()

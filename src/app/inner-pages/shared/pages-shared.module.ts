@@ -22,6 +22,7 @@ import { JobFullComponent } from './components/job-full/job-full.component';
 import { WorkExperienceComponent } from './components/developer-resume-full/work-experience/work-experience.component';
 import { ProjectCardComponent } from './components/project-card/project-card.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DeleteBillingMethodDialogComponent } from 'app/inner-pages/shared/components/delete-billing-method-dialog/delete-billing-method-dialog.component';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     JobFullComponent,
     WorkExperienceComponent,
     ProjectCardComponent,
+    DeleteBillingMethodDialogComponent,
   ],
   imports: [
     CommonModule,

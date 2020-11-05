@@ -16,11 +16,13 @@
     <app-input class="m__top--10 light" [value]="lastName" formControlName="lastName" [placeholder]="'Last name'"></app-input>
   </div>
 
+  <div class="d__flex d__flex--justify-center text__center">
+    <span *ngIf="errorMessage" class="error text text__md text__color--2 m__top--25">
+      {{ errorMessage }}
+    </span>
+  </div>
+
   <div class="text__center m__top--50">
     <app-button [text]="'Continue'" (buttonClick)="updateMethod()"></app-button>
   </div>
-
-  <span *ngIf="errorMessage" class="error text text__md text__color--2 m__top--25">
-      {{ errorMessage }}
-    </span>
 </div>

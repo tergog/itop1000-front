@@ -6,7 +6,7 @@
 </div>
 
 <div class="p__20">
-  <span *ngIf="!billingMethods.length" class="text text__color--1 text__sm">No Billings yet</span>
+  <span *ngIf="!billingMethods" class="text text__color--1 text__sm">No Billings yet</span>
 
   <ng-container *ngFor="let billingMethod of billingMethods">
     <app-billing-method [paymentMethod]="billingMethod"

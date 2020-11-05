@@ -33,19 +33,11 @@ export class UpdateBillingMethodDialogComponent implements OnInit, OnDestroy {
     this.form = new FormGroup({
 
       firstName: new FormControl('', {
-        validators: [
-          Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(20),
-        ],
+        validators: [Validators.required,],
       }),
 
       lastName: new FormControl('', {
-        validators: [
-          Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(20),
-        ],
+        validators: [Validators.required,],
       }),
     });
   }

@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { untilDestroyed } from "ngx-take-until-destroy";
+import { untilDestroyed } from 'ngx-take-until-destroy';
+import { PaymentMethod } from '@stripe/stripe-js';
 
 import { AddBillingMethodDialogComponent } from 'app/inner-pages/shared/components/add-billing-method-dialog/add-billing-method-dialog.component';
 import { PaymentService } from 'app/shared/services/payment.service';
@@ -12,7 +13,7 @@ import { PaymentService } from 'app/shared/services/payment.service';
 })
 export class ClientBillingsComponent implements OnInit, OnDestroy {
 
-  public billingMethods: any = [];
+  public billingMethods: PaymentMethod[] = [];
   public errorMessage: string;
 
   constructor(private matDialog: MatDialog,

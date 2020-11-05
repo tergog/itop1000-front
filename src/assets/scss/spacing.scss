@@ -127,12 +127,24 @@
     width: 350px !important;
   }
 
+  &__494 {
+    width: 494px !important;
+  }
+
   &__594 {
     width: 594px !important;
 
     @media (max-width: 992px) {
       width: 80% !important;
     }
+  }
+
+  &__50per {
+    width: 50%;
+  }
+
+  &__100per {
+    width: 100%;
   }
 }
 
@@ -142,18 +154,6 @@
   }
 
   &__100p {
-    width: 100%;
-  }
-
-  &__494 {
-    width: 494px !important;
-  }
-
-  &__50per {
-    width: 50%;
-  }
-
-  &__100per {
     width: 100%;
   }
 }
