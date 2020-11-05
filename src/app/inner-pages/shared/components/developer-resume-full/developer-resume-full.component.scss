@@ -53,7 +53,25 @@
   box-shadow: 0 2px 4px $color-1;
   width: calc(100% - 300px);
   min-height: 100%;
-  border-left: 2px solid $color-5;
+  height: 100%;
+
+  position: relative;
+
+
+  .border-sparks {
+    position: absolute;
+    left: -23px;
+    top: 0;
+    min-height: 100%;
+    border-left: 40px solid $color-5;
+    -webkit-border-image: url(assets/icons/line-sparkl.svg) 40 repeat;
+  }
+
+
+  //background-image: url(assets/icons/line-sparkl.svg);
+  //background-position: left;
+  //background-repeat: repeat-y;
+  //background-size: auto;
 
   .location-wrap {
     display: flex;

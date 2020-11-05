@@ -12,8 +12,8 @@
 
     <image-cropper
       [imageChangedEvent]="imageChangedEvent"
-      [maintainAspectRatio]="true"
-      [roundCropper]="true"
+      [maintainAspectRatio]="inputData.destination !== 'ProjectImage'"
+      [roundCropper]="inputData.destination !== 'ProjectImage'"
       format="png"
       (imageCropped)="imageCropped($event)"
       (imageLoaded)="imageLoaded()"

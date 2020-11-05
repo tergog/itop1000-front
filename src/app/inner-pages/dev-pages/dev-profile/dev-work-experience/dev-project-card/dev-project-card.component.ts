@@ -117,7 +117,7 @@ export class DevProjectCardComponent implements OnInit {
 
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
-      destination: 'Project'
+      destination: ( !forLogo && (id || id === 0) ) ? 'ProjectImage' : 'ProjectLogo'
     };
 
     this.matDialog.open(UploadPhotoDialogComponent, dialogConfig)

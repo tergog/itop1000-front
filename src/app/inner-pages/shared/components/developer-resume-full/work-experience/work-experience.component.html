@@ -1,23 +1,46 @@
 <div class="project-wrap d__flex d__flex--direction-column">
-  <div>
-    <span class="text__center text__color--3 text__font--2 text__uppercase">{{project.title}}</span>
-    <div class="section-underline m__top--10">
+  <div class="d__flex">
+    <div>
+      <span class="text__xxlg text__color--3 text__font--2 text__uppercase"
+            style="line-height: 45px">{{project.title}}</span>
+      <div class="section-underline"></div>
+    </div>
+    <div class="m__left--30 d__flex d__flex--items-center">
+    <span class="text__color--5 text__font--2 text__md text__fw--300">{{project.from | date: 'MMMM yyyy'}}
+      - {{project.to | date: 'MMMM yyyy'}}</span>
+    </div>
   </div>
   <div class="m__top--30">
-    <span class="text text__color--3 text__sm text__uppercase m__right--10"
+    <span class="text text__font--2 text__color--3 text__sm text__fw--600 text__uppercase m__right--30"
           *ngFor="let technology of project.technologies">
       {{technology.name}}
     </span>
   </div>
   <div class="m__top--30">
-    <span class="text text__color--3 text__lg m__top--10">{{project.description}}</span>
+    <span class="text text__fw--200 text__lg text__capitalize m__top--10 project-description">{{project.description}}</span>
   </div>
   <div class="m__top--30">
-    <span class="text__color--5 text__font--2">{{project.link}}</span>
+    <span class="text__color--5 text__font--2 text__fw--300 text__lowercase text__lg">{{project.link}}</span>
   </div>
-  <div class="m__top--60">
-    <img src="{{project.logo}}" alt="project.link">
-  </div>
-</div>
+  <div class="separator"></div>
 
+  <div class="slider d__flex d__flex--justify-between d__flex--items-center"
+       *ngIf="project.images"
+       (mouseover)="carouselStop()"
+       (mouseout)="carouselStart()"
+  >
+    <div class="carousel-step" (click)="carouselStep(false)">
+
+    </div>
+    <ng-container *ngFor="let img of project.images; let i = index">
+      <div *ngIf="projectImageId === i"  @fade>
+        <img class="project-image" [src]="img" >
+      </div>
+    </ng-container>
+    <div class="carousel-step" (click)="carouselStep(true)">
+
+    </div>
+  </div>
+
+</div>
 
