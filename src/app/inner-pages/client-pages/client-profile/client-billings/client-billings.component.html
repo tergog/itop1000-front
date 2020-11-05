@@ -12,4 +12,8 @@
     <app-billing-method [paymentMethod]="billingMethod"
                         (onMethodChanged)="getPaymentMethods()" ></app-billing-method>
   </ng-container>
+
+  <span *ngIf="errorMessage" class="error text text__md text__color--2 m__top--25">
+    {{ errorMessage }}
+  </span>
 </div>

@@ -13,6 +13,7 @@ import { PaymentService } from 'app/shared/services/payment.service';
 export class ClientBillingsComponent implements OnInit, OnDestroy {
 
   public billingMethods: any = [];
+  public errorMessage: string;
 
   constructor(private matDialog: MatDialog,
               private paymentService: PaymentService) { }
@@ -33,7 +34,7 @@ export class ClientBillingsComponent implements OnInit, OnDestroy {
     this.paymentService.getPaymentMethods()
       .pipe(untilDestroyed(this))
       .subscribe((billingsMethods) => this.billingMethods = billingsMethods,
-        ({error}) => console.log(error)
+        ({error}) => this.errorMessage = error.message
       );
   }
 

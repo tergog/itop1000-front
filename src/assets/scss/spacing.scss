@@ -2,9 +2,11 @@
   &--0 {
     margin: 0;
   }
+
   &--5 {
     margin: 5px;
   }
+
   &__top {
     &--10 {
       margin-top: 10px;
@@ -43,7 +45,7 @@
     &--auto {
       margin-right: auto;
     }
-    
+
     &--0 {
       margin-right: 0 !important;
     }
@@ -149,5 +151,9 @@
 
   &__50per {
     width: 50%;
+  }
+
+  &__100per {
+    width: 100%;
   }
 }
