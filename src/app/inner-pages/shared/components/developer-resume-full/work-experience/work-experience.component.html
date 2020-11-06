@@ -30,15 +30,13 @@
        (mouseout)="carouselStart()"
   >
     <div class="carousel-step" (click)="carouselStep(false)">
-
     </div>
     <ng-container *ngFor="let img of project.images; let i = index">
-      <div *ngIf="projectImageId === i"  @fade>
-        <img class="project-image" [src]="img" >
+      <div *ngIf="projectImageId === i" class="project-image" @fade>
+        <img [src]="img" alt="Project Image">
       </div>
     </ng-container>
     <div class="carousel-step" (click)="carouselStep(true)">
-
     </div>
   </div>
 

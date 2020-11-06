@@ -42,6 +42,7 @@ export class DeveloperResumeFullComponent implements OnInit, OnDestroy {
       .subscribe((dev) => !dev
         ? this.store.dispatch(setDeveloper({id: this.route.snapshot.params.id}))
         : this.developer$ = this.store.select(getDeveloper)
+
     );
 
     this.projectCounter = 3;
@@ -75,6 +76,10 @@ export class DeveloperResumeFullComponent implements OnInit, OnDestroy {
 
   public onWorkExperienceClick(id: string, projectId: number): void {
     this.router.navigate([`in/c/search-developers/${id}/project/${projectId}`]);
+  }
+
+  public onMessageClick(): void {
+    this.router.navigate(['in/c/chat']);
   }
 
   public inViewport(isInViewport: boolean, section: DeveloperResumeSections): void {

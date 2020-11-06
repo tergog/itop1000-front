@@ -36,18 +36,30 @@ export class WorkExperienceComponent implements OnInit {
       ? this.project = developer.devProperties.projects[this.projectId]
       : this.store.dispatch(setDeveloper({id: this.route.snapshot.params.id})));
 
-    this.carousel = setInterval(() => {
-      this.projectImageId = ++this.projectImageId % this.project.images.length;
-    }, 4000);
+    this.carouselStart();
   }
 
   public carouselStep(isNext: boolean) {
-    this.projectImageId = (isNext ? ++this.projectImageId : --this.projectImageId) % this.project.images.length;
+    if (!isNext && this.projectImageId === 0) {
+      this.projectImageId = this.project.images.length - 1;
+      return;
+    }
+    if (isNext && this.projectImageId === this.project.images.length - 1) {
+      this.projectImageId = 0;
+      return;
+    }
+    this.projectImageId = (isNext ? ++this.projectImageId : --this.projectImageId);
   }
 
   public carouselStart() {
     this.carousel = setInterval(() => {
-      this.projectImageId = ++this.projectImageId % this.project.images.length;
+      console.log(this.projectImageId, this.project.images.length);
+
+      this.projectImageId !== this.project.images.length - 1
+        ? this.projectImageId = ++this.projectImageId
+        : this.projectImageId = 0;
+
+      console.log(this.projectImageId);
     }, 4000);
   }
 

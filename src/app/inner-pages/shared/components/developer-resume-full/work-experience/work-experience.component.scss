@@ -41,7 +41,16 @@
 }
 
 .project-image {
-  height: 100%;
+  width: auto;
+  height: 300px;
+
+  img{
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
 }
 
 .carousel-step {
@@ -52,4 +61,5 @@
   height: 50px;
   border: 1px solid $color-6;
   border-radius: 50%;
+  opacity: 0.5;
 }
