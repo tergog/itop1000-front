@@ -1,19 +1,18 @@
 <div class="d__flex content-wrap">
   <div class="d__flex d__flex--items-center d__flex--justify-center m__right--10">
-    <img *ngIf="project.logo" [src]="project.logo" alt="projectImage" class="project-image">
+    <img *ngIf="project.logo" [src]="project.logo" alt="projectImage">
     <div *ngIf="!project.logo" class="image-exchange">
 
     </div>
   </div>
   <div class="d__flex d__flex--direction-column">
-    <div class="d__flex m">
+    <div class="d__flex">
       <span class="text text__center text__color--5 text__uppercase text__font--2">
         {{ project.title }}
       </span>
     </div>
     <div>
-    <span *ngIf="project.from && project.to" class="text__color--4 text__font--2 text__xs text__capitalize"
-          style="color: #998B8B">
+    <span *ngIf="project.from && project.to" class="project-card-date text__color--4 text__font--2 text__xs text__capitalize">
         {{ project.from | date : 'MMMM yyyy' }} - {{ project.to | date: 'MMMM yyyy' }}
       </span>
     </div>

@@ -12,7 +12,8 @@ import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-pro
 import { NameValueModel, UserInfo } from 'app/shared/models';
 import * as fromCore from 'app/core/reducers';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { UploadPhotoDialogComponent } from '../../../shared/components/upload-photo-dialog/upload-photo-dialog.component';
+import { UploadPhotoDialogComponent } from 'app/inner-pages/shared/components/upload-photo-dialog/upload-photo-dialog.component';
+import { MatOptionSelectionChange } from "@angular/material/core";
 
 @Component({
   selector: 'app-dev-work-experience',
@@ -32,6 +33,7 @@ export class DevWorkExperienceComponent implements OnInit {
 
   public selectedTechnologies = [];
   public availableTechnologies: NameValueModel[] = [
+
     {name: 'Javascript', value: 1},
     {name: 'Typescript', value: 2},
     {name: 'CSS3', value: 3},
@@ -42,6 +44,7 @@ export class DevWorkExperienceComponent implements OnInit {
     {name: 'Angular 7', value: 9},
     {name: 'Angular 8', value: 10},
     {name: 'Angular 2+', value: 11},
+
   ];
 
   constructor(
@@ -92,7 +95,7 @@ export class DevWorkExperienceComponent implements OnInit {
     this.isNewProject = false;
   }
 
-  public onTechnologySelect({option}): void {
+  public onTechnologySelect({ option }: any): void {
     this.availableTechnologies = this.availableTechnologies.filter(technology => technology.value !== option.value.value);
     this.selectedTechnologies.push(option.value);
   }
@@ -137,7 +140,6 @@ export class DevWorkExperienceComponent implements OnInit {
 
   private updateTechnologies(technologies: NameValueModel[]): void {
     this.selectedTechnologies = [...technologies];
-
     this.availableTechnologies = xorBy(this.selectedTechnologies, this.availableTechnologies);
   }
 

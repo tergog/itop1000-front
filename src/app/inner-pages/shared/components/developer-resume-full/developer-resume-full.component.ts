@@ -31,7 +31,6 @@ export class DeveloperResumeFullComponent implements OnInit, OnDestroy {
 
   public projectCounter = 0;
 
-
   private inViewportChange;
 
   constructor(private store: Store<State>, private router: Router, private route: ActivatedRoute) {
@@ -57,8 +56,9 @@ export class DeveloperResumeFullComponent implements OnInit, OnDestroy {
 
   }
 
-  onShowMoreClick() {
-    this.developer$.subscribe(dev => this.projectCounter < dev.devProperties.projects.length
+  onShowMoreClick(): void {
+    this.developer$.pipe(untilDestroyed(this))
+      .subscribe(dev => this.projectCounter < dev.devProperties.projects.length
       ? this.projectCounter += 3
       : this.projectCounter = 3
     );

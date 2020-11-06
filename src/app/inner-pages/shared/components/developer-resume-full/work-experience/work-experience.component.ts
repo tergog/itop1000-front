@@ -6,6 +6,8 @@ import { trigger, transition, animate, style } from '@angular/animations';
 import { State, getDeveloper } from 'app/core/developers';
 import { DevProject } from 'app/shared/models/dev-project.model';
 import { setDeveloper } from 'app/core/developers/developers.actions';
+import { interval, Observable } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 
 @Component({
   selector: 'app-work-experience',
@@ -23,7 +25,8 @@ export class WorkExperienceComponent implements OnInit {
   public project: DevProject;
   public projectId: number;
   public projectImageId = 0;
-  public carousel: any;
+  public interval: Observable<any>;
+  private carousel: any;
 
   constructor(
     private store: Store<State>,
@@ -36,10 +39,11 @@ export class WorkExperienceComponent implements OnInit {
       ? this.project = developer.devProperties.projects[this.projectId]
       : this.store.dispatch(setDeveloper({id: this.route.snapshot.params.id})));
 
+    this.interval = interval(4000);
     this.carouselStart();
   }
 
-  public carouselStep(isNext: boolean) {
+  public carouselStep(isNext: boolean): void {
     if (!isNext && this.projectImageId === 0) {
       this.projectImageId = this.project.images.length - 1;
       return;
@@ -51,20 +55,17 @@ export class WorkExperienceComponent implements OnInit {
     this.projectImageId = (isNext ? ++this.projectImageId : --this.projectImageId);
   }
 
-  public carouselStart() {
-    this.carousel = setInterval(() => {
-      console.log(this.projectImageId, this.project.images.length);
-
+  public carouselStart(): void {
+    this.carousel = this.interval
+      .subscribe(() => {
       this.projectImageId !== this.project.images.length - 1
         ? this.projectImageId = ++this.projectImageId
         : this.projectImageId = 0;
-
-      console.log(this.projectImageId);
-    }, 4000);
+    });
   }
 
-  public carouselStop() {
-    clearInterval(this.carousel);
+  public carouselStop(): void {
+    this.carousel.unsubscribe();
   }
 
 }

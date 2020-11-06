@@ -1,7 +1,6 @@
 import * as coreActions from '../actions/core.actions';
 
-import { Job, UserInfo } from 'app/shared/models';
-import { DevProperties } from '../../shared/models/dev-properties.model';
+import { Job, UserInfo, DevProperties } from 'app/shared/models';
 
 export interface State {
   isAuthenticated: boolean;

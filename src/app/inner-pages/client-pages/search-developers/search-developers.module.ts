@@ -12,8 +12,6 @@ const routes: Routes = [
   { path: ':id/project/:projectId', component: WorkExperienceComponent },
   { path: ':id', component: DeveloperResumeFullComponent },
   { path: '', component: SearchDevelopersComponent },
-
-
 ];
 
 @NgModule({
