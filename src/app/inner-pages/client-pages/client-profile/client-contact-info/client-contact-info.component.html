@@ -1,33 +1,11 @@
-<app-profile-section-header [title]="'Account'" (edit)="onEditClick()"></app-profile-section-header>
+<app-profile-section-header [title]="'Account'" (edit)="editToggle()"></app-profile-section-header>
 
 <div class="p__20">
-  <div class="w__350 d__inline-flex d__flex--justify-between d__flex--items-center m__right--10 m__bottom--10">
-    <span class="text text__sm text__bold text__uppercase">Name</span>
-    <app-input [type]="'inner'" [placeholder]="'Name'"></app-input>
-  </div>
+  <ng-container *ngIf="isEdit">
+    <app-client-contact-info-edit [userInfo]="userInfo$ | async" (cancel)="editToggle()" (save)="onSaveClick($event)"></app-client-contact-info-edit>
+  </ng-container>
 
-  <div class="w__350 d__inline-flex d__flex--justify-between d__flex--items-center m__right--10 m__bottom--10">
-    <span class="text text__sm text__bold text__uppercase">Email</span>
-    <app-input [type]="'inner'" [placeholder]="'Email'"></app-input>
-  </div>
-
-  <div class="w__350 d__inline-flex d__flex--justify-between d__flex--items-center m__right--10 m__bottom--10">
-    <span class="text text__sm text__bold text__uppercase">Time Zone</span>
-    <app-input [type]="'inner'" [placeholder]="'Time Zone'"></app-input>
-  </div>
-
-  <div class="w__350 d__inline-flex d__flex--justify-between d__flex--items-center m__right--10 m__bottom--10">
-    <span class="text text__sm text__bold text__uppercase">Address</span>
-    <app-input [type]="'inner'" [placeholder]="'Address'"></app-input>
-  </div>
-
-  <div class="w__350 d__inline-flex d__flex--justify-between d__flex--items-center m__right--10 m__bottom--10">
-    <span class="text text__sm text__bold text__uppercase">Phone</span>
-    <app-input [type]="'inner'" [placeholder]="'Phone'"></app-input>
-  </div>
-
-  <div class="text__right" *ngIf="isEdit">
-    <app-button [type]="'transparent'" [text]="'Cancel'" (buttonClick)="onEditClick()"></app-button>
-    <app-button [text]="'Save'" (buttonClick)="onSaveClick()"></app-button>
-  </div>
+  <ng-container *ngIf="!isEdit">
+    <app-client-contact-info-preview [userInfo]="userInfo$ | async"></app-client-contact-info-preview>
+  </ng-container>
 </div>

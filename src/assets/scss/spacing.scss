@@ -2,9 +2,11 @@
   &--0 {
     margin: 0;
   }
+
   &--5 {
     margin: 5px;
   }
+
   &__top {
     &--10 {
       margin-top: 10px;
@@ -40,6 +42,10 @@
   }
 
   &__right {
+    &--auto {
+      margin-right: auto;
+    }
+
     &--0 {
       margin-right: 0 !important;
     }
@@ -52,14 +58,28 @@
       margin-right: 10px;
     }
 
+    &--20 {
+      margin-right: 10px;
+    }
+
     &--30 {
       margin-right: 30px;
+    }
+
+    &--50 {
+      margin-right: 60px;
     }
   }
 
   &__left {
     &--30 {
       margin-left: 30px;
+    }
+  }
+
+  &__left {
+    &--auto {
+      margin-left: auto;
     }
   }
 
@@ -99,8 +119,16 @@
     }
   }
 
+  &__320 {
+    width: 320px !important;
+  }
+
   &__350 {
     width: 350px !important;
+  }
+
+  &__494 {
+    width: 494px !important;
   }
 
   &__594 {
@@ -109,6 +137,14 @@
     @media (max-width: 992px) {
       width: 80% !important;
     }
+  }
+
+  &__50per {
+    width: 50%;
+  }
+
+  &__100per {
+    width: 100%;
   }
 }
 

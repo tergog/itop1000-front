@@ -9,6 +9,8 @@ export const ApiConstants = {
     changePassword: 'accounts/change-password',
     upload: 'accounts/upload',
     uploadProjectImage: 'accounts/upload-project-image',
+    paymentMethod: 'accounts/payment-method',
+    paymentMethods: 'accounts/payment-methods',
     searchDevelopers: 'accounts/search',
     getDeveloperById: 'accounts/get-developer'
   },
