@@ -1,0 +1,55 @@
+@import 'assets/scss/variables';
+
+table {
+  padding: 40px 15px;
+
+  th.mat-header-cell {
+    padding-right: 50px;
+    padding-left: 50px;
+    border-bottom: none;
+    font-family: Work Sans;
+    font-weight: 500;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: $color-1;
+
+    span {
+      padding-right: 40px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid $color-1;
+    }
+  }
+
+  td.mat-cell {
+    padding: 30px 50px;
+    font-family: Work Sans;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: $color-1;
+  }
+}
+
+.mat-paginator {
+  font-family: Work Sans;
+  font-weight: 400;
+  font-size: 13px;
+  color: $color-1;
+}
+
+th.mat-header-cell:first-of-type,
+td.mat-cell:first-of-type,
+td.mat-footer-cell:first-of-type {
+  padding-left: 100px;
+}
+
+th.mat-header-cell:last-of-type,
+td.mat-cell:last-of-type,
+td.mat-footer-cell:last-of-type{
+  padding-right: 100px;
+}
+
+.arrow-down {
+  margin-left: 35px;
+  margin-bottom: -4px;
+}

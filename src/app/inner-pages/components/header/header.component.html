@@ -7,11 +7,11 @@
 </div>
 
 
-<div class="photo-preview with-chevron cursor__pointer" [style.backgroundImage]="'url(' + (userInfo$ | async)?.photo + ')'" (click)="togglePopup()"></div>
+<div class="photo-preview with-chevron cursor__pointer" [style.backgroundImage]="(userInfo$ | async)?.photo ? 'url(' + (userInfo$ | async)?.photo + ')' : 'none'" (click)="togglePopup()"></div>
 
 <div [@opacityInOut] class="logout-popup" *ngIf="isPopupOpen">
   <div class="d__flex d__flex--items-center">
-    <div class="photo-preview m__right--10" [style.backgroundImage]="'url(' + (userInfo$ | async)?.photo + ')'"></div>
+    <div class="photo-preview m__right--10" [style.backgroundImage]="(userInfo$ | async)?.photo ? 'url(' + (userInfo$ | async)?.photo + ')' : 'none'"></div>
     <div class="d__flex d__flex--direction-column">
       <span class="text text__lg text__fw--500 text__color--1">{{ (userInfo$ | async)?.firstName }} {{ (userInfo$ | async)?.lastName }}</span>
       <span class="text text__sm text__color--6">{{ (userInfo$ | async)?.email }}</span>

@@ -11,6 +11,32 @@
   height: 30px;
   border-radius: 50%;
   background: url(assets/icons/edit.svg) no-repeat $color-3 center center;
+  border: 1px solid $color-4;
+  box-shadow: inset 0px 6px 5px rgba(255, 255, 255, 0.3);
+
+  &:hover {
+    border-color: $color-2-hover;
+  }
+}
+
+.arrow-down {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: url(assets/icons/arrow-down.svg) no-repeat $color-3 center center;
+}
+
+.delete {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: url(assets/icons/delete.svg) no-repeat $color-3 center center;
+  border: 1px solid $color-4;
+  box-shadow: inset 0px 6px 5px rgba(255, 255, 255, 0.3);
+
+  &:hover {
+    border-color: $color-2-hover;
+  }
 }
 
 .plus {
@@ -189,6 +215,45 @@
 
   &-gray {
     background-image: url(~assets/icons/location-gray.svg);
+  }
+}
+
+
+.card {
+  width: 32px;
+  height: 32px;
+  background-size: cover;
+
+  &.amex {
+    background-image: url(assets/icons/amex-card.png);
+  }
+
+  &.diners {
+    background-image: url(assets/icons/diners-card.png);
+  }
+
+  &.discover {
+    background-image: url(assets/icons/discover-card.png);
+  }
+
+  &.jcb {
+    background-image: url(assets/icons/jcb-card.png);
+  }
+
+  &.mastercard {
+    background-image: url(assets/icons/mastercard-card.png);
+  }
+
+  &.unionpay {
+    background-image: url(assets/icons/unionpay-card.png);
+  }
+
+  &.visa {
+    background-image: url(assets/icons/visa-card.png);
+  }
+
+  &.unknown {
+    background-image: url(assets/icons/unknown-card.png);
   }
 }
 

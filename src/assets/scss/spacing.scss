@@ -2,9 +2,11 @@
   &--0 {
     margin: 0;
   }
+
   &--5 {
     margin: 5px;
   }
+
   &__top {
     &--10 {
       margin-top: 10px;
@@ -40,6 +42,10 @@
   }
 
   &__right {
+    &--auto {
+      margin-right: auto;
+    }
+
     &--0 {
       margin-right: 0 !important;
     }
@@ -49,6 +55,10 @@
     }
 
     &--10 {
+      margin-right: 10px;
+    }
+
+    &--20 {
       margin-right: 10px;
     }
 
@@ -64,6 +74,12 @@
   &__left {
     &--30 {
       margin-left: 30px;
+    }
+  }
+
+  &__left {
+    &--auto {
+      margin-left: auto;
     }
   }
 
@@ -111,12 +127,24 @@
     width: 350px !important;
   }
 
+  &__494 {
+    width: 494px !important;
+  }
+
   &__594 {
     width: 594px !important;
 
     @media (max-width: 992px) {
       width: 80% !important;
     }
+  }
+
+  &__50per {
+    width: 50%;
+  }
+
+  &__100per {
+    width: 100%;
   }
 }
 

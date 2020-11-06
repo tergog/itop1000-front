@@ -1,0 +1,38 @@
+<div class="dialog-header">
+  <span class="text text__lg text__color--3 text__uppercase">Add a billing method</span>
+  <i class="close cursor__pointer" mat-dialog-close></i>
+</div>
+
+<div class="p__20 w__494"
+     ngxStripeCardGroup
+     [formGroup]="form"
+     [elementsOptions]="elementsOptions">
+
+  <div class="m__top--20">
+    <span class="text text__sm text__color--1 text__fw--600 m__top--20">First name</span>
+    <app-input class="m__top--10 light" formControlName="firstName" [placeholder]="'First name'"></app-input>
+  </div>
+
+  <div class="m__top--20">
+    <span class="text text__sm text__color--1 text__fw--600">Last name</span>
+    <app-input class="m__top--10 light" formControlName="lastName" [placeholder]="'Last name'"></app-input>
+  </div>
+
+  <div class="m__top--20">
+    <span class="text text__sm text__color--1 text__fw--600">Card info</span>
+    <div class="input-wrap m__top--10">
+      <ngx-stripe-card
+        [options]="cardOptions"
+        [elementsOptions]="elementsOptions"
+      ></ngx-stripe-card>
+    </div>
+  </div>
+
+  <div class="text__center m__top--50">
+    <app-button [text]="'Continue'" (buttonClick)="createPaymentToken()"></app-button>
+  </div>
+
+  <span *ngIf="errorMessage" class="error text text__md text__color--2 m__top--25">
+      {{ errorMessage }}
+    </span>
+</div>

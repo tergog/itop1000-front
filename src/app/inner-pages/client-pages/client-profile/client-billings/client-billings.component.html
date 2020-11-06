@@ -1,6 +1,19 @@
-<app-profile-section-header [title]="'Billings'" [canEdit]="false"></app-profile-section-header>
+<app-profile-section-header [title]="'Billing & Payments'" [canEdit]="false"></app-profile-section-header>
 
 <div class="p__20 d__flex d__flex--justify-between d__flex--items-center">
-  <span class="text text__color--1 text__sm">No Billings yet</span>
-  <app-button [type]="'secondary'" [text]="'Add method'"></app-button>
+  <h2 class="text text__sm text__bold text__uppercase">Billing & Payments</h2>
+  <app-button class="m__left--auto" [type]="'secondary'" [text]="'Add method'" (click)="onAddClick()"></app-button>
+</div>
+
+<div class="p__20">
+  <span *ngIf="!billingMethods" class="text text__color--1 text__sm">No Billings yet</span>
+
+  <ng-container *ngFor="let billingMethod of billingMethods">
+    <app-billing-method [paymentMethod]="billingMethod"
+                        (onMethodChanged)="getPaymentMethods()" ></app-billing-method>
+  </ng-container>
+
+  <span *ngIf="errorMessage" class="error text text__md text__color--2 m__top--25">
+    {{ errorMessage }}
+  </span>
 </div>

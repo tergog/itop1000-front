@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { ClientProfileComponent } from 'app/inner-pages/client-pages/client-profile/client-profile.component';
 import { ClientProfileSidenavComponent } from 'app/inner-pages/client-pages/client-profile/client-profile-sidenav/client-profile-sidenav.component';
@@ -14,6 +16,7 @@ import { CreateJobComponent } from 'app/inner-pages/client-pages/client-profile/
 import { ReactiveFormsModule } from '@angular/forms';
 import { ClientPaymentsComponent } from 'app/inner-pages/client-pages/client-profile/client-payments/client-payments.component';
 import { ClientBillingsComponent } from 'app/inner-pages/client-pages/client-profile/client-billings/client-billings.component';
+import { BillingMethodComponent } from 'app/inner-pages/client-pages/client-profile/client-billings/billing-method/billing-method.component';
 import { ClientContactInfoPreviewComponent } from './client-contact-info/client-contact-info-preview/client-contact-info-preview.component';
 import { ClientContactInfoEditComponent } from './client-contact-info/client-contact-info-edit/client-contact-info-edit.component';
 
@@ -32,6 +35,7 @@ export const routes: Routes = [
     CreateJobComponent,
     ClientPaymentsComponent,
     ClientBillingsComponent,
+    BillingMethodComponent,
     ClientContactInfoPreviewComponent,
     ClientContactInfoEditComponent
   ],
@@ -40,7 +44,9 @@ export const routes: Routes = [
     RouterModule.forChild(routes),
     PagesSharedModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule,
+    MatPaginatorModule
   ]
 })
 export class ClientProfileModule { }
