@@ -11,7 +11,8 @@ export const ApiConstants = {
     paymentMethod: 'accounts/payment-method',
     paymentMethods: 'accounts/payment-methods',
     searchDevelopers: 'accounts/search',
-    getDeveloperById: 'accounts/get-developer'
+    getDeveloperById: 'accounts/get-developer',
+    chargesList: 'accounts/charges-list'
   },
   jobs: {
     main: 'jobs',
