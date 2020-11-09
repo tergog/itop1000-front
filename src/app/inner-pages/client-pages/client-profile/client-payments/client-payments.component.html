@@ -1,10 +1,10 @@
 <app-profile-section-header [title]="'Payments'" [canEdit]="false"></app-profile-section-header>
 
-<div class="p__20" *ngIf="!dataSource">
+<div class="p__20" *ngIf="!chargesList.length">
   <span class="text text__color--1 text__sm">No Payments yet</span>
 </div>
 
-<div class="mat-elevation-z8">
+<div class="mat-elevation-z8" *ngIf="chargesList.length">
   <table mat-table [dataSource]="dataSource" class="w__100per">
 
     <ng-container matColumnDef="date">
