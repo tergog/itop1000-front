@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
 import { trigger, transition, animate, style } from '@angular/animations';
+import { interval, Observable } from 'rxjs';
 
 import { State, getDeveloper } from 'app/core/developers';
 import { DevProject } from 'app/shared/models/dev-project.model';
 import { setDeveloper } from 'app/core/developers/developers.actions';
-import { interval, Observable } from "rxjs";
-import { takeUntil } from "rxjs/operators";
 
 @Component({
   selector: 'app-work-experience',

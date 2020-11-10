@@ -6,14 +6,13 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter, first } from 'rxjs/operators';
 import xorBy from 'lodash.xorby';
-
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
 import { NameValueModel, UserInfo } from 'app/shared/models';
 import * as fromCore from 'app/core/reducers';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UploadPhotoDialogComponent } from 'app/inner-pages/shared/components/upload-photo-dialog/upload-photo-dialog.component';
-import { MatOptionSelectionChange } from "@angular/material/core";
+
 
 @Component({
   selector: 'app-dev-work-experience',
@@ -152,6 +151,5 @@ export class DevWorkExperienceComponent implements OnInit {
         ({error}) => console.log(error)
       );
   }
-
 
 }
