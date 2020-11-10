@@ -1,4 +1,13 @@
 :host {
+  width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+
+  & > div {
+    flex: 1;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 }
