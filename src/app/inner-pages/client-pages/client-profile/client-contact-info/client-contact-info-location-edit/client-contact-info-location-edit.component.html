@@ -1,31 +1,41 @@
 <div [formGroup]="form">
 
-  <div (clickOutside)="onHidePopup()" class="w__320 d__inline-flex d__flex--justify-between d__flex--items-center m__right--30 m__bottom--10">
+  <div class="w__320 d__inline-flex d__flex--justify-between d__flex--items-center m__right--30 m__bottom--10"
+       (clickOutside)="hideTimezone()">
     <i class="contact-info contact-info-gray"></i>
     <span class="text text__sm text__bold text__uppercase">TIME ZONE</span>
 
-    <app-input (onFocusField)="onShowPopup()" [type]="'inner'" formControlName="timezone" [placeholder]="'Time Zone'" [value]="form.get('timezone').value"></app-input>
-    <div class="timezone" *ngIf="isPopupShown" clickOutside>
-      <div class="p__15 text__center text text__color--1 text__sm" *ngIf="!filteredTimezones.length">No elements found</div>
-      <ul class="d__flex m--0 d__flex--direction-column list-style__none w__100p">
-        <li
-          *ngFor="let timezone of filteredTimezones"
-          class="p__15 text__center text text__color--1 text__sm cursor__pointer"
-          (click)="onTimezoneSelect(timezone)"> {{ timezone }}</li>
-      </ul>
-    </div>
+    <app-input (onFocusField)="showTimezone()"
+               class="timezone-input"
+               [type]="'inner'"
+               formControlName="timezone"
+               [placeholder]="'Time Zone'"
+               [value]="form.get('timezone').value"></app-input>
+
+    <app-timezone *ngIf="isPopupShown"
+                  (ngModelChange)="hideTimezone()"
+                  [currentTimezone]="form.get('timezone').value"
+                  formControlName="timezone"></app-timezone>
   </div>
 
   <div class="w__320 d__inline-flex d__flex--justify-between d__flex--items-center m__right--30 m__bottom--10">
     <i class="location location-gray"></i>
     <span class="text text__sm text__bold text__uppercase">ADDRESS</span>
-    <app-input [type]="'inner'" formControlName="address" [placeholder]="'Address'" [value]="form.get('address').value"></app-input>
+
+    <app-input [type]="'inner'"
+               formControlName="address"
+               [placeholder]="'Address'"
+               [value]="form.get('address').value"></app-input>
   </div>
 
   <div class="w__320 d__inline-flex d__flex--justify-between d__flex--items-center m__right--30 m__bottom--10">
     <i class="phone phone-gray"></i>
     <span class="text text__sm text__bold text__uppercase">PHONE</span>
-    <app-input [type]="'inner'" formControlName="phone" [placeholder]="'Phone'" [value]="form.get('phone').value"></app-input>
+
+    <app-input [type]="'inner'"
+               formControlName="phone"
+               [placeholder]="'Phone'"
+               [value]="form.get('phone').value"></app-input>
   </div>
 </div>
 

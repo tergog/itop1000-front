@@ -1,7 +1,7 @@
-import { Component, EventEmitter, forwardRef, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, forwardRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 
 import { timezones } from 'app/constants/constants';
@@ -18,58 +18,47 @@ import { timezones } from 'app/constants/constants';
     }
   ]
 })
-export class TimezoneComponent implements OnInit, OnDestroy, ControlValueAccessor {
+export class TimezoneComponent implements OnInit, OnDestroy, ControlValueAccessor, OnChanges {
+  @Input() currentTimezone: string;
+  public filteredTimezones: string[] = timezones;
 
-  public currentTimezones: string[] = timezones;
-
-  private timezoneSource = new BehaviorSubject<FormControl>(null);
-  /*private timezoneSource$: Observable<FormControl> = this.timezoneSource.asObservable();*/
-
-  @Output() selectedTimezone = new EventEmitter();
-  @Output() filteredTimezones = new EventEmitter();
+  private timezoneSource = new BehaviorSubject<string>(null);
 
   constructor() { }
 
   ngOnInit(): void {
-    this.timezoneSource.value.valueChanges.pipe(
+  }
+
+  public selectTimezone(timezone: string): void {
+    this.writeValue(timezone);
+  }
+
+  public setFilteredTimezones(): void {
+    this.timezoneSource.pipe(
       debounceTime(500),
       distinctUntilChanged(),
       map((value) => value.trim()),
       switchMap((value) =>
         of(timezones.filter((timezone) => timezone.includes(value)))
       ),
-      filter((timezone) => !timezone.includes(this.timezoneSource.value.value)),
+      filter((timezone) => !timezone.includes(this.timezoneSource.value)),
       untilDestroyed(this),
-    ).subscribe((timezonesArr: string[]) => this.setFilteredTimezones(timezonesArr));
+    ).subscribe((timezonesArr: string[]) => this.filteredTimezones = timezonesArr);
   }
 
-  public selectTimezone(timezone: string): void {
-    this.selectedTimezone.emit(timezone);
-  }
-
-  public setFilteredTimezones(timezonesArr: string[]): void {
-    this.filteredTimezones.emit();
-    this.currentTimezones = timezonesArr;
+  ngOnChanges(changes: SimpleChanges): void {
+    this.timezoneSource.next(this.currentTimezone);
+    this.setFilteredTimezones();
   }
 
   ngOnDestroy() {
   }
 
-  @Input()
-  set formControl(obj: FormControl) {
-    this.timezoneSource.next(obj);
-    this.writeValue(this.timezoneSource.value);
-  }
-
-  get formControl() {
-    return this.timezoneSource.value;
-  }
-
-  private onChange = (obj: FormControl) => {};
+  private onChange = (timezone: string) => {};
 
   private onTouched = () => {};
 
-  public registerOnChange(fn: (obj: FormControl) => void): void {
+  public registerOnChange(fn: (timezone: string) => void): void {
     this.onChange = fn;
   }
 
@@ -77,7 +66,7 @@ export class TimezoneComponent implements OnInit, OnDestroy, ControlValueAccesso
     this.onTouched = fn;
   }
 
-  public writeValue(obj: FormControl): void {
-    this.onChange(this.timezoneSource.value);
+  public writeValue(timezone: string): void {
+    this.onChange(timezone);
   }
 }

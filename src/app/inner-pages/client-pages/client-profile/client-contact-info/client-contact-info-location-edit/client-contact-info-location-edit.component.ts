@@ -1,11 +1,7 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
-import { untilDestroyed } from 'ngx-take-until-destroy';
 
 import { UserInfo} from 'app/shared/models';
-import { timezones} from 'app/constants/constants';
 import { ClientProfileService } from 'app/inner-pages/client-pages/client-profile/client-profile.service';
 
 
@@ -14,10 +10,9 @@ import { ClientProfileService } from 'app/inner-pages/client-pages/client-profil
   templateUrl: './client-contact-info-location-edit.component.html',
   styleUrls: ['./client-contact-info-location-edit.component.scss']
 })
-export class ClientContactInfoLocationEditComponent implements OnInit, OnDestroy {
+export class ClientContactInfoLocationEditComponent implements OnInit {
 
   public isPopupShown: boolean;
-  public filteredTimezones = timezones;
   public form: FormGroup;
 
   @Input() userInfo: UserInfo;
@@ -25,29 +20,22 @@ export class ClientContactInfoLocationEditComponent implements OnInit, OnDestroy
   @Output() cancel = new EventEmitter();
   @Output() save = new EventEmitter();
 
-  constructor(
-    private clientProfileService: ClientProfileService
-  ) { }
+  constructor(private clientProfileService: ClientProfileService) { }
 
   ngOnInit(): void {
     this.initForm();
-
     this.form.patchValue(this.userInfo);
-
-    this.form.get('timezone').valueChanges.pipe(
-      debounceTime(500),
-      distinctUntilChanged(),
-      map(value => value.trim()),
-      switchMap(value =>
-        of(timezones.filter(timezone => timezone.includes(value)))
-      ),
-      filter(timezone => !timezone.includes(this.form.get('timezone').value)),
-      untilDestroyed(this),
-    ).subscribe((timezones: string[]) => this.setFilteredTimezones(timezones));
-  }
-
-  public onCancelClick(): void {
-    this.cancel.emit();
+    //
+    // this.form.get('timezone').valueChanges.pipe(
+    //   debounceTime(500),
+    //   distinctUntilChanged(),
+    //   map(value => value.trim()),
+    //   switchMap(value =>
+    //     of(timezones.filter(timezone => timezone.includes(value)))
+    //   ),
+    //   filter(timezone => !timezone.includes(this.form.get('timezone').value)),
+    //   untilDestroyed(this),
+    // ).subscribe((timezones: string[]) => this.setFilteredTimezones(timezones));
   }
 
   public onCancelLocationClick(): void {
@@ -60,27 +48,11 @@ export class ClientContactInfoLocationEditComponent implements OnInit, OnDestroy
     this.clientProfileService.onSaveClick(this.form.value);
   }
 
-  public onSaveClick(): void {
-    this.disableEmptyFields();
-    this.save.emit(this.form.value);
-    this.clientProfileService.onSaveClick(this.form.value);
-  }
-
-  public setFilteredTimezones(timezones: string[]): void {
-    this.onShowPopup();
-    this.filteredTimezones = timezones;
-  }
-
-  public onTimezoneSelect(timezone: string): void {
-    this.form.get('timezone').setValue(timezone, { emitModelToViewChange: false });
-    this.onHidePopup();
-  }
-
-  public onShowPopup(): void {
+  public showTimezone(): void {
     this.isPopupShown = true;
   }
 
-  public onHidePopup(): void {
+  public hideTimezone(): void {
     this.isPopupShown = false;
   }
 
@@ -97,7 +69,4 @@ export class ClientContactInfoLocationEditComponent implements OnInit, OnDestroy
       return this.form.controls[field].value || this.form.controls[field].disable();
     });
   }
-
-  ngOnDestroy(): void {}
-
 }

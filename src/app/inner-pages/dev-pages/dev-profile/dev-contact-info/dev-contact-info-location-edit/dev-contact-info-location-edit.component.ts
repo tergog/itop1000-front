@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
@@ -43,11 +43,6 @@ export class DevContactInfoLocationEditComponent implements OnInit {
 
   public hideTimezone(): void {
     this.isTimezoneShown = false;
-  }
-
-  public setTimezone(timezone: string): void {
-    this.form.get('timezone').setValue(timezone, { emitModelToViewChange: false });
-    this.hideTimezone();
   }
 
   private initForm(): void {
