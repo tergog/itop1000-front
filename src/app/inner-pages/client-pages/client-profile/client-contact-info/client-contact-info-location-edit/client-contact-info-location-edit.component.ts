@@ -25,17 +25,6 @@ export class ClientContactInfoLocationEditComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     this.form.patchValue(this.userInfo);
-    //
-    // this.form.get('timezone').valueChanges.pipe(
-    //   debounceTime(500),
-    //   distinctUntilChanged(),
-    //   map(value => value.trim()),
-    //   switchMap(value =>
-    //     of(timezones.filter(timezone => timezone.includes(value)))
-    //   ),
-    //   filter(timezone => !timezone.includes(this.form.get('timezone').value)),
-    //   untilDestroyed(this),
-    // ).subscribe((timezones: string[]) => this.setFilteredTimezones(timezones));
   }
 
   public onCancelLocationClick(): void {
