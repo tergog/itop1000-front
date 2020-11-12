@@ -28,17 +28,16 @@ export const reducers: ActionReducerMap<State> = {
 /**
  * Selectors returns smaller piece of state out of the root state
  */
-export const getCoreState = (state: State) => state.developers;
+export const getDevelopersState = (state: State) => state.developers;
 
 /**
  * Selectors from Developers module
  */
 export const getDevelopers = createSelector(
-  getCoreState,
+  getDevelopersState,
   fromDevelopers.getDevelopers
 );
 
 export const getDeveloper = createSelector(
-  getCoreState,
-  fromDevelopers.getDeveloper
-);
+  getDevelopersState,
+  fromDevelopers.getDeveloper);

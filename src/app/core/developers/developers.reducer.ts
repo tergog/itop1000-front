@@ -92,7 +92,10 @@ export const developers = [
               },
             ],
             link: 'https://github.com/',
-            photo: null,
+            logo: null,
+            images: [],
+            from: null,
+            to: null
           },
           {
             title: 'Project 2 title',
@@ -112,7 +115,10 @@ export const developers = [
               },
             ],
             link: 'https://github.com/',
-            photo: null,
+            logo: null,
+            images: [],
+            from: null,
+            to: null
           }
         ],
         description: 'On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame...',
@@ -159,11 +165,15 @@ export const reducer = createReducer(
     actions.setDeveloperSuccess,
     (state, {developer}) => ({
       ...state,
-      developer
+      developer: {...developer}
     })
   ),
 );
 
 /** Selector return is Authenticated */
-export const getDevelopers = (state: State): Developer[] => state.developers;
-export const getDeveloper = (state: State): Developer => state.developer;
+export const getDevelopers = (state: State): Developer[] => {
+  return state.developers;
+};
+export const getDeveloper = (state: State): Developer => {
+  return state.developer;
+};

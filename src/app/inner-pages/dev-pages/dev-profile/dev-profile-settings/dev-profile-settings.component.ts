@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FormControl, FormGroup } from '@angular/forms';
 import { filter, first } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
@@ -8,7 +8,6 @@ import * as fromCore from 'app/core/reducers';
 import { UploadPhotoDialogComponent } from 'app/inner-pages/shared/components/upload-photo-dialog/upload-photo-dialog.component';
 import { UserService } from 'app/shared/services';
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
-import { UserInfo } from 'app/shared/models';
 
 @Component({
   selector: 'app-dev-profile-settings',
@@ -38,7 +37,13 @@ export class DevProfileSettingsComponent implements OnInit {
   }
 
   public openUploadPhotoDialog(): void {
-    this.matDialog.open(UploadPhotoDialogComponent)
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      destination: 'Profile'
+    };
+
+    this.matDialog.open(UploadPhotoDialogComponent, dialogConfig)
       .afterClosed()
       .pipe(
         filter(result => !!result),

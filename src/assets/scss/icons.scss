@@ -178,6 +178,12 @@
   background-image: url(assets/icons/categories-light.svg);
 }
 
+.project {
+  width: 15px;
+  height: 15px;
+  background-image: url(assets/icons/project.svg);
+}
+
 .education-light {
   width: 15px;
   height: 10px;
@@ -281,6 +287,11 @@
   .categories, .categories-light {
     opacity: 1;
     background-image: url(assets/icons/categories-active.svg);
+  }
+
+  .project {
+    opacity: 1;
+    background-image: url(assets/icons/project-red.svg);
   }
 
   .education-light {
