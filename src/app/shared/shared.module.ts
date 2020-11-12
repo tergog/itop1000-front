@@ -17,6 +17,8 @@ import { TextareaComponent } from 'app/shared/components/textarea/textarea.compo
 import { ClickedOutsideDirective } from './directives/click-outside.directive';
 import { SeparatorComponent } from './components/separator/separator.component';
 import { TimezoneComponent } from './components/timezone/timezone.component';
+import { AddressComponent } from 'app/shared/components/address/address.component';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { TimezoneComponent } from './components/timezone/timezone.component';
     TextareaComponent,
     ClickedOutsideDirective,
     SeparatorComponent,
-    TimezoneComponent
+    TimezoneComponent,
+    AddressComponent
   ],
   exports: [
     InputComponent,
@@ -43,7 +46,8 @@ import { TimezoneComponent } from './components/timezone/timezone.component';
     NgCircleProgressModule,
     ClickedOutsideDirective,
     SeparatorComponent,
-    TimezoneComponent
+    TimezoneComponent,
+    AddressComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +59,8 @@ import { TimezoneComponent } from './components/timezone/timezone.component';
     MatIconModule,
     MatOptionModule,
     OverlayModule,
-    NgCircleProgressModule
+    NgCircleProgressModule,
+    GooglePlaceModule
   ],
   providers: [CircleProgressOptions],
 

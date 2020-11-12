@@ -4,6 +4,8 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { NgxStripeModule } from 'ngx-stripe';
 
 import { AppRoutingModule } from 'app/app-routing.module';
 import { AppComponent } from 'app/app.component';
@@ -14,7 +16,6 @@ import { CoreModule } from 'app/core/core.module';
 import { DevelopersModule } from 'app/core/developers/developers.module';
 import { HttpErrorHandlerService } from 'app/shared/services/http-error-handler.service';
 import { TokenInterceptor } from 'app/shared/interceptors/token.interceptor';
-import { NgxStripeModule } from 'ngx-stripe';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,6 +35,7 @@ import { NgxStripeModule } from 'ngx-stripe';
       },
     }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
+    GooglePlaceModule
   ],
   providers: [
     {

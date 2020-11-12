@@ -1,0 +1,6 @@
+<input ngx-google-places-autocomplete
+       class="address-input"
+       [(ngModel)]="currentAddress"
+       #placesRef="ngx-places"
+       placeholder="Address"
+       (onAddressChange)="handleAddressChange($event)"/>
