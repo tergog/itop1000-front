@@ -14,7 +14,6 @@ export class DevContactInfoAccountEditComponent implements OnInit {
   public form: FormGroup;
 
   @Input() userInfo: UserInfo;
-  @Output() updateProfileInfo = new EventEmitter();
   @Output() cancel = new EventEmitter();
   @Output() save = new EventEmitter();
 
@@ -27,24 +26,14 @@ export class DevContactInfoAccountEditComponent implements OnInit {
     this.form.patchValue(this.userInfo);
   }
 
-  public onCancelClick(): void {
-    this.cancel.emit();
-  }
-
-  public onCancelAccountClick(): void {
-    this.cancel.emit();
-  }
-
-  public onSaveAccountClick(): void {
+  public saveChanges(): void {
     this.disableEmptyFields();
-    this.save.emit(this.form.value);
+    this.save.emit();
     this.devProfileService.onSaveClick(this.form.value);
   }
 
-  public onSaveClick(): void {
-    this.disableEmptyFields();
-    this.save.emit(this.form.value);
-    this.devProfileService.onSaveClick(this.form.value);
+  public cancelChanges(): void {
+    this.cancel.emit();
   }
 
   private initForm(): void {

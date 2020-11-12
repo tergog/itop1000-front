@@ -2,7 +2,7 @@
 
 <div class="p__20">
   <ng-container *ngIf="isEdit">
-    <app-dev-contact-info-edit [userInfo]="userInfo$ | async" (cancel)="editToggle()" (save)="onSaveClick($event)"></app-dev-contact-info-edit>
+    <app-dev-contact-info-edit [userInfo]="userInfo$ | async" (cancel)="editToggle()" (save)="onSaveClick()"></app-dev-contact-info-edit>
   </ng-container>
 
   <ng-container *ngIf="!isEdit">
@@ -14,7 +14,7 @@
 
 <div class="p__20">
   <ng-container *ngIf="isAccountEdit">
-    <app-dev-contact-info-account-edit [userInfo]="userInfo$ | async" (cancel)="editAccountToggle()" (save)="onSaveAccountClick($event)"></app-dev-contact-info-account-edit>
+    <app-dev-contact-info-account-edit [userInfo]="userInfo$ | async" (cancel)="editAccountToggle()" (save)="onSaveAccountClick()"></app-dev-contact-info-account-edit>
   </ng-container>
 
   <ng-container *ngIf="!isAccountEdit">
@@ -26,7 +26,7 @@
 
 <div class="p__20">
   <ng-container *ngIf="isLocationEdit">
-    <app-dev-contact-info-location-edit [userInfo]="userInfo$ | async" (cancel)="editLocationToggle()" (save)="onSaveLocationClick($event)"></app-dev-contact-info-location-edit>
+    <app-dev-contact-info-location-edit [userInfo]="userInfo$ | async" (cancel)="editLocationToggle()" (save)="onSaveLocationClick()"></app-dev-contact-info-location-edit>
   </ng-container>
 
   <ng-container *ngIf="!isLocationEdit">

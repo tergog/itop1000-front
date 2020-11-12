@@ -16,6 +16,7 @@ import { ButtonComponent } from 'app/shared/components/button/button.component';
 import { TextareaComponent } from 'app/shared/components/textarea/textarea.component';
 import { ClickedOutsideDirective } from './directives/click-outside.directive';
 import { SeparatorComponent } from './components/separator/separator.component';
+import { TimezoneComponent } from './components/timezone/timezone.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { SeparatorComponent } from './components/separator/separator.component';
     TextareaComponent,
     ClickedOutsideDirective,
     SeparatorComponent,
+    TimezoneComponent
   ],
   exports: [
     InputComponent,
@@ -41,6 +43,7 @@ import { SeparatorComponent } from './components/separator/separator.component';
     NgCircleProgressModule,
     ClickedOutsideDirective,
     SeparatorComponent,
+    TimezoneComponent
   ],
   imports: [
     CommonModule,

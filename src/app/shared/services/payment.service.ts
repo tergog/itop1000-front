@@ -23,11 +23,15 @@ export class PaymentService {
   }
 
   public updatePaymentMethod(paymentMethodData): Observable<any> {
-    return this.http.put(`${this.apiUrl}${ApiConstants.accounts.paymentMethod}`, paymentMethodData)
+    return this.http.put(`${this.apiUrl}${ApiConstants.accounts.paymentMethod}`, paymentMethodData);
   }
 
   public getPaymentMethods(): Observable<any> {
     return this.http.get(`${this.apiUrl}${ApiConstants.accounts.paymentMethods}`);
+  }
+
+  public getChargesList(): Observable<any> {
+    return this.http.get(`${this.apiUrl}${ApiConstants.accounts.chargesList}`);
   }
 }
 

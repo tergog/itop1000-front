@@ -43,6 +43,7 @@
     background: $color-3;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.09);
     font-family: "Raleway";
+    font-feature-settings: "lnum";
     font-weight: 600;
 
     input[type='text'],
@@ -59,6 +60,7 @@
   input[type='text'],
   input[type='password'] {
     font-family: Raleway;
+    font-feature-settings: "lnum";
     font-style: normal;
     font-weight: normal;
     font-size: 12px;

@@ -54,6 +54,7 @@ i {
   font-family: $font-1;
   font-style: normal;
   font-weight: normal;
+  font-feature-settings: "lnum";
 
   &__transform {
     &--capitalize {
