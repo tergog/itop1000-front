@@ -4,6 +4,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 import { AppRoutingModule } from 'app/app-routing.module';
 import { AppComponent } from 'app/app.component';
@@ -16,6 +17,7 @@ import { HttpErrorHandlerService } from 'app/shared/services/http-error-handler.
 import { TokenInterceptor } from 'app/shared/interceptors/token.interceptor';
 import { NgxStripeModule } from 'ngx-stripe';
 
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -26,13 +28,8 @@ import { NgxStripeModule } from 'ngx-stripe';
     DevelopersModule,
     BrowserAnimationsModule,
     NgxStripeModule.forRoot('pk_test_51HfRHCEuY58zLN527L8buA0YyVEdwwmwCiPgRNRiMhWdDdXaKgYOYeQ6bDNwDPXMtaAmtSSnbpaSzYYceAl7bSwh00wB02HoJj'),
-    StoreModule.forRoot(reducers, {
-      metaReducers,
-      runtimeChecks: {
-        strictStateImmutability: true,
-        strictActionImmutability: true,
-      },
-    }),
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot(),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
   providers: [
