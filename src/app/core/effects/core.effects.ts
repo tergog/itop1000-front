@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 import * as coreActions from 'app/core/actions/core.actions';
 import { JobsService, UserService, DevelopersService } from 'app/shared/services';
 import { TOKEN } from 'app/constants/constants';
-import { Job, Developer } from 'app/shared/models';
+import { Job } from 'app/shared/models';
 import { State } from 'app/core/reducers';
 
 @Injectable()
@@ -35,17 +35,17 @@ export class CoreEffects {
       tap(() => this.cleanLocalStorage())
   ), { dispatch: false });
 
-  private cleanLocalStorage(): void {
-    localStorage.removeItem(TOKEN);
-    this.router.navigate(['auth/login']);
-  }
-
   onSearchJobs$ = createEffect(() => this.actions$.pipe(
     ofType(coreActions.SEARCH_JOBS),
     switchMap(({ payload }) => this.jobsService.searchJobs(payload)),
     map((jobs: Job[]) => new coreActions.SearchJobsSuccessAction(jobs)),
-    tap(() => this.router.navigate(['in/d/search-jobs']))
+    tap(() => this.router.navigate(['in/d/search-jobs'])),
   ));
+
+  private cleanLocalStorage(): void {
+    localStorage.removeItem(TOKEN);
+    this.router.navigate(['auth/login']);
+  }
 
   private setUserInfoToLocalStorage({ payload }): void {
     if (payload.token) {

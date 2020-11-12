@@ -21,4 +21,8 @@ export class DevelopersService {
   public searchDevelopers(searchTerm: string): Observable<Developer[]> {
     return this.http.get<Developer[]>(`${this.apiUrl}${ApiConstants.accounts.searchDevelopers}?searchTerm=${searchTerm}`);
   }
+
+  public uploadProjectImage(image: string | ArrayBuffer): Observable<string> {
+    return this.http.post<string>(`${this.apiUrl}${ApiConstants.accounts.uploadProjectImage}`, {image});
+  }
 }

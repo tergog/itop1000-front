@@ -1,36 +1,66 @@
-<div class="card d__flex d__flex--direction-column p__20">
-  <i class="edit cursor__pointer" (click)="onEditClick()"></i>
+<div class="dev-project-card d__flex d__flex--direction-column p__15">
+  <i class="edit cursor__pointer m--5" (click)="onEditClick()"></i>
   <ng-container *ngIf="!isEdit">
-    <h2 class="text text__title">{{ project.title }}</h2>
-    <p class="text text__md">{{ project.description }}</p>
-    <a href="{{ project.link }}">Link</a>
-      <mat-chip-list #chipListTechnologies>
-        <mat-chip *ngFor="let technology of selectedTechnologies"
-                  [selectable]="false"
-                  [removable]="isEdit"
-                  (removed)="onTechnologyRemove(technology)">
-          {{ technology.name }}
-        </mat-chip>
-      </mat-chip-list>
-<!--    <div class="d__flex m__top&#45;&#45;20 d__flex d__flex&#45;&#45;direction-column">-->
-<!--      <app-project-card class="m__right&#45;&#45;10 m__top&#45;&#45;30" [project]="project"></app-project-card>-->
-<!--    </div>-->
+        <div class="d__flex d__flex d__flex--direction-column">
+          <app-project-card class="m__right--10" [project]="project"></app-project-card>
+        </div>
   </ng-container>
 
   <div [formGroup]="form" *ngIf="isEdit">
+
+    <div class="m__bottom--10 d__flex d__flex--justify-between">
+      <div class="profile-photo-wrap" (click)="openUploadPhotoDialog(true)">
+        <i class="profile-photo" *ngIf="!logoUrl"></i>
+        <i class="plus" *ngIf="!logoUrl"></i>
+        <img class="cursor__pointer" [src]=logoUrl alt="projectImageUrl" *ngIf="logoUrl">
+      </div>
+
+      <div class="m__bottom--10">
+        <div class="profile-photo-wrap">
+          <div *ngIf="!projectImages || projectImages.length === 0" (click)="openUploadPhotoDialog(false)">
+          <i class="profile-photo" ></i>
+          </div>
+          <div *ngFor="let image of projectImages; index as i">
+          <img class="cursor__pointer"
+               [src]=image alt="projectImage"
+               (click)="openUploadPhotoDialog(false, i)"
+               *ngIf="image"
+               >
+          </div>
+          <i class="plus" (click)="openUploadPhotoDialog(false)"></i>
+        </div>
+      </div>
+    </div>
+
     <div class="d__inline-flex d__flex--justify-between d__flex--items-center m__right--30 m__bottom--10">
       <span class="text text__sm text__bold text__uppercase m__right--10">Title</span>
-      <app-input [type]="'inner'" formControlName="title" [placeholder]="'Title'" [value]="form.get('title').value"></app-input>
+      <app-input [type]="'inner'" formControlName="title" [placeholder]="'Title'"
+                 [value]="form.get('title').value"></app-input>
     </div>
 
     <div class="d__inline-flex d__flex--justify-between d__flex--items-center m__right--30 m__bottom--10">
       <span class="text text__sm text__bold text__uppercase m__right--10">Description</span>
-      <app-input [type]="'inner'" formControlName="description" [placeholder]="'Description'" [value]="form.get('description').value"></app-input>
+      <app-input [type]="'inner'" formControlName="description" [placeholder]="'Description'"
+                 [value]="form.get('description').value"></app-input>
     </div>
 
     <div class="d__inline-flex d__flex--justify-between d__flex--items-center m__right--30 m__bottom--10">
       <span class="text text__sm text__bold text__uppercase m__right--10">Link</span>
-      <app-input [type]="'inner'" formControlName="link" [placeholder]="'Link'" [value]="form.get('link').value"></app-input>
+      <app-input [type]="'inner'" formControlName="link" [placeholder]="'Link'"
+                 [value]="form.get('link').value"></app-input>
+    </div>
+
+    <div>
+      <mat-form-field appearance="fill">
+        <input matInput formControlName="from" [placeholder]="'From'" [matDatepicker]="pickerFrom">
+        <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+        <mat-datepicker #pickerFrom></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <input matInput formControlName="to" [placeholder]="'To'" [matDatepicker]="pickerTo">
+        <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+        <mat-datepicker #pickerTo></mat-datepicker>
+      </mat-form-field>
     </div>
 
     <mat-form-field class="chip-list m__top--10" [class.edit-mode]="isEdit">
@@ -43,11 +73,11 @@
           <mat-icon matChipRemove *ngIf="isEdit">cancel</mat-icon>
         </mat-chip>
         <input placeholder="Add Technology..."
-              [readOnly]="!isEdit"
-              [matChipInputFor]="chipListTechnologies"
-              [matAutocomplete]="autoTechnologies"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-              [matChipInputAddOnBlur]="true">
+               [readOnly]="!isEdit"
+               [matChipInputFor]="chipListTechnologies"
+               [matAutocomplete]="autoTechnologies"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+               [matChipInputAddOnBlur]="true">
       </mat-chip-list>
 
       <mat-autocomplete #autoTechnologies="matAutocomplete" (optionSelected)="onTechnologySelect($event)">

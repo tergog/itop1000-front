@@ -2,18 +2,14 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { Store } from '@ngrx/store';
-import { first, tap } from 'rxjs/operators';
-import * as jwtDecode from 'jwt-decode';
+import { first } from 'rxjs/operators';
 
 import { DevProfileSectionNames } from 'app/inner-pages/dev-pages/dev-profile/shared/enums/devProfileSectionNames';
-import { TOKEN } from 'app/constants/constants';
-import * as coreActions from 'app/core/actions/core.actions';
 import * as fromCore from 'app/core/reducers';
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
 import { UserService, NotificationsService } from 'app/shared/services';
 import { UserInfo } from 'app/shared/models/user-info.model';
 import { DevProperties } from 'app/shared/models/dev-properties.model';
-import { DevProject } from 'app/shared/models/dev-project.model';
 import { NameValueModel } from 'app/shared/models/name-value.model';
 
 @Component({
