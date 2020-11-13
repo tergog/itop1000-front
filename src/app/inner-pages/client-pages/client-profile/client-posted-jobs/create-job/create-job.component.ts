@@ -36,6 +36,7 @@ export class CreateJobComponent implements OnInit {
       price: new FormControl('', []),
       country: new FormControl('', []),
       city: new FormControl('', []),
+      company: new FormControl('', []),
     });
   }
 
