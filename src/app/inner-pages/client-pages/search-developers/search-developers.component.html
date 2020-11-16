@@ -1,5 +1,6 @@
 <app-standard-bg-wrap>
-  <ng-container *ngIf="developersPaginated.length">
+  <div *ngIf="developersPaginated.length; else noDevelopers">
+
     <app-developer-resume *ngFor="let developer of developers"
                           [developer]="developer"
                           (profile)="onProfileClick($event)">
@@ -10,10 +11,11 @@
                    [pageSize]="2"
                    [pageSizeOptions]="[2, 10, 15, developers.length]">
     </mat-paginator>
-  </ng-container>
+  </div>
 
-  <ng-container *ngIf="!developers.length">
+  <ng-template #noDevelopers>
     <span class="text text__color--2 text__xlg">No Developers found</span>
-  </ng-container>
+  </ng-template>
+
 </app-standard-bg-wrap>
 

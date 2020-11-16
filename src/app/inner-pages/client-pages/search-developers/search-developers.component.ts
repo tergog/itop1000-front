@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { untilDestroyed } from 'ngx-take-until-destroy';
@@ -34,7 +34,7 @@ export class SearchDevelopersComponent implements OnInit, OnDestroy {
     });
   }
 
-  onPageChange($event) {
+  onPageChange($event): void {
     this.developersPaginated = this.developers.slice($event.pageIndex * $event.pageSize, $event.pageIndex * $event.pageSize + $event.pageSize);
   }
 
