@@ -1,10 +1,12 @@
 <app-profile-section-header [title]="'Work experience'" [canEdit]="false"></app-profile-section-header>
 
-<app-dev-project-card class="m__top--30"
-                  *ngFor="let project of (userInfo$ | async).devProperties.projects; index as i"
-                  [project]="project"
-                  [id]="i"
-></app-dev-project-card>
+<ng-container *ngIf="(userInfo$ | async).devProperties">
+  <app-dev-project-card class="m__top--30"
+                        *ngFor="let project of (userInfo$ | async).devProperties.projects; index as i"
+                        [project]="project"
+                        [id]="i"
+  ></app-dev-project-card>
+</ng-container>
 
 <div class="m__top--30 m__bottom--10">
   <app-button
@@ -13,7 +15,7 @@
   ></app-button>
 </div>
 
-<ng-container *ngIf="!(userInfo$ | async).devProperties.projects">
+<ng-container *ngIf="!(userInfo$ | async).devProperties">
   <div class="d__flex d__flex--direction-column d__flex--items-center p__20" *ngIf="!isNewProject">
     <span class="text text__title text__color--1 m__top--50">
       You have not added any project
