@@ -64,6 +64,7 @@ export class DevProfileSettingsComponent implements OnInit {
     this.form = new FormGroup({
       firstName: new FormControl('', []),
       lastName: new FormControl('', []),
+      title: new FormControl('', []),
       address: new FormControl('', []),
       phone: new FormControl('', []),
       email: new FormControl('', []),

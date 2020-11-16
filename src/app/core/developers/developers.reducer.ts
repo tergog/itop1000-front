@@ -138,7 +138,7 @@ export interface State {
 }
 
 const INIT_STATE: State = {
-  developers,
+  developers: [],
   developer: null // developers[0]
 };
 
