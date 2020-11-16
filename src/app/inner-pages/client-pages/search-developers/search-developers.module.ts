@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { SharedModule } from 'app/shared/shared.module';
 import { PagesSharedModule } from 'app/inner-pages/shared/pages-shared.module';
@@ -20,7 +21,8 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     SharedModule,
-    PagesSharedModule
+    PagesSharedModule,
+    MatPaginatorModule
   ]
 })
 export class SearchDevelopersModule { }

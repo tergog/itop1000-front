@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { SearchJobsComponent } from 'app/inner-pages/dev-pages/search-jobs/search-jobs.component';
 import { JobFullComponent } from 'app/inner-pages/shared/components/job-full/job-full.component';
@@ -18,7 +19,8 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     SharedModule,
-    PagesSharedModule
+    PagesSharedModule,
+    MatPaginatorModule
   ]
 })
 export class SearchJobsModule { }

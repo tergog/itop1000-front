@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { untilDestroyed } from 'ngx-take-until-destroy';
 
 import { Developer } from 'app/shared/models';
 import { DevelopersService } from 'app/shared/services';
@@ -14,9 +14,10 @@ import { updateDeveloper } from 'app/core/developers/developers.actions';
   styleUrls: ['./search-developers.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SearchDevelopersComponent implements OnInit {
+export class SearchDevelopersComponent implements OnInit, OnDestroy {
 
-  public developers$: Observable<Developer[]>;
+  public developers: Developer[] = [];
+  public developersPaginated: Developer[] = [];
 
   constructor(
     private developersService: DevelopersService,
@@ -25,12 +26,24 @@ export class SearchDevelopersComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.developers$ = this.store.select(getDevelopers);
+    this.store.select(getDevelopers)
+      .pipe(untilDestroyed(this))
+      .subscribe(developers => {
+        this.developers = developers;
+        this.developersPaginated= this.developers.slice(0, 2);
+    });
+  }
+
+  onPageChange($event) {
+    this.developersPaginated = this.developers.slice($event.pageIndex * $event.pageSize, $event.pageIndex * $event.pageSize + $event.pageSize);
   }
 
   public onProfileClick(id: string): void {
     this.store.dispatch(updateDeveloper({id}));
     this.router.navigate(['in/c/search-developers', id]);
+  }
+
+  ngOnDestroy(): void {
   }
 
 }
