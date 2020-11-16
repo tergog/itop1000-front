@@ -10,7 +10,7 @@
   </div>
 
   <span class="text text__color--5 text__xlg m__top--10"
-    >${{ developer.devProperties.hourlyRate }}/hr
+        *ngIf="developer.devProperties.hourlyRate">${{ developer.devProperties.hourlyRate }}/hr
   </span>
 </div>
 

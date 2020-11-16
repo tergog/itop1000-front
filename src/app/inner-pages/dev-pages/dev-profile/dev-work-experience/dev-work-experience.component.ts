@@ -1,12 +1,13 @@
 import { DevelopersService } from 'app/shared/services';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter, first } from 'rxjs/operators';
 import xorBy from 'lodash.xorby';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { untilDestroyed } from 'ngx-take-until-destroy';
 
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
 import { NameValueModel, UserInfo } from 'app/shared/models';
@@ -19,7 +20,7 @@ import { UploadPhotoDialogComponent } from 'app/inner-pages/shared/components/up
   templateUrl: './dev-work-experience.component.html',
   styleUrls: ['./dev-work-experience.component.scss'],
 })
-export class DevWorkExperienceComponent implements OnInit {
+export class DevWorkExperienceComponent implements OnInit, OnDestroy {
 
   public isNewProject: boolean;
   public form: FormGroup;
@@ -56,7 +57,9 @@ export class DevWorkExperienceComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+
     this.userInfo$ = this.store.select(fromCore.getUserInfo);
+
     this.store.select(fromCore.getUserInfo)
       .pipe(first())
       .subscribe((userInfo: UserInfo) => {
@@ -144,12 +147,14 @@ export class DevWorkExperienceComponent implements OnInit {
 
   private uploadImage(image: string, forLogo: boolean): void {
     this.developersService.uploadProjectImage(image)
+      .pipe(untilDestroyed(this))
       .subscribe(
-        (url) => {
-          forLogo ? this.logoUrl = url : this.projectImages.push(url);
-        },
+        url => forLogo ? this.logoUrl = url : this.projectImages.push(url),
         ({error}) => console.log(error)
       );
+  }
+
+  ngOnDestroy(): void {
   }
 
 }
