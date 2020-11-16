@@ -100,8 +100,9 @@ export class DevProfileEditFormComponent implements OnInit {
     // selectedChips = [ ...chips ] || [];
     // availableChips = xorBy(selectedChips, availableChips);
 
-    this.devProfileService.selectedCategories = [...devProperties.categories] || [];
-    this.devProfileService.selectedSkills = [...devProperties.skills] || [];
+    this.devProfileService.selectedCategories = devProperties.categories? [...devProperties.categories] : [];
+    this.devProfileService.selectedSkills = devProperties.skills? [...devProperties.skills] : [];
+
     // this.devProfileService.selectedSoftSkills = [...devProperties.softSkills] || [];
     // this.devProfileService.selectedLanguages = [...devProperties.languages] || [];
 
