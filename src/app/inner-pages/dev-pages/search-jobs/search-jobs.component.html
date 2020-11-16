@@ -1,10 +1,16 @@
-<ng-container *ngIf="(jobs$ | async)?.length">
-  <app-job *ngFor="let job of jobs$ | async"
+<ng-container *ngIf="jobsPaginated.length">
+  <app-job *ngFor="let job of jobsPaginated"
            [job]="job"
            (click)="onJobClick(job.id)">
   </app-job>
+
+  <mat-paginator [length]="jobs.length"
+                 (page)="onPageChange($event)"
+                 [pageSize]="2"
+                 [pageSizeOptions]="[2, 10, 15, jobs.length]">
+  </mat-paginator>
 </ng-container>
 
-<ng-container *ngIf="!(jobs$ | async)?.length">
+<ng-container *ngIf="!jobs.length">
   No jobs found
 </ng-container>

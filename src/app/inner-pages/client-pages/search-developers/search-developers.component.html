@@ -1,11 +1,21 @@
 <app-standard-bg-wrap>
-  <app-developer-resume
-    *ngFor="let developer of developers$ | async"
-    [developer]="developer"
-    (profile)="onProfileClick($event)">
-  </app-developer-resume>
+  <div *ngIf="developersPaginated.length; else noDevelopers">
 
-  <ng-container *ngIf="!(developers$ | async)?.length">
+    <app-developer-resume *ngFor="let developer of developers"
+                          [developer]="developer"
+                          (profile)="onProfileClick($event)">
+    </app-developer-resume>
+
+    <mat-paginator [length]="developers.length"
+                   (page)="onPageChange($event)"
+                   [pageSize]="2"
+                   [pageSizeOptions]="[2, 10, 15, developers.length]">
+    </mat-paginator>
+  </div>
+
+  <ng-template #noDevelopers>
     <span class="text text__color--2 text__xlg">No Developers found</span>
-  </ng-container>
+  </ng-template>
+
 </app-standard-bg-wrap>
+
