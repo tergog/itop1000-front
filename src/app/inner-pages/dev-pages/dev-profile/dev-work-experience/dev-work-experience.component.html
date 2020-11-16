@@ -4,22 +4,17 @@
   <app-dev-project-card class="m__top--30"
                         *ngFor="let project of (userInfo$ | async).devProperties.projects; index as i"
                         [project]="project"
-                        [id]="i"
-  ></app-dev-project-card>
+                        [id]="i"></app-dev-project-card>
 </ng-container>
 
 <div class="m__top--30 m__bottom--10">
-  <app-button
-              [text]="'Add project'"
-              (buttonClick)="onAddClick()"
-  ></app-button>
+  <app-button [text]="'Add project'"
+              (buttonClick)="onAddClick()"></app-button>
 </div>
 
 <ng-container *ngIf="!(userInfo$ | async).devProperties">
   <div class="d__flex d__flex--direction-column d__flex--items-center p__20" *ngIf="!isNewProject">
-    <span class="text text__title text__color--1 m__top--50">
-      You have not added any project
-    </span>
+    <span class="text text__title text__color--1 m__top--50"> You have not added any project </span>
   </div>
 </ng-container>
 
@@ -57,8 +52,7 @@
           <mat-chip *ngFor="let technology of selectedTechnologies"
                     [selectable]="false"
                     [removable]="isNewProject"
-                    (removed)="onTechnologyRemove(technology)">
-            {{ technology.name }}
+                    (removed)="onTechnologyRemove(technology)"> {{ technology.name }}
             <mat-icon matChipRemove *ngIf="isNewProject">cancel</mat-icon>
           </mat-chip>
           <input placeholder="Add Technology..."
@@ -70,8 +64,8 @@
         </mat-chip-list>
 
         <mat-autocomplete #autoTechnologies="matAutocomplete" (optionSelected)="onTechnologySelect($event)">
-          <mat-option *ngFor="let technology of availableTechnologies" [value]="technology">
-            {{ technology.name }}
+          <mat-option *ngFor="let technology of availableTechnologies"
+                      [value]="technology"> {{ technology.name }}
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
@@ -82,6 +76,7 @@
           <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
           <mat-datepicker #pickerFrom></mat-datepicker>
         </mat-form-field>
+
         <mat-form-field appearance="fill">
           <input matInput formControlName="to" [placeholder]="'To'" [matDatepicker]="pickerTo">
           <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
