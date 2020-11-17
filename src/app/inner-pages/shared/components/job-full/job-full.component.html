@@ -47,13 +47,21 @@
           <div>
             <div class="text text__font--2 text__fw--500 text__uppercase text__title">{{ job.title }}</div>
             <div class="job-duration text__color--5 text__color--5 text__font--2 m__top--10" #durationRef>
-              <span class="text__underline text__color--3 text__font--2">Project duration</span> {{ job.duration }}
-              Months
+              <span class="text__underline text__color--3 text__font--2">Project duration</span> {{ job.duration }} Months
             </div>
           </div>
-          <div (click)="onRespondClick()">
+
+          <div (click)="onRespondClick()" *ngIf="!canEdit; else canEditButtons">
             <button class="btn-respond">RESPOND</button>
           </div>
+
+          <ng-template #canEditButtons>
+            <div class="d__flex d__flex--direction-column">
+              <app-button class="m__bottom--10" [text]="'Edit'" (buttonClick)="onEditJob()"></app-button>
+              <app-button [text]="'Archive'" (buttonClick)="onDeleteClick()"></app-button>
+            </div>
+          </ng-template>
+
         </div>
         <div class="text text__font--4 text__fw--200 text__color--8 m__top--60">{{ job.description }}</div>
         <hr class="splitter-line m__top--36">

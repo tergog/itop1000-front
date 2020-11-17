@@ -1,0 +1,18 @@
+<div class="dialog-header">
+  <span class="text text__lg text__color--3 text__uppercase">{{ data.title }}</span>
+  <i class="close cursor__pointer" mat-dialog-close></i>
+</div>
+
+<div class="p__20 m__top--20 w__494">
+
+  <div class="text text__color--1 text__sm text__center">
+    <p>{{ data.text }}</p>
+  </div>
+
+
+  <div class="text__center m__top--50">
+    <app-button [type]="'transparent'" [text]="'Cancel'" mat-dialog-close></app-button>
+    <app-button [text]="'Confirm'" (buttonClick)="onConfirmClick()"></app-button>
+  </div>
+
+</div>
