@@ -24,6 +24,7 @@ import { ProjectCardComponent } from './components/project-card/project-card.com
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DeleteBillingMethodDialogComponent } from 'app/inner-pages/shared/components/delete-billing-method-dialog/delete-billing-method-dialog.component';
 import { ConfirmationDialogComponent } from 'app/inner-pages/shared/components/confirmation-dialog/confirmation-dialog.component';
+import { EditJobDialogComponent } from 'app/inner-pages/shared/components/edit-job-dialog/edit-job-dialog.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { ConfirmationDialogComponent } from 'app/inner-pages/shared/components/c
     ProjectCardComponent,
     DeleteBillingMethodDialogComponent,
     ConfirmationDialogComponent,
+    EditJobDialogComponent,
   ],
   imports: [
     CommonModule,

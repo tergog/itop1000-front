@@ -1,0 +1,99 @@
+<div class="dialog-header">
+  <span class="text text__lg text__color--3 text__uppercase">Edit job</span>
+  <i class="close cursor__pointer" mat-dialog-close></i>
+</div>
+
+<div class="p__20 m__top--20 form-wrap w__594">
+  <div [formGroup]="form" class="d__flex d__flex--direction-column d__flex--justify-center m__bottom--30">
+    <div class="d__flex d__flex--direction-column">
+      <span class="text text__sm text__color--1 text__fw--600">Title</span>
+      <app-input class="m__top--10 light"
+                 [type]="'light'"
+                 [placeholder]="'Job Title'"
+                 formControlName="title"
+                 [value]="form.get('title').value"></app-input>
+    </div>
+
+    <div class="d__flex d__flex--direction-column m__top--20">
+      <span class="text text__sm text__color--1 text__fw--600">Description</span>
+      <app-textarea class="m__top--10"
+                    [placeholder]="'Job Description'"
+                    formControlName="description"
+                    [value]="form.get('description').value"></app-textarea>
+    </div>
+
+    <div class="d__flex d__flex--direction-column m__top--20">
+      <span class="text text__sm text__color--1 text__fw--600">Categories</span>
+      <app-input class="m__top--10 light"
+                 [type]="'light'"
+                 [placeholder]="'Job Title'"
+                 formControlName="categories"
+                 [value]="form.get('categories').value"></app-input>
+    </div>
+
+    <div class="d__flex d__flex--direction-column m__top--20">
+      <span class="text text__sm text__color--1 text__fw--600">Requirements</span>
+      <app-input class="m__top--10 light"
+                 [type]="'light'"
+                 [placeholder]="'Requirements'"
+                 formControlName="requirements"
+                 [value]="form.get('requirements').value"></app-input>
+    </div>
+
+    <div class="d__flex d__flex--direction-column m__top--20">
+      <span class="text text__sm text__color--1 text__fw--600">Duration</span>
+      <app-input class="m__top--10 light"
+                 [type]="'light'"
+                 [placeholder]="'Duration'"
+                 formControlName="duration"
+                 [value]="form.get('duration').value"></app-input>
+    </div>
+
+    <div class="d__flex d__flex--direction-column m__top--20">
+      <span class="text text__sm text__color--1 text__fw--600">Price</span>
+      <app-input class="m__top--10 light"
+                 [type]="'light'"
+                 [placeholder]="'Price'"
+                 formControlName="price"
+                 [value]="form.get('price').value"></app-input>
+    </div>
+
+    <div class="d__flex d__flex--direction-column m__top--20">
+      <span class="text text__sm text__color--1 text__fw--600">Company</span>
+      <app-input class="m__top--10 light"
+                 [type]="'light'"
+                 [placeholder]="'Company'"
+                 formControlName="company"
+                 [value]="form.get('company').value"></app-input>
+    </div>
+
+    <div class="d__flex d__flex--direction-column m__top--20">
+      <span class="text text__sm text__color--1 text__fw--600">Country</span>
+      <app-input class="m__top--10 light"
+                 [type]="'light'"
+                 [placeholder]="'Country'"
+                 formControlName="country"
+                 [value]="form.get('country').value"></app-input>
+    </div>
+
+    <div class="d__flex d__flex--direction-column m__top--20">
+      <span class="text text__sm text__color--1 text__fw--600">City</span>
+      <app-input class="m__top--10 light"
+                 [type]="'light'"
+                 [placeholder]="'City'"
+                 formControlName="city"
+                 [value]="form.get('city').value"></app-input>
+    </div>
+  </div>
+
+  <div class="d__flex d__flex--justify-center text__center">
+    <span *ngIf="errorMessage" class="error text text__md text__color--2 m__top--25">
+      {{ errorMessage }}
+    </span>
+  </div>
+
+  <div class="m__top--10 m__bottom--30 text__right">
+    <app-button [type]="'transparent'" [text]="'Cancel'" mat-dialog-close></app-button>
+    <app-button [text]="'Post'" (buttonClick)="onPostClick()"></app-button>
+  </div>
+</div>

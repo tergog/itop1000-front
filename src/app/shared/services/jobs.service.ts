@@ -33,4 +33,8 @@ export class JobsService {
   public deleteJob(jobId: string) {
     return this.http.delete(`${this.apiUrl}${ApiConstants.jobs.main}/${jobId}`);
   }
+
+  public updateJob(jobId: string, jobData: Job) {
+    return this.http.post(`${this.apiUrl}${ApiConstants.jobs.main}/${jobId}`, jobData);
+  }
 }

@@ -84,6 +84,10 @@
   }
 
   &__bottom {
+    &--30 {
+      margin-bottom: 30px;
+    }
+
     &--10 {
       margin-bottom: 10px;
     }
@@ -137,6 +141,10 @@
     @media (max-width: 992px) {
       width: 80% !important;
     }
+  }
+
+  &__600 {
+    width: 600px !important;
   }
 
   &__50per {
