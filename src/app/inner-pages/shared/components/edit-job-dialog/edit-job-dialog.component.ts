@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { Job } from 'app/shared/models';
 import { JobsService } from 'app/shared/services';
+import { untilDestroyed } from 'ngx-take-until-destroy';
 
 @Component({
   selector: 'app-edit-job-dialog',
@@ -41,8 +42,9 @@ export class EditJobDialogComponent implements OnInit {
   }
 
 
-  onPostClick() {
+  onPostClick(): void {
     this.jobService.updateJob(this.job.id, this.form.value)
+      .pipe(untilDestroyed(this))
       .subscribe(
         () => this.dialogRef.close('Job updated successfully'),
         error => this.errorMessage = error.message);

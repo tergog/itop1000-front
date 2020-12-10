@@ -30,11 +30,11 @@ export class JobsService {
     return this.http.post(`${this.apiUrl}${ApiConstants.jobs.main}`, jobData);
   }
 
-  public deleteJob(jobId: string) {
+  public deleteJob(jobId: string): Observable<object> {
     return this.http.delete(`${this.apiUrl}${ApiConstants.jobs.main}/${jobId}`);
   }
 
-  public updateJob(jobId: string, jobData: Job) {
-    return this.http.post(`${this.apiUrl}${ApiConstants.jobs.main}/${jobId}`, jobData);
+  public updateJob(jobId: string, jobData: Job): Observable<Job> {
+    return this.http.post<Job>(`${this.apiUrl}${ApiConstants.jobs.main}/${jobId}`, jobData);
   }
 }

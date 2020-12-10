@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { Observable, of } from 'rxjs';
-import { flatMap } from 'rxjs/operators';
+import { flatMap, switchMap, tap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 
 import { getJobs, State } from 'app/core/reducers';
@@ -46,12 +46,11 @@ export class JobFullComponent implements OnInit, OnDestroy {
     this.store.select(getJobs)
       .pipe(
         untilDestroyed(this),
-        flatMap(jobs => this.getJobFromStore(jobs)))
-      .subscribe((job: Job) => {
-        this.job = job;
-        this.store.select(fromCore.getUserInfo)
-          .subscribe(user => this.canEdit = user.id === this.job.userId);
-      });
+        flatMap(jobs => this.getJobFromStore(jobs)),
+        tap((job: Job) => this.job = job),
+        switchMap(() => this.store.select(fromCore.getUserInfo)),
+      )
+      .subscribe(user => this.canEdit = user.id === this.job.userId);
   }
 
   public onSectionCLick(selectedSection: JobSections, element: HTMLElement): void {
@@ -82,29 +81,30 @@ export class JobFullComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed()
       .pipe(untilDestroyed(this))
-      .subscribe(res => { if (res === 'Confirmed') this.onDeleteJob()});
+      .subscribe(res => { if (res === 'Confirmed') { this.onDeleteJob(); }});
   }
 
-  onDeleteJob() {
+  public onDeleteJob(): void {
     this.jobsService.deleteJob(this.job.id)
       .pipe(untilDestroyed(this))
       .subscribe(
         () => {
           this.handleSuccessResponse();
-          this.router.navigate(['in/c/profile'])},
+          this.router.navigate(['in/c/profile']); },
         error => this.handleErrorResponse(error)
-      )
+      );
   }
 
-  onEditClick() {
+  public onEditClick(): void {
     const dialogRef =  this.matDialog.open(EditJobDialogComponent, {data: {job: this.job}});
 
     dialogRef.afterClosed()
       .pipe(untilDestroyed(this))
-      .subscribe(res => { if (res === 'Job updated successfully') {
+      .subscribe(res => {
+        if (res === 'Job updated successfully') {
         this.getJobInfo();
         this.handleSuccessResponse();
-      }})
+      }});
   }
 
   private handleSuccessResponse(): void {
