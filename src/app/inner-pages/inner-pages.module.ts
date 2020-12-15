@@ -9,6 +9,8 @@ import { InnerPagesComponent } from 'app/inner-pages/inner-pages.component';
 import { SharedModule } from 'app/shared/shared.module';
 import { DevPagesGuard } from 'app/shared/guards/dev-pages.guard';
 import { ClientPagesGuard } from 'app/shared/guards/client-pages.guard';
+import { LandingComponent } from 'app/inner-pages/components/landing/landing.component';
+
 
 const routes: Routes = [
   {
@@ -27,10 +29,11 @@ const routes: Routes = [
         (m) => m.ClientPagesModule
       ),
   },
+  { path: 'landing', component: LandingComponent }
 ];
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, InnerPagesComponent],
+  declarations: [HeaderComponent, FooterComponent, InnerPagesComponent, LandingComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
