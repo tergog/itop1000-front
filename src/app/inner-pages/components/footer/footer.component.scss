@@ -13,11 +13,6 @@
 
 .container{
   max-width: 1400px;
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
 }
 
 .logo-icon{
@@ -26,19 +21,9 @@
 
 ul{
   padding: 0;
-  margin-left: 30px;
-}
-
-li{
-  margin-bottom: 16px;
 }
 
 li > a{
-  text-decoration: none;
-  font-weight: 300;
-  font-size: 24px;
-  text-transform: uppercase;
-  color: #fff; 
   &:hover{
     font-weight: 500;
     color: $text-color-5;
@@ -51,60 +36,23 @@ li > a{
 
 .line{
   height: 238px;
-  border: 1px solid #E5E5E5;
-  margin-right: 46px;
+  border: 1px solid $color-8;
 }
 
 .client-freelancer{
   width: 260px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.circles{
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
 }
 
 .outline{
   width: 50px;
   height: 50px;
-  border: 1px solid #E51B3E;
+  border: 1px solid $color-9;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .circle{
-  background: #C4C4C4;
+  background: $color-11;
   width: 28px;
   height: 28px;
   border-radius: 50%;
-}
-
-.client-freelancer-text{
-  font-size: 24px;
-  margin: 45px 0;
-  display: flex;
-  align-items: center;
-  .client{
-      margin-right: 5px;
-      text-decoration: none;
-      text-transform: uppercase;
-      font-weight: 500;
-      color: $text-color-5;
-  }
-  .freelancer{
-      margin-left: 5px;
-      text-decoration: none;
-      text-transform: uppercase;
-      font-weight: 300;
-      color: $text-color-8;
-  }
-  span{
-      color: $text-color-10;
-  }
 }
