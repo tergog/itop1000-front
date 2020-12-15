@@ -315,3 +315,87 @@
   }
 }
 
+
+// WYSIWYG
+.wysiwyg-icon {
+  background-size: cover;
+  vertical-align: middle;
+
+  &.bold {
+    width: 10px;
+    height: 12px;
+    background-image: url(assets/icons/wysiwyg-bold.svg);
+  }
+
+  &.italic {
+    width: 10px;
+    height: 12px;
+    background-image: url(assets/icons/wysiwyg-italic.svg);
+  }
+
+  &.underline {
+    width: 12px;
+    height: 14px;
+    background-image: url(assets/icons/wysiwyg-underline.svg);
+  }
+
+  &.linethrough {
+    width: 9px;
+    height: 13px;
+    background-image: url(assets/icons/wysiwyg-linethrough.svg);
+  }
+  
+  &.smile {
+    width: 13px;
+    height: 13px;
+    background-image: url(assets/icons/wysiwyg-smile.svg);
+  }
+
+  &.font {
+    width: 13px;
+    height: 12px;
+    background-image: url(assets/icons/wysiwyg-font.svg);
+  }
+
+  &.align-right {
+    width: 13px;
+    height: 12px;
+    background-image: url(assets/icons/wysiwyg-align-right.svg);
+  }
+
+  &.align-center {
+    width: 12px;
+    height: 13px;
+    background-image: url(assets/icons/wysiwyg-align-center.svg);
+  }
+
+  &.align-left {
+    width: 13px;
+    height: 13px;
+    background-image: url(assets/icons/wysiwyg-align-left.svg);
+  }
+
+  &.line-spacing {
+    width: 12px;
+    height: 13px;
+    background-image: url(assets/icons/wysiwyg-line-spacing.svg);
+  }
+
+  &.link {
+    width: 13px;
+    height: 13px;
+    background-image: url(assets/icons/wysiwyg-link.svg);
+  }
+
+  &.gallery {
+    width: 13px;
+    height: 13px;
+    background-image: url(assets/icons/wysiwyg-gallery.svg);
+  }
+
+  &.upload {
+    width: 13px;
+    height: 15px;
+    background-image: url(assets/icons/wysiwyg-upload.svg);
+  }
+}
