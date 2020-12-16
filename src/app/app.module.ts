@@ -17,10 +17,13 @@ import { CoreModule } from 'app/core/core.module';
 import { DevelopersModule } from 'app/core/developers/developers.module';
 import { HttpErrorHandlerService } from 'app/shared/services/http-error-handler.service';
 import { TokenInterceptor } from 'app/shared/interceptors/token.interceptor';
+import { HeaderComponent } from './inner-pages/components/header/header.component';
+import { FooterComponent } from './inner-pages/components/footer/footer.component';
+import { LandingComponent } from './landing/landing.component';
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LandingComponent, HeaderComponent, FooterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

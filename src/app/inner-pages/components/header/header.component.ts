@@ -25,6 +25,8 @@ export class HeaderComponent implements OnInit {
   public UserRole = UserRole;
   public userRole: string;
   public searchTerm = new FormControl();
+  isAuth: boolean;
+  isAuth$: Observable<boolean>;
 
   constructor(private store: Store<fromCore.State>) {
   }
@@ -35,6 +37,14 @@ export class HeaderComponent implements OnInit {
         filter(user => !!user),
         tap(({role}) => this.userRole = role)
       );
+      this.isAuth$ = this.store.select(fromCore.getIsAuthenticated)
+      this.isAuth$.subscribe(res => {
+      if (res) {
+        this.isAuth = true;
+      } else {
+        this.isAuth = false;
+      }
+    }) 
   }
 
   public togglePopup(): void {
