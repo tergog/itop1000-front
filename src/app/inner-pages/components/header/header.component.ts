@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 
+
 import * as fromCore from 'app/core/reducers';
 import { UserInfo } from 'app/shared/models';
 import { getUserInfo } from 'app/core/reducers';
@@ -11,6 +12,8 @@ import { SearchJobsAction, SetOnLogoutAction } from 'app/core/actions/core.actio
 import { opacityInOutAnimation } from 'app/shared/animations';
 import { UserRole } from 'app/shared/enums';
 import { searchDevelopers } from 'app/core/developers/developers.actions';
+import { getIsAuthenticatedSelector } from 'app/core/reducers/core.reducer';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -25,16 +28,30 @@ export class HeaderComponent implements OnInit {
   public UserRole = UserRole;
   public userRole: string;
   public searchTerm = new FormControl();
+  isAuth$: Observable<boolean>
+  isAuth: boolean;
+  isView: boolean;
 
   constructor(private store: Store<fromCore.State>) {
+   
   }
 
   ngOnInit(): void {
+    
+
     this.userInfo$ = this.store.select(getUserInfo)
       .pipe(
         filter(user => !!user),
         tap(({role}) => this.userRole = role)
       );
+    this.isAuth$ = this.store.select(fromCore.getIsAuthenticated)
+    this.isAuth$.subscribe(res => {
+      if (res) {
+        this.isAuth = true;
+      } else {
+        this.isAuth = false;
+      }
+    }) 
   }
 
   public togglePopup(): void {

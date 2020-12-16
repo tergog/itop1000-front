@@ -1,4 +1,4 @@
-@import '../../../../assets/scss/variables';
+@import 'assets/scss/variables';
 
 :host {
   height: 80px;
@@ -7,6 +7,10 @@
   display: flex;
   justify-content: space-between;
   position: relative;
+}
+
+.menu{
+  justify-self: center;
 }
 
 .photo-preview {
@@ -30,6 +34,17 @@
       border-top: 5px solid $color-2;
     }
   }
+}
+
+a:hover {
+  color: $text-color-5;
+}
+
+.reg{
+  padding: 12px 20px;
+  border-radius: 50px;
+  display: block;
+  border: 1px solid $text-color-5;
 }
 
 .logout-popup {

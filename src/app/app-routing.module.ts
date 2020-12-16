@@ -7,9 +7,10 @@ import { AuthGuard } from 'app/shared/guards/auth.guard';
 import { ClientPagesGuard } from 'app/shared/guards/client-pages.guard';
 import { VerifyEmailComponent } from 'app/auth/components/verify-email/verify-email.component';
 import { TermsPagesComponent } from 'app/core/components/terms-pages/terms-pages.component';
+import { LandingComponent } from './landing/landing.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', component: LandingPageComponent },
+  { path: '', pathMatch: 'full', component: LandingComponent },
   { path: 'account/verify-email', component: VerifyEmailComponent },
   {
     path: 'auth',
@@ -31,6 +32,10 @@ const routes: Routes = [
     path: 'privacy',
     component: TermsPagesComponent,
   },
+  {
+    path: 'landing',
+    component: LandingComponent
+  }
 ];
 
 @NgModule({

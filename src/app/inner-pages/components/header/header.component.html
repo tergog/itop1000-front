@@ -1,12 +1,36 @@
 <i class="logo-preview-2 cursor__pointer" routerLink="profile"></i>
 
-<div class="w__350">
-  <app-input (enterKey)="onSearch()" [placeholder]="(userInfo$ | async)?.role === UserRole.Client ? 'Search for a developer' : 'Search for a job'" [formControl]="searchTerm">
+<ng-container *ngIf="isAuth$ | async">
+  <div class="w__350">
+  <!--<app-input (enterKey)="onSearch()" [placeholder]="(userInfo$ | async)?.role === UserRole.Client ? 'Search for a developer' : 'Search for a job'" [formControl]="searchTerm">
     <i class="search" (click)="onSearch()"></i>
-  </app-input>
-</div>
+  </app-input>-->
+  </div>
+</ng-container>
+<ng-container *ngIf="!isAuth">
+  <div class="menu d__flex d__flex--items-center">
+      <a class="text text__fw--300 text__color--3 text__xlg text__decoration--none m__right--20" href="">Services</a>
+      <span class="m__right--20 text__color--2 text__xxlg">|</span>
+
+      <a class="text text__fw--300 text__color--3 text__xlg text__decoration--none m__right--20" href="">Specialists</a>
+      <span class="m__right--20 text__color--2 text__xxlg">|</span>
+
+      <a class="text text__fw--300 text__color--3 text__xlg text__decoration--none m__right--20" href="">Projects</a>
+      <span class="m__right--20 text__color--2 text__xxlg">|</span>
+
+      <a class="text text__fw--300 text__color--3 text__xlg text__decoration--none" href="">Question-answer</a>
+  </div>
+</ng-container>
 
 
+<ng-container *ngIf="!isAuth">
+  <div class="d__flex d__flex--items-center">
+      <a class="m__right--20 text text__decoration--none text__fw--300 text__xlg text__color--5" routerLink="/auth/login">Войти</a>
+      <a class="reg text text__decoration--none text__fw--300 text__xlg text__color--5" routerLink="/auth/signup">Регистрация</a>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="isAuth">
 <div class="photo-preview with-chevron cursor__pointer" [style.backgroundImage]="(userInfo$ | async)?.photo ? 'url(' + (userInfo$ | async)?.photo + ')' : 'none'" (click)="togglePopup()"></div>
 
 <div [@opacityInOut] class="logout-popup" *ngIf="isPopupOpen">
@@ -24,3 +48,5 @@
     <span class="text text__color--2 text__md text__fw--500 text__uppercase cursor__pointer" (click)="logout()">log out</span>
   </div>
 </div>
+</ng-container>
+

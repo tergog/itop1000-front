@@ -17,19 +17,31 @@ import { CoreModule } from 'app/core/core.module';
 import { DevelopersModule } from 'app/core/developers/developers.module';
 import { HttpErrorHandlerService } from 'app/shared/services/http-error-handler.service';
 import { TokenInterceptor } from 'app/shared/interceptors/token.interceptor';
+import { DefaultDataServiceConfig, EntityDataModule } from '@ngrx/data';
+import { EntityStoreModule } from 'app/core/entity/entity-store.module'
+import { entityConfig } from 'app/core/entity/entity.metadata';
+import { HeaderComponent } from './inner-pages/components/header/header.component';
+import { FooterComponent } from './inner-pages/components/footer/footer.component';
+import { LandingComponent } from './landing/landing.component';
+import { InputComponent } from './shared/components/input/input.component';
 
+const defaultDataServiceConfig: DefaultDataServiceConfig = {
+  root: environment.apiUrl
+}
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LandingComponent, HeaderComponent, FooterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     CoreModule,
     DevelopersModule,
+    EntityStoreModule,
     BrowserAnimationsModule,
     NgxStripeModule.forRoot('pk_test_51HfRHCEuY58zLN527L8buA0YyVEdwwmwCiPgRNRiMhWdDdXaKgYOYeQ6bDNwDPXMtaAmtSSnbpaSzYYceAl7bSwh00wB02HoJj'),
     StoreModule.forRoot({}),
+    EntityDataModule.forRoot(entityConfig),
     EffectsModule.forRoot(),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     GooglePlaceModule
@@ -44,6 +56,10 @@ import { TokenInterceptor } from 'app/shared/interceptors/token.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true,
+    },
+    { 
+      provide: DefaultDataServiceConfig,
+      useValue: defaultDataServiceConfig
     },
     AuthGuard,
   ],
