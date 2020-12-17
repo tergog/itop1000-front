@@ -17,7 +17,8 @@ export const ApiConstants = {
   },
   jobs: {
     main: 'jobs',
-    search: 'jobs/search'
+    search: 'jobs/search',
+    delete: 'jobs'
   },
   developers: {
     main: 'developers',

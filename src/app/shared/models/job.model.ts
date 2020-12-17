@@ -7,6 +7,7 @@ export interface Job {
   duration: number;
   price: number;
   country: string;
+  userId?: string;
   city: string;
   dateCreated: string;
   company: string;

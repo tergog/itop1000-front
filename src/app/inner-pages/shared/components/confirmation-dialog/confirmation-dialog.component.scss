@@ -1,0 +1,15 @@
+@import '../../../../../assets/scss/variables';
+
+.dialog-header {
+  position: relative;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $color-1;
+
+  .close {
+    position: absolute;
+    right: 20px;
+  }
+}
