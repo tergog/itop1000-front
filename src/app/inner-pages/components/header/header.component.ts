@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { filter, tap } from 'rxjs/operators';
+import { filter, switchMap, tap } from 'rxjs/operators';
 
 import * as fromCore from 'app/core/reducers';
 import { UserInfo } from 'app/shared/models';
@@ -11,12 +11,12 @@ import { SearchJobsAction, SetOnLogoutAction } from 'app/core/actions/core.actio
 import { opacityInOutAnimation } from 'app/shared/animations';
 import { UserRole } from 'app/shared/enums';
 import { searchDevelopers } from 'app/core/developers/developers.actions';
+import { UserService } from 'app/shared/services';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
-  animations: [opacityInOutAnimation]
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
 
@@ -25,8 +25,7 @@ export class HeaderComponent implements OnInit {
   public UserRole = UserRole;
   public userRole: string;
   public searchTerm = new FormControl();
-  isAuth: boolean;
-  isAuth$: Observable<boolean>;
+  
 
   constructor(private store: Store<fromCore.State>) {
   }
@@ -36,15 +35,7 @@ export class HeaderComponent implements OnInit {
       .pipe(
         filter(user => !!user),
         tap(({role}) => this.userRole = role)
-      );
-      this.isAuth$ = this.store.select(fromCore.getIsAuthenticated)
-      this.isAuth$.subscribe(res => {
-      if (res) {
-        this.isAuth = true;
-      } else {
-        this.isAuth = false;
-      }
-    }) 
+      ); 
   }
 
   public togglePopup(): void {
@@ -62,5 +53,4 @@ export class HeaderComponent implements OnInit {
       this.store.dispatch(searchDevelopers({payload: this.searchTerm.value}));
     }
   }
-
 }

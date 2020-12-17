@@ -4,6 +4,13 @@ import { Location } from "@angular/common";
 
 import { NotificationMessage } from 'app/shared/models';
 import { NotificationsService } from 'app/shared/services/notifications.service';
+import { UserService } from './shared/services';
+import { first, map, shareReplay } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import * as fromCore from 'app/core/reducers';
+import * as coreActions from 'app/core/actions/core.actions';
+import * as jwtDecode from 'jwt-decode';
+import { TOKEN } from './constants/constants';
 
 @Component({
   selector: 'app-root',
@@ -13,16 +20,9 @@ import { NotificationsService } from 'app/shared/services/notifications.service'
 export class AppComponent implements OnInit {
   title = 'ITOP1000';
   public notification: NotificationMessage;
-  isView: boolean;
 
-  constructor(private notificationService: NotificationsService, private router: Router, location: Location) {
-    router.events.subscribe(val => {
-      if(location.path() === "/auth/login" || location.path() === "/auth/signup") {
-        this.isView = false;
-      } else {
-        this.isView = true;
-      }
-    });
+  constructor(private notificationService: NotificationsService) {
+    
   }
 
   ngOnInit(): void {

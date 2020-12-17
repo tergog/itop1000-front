@@ -129,6 +129,16 @@
   width: 118px;
   height: 52px;
   background-image: url(assets/icons/logo-preview-2.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.logo-preview-3 {
+  display: block;
+  width: 236px;
+  height: 104px;
+  background-image: url(assets/icons/logo-preview-2.svg);
+  background-repeat: no-repeat;
   background-size: contain;
 }
 
@@ -224,6 +234,53 @@
   }
 }
 
+.instagram-color {
+  width: 32px;
+  height: 32px;
+  background-image: url(assets/icons/instagram.svg);
+  display: block;
+  background-size: contain;
+}
+
+.facebook-color {
+  width: 32px;
+  height: 32px;
+  background: url(assets/icons/facebook.svg);
+  display: block;
+  background-size: contain;
+}
+
+.linkedin {
+  width: 32px;
+  height: 32px;
+  background: url(assets/icons/linkedin2.svg);
+  display: block;
+  background-size: contain;
+}
+
+.instagram {
+  width: 32px;
+  height: 32px;
+  background-image: url(assets/icons/instagram2.svg);
+  display: block;
+  background-size: contain;
+}
+
+.facebook {
+  width: 26px;
+  height: 26px;
+  background: url(assets/icons/facebook2.svg);
+  display: block;
+  background-size: contain;
+}
+
+.linkedin-color {
+  width: 32px;
+  height: 32px;
+  background: url(assets/icons/linkedin.svg);
+  display: block;
+  background-size: contain;
+}
 
 .card {
   width: 32px;
@@ -313,5 +370,6 @@
   .reviews {
     background-image: url(assets/icons/reviews-active.svg);
   }
+
 }
 

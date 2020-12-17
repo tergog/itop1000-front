@@ -17,15 +17,19 @@ import { CoreModule } from 'app/core/core.module';
 import { DevelopersModule } from 'app/core/developers/developers.module';
 import { HttpErrorHandlerService } from 'app/shared/services/http-error-handler.service';
 import { TokenInterceptor } from 'app/shared/interceptors/token.interceptor';
-import { HeaderComponent } from './inner-pages/components/header/header.component';
-import { FooterComponent } from './inner-pages/components/footer/footer.component';
+import { HeaderLandingComponent } from './inner-pages/components/header-landing/header-landing.component';
+import { FooterLandingComponent } from './inner-pages/components/footer-landing/footer-landing.component';
 import { LandingComponent } from './landing/landing.component';
+import { InputComponent } from './shared/components/input/input.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
-  declarations: [AppComponent, LandingComponent, HeaderComponent, FooterComponent],
+  declarations: [AppComponent, LandingComponent, HeaderLandingComponent, FooterLandingComponent],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
     CoreModule,
