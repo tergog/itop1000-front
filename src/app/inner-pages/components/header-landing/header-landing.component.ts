@@ -10,7 +10,6 @@ import { opacityInOutAnimation } from 'app/shared/animations';
 })
 export class HeaderLandingComponent implements OnInit {
 
-
   constructor() {
   }
 

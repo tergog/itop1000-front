@@ -2,16 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { filter, switchMap, tap } from 'rxjs/operators';
+import { filter, tap } from 'rxjs/operators';
 
 import * as fromCore from 'app/core/reducers';
 import { UserInfo } from 'app/shared/models';
 import { getUserInfo } from 'app/core/reducers';
 import { SearchJobsAction, SetOnLogoutAction } from 'app/core/actions/core.actions';
-import { opacityInOutAnimation } from 'app/shared/animations';
 import { UserRole } from 'app/shared/enums';
 import { searchDevelopers } from 'app/core/developers/developers.actions';
-import { UserService } from 'app/shared/services';
 
 @Component({
   selector: 'app-header',

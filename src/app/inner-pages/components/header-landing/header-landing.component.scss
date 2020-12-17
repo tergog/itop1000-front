@@ -9,55 +9,13 @@
   position: relative;
 }
 
-.menu{
-  justify-self: center;
-}
-
-.photo-preview {
-  position: relative;
-  width: 52px;
-  height: 52px;
-  border: 1px solid $color-3;
-  border-radius: 50%;
-  background-size: contain;
-
-  &.with-chevron {
-    &:after {
-      position: absolute;
-      content: '';
-      top: 50%;
-      right: -16px;
-      width: 0;
-      height: 0;
-      border-left: 6px solid transparent;
-      border-right: 6px solid transparent;
-      border-top: 5px solid $color-2;
-    }
-  }
-}
-
 a:hover {
   color: $text-color-5;
 }
 
-.reg{
+.registrationBtn {
   padding: 12px 20px;
   border-radius: 50px;
   display: block;
   border: 1px solid $text-color-5;
-}
-
-.logout-popup {
-  position: absolute;
-  right: 125px;
-  top: 90px;
-  background: $color-3;
-  border: 1px solid $color-1;
-  padding: 20px 25px;
-  z-index: 1;
-}
-
-.separator {
-  width: 100%;
-  border-top: 1px solid $color-4;
 }
