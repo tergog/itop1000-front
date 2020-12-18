@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -19,6 +19,8 @@ import { SeparatorComponent } from './components/separator/separator.component';
 import { TimezoneComponent } from './components/timezone/timezone.component';
 import { AddressComponent } from 'app/shared/components/address/address.component';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { PhoneComponent } from './components/phone/phone.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
     ClickedOutsideDirective,
     SeparatorComponent,
     TimezoneComponent,
-    AddressComponent
+    AddressComponent,
+    PhoneComponent
   ],
   exports: [
     InputComponent,
@@ -47,7 +50,8 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
     ClickedOutsideDirective,
     SeparatorComponent,
     TimezoneComponent,
-    AddressComponent
+    AddressComponent,
+    PhoneComponent
   ],
   imports: [
     CommonModule,
@@ -60,7 +64,9 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
     MatOptionModule,
     OverlayModule,
     NgCircleProgressModule,
-    GooglePlaceModule
+    GooglePlaceModule,
+    NgxIntlTelInputModule,
+    ReactiveFormsModule
   ],
   providers: [CircleProgressOptions],
 

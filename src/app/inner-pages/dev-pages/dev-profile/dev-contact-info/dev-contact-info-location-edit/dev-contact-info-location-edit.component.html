@@ -28,10 +28,14 @@
     <i class="phone phone-gray"></i>
     <span class="text text__sm text__bold text__uppercase">PHONE</span>
 
-    <app-input [type]="'inner'"
+    <!-- <app-input [type]="'inner'"
                formControlName="phone"
                [placeholder]="'Phone'"
-               [value]="form.get('phone').value"></app-input>
+               [value]="form.get('phone').value"></app-input> -->
+               <app-phone
+               formControlName="phone"
+               [phone]="form.get('phone').value"></app-phone>
+               
   </div>
 </div>
 
