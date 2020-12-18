@@ -1,5 +1,5 @@
-import { DevelopersService } from 'app/shared/services';
-import { FormGroup, FormControl } from '@angular/forms';
+import { DevelopersService, UtilsService } from 'app/shared/services';
+import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Store } from '@ngrx/store';
@@ -26,6 +26,8 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
   public form: FormGroup;
   public userInfo$: Observable<UserInfo>;
 
+  showError: boolean;
+
   public logoUrl: string;
   public projectImages: string[] = [];
 
@@ -51,7 +53,8 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
     private store: Store<fromCore.State>,
     private devProfileService: DevProfileService,
     private matDialog: MatDialog,
-    private developersService: DevelopersService
+    private developersService: DevelopersService,
+    private utilsService: UtilsService
   ) {
   }
 
@@ -79,8 +82,13 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
   }
 
   public onSaveClick(): void {
-    this.disableEmptyFields();
-    this.devProfileService.devProperties = {
+    if (this.form.invalid) {
+      this.showError = true;
+      console.log(this.form.get('technologies'))
+    } else {
+      this.showError = false;
+      this.disableEmptyFields();
+      this.devProfileService.devProperties = {
       ...this.devProfileService.devProperties,
       projects: [
         ...this.devProfileService.devProperties.projects,
@@ -95,11 +103,13 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
 
     this.devProfileService.onSaveClick({devProperties: this.devProfileService.devProperties});
     this.isNewProject = false;
+    }
   }
 
   public onTechnologySelect({ option }: any): void {
     this.availableTechnologies = this.availableTechnologies.filter(technology => technology.value !== option.value.value);
     this.selectedTechnologies.push(option.value);
+    this.form.get('technologies').patchValue(option);
   }
 
   public onTechnologyRemove(technology: NameValueModel): void {
@@ -125,12 +135,12 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
 
   private initForm(): void {
     this.form = new FormGroup({
-      title: new FormControl('', []),
-      description: new FormControl('', []),
-      technologies: new FormControl([], []),
-      link: new FormControl('', []),
-      from: new FormControl('', []),
-      to: new FormControl('', []),
+      title: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      description: new FormControl('', [Validators.required, Validators.minLength(100)]),
+      technologies: new FormControl([], [Validators.required]),
+      link: new FormControl('', [Validators.required, Validators.pattern(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/)]),
+      from: new FormControl('', [Validators.required]),
+      to: new FormControl('', [Validators.required]),
     });
   }
 
