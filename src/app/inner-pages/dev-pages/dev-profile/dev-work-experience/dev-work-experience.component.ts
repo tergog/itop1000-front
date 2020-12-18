@@ -84,7 +84,6 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
   public onSaveClick(): void {
     if (this.form.invalid) {
       this.showError = true;
-      console.log(this.form.get('technologies'))
     } else {
       this.showError = false;
       this.disableEmptyFields();
@@ -109,12 +108,13 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
   public onTechnologySelect({ option }: any): void {
     this.availableTechnologies = this.availableTechnologies.filter(technology => technology.value !== option.value.value);
     this.selectedTechnologies.push(option.value);
-    this.form.get('technologies').patchValue(option);
+    this.form.get('technologies').patchValue(this.selectedTechnologies);
   }
 
   public onTechnologyRemove(technology: NameValueModel): void {
     this.selectedTechnologies = this.selectedTechnologies.filter(item => item.value !== technology.value);
     this.availableTechnologies.push(technology);
+    this.form.get('technologies').patchValue(this.selectedTechnologies);
   }
 
   public openUploadImageDialog(forLogo: boolean = false): void {
