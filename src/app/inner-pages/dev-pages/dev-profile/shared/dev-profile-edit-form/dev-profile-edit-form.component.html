@@ -10,12 +10,13 @@
       <mat-chip-list #chipListCategories formControlName="categories">
         <mat-chip *ngFor="let category of devProfileService.selectedCategories"
                   [selectable]="false"
+                  [disabled]="!isEdit"
                   [removable]="isEdit"
                   (removed)="onChipRemove(category, 'selectedCategories', 'availableCategories')">
           {{ category.name }}
           <mat-icon matChipRemove *ngIf="isEdit">cancel</mat-icon>
         </mat-chip>
-        <input placeholder="Add category..."
+        <input (click)="onCategory()" #category placeholder="Add category..."
                 [readOnly]="!isEdit"
                 [matChipInputFor]="chipListCategories"
                 [matAutocomplete]="autoCategories"
@@ -38,12 +39,13 @@
       <mat-chip-list #chipListSkills formControlName="skills">
         <mat-chip *ngFor="let skill of devProfileService.selectedSkills"
                   [selectable]="false"
+                  [disabled]="!isEdit"
                   [removable]="isEdit"
                   (removed)="onChipRemove(skill, 'selectedSkills', 'availableSkills')">
           {{ skill.name }}
           <mat-icon matChipRemove *ngIf="isEdit">cancel</mat-icon>
         </mat-chip>
-        <input placeholder="Add skill..."
+        <input (click)="onSkills()" #skills placeholder="Add skill..."
                 [readOnly]="!isEdit"
                 [matChipInputFor]="chipListSkills"
                 [matAutocomplete]="autoSkills"
