@@ -16,7 +16,7 @@
           {{ category.name }}
           <mat-icon matChipRemove *ngIf="isEdit">cancel</mat-icon>
         </mat-chip>
-        <input (click)="onCategory()" #category placeholder="Add category..."
+        <input #category placeholder="Add category..."
                 [readOnly]="!isEdit"
                 [matChipInputFor]="chipListCategories"
                 [matAutocomplete]="autoCategories"
@@ -45,7 +45,7 @@
           {{ skill.name }}
           <mat-icon matChipRemove *ngIf="isEdit">cancel</mat-icon>
         </mat-chip>
-        <input (click)="onSkills()" #skills placeholder="Add skill..."
+        <input #skills placeholder="Add skill..."
                 [readOnly]="!isEdit"
                 [matChipInputFor]="chipListSkills"
                 [matAutocomplete]="autoSkills"

@@ -25,8 +25,6 @@ export class DevProfileEditFormComponent implements OnInit {
   @Output() editToggle = new EventEmitter();
   @ViewChild('category', {static: false}) category: ElementRef;
   @ViewChild('skills', {static: false}) skills: ElementRef;
-  editElement: ElementRef;
-
 
   public form: FormGroup;
   public DevProfileSectionNames = DevProfileSectionNames;
@@ -71,19 +69,20 @@ export class DevProfileEditFormComponent implements OnInit {
     this.isEdit = false;
   }
 
-  onCategory() {
-    this.editElement = {...this.category};
-  }
-
-  onSkills() {
-    this.editElement = {...this.skills};
+  test(element: ElementRef){
+    console.log(element);
   }
 
   public onChipSelect(chip, selectedChips, availableChips): void {
     this.devProfileService[availableChips] = this.devProfileService[availableChips].filter(ch => ch.value !== chip.value);
     this.devProfileService[selectedChips].push(chip);
-    this.editElement.nativeElement.blur();
-    setTimeout(() => { this.editElement.nativeElement.focus()}, 0) 
+    if (selectedChips === "selectedCategories") {
+      this.category.nativeElement.blur();
+      setTimeout(() => { this.category.nativeElement.focus()}, 0);
+    } else if (selectedChips === "selectedSkills") {
+      this.skills.nativeElement.blur();
+      setTimeout(() => { this.skills.nativeElement.focus()}, 0);
+    }
   }
 
   public onChipRemove(chip: NameValueModel, selectedChips, availableChips): void {
