@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from 'app/shared/shared.module';
 import { PagesSharedModule } from 'app/inner-pages/shared/pages-shared.module';
 import { ChatComponent } from './chat.component';
 import { WysiwygComponent } from './wysiwyg/wysiwyg.component';
+
+import { ContenteditableControlValueAccessor } from './wysiwyg/contenteditable.directive';
 
 const routes: Routes = [
   { path: '', component: ChatComponent },
@@ -15,14 +17,16 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     ChatComponent,
-    WysiwygComponent
+    WysiwygComponent,
+    ContenteditableControlValueAccessor
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     SharedModule,
     PagesSharedModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class ChatModule {
