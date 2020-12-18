@@ -40,6 +40,14 @@ body {
   box-sizing: border-box;
 }
 
+.red-line {
+  height: 12px;
+  width: 100%;
+  background: $color-2;
+  box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.18);
+  transform: matrix(1, 0, 0, -1, 0, 0);
+}
+
 .error {
   display: inline-block;
   padding: 10px;
@@ -141,18 +149,6 @@ i {
 
   &__color--10 {
     color: $text-color-10;
-  }
-
-  &__color--11 {
-    color: $text-color-11;
-  }
-
-  &__color--12 {
-    color: $text-color-12;
-  }
-
-  &__color--13 {
-    color: $text-color-13;
   }
 
   &__xs {

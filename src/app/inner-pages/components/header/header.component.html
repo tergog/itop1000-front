@@ -1,4 +1,4 @@
-<i class="logo-preview-2 cursor__pointer" routerLink="/landing"></i>
+<i class="logo-preview-2 cursor__pointer" routerLink="profile"></i>
 
 <div class="w__350">
   <app-input (enterKey)="onSearch()" [placeholder]="(userInfo$ | async)?.role === UserRole.Client ? 'Search for a developer' : 'Search for a job'" [formControl]="searchTerm">

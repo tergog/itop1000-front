@@ -6,6 +6,7 @@ import { filter, tap } from 'rxjs/operators';
 
 import * as fromCore from 'app/core/reducers';
 import { UserInfo } from 'app/shared/models';
+import { opacityInOutAnimation } from 'app/shared/animations';
 import { getUserInfo } from 'app/core/reducers';
 import { SearchJobsAction, SetOnLogoutAction } from 'app/core/actions/core.actions';
 import { UserRole } from 'app/shared/enums';
@@ -14,7 +15,8 @@ import { searchDevelopers } from 'app/core/developers/developers.actions';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  animations: [opacityInOutAnimation]
 })
 export class HeaderComponent implements OnInit {
 
