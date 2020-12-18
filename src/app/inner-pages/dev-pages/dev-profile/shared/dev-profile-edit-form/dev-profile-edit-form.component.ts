@@ -1,5 +1,5 @@
 import { FormGroup, FormControl } from '@angular/forms';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs/operators';
@@ -23,6 +23,10 @@ export class DevProfileEditFormComponent implements OnInit {
   @Input() sectionName: string;
   @Input() isEdit: boolean;
   @Output() editToggle = new EventEmitter();
+  @ViewChild('category', {static: false}) category: ElementRef;
+  @ViewChild('skills', {static: false}) skills: ElementRef;
+  editElement: ElementRef;
+
 
   public form: FormGroup;
   public DevProfileSectionNames = DevProfileSectionNames;
@@ -67,9 +71,19 @@ export class DevProfileEditFormComponent implements OnInit {
     this.isEdit = false;
   }
 
+  onCategory() {
+    this.editElement = {...this.category};
+  }
+
+  onSkills() {
+    this.editElement = {...this.skills};
+  }
+
   public onChipSelect(chip, selectedChips, availableChips): void {
     this.devProfileService[availableChips] = this.devProfileService[availableChips].filter(ch => ch.value !== chip.value);
     this.devProfileService[selectedChips].push(chip);
+    this.editElement.nativeElement.blur();
+    setTimeout(() => { this.editElement.nativeElement.focus()}, 0) 
   }
 
   public onChipRemove(chip: NameValueModel, selectedChips, availableChips): void {
