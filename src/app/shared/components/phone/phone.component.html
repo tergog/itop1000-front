@@ -1,5 +1,5 @@
-<ngx-intl-tel-input 
-	[cssClass]="'custom'" 
+<ngx-intl-tel-input
+	[cssClass]="'custom'"
 	[preferredCountries]="preferredCountries"
 	[enableAutoCountrySelect]="true"
 	[enablePlaceholder]="true"
@@ -9,10 +9,9 @@
 	[selectedCountryISO]="CountryISO.UnitedKingdom"
 	[maxLength]="15"
 	[tooltipField]="TooltipLabel.Name"
-	[phoneValidation]="true" 
+	[phoneValidation]="true"
 	[separateDialCode]="separateDialCode"
-	[numberFormat]="PhoneNumberFormat.National" 
-	name="phone"
-	formControlName="phone">
-	[phone]
+	[numberFormat]="PhoneNumberFormat.National"
+  [(ngModel)]="phone"
+	name="phone">
 </ngx-intl-tel-input>
