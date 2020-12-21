@@ -1,7 +1,36 @@
-<quill-editor
-  [(ngModel)]="textContent"
-  [modules]="quillConfig"
-  placeholder="Message"
-  bubble="snow"
-  class="chat__text-editor"
-></quill-editor>
+<div class="chat__text-editor">
+  <div class="chat__text-editor__toolbar">
+    <span class="ql-formats">
+      <button class="ql-bold"></button>
+      <button class="ql-italic"></button>
+      <button class="ql-underline"></button>
+      <button class="ql-strike"></button>
+      <select class="ql-align">
+        <option value="right"></option>
+        <option value="center"></option>
+        <option value="" selected></option>
+      </select>
+    </span>
+    <span class="ql-formats">
+      <select class="ql-font"></select>
+      <input type="number" min='1' class="ql-spacing">
+    </span>
+    <span class="ql-formats">
+      <button class="ql-emoji"></button>
+      <button class="ql-link"></button>
+      <button class="ql-image"></button>
+    </span>
+    <button class="ql-file">
+      <svg width="13" height="15" viewBox="0 0 13 15" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10.4047 8.15918L6.5 12.6646L2.5953 8.15918L3.31348 7.33051L5.99219 10.4213V0H7.00781V10.4213L9.68652 7.33051L10.4047 8.15918ZM13 13.8281H0V15H13V13.8281Z"/>
+      </svg>          
+      Attach Files
+    </button>
+  </div>
+  <div class="chat__text-editor__divider"></div>
+  <quill-editor
+    [(ngModel)]="textContent"
+    (onContentChanged)="textContentChange($event)"
+    class="chat__text-editor__body"
+  ></quill-editor>
+</div>

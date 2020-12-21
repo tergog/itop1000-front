@@ -1,3 +1,9 @@
+$editor-border: 1px solid rgba(0, 0, 0, .15);
+$editor-border-radius: 5px;
+$editor-yellow: #f1d261;
+$editor-light: #eee;
+$editor-dark: #444;
+
 .chat__text-editor {
   display: block;
   width: 955px;
@@ -7,4 +13,82 @@
   background: rgba(0, 0, 0, 0.3);
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
   margin-bottom: 50px;
+
+  &__toolbar {
+    border: none;
+    padding: 32px 35px;
+
+    .ql-spacing {
+      float: left;
+      width: 60px;
+      height: 24px;
+      margin: 0 0 0 5px;
+      padding: 2px 0 2px 2px;
+      background-color: transparent;
+      border: $editor-border;
+      border-radius: $editor-border-radius;
+
+      &:focus {
+        background-color: $editor-light;
+        color: $editor-dark;
+      }
+    }
+
+    .ql-file {
+      color: $editor-yellow;
+      width: 130px;
+      line-height: 1.2rem;
+      float: right;
+    }
+  }
+
+  &__divider {
+    width: 95%;
+    height: 1px;
+    margin: 0 auto;
+    background-color: rgba(105, 105, 105, .9);
+  }
+}
+
+::ng-deep {
+  .ql-emoji .ql-fill {
+    fill: $editor-yellow !important;
+  }
+
+  .ql-emoji .ql-stroke {
+    stroke: $editor-yellow !important;
+  }
+
+  .ql-picker.ql-font,
+  .ql-picker.ql-font {
+    border: $editor-border;
+    border-radius: $editor-border-radius;
+
+    &.ql-expanded {
+      border: $editor-border !important;
+      border-radius: $editor-border-radius !important;
+      background-color: $editor-light;
+      
+      .ql-picker-label {
+        color: $editor-dark;
+      }
+    }
+  }
+
+  .ql-container {
+    border: none !important;
+  }
+
+  .ql-editor {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 16px;
+    padding: 26px 35px;
+
+    &:before {
+      font-style: normal !important;
+      left: 35px !important;
+      right: 35px !important;
+    }
+  }
 }
