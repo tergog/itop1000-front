@@ -30,25 +30,24 @@ export class UserService {
     return this.http.post(`${environment.apiUrl}${ApiConstants.accounts.verifyEmail}`, { token });
   }
 
-  encrypt(value : string) : string{
-    return crypto.AES.encrypt(value, environment.secret.trim()).toString();
-  }
-
-  decrypt(textToDecrypt : string){
-    return crypto.AES.decrypt(textToDecrypt, environment.secret.trim()).toString(crypto.enc.Utf8);
+  private customEncrypt(value: string): string {
+    value = crypto.AES.encrypt(value, '1542156').toString();
+    value = btoa(value);
+    value = crypto.AES.encrypt(value, '4256171').toString();
+    value = value.split('').reverse().join('');
+    return value;
   }
 
   public userRegistration(userInfo: UserRegistrationInfo): Observable<object> {
     if(userInfo.password = userInfo.confirmPassword){
-      userInfo.password = this.encrypt(userInfo.password);
+      userInfo.password = this.customEncrypt(userInfo.password);
       userInfo.confirmPassword = userInfo.password;
-    return this.http.post(`${this.apiUrl}${ApiConstants.accounts.register}/`, userInfo);
+      return this.http.post(`${this.apiUrl}${ApiConstants.accounts.register}/`, userInfo);
     }
-    
   }
 
   public userLogin(userInfo: UserLoginInfo): Observable<object> {
-    userInfo.password = this.encrypt(userInfo.password);
+    userInfo.password = this.customEncrypt(userInfo.password);
     return this.http.post(`${this.apiUrl}${ApiConstants.accounts.authenticate}`, userInfo);
   }
 

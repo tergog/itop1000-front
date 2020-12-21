@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { NotificationMessage } from 'app/shared/models';
 import { NotificationsService } from 'app/shared/services/notifications.service';
+import { UserService } from './shared/services';
 
 @Component({
   selector: 'app-root',
