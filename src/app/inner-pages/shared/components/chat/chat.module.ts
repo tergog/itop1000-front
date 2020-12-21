@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { SharedModule } from 'app/shared/shared.module';
 import { PagesSharedModule } from 'app/inner-pages/shared/pages-shared.module';
-import { ChatComponent } from './chat.component';
-import { WysiwygComponent } from './wysiwyg/wysiwyg.component';
+import { RichTextEditorModule } from './rich-text-editor/rich-text-editor.module';
 
-import { ContenteditableControlValueAccessor } from './wysiwyg/contenteditable.directive';
+import { ChatComponent } from './chat.component';
 
 const routes: Routes = [
   { path: '', component: ChatComponent },
@@ -16,9 +15,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    ChatComponent,
-    WysiwygComponent,
-    ContenteditableControlValueAccessor
+    ChatComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +23,7 @@ const routes: Routes = [
     SharedModule,
     PagesSharedModule,
     FormsModule,
-    ReactiveFormsModule
+    RichTextEditorModule
   ]
 })
 export class ChatModule {

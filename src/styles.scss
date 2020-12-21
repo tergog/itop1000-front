@@ -5,6 +5,12 @@
 @import 'assets/scss/spacing';
 @import 'assets/scss/display';
 
+// Loading styles for chat text-editor
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.bubble.css';
+@import '~quill/dist/quill.snow.css';
+@import '~quill-emoji/dist/quill-emoji.css';
+
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @import '~@angular/material/theming';
