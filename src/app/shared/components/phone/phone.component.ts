@@ -1,7 +1,6 @@
-import {Component, forwardRef, Input, OnInit, ViewChild} from '@angular/core';
-import {FormGroup, FormControl, Validators, NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/forms';
+import { Component, EventEmitter, forwardRef, HostBinding, Input, OnInit, Output } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { SearchCountryField, TooltipLabel, CountryISO, PhoneNumberFormat } from 'ngx-intl-tel-input';
-import { AddressComponent } from '../address/address.component';
 
 @Component({
   selector: 'app-phone',
@@ -15,42 +14,51 @@ import { AddressComponent } from '../address/address.component';
     }
   ]
 })
+export class PhoneComponent implements OnInit, ControlValueAccessor {
 
-export class PhoneComponent implements  OnInit, ControlValueAccessor{
-    @Input('phone') phone: string;
+  @HostBinding('class.inner') get valid() { return this.type === 'inner'}
+  @Input() type: string;
+  @Input() placeholder;
+  @Input() isHiddenPassword: boolean;
+  @Output() enterKey = new EventEmitter();
+  @Output() onFocusField = new EventEmitter();
 
-    separateDialCode = false;
-    SearchCountryField = SearchCountryField;
-    TooltipLabel = TooltipLabel;
-    CountryISO = CountryISO;
-    PhoneNumberFormat = PhoneNumberFormat;
-    preferredCountries: CountryISO[] = [CountryISO.UnitedStates, CountryISO.UnitedKingdom];
-    // phoneForm = new FormGroup({
-    //   phone: new FormControl(undefined, [Validators.required])
-    // });
+  separateDialCode = false;
+  SearchCountryField = SearchCountryField;
+  TooltipLabel = TooltipLabel;
+  CountryISO = CountryISO;
+  PhoneNumberFormat = PhoneNumberFormat;
+  preferredCountries: CountryISO[] = [CountryISO.UnitedStates, CountryISO.UnitedKingdom];
 
-    changePreferredCountries() {
-      this.preferredCountries = [CountryISO.India, CountryISO.Canada];
-    }
+  constructor() { }
 
-    ngOnInit() {
+  ngOnInit(): void {
+  }
 
-    }
+  @Input()
+  set value(value: any) {
+    this._value = value;
+    this.writeValue(value);
+  }
 
-    private onChange = (phone: string) => {
-      console.log(phone);
-    }
-    private onTouched = () => {};
+  get value(): any {
+    return this._value;
+  }
 
-    public registerOnChange(fn: (phone: string) => void): void {
-      this.onChange = fn;
-    }
+  _value: any;
 
-    public registerOnTouched(fn: () => void): void {
-      this.onTouched = fn;
-    }
+  writeValue(value: number): void {
+    this.onChange(this.value);
+  }
 
-    public writeValue(phone: string): void {
-      this.onChange(phone);
-    }
+  private onChange = (value: number) => {};
+
+  private onTouched = () => {};
+
+  public registerOnChange(fn: (value: number) => void): void {
+    this.onChange = fn;
+  }
+
+  public registerOnTouched(fn: () => void): void {
+  }
 }

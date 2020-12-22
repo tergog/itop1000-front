@@ -1,17 +1,20 @@
 <ngx-intl-tel-input
-	[cssClass]="'custom'"
-	[preferredCountries]="preferredCountries"
-	[enableAutoCountrySelect]="true"
-	[enablePlaceholder]="true"
-	[searchCountryFlag]="true"
-	[searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
-	[selectFirstCountry]="false"
-	[selectedCountryISO]="CountryISO.UnitedKingdom"
-	[maxLength]="15"
-	[tooltipField]="TooltipLabel.Name"
-	[phoneValidation]="true"
-	[separateDialCode]="separateDialCode"
-	[numberFormat]="PhoneNumberFormat.National"
-  [(ngModel)]="phone"
-	name="phone">
+  [preferredCountries]="preferredCountries"
+  [enableAutoCountrySelect]="true"
+  [enablePlaceholder]="true"
+  [searchCountryFlag]="true"
+  [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+  [selectFirstCountry]="false"
+  [selectedCountryISO]="CountryISO.UnitedKingdom"
+  [maxLength]="15"
+  [tooltipField]="TooltipLabel.Name"
+  [phoneValidation]="true"
+  [separateDialCode]="separateDialCode"
+  [numberFormat]="PhoneNumberFormat.International"
+  [(ngModel)]="value"
+  name="phone">
 </ngx-intl-tel-input>
+
+
+
+<ng-content></ng-content>

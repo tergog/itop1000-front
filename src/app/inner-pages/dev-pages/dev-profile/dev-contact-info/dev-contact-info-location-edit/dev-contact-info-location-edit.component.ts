@@ -3,7 +3,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
 import { UserInfo } from 'app/shared/models';
-import {map} from "rxjs/internal/operators";
 
 @Component({
   selector: 'app-dev-contact-info-location-edit',
@@ -25,16 +24,13 @@ export class DevContactInfoLocationEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    console.log(this.userInfo);
     this.form.patchValue(this.userInfo);
-    // this.form.get('phone').valueChanges.pipe(
-    //   map(value => value.number)
-    // ).subscribe(value => this.form.patchValue(value));
   }
 
   public saveChanges(): void {
     this.disableEmptyFields();
     this.save.emit();
+    this.form.value.phone = this.form.value.phone.number;
     this.devProfileService.onSaveClick(this.form.value);
   }
 
@@ -60,7 +56,6 @@ export class DevContactInfoLocationEditComponent implements OnInit {
 
   private disableEmptyFields(): void {
     Object.keys(this.form.controls).forEach(field => {
-      console.log(this.form.controls[field].value);
       return this.form.controls[field].value || this.form.controls[field].disable();
     });
   }

@@ -20,8 +20,8 @@ import { TimezoneComponent } from './components/timezone/timezone.component';
 import { AddressComponent } from 'app/shared/components/address/address.component';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
-import { PhoneComponent } from './components/phone/phone.component';
-import {InputTestComponent} from './components/input-test/input-test.component';
+import {PhoneComponent} from './components/phone/phone.component';
+
 
 @NgModule({
   declarations: [
@@ -33,8 +33,7 @@ import {InputTestComponent} from './components/input-test/input-test.component';
     SeparatorComponent,
     TimezoneComponent,
     AddressComponent,
-    PhoneComponent,
-    InputTestComponent
+    PhoneComponent
   ],
   exports: [
     InputComponent,
@@ -53,8 +52,7 @@ import {InputTestComponent} from './components/input-test/input-test.component';
     SeparatorComponent,
     TimezoneComponent,
     AddressComponent,
-    PhoneComponent,
-    InputTestComponent
+    PhoneComponent
   ],
   imports: [
     CommonModule,
