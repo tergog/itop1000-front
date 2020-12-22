@@ -37,7 +37,12 @@ export class PhoneComponent implements OnInit, ControlValueAccessor {
 
   @Input()
   set value(value: any) {
-    this._value = value;
+    if (typeof(value) === 'object') {
+      this._value = value.number;
+    } else {
+      this._value = value;
+    }
+
     this.writeValue(value);
   }
 

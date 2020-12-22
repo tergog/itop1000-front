@@ -30,7 +30,6 @@ export class DevContactInfoLocationEditComponent implements OnInit {
   public saveChanges(): void {
     this.disableEmptyFields();
     this.save.emit();
-    this.form.value.phone = this.form.value.phone.number;
     this.devProfileService.onSaveClick(this.form.value);
   }
 

@@ -34,7 +34,6 @@ export class ClientContactInfoLocationEditComponent implements OnInit {
   public onSaveLocationClick(): void {
     this.disableEmptyFields();
     this.save.emit(this.form.value);
-    this.form.value.phone = this.form.value.phone.number;
     this.clientProfileService.onSaveClick(this.form.value);
   }
 
