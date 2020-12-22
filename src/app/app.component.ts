@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 import { NotificationMessage } from 'app/shared/models';
 import { NotificationsService } from 'app/shared/services/notifications.service';
 
@@ -12,7 +13,9 @@ export class AppComponent implements OnInit {
   title = 'ITOP1000';
   public notification: NotificationMessage;
 
-  constructor(private notificationService: NotificationsService) {}
+  constructor(private notificationService: NotificationsService) {
+    
+  }
 
   ngOnInit(): void {
     this.subscribeForNotifications();

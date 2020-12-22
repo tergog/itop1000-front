@@ -6,9 +6,9 @@ import { filter, tap } from 'rxjs/operators';
 
 import * as fromCore from 'app/core/reducers';
 import { UserInfo } from 'app/shared/models';
+import { opacityInOutAnimation } from 'app/shared/animations';
 import { getUserInfo } from 'app/core/reducers';
 import { SearchJobsAction, SetOnLogoutAction } from 'app/core/actions/core.actions';
-import { opacityInOutAnimation } from 'app/shared/animations';
 import { UserRole } from 'app/shared/enums';
 import { searchDevelopers } from 'app/core/developers/developers.actions';
 
@@ -25,6 +25,7 @@ export class HeaderComponent implements OnInit {
   public UserRole = UserRole;
   public userRole: string;
   public searchTerm = new FormControl();
+  
 
   constructor(private store: Store<fromCore.State>) {
   }
@@ -34,7 +35,7 @@ export class HeaderComponent implements OnInit {
       .pipe(
         filter(user => !!user),
         tap(({role}) => this.userRole = role)
-      );
+      ); 
   }
 
   public togglePopup(): void {
@@ -52,5 +53,4 @@ export class HeaderComponent implements OnInit {
       this.store.dispatch(searchDevelopers({payload: this.searchTerm.value}));
     }
   }
-
 }
