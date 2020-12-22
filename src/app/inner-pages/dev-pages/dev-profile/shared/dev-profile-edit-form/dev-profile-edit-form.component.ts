@@ -12,6 +12,11 @@ import { UserInfo } from 'app/shared/models/user-info.model';
 import { DevProperties } from 'app/shared/models/dev-properties.model';
 import { NameValueModel } from 'app/shared/models/name-value.model';
 
+export enum SelectedChips {
+  Category = 'selectedCategories',
+  Skill = 'selectedSkills'
+};
+
 @Component({
   selector: 'app-dev-profile-edit-form',
   templateUrl: './dev-profile-edit-form.component.html',
@@ -25,6 +30,8 @@ export class DevProfileEditFormComponent implements OnInit {
   @Output() editToggle = new EventEmitter();
   @ViewChild('category', {static: false}) category: ElementRef;
   @ViewChild('skills', {static: false}) skills: ElementRef;
+
+  selectedChip = SelectedChips;
 
   public form: FormGroup;
   public DevProfileSectionNames = DevProfileSectionNames;
@@ -69,16 +76,12 @@ export class DevProfileEditFormComponent implements OnInit {
     this.isEdit = false;
   }
 
-  test(element: ElementRef){
-    console.log(element);
-  }
-
   public onChipSelect(chip, selectedChips, availableChips): void {
     this.devProfileService[availableChips] = this.devProfileService[availableChips].filter(ch => ch.value !== chip.value);
     this.devProfileService[selectedChips].push(chip);
-    if (selectedChips === "selectedCategories") {
+    if (selectedChips === SelectedChips.Category) {
       this.resetFocus(this.category);
-    } else if (selectedChips === "selectedSkills") {
+    } else if (selectedChips === SelectedChips.Skill) {
       this.resetFocus(this.skills);
     }
   }

@@ -86,7 +86,7 @@
         </mat-form-field>
         <mat-error class="m__bottom--10" *ngIf="(showError && form.get('from').errors?.required)">From required</mat-error>
 
-        <mat-form-field  appearance="fill">
+        <mat-form-field appearance="fill">
           <input matInput formControlName="to" [placeholder]="'To'" [matDatepicker]="pickerTo">
           <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
           <mat-datepicker #pickerTo></mat-datepicker>

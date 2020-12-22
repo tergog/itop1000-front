@@ -24,7 +24,7 @@
                 [matChipInputAddOnBlur]="true">
       </mat-chip-list>
 
-      <mat-autocomplete #autoCategories="matAutocomplete" (optionSelected)="onChipSelect($event.option.value, 'selectedCategories', 'availableCategories')">
+      <mat-autocomplete #autoCategories="matAutocomplete" (optionSelected)="onChipSelect($event.option.value, selectedChip.Category, 'availableCategories')">
         <mat-option *ngFor="let category of devProfileService.availableCategories" [value]="category">
           {{ category.name }}
         </mat-option>
@@ -53,7 +53,7 @@
                 [matChipInputAddOnBlur]="true">
       </mat-chip-list>
 
-      <mat-autocomplete #autoSkills="matAutocomplete" (optionSelected)="onChipSelect($event.option.value, 'selectedSkills', 'availableSkills')">
+      <mat-autocomplete #autoSkills="matAutocomplete" (optionSelected)="onChipSelect($event.option.value, selectedChip.Skill, 'availableSkills')">
         <mat-option *ngFor="let skill of devProfileService.availableSkills" [value]="skill">
           {{ skill.name }}
         </mat-option>

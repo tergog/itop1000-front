@@ -4,7 +4,6 @@ import * as fromCore from 'app/core/reducers';
 
 import { DevProfileSectionNames } from 'app/inner-pages/dev-pages/dev-profile/shared/enums/devProfileSectionNames';
 
-
 @Component({
   selector: 'app-dev-categories-and-skills',
   templateUrl: './dev-categories-and-skills.component.html',
