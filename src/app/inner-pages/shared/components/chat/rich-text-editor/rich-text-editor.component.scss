@@ -19,18 +19,48 @@ $editor-dark: #444;
     padding: 32px 35px;
 
     .ql-spacing {
+      display: flex;
       float: left;
-      width: 60px;
-      height: 24px;
-      margin: 0 0 0 5px;
-      padding: 2px 0 2px 2px;
-      background-color: transparent;
-      border: $editor-border;
-      border-radius: $editor-border-radius;
+      margin-left: 5px;
+      width: 80px;
+      
+      &__input {
+        flex: 1;
+        width: 60%;
+        height: 24px;
+        margin: 0;
+        padding: 2px 0 2px 5px;
+        background-color: transparent;
+        border: $editor-border;
+        border-top-left-radius: $editor-border-radius;
+        border-bottom-left-radius: $editor-border-radius;
+        font-size: 14px;
+        font-weight: 500;
 
-      &:focus {
-        background-color: $editor-light;
-        color: $editor-dark;
+        &:focus {
+          background-color: $editor-light;
+          color: $editor-dark;
+        }
+      }
+
+      &__inc {
+        width: 20%;
+        height: 24px;
+        padding: 0;
+        line-height: 24px;
+        border: $editor-border;
+        border-left: none;
+      }
+
+      &__dec {
+        width: 20%;
+        height: 24px;
+        line-height: 24px;
+        padding: 0;
+        border: $editor-border;
+        border-left: none;
+        border-top-right-radius: $editor-border-radius;
+        border-bottom-right-radius: $editor-border-radius;
       }
     }
 
@@ -89,6 +119,14 @@ $editor-dark: #444;
       font-style: normal !important;
       left: 35px !important;
       right: 35px !important;
+    }
+  }
+
+  .chat__text-editor {
+    @for $i from 0 through 10 {
+      &.inner-spacing-#{$i} p + p {
+        margin-top: #{$i}px !important;
+      }
     }
   }
 }
