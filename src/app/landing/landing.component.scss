@@ -12,10 +12,6 @@
     }
 }
 
-a:hover {
-    color: $text-color-5;
-}
-
 .search-container {
     max-width: 1440px;
     height: 76px;
@@ -62,7 +58,7 @@ a:hover {
 
 .line {
     max-width: 1443px;
-    border-top: 1px solid $color-5;
+    border: 1px solid $color-5;
 }
 
 .circles {

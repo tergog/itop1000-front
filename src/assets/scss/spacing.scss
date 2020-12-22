@@ -103,9 +103,14 @@
 }
 
 .p {
+  &__0 {
+    padding: 0 !important;
+  }
+
   &__15 {
     padding: 15px;
   }
+
   &__20 {
     padding: 20px;
   }
@@ -181,7 +186,16 @@
     height: auto !important;
   }
 
+  &__80 {
+    height: 80px;
+  }
+
   &__100p {
     width: 100%;
   }
+
+  &__260 {
+    height: 260px;
+  }
+  
 }

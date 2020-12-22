@@ -10,33 +10,3 @@
   top: 100%;
   left: 0;
 }
-
-ul {
-  padding: 0;
-}
-
-
-a:hover {
-  font-weight: 500;
-  color: $text-color-5;
-}
-
-.line {
-  height: 260px;
-  border: 1px solid $color-8;
-}
-
-.outline {
-  width: 50px;
-  height: 50px;
-  border: 1px solid $color-9;
-  border-radius: 50%;
-}
-
-.circle {
-  background: $color-4;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-}
-
