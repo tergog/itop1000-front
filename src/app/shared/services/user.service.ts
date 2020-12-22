@@ -39,7 +39,7 @@ export class UserService {
   }
 
   public userRegistration(userInfo: UserRegistrationInfo): Observable<object> {
-    if(userInfo.password = userInfo.confirmPassword){
+    if(userInfo.password = userInfo.confirmPassword) {
       userInfo.password = this.customEncrypt(userInfo.password);
       userInfo.confirmPassword = userInfo.password;
       return this.http.post(`${this.apiUrl}${ApiConstants.accounts.register}/`, userInfo);
