@@ -17,12 +17,19 @@
 </div>
 
 <div class="right-side">
-  <div>
-    <div class="text text__font--2 text__fw--500 text__uppercase text__x4lg">{{ job.title }}</div>
-    <div class="text__color--5">
-      <span class="text__underline text__color--3">Project duration</span> {{ job.duration }} months
+  <div class="d__flex h__100">
+    <div>
+      <div class="text text__font--2 text__fw--500 text__uppercase text__x4lg">{{ job.title }}</div>
+      <div class="text__color--5">
+        <span class="text__underline text__color--3">Project duration</span> {{ job.duration }} months
+      </div>
+    </div>
+    <div class="d__flex d__flex--direction-column m__left--auto">
+      <app-button class="m__bottom--10" [text]="'Edit'" (click)="$event.stopPropagation();onEditClick()"></app-button>
+      <app-button [text]="'Archive'" (click)="$event.stopPropagation();onArchiveClick()"></app-button>
     </div>
   </div>
+ 
   <div class="text text__font--4 text__color--8">{{ job.description }}</div>
   <div>
     <div class="d__flex d__flex--flex-start d__flex--flex-wrap">
@@ -43,4 +50,6 @@
     <span>{{ job.city }}, {{ job.country }}</span>
     <span class="m__left--30 text__fw--300 text__font--2 text__capitalize">{{ job.dateCreated | date:'dd MMMM' }}</span>
   </div>
+  
 </div>
+

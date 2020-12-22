@@ -35,6 +35,6 @@ export class JobsService {
   }
 
   public updateJob(jobId: string, jobData: Job): Observable<Job> {
-    return this.http.post<Job>(`${this.apiUrl}${ApiConstants.jobs.main}/${jobId}`, jobData);
+    return this.http.put<Job>(`${this.apiUrl}${ApiConstants.jobs.main}/${jobId}`, jobData);
   }
 }

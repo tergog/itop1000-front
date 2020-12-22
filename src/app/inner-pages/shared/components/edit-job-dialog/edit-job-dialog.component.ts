@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
@@ -11,7 +11,7 @@ import { untilDestroyed } from 'ngx-take-until-destroy';
   templateUrl: './edit-job-dialog.component.html',
   styleUrls: ['./edit-job-dialog.component.scss']
 })
-export class EditJobDialogComponent implements OnInit {
+export class EditJobDialogComponent implements OnInit, OnDestroy {
 
   public form: FormGroup;
   public job: Job;
@@ -41,12 +41,15 @@ export class EditJobDialogComponent implements OnInit {
     });
   }
 
-
   onPostClick(): void {
     this.jobService.updateJob(this.job.id, this.form.value)
       .pipe(untilDestroyed(this))
       .subscribe(
         () => this.dialogRef.close('Job updated successfully'),
         error => this.errorMessage = error.message);
+  }
+
+  ngOnDestroy() {
+
   }
 }

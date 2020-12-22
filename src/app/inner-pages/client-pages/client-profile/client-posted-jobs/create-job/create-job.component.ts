@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { JobsService } from 'app/shared/services';
+import { JobsService, NotificationsService } from 'app/shared/services';
+import { Job, NotificationMessage } from 'app/shared/models';
 
 @Component({
   selector: 'app-create-job',
@@ -9,9 +10,10 @@ import { JobsService } from 'app/shared/services';
 })
 export class CreateJobComponent implements OnInit {
 
+  @Output() isEdit = new EventEmitter<Job>();
   public form: FormGroup;
 
-  constructor(private jobsService: JobsService) { }
+  constructor(private jobsService: JobsService, private notificationService: NotificationsService) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -19,11 +21,18 @@ export class CreateJobComponent implements OnInit {
 
   public onPostClick(): void {
     this.jobsService.createJob(this.form.value)
-      .subscribe(r => console.log(r));
+      .subscribe((r) => {
+        console.log(r);
+        let msg: NotificationMessage = {message: "Added project", type: "success"}
+        this.notificationService.message.emit(msg);
+        this.form.reset();
+        this.isEdit.emit()
+      });
   }
 
   public onCancelClick(): void {
-
+    this.isEdit.emit();
+    this.form.reset();
   }
 
   private initForm(): void {
