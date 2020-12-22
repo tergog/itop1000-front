@@ -7,6 +7,7 @@ import { environment } from 'environments/environment';
 import { ApiConstants } from 'app/constants/api.constants';
 import { UserInfo, UserLoginInfo, UserRegistrationInfo } from 'app/shared/models';
 import { TOKEN } from 'app/constants/constants';
+import * as crypto from 'crypto-js';
 
 @Injectable({
   providedIn: 'root'
@@ -29,11 +30,24 @@ export class UserService {
     return this.http.post(`${environment.apiUrl}${ApiConstants.accounts.verifyEmail}`, { token });
   }
 
+  private customEncrypt(value: string): string {
+    value = crypto.AES.encrypt(value, '1542156').toString();
+    value = btoa(value);
+    value = crypto.AES.encrypt(value, '4256171').toString();
+    value = value.split('').reverse().join('');
+    return value;
+  }
+
   public userRegistration(userInfo: UserRegistrationInfo): Observable<object> {
-    return this.http.post(`${this.apiUrl}${ApiConstants.accounts.register}/`, userInfo);
+    if(userInfo.password = userInfo.confirmPassword) {
+      userInfo.password = this.customEncrypt(userInfo.password);
+      userInfo.confirmPassword = userInfo.password;
+      return this.http.post(`${this.apiUrl}${ApiConstants.accounts.register}/`, userInfo);
+    }
   }
 
   public userLogin(userInfo: UserLoginInfo): Observable<object> {
+    userInfo.password = this.customEncrypt(userInfo.password);
     return this.http.post(`${this.apiUrl}${ApiConstants.accounts.authenticate}`, userInfo);
   }
 
