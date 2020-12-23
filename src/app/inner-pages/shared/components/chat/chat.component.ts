@@ -1,13 +1,18 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { ContentChange } from 'ngx-quill';
 
+import { NotificationsService } from 'app/shared/services';
+import { NotificationMessage } from 'app/shared/models';
+
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss'],
 })
 export class ChatComponent implements OnInit {
-  constructor() { }
+  constructor(
+    private notificationsService: NotificationsService
+  ) { }
 
   ngOnInit(): void {
   }
