@@ -64,7 +64,7 @@ $editor-dark: #444;
       }
     }
 
-    .ql-file {
+    .ql-attach-file {
       color: $editor-yellow;
       width: 130px;
       line-height: 1.2rem;
@@ -119,6 +119,14 @@ $editor-dark: #444;
       font-style: normal !important;
       left: 35px !important;
       right: 35px !important;
+    }
+
+    .ql-file-embedded {
+      margin: 10px auto;
+      padding: 5px 10px;
+      font-size: 14px;
+      border: 1px solid rgba(105, 105, 105, .9);
+      user-select: none;
     }
   }
 
