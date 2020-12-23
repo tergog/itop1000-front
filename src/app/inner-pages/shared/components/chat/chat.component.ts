@@ -1,18 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { ContentChange } from 'ngx-quill';
-
-import { NotificationsService } from 'app/shared/services';
-import { NotificationMessage } from 'app/shared/models';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.scss']
+  styleUrls: ['./chat.component.scss'],
 })
 export class ChatComponent implements OnInit {
-  constructor(
-    private notificationsService: NotificationsService
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
@@ -22,7 +17,11 @@ export class ChatComponent implements OnInit {
     // Do something
   }
 
-  onEditorError(message: NotificationMessage): void {
-    this.notificationsService.message.emit(message);
+  onBackButtonClick(): void {
+
+  }
+
+  onSendButtonClick(): void {
+    
   }
 }

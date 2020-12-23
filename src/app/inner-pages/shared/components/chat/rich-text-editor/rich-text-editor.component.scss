@@ -1,18 +1,16 @@
-$editor-border: 1px solid rgba(0, 0, 0, .15);
-$editor-border-radius: 5px;
-$editor-yellow: #f1d261;
-$editor-light: #eee;
-$editor-dark: #444;
+@import '~assets/scss/variables.scss';
+
+$editor-border: 1px solid $color-8;
+
+:host {
+  font-family: $font-2;
+  display: block;
+  max-height: 500px;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+}
 
 .chat__text-editor {
-  display: block;
-  width: 955px;
-  // height: 186px;
-  margin: 0 auto;
-  // background: rgba(255, 255, 255, 0.15);
-  background: rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
-
   &__toolbar {
     border: none;
     padding: 32px 35px;
@@ -31,15 +29,9 @@ $editor-dark: #444;
         padding: 2px 0 2px 5px;
         background-color: transparent;
         border: $editor-border;
-        border-top-left-radius: $editor-border-radius;
-        border-bottom-left-radius: $editor-border-radius;
         font-size: 14px;
         font-weight: 500;
-
-        &:focus {
-          background-color: $editor-light;
-          color: $editor-dark;
-        }
+        color: $text-color-8;
       }
 
       &__inc {
@@ -49,6 +41,7 @@ $editor-dark: #444;
         line-height: 24px;
         border: $editor-border;
         border-left: none;
+        color: $text-color-8;
       }
 
       &__dec {
@@ -58,13 +51,12 @@ $editor-dark: #444;
         padding: 0;
         border: $editor-border;
         border-left: none;
-        border-top-right-radius: $editor-border-radius;
-        border-bottom-right-radius: $editor-border-radius;
+        color: $text-color-8;
       }
     }
 
     .ql-attach-file {
-      color: $editor-yellow;
+      color: $text-color-5;
       width: 130px;
       line-height: 1.2rem;
       float: right;
@@ -80,27 +72,79 @@ $editor-dark: #444;
 }
 
 ::ng-deep {
+  .ql-snow.ql-toolbar,
+  .ql-snow .ql-toolbar {
+    button:hover,
+    button:focus,
+    button.ql-active,
+    .ql-picker-label:hover,
+    .ql-picker-label.ql-active,
+    .ql-picker-item:hover,
+    .ql-picker-item.ql-selected {
+      .ql-stroke,
+      .ql-stroke-miter {
+        stroke: $text-color-5 !important;
+      }
+    }
+  }
+
+  .ql-snow.ql-toolbar,
+  .ql-snow .ql-toolbar {
+    button:hover,
+    button:focus,
+    button.ql-active,
+    .ql-picker-label:hover,
+    .ql-picker-label.ql-active,
+    .ql-picker-item:hover,
+    .ql-picker-item.ql-selected {
+      .ql-fill,
+      .ql-stroke.ql-fill {
+        fill: $text-color-5 !important;
+      }
+    }
+  }
+
+  .ql-snow,
+  .ql-snow.ql-toolbar,
+  .ql-snow .ql-toolbar {
+    a,
+    button:hover,
+    button:focus,
+    button.ql-active,
+    .ql-picker-label:hover,
+    .ql-picker-label.ql-active,
+    .ql-picker-item:hover,
+    .ql-picker-item.ql-selected {
+      color: $text-color-5 !important;
+    }
+  }
+
+  .ql-snow .ql-tooltip {
+    background-color: $bg-color-opacity !important;
+    box-shadow: none;
+    color: $text-color-8;
+  }
+
+  .ql-fill,
   .ql-emoji .ql-fill {
-    fill: $editor-yellow !important;
+    fill: $text-color-8 !important;
   }
 
+  .ql-stroke,
   .ql-emoji .ql-stroke {
-    stroke: $editor-yellow !important;
+    stroke: $text-color-8 !important;
   }
 
-  .ql-picker.ql-font,
+  .ql-picker-options {
+    background-color: $bg-color-opacity !important;
+  }
+  
   .ql-picker.ql-font {
+    color: $text-color-8;
     border: $editor-border;
-    border-radius: $editor-border-radius;
 
     &.ql-expanded {
       border: $editor-border !important;
-      border-radius: $editor-border-radius !important;
-      background-color: $editor-light;
-      
-      .ql-picker-label {
-        color: $editor-dark;
-      }
     }
   }
 
@@ -113,8 +157,12 @@ $editor-dark: #444;
     font-weight: 500;
     line-height: 16px;
     padding: 26px 35px;
+    max-height: 400px;
+    overflow: auto;
+    color: $text-color-8 !important;
 
     &:before {
+      color: $text-color-8 !important;
       font-style: normal !important;
       left: 35px !important;
       right: 35px !important;
@@ -132,7 +180,7 @@ $editor-dark: #444;
   .chat__text-editor {
     @for $i from 0 through 10 {
       &.inner-spacing-#{$i} p + p {
-        margin-top: #{$i}px !important;
+        line-height: #{16 + $i}px !important;
       }
     }
   }

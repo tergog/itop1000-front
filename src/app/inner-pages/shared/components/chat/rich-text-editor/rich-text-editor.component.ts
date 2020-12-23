@@ -1,8 +1,8 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, ApplicationRef } from '@angular/core';
 import { ContentChange } from 'ngx-quill';
 import 'quill-emoji';
 
-import { NotificationMessage } from 'app/shared/models';
+import { NotificationsService } from 'app/shared/services';
 
 @Component({
   selector: 'app-rich-text-editor',
@@ -10,6 +10,10 @@ import { NotificationMessage } from 'app/shared/models';
   styleUrls: [ './rich-text-editor.component.scss' ]
 })
 export class RichTextEditorComponent {
+  constructor(
+    private notificationsService: NotificationsService
+  ) {}
+
   public textContent: string = '';
 
   @Output() shareTextContent = new EventEmitter<ContentChange>();
@@ -17,7 +21,6 @@ export class RichTextEditorComponent {
     this.shareTextContent.emit(value);
   }
 
-  @Output() shareEditorError = new EventEmitter<NotificationMessage>();
   public quillModules = {
     toolbar: {
       container: '.chat__text-editor__toolbar'
@@ -31,7 +34,7 @@ export class RichTextEditorComponent {
     },
     attachFiles: {
       button: '.ql-attach-file',
-      errorEmmiter: this.shareEditorError
+      errorEmmiter: this.notificationsService.message
     },
     "emoji-toolbar": true
   };

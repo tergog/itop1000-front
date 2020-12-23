@@ -1,4 +1,5 @@
 import 'quill'
+import { HTMLInputEvent } from './attach-files.module';
 
 const MIN_SPACING = 0;
 const MAX_SPACING = 10; // When you are changing this value don't remember change in styles too.
@@ -10,7 +11,15 @@ export interface IVerticalSpacingConfig {
   btnDec: string;
   input: string;
   spacing: number;
-}
+};
+
+export interface HTMLFocusEvent extends FocusEvent {
+  target: HTMLInputElement & EventTarget;
+};
+
+export interface HTMLKeyboardEvent extends KeyboardEvent {
+  target: HTMLInputElement & EventTarget;
+};
 
 class VerticalSpacing {
   private options: IVerticalSpacingConfig;
@@ -29,15 +38,23 @@ class VerticalSpacing {
     this.$btnInc.onclick = () => this.changeSpacingBy(DEFAULT_STEP);
     this.$btnDec.onclick = () => this.changeSpacingBy(-DEFAULT_STEP);
     
-    this.$input.onblur = () => {
-      this.setSpacing(
-        this.$input.value ?
-          parseInt(this.$input.value, 10) :
-          this.options.spacing
-      );
-    };
+    this.$input.onblur = (e: HTMLFocusEvent) => this.onNewSpacingSubmit(e.target.value);
+    this.$input.onkeyup = (e: HTMLKeyboardEvent) => {
+      if (e.key === 'Enter') {
+        this.onNewSpacingSubmit(e.target.value);
+        e.target.blur();
+      }
+    }
 
     this.init();
+  }
+
+  onNewSpacingSubmit(value: string) {
+    this.setSpacing(
+      value ?
+        parseInt(value, 10) :
+        this.options.spacing
+    );
   }
 
   setSpacing(value: number): void {
@@ -65,6 +82,6 @@ class VerticalSpacing {
       ` $1${this.options.spacing}`
     );
   }
-}
+};
 
 export { VerticalSpacing };

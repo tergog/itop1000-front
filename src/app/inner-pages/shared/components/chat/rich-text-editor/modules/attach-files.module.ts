@@ -75,7 +75,6 @@ class AttachFiles {
     for (let v of validators) {
       if (v.validator(files)) {
         this.options.errorEmmiter.emit({ type: 'error', message: v.message });
-        this.quill.focus();
         return false;
       }
     }
