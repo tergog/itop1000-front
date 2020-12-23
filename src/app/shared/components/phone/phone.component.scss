@@ -36,14 +36,10 @@
 
     .iti .search-container input {
       font-size: 14px;
-      border-color: #c7cace;
+      border-color: $color-4;
       border-radius: 0;
       padding: 5px 10px;
     }
-
-    //.iti .search-container input:focus {
-    //  outline: none;
-    //}
 
     @media screen and (max-width: 479px) {
       .iti .iti__country-list {
@@ -54,8 +50,6 @@
     ngx-intl-tel-input input {
       height: 40px;
       padding: 10px;
-      border-style: solid;
-      border-color: #c7cace;
       border-radius: 5px;
       font-size: 18px;
       box-shadow: 0 4px 4px rgba(0, 0, 0, 0.5)
@@ -77,19 +71,19 @@
     }
 
     ngx-intl-tel-input input::-webkit-input-placeholder {
-      color: #bac2c7;
+      color: $text-color-6;
     }
 
     ngx-intl-tel-input input:-ms-input-placeholder {
-      color: #bac2c7;
+      color: $text-color-6
     }
 
     ngx-intl-tel-input input::-ms-input-placeholder {
-      color: #bac2c7;
+      color:$text-color-6;
     }
 
     ngx-intl-tel-input input::placeholder {
-      color: #bac2c7;
+      color: $text-color-6;
     }
 
     ngx-intl-tel-input input[disabled] {
