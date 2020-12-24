@@ -136,12 +136,16 @@ export interface State {
   developers: Developer[];
   developer: Developer;
   jobs: Job[];
+  loading: boolean;
+  error: boolean;
 }
 
 const INIT_STATE: State = {
   developers: [],
   developer: null, // developers[0]
-  jobs: []
+  jobs: [],
+  loading: false,
+  error: false
 };
 
 export const reducer = createReducer(
@@ -166,10 +170,29 @@ export const reducer = createReducer(
   on(
     actions.searchJobsSuccess,
     (state, payload) => {
-      console.log(payload.jobs);
       return {
         ...state,
-        jobs: payload.jobs
+        jobs: payload.jobs,
+        loading: false
+      }
+    }
+  ),
+  on(
+    actions.searchJobs,
+    (state) => {
+      return {
+        ...state,
+        loading: true
+      }
+    }
+  ),
+  on(
+    actions.searchJobsError,
+    (state) => {
+      return {
+        ...state,
+        loading: false,
+        error: true
       }
     }
   ),

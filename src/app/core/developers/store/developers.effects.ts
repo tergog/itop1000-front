@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
-import { map, mergeMap, switchMap, tap } from 'rxjs/internal/operators';
+import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/internal/operators';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
@@ -8,6 +8,7 @@ import * as actions from './developers.actions';
 import { DevelopersService, JobsService } from 'app/shared/services';
 import { Developer, Job } from 'app/shared/models';
 import { State } from './developers.reducer';
+import { of } from 'rxjs';
 
 @Injectable()
 export class DevelopersEffects {
@@ -35,9 +36,12 @@ export class DevelopersEffects {
 
   onSearchJobs$ = createEffect(() => this.actions$.pipe(
     ofType(actions.SEARCH_JOBS),
-    switchMap((payload) => this.jobsService.searchJobs(payload)),
-    map((jobs: Job[]) => actions.searchJobsSuccess(jobs)),
-    tap(() => this.router.navigate(['in/d/search-jobs'])),
+    switchMap((payload) => this.jobsService.searchJobs(payload).pipe(
+      map((jobs: Job[]) => actions.searchJobsSuccess(jobs)),
+      tap(() => this.router.navigate(['in/d/search-jobs'])),
+      catchError(err => of(actions.searchJobsError(err)))
+    )),
+    
   ));
 
 }
