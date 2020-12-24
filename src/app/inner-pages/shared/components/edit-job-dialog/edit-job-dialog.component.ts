@@ -34,6 +34,10 @@ export class EditJobDialogComponent implements OnInit, OnDestroy {
     this.job = this.data.job;
     this.initForm();
     this.form.patchValue(this.job);
+    this.devProfileService.selectedCategories.push(...this.job.categories)
+    for(let category of this.devProfileService.selectedCategories) {
+      this.devProfileService.availableCategories = this.devProfileService.availableCategories.filter(el => el.name !== category.name)
+    }
   }
 
   private initForm(): void {
@@ -89,6 +93,7 @@ export class EditJobDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-
+    this.devProfileService.availableCategories.push(...this.devProfileService.selectedCategories);
+    this.devProfileService.selectedCategories = [];
   }
 }
