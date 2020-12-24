@@ -5,14 +5,15 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import * as actions from './developers.actions';
-import { DevelopersService } from 'app/shared/services';
-import { Developer } from 'app/shared/models';
+import { DevelopersService, JobsService } from 'app/shared/services';
+import { Developer, Job } from 'app/shared/models';
 import { State } from './developers.reducer';
 
 @Injectable()
 export class DevelopersEffects {
   constructor(
       private actions$: Actions,
+      private jobsService: JobsService,
       private developersService: DevelopersService,
       private store: Store<State>,
       private router: Router
@@ -30,6 +31,13 @@ export class DevelopersEffects {
     mergeMap(( {id} ) => this.developersService.getDeveloper(id)),
     map((developer: Developer) => actions.setDeveloperSuccess(developer)),
     tap((obj) => this.router.navigate([`in/c/search-developers/${obj.developer.id}`]))
+  ));
+
+  onSearchJobs$ = createEffect(() => this.actions$.pipe(
+    ofType(actions.SEARCH_JOBS),
+    switchMap((payload) => this.jobsService.searchJobs(payload)),
+    map((jobs: Job[]) => actions.searchJobsSuccess(jobs)),
+    tap(() => this.router.navigate(['in/d/search-jobs'])),
   ));
 
 }

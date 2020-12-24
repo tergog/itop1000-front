@@ -7,10 +7,9 @@
     {{ job.company || 'No Company' }}
   </div>
   <div class="m__top--10 text__center text__capitalize text__color--5 text__font--2">
-    ${{ job.price }}/Mth
+    ${{ job.price }}/{{ job.contractType === "Month based" ? 'Mth' : 'Hrs'}}
   </div>
   <!--  TODO separate point styles, replace to assets/scss-->
-
   <p class="border-point border-point--right border-point--1"></p>
   <p class="border-point border-point--right border-point--2"></p>
   <p class="border-point border-point--right border-point--3"></p>
@@ -24,9 +23,9 @@
         <span class="text__underline text__color--3">Project duration</span> {{ job.duration }} months
       </div>
     </div>
-    <div class="d__flex d__flex--direction-column m__left--auto">
-      <app-button class="m__bottom--10" [text]="'Edit'" (click)="$event.stopPropagation();onEditClick()"></app-button>
-      <app-button [text]="'Archive'" (click)="$event.stopPropagation();onArchiveClick()"></app-button>
+    <div class="d__flex m__left--auto">
+      <i class="edit cursor__pointer m__right--10" (click)="$event.stopPropagation();onEditClick()"></i>
+      <i class="delete cursor__pointer" (click)="$event.stopPropagation();onArchiveClick()"></i>
     </div>
   </div>
  
@@ -40,14 +39,14 @@
   </div>
   <div>
     <div class="d__flex d__flex--flex-start d__flex--flex-wrap">
-      <span class="text__uppercase m--5" *ngFor="let category of job.categories.split(' ')">{{ category }}</span>
+      <span class="text__uppercase m--5" *ngFor="let category of job.categories">{{ category.name }}</span>
       <!-- TODO change logic-->
     </div>
     <hr class="splitter-line">
   </div>
   <div class="text text__md">
     <img src="/assets/icons/location.svg" alt="location">
-    <span>{{ job.city }}, {{ job.country }}</span>
+    <span>{{ job.address }}</span>
     <span class="m__left--30 text__fw--300 text__font--2 text__capitalize">{{ job.dateCreated | date:'dd MMMM' }}</span>
   </div>
   

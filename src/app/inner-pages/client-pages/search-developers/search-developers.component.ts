@@ -5,8 +5,8 @@ import { untilDestroyed } from 'ngx-take-until-destroy';
 
 import { Developer } from 'app/shared/models';
 import { DevelopersService } from 'app/shared/services';
-import { getDevelopers, State } from 'app/core/developers';
-import { updateDeveloper } from 'app/core/developers/developers.actions';
+import { getDevelopers, State } from 'app/core/developers/store';
+import { updateDeveloper } from 'app/core/developers/store/developers.actions';
 
 @Component({
   selector: 'app-search-developers',

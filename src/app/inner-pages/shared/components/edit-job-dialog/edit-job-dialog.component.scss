@@ -1,19 +1,29 @@
 @import '../../../../../assets/scss/variables';
 
-.dialog-header {
+:host{
   position: relative;
+}
+
+.dialog-header {
   height: 62px;
   display: flex;
+  position: relative;
   align-items: center;
   justify-content: center;
   background-color: $color-1;
-
-  .close {
-    position: absolute;
-    right: 20px;
-  }
+  overflow: hidden;
 }
 
 .form-wrap {
   max-height: 80vh;
+  overflow:auto;
+}
+
+.close {
+  position: absolute;
+  right: 20px;
+}
+//contract type
+.buttons {
+  overflow: hidden;
 }

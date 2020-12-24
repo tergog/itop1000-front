@@ -7,10 +7,11 @@ import { filter, tap } from 'rxjs/operators';
 import * as fromCore from 'app/core/reducers';
 import { UserInfo } from 'app/shared/models';
 import { getUserInfo } from 'app/core/reducers';
-import { SearchJobsAction, SetOnLogoutAction } from 'app/core/actions/core.actions';
+import { SetOnLogoutAction } from 'app/core/actions/core.actions';
+import { searchJobs } from 'app/core/developers/store/developers.actions'
 import { opacityInOutAnimation } from 'app/shared/animations';
 import { UserRole } from 'app/shared/enums';
-import { searchDevelopers } from 'app/core/developers/developers.actions';
+import { searchDevelopers } from 'app/core/developers/store/developers.actions';
 
 @Component({
   selector: 'app-header',
@@ -47,7 +48,7 @@ export class HeaderComponent implements OnInit {
 
   public onSearch(): void {
     if (this.userRole === this.UserRole.Dev) {
-      this.store.dispatch(new SearchJobsAction(this.searchTerm.value));
+      this.store.dispatch(searchJobs(this.searchTerm.value));
     } else {
       this.store.dispatch(searchDevelopers({payload: this.searchTerm.value}));
     }

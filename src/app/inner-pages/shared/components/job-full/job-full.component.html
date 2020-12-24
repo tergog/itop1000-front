@@ -10,7 +10,7 @@
       {{ job.company || 'No Company' }}
     </div>
     <div class="m__top--10 text__center text__capitalize text__color--5 text__font--2">
-      ${{ job.price }}/Mth
+      ${{ job.price }}/{{job.contractType === "Month based" ? 'Mth' : 'Hrs'}}
     </div>
     <ul class="job-nav">
       <li [class.active]="activeSection === JobSections.Project"
@@ -36,7 +36,7 @@
       <div class="location-wrap">
         <div class="d__flex m__right--30">
           <i class="location m__right--10"></i>
-          <span class="text text__md text__color--3">{{ job.city }}, {{ job.country }}</span>
+          <span class="text text__md text__color--3">{{ job.address }}</span>
         </div>
 
         <div class="separator"></div>
@@ -78,11 +78,11 @@
 
       <!-- TODO -->
       <div class="d__flex d__flex--justify-around skills-spinners">
-        <div *ngFor="let category of job.categories.split(' ')" class="m_">
+        <div *ngFor="let category of job.categories" class="m_">
           <div
             class="d__flex d__flex--justify-between d__flex--direction-column d__flex--items-center d__flex--justify-center">
             <div class="m__top--10">
-              <span class="text__uppercase text__font--2 text__center text__uppercase font__md">{{ category }}</span>
+              <span class="text__uppercase text__font--2 text__center text__uppercase font__md">{{ category.name }}</span>
             </div>
           </div>
         </div>

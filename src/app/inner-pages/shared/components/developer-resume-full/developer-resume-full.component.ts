@@ -5,8 +5,8 @@ import { Observable, Subject } from 'rxjs';
 import { bufferTime } from 'rxjs/operators';
 
 import { Developer } from 'app/shared/models';
-import { getDeveloper, State } from 'app/core/developers';
-import { setDeveloper } from 'app/core/developers/developers.actions';
+import { getDeveloper, State } from 'app/core/developers/store';
+import { setDeveloper } from 'app/core/developers/store/developers.actions';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 
 export enum DeveloperResumeSections {

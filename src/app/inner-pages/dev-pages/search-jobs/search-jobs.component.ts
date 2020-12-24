@@ -5,7 +5,7 @@ import { untilDestroyed } from 'ngx-take-until-destroy';
 
 import { JobsService } from 'app/shared/services';
 import { Job } from 'app/shared/models';
-import { getJobs, State } from 'app/core/reducers';
+import { getJobs, State } from 'app/core/developers/store/index';
 
 @Component({
   selector: 'app-search-jobs',
@@ -27,7 +27,7 @@ export class SearchJobsComponent implements OnInit, OnDestroy {
     this.store.select(getJobs)
       .pipe(untilDestroyed(this))
       .subscribe(jobs=> {
-        this.jobs= jobs;
+        this.jobs = jobs;
         this.jobsPaginated= this.jobs.slice(0, 2);
     });
   }

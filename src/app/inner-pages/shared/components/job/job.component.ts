@@ -2,7 +2,9 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { On, Store } from '@ngrx/store';
-import { State } from 'app/core/reducers/core.reducer';
+import { GetJobsAction } from 'app/core/client/store/actions';
+
+import { State } from 'app/core/reducers/index';
 
 import { Job } from 'app/shared/models';
 import { JobsService } from 'app/shared/services/jobs.service';
@@ -60,6 +62,7 @@ export class JobComponent implements OnInit, OnDestroy {
       .subscribe(
         (res) => {
           this.handleSuccessResponse(res);
+          this.store.dispatch(new GetJobsAction())
           },
         error => this.handleErrorResponse(error)
       );

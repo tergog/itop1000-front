@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
-import { map, switchMap, tap } from 'rxjs/internal/operators';
+import { tap } from 'rxjs/internal/operators';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import * as coreActions from 'app/core/actions/core.actions';
-import { JobsService, UserService, DevelopersService } from 'app/shared/services';
+import { UserService, DevelopersService } from 'app/shared/services';
 import { TOKEN } from 'app/constants/constants';
-import { Job } from 'app/shared/models';
 import { State } from 'app/core/reducers';
 
 @Injectable()
@@ -15,7 +14,6 @@ export class CoreEffects {
   constructor(
       private actions$: Actions,
       private userService: UserService,
-      private jobsService: JobsService,
       private developersService: DevelopersService,
       private store: Store<State>,
       private router: Router
@@ -34,13 +32,6 @@ export class CoreEffects {
       ofType(coreActions.ON_LOGOUT),
       tap(() => this.cleanLocalStorage())
   ), { dispatch: false });
-
-  onSearchJobs$ = createEffect(() => this.actions$.pipe(
-    ofType(coreActions.SEARCH_JOBS),
-    switchMap(({ payload }) => this.jobsService.searchJobs(payload)),
-    map((jobs: Job[]) => new coreActions.SearchJobsSuccessAction(jobs)),
-    tap(() => this.router.navigate(['in/d/search-jobs'])),
-  ));
 
   private cleanLocalStorage(): void {
     localStorage.removeItem(TOKEN);

@@ -9,7 +9,6 @@ import { InnerPagesComponent } from 'app/inner-pages/inner-pages.component';
 import { SharedModule } from 'app/shared/shared.module';
 import { DevPagesGuard } from 'app/shared/guards/dev-pages.guard';
 import { ClientPagesGuard } from 'app/shared/guards/client-pages.guard';
-
 const routes: Routes = [
   {
     path: 'd',

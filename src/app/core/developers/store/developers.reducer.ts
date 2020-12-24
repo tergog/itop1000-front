@@ -1,6 +1,6 @@
 import * as actions from './developers.actions';
 
-import { Developer } from 'app/shared/models';
+import { Developer, Job } from 'app/shared/models';
 import { createReducer, on } from '@ngrx/store';
 
 export const developers = [
@@ -135,11 +135,13 @@ export const developers = [
 export interface State {
   developers: Developer[];
   developer: Developer;
+  jobs: Job[];
 }
 
 const INIT_STATE: State = {
   developers: [],
-  developer: null // developers[0]
+  developer: null, // developers[0]
+  jobs: []
 };
 
 export const reducer = createReducer(
@@ -162,6 +164,16 @@ export const reducer = createReducer(
     }
   ),
   on(
+    actions.searchJobsSuccess,
+    (state, payload) => {
+      console.log(payload.jobs);
+      return {
+        ...state,
+        jobs: payload.jobs
+      }
+    }
+  ),
+  on(
     actions.setDeveloperSuccess,
     (state, {developer}) => ({
       ...state,
@@ -173,6 +185,12 @@ export const reducer = createReducer(
 /** Selector return is Authenticated */
 export const getDevelopers = (state: State): Developer[] => {
   return state.developers;
+};
+export const getJobs = (state: State): Job[] => {
+  if (state.jobs){
+    return state.jobs;
+  }
+  
 };
 export const getDeveloper = (state: State): Developer => {
   return state.developer;

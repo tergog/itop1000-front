@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ImageCropperModule } from 'ngx-image-cropper';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InViewportModule } from '@thisissoon/angular-inviewport';
 import { NgxStripeModule } from 'ngx-stripe';
 
@@ -25,6 +25,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DeleteBillingMethodDialogComponent } from 'app/inner-pages/shared/components/delete-billing-method-dialog/delete-billing-method-dialog.component';
 import { ConfirmationDialogComponent } from 'app/inner-pages/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { EditJobDialogComponent } from 'app/inner-pages/shared/components/edit-job-dialog/edit-job-dialog.component';
+import { DevProfileService } from '../dev-pages/dev-profile/dev-profile.service';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -49,11 +51,13 @@ import { EditJobDialogComponent } from 'app/inner-pages/shared/components/edit-j
   imports: [
     CommonModule,
     SharedModule,
+    FormsModule,
     ReactiveFormsModule,
     ImageCropperModule,
     InViewportModule,
     NgxStripeModule,
     MatProgressSpinnerModule,
+    MatSelectModule
   ],
   exports: [
     ChangePasswordDialogComponent,
@@ -64,6 +68,9 @@ import { EditJobDialogComponent } from 'app/inner-pages/shared/components/edit-j
     StandardBgWrapComponent,
     ProjectCardComponent
   ],
+  providers: [
+    DevProfileService
+  ]
 })
 export class PagesSharedModule {
 }

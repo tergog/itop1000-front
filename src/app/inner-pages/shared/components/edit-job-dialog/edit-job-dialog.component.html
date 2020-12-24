@@ -1,9 +1,9 @@
-<div class="dialog-header">
+<div class="dialog-header w__594">
   <span class="text text__lg text__color--3 text__uppercase">Edit job</span>
   <i class="close cursor__pointer" mat-dialog-close></i>
 </div>
 
-<div class="p__20 m__top--20 form-wrap w__594">
+<div class="p__20 form-wrap w__594">
   <div [formGroup]="form" class="d__flex d__flex--direction-column d__flex--justify-center m__bottom--30">
     <div class="d__flex d__flex--direction-column">
       <span class="text text__sm text__color--1 text__fw--600">Title</span>
@@ -12,7 +12,9 @@
                  [placeholder]="'Job Title'"
                  formControlName="title"
                  [value]="form.get('title').value"></app-input>
+                 <mat-error *ngIf="showError && form.get('title').errors?.required">Title required</mat-error>
     </div>
+    
 
     <div class="d__flex d__flex--direction-column m__top--20">
       <span class="text text__sm text__color--1 text__fw--600">Description</span>
@@ -20,15 +22,36 @@
                     [placeholder]="'Job Description'"
                     formControlName="description"
                     [value]="form.get('description').value"></app-textarea>
+                    <mat-error *ngIf="showError && form.get('description').errors?.required">Description required</mat-error>
     </div>
 
     <div class="d__flex d__flex--direction-column m__top--20">
       <span class="text text__sm text__color--1 text__fw--600">Categories</span>
-      <app-input class="m__top--10 light"
-                 [type]="'light'"
-                 [placeholder]="'Job Title'"
-                 formControlName="categories"
-                 [value]="form.get('categories').value"></app-input>
+      
+      <mat-form-field class="m__top--10" [class.edit-mode]="true">
+        <mat-chip-list #chipListCategories formControlName="categories">
+          <mat-chip *ngFor="let category of devProfileService.selectedCategories"
+                    [selectable]="false"
+                    [removable]="true"
+                    (removed)="onChipRemove(category)"
+                    >
+            {{ category.name }}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+          <input #category placeholder="Add category..."
+                  [matChipInputFor]="chipListCategories"
+                  [matAutocomplete]="autoCategories"
+                  [matChipInputAddOnBlur]="true">
+        </mat-chip-list>
+  
+        <mat-autocomplete #autoCategories="matAutocomplete" (optionSelected)="onChipSelect($event.option.value)">
+          <mat-option *ngFor="let category of devProfileService.availableCategories" [value]="category">
+            {{ category.name }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-error *ngIf="showError && form.get('categories').errors?.required">Categories required</mat-error>
+
     </div>
 
     <div class="d__flex d__flex--direction-column m__top--20">
@@ -38,6 +61,7 @@
                  [placeholder]="'Requirements'"
                  formControlName="requirements"
                  [value]="form.get('requirements').value"></app-input>
+                 <mat-error *ngIf="showError && form.get('requirements').errors?.required">Requirements required</mat-error>
     </div>
 
     <div class="d__flex d__flex--direction-column m__top--20">
@@ -47,6 +71,20 @@
                  [placeholder]="'Duration'"
                  formControlName="duration"
                  [value]="form.get('duration').value"></app-input>
+                 <mat-error *ngIf="showError && form.get('duration').errors?.required">Duration required</mat-error>
+                 <mat-error *ngIf="showError && form.get('duration').errors?.pattern">Duration should be a number</mat-error>
+    </div>
+
+    <div class="d__flex d__flex--direction-column m__top--20">
+      <span class="text text__sm text__color--1 text__fw--600">Contract type</span>
+      <mat-form-field appearance="fill">
+        <mat-label>Contract type</mat-label>
+        <mat-select [value]="job.contractType" (selectionChange)="onSelect($event) ">
+          <mat-option value="Hourly based">Hourly based</mat-option>
+          <mat-option value="Month based">Month based</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-error *ngIf="showError && form.get('contractType').errors?.required">Contract type required</mat-error>
     </div>
 
     <div class="d__flex d__flex--direction-column m__top--20">
@@ -56,6 +94,8 @@
                  [placeholder]="'Price'"
                  formControlName="price"
                  [value]="form.get('price').value"></app-input>
+                 <mat-error *ngIf="showError && form.get('price').errors?.required">Price required</mat-error>
+                 <mat-error *ngIf="showError && form.get('price').errors?.pattern">Price should be a number</mat-error>
     </div>
 
     <div class="d__flex d__flex--direction-column m__top--20">
@@ -65,24 +105,17 @@
                  [placeholder]="'Company'"
                  formControlName="company"
                  [value]="form.get('company').value"></app-input>
+                 <mat-error *ngIf="showError && form.get('company').errors?.required">Company required</mat-error>
     </div>
 
     <div class="d__flex d__flex--direction-column m__top--20">
-      <span class="text text__sm text__color--1 text__fw--600">Country</span>
-      <app-input class="m__top--10 light"
-                 [type]="'light'"
-                 [placeholder]="'Country'"
-                 formControlName="country"
-                 [value]="form.get('country').value"></app-input>
-    </div>
-
-    <div class="d__flex d__flex--direction-column m__top--20">
-      <span class="text text__sm text__color--1 text__fw--600">City</span>
-      <app-input class="m__top--10 light"
-                 [type]="'light'"
-                 [placeholder]="'City'"
-                 formControlName="city"
-                 [value]="form.get('city').value"></app-input>
+      <span class="text text__sm text__color--1 text__fw--600">Address</span>
+      <app-address 
+      class="m__top--10 light w__100per"
+      formControlName="address"
+      [currentAddress]="form.get('address').value">
+      </app-address>
+      <mat-error *ngIf="showError && form.get('address').errors?.required">Address required</mat-error>
     </div>
   </div>
 
@@ -91,9 +124,8 @@
       {{ errorMessage }}
     </span>
   </div>
-
-  <div class="m__top--10 m__bottom--30 text__right">
-    <app-button [type]="'transparent'" [text]="'Cancel'" mat-dialog-close></app-button>
-    <app-button [text]="'Post'" (buttonClick)="onPostClick()"></app-button>
-  </div>
+</div>
+<div class="buttons text__right p__15">
+  <app-button [type]="'transparent'" [text]="'Cancel'" mat-dialog-close></app-button>
+  <app-button [text]="'Post'" (buttonClick)="onPostClick()"></app-button>
 </div>

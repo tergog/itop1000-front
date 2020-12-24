@@ -21,6 +21,8 @@ import { ClientContactInfoPreviewComponent } from 'app/inner-pages/client-pages/
 import { ClientContactInfoEditComponent } from 'app/inner-pages/client-pages/client-profile/client-contact-info/client-contact-info-edit/client-contact-info-edit.component';
 import { ClientContactInfoLocationEditComponent } from 'app/inner-pages/client-pages/client-profile/client-contact-info/client-contact-info-location-edit/client-contact-info-location-edit.component';
 import { ClientContactInfoLocationPreviewComponent } from 'app/inner-pages/client-pages/client-profile/client-contact-info/client-contact-info-location-preview/client-contact-info-location-preview.component';
+import { MatSelectModule } from '@angular/material/select'
+
 
 export const routes: Routes = [
   { path: '', component: ClientProfileComponent },
@@ -50,7 +52,8 @@ export const routes: Routes = [
     SharedModule,
     ReactiveFormsModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSelectModule
   ]
 })
 export class ClientProfileModule { }
