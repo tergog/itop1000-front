@@ -62,7 +62,7 @@
                     (removed)="onTechnologyRemove(technology)"> {{ technology.name }}
             <mat-icon matChipRemove *ngIf="isNewProject">cancel</mat-icon>
           </mat-chip>
-          <input placeholder="Add Technology..."
+          <input #category placeholder="Add Technology..."
                  [readOnly]="!isNewProject"
                  [matChipInputFor]="chipListTechnologies"
                  [matAutocomplete]="autoTechnologies"
