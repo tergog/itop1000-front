@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
-import { catchError, map, switchMap } from 'rxjs/internal/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 import * as clientActions from 'app/core/client/store/actions';
 import { JobsService } from 'app/shared/services';
 import { Job } from 'app/shared/models';
-import { of } from 'rxjs';
+
 
 
 @Injectable()

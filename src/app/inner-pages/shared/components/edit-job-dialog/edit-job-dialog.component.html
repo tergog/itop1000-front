@@ -51,7 +51,6 @@
         </mat-autocomplete>
       </mat-form-field>
       <mat-error *ngIf="showError && form.get('categories').errors?.required">Categories required</mat-error>
-
     </div>
 
     <div class="d__flex d__flex--direction-column m__top--20">
@@ -79,7 +78,7 @@
       <span class="text text__sm text__color--1 text__fw--600">Contract type</span>
       <mat-form-field appearance="fill">
         <mat-label>Contract type</mat-label>
-        <mat-select [value]="job.contractType" (selectionChange)="onSelect($event) ">
+        <mat-select [value]="job.contractType" (selectionChange)="onSelect($event)">
           <mat-option value="Hourly based">Hourly based</mat-option>
           <mat-option value="Month based">Month based</mat-option>
         </mat-select>

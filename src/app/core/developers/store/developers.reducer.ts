@@ -1,7 +1,7 @@
 import * as actions from './developers.actions';
+import { createReducer, on } from '@ngrx/store';
 
 import { Developer, Job } from 'app/shared/models';
-import { createReducer, on } from '@ngrx/store';
 
 export const developers = [
     {

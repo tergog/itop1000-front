@@ -4,7 +4,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { filter, first } from 'rxjs/operators';
+import { debounceTime, filter, first } from 'rxjs/operators';
 import xorBy from 'lodash.xorby';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { untilDestroyed } from 'ngx-take-until-destroy';
@@ -58,6 +58,7 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initForm();
 
+    this.form.valueChanges.pipe(debounceTime(700)).subscribe(v => console.log(v))
     this.userInfo$ = this.store.select(fromCore.getUserInfo);
 
     this.store.select(fromCore.getUserInfo)
@@ -83,7 +84,7 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
     this.devProfileService.devProperties = {
       ...this.devProfileService.devProperties,
       projects: [
-        ...this.devProfileService.devProperties.projects,
+        ...(this.devProfileService.devProperties.projects || []),
         {
           ...this.form.value,
           technologies: [...this.selectedTechnologies],
