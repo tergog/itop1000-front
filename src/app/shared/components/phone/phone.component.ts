@@ -48,7 +48,8 @@ export class PhoneComponent implements OnInit, ControlValueAccessor {
   _value: any;
 
   writeValue(value: number): void {
-    this.onChange(this.value);
+    this._value = value;
+    this.onChange(this._value.number);
   }
 
   private onChange = (value: number) => {};
