@@ -2,17 +2,17 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { On, Store } from '@ngrx/store';
-import { GetJobsAction } from 'app/core/client/store/actions';
-
 import { State } from 'app/core/reducers/index';
+import { untilDestroyed } from 'ngx-take-until-destroy';
 
+import { GetJobsAction } from 'app/core/client/store/actions';
 import { Job } from 'app/shared/models';
 import { JobsService } from 'app/shared/services/jobs.service';
 import { NotificationsService } from 'app/shared/services/notifications.service';
-import { untilDestroyed } from 'ngx-take-until-destroy';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { EditJobDialogComponent } from '../edit-job-dialog/edit-job-dialog.component';
 import { JobSections } from '../job-full/job-full.component';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-job',
@@ -37,7 +37,7 @@ export class JobComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
 
-  onEditClick() {
+  onEditClick(): void {
     const dialogRef = this.matDialog.open(EditJobDialogComponent, {data: {job: this.job}});
 
     dialogRef.afterClosed()
@@ -48,7 +48,7 @@ export class JobComponent implements OnInit, OnDestroy {
       }});
   }
 
-  onArchiveClick() {
+  onArchiveClick(): void {
     const dialogRef =  this.matDialog.open(ConfirmationDialogComponent, {data: {title: 'Archive job', text: `Are you sure you want to delete the ${this.job.title} job?`}});
 
     dialogRef.afterClosed()
@@ -56,7 +56,7 @@ export class JobComponent implements OnInit, OnDestroy {
       .subscribe(res => { if (res === 'Confirmed') { this.onDeleteJob(); }});
   }
 
-  onDeleteJob(){
+  onDeleteJob(): void{
     this.jobsService.deleteJob(this.job.id)
       .pipe(untilDestroyed(this))
       .subscribe(
@@ -64,13 +64,13 @@ export class JobComponent implements OnInit, OnDestroy {
           this.handleSuccessResponse(res);
           this.store.dispatch(new GetJobsAction())
           },
-        error => this.handleErrorResponse(error)
+          error => this.handleErrorResponse(error)
       );
   }
 
-  private handleSuccessResponse(res): void {
+  private handleSuccessResponse(res: any): void {
     this.notificationsService.message.emit({
-      message: res.message ? res.message : res,
+      message: res.message,
       type: 'success'
     });
   }

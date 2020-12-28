@@ -58,7 +58,6 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initForm();
 
-    this.form.valueChanges.pipe(debounceTime(700)).subscribe(v => console.log(v))
     this.userInfo$ = this.store.select(fromCore.getUserInfo);
 
     this.store.select(fromCore.getUserInfo)

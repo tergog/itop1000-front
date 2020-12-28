@@ -2,14 +2,15 @@ import { Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@an
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { GetJobsAction } from 'app/core/client/store/actions';
-
-import { getUserInfo, State } from 'app/core/reducers/index';
-import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
-import { Job, UserInfo } from 'app/shared/models';
-import { JobsService } from 'app/shared/services';
 import { untilDestroyed } from 'ngx-take-until-destroy';
-import { first } from 'rxjs/operators';
+import { MatSelectChange } from '@angular/material/select';
+
+import { GetJobsAction } from 'app/core/client/store/actions';
+import { State } from 'app/core/reducers/index';
+import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
+import { Job, NameValueModel } from 'app/shared/models';
+import { JobsService } from 'app/shared/services';
+
 
 @Component({
   selector: 'app-edit-job-dialog',
@@ -22,7 +23,7 @@ export class EditJobDialogComponent implements OnInit, OnDestroy {
   public form: FormGroup;
   public job: Job;
   public errorMessage: string;
-  showError: boolean = false;
+  showError: boolean;
   selectedOpt: string;
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private store: Store<State>,
@@ -55,44 +56,43 @@ export class EditJobDialogComponent implements OnInit, OnDestroy {
   }
 
   onPostClick(): void {
-    console.log(this.form.value);
-    if(this.form.valid) {
-      this.jobService.updateJob(this.job.id, this.form.value)
-      .pipe(untilDestroyed(this))
-      .subscribe(
-        () => { 
-          this.dialogRef.close('Job updated successfully');
-          this.store.dispatch(new GetJobsAction());
-        },
-        error => this.errorMessage = error.message);
-    } else {
+    if (!this.form.valid) {
       this.showError = true;
+      return;
     }
+    this.jobService.updateJob(this.job.id, this.form.value)
+    .pipe(untilDestroyed(this))
+    .subscribe(
+      () => { 
+        this.dialogRef.close('Job updated successfully');
+        this.store.dispatch(new GetJobsAction());
+      },
+      error => this.errorMessage = error.message);
   }
 
-  onChipSelect(category) {
+  onChipSelect(category: NameValueModel): void {
     this.devProfileService.selectedCategories.push(category);
     this.devProfileService.availableCategories = this.devProfileService.availableCategories.filter(el => el.value !== category.value);
     this.form.get('categories').patchValue(this.devProfileService.selectedCategories);
     this.focusReset();
   }
   
-  onChipRemove(category) {
+  onChipRemove(category: NameValueModel): void {
     this.devProfileService.availableCategories.push(category);
     this.devProfileService.selectedCategories = this.devProfileService.selectedCategories.filter(el => el.value !== category.value);
     this.form.get('categories').patchValue(this.devProfileService.selectedCategories);
   }
 
-  focusReset() {
+  focusReset(): void {
     this.category.nativeElement.blur();
     setTimeout(() => this.category.nativeElement.focus(), 0)
   }
 
-  onSelect(event) {
+  onSelect(event: MatSelectChange): void {
     this.form.get('contractType').setValue(event.value);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.devProfileService.availableCategories.push(...this.devProfileService.selectedCategories);
     this.devProfileService.selectedCategories = [];
   }
