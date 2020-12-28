@@ -30,12 +30,15 @@ export class SearchDevelopersComponent implements OnInit, OnDestroy {
       .pipe(untilDestroyed(this))
       .subscribe(developers => {
         this.developers = developers;
-        this.developersPaginated= this.developers.slice(0, 2);
+        this.developersPaginated = this.developers.slice(0, 2);
     });
   }
 
   onPageChange($event): void {
-    this.developersPaginated = this.developers.slice($event.pageIndex * $event.pageSize, $event.pageIndex * $event.pageSize + $event.pageSize);
+    this.developersPaginated = this.developers.slice(
+      $event.pageIndex * $event.pageSize,
+      $event.pageIndex * $event.pageSize + $event.pageSize
+    );
   }
 
   public onProfileClick(id: string): void {

@@ -4,6 +4,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InViewportModule } from '@thisissoon/angular-inviewport';
 import { NgxStripeModule } from 'ngx-stripe';
+import { ReactiveComponentModule } from '@ngrx/component';
 
 import { ChangePasswordDialogComponent } from 'app/inner-pages/shared/components//change-password-dialog/change-password-dialog.component';
 import {
@@ -25,6 +26,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DeleteBillingMethodDialogComponent } from 'app/inner-pages/shared/components/delete-billing-method-dialog/delete-billing-method-dialog.component';
 import { ConfirmationDialogComponent } from 'app/inner-pages/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { EditJobDialogComponent } from 'app/inner-pages/shared/components/edit-job-dialog/edit-job-dialog.component';
+import { ActiveProjectsComponent } from './components/active-projects/active-projects.component';
+
 
 
 @NgModule({
@@ -45,25 +48,28 @@ import { EditJobDialogComponent } from 'app/inner-pages/shared/components/edit-j
     DeleteBillingMethodDialogComponent,
     ConfirmationDialogComponent,
     EditJobDialogComponent,
+    ActiveProjectsComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
     ReactiveFormsModule,
+    ReactiveComponentModule,
     ImageCropperModule,
     InViewportModule,
     NgxStripeModule,
     MatProgressSpinnerModule,
   ],
-  exports: [
-    ChangePasswordDialogComponent,
-    ProfileChangePasswordComponent,
-    ProfileSectionHeaderComponent,
-    JobComponent,
-    DeveloperResumeComponent,
-    StandardBgWrapComponent,
-    ProjectCardComponent
-  ],
+    exports: [
+        ChangePasswordDialogComponent,
+        ProfileChangePasswordComponent,
+        ProfileSectionHeaderComponent,
+        JobComponent,
+        DeveloperResumeComponent,
+        StandardBgWrapComponent,
+        ProjectCardComponent,
+        ActiveProjectsComponent
+    ],
 })
 export class PagesSharedModule {
 }
