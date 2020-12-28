@@ -40,6 +40,7 @@ export class AddressComponent implements OnInit, ControlValueAccessor {
   }
 
   public writeValue(address: string): void {
-    this.onChange(address);
+    this.currentAddress = address;
+    this.onChange(this.currentAddress);
   }
 }

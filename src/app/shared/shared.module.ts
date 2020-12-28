@@ -21,6 +21,8 @@ import { AddressComponent } from 'app/shared/components/address/address.componen
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import {PhoneComponent} from './components/phone/phone.component';
+import { PhoneRegexComponent } from './components/phone-regex/phone-regex.component';
+import {NgxPhoneMaskModule} from "ngx-phone-mask";
 
 
 @NgModule({
@@ -33,7 +35,8 @@ import {PhoneComponent} from './components/phone/phone.component';
     SeparatorComponent,
     TimezoneComponent,
     AddressComponent,
-    PhoneComponent
+    PhoneComponent,
+    PhoneRegexComponent
   ],
   exports: [
     InputComponent,
@@ -52,7 +55,8 @@ import {PhoneComponent} from './components/phone/phone.component';
     SeparatorComponent,
     TimezoneComponent,
     AddressComponent,
-    PhoneComponent
+    PhoneComponent,
+    PhoneRegexComponent
   ],
   imports: [
     CommonModule,
@@ -67,7 +71,8 @@ import {PhoneComponent} from './components/phone/phone.component';
     NgCircleProgressModule,
     GooglePlaceModule,
     NgxIntlTelInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPhoneMaskModule
   ],
   providers: [CircleProgressOptions],
 
