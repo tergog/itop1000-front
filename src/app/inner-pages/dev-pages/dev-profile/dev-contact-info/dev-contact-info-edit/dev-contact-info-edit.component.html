@@ -28,7 +28,7 @@
   <div class="w__350 d__inline-flex d__flex--justify-between d__flex--items-center m__right--10 m__bottom--10">
     <span class="text text__sm text__bold text__uppercase">Phone</span>
     <div class="d__flex d__flex--direction-column">
-      <app-phone formControlName="phone"[placeholder]="'Phone'"></app-phone>
+      <app-phone-regex formControlName="phone"[placeholder]="'Phone'"></app-phone-regex>
       <div class="m__top--10" *ngIf="form.get('phone').invalid && form.get('phone').dirty">
         <span *ngIf="form.get('phone').errors.required" class="text text__color--2 text__sm">Field is required</span>
         <span *ngIf="form.get('phone').errors.pattern" class="text text__color--2 text__sm">Invalid phone format</span>

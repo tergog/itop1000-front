@@ -19,9 +19,6 @@ export class PhoneRegexComponent implements OnInit, ControlValueAccessor {
   @Input() type: string;
   @Input() placeholder;
   @Input() isHiddenPassword: boolean;
-  @Output() enterKey = new EventEmitter();
-  @Output() onFocusField = new EventEmitter();
-
 
   constructor() { }
 
@@ -57,11 +54,4 @@ export class PhoneRegexComponent implements OnInit, ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  public enterKeyClick(): void {
-    this.enterKey.emit();
-  }
-
-  public onFocus(): void {
-    this.onFocusField.emit();
-  }
 }

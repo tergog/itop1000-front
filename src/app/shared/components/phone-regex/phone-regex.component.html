@@ -1,10 +1,9 @@
 <input
-  (keyup.enter)="enterKeyClick()"
-  (focus)="onFocus()"
   class="{{ type }}"
-  [type]="isHiddenPassword ? 'password' : 'text'"
+  [type]="'text'"
   [(ngModel)]="value"
   [placeholder]="placeholder"
   ngxPhoneMask
 >
 <ng-content></ng-content>
+

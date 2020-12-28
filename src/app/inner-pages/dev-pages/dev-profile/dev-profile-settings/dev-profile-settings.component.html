@@ -67,10 +67,11 @@
 
   <div class="w__350 d__inline-flex d__flex--justify-between d__flex--items-center m__right--10 m__bottom--10">
     <span class="text text__sm text__bold text__uppercase">Phone</span>
-    <app-phone
+    <app-phone-regex
+      [type]="'inner'"
       formControlName="phone"
       [placeholder]="'Phone'">
-    </app-phone>
+    </app-phone-regex>
   </div>
 </div>
 

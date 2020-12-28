@@ -28,8 +28,10 @@
     <i class="phone phone-gray"></i>
     <span class="text text__sm text__bold text__uppercase">PHONE</span>
 
-    <app-phone formControlName="phone"
-               [placeholder]="'Phone'"></app-phone>
+    <app-phone-regex
+      formControlName="phone"
+      [placeholder]="'+1 (000) 000 00 00'"
+      [type]="'inner'"></app-phone-regex>
   </div>
 </div>
 
