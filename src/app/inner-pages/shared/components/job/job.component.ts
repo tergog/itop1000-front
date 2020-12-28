@@ -12,7 +12,6 @@ import { NotificationsService } from 'app/shared/services/notifications.service'
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { EditJobDialogComponent } from '../edit-job-dialog/edit-job-dialog.component';
 import { JobSections } from '../job-full/job-full.component';
-import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-job',
@@ -70,7 +69,7 @@ export class JobComponent implements OnInit, OnDestroy {
 
   private handleSuccessResponse(res: any): void {
     this.notificationsService.message.emit({
-      message: res.message,
+      message: res,
       type: 'success'
     });
   }

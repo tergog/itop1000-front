@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
@@ -16,7 +16,7 @@ import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-pro
   styleUrls: ['./create-job.component.scss']
 })
 
-export class CreateJobComponent implements OnInit {
+export class CreateJobComponent implements OnInit, OnDestroy {
 
   @Output() isEdit = new EventEmitter<Job>();
   @ViewChild('category', {static: false}) category: ElementRef;
@@ -85,5 +85,9 @@ export class CreateJobComponent implements OnInit {
 
   onSelect(event: MatSelectChange): void {
     this.form.get('contractType').setValue(event.value);
+  }
+
+  ngOnDestroy(): void {
+    
   }
 }
