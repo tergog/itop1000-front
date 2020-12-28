@@ -79,14 +79,11 @@ export class DevProfileEditFormComponent implements OnInit {
   public onChipSelect(chip, selectedChips, availableChips): void {
     this.devProfileService[availableChips] = this.devProfileService[availableChips].filter(ch => ch.value !== chip.value);
     this.devProfileService[selectedChips].push(chip);
-    if (selectedChips === SelectedChips.Category) {
-      this.resetFocus(this.category);
-    } else if (selectedChips === SelectedChips.Skill) {
-      this.resetFocus(this.skills);
-    }
+    this.resetFocus(selectedChips);
   }
 
-  resetFocus(element: ElementRef) {
+  resetFocus(selectedChips: SelectedChips): void {
+    const element = selectedChips === SelectedChips.Category ? this.category : this.skills;
     element.nativeElement.blur();
     setTimeout(() => { element.nativeElement.focus()}, 0);
   }
