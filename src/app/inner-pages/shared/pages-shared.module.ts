@@ -26,7 +26,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DeleteBillingMethodDialogComponent } from 'app/inner-pages/shared/components/delete-billing-method-dialog/delete-billing-method-dialog.component';
 import { ConfirmationDialogComponent } from 'app/inner-pages/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { EditJobDialogComponent } from 'app/inner-pages/shared/components/edit-job-dialog/edit-job-dialog.component';
-import { DevProfileService } from '../dev-pages/dev-profile/dev-profile.service';
+import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
+import { LandingComponent } from 'app/landing/landing.component';
+import { HeaderLandingComponent } from 'app/inner-pages/components/header-landing/header-landing.component';
+import { FooterLandingComponent } from 'app/inner-pages/components/footer-landing/footer-landing.component';
 
 
 @NgModule({
@@ -47,6 +50,9 @@ import { DevProfileService } from '../dev-pages/dev-profile/dev-profile.service'
     DeleteBillingMethodDialogComponent,
     ConfirmationDialogComponent,
     EditJobDialogComponent,
+    LandingComponent,
+    HeaderLandingComponent,
+    FooterLandingComponent
   ],
   imports: [
     CommonModule,
