@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HeaderComponent } from 'app/inner-pages/components/header/header.component';
-import { FooterComponent } from 'app/inner-pages/components/footer/footer.component';
 import { InnerPagesComponent } from 'app/inner-pages/inner-pages.component';
 import { SharedModule } from 'app/shared/shared.module';
 import { DevPagesGuard } from 'app/shared/guards/dev-pages.guard';
@@ -30,7 +29,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, InnerPagesComponent],
+  declarations: [HeaderComponent, InnerPagesComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
