@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { HeaderComponent } from 'app/inner-pages/components/header/header.component';
+import { FooterComponent } from 'app/inner-pages/components/footer/footer.component';
 import { InnerPagesComponent } from 'app/inner-pages/inner-pages.component';
 import { SharedModule } from 'app/shared/shared.module';
 import { DevPagesGuard } from 'app/shared/guards/dev-pages.guard';
 import { ClientPagesGuard } from 'app/shared/guards/client-pages.guard';
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
 
 const routes: Routes = [
   {
@@ -30,11 +30,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [InnerPagesComponent, HeaderComponent, FooterComponent],
+  declarations: [HeaderComponent, FooterComponent, InnerPagesComponent],
   imports: [
     CommonModule,
-    SharedModule,
     RouterModule.forChild(routes),
+    SharedModule,
     FormsModule,
     ReactiveFormsModule,
   ],

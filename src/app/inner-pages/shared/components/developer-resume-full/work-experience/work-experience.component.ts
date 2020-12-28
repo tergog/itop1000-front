@@ -4,9 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { trigger, transition, animate, style } from '@angular/animations';
 import { interval, Observable } from 'rxjs';
 
-import { State, getDeveloper } from 'app/core/developers';
+import { State, getDeveloper } from 'app/core/developers/store';
 import { DevProject } from 'app/shared/models/dev-project.model';
-import { setDeveloper } from 'app/core/developers/developers.actions';
+import { setDeveloper } from 'app/core/developers/store/developers.actions';
 
 @Component({
   selector: 'app-work-experience',

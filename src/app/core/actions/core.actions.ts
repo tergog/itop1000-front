@@ -10,9 +10,6 @@ export const ON_LOGOUT = '[Core] On logout';
 export const UPDATE_USER_PROFILE = '[Core] Update user profile';
 export const UPDATE_PROJECT_IMAGE = '[Core] Update project image';
 
-export const SEARCH_JOBS = '[Core] Search jobs';
-export const SEARCH_JOBS_SUCCESS = '[Core] Search jobs success';
-
 export const ON_VALID_SESSION = '[Core] On valid session';
 
 /**
@@ -42,16 +39,6 @@ export class OnValidSessionAction implements Action {
   constructor(public payload: boolean) {}
 }
 
-export class SearchJobsAction implements Action {
-  readonly type = SEARCH_JOBS;
-  constructor(public payload: string) {}
-}
-
-export class SearchJobsSuccessAction implements Action {
-  readonly type = SEARCH_JOBS_SUCCESS;
-  constructor(public payload: Job[]) {}
-}
-
 export class UpdateProjectImageAction implements Action {
   readonly type = UPDATE_PROJECT_IMAGE;
   constructor(public image: string, public id: number) {}
@@ -66,6 +53,4 @@ export type Actions =
   | SetOnLogoutAction
   | UpdateUserProfileAction
   | OnValidSessionAction
-  | SearchJobsAction
-  | SearchJobsSuccessAction
   | UpdateProjectImageAction;

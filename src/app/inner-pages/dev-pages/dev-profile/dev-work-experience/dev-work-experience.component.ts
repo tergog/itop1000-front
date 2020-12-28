@@ -82,7 +82,7 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
     this.disableEmptyFields();
     this.devProfileService.devProperties = {
       ...this.devProfileService.devProperties,
-      projects: [   
+      projects: [
         ...(this.devProfileService.devProperties.projects || []),
         {
           ...this.form.value,
@@ -92,7 +92,7 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
         }
       ]
     };
-    
+
     this.devProfileService.onSaveClick({devProperties: this.devProfileService.devProperties});
     this.isNewProject = false;
   }

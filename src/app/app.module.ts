@@ -10,30 +10,25 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { AppRoutingModule } from 'app/app-routing.module';
 import { AppComponent } from 'app/app.component';
-import { metaReducers, reducers } from 'app/core/reducers';
+import { metaReducers, reducers } from 'app/core/reducers/index';
 import { environment } from 'environments/environment';
 import { AuthGuard } from 'app/shared/guards/auth.guard';
 import { CoreModule } from 'app/core/core.module';
-import { DevelopersModule } from 'app/core/developers/developers.module';
+import { DevelopersModule } from 'app/core/developers/store/developers.module';
 import { HttpErrorHandlerService } from 'app/shared/services/http-error-handler.service';
 import { TokenInterceptor } from 'app/shared/interceptors/token.interceptor';
-import { HeaderLandingComponent } from './inner-pages/components/header-landing/header-landing.component';
-import { FooterLandingComponent } from './inner-pages/components/footer-landing/footer-landing.component';
-import { LandingComponent } from './landing/landing.component';
-import { InputComponent } from './shared/components/input/input.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { SharedModule } from './shared/shared.module';
+import { ClientModule } from './core/client/store/client.module';
 
 
 @NgModule({
-  declarations: [AppComponent, LandingComponent, HeaderLandingComponent, FooterLandingComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
-    ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
     CoreModule,
     DevelopersModule,
+    ClientModule,
     BrowserAnimationsModule,
     NgxStripeModule.forRoot('pk_test_51HfRHCEuY58zLN527L8buA0YyVEdwwmwCiPgRNRiMhWdDdXaKgYOYeQ6bDNwDPXMtaAmtSSnbpaSzYYceAl7bSwh00wB02HoJj'),
     StoreModule.forRoot({}),

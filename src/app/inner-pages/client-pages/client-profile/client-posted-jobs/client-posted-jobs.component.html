@@ -16,6 +16,6 @@
   </ng-container>
 
   <ng-container *ngIf="isCreateJob">
-    <app-create-job></app-create-job>
+    <app-create-job (isEdit)="isCreateJob = false"></app-create-job>
   </ng-container>
 </div>
