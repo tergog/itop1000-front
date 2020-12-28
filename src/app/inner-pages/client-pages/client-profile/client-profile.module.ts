@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { ReactiveComponentModule } from '@ngrx/component';
 
 import { ClientProfileComponent } from 'app/inner-pages/client-pages/client-profile/client-profile.component';
 import { ClientProfileSidenavComponent } from 'app/inner-pages/client-pages/client-profile/client-profile-sidenav/client-profile-sidenav.component';
@@ -50,7 +51,8 @@ export const routes: Routes = [
     SharedModule,
     ReactiveFormsModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    ReactiveComponentModule
   ]
 })
 export class ClientProfileModule { }

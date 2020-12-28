@@ -4,7 +4,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { filter, first } from 'rxjs/operators';
+import { filter, first, tap } from 'rxjs/operators';
 import xorBy from 'lodash.xorby';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { untilDestroyed } from 'ngx-take-until-destroy';
@@ -58,14 +58,13 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initForm();
 
-    this.userInfo$ = this.store.select(fromCore.getUserInfo);
-
-    this.store.select(fromCore.getUserInfo)
-      .pipe(first())
-      .subscribe((userInfo: UserInfo) => {
+    this.userInfo$ = this.store.select(fromCore.getUserInfo).pipe(
+      first(),
+      tap((userInfo: UserInfo) => {
         this.devProfileService.devProperties = userInfo.devProperties;
         this.updateTechnologies(this.selectedTechnologies);
-      });
+      })
+    );
   }
 
   public onAddClick(): void {

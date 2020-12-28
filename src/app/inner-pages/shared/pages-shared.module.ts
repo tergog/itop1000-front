@@ -4,6 +4,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InViewportModule } from '@thisissoon/angular-inviewport';
 import { NgxStripeModule } from 'ngx-stripe';
+import { ReactiveComponentModule } from '@ngrx/component';
 
 import { ChangePasswordDialogComponent } from 'app/inner-pages/shared/components//change-password-dialog/change-password-dialog.component';
 import {
@@ -54,6 +55,7 @@ import { EditJobDialogComponent } from 'app/inner-pages/shared/components/edit-j
     InViewportModule,
     NgxStripeModule,
     MatProgressSpinnerModule,
+    ReactiveComponentModule
   ],
   exports: [
     ChangePasswordDialogComponent,

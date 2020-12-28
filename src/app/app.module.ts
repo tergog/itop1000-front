@@ -7,6 +7,8 @@ import { StoreModule } from '@ngrx/store';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { NgxStripeModule } from 'ngx-stripe';
 import { EffectsModule } from '@ngrx/effects';
+import { ReactiveComponentModule } from '@ngrx/component';
+
 
 import { AppRoutingModule } from 'app/app-routing.module';
 import { AppComponent } from 'app/app.component';
@@ -32,7 +34,8 @@ import { TokenInterceptor } from 'app/shared/interceptors/token.interceptor';
     StoreModule.forRoot({}),
     EffectsModule.forRoot(),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    GooglePlaceModule
+    GooglePlaceModule,
+    ReactiveComponentModule
   ],
   providers: [
     {

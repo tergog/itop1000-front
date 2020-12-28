@@ -2,11 +2,11 @@
 
 <div class="p__20">
   <ng-container *ngIf="isAccountEdit">
-    <app-client-contact-info-edit [userInfo]="userInfo$ | async" (cancel)="editAccountToggle()" (save)="onSaveAccountClick($event)"></app-client-contact-info-edit>
+    <app-client-contact-info-edit [userInfo]="userInfo$ | ngrxPush" (cancel)="editAccountToggle()" (save)="onSaveAccountClick($event)"></app-client-contact-info-edit>
   </ng-container>
 
   <ng-container *ngIf="!isAccountEdit">
-    <app-client-contact-info-preview [userInfo]="userInfo$ | async"></app-client-contact-info-preview>
+    <app-client-contact-info-preview [userInfo]="userInfo$ | ngrxPush"></app-client-contact-info-preview>
   </ng-container>
 </div>
 
@@ -14,10 +14,10 @@
 
 <div class="p__20">
   <ng-container *ngIf="isLocationEdit">
-    <app-client-contact-info-location-edit [userInfo]="userInfo$ | async" (cancel)="editLocationToggle()" (save)="onSaveLocationClick($event)"></app-client-contact-info-location-edit>
+    <app-client-contact-info-location-edit [userInfo]="userInfo$ | ngrxPush" (cancel)="editLocationToggle()" (save)="onSaveLocationClick($event)"></app-client-contact-info-location-edit>
   </ng-container>
 
   <ng-container *ngIf="!isLocationEdit">
-    <app-client-contact-info-location-preview [userInfo]="userInfo$ | async"></app-client-contact-info-location-preview>
+    <app-client-contact-info-location-preview [userInfo]="userInfo$ | ngrxPush"></app-client-contact-info-location-preview>
   </ng-container>
 </div>

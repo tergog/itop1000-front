@@ -7,6 +7,8 @@ import { Developer } from 'app/shared/models';
 import { DevelopersService } from 'app/shared/services';
 import { getDevelopers, State } from 'app/core/developers';
 import { updateDeveloper } from 'app/core/developers/developers.actions';
+import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-search-developers',
@@ -15,8 +17,9 @@ import { updateDeveloper } from 'app/core/developers/developers.actions';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchDevelopersComponent implements OnInit, OnDestroy {
-
-  public developers: Developer[] = [];
+  
+  public developers: Developer[];
+  public developers$: Observable<Developer[]>;
   public developersPaginated: Developer[] = [];
 
   constructor(
@@ -26,12 +29,12 @@ export class SearchDevelopersComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.store.select(getDevelopers)
-      .pipe(untilDestroyed(this))
-      .subscribe(developers => {
+    this.developers$ = this.store.select(getDevelopers)
+      .pipe(untilDestroyed(this),
+      tap((developers: Developer[]) => {
         this.developers = developers;
-        this.developersPaginated= this.developers.slice(0, 2);
-    });
+        this.developersPaginated = this.developers.slice(0, 2);
+      }));
   }
 
   onPageChange($event): void {
