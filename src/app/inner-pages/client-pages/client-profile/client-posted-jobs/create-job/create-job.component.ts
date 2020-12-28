@@ -1,13 +1,14 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSelectChange } from '@angular/material/select';
+import { untilDestroyed } from 'ngx-take-until-destroy';
 
 import { JobsService, NotificationsService } from 'app/shared/services';
 import { Job, NameValueModel, NotificationMessage } from 'app/shared/models';
 import { State } from 'app/core/reducers/index';
 import { GetJobsAction } from 'app/core/client/store/actions';
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
-import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-create-job',
@@ -33,7 +34,7 @@ export class CreateJobComponent implements OnInit {
       this.showError = true;
       return
     }
-    this.jobsService.createJob(this.form.value)
+    this.jobsService.createJob(this.form.value).pipe(untilDestroyed(this))
     .subscribe(() => {
       let msg: NotificationMessage = {message: "Added project", type: "success"};
       this.store.dispatch(new GetJobsAction());

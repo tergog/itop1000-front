@@ -4,6 +4,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InViewportModule } from '@thisissoon/angular-inviewport';
 import { NgxStripeModule } from 'ngx-stripe';
+import { MatSelectModule } from '@angular/material/select';
 
 import { ChangePasswordDialogComponent } from 'app/inner-pages/shared/components//change-password-dialog/change-password-dialog.component';
 import {
@@ -26,7 +27,6 @@ import { DeleteBillingMethodDialogComponent } from 'app/inner-pages/shared/compo
 import { ConfirmationDialogComponent } from 'app/inner-pages/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { EditJobDialogComponent } from 'app/inner-pages/shared/components/edit-job-dialog/edit-job-dialog.component';
 import { DevProfileService } from '../dev-pages/dev-profile/dev-profile.service';
-import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({

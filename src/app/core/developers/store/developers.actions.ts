@@ -10,7 +10,7 @@ export const SET_DEVELOPER_SUCCESS = '[Developers] Set developer success';
 
 export const SEARCH_JOBS = '[Developers] Search jobs';
 export const SEARCH_JOBS_SUCCESS = '[Developers] Search jobs success';
-export const SEARCH_JOBS_ERROR = '[Developers] Search jobs success';
+export const SEARCH_JOBS_ERROR = '[Developers] Search jobs error';
 
 export const UPDATE_DEVELOPER = '[Developers] Update developer';
 

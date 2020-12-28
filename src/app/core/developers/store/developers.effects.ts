@@ -3,12 +3,12 @@ import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { of } from 'rxjs';
 
 import * as actions from './developers.actions';
 import { DevelopersService, JobsService } from 'app/shared/services';
 import { Developer, Job } from 'app/shared/models';
 import { State } from './developers.reducer';
-import { of } from 'rxjs';
 
 @Injectable()
 export class DevelopersEffects {

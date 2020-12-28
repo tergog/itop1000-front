@@ -26,9 +26,9 @@ export class SearchJobsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.store.select(getJobs)
       .pipe(untilDestroyed(this))
-      .subscribe(jobs=> {
+      .subscribe(jobs => {
         this.jobs = jobs;
-        this.jobsPaginated= this.jobs.slice(0, 2);
+        this.jobsPaginated = this.jobs.slice(0, 2);
     });
   }
 

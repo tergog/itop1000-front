@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select'
 
 import { ClientProfileComponent } from 'app/inner-pages/client-pages/client-profile/client-profile.component';
 import { ClientProfileSidenavComponent } from 'app/inner-pages/client-pages/client-profile/client-profile-sidenav/client-profile-sidenav.component';
@@ -21,7 +22,6 @@ import { ClientContactInfoPreviewComponent } from 'app/inner-pages/client-pages/
 import { ClientContactInfoEditComponent } from 'app/inner-pages/client-pages/client-profile/client-contact-info/client-contact-info-edit/client-contact-info-edit.component';
 import { ClientContactInfoLocationEditComponent } from 'app/inner-pages/client-pages/client-profile/client-contact-info/client-contact-info-location-edit/client-contact-info-location-edit.component';
 import { ClientContactInfoLocationPreviewComponent } from 'app/inner-pages/client-pages/client-profile/client-contact-info/client-contact-info-location-preview/client-contact-info-location-preview.component';
-import { MatSelectModule } from '@angular/material/select'
 
 
 export const routes: Routes = [

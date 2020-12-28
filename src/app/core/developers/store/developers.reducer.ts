@@ -210,10 +210,7 @@ export const getDevelopers = (state: State): Developer[] => {
   return state.developers;
 };
 export const getJobs = (state: State): Job[] => {
-  if (state.jobs){
-    return state.jobs;
-  }
-  
+  return state.jobs;
 };
 export const getDeveloper = (state: State): Developer => {
   return state.developer;
