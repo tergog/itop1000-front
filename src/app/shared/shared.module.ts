@@ -19,11 +19,13 @@ import { SeparatorComponent } from './components/separator/separator.component';
 import { TimezoneComponent } from './components/timezone/timezone.component';
 import { AddressComponent } from 'app/shared/components/address/address.component';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
     InputComponent,
     CheckboxComponent,
+    LoaderComponent,
     ButtonComponent,
     TextareaComponent,
     ClickedOutsideDirective,
@@ -34,6 +36,7 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
   exports: [
     InputComponent,
     CheckboxComponent,
+    LoaderComponent,
     ButtonComponent,
     MatAutocompleteModule,
     MatChipsModule,
