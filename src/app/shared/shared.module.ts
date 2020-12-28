@@ -19,7 +19,7 @@ import { SeparatorComponent } from './components/separator/separator.component';
 import { TimezoneComponent } from './components/timezone/timezone.component';
 import { AddressComponent } from 'app/shared/components/address/address.component';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
-import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+// import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { PhoneRegexComponent } from './components/phone-regex/phone-regex.component';
 import {NgxPhoneMaskModule} from "ngx-phone-mask";
 
@@ -67,7 +67,7 @@ import {NgxPhoneMaskModule} from "ngx-phone-mask";
     OverlayModule,
     NgCircleProgressModule,
     GooglePlaceModule,
-    NgxIntlTelInputModule,
+    // NgxIntlTelInputModule,
     ReactiveFormsModule,
     NgxPhoneMaskModule
   ],
