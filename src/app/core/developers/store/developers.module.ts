@@ -4,7 +4,7 @@ import { StoreModule } from '@ngrx/store';
 
 import { DevelopersEffects } from './developers.effects';
 import { reducer } from './developers.reducer';
-import { metaReducers } from 'app/core/developers';
+import { metaReducers } from 'app/core/developers/store';
 
 
 @NgModule({

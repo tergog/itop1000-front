@@ -5,8 +5,8 @@ import { untilDestroyed } from 'ngx-take-until-destroy';
 
 import { Developer } from 'app/shared/models';
 import { DevelopersService } from 'app/shared/services';
-import { getDevelopers, State } from 'app/core/developers';
-import { updateDeveloper } from 'app/core/developers/developers.actions';
+import { getDevelopers, State } from 'app/core/developers/store';
+import { updateDeveloper } from 'app/core/developers/store/developers.actions';
 
 @Component({
   selector: 'app-search-developers',
@@ -30,7 +30,7 @@ export class SearchDevelopersComponent implements OnInit, OnDestroy {
       .pipe(untilDestroyed(this))
       .subscribe(developers => {
         this.developers = developers;
-        this.developersPaginated= this.developers.slice(0, 2);
+        this.developersPaginated = this.developers.slice(0, 2);
     });
   }
 

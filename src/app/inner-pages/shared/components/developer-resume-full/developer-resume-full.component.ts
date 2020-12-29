@@ -3,11 +3,11 @@ import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { bufferTime } from 'rxjs/operators';
+import { untilDestroyed } from 'ngx-take-until-destroy';
 
 import { Developer } from 'app/shared/models';
-import { getDeveloper, State } from 'app/core/developers';
-import { setDeveloper } from 'app/core/developers/developers.actions';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+import { getDeveloper, State } from 'app/core/developers/store';
+import { setDeveloper } from 'app/core/developers/store/developers.actions';
 
 export enum DeveloperResumeSections {
   ProfessionalSkills,

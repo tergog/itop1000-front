@@ -6,7 +6,6 @@
   </app-input>
 </div>
 
-
 <div class="photo-preview with-chevron cursor__pointer" [style.backgroundImage]="(userInfo$ | async)?.photo ? 'url(' + (userInfo$ | async)?.photo + ')' : 'none'" (click)="togglePopup()"></div>
 
 <div [@opacityInOut] class="logout-popup" *ngIf="isPopupOpen">

@@ -2,47 +2,88 @@
   <div class="d__flex d__flex--direction-column">
     <span class="text text__sm text__color--1 text__fw--600">Title</span>
     <app-input class="m__top--10" [type]="'inner'" [placeholder]="'Job Title'" formControlName="title"></app-input>
+    <mat-error *ngIf="showError && form.get('title').errors?.required">Title required</mat-error>
   </div>
 
   <div class="d__flex d__flex--direction-column m__top--20">
     <span class="text text__sm text__color--1 text__fw--600">Description</span>
     <app-textarea class="m__top--10" [placeholder]="'Job Description'" formControlName="description"></app-textarea>
+    <mat-error *ngIf="showError && form.get('description').errors?.required">Description required</mat-error>
   </div>
 
   <div class="d__flex d__flex--direction-column">
     <span class="text text__sm text__color--1 text__fw--600">Categories</span>
-    <app-input class="m__top--10" [type]="'inner'" [placeholder]="'Job Title'" formControlName="categories"></app-input>
+    <mat-form-field class="m__top--10" [class.edit-mode]="true">
+      <mat-chip-list #chipListCategories formControlName="categories">
+        <mat-chip *ngFor="let category of devProfileService.selectedCategories"
+                  [selectable]="false"
+                  [removable]="true"
+                  (removed)="onChipRemove(category)"
+                  >
+          {{ category.name }}
+          <mat-icon matChipRemove *ngIf="isEdit">cancel</mat-icon>
+        </mat-chip>
+        <input #category placeholder="Add category..."
+                [readOnly]="!isEdit"
+                [matChipInputFor]="chipListCategories"
+                [matAutocomplete]="autoCategories"
+                [matChipInputAddOnBlur]="true">
+      </mat-chip-list>
+
+      <mat-autocomplete #autoCategories="matAutocomplete" (optionSelected)="onChipSelect($event.option.value)">
+        <mat-option *ngFor="let category of devProfileService.availableCategories" [value]="category">
+          {{ category.name }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <mat-error *ngIf="showError && form.get('categories').errors?.required">Categories required</mat-error>
   </div>
 
   <div class="d__flex d__flex--direction-column">
     <span class="text text__sm text__color--1 text__fw--600">Requirements</span>
     <app-input class="m__top--10" [type]="'inner'" [placeholder]="'Requirements'" formControlName="requirements"></app-input>
+    <mat-error *ngIf="showError && form.get('requirements').errors?.required">Requirements required</mat-error>
   </div>
 
   <div class="d__flex d__flex--direction-column">
     <span class="text text__sm text__color--1 text__fw--600">Duration</span>
     <app-input class="m__top--10" [type]="'inner'" [placeholder]="'Duration'" formControlName="duration"></app-input>
+    <mat-error *ngIf="showError && form.get('duration').errors?.required">Duration required</mat-error>
+    <mat-error *ngIf="showError && form.get('duration').errors?.pattern">Duration should be a number</mat-error>
+  </div>
+
+  <div class="d__flex d__flex--direction-column">
+    <span class="text text__sm text__color--1 text__fw--600">Contract type</span>
+    <mat-form-field appearance="fill">
+      <mat-label>Contract type</mat-label>
+      <mat-select (selectionChange)="onSelect($event)">
+        <mat-option value="Hourly based">Hourly based</mat-option>
+        <mat-option value="Month based">Month based</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-error *ngIf="showError && form.get('contractType').errors?.required">Contract type required</mat-error>
   </div>
 
   <div class="d__flex d__flex--direction-column">
     <span class="text text__sm text__color--1 text__fw--600">Price</span>
     <app-input class="m__top--10" [type]="'inner'" [placeholder]="'Price'" formControlName="price"></app-input>
+    <mat-error *ngIf="showError && form.get('price').errors?.required">Price required</mat-error>
+    <mat-error *ngIf="showError && form.get('price').errors?.pattern">Price should be a number</mat-error>
   </div>
 
   <div class="d__flex d__flex--direction-column">
     <span class="text text__sm text__color--1 text__fw--600">Company</span>
     <app-input class="m__top--10" [type]="'inner'" [placeholder]="'Company'" formControlName="company"></app-input>
+    <mat-error *ngIf="showError && form.get('company').errors?.required">Company required</mat-error>
   </div>
 
   <div class="d__flex d__flex--direction-column">
-    <span class="text text__sm text__color--1 text__fw--600">Country</span>
-    <app-input class="m__top--10" [type]="'inner'" [placeholder]="'Country'" formControlName="country"></app-input>
+    <span class="text text__sm text__color--1 text__fw--600">Address</span>
+    <app-address class="m__top--10" formControlName="address">
+    </app-address>
+    <mat-error *ngIf="showError && form.get('address').errors?.required">Address required</mat-error>
   </div>
 
-  <div class="d__flex d__flex--direction-column">
-    <span class="text text__sm text__color--1 text__fw--600">City</span>
-    <app-input class="m__top--10" [type]="'inner'" [placeholder]="'City'" formControlName="city"></app-input>
-  </div>
 </div>
 
 <div class="m__top--10 text__right">
