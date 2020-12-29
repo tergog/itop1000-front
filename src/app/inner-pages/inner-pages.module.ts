@@ -25,7 +25,7 @@ const routes: Routes = [
       import('app/inner-pages/client-pages/client-pages.module').then(
         (m) => m.ClientPagesModule
       ),
-  },
+  }
 ];
 
 @NgModule({

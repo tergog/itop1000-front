@@ -1,4 +1,4 @@
-# Itop1000Front
+# ITOP1000 Front
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.7.
 
@@ -27,7 +27,8 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
 
-## Project imports code styles
+# Code Style
+##Imports
 1. Use spaces at import
 2. Use single quotes
 3. Use project root path for import
@@ -39,3 +40,36 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { UtilsService } from 'app/shared/services/utils.service';
+
+## Commit message format
+
+#### Type must be one of the following:
+
+Each commit message consists of a header. The header has a special format that includes a type, a scope and a subject:
+```
+<type>(<scope>): <subject>
+```
+The header is mandatory and the scope of the header is optional.
+
+#### Subject
+The subject contains a succinct description of the change:
+
+- use the imperative, present tense: "change" not "changed" nor "changes"
+- don't capitalize the first letter
+- no dot (.) at the end
+
+Any line of the commit message cannot be longer 100 characters! This allows the message to be easier to read on GitHub as well as in various git tools.
+
+
+- `build`: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
+- `ci`: Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)
+- `docs`: Documentation only changes
+- `feat`: A new feature
+- `fix`: A bug fix
+- `perf`: A code change that improves performance
+- `refactor`: A code change that neither fixes a bug nor adds a feature
+- `style`: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+- `test`: Adding missing tests or correcting existing tests
+
+For full description go to: [Angular contributing rules link](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#rules)
+---

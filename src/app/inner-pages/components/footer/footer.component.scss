@@ -1,0 +1,12 @@
+@import 'assets/scss/variables';
+
+:host { 
+  background-color: $color-1;
+  display: flex;
+  padding: 15px 125px;
+  flex-direction: column;
+  align-items: center;
+  position: sticky;
+  top: 100%;
+  left: 0;
+}

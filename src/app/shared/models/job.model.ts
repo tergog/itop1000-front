@@ -1,13 +1,16 @@
+import { NameValueModel } from 'app/shared/models/name-value.model'
+
 export interface Job {
   id: string;
   title: string;
   description: string;
-  categories: string;
+  categories: NameValueModel[];
   requirements: string;
   duration: number;
+  contractType: string;
   price: number;
-  country: string;
-  city: string;
+  address: string;
+  userId?: string;
   dateCreated: string;
   company: string;
 }

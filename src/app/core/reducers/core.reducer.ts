@@ -27,8 +27,6 @@ export function reducer(state: State = INIT_STATE, action: coreActions.Actions) 
       return {...state, userInfo: action.payload};
     case coreActions.ON_VALID_SESSION:
       return { ...state, isAuthenticated: action.payload };
-    case coreActions.SEARCH_JOBS_SUCCESS:
-      return { ...state, jobs: action.payload };
     case coreActions.UPDATE_PROJECT_IMAGE:
       const account = {
         ...state.userInfo,
@@ -46,4 +44,3 @@ export function reducer(state: State = INIT_STATE, action: coreActions.Actions) 
 /** Selector return is Authenticated */
 export const getIsAuthenticatedSelector = (state: State): boolean => state.isAuthenticated;
 export const getUserInfoSelector = (state: State): UserInfo => state.userInfo;
-export const getJobs = (state: State): Job[] => state.jobs;

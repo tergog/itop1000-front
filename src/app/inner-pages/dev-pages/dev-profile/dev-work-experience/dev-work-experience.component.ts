@@ -83,7 +83,7 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
     this.devProfileService.devProperties = {
       ...this.devProfileService.devProperties,
       projects: [
-        ...this.devProfileService.devProperties.projects,
+        ...(this.devProfileService.devProperties.projects || []),
         {
           ...this.form.value,
           technologies: [...this.selectedTechnologies],

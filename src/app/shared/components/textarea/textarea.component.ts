@@ -23,13 +23,14 @@ export class TextareaComponent implements OnInit, ControlValueAccessor {
   ngOnInit(): void {
   }
 
-  get value(): any {
-    return this._value;
-  }
-
+  @Input()
   set value(value: any) {
     this._value = value;
     this.writeValue(value);
+  }
+
+  get value(): any {
+    return this._value;
   }
 
   _value: any;

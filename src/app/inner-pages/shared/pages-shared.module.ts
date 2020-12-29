@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ImageCropperModule } from 'ngx-image-cropper';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InViewportModule } from '@thisissoon/angular-inviewport';
 import { NgxStripeModule } from 'ngx-stripe';
+import { MatSelectModule } from '@angular/material/select';
 
 import { ChangePasswordDialogComponent } from 'app/inner-pages/shared/components//change-password-dialog/change-password-dialog.component';
 import {
@@ -23,6 +24,12 @@ import { WorkExperienceComponent } from './components/developer-resume-full/work
 import { ProjectCardComponent } from './components/project-card/project-card.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DeleteBillingMethodDialogComponent } from 'app/inner-pages/shared/components/delete-billing-method-dialog/delete-billing-method-dialog.component';
+import { ConfirmationDialogComponent } from 'app/inner-pages/shared/components/confirmation-dialog/confirmation-dialog.component';
+import { EditJobDialogComponent } from 'app/inner-pages/shared/components/edit-job-dialog/edit-job-dialog.component';
+import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
+import { LandingComponent } from 'app/landing/landing.component';
+import { HeaderLandingComponent } from 'app/inner-pages/components/header-landing/header-landing.component';
+import { FooterLandingComponent } from 'app/inner-pages/components/footer-landing/footer-landing.component';
 
 
 @NgModule({
@@ -41,15 +48,22 @@ import { DeleteBillingMethodDialogComponent } from 'app/inner-pages/shared/compo
     WorkExperienceComponent,
     ProjectCardComponent,
     DeleteBillingMethodDialogComponent,
+    ConfirmationDialogComponent,
+    EditJobDialogComponent,
+    LandingComponent,
+    HeaderLandingComponent,
+    FooterLandingComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
+    FormsModule,
     ReactiveFormsModule,
     ImageCropperModule,
     InViewportModule,
     NgxStripeModule,
     MatProgressSpinnerModule,
+    MatSelectModule
   ],
   exports: [
     ChangePasswordDialogComponent,
@@ -60,6 +74,9 @@ import { DeleteBillingMethodDialogComponent } from 'app/inner-pages/shared/compo
     StandardBgWrapComponent,
     ProjectCardComponent
   ],
+  providers: [
+    DevProfileService
+  ]
 })
 export class PagesSharedModule {
 }
