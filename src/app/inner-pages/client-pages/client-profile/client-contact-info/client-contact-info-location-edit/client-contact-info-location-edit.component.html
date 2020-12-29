@@ -2,7 +2,7 @@
 
   <div class="w__320 d__inline-flex d__flex--justify-between d__flex--items-center m__right--30 m__bottom--10"
        (clickOutside)="hideTimezone()">
-    <i class="contact-info contact-info-gray"></i>
+    <mat-icon svgIcon="contact-info"></mat-icon>
     <span class="text text__sm text__bold text__uppercase">TIME ZONE</span>
 
     <app-input (onFocusField)="showTimezone()"
@@ -19,7 +19,7 @@
   </div>
 
   <div class="w__320 d__inline-flex d__flex--justify-between d__flex--items-center m__right--30 m__bottom--10">
-    <i class="location location-gray"></i>
+    <mat-icon svgIcon="location"></mat-icon>
     <span class="text text__sm text__bold text__uppercase">ADDRESS</span>
 
     <app-address formControlName="address"
@@ -27,7 +27,7 @@
   </div>
 
   <div class="w__320 d__inline-flex d__flex--justify-between d__flex--items-center m__right--30 m__bottom--10">
-    <i class="phone phone-gray"></i>
+    <mat-icon svgIcon="phone"></mat-icon>
     <span class="text text__sm text__bold text__uppercase">PHONE</span>
 
     <app-input [type]="'inner'"

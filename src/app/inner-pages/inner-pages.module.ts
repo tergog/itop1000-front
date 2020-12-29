@@ -6,9 +6,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from 'app/inner-pages/components/header/header.component';
 import { FooterComponent } from 'app/inner-pages/components/footer/footer.component';
 import { InnerPagesComponent } from 'app/inner-pages/inner-pages.component';
-import { SharedModule } from 'app/shared/shared.module';
 import { DevPagesGuard } from 'app/shared/guards/dev-pages.guard';
 import { ClientPagesGuard } from 'app/shared/guards/client-pages.guard';
+import { SharedModule } from '../shared/shared.module';
 
 const routes: Routes = [
   {
@@ -34,8 +34,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    SharedModule,
     FormsModule,
+    SharedModule,
     ReactiveFormsModule,
   ],
 })

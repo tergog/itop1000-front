@@ -1,8 +1,8 @@
 <app-profile-section-header [title]="'Profile Settings'" (edit)="onEditClick()"></app-profile-section-header>
 
 <div class="profile-photo-wrap" (click)="openUploadPhotoDialog()" *ngIf="!imageUrl">
-  <i class="profile-photo"></i>
-  <i class="plus"></i>
+  <mat-icon svgIcon="profile-photo"></mat-icon>
+  <mat-icon svgIcon="plus"></mat-icon>
 </div>
 
 <ng-container *ngIf="imageUrl">

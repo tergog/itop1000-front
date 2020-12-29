@@ -24,9 +24,9 @@
 
     <div class="m__bottom--10">
       <div class="profile-photo-wrap" (click)="openUploadImageDialog(true)">
-        <i class="profile-photo" *ngIf="!logoUrl"></i>
+        <mat-icon svgIcon="profile-photo" *ngIf="!logoUrl"></mat-icon>
         <img [src]=logoUrl alt="projectLogo" *ngIf="logoUrl">
-        <i class="plus"></i>
+        <mat-icon svgIcon="plus"></mat-icon>
       </div>
     </div>
 
@@ -88,9 +88,9 @@
 
     <div class="m__bottom--10">
       <div class="profile-photo-wrap" (click)="openUploadImageDialog(false)">
-        <i class="profile-photo" *ngIf="!projectImages"></i>
+        <mat-icon svgIcon="profile-photo" *ngIf="!projectImages"></mat-icon>
         <img [src]=image alt="projectImage" *ngFor="let image of projectImages">
-        <i class="plus"></i>
+        <mat-icon svgIcon="plus"></mat-icon>
       </div>
     </div>
 

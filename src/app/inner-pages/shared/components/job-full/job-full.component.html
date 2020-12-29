@@ -15,17 +15,17 @@
     <ul class="job-nav">
       <li [class.active]="activeSection === JobSections.Project"
           (click)="onSectionCLick(JobSections.Project, jobDescriptionRef)">
-        <i class="job-nav-icon project"></i>
+        <mat-icon svgIcon="project" class="job-nav-icon"></mat-icon>
         <span>Project</span>
       </li>
       <li [class.active]="activeSection === JobSections.Duration"
           (click)="onSectionCLick(JobSections.Duration, durationRef)">
-        <i class="job-nav-icon duration"></i>
+        <mat-icon svgIcon="duration" class="job-nav-icon"></mat-icon>
         <span>Duration</span>
       </li>
       <li [class.active]="activeSection === JobSections.KeySkills"
           (click)="onSectionCLick(JobSections.KeySkills, keySkillsRef)">
-        <i class="job-nav-icon idea"></i>
+        <mat-icon svgIcon="idea" class="job-nav-icon"></mat-icon>
         <span>Key Skills</span>
       </li>
     </ul>
@@ -35,7 +35,7 @@
     <div class="right-side-content">
       <div class="location-wrap">
         <div class="d__flex m__right--30">
-          <i class="location m__right--10"></i>
+          <mat-icon svgIcon="location" class="m__right--10"></mat-icon>
           <span class="text text__md text__color--3">{{ job.city }}, {{ job.country }}</span>
         </div>
 

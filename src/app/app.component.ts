@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { NotificationMessage } from 'app/shared/models';
 import { NotificationsService } from 'app/shared/services/notifications.service';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +14,15 @@ export class AppComponent implements OnInit {
   title = 'ITOP1000';
   public notification: NotificationMessage;
 
-  constructor(private notificationService: NotificationsService) {}
+  constructor(
+    private notificationService: NotificationsService,
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer
+  ) {
+    this.matIconRegistry.addSvgIconSet(
+      domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/sprite.svg')
+    );
+  }
 
   ngOnInit(): void {
     this.subscribeForNotifications();

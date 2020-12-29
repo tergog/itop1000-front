@@ -9,8 +9,8 @@ import { NgxStripeModule } from 'ngx-stripe';
 import { EffectsModule } from '@ngrx/effects';
 
 import { AppRoutingModule } from 'app/app-routing.module';
+import { SharedModule } from 'app/shared/shared.module';
 import { AppComponent } from 'app/app.component';
-import { metaReducers, reducers } from 'app/core/reducers';
 import { environment } from 'environments/environment';
 import { AuthGuard } from 'app/shared/guards/auth.guard';
 import { CoreModule } from 'app/core/core.module';
@@ -32,7 +32,8 @@ import { TokenInterceptor } from 'app/shared/interceptors/token.interceptor';
     StoreModule.forRoot({}),
     EffectsModule.forRoot(),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    GooglePlaceModule
+    GooglePlaceModule,
+    SharedModule
   ],
   providers: [
     {
