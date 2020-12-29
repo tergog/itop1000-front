@@ -20,7 +20,6 @@ export class AppComponent implements OnInit {
     this.subscribeForNotifications();
   }
 
-
   public onCloseNotification(): void {
     this.notification = null;
   }

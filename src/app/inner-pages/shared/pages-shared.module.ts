@@ -30,6 +30,7 @@ import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-pro
 import { LandingComponent } from 'app/landing/landing.component';
 import { HeaderLandingComponent } from 'app/inner-pages/components/header-landing/header-landing.component';
 import { FooterLandingComponent } from 'app/inner-pages/components/footer-landing/footer-landing.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { FooterLandingComponent } from 'app/inner-pages/components/footer-landin
     FooterLandingComponent
   ],
   imports: [
+    RouterModule,
     CommonModule,
     SharedModule,
     FormsModule,
