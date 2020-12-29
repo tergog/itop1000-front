@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { getClientLoading, getDevelopersLoading, State } from 'app/core/reducers';
 import { Observable, merge } from 'rxjs';
+
+import { getClientLoading, getDevelopersLoading, State } from 'app/core/reducers';
+
 
 @Component({
   selector: 'app-loader',
