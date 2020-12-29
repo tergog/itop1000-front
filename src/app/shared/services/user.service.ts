@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import * as crypto from 'crypto-js';
 
 import { environment } from 'environments/environment';
 import { ApiConstants } from 'app/constants/api.constants';
 import { UserInfo, UserLoginInfo, UserRegistrationInfo } from 'app/shared/models';
 import { TOKEN } from 'app/constants/constants';
-import * as crypto from 'crypto-js';
+
 
 @Injectable({
   providedIn: 'root'

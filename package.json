@@ -29,6 +29,7 @@
     "@ngrx/store-devtools": "^9.2.0",
     "@stripe/stripe-js": "^1.10.0",
     "@thisissoon/angular-inviewport": "^4.2.2",
+    "@types/crypto-js": "^4.0.1",
     "@types/googlemaps": "^3.40.3",
     "bcryptjs": "^2.4.3",
     "crypto-js": "^4.0.0",
@@ -70,6 +71,9 @@
     "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^2.3.0",
     "typescript": "~3.8.3"
+  },
+  "browser": {
+    "crypto": false
   },
   "engines": {
     "node": "14.8.0",
