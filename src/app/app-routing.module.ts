@@ -1,10 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
-import { LandingPageComponent } from 'app/core/components/landing-page/landing-page.component';
 import { AuthGuard } from 'app/shared/guards/auth.guard';
-import { ClientPagesGuard } from 'app/shared/guards/client-pages.guard';
 import { VerifyEmailComponent } from 'app/auth/components/verify-email/verify-email.component';
 import { TermsPagesComponent } from 'app/core/components/terms-pages/terms-pages.component';
 import { LandingComponent } from './landing/landing.component';
@@ -39,7 +37,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), CommonModule],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }), CommonModule],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

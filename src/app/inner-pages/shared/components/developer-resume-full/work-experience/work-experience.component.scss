@@ -1,4 +1,4 @@
-@import 'assets/scss/variables';
+@import '~assets/scss/variables';
 
 :host {
   height: calc(100% - 160px);
@@ -58,7 +58,7 @@
 }
 
 .carousel-step {
-  background-image: url(assets/icons/plus.svg);
+  background-image: url(~assets/icons/plus.svg);
   background-repeat: no-repeat;
   background-position: center;
   width: 50px;

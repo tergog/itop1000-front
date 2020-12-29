@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { AddBillingMethodDialogComponent } from './add-billing-method-dialog.component';
 
@@ -6,7 +6,7 @@ describe('AddBillingMethodDialogComponent', () => {
   let component: AddBillingMethodDialogComponent;
   let fixture: ComponentFixture<AddBillingMethodDialogComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ AddBillingMethodDialogComponent ]
     })

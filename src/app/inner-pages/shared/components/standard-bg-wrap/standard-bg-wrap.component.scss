@@ -1,10 +1,10 @@
-@import 'assets/scss/variables';
+@import '~assets/scss/variables';
 
 :host {
   display: block;
   width: 100%;
   min-height: 100%;
-  background-image: url(~assets/img/search-bg.png);
+  background-image: url('~assets/img/search-bg.png');
 }
 
 .search-wrap {
