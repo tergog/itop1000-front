@@ -5,14 +5,14 @@
                         *ngFor="let project of userInfo.devProperties.projects; index as i"
                         [project]="project"
                         [id]="i"></app-dev-project-card>
-</ng-container>
 
-<div class="m__top--30 m__bottom--10">
+
+  <div class="m__top--30 m__bottom--10">
   <app-button [text]="'Add project'"
               (buttonClick)="onAddClick()"></app-button>
-</div>
+  </div>
 
-<ng-container *ngrxLet="userInfo$ as userInfo">
+
   <div class="d__flex d__flex--direction-column d__flex--items-center p__20" *ngIf="!isNewProject && !userInfo.devProperties.projects.length">
     <span class="text text__title text__color--1 m__top--50"> You have not added any project </span>
   </div>

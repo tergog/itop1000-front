@@ -1,23 +1,25 @@
 <app-profile-section-header [title]="'Account'" (edit)="editAccountToggle()"></app-profile-section-header>
 
-<div class="p__20">
-  <ng-container *ngIf="isAccountEdit">
-    <app-client-contact-info-edit [userInfo]="userInfo$ | ngrxPush" (cancel)="editAccountToggle()" (save)="onSaveAccountClick($event)"></app-client-contact-info-edit>
-  </ng-container>
-
-  <ng-container *ngIf="!isAccountEdit">
-    <app-client-contact-info-preview [userInfo]="userInfo$ | ngrxPush"></app-client-contact-info-preview>
-  </ng-container>
-</div>
-
-<app-profile-section-header [title]="'Location'" (edit)="editLocationToggle()"></app-profile-section-header>
-
-<div class="p__20">
-  <ng-container *ngIf="isLocationEdit">
-    <app-client-contact-info-location-edit [userInfo]="userInfo$ | ngrxPush" (cancel)="editLocationToggle()" (save)="onSaveLocationClick($event)"></app-client-contact-info-location-edit>
-  </ng-container>
-
-  <ng-container *ngIf="!isLocationEdit">
-    <app-client-contact-info-location-preview [userInfo]="userInfo$ | ngrxPush"></app-client-contact-info-location-preview>
-  </ng-container>
-</div>
+<ng-container *ngrxLet="userInfo$; let userInfo">
+  <div class="p__20">
+    <ng-container *ngIf="isAccountEdit">
+      <app-client-contact-info-edit [userInfo]="userInfo" (cancel)="editAccountToggle()" (save)="onSaveAccountClick($event)"></app-client-contact-info-edit>
+    </ng-container>
+  
+    <ng-container *ngIf="!isAccountEdit">
+      <app-client-contact-info-preview [userInfo]="userInfo"></app-client-contact-info-preview>
+    </ng-container>
+  </div>
+  
+  <app-profile-section-header [title]="'Location'" (edit)="editLocationToggle()"></app-profile-section-header>
+  
+  <div class="p__20">
+    <ng-container *ngIf="isLocationEdit">
+      <app-client-contact-info-location-edit [userInfo]="userInfo" (cancel)="editLocationToggle()" (save)="onSaveLocationClick($event)"></app-client-contact-info-location-edit>
+    </ng-container>
+  
+    <ng-container *ngIf="!isLocationEdit">
+      <app-client-contact-info-location-preview [userInfo]="userInfo"></app-client-contact-info-location-preview>
+    </ng-container>
+  </div>
+</ng-container>
