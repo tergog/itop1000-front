@@ -24,11 +24,11 @@
       </div>
     </div>
     <div class="d__flex m__left--auto">
-      <i class="edit cursor__pointer m__right--10" (click)="$event.stopPropagation();onEditClick()"></i>
-      <i class="delete cursor__pointer" (click)="$event.stopPropagation();onArchiveClick()"></i>
+      <mat-icon svgIcon="edit" class="cursor__pointer m__right--10" (click)="$event.stopPropagation();onEditClick()"></mat-icon>
+      <mat-icon svgIcon="delete" class="cursor__pointer" (click)="$event.stopPropagation();onArchiveClick()"></mat-icon>
     </div>
   </div>
- 
+
   <div class="text text__font--4 text__color--8">{{ job.description }}</div>
   <div>
     <div class="d__flex d__flex--flex-start d__flex--flex-wrap">
@@ -49,6 +49,6 @@
     <span>{{ job.address }}</span>
     <span class="m__left--30 text__fw--300 text__font--2 text__capitalize">{{ job.dateCreated | date:'dd MMMM' }}</span>
   </div>
-  
+
 </div>
 

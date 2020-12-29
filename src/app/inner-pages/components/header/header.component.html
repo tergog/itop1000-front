@@ -1,8 +1,8 @@
-<i class="logo-preview-2 cursor__pointer" routerLink="profile"></i>
+<mat-icon svgIcon="logo-small" class="cursor__pointer" routerLink="profile"></mat-icon>
 
 <div class="w__350">
   <app-input (enterKey)="onSearch()" [placeholder]="(userInfo$ | async)?.role === UserRole.Client ? 'Search for a developer' : 'Search for a job'" [formControl]="searchTerm">
-    <i class="search" (click)="onSearch()"></i>
+    <mat-icon svgIcon="search" (click)="onSearch()"></mat-icon>
   </app-input>
 </div>
 

@@ -11,6 +11,7 @@ import { TermsPagesComponent } from 'app/core/components/terms-pages/terms-pages
 
 import { reducer } from './reducers/core.reducer';
 import { metaReducers } from './reducers';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { metaReducers } from './reducers';
   imports: [
     CommonModule,
     RouterModule,
+    MatIconModule,
     StoreModule.forFeature('core', reducer, {metaReducers}),
     EffectsModule.forFeature([CoreEffects])],
   exports: [NotificationComponent, TermsPagesComponent],

@@ -1,5 +1,5 @@
 <div class="dev-project-card d__flex d__flex--direction-column p__15">
-  <i class="edit cursor__pointer m--5" (click)="onEditClick()"></i>
+  <mat-icon svgIcon="edit" class="cursor__pointer m--5" (click)="onEditClick()"></mat-icon>
   <ng-container *ngIf="!isEdit">
         <div class="d__flex d__flex d__flex--direction-column">
           <app-project-card class="m__right--10" [project]="project"></app-project-card>
@@ -10,15 +10,15 @@
 
     <div class="m__bottom--10 d__flex d__flex--justify-between">
       <div class="profile-photo-wrap" (click)="openUploadPhotoDialog(true)">
-        <i class="profile-photo" *ngIf="!logoUrl"></i>
-        <i class="plus" *ngIf="!logoUrl"></i>
+        <mat-icon svgIcon="profile-photo" *ngIf="!logoUrl"></mat-icon>
+        <mat-icon svgIcon="plus" *ngIf="!logoUrl"></mat-icon>
         <img class="cursor__pointer" [src]=logoUrl alt="projectImageUrl" *ngIf="logoUrl">
       </div>
 
       <div class="m__bottom--10">
         <div class="profile-photo-wrap">
           <div *ngIf="!projectImages || projectImages.length === 0" (click)="openUploadPhotoDialog(false)">
-          <i class="profile-photo" ></i>
+            <mat-icon svgIcon="profile-photo"></mat-icon>
           </div>
           <div *ngFor="let image of projectImages; index as i">
           <img class="cursor__pointer"
@@ -27,7 +27,7 @@
                *ngIf="image"
                >
           </div>
-          <i class="plus" (click)="openUploadPhotoDialog(false)"></i>
+          <mat-icon svgIcon="plus" (click)="openUploadPhotoDialog(false)"></mat-icon>
         </div>
       </div>
     </div>

@@ -81,39 +81,11 @@
     .job-nav-icon {
       height: 15px;
       width: 15px;
-
-      &.project {
-        background-image: url(~assets/icons/project.svg);
-      }
-
-      &.duration {
-        background-image: url(~assets/icons/duration.svg);
-      }
-
-      &.idea {
-        background-image: url(~assets/icons/idea.svg);
-      }
-
     }
 
     &:hover,
     &.active {
       color: $text-color-9;
-
-      .job-nav-icon {
-
-        &.project {
-          background-image: url(~assets/icons/project-red.svg);
-        }
-
-        &.duration {
-          background-image: url(~assets/icons/duration-red.svg);
-        }
-
-        &.idea {
-          background-image: url(~assets/icons/idea-red.svg);
-        }
-      }
     }
 
     &.active {

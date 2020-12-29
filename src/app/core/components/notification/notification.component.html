@@ -10,5 +10,5 @@
     [class.text__color--2]="notification.type === 'error'"
     [innerHTML]="notification.message"
   ></span>
-  <i class="cursor__pointer close" (click)="onNotificationClose()"></i>
+  <mat-icon svgIcon="close" class="cursor__pointer" (click)="onNotificationClose()"></mat-icon>
 </div>

@@ -12,7 +12,8 @@
     <div class="m__top--25">
       <span class="text text__sm text__color--3 text__fw--600">Password</span>
       <app-input formControlName="password" (enterKey)="onLogInClick()" [isHiddenPassword]="isPasswordHidden" [placeholder]="'password'" class="m__top--10">
-        <i [class.eye]="!isPasswordHidden" [class.eye-line]="isPasswordHidden" (click)="passwordHiddenToggle()"></i>
+        <mat-icon svgIcon="eye" *ngIf="!isPasswordHidden" (click)="passwordHiddenToggle()"></mat-icon>
+        <mat-icon svgIcon="eye-line" *ngIf="isPasswordHidden" (click)="passwordHiddenToggle()"></mat-icon>
       </app-input>
     </div>
 
