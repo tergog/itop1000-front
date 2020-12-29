@@ -17,6 +17,7 @@ import { TextareaComponent } from 'app/shared/components/textarea/textarea.compo
 import { ClickedOutsideDirective } from './directives/click-outside.directive';
 import { SeparatorComponent } from './components/separator/separator.component';
 import { TimezoneComponent } from './components/timezone/timezone.component';
+import {ResumeService} from './services/resume.service';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,10 @@ import { TimezoneComponent } from './components/timezone/timezone.component';
     OverlayModule,
     NgCircleProgressModule
   ],
-  providers: [CircleProgressOptions],
+  providers: [
+    CircleProgressOptions,
+    ResumeService
+  ],
 
 })
 export class SharedModule {}

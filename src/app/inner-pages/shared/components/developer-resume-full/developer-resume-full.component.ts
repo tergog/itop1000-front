@@ -1,13 +1,18 @@
-import { Component, OnInit, Renderer2, OnDestroy } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
-import { bufferTime } from 'rxjs/operators';
+import {Component, OnInit, Renderer2, OnDestroy} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Observable, Subject} from 'rxjs';
+import {bufferTime} from 'rxjs/operators';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
 
-import { Developer } from 'app/shared/models';
-import { getDeveloper, State } from 'app/core/developers';
-import { setDeveloper } from 'app/core/developers/developers.actions';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+import {Developer} from 'app/shared/models';
+import {getDeveloper, State} from 'app/core/developers';
+import {setDeveloper} from 'app/core/developers/developers.actions';
+import {untilDestroyed} from 'ngx-take-until-destroy';
+import {ResumeService} from '../../../../shared/services/resume.service';
 
 export enum DeveloperResumeSections {
   ProfessionalSkills,
@@ -28,21 +33,29 @@ export class DeveloperResumeFullComponent implements OnInit, OnDestroy {
   public developer$: Observable<Developer>;
   public DeveloperResumeSections = DeveloperResumeSections;
   public activeSection = DeveloperResumeSections.ProfessionalSkills;
-
+  developer: Developer;
   public projectCounter = 0;
 
   private inViewportChange;
 
-  constructor(private store: Store<State>, private router: Router, private route: ActivatedRoute) {
+  constructor(
+    private store: Store<State>,
+    private router: Router,
+    private route: ActivatedRoute,
+    private resumeService: ResumeService) {
   }
 
   ngOnInit(): void {
     this.store.select(getDeveloper).pipe(untilDestroyed(this))
-      .subscribe((dev) => !dev
-        ? this.store.dispatch(setDeveloper({id: this.route.snapshot.params.id}))
-        : this.developer$ = this.store.select(getDeveloper)
-
-    );
+      .subscribe((dev: Developer) => {
+          if (!dev) {
+            this.store.dispatch(setDeveloper({id: this.route.snapshot.params.id}));
+          } else {
+            this.developer = dev;
+            this.developer$ = this.store.select(getDeveloper);
+          }
+        }
+      );
 
     this.projectCounter = 3;
 
@@ -59,9 +72,9 @@ export class DeveloperResumeFullComponent implements OnInit, OnDestroy {
   onShowMoreClick(): void {
     this.developer$.pipe(untilDestroyed(this))
       .subscribe(dev => this.projectCounter < dev.devProperties.projects.length
-      ? this.projectCounter += 3
-      : this.projectCounter = 3
-    );
+        ? this.projectCounter += 3
+        : this.projectCounter = 3
+      );
   }
 
 
@@ -97,5 +110,10 @@ export class DeveloperResumeFullComponent implements OnInit, OnDestroy {
     }
 
     return arr;
+  }
+
+  async exportResume() {
+    const documentDefinition = await this.resumeService.getDocumentDefinition(this.developer);
+    pdfMake.createPdf(documentDefinition).download('Export CV As PDF');
   }
 }
