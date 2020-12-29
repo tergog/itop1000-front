@@ -27,7 +27,7 @@ export interface IQuillModel {
   hasFocus(): boolean;
   focus(): void;
   blur(): void;
-};
+}
 
 class AttachFiles {
   private quill: IQuillModel;
@@ -65,16 +65,28 @@ class AttachFiles {
 
   validateAttaching(files: FileList): boolean {
     const that = this;
-    const validators = [
-      { validator: (f: FileList) => f === null, message: 'Files not found!' },
-      { validator: (f: FileList) => f.length != 1 || that.isFileAlreadyAttached(), message: 'Only one file allowed attaching!'},
-      { validator: (f: FileList) => !ALLOW_TYPES.includes(f[0].type), message: 'Allowed only archives, .txt and .pdf!' },
-      { validator: (f: FileList) => f[0].size <= 0 || f[0].size > MAX_SIZE, message: 'File size must be greater than 0mb and less than 5mb!' }
-    ];
+    const validators = [{
+      validator: (f: FileList) => f === null,
+      message: 'Files not found!'
+    }, {
+      validator: (f: FileList) => f.length != 1 || that.isFileAlreadyAttached(),
+      message: 'Only one file allowed attaching!'
+    }, {
+      validator: (f: FileList) => !ALLOW_TYPES.includes(f[0].type),
+      message: 'Allowed only archives, .txt and .pdf!'
+    }, {
+      validator: (f: FileList) => f[0].size <= 0 || f[0].size > MAX_SIZE,
+      message: 'File size must be greater than 0mb and less than 5mb!'
+    }];
 
     for (let v of validators) {
       if (v.validator(files)) {
-        this.options.errorEmmiter.emit({ type: 'error', message: v.message });
+        this.options.errorEmmiter.emit({
+          type: 'error',
+          message: v.message
+        });
+
+        // Blur and focus to update for notification message
         this.quill.blur();
         this.quill.focus();
         return false;
@@ -92,7 +104,7 @@ class AttachFiles {
           return true;
         }
       }
-    } 
+    }
     return false;
   }
 

@@ -8,6 +8,9 @@ import { PagesSharedModule } from 'app/inner-pages/shared/pages-shared.module';
 import { RichTextEditorModule } from './rich-text-editor/rich-text-editor.module';
 
 import { ChatComponent } from './chat.component';
+import { ChatHeaderComponent } from './chat-header/chat-header.component';
+import { SidebarRoomsComponent } from './sidebar-rooms/sidebar-rooms.component';
+import { MessageBoxComponent } from './message-box/message-box.component';
 
 const routes: Routes = [
   { path: '', component: ChatComponent },
@@ -15,7 +18,10 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    ChatComponent
+    ChatComponent,
+    ChatHeaderComponent,
+    SidebarRoomsComponent,
+    MessageBoxComponent
   ],
   imports: [
     CommonModule,

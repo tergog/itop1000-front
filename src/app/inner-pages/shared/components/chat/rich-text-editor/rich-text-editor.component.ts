@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, ApplicationRef } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { ContentChange } from 'ngx-quill';
 import 'quill-emoji';
 
