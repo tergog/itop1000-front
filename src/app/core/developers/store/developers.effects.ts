@@ -25,7 +25,7 @@ export class DevelopersEffects {
     switchMap(( {payload} ) => this.developersService.searchDevelopers(payload).pipe(
       map((developers: Developer[]) => actions.searchDevelopersSuccess(developers)),
       tap(() => this.router.navigate(['in/c/search-developers'])),
-      catchError(err => of(actions.searchDevelopersError(err)))
+      catchError((err: any) => of(actions.searchDevelopersError(err)))
     )),
   ));
 
@@ -34,7 +34,7 @@ export class DevelopersEffects {
     switchMap(( {id} ) => this.developersService.getDeveloper(id).pipe(
       map((developer: Developer) => actions.setDeveloperSuccess(developer)),
       tap((obj) => this.router.navigate([`in/c/search-developers/${obj.developer.id}`])),
-      catchError(err => of(actions.setDeveloperError(err)))
+      catchError((err: any) => of(actions.setDeveloperError(err)))
     )),
   ));
 
@@ -43,7 +43,7 @@ export class DevelopersEffects {
     switchMap((payload) => this.jobsService.searchJobs(payload).pipe(
       map((jobs: Job[]) => actions.searchJobsSuccess(jobs)),
       tap(() => this.router.navigate(['in/d/search-jobs'])),
-      catchError(err => of(actions.searchJobsError(err)))
+      catchError((err: any) => of(actions.searchJobsError(err)))
     )),
   ));
 
