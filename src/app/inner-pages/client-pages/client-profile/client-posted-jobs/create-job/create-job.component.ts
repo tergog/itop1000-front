@@ -49,6 +49,8 @@ export class CreateJobComponent implements OnInit, OnDestroy {
   public onCancelClick(): void {
     this.isEdit.emit();
     this.form.reset();
+    this.devProfileService.availableCategories.push(...this.devProfileService.selectedCategories);
+    this.devProfileService.selectedCategories = [];
   }
 
   private initForm(): void {

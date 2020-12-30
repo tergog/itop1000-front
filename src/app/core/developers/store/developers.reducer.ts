@@ -168,6 +168,16 @@ export const reducer = createReducer(
     })
   ),
   on(
+    actions.searchDevelopersError,
+    (state) => {
+      return {
+        ...state,
+        error: true,
+        loading: false
+      }
+    }
+  ),
+  on(
     actions.updateDeveloper,
     (state, {id}) => {
       const developerById: Developer = state.developers.find((dev: Developer) => dev.id === id);
@@ -213,6 +223,16 @@ export const reducer = createReducer(
       developer: {...developer}
     })
   ),
+  on(
+    actions.setDeveloperError,
+    (state) => {
+      return {
+        ...state,
+        loading: false,
+        error: true
+      }
+    }
+  )
 );
 
 /** Selector return is Authenticated */
