@@ -1,5 +1,5 @@
 import { FormGroup, FormControl } from '@angular/forms';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs/operators';
@@ -12,6 +12,11 @@ import { UserInfo } from 'app/shared/models/user-info.model';
 import { DevProperties } from 'app/shared/models/dev-properties.model';
 import { NameValueModel } from 'app/shared/models/name-value.model';
 
+export enum SelectedChips {
+  Category = 'selectedCategories',
+  Skill = 'selectedSkills'
+};
+
 @Component({
   selector: 'app-dev-profile-edit-form',
   templateUrl: './dev-profile-edit-form.component.html',
@@ -23,6 +28,10 @@ export class DevProfileEditFormComponent implements OnInit {
   @Input() sectionName: string;
   @Input() isEdit: boolean;
   @Output() editToggle = new EventEmitter();
+  @ViewChild('category', {static: false}) category: ElementRef;
+  @ViewChild('skills', {static: false}) skills: ElementRef;
+
+  selectedChip = SelectedChips;
 
   public form: FormGroup;
   public DevProfileSectionNames = DevProfileSectionNames;
@@ -70,6 +79,13 @@ export class DevProfileEditFormComponent implements OnInit {
   public onChipSelect(chip, selectedChips, availableChips): void {
     this.devProfileService[availableChips] = this.devProfileService[availableChips].filter(ch => ch.value !== chip.value);
     this.devProfileService[selectedChips].push(chip);
+    this.resetFocus(selectedChips);
+  }
+
+  resetFocus(selectedChips: SelectedChips): void {
+    const element = selectedChips === SelectedChips.Category ? this.category : this.skills;
+    element.nativeElement.blur();
+    setTimeout(() => { element.nativeElement.focus()}, 0);
   }
 
   public onChipRemove(chip: NameValueModel, selectedChips, availableChips): void {
