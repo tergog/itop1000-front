@@ -1,16 +1,16 @@
-import {Component, OnInit, Renderer2, OnDestroy} from '@angular/core';
-import {Store} from '@ngrx/store';
-import {untilDestroyed} from 'ngx-take-until-destroy';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Observable, Subject} from 'rxjs';
-import {bufferTime} from 'rxjs/operators';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { untilDestroyed } from 'ngx-take-until-destroy';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, Subject } from 'rxjs';
+import { bufferTime } from 'rxjs/operators';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 
-import {Developer} from 'app/shared/models';
-import {getDeveloper, State} from 'app/core/developers';
-import {setDeveloper} from 'app/core/developers/developers.actions';
-import {ResumeService} from '../../../../shared/services/resume.service';
+import { Developer } from 'app/shared/models';
+import { getDeveloper, State } from 'app/core/developers';
+import { setDeveloper } from 'app/core/developers/developers.actions';
+import { ResumeService } from '../../../../shared/services/resume.service';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 

@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import {DevProject} from '../models/dev-project.model';
-import {Developer, NameValueModel} from '../models';
+import { DevProject } from '../models/dev-project.model';
+import { Developer, NameValueModel } from '../models';
 
 @Injectable()
 export class ResumeService {
@@ -146,7 +146,7 @@ export class ResumeService {
         style: 'name'
       },
       {
-        text: `${developer.devProperties.hourlyRate}$/hr`,
+        text: `${ developer.devProperties.hourlyRate }$/hr`,
         style: 'hourlyRate'
       },
       {
@@ -182,12 +182,12 @@ export class ResumeService {
         style: 'header'
       },
       this.addLanguages(developer.devProperties.languages),
-     /* \
-      {
-        text: 'CERTIFICATES',
-        style: 'header'
-      },
-      */
+      /* \
+       {
+         text: 'CERTIFICATES',
+         style: 'header'
+       },
+       */
       {
         text: 'WORK EXPERIENCE',
         style: 'header'
@@ -210,7 +210,7 @@ export class ResumeService {
           ...developer.devProperties.skills.map(s => {
             return {
               style: 'skills',
-              text: `${s.name}:`
+              text: `${ s.name }:`
             };
           }),
         ],
@@ -218,13 +218,14 @@ export class ResumeService {
           ...developer.devProperties.skills.map(s => {
             return {
               style: 'skills',
-              text: `${s.value * 20}%`
+              text: `${ s.value * 20 }%`
             };
           }),
         ]
       ]
     };
   }
+
   private addSoftSkills(developer: Developer): object {
     return {
       style: 'languages',
@@ -233,7 +234,7 @@ export class ResumeService {
           ...developer.devProperties.softSkills.map(s => {
             return {
               style: 'skills',
-              text: `${s.name}:`
+              text: `${ s.name }:`
             };
           }),
         ],
@@ -241,7 +242,7 @@ export class ResumeService {
           ...developer.devProperties.softSkills.map(s => {
             return {
               style: 'skills',
-              text: `${s.value}%`
+              text: `${ s.value }%`
             };
           }),
         ]
@@ -256,7 +257,7 @@ export class ResumeService {
         [
           ...languages.map((el) => {
             return {
-              text: `${el.name}:`
+              text: `${ el.name }:`
             };
           })
         ],
@@ -294,12 +295,12 @@ export class ResumeService {
       columns: [
         [
           {text: 'Title'},
-          {text: `${exp.title}`}
+          {text: `${ exp.title }`}
         ],
         [
           {text: 'Date'},
-          {text: `from: ${this.addDate(exp.from)}`},
-          {text: `to: ${this.addDate(exp.to)}`}
+          {text: `from: ${ this.addDate(exp.from) }`},
+          {text: `to: ${ this.addDate(exp.to) }`}
         ],
         [
           {text: 'Technologies'},
@@ -316,6 +317,6 @@ export class ResumeService {
 
   private addDate(d: Date): string {
     const date = new Date(d);
-    return `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`;
+    return `${ date.getDate() }-${ date.getMonth() }-${ date.getFullYear() }`;
   }
 }
