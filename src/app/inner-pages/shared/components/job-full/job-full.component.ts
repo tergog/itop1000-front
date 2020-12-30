@@ -19,7 +19,7 @@ export enum EJobSections {
   KeySkills
 }
 
-enum EResMessage {
+export enum EResMessage {
   Confirmed = 'Confirmed',
   Updated = 'Job updated successfully'
 }

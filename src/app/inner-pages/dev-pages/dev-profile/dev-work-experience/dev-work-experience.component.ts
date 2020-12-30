@@ -1,4 +1,4 @@
-import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Store } from '@ngrx/store';
@@ -10,7 +10,6 @@ import { untilDestroyed } from 'ngx-take-until-destroy';
 
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
 import { DevelopersService, UtilsService } from 'app/shared/services';
-import { DevProperties } from 'app/shared/models/dev-properties.model';
 import { NameValueModel, UserInfo } from 'app/shared/models';
 import * as fromCore from 'app/core/reducers';
 import { UploadPhotoDialogComponent } from 'app/inner-pages/shared/components/upload-photo-dialog/upload-photo-dialog.component';
@@ -26,7 +25,6 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
   public isNewProject: boolean;
   public form: FormGroup;
   public userInfo$: Observable<UserInfo>;
-  public userInfo: UserInfo;
   @ViewChild('category', {static: false}) category: ElementRef;
 
   showError: boolean;
@@ -67,7 +65,6 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
     this.userInfo$ = this.store.select(fromCore.getUserInfo).pipe(
       first(),
       tap((userInfo: UserInfo) => {
-        this.userInfo = userInfo;
         this.devProfileService.devProperties = userInfo.devProperties;
         this.updateTechnologies(this.selectedTechnologies);
       })
@@ -90,9 +87,9 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
       return;
     }
     this.showError = false;
-    const newDevProperties: DevProperties = {projects: [...(this.userInfo.devProperties.projects || []), this.form.value]};
+/*    const newDevProperties: DevProperties = {projects: [...(this.userInfo.devProperties.projects || []), this.form.value]};
     this.userInfo = {...this.userInfo, devProperties: newDevProperties};
-    this.devProfileService.onSaveClick({devProperties: newDevProperties});
+    this.devProfileService.onSaveClick({devProperties: newDevProperties});*/
     this.isNewProject = false;
     this.availableTechnologies.push(...this.selectedTechnologies);
     this.selectedTechnologies = [];
@@ -138,7 +135,7 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
       title: new FormControl('', [Validators.required, Validators.minLength(8)]),
       description: new FormControl('', [Validators.required, Validators.minLength(10)]),
       technologies: new FormControl([], [Validators.required]),
-      link: new FormControl('', [Validators.required, this.utilsService?.linkValidator()]),
+      link: new FormControl('', [Validators.required]),
       from: new FormControl('', [Validators.required]),
       to: new FormControl('', [Validators.required]),
     });

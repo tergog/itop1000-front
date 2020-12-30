@@ -1,6 +1,6 @@
 <app-profile-section-header [title]="'Work experience'" [canEdit]="false"></app-profile-section-header>
 
-<ng-container *ngrxLet="userInfo$ as userInfo">
+<ng-container *ngrxLet="userInfo$; let userInfo">
   <app-dev-project-card class="m__top--30"
                         *ngFor="let project of userInfo.devProperties.projects; index as i"
                         [project]="project"
@@ -13,7 +13,7 @@
   </div>
 
 
-  <div class="d__flex d__flex--direction-column d__flex--items-center p__20" *ngIf="!isNewProject && !userInfo.devProperties.projects.length">
+  <div class="d__flex d__flex--direction-column d__flex--items-center p__20" *ngIf="!isNewProject && !userInfo.devProperties.projects?.length">
     <span class="text text__title text__color--1 m__top--50"> You have not added any project </span>
   </div>
 </ng-container>
