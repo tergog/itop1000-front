@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ClientProfileSections } from 'app/inner-pages/client-pages/client-profile/client-profile-sections.enum';
+import { EClientProfileSections } from 'app/inner-pages/client-pages/client-profile/client-profile-sections.enum';
 
 @Component({
   selector: 'app-client-profile',
@@ -9,14 +9,14 @@ import { ClientProfileSections } from 'app/inner-pages/client-pages/client-profi
 })
 export class ClientProfileComponent implements OnInit {
 
-  public selectedSection: ClientProfileSections = ClientProfileSections.ContactInfo;
+  public selectedSection: EClientProfileSections = EClientProfileSections.ContactInfo;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  public onSectionSelect(selectedSection: ClientProfileSections): void {
+  public onSectionSelect(selectedSection: EClientProfileSections): void {
     this.selectedSection = selectedSection;
   }
 

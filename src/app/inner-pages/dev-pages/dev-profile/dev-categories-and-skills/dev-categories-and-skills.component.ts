@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DevProfileSectionNames } from 'app/inner-pages/dev-pages/dev-profile/shared/enums/devProfileSectionNames';
+import { EDevProfileSectionNames } from 'app/inner-pages/dev-pages/dev-profile/shared/enums/devProfileSectionNames';
 
 
 @Component({
@@ -11,7 +11,7 @@ import { DevProfileSectionNames } from 'app/inner-pages/dev-pages/dev-profile/sh
 export class DevCategoriesAndSkillsComponent implements OnInit {
 
   public isEdit: boolean;
-  public DevProfileSectionNames = DevProfileSectionNames;
+  public DevProfileSectionNames = EDevProfileSectionNames;
 
   constructor() { }
 

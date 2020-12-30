@@ -13,13 +13,13 @@ import * as fromCore from 'app/core/reducers';
 import { ConfirmationDialogComponent } from 'app/inner-pages/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { EditJobDialogComponent } from 'app/inner-pages/shared/components/edit-job-dialog/edit-job-dialog.component';
 
-export enum JobSections {
+export enum EJobSections {
   Project,
   Duration,
   KeySkills
 }
 
-enum ResMessage {
+enum EResMessage {
   Confirmed = 'Confirmed',
   Updated = 'Job updated successfully'
 }
@@ -31,9 +31,9 @@ enum ResMessage {
 })
 export class JobFullComponent implements OnInit, OnDestroy {
   job: Job;
-  JobSections = JobSections;
-  resMessage = ResMessage;
-  activeSection = JobSections.Project;
+  JobSections = EJobSections;
+  resMessage = EResMessage;
+  activeSection = EJobSections.Project;
   public canEdit: boolean;
 
   constructor(
@@ -59,7 +59,7 @@ export class JobFullComponent implements OnInit, OnDestroy {
       .subscribe(user => this.canEdit = user.id === this.job.userId);
   }
 
-  public onSectionCLick(selectedSection: JobSections, element: HTMLElement): void {
+  public onSectionCLick(selectedSection: EJobSections, element: HTMLElement): void {
     this.activeSection = selectedSection;
     element.scrollIntoView({
       behavior: 'smooth',
