@@ -272,5 +272,11 @@ a:hover {
   border-radius: 50%;
 }
 
+.clearfix:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
