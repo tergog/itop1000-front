@@ -252,23 +252,19 @@
   right: 0.5em;
 }
 .export-cv{
+  outline: none;
   margin-bottom: 10px;
   border-radius: 4px;
   border: none;
   cursor: pointer;
   background-color: transparent;
-  svg{
-    fill: $color-10;
+  .download{
     height: 25px;
     width: 25px;
-    &:focus{
-      fill: $color-2-hover;
-    }
-    &:active, &:focus {
-      fill: $color-2-active;
-    }
+    background-image: url(~assets/icons/download.svg);
+    background-repeat: no-repeat;
   }
-  &:focus{
-    outline: none;
+  &:focus:active .download{
+    background-image: url(~assets/icons/download-1.svg);
   }
 }
