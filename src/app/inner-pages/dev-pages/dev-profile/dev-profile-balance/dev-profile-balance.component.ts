@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { GetPaidNowDialogComponent } from 'app/inner-pages/shared/components/get-paid-now-dialog/get-paid-now-dialog.component';
 import { untilDestroyed } from 'ngx-take-until-destroy';
+
+import { GetPaidNowDialogComponent } from 'app/inner-pages/shared/components/get-paid-now-dialog/get-paid-now-dialog.component';
 
 @Component({
   selector: 'app-dev-profile-balance',

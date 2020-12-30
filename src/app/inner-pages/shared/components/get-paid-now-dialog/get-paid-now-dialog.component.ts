@@ -5,7 +5,6 @@ import { StripeCardElementOptions, StripeElementsOptions } from '@stripe/stripe-
 import { MatDialogRef } from '@angular/material/dialog';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 
-import { UserService } from 'app/shared/services';
 import { PaymentService } from 'app/shared/services/payment.service';
 
 @Component({
@@ -44,7 +43,6 @@ export class GetPaidNowDialogComponent implements OnInit {
   };
 
   constructor(private stripeService: StripeService,
-              private userService: UserService,
               private paymentService: PaymentService,
               private dialogRef: MatDialogRef<GetPaidNowDialogComponent>) {}
 
@@ -54,12 +52,8 @@ export class GetPaidNowDialogComponent implements OnInit {
 
   private initForm(): void {
     this.form = new FormGroup({
-
-      firstName: new FormControl('', {
-        validators: [Validators.required,],}),
-
-      lastName: new FormControl('', {
-        validators: [Validators.required,],}),
+      firstName: new FormControl('', [Validators.required]),
+      lastName: new FormControl('', [Validators.required])
     });
   }
   
@@ -71,7 +65,7 @@ export class GetPaidNowDialogComponent implements OnInit {
           error => console.log(error));
   }
 
-  public createPaymentMethod(token) {
+  public createPaymentMethod(token): void {
     let cardToken  = {
       type: "card",
       card: {
