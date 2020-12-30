@@ -19,7 +19,7 @@ export const UPDATE_DEVELOPER = '[Developers] Update developer';
 
 export const searchDevelopers = createAction(SEARCH_DEVELOPERS, props<{ payload: string }>());
 export const searchDevelopersSuccess = createAction(SEARCH_DEVELOPERS_SUCCESS, (developersList: Developer[]) => ({developersList}));
-export const searchDevelopersError = createAction(SEARCH_JOBS_ERROR, (error) => (error));
+export const searchDevelopersError = createAction(SEARCH_DEVELOPERS_ERROR, (error) => (error));
 export const searchJobs = createAction(SEARCH_JOBS, props<{ payload: string }>());
 export const searchJobsSuccess = createAction(SEARCH_JOBS_SUCCESS, (jobs: Job[]) => ({jobs}));
 export const searchJobsError = createAction(SEARCH_JOBS_ERROR, (error) => (error));
