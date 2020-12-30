@@ -6,6 +6,7 @@ import { QuillConfig, QuillModule } from 'ngx-quill';
 import { RichTextEditorComponent } from './rich-text-editor.component';
 import { VerticalSpacing } from './modules/vertical-spacing.module';
 import { AttachFiles } from './modules/attach-files.module';
+import { CounterModule } from './modules/counter.module';
 import { FileBlot } from './modules/attach-files.blot';
 
 const quillConfig: QuillConfig = {
@@ -17,6 +18,9 @@ const quillConfig: QuillConfig = {
   }, {
     implementation: AttachFiles,
     path: 'modules/attachFiles'
+  }, {
+    implementation: CounterModule,
+    path: 'modules/counterModule'
   }, {
     implementation: FileBlot,
     path: 'blots/file'

@@ -1,5 +1,4 @@
-import 'quill'
-import { HTMLInputEvent } from './attach-files.module';
+import 'quill';
 
 const MIN_SPACING = 0;
 const MAX_SPACING = 10; // When you are changing this value don't remember change in styles too.
@@ -37,7 +36,7 @@ class VerticalSpacing {
 
     this.$btnInc.onclick = () => this.changeSpacingBy(DEFAULT_STEP);
     this.$btnDec.onclick = () => this.changeSpacingBy(-DEFAULT_STEP);
-    
+
     this.$input.onblur = (e: HTMLFocusEvent) => this.onNewSpacingSubmit(e.target.value);
     this.$input.onkeyup = (e: HTMLKeyboardEvent) => {
       if (e.key === 'Enter') {
@@ -61,7 +60,7 @@ class VerticalSpacing {
     if (value < MIN_SPACING) { this.options.spacing = MIN_SPACING; }
     else if (value > MAX_SPACING) { this.options.spacing = MAX_SPACING; }
     else { this.options.spacing = value; };
-  
+
     this.updateEditor();
   }
 

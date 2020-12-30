@@ -73,6 +73,12 @@ $editor-border: 1px solid $color-8;
     margin: 0 auto;
     background-color: rgba(105, 105, 105, .9);
   }
+
+  &__counter {
+    text-align: right;
+    padding: 5px 12px;
+    color: $text-color-6;
+  }
 }
 
 ::ng-deep {

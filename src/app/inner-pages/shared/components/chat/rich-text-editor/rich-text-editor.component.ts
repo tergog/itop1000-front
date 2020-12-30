@@ -36,6 +36,10 @@ export class RichTextEditorComponent {
       button: '.ql-attach-file',
       errorEmmiter: this.notificationsService.message
     },
+    counterModule: {
+      container: '.ql-counter',
+      maxLength: 1024
+    },
     "emoji-toolbar": true
   };
 }
