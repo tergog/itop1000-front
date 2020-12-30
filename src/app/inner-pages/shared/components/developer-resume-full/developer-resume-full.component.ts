@@ -6,13 +6,13 @@ import {bufferTime} from 'rxjs/operators';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
-
 import {Developer} from 'app/shared/models';
 import {getDeveloper, State} from 'app/core/developers';
 import {setDeveloper} from 'app/core/developers/developers.actions';
 import {untilDestroyed} from 'ngx-take-until-destroy';
 import {ResumeService} from '../../../../shared/services/resume.service';
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 export enum DeveloperResumeSections {
   ProfessionalSkills,
