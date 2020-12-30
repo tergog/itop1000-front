@@ -1,0 +1,35 @@
+@import '../../../../../assets/scss/variables';
+
+.dialog-header {
+  position: relative;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $color-1;
+
+  .close {
+    position: absolute;
+    right: 20px;
+  }
+}
+
+
+.input-wrap {
+  border: 1px solid $color-4;
+  padding: 14px;
+  border-radius: 10px;
+  font-family: "Raleway";
+  font-feature-settings: "lnum";
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.09);
+  font-weight: 600;
+}
+
+.sm-input {
+  margin-right: 20px;
+  width: calc(50% - 10px);
+
+  &:last-child {
+    margin-right: 0;
+  }
+}

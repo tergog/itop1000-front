@@ -30,6 +30,7 @@ import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-pro
 import { LandingComponent } from 'app/landing/landing.component';
 import { HeaderLandingComponent } from 'app/inner-pages/components/header-landing/header-landing.component';
 import { FooterLandingComponent } from 'app/inner-pages/components/footer-landing/footer-landing.component';
+import { GetPaidNowDialogComponent } from './components/get-paid-now-dialog/get-paid-now-dialog.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { FooterLandingComponent } from 'app/inner-pages/components/footer-landin
     ChangePasswordDialogComponent,
     ProfileChangePasswordComponent,
     ProfileSectionHeaderComponent,
+    GetPaidNowDialogComponent,
     JobComponent,
     UploadPhotoDialogComponent,
     DeveloperResumeComponent,
