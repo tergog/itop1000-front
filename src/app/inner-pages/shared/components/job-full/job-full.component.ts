@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { Observable, of } from 'rxjs';
-import { flatMap, switchMap, tap } from 'rxjs/operators';
+import { filter, flatMap, switchMap, tap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 
 import { getJobs, State } from 'app/core/reducers';
@@ -80,8 +80,12 @@ export class JobFullComponent implements OnInit, OnDestroy {
     const dialogRef =  this.matDialog.open(ConfirmationDialogComponent, {data: {title: 'Archive job', text: `Are you sure you want to delete the ${this.job.title} job?`}});
 
     dialogRef.afterClosed()
-      .pipe(untilDestroyed(this))
-      .subscribe(res => { if (res === 'Confirmed') { this.onDeleteJob(); }});
+      .pipe(
+        untilDestroyed(this),
+        filter(res => res === 'Confirmed'),
+        tap(() => this.onDeleteJob())
+      )
+      .subscribe();
   }
 
   public onDeleteJob(): void {
@@ -99,12 +103,14 @@ export class JobFullComponent implements OnInit, OnDestroy {
     const dialogRef =  this.matDialog.open(EditJobDialogComponent, {data: {job: this.job}});
 
     dialogRef.afterClosed()
-      .pipe(untilDestroyed(this))
-      .subscribe(res => {
-        if (res === 'Job updated successfully') {
-        this.getJobInfo();
-        this.handleSuccessResponse();
-      }});
+      .pipe(
+        untilDestroyed(this),
+        filter(res => res === 'Job updated successfully'),
+        tap(() => {
+          this.getJobInfo();
+          this.handleSuccessResponse();
+        })
+      ).subscribe();
   }
 
   private handleSuccessResponse(): void {
