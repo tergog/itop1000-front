@@ -2,7 +2,7 @@
 
 <ng-container *ngrxLet="userInfo$ as userInfo">
   <div class="w__350">
-    <app-input (enterKey)="onSearch()" [placeholder]="userInfo.role === UserRole.Client ? 'Search for a developer' : 'Search for a job'" [formControl]="searchTerm">
+    <app-input (enterKey)="onSearch()" [placeholder]="userInfo.role === UserRole.Client ? searchFor.searchForDeveloper : searchFor.searchForJob" [formControl]="searchTerm">
       <i class="search" (click)="onSearch()"></i>
     </app-input>
   </div>
@@ -26,5 +26,3 @@
     </div>
   </div>
 </ng-container>
-
-

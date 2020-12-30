@@ -2,13 +2,13 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { untilDestroyed } from 'ngx-take-until-destroy';
+import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 import { Developer } from 'app/shared/models';
 import { DevelopersService } from 'app/shared/services';
 import { getDevelopers, State } from 'app/core/developers';
 import { updateDeveloper } from 'app/core/developers/developers.actions';
-import { tap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-search-developers',

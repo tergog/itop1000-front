@@ -12,6 +12,11 @@ import { opacityInOutAnimation } from 'app/shared/animations';
 import { UserRole } from 'app/shared/enums';
 import { searchDevelopers } from 'app/core/developers/developers.actions';
 
+enum SearchFor {
+  searchForDeveloper = 'Search for a developer',
+  searchForJob = 'Search for a job'
+}
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -25,6 +30,7 @@ export class HeaderComponent implements OnInit {
   public UserRole = UserRole;
   public userRole: string;
   public searchTerm = new FormControl();
+  searchFor = SearchFor;
 
   constructor(private store: Store<fromCore.State>) {
   }

@@ -19,6 +19,11 @@ export enum JobSections {
   KeySkills
 }
 
+enum ResMessage {
+  Confirmed = 'Confirmed',
+  Updated = 'Job updated successfully'
+}
+
 @Component({
   selector: 'app-job-full',
   templateUrl: './job-full.component.html',
@@ -27,6 +32,7 @@ export enum JobSections {
 export class JobFullComponent implements OnInit, OnDestroy {
   job: Job;
   JobSections = JobSections;
+  resMessage = ResMessage;
   activeSection = JobSections.Project;
   public canEdit: boolean;
 
@@ -82,7 +88,7 @@ export class JobFullComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed()
       .pipe(
         untilDestroyed(this),
-        filter(res => res === 'Confirmed'),
+        filter(res => res === this.resMessage.Confirmed),
         tap(() => this.onDeleteJob())
       )
       .subscribe();
@@ -105,7 +111,7 @@ export class JobFullComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed()
       .pipe(
         untilDestroyed(this),
-        filter(res => res === 'Job updated successfully'),
+        filter(res => res === this.resMessage.Updated),
         tap(() => {
           this.getJobInfo();
           this.handleSuccessResponse();
