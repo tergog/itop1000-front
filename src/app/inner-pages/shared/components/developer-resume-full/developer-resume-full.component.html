@@ -79,14 +79,14 @@
       <div class="border-sparks"></div>
       <div class="m__left--30 m__right--30 d__flex d__flex--direction-column">
         <div id="exportCV">
-          <button class="export-cv" title="export as pdf" (click)="exportResume()">
+          <button class="export-cv" title="export as pdf" (click)="exportResume(developer)">
             <i class="download"></i>
           </button>
         </div>
         <div class="location-wrap">
           <div class="d__flex m__right--30">
             <i class="location m__right--10"></i>
-            <span class="text text__md text__font--2 text__color--3">{{ developer.address}}</span>
+            <span class="text text__md text__font--2 text__color--3">{{ developer.address }}</span>
           </div>
 
           <div class="separator"></div>
