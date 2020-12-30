@@ -27,3 +27,4 @@ export function reducer(state: State = INIT_STATE, action: Actions.Actions) {
 }
 
 export const getJobs = (state: State): Job[] => state.jobs;
+export const getLoading = (state: State): boolean => state.loading;

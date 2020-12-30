@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { opacityInOutAnimation } from 'app/shared/animations';
 
 @Component({
   selector: 'app-header-landing',

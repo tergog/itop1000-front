@@ -30,7 +30,7 @@ export class SearchDevelopersComponent implements OnInit, OnDestroy {
       .pipe(untilDestroyed(this))
       .subscribe(developers => {
         this.developers = developers;
-        this.developersPaginated= this.developers.slice(0, 2);
+        this.developersPaginated = this.developers.slice(0, 2);
     });
   }
 

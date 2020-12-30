@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-
 import { NotificationMessage } from 'app/shared/models';
 import { NotificationsService } from 'app/shared/services/notifications.service';
+
 
 @Component({
   selector: 'app-root',
@@ -14,7 +14,6 @@ export class AppComponent implements OnInit {
   public notification: NotificationMessage;
 
   constructor(private notificationService: NotificationsService) {
-    
   }
 
   ngOnInit(): void {

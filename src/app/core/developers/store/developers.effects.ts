@@ -22,16 +22,20 @@ export class DevelopersEffects {
 
   onSearchDevelopers$ = createEffect(() => this.actions$.pipe(
     ofType(actions.SEARCH_DEVELOPERS),
-    mergeMap(( {payload} ) => this.developersService.searchDevelopers(payload)),
-    map((developers: Developer[]) => actions.searchDevelopersSuccess(developers)),
-    tap(() => this.router.navigate(['in/c/search-developers']))
+    switchMap(( {payload} ) => this.developersService.searchDevelopers(payload).pipe(
+      map((developers: Developer[]) => actions.searchDevelopersSuccess(developers)),
+      tap(() => this.router.navigate(['in/c/search-developers'])),
+      catchError(err => of(actions.searchDevelopersError(err)))
+    )),
   ));
 
   onSetDeveloper$ = createEffect(() => this.actions$.pipe(
     ofType(actions.SET_DEVELOPER),
-    mergeMap(( {id} ) => this.developersService.getDeveloper(id)),
-    map((developer: Developer) => actions.setDeveloperSuccess(developer)),
-    tap((obj) => this.router.navigate([`in/c/search-developers/${obj.developer.id}`]))
+    switchMap(( {id} ) => this.developersService.getDeveloper(id).pipe(
+      map((developer: Developer) => actions.setDeveloperSuccess(developer)),
+      tap((obj) => this.router.navigate([`in/c/search-developers/${obj.developer.id}`])),
+      catchError(err => of(actions.setDeveloperError(err)))
+    )),
   ));
 
   onSearchJobs$ = createEffect(() => this.actions$.pipe(
@@ -41,7 +45,6 @@ export class DevelopersEffects {
       tap(() => this.router.navigate(['in/d/search-jobs'])),
       catchError(err => of(actions.searchJobsError(err)))
     )),
-    
   ));
 
 }
