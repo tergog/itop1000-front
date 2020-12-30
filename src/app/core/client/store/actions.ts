@@ -17,7 +17,7 @@ export class GetJobsSuccessAction implements Action {
 
 export class GetJobsFailAction implements Action {
     readonly type = GET_JOBS_FAIL;
-    constructor(public payload) {}
+    constructor(public payload: any) {}
 }
 export type Actions =
   | GetJobsAction
