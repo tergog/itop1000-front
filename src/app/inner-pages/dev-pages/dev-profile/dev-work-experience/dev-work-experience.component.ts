@@ -3,7 +3,7 @@ import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/co
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { filter, first } from 'rxjs/operators';
+import { filter, first, tap } from 'rxjs/operators';
 import xorBy from 'lodash.xorby';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { untilDestroyed } from 'ngx-take-until-destroy';
@@ -64,15 +64,14 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initForm();
 
-    this.userInfo$ = this.store.select(fromCore.getUserInfo);
-
-    this.store.select(fromCore.getUserInfo)
-      .pipe(first())
-      .subscribe((userInfo: UserInfo) => {
+    this.userInfo$ = this.store.select(fromCore.getUserInfo).pipe(
+      first(),
+      tap((userInfo: UserInfo) => {
         this.userInfo = userInfo;
         this.devProfileService.devProperties = userInfo.devProperties;
         this.updateTechnologies(this.selectedTechnologies);
-      });
+      })
+    );
   }
 
   public onAddClick(): void {
@@ -139,7 +138,7 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
       title: new FormControl('', [Validators.required, Validators.minLength(8)]),
       description: new FormControl('', [Validators.required, Validators.minLength(10)]),
       technologies: new FormControl([], [Validators.required]),
-      link: new FormControl('', [Validators.required, this.utilsService.linkValidator()]),
+      link: new FormControl('', [Validators.required, this.utilsService?.linkValidator()]),
       from: new FormControl('', [Validators.required]),
       to: new FormControl('', [Validators.required]),
     });

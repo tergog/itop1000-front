@@ -9,7 +9,7 @@ import { Developer } from 'app/shared/models';
 import { getDeveloper, State } from 'app/core/developers/store';
 import { setDeveloper } from 'app/core/developers/store/developers.actions';
 
-export enum DeveloperResumeSections {
+export enum EDeveloperResumeSections {
   ProfessionalSkills,
   WorkExperience,
   Education,
@@ -26,8 +26,8 @@ export enum DeveloperResumeSections {
 })
 export class DeveloperResumeFullComponent implements OnInit, OnDestroy {
   public developer$: Observable<Developer>;
-  public DeveloperResumeSections = DeveloperResumeSections;
-  public activeSection = DeveloperResumeSections.ProfessionalSkills;
+  public DeveloperResumeSections = EDeveloperResumeSections;
+  public activeSection = EDeveloperResumeSections.ProfessionalSkills;
 
   public projectCounter = 0;
 
@@ -46,7 +46,7 @@ export class DeveloperResumeFullComponent implements OnInit, OnDestroy {
 
     this.projectCounter = 3;
 
-    this.inViewportChange = new Subject<{ isInViewport: boolean, section: DeveloperResumeSections }>()
+    this.inViewportChange = new Subject<{ isInViewport: boolean, section: EDeveloperResumeSections }>()
       .pipe(bufferTime(300));
 
     // this.inViewportChange.subscribe((sections) => console.log(sections));
@@ -65,7 +65,7 @@ export class DeveloperResumeFullComponent implements OnInit, OnDestroy {
   }
 
 
-  public onSectionCLick(selectedSection: DeveloperResumeSections, element: HTMLElement): void {
+  public onSectionCLick(selectedSection: EDeveloperResumeSections, element: HTMLElement): void {
     this.activeSection = selectedSection;
     element.scrollIntoView({
       behavior: 'smooth',
@@ -82,7 +82,7 @@ export class DeveloperResumeFullComponent implements OnInit, OnDestroy {
     this.router.navigate(['in/c/chat']);
   }
 
-  public inViewport(isInViewport: boolean, section: DeveloperResumeSections): void {
+  public inViewport(isInViewport: boolean, section: EDeveloperResumeSections): void {
     /*console.log(isInViewport)
     if (isInViewport) {
       this.activeSection = section;

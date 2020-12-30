@@ -1,4 +1,4 @@
-export enum DevProfileSections {
+export enum EDevProfileSections {
   ContactInfo,
   ProfileSettings,
   CategoriesAndSkills,

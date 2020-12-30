@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { Observable, of } from 'rxjs';
-import { flatMap, switchMap, tap } from 'rxjs/operators';
+import { filter, flatMap, switchMap, tap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 
 import { getJobs, State } from 'app/core/reducers';
@@ -13,10 +13,15 @@ import * as fromCore from 'app/core/reducers';
 import { ConfirmationDialogComponent } from 'app/inner-pages/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { EditJobDialogComponent } from 'app/inner-pages/shared/components/edit-job-dialog/edit-job-dialog.component';
 
-export enum JobSections {
+export enum EJobSections {
   Project,
   Duration,
   KeySkills
+}
+
+enum EResMessage {
+  Confirmed = 'Confirmed',
+  Updated = 'Job updated successfully'
 }
 
 @Component({
@@ -26,8 +31,9 @@ export enum JobSections {
 })
 export class JobFullComponent implements OnInit, OnDestroy {
   job: Job;
-  JobSections = JobSections;
-  activeSection = JobSections.Project;
+  JobSections = EJobSections;
+  resMessage = EResMessage;
+  activeSection = EJobSections.Project;
   public canEdit: boolean;
 
   constructor(
@@ -53,7 +59,7 @@ export class JobFullComponent implements OnInit, OnDestroy {
       .subscribe(user => this.canEdit = user.id === this.job.userId);
   }
 
-  public onSectionCLick(selectedSection: JobSections, element: HTMLElement): void {
+  public onSectionCLick(selectedSection: EJobSections, element: HTMLElement): void {
     this.activeSection = selectedSection;
     element.scrollIntoView({
       behavior: 'smooth',
@@ -80,8 +86,12 @@ export class JobFullComponent implements OnInit, OnDestroy {
     const dialogRef =  this.matDialog.open(ConfirmationDialogComponent, {data: {title: 'Archive job', text: `Are you sure you want to delete the ${this.job.title} job?`}});
 
     dialogRef.afterClosed()
-      .pipe(untilDestroyed(this))
-      .subscribe(res => { if (res === 'Confirmed') { this.onDeleteJob(); }});
+      .pipe(
+        untilDestroyed(this),
+        filter(res => res === this.resMessage.Confirmed),
+        tap(() => this.onDeleteJob())
+      )
+      .subscribe();
   }
 
   public onDeleteJob(): void {
@@ -99,12 +109,14 @@ export class JobFullComponent implements OnInit, OnDestroy {
     const dialogRef =  this.matDialog.open(EditJobDialogComponent, {data: {job: this.job}});
 
     dialogRef.afterClosed()
-      .pipe(untilDestroyed(this))
-      .subscribe(res => {
-        if (res === 'Job updated successfully') {
-        this.getJobInfo();
-        this.handleSuccessResponse();
-      }});
+      .pipe(
+        untilDestroyed(this),
+        filter(res => res === this.resMessage.Updated),
+        tap(() => {
+          this.getJobInfo();
+          this.handleSuccessResponse();
+        })
+      ).subscribe();
   }
 
   private handleSuccessResponse(): void {

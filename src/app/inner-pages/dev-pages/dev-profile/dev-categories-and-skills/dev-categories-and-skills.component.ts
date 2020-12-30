@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs/operators';
 
+import { EDevProfileSectionNames } from 'app/inner-pages/dev-pages/dev-profile/shared/enums/devProfileSectionNames';
 import * as fromCore from 'app/core/reducers';
-import { DevProfileSectionNames } from 'app/inner-pages/dev-pages/dev-profile/shared/enums/devProfileSectionNames';
 
 
 @Component({
@@ -14,7 +14,7 @@ import { DevProfileSectionNames } from 'app/inner-pages/dev-pages/dev-profile/sh
 export class DevCategoriesAndSkillsComponent implements OnInit, OnDestroy {
 
   public isEdit: boolean;
-  public DevProfileSectionNames = DevProfileSectionNames;
+  public DevProfileSectionNames = EDevProfileSectionNames;
 
   constructor(private store: Store<fromCore.State>) { }
 
@@ -30,6 +30,6 @@ export class DevCategoriesAndSkillsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-  
+
   }
 }

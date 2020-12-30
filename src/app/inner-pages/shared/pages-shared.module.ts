@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ImageCropperModule } from 'ngx-image-cropper';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { InViewportModule } from '@thisissoon/angular-inviewport';
 import { NgxStripeModule } from 'ngx-stripe';
 import { MatSelectModule } from '@angular/material/select';
+import { ReactiveComponentModule } from '@ngrx/component';
 
 import { ChangePasswordDialogComponent } from 'app/inner-pages/shared/components//change-password-dialog/change-password-dialog.component';
 import {
@@ -65,6 +66,7 @@ import { RouterModule } from '@angular/router';
     InViewportModule,
     NgxStripeModule,
     MatProgressSpinnerModule,
+    ReactiveComponentModule,
     MatSelectModule
   ],
   exports: [

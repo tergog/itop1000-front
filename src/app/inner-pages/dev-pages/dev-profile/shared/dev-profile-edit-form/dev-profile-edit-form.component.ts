@@ -4,7 +4,7 @@ import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs/operators';
 
-import { DevProfileSectionNames } from 'app/inner-pages/dev-pages/dev-profile/shared/enums/devProfileSectionNames';
+import { EDevProfileSectionNames } from 'app/inner-pages/dev-pages/dev-profile/shared/enums/devProfileSectionNames';
 import * as fromCore from 'app/core/reducers';
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
 import { UserService, NotificationsService } from 'app/shared/services';
@@ -34,7 +34,7 @@ export class DevProfileEditFormComponent implements OnInit {
   selectedChip = SelectedChips;
 
   public form: FormGroup;
-  public DevProfileSectionNames = DevProfileSectionNames;
+  public DevProfileSectionNames = EDevProfileSectionNames;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   constructor(

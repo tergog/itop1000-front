@@ -6,7 +6,7 @@ import * as fromCore from 'app/core/reducers';
 import * as coreActions from 'app/core/actions/core.actions';
 import { TOKEN } from 'app/constants/constants';
 
-import { DevProfileSections } from 'app/inner-pages/dev-pages/dev-profile/dev-profile-sections/dev-profile-sections.enum';
+import { EDevProfileSections } from 'app/inner-pages/dev-pages/dev-profile/dev-profile-sections/dev-profile-sections.enum';
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +15,7 @@ import { DevProfileSections } from 'app/inner-pages/dev-pages/dev-profile/dev-pr
 })
 export class DevProfileComponent implements OnInit {
 
-  public selectedSection: DevProfileSections = DevProfileSections.ContactInfo;
+  public selectedSection: EDevProfileSections = EDevProfileSections.ContactInfo;
 
   constructor(
     // private store: Store<fromCore.State>
@@ -25,7 +25,7 @@ export class DevProfileComponent implements OnInit {
 
   }
 
-  public onSectionSelect(selectedSection: DevProfileSections): void {
+  public onSectionSelect(selectedSection: EDevProfileSections): void {
     this.selectedSection = selectedSection;
   }
 
