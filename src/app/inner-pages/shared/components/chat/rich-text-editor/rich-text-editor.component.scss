@@ -13,7 +13,7 @@ $editor-border: 1px solid $color-8;
 .chat__text-editor {
   &__toolbar {
     border: none;
-    padding: 32px 35px;
+    padding: 12px;
 
     .ql-spacing {
       display: flex;
@@ -60,6 +60,10 @@ $editor-border: 1px solid $color-8;
       width: 130px;
       line-height: 1.2rem;
       float: right;
+
+      @media screen and (max-width: $screen-xl) {
+        float: none;
+      }
     }
   }
 

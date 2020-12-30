@@ -1,9 +1,9 @@
 @import '~assets/scss/variables.scss';
 
 :host {
+  font-family: $font-2, sans-serif;
   display: block;
   height: calc(100% - 80px);
-  font-family: $font-2;
   overflow: auto;
   background: url("~assets/img/search-bg.png");
 }
