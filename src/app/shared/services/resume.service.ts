@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+
 import {DevProject} from '../models/dev-project.model';
 import {Developer, NameValueModel} from '../models';
 
@@ -280,6 +281,7 @@ export class ResumeService {
       case 4:
         return 'Intermediate';
       case 5:
+      case 6:
         return 'Upper-Intermediate';
       default:
         return 'N/A';
