@@ -1,26 +1,24 @@
-import { Component, EventEmitter, forwardRef, HostBinding, Input, OnInit, Output } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {Component, EventEmitter, forwardRef, HostBinding, Input, OnInit, Output} from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 
 @Component({
-  selector: 'app-input',
-  templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss'],
+  selector: 'app-phone-regex',
+  templateUrl: './phone-regex.component.html',
+  styleUrls: ['./phone-regex.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => InputComponent),
+      useExisting: forwardRef(() => PhoneRegexComponent),
       multi: true
     }
   ]
 })
-export class InputComponent implements OnInit, ControlValueAccessor {
+export class PhoneRegexComponent implements OnInit, ControlValueAccessor {
 
   @HostBinding('class.inner') get valid() { return this.type === 'inner' }
   @Input() type: string;
   @Input() placeholder;
   @Input() isHiddenPassword: boolean;
-  @Output() enterKey = new EventEmitter();
-  @Output() onFocusField = new EventEmitter();
 
   constructor() { }
 
@@ -56,11 +54,4 @@ export class InputComponent implements OnInit, ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  public enterKeyClick(): void {
-    this.enterKey.emit();
-  }
-
-  public onFocus(): void {
-    this.onFocusField.emit();
-  }
 }
