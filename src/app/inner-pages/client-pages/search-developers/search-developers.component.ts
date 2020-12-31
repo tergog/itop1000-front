@@ -26,19 +26,23 @@ export class SearchDevelopersComponent implements OnInit, OnDestroy {
     private developersService: DevelopersService,
     private store: Store<State>,
     private router: Router
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.developers$ = this.store.select(getDevelopers)
       .pipe(untilDestroyed(this),
-      tap((developers: Developer[]) => {
-        this.developers = developers;
-        this.developersPaginated = this.developers.slice(0, 2);
-      }));
+        tap((developers: Developer[]) => {
+          this.developers = developers;
+          this.developersPaginated = this.developers.slice(0, 2);
+        }));
   }
 
   onPageChange($event): void {
-    this.developersPaginated = this.developers.slice($event.pageIndex * $event.pageSize, $event.pageIndex * $event.pageSize + $event.pageSize);
+    this.developersPaginated = this.developers.slice(
+      $event.pageIndex * $event.pageSize,
+      $event.pageIndex * $event.pageSize + $event.pageSize
+    );
   }
 
   public onProfileClick(id: string): void {

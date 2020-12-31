@@ -1,10 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import * as jwtDecode from 'jwt-decode';
-
-import * as fromCore from 'app/core/reducers';
-import * as coreActions from 'app/core/actions/core.actions';
-import { TOKEN } from 'app/constants/constants';
 
 import { EDevProfileSections } from 'app/inner-pages/dev-pages/dev-profile/dev-profile-sections/dev-profile-sections.enum';
 
@@ -17,12 +11,10 @@ export class DevProfileComponent implements OnInit {
 
   public selectedSection: EDevProfileSections = EDevProfileSections.ContactInfo;
 
-  constructor(
-    // private store: Store<fromCore.State>
-  ) { }
+  constructor() {
+  }
 
   ngOnInit(): void {
-
   }
 
   public onSectionSelect(selectedSection: EDevProfileSections): void {

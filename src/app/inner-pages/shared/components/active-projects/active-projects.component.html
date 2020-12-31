@@ -1,0 +1,28 @@
+<app-profile-section-header *ngIf="!activeProject" [title]="'Active Projects'"
+                            [canEdit]="false"></app-profile-section-header>
+<app-profile-section-header *ngIf="activeProject" [title]="activeProject.title"
+                            [canEdit]="false"></app-profile-section-header>
+
+<div *ngrxLet="projects$; let projects">
+  <div *ngIf="!activeProject">
+    <app-project-card class="active-project-cards"
+                      *ngFor="let project of projects;"
+                      [project]="project"
+                      (click)="onProjectClick(project)">
+    </app-project-card>
+  </div>
+  <div *ngIf="activeProject">
+    <i class="arrow-down cursor__pointer exit-arrow-button" (click)="onCancelButtonClick()"></i>
+    <div class="screenshots-board">
+      <div class="screenshot" *ngFor="let photo of projects[0].screenshots">
+        <div>
+          <img [src]="photo.link">
+        </div>
+        <div>
+          <span>{{photo.dateCreated | date : 'short'}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

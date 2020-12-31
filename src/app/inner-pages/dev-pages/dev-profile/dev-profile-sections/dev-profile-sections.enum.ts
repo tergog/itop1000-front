@@ -3,6 +3,7 @@ export enum EDevProfileSections {
   ProfileSettings,
   CategoriesAndSkills,
   WorkExperience,
+  ActiveProjects,
   Balance,
   PasswordAndSecurity
 }
