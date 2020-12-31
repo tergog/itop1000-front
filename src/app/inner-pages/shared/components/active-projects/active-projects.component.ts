@@ -8,10 +8,6 @@ import { UserInfo } from 'app/shared/models';
 import * as fromCore from 'app/core/reducers';
 import { ActiveProject } from 'app/shared/models';
 
-
-
-
-
 @Component({
   selector: 'app-active-projects',
   templateUrl: './active-projects.component.html',
@@ -28,14 +24,11 @@ export class ActiveProjectsComponent implements OnInit {
     ) {
   }
 
-
   ngOnInit(): void {
     this.projects$ = this.store.select(fromCore.getUserInfo).pipe(
         map((user: UserInfo) => user.id),
         switchMap((id: string) => this.projectService.getActiveProjects(id))
       );
-
-
   }
 
   public onProjectClick(project): void {
