@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { map, switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 import { ActiveProjectsService } from 'app/shared/services';
 import { UserInfo } from 'app/shared/models';
 import * as fromCore from 'app/core/reducers';
-import { map, switchMap } from 'rxjs/operators';
+import { ActiveProject } from 'app/shared/models';
+
+
 
 
 
@@ -15,8 +19,8 @@ import { map, switchMap } from 'rxjs/operators';
 })
 export class ActiveProjectsComponent implements OnInit {
 
-  public activeProject;
-  projects$;
+  public activeProject: ActiveProject;
+  projects$: Observable<any>;
 
   constructor(
     private projectService: ActiveProjectsService,
@@ -39,7 +43,7 @@ export class ActiveProjectsComponent implements OnInit {
   }
 
   public onCancelButtonClick(): void {
-    this.activeProject = false;
+    this.activeProject = null;
   }
 
 }
