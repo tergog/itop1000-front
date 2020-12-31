@@ -32,6 +32,7 @@ import { LandingComponent } from 'app/landing/landing.component';
 import { HeaderLandingComponent } from 'app/inner-pages/components/header-landing/header-landing.component';
 import { FooterLandingComponent } from 'app/inner-pages/components/footer-landing/footer-landing.component';
 import { RouterModule } from '@angular/router';
+import { GetPaidNowDialogComponent } from './components/get-paid-now-dialog/get-paid-now-dialog.component';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { RouterModule } from '@angular/router';
     ChangePasswordDialogComponent,
     ProfileChangePasswordComponent,
     ProfileSectionHeaderComponent,
+    GetPaidNowDialogComponent,
     JobComponent,
     UploadPhotoDialogComponent,
     DeveloperResumeComponent,
