@@ -23,7 +23,7 @@ export class ResumeService {
                   style: '',
                   text: ''
                 },
-                await this.getLogo('http://localhost:4200/logo-preview-1.svg'),
+                await this.getLogo('http://localhost:4200/logo-preview-1.svg')
               ],
               [
                 await this.addContactInfo(developer),
@@ -204,39 +204,39 @@ export class ResumeService {
         text: 'WORK EXPERIENCE',
         style: 'header'
       },
-      this.addExpirience(developer),
-  ];
+      this.addExperience(developer),
+    ];
   }
 
   private addSkills(developer: Developer): object {
     return developer.devProperties.skills
       ? {
-      style: 'skillsColumns',
-      columns: [
-        [
-          {
-            style: 'description',
-            text: developer.devProperties.description || 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam beatae dicta dignissimos dolorem ea eaque error illum in laboriosam magni necessitatibus nulla, odio optio perspiciatis provident, qui quibusdam sapiente vel!'
-          }
-        ],
-        [
-           ...developer.devProperties.skills.map(s => {
-            return {
-              style: 'skills',
-              text: `${ s.name }:`
-            };
-          }),
-        ],
-        [
-          ...developer.devProperties.skills.map(s => {
-            return {
-              style: 'skills',
-              text: `${ s.value * 20 }%`
-            };
-          }),
+        style: 'skillsColumns',
+        columns: [
+          [
+            {
+              style: 'description',
+              text: developer.devProperties.description || 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam beatae dicta dignissimos dolorem ea eaque error illum in laboriosam magni necessitatibus nulla, odio optio perspiciatis provident, qui quibusdam sapiente vel!'
+            }
+          ],
+          [
+            ...developer.devProperties.skills.map(s => {
+              return {
+                style: 'skills',
+                text: `${ s.name }:`
+              };
+            }),
+          ],
+          [
+            ...developer.devProperties.skills.map(s => {
+              return {
+                style: 'skills',
+                text: `${ s.value * 20 }%`
+              };
+            }),
+          ]
         ]
-      ]
-    } : {text: ''};
+      } : {text: ''};
   }
 
   private addSoftSkills(developer: Developer): object {
@@ -283,7 +283,7 @@ export class ResumeService {
         ],
         []
       ]
-    } : {text: ''} ;
+    } : {text: ''};
   }
 
   private addLanguageLevel(val: number): string {
@@ -302,7 +302,7 @@ export class ResumeService {
     }
   }
 
-  private addExpirience(developer: Developer): Array<object> {
+  private addExperience(developer: Developer): Array<object> {
     return developer.devProperties.projects
       ? developer.devProperties.projects.map(el => this.addProject(el)) : [{text: ''}];
   }
