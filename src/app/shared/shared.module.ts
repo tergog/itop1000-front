@@ -8,7 +8,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatOptionModule } from '@angular/material/core';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { MatDialogModule } from '@angular/material/dialog';
-import { NgCircleProgressModule, CircleProgressOptions } from 'ng-circle-progress';
+import { CircleProgressOptions, NgCircleProgressModule } from 'ng-circle-progress';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 
 import { InputComponent } from 'app/shared/components/input/input.component';
 import { CheckboxComponent } from 'app/shared/components/checkbox/checkbox.component';
@@ -18,7 +19,7 @@ import { ClickedOutsideDirective } from './directives/click-outside.directive';
 import { SeparatorComponent } from './components/separator/separator.component';
 import { TimezoneComponent } from './components/timezone/timezone.component';
 import { AddressComponent } from 'app/shared/components/address/address.component';
-import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { ResumeService } from './services/resume.service';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,10 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
     NgCircleProgressModule,
     GooglePlaceModule
   ],
-  providers: [CircleProgressOptions],
+  providers: [
+    CircleProgressOptions,
+    ResumeService
+  ],
 
 })
 export class SharedModule {}

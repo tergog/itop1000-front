@@ -1,13 +1,18 @@
-import { Component, OnInit, Renderer2, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
-import { bufferTime } from 'rxjs/operators';
+import { bufferTime, tap } from 'rxjs/operators';
 import { untilDestroyed } from 'ngx-take-until-destroy';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
 
 import { Developer } from 'app/shared/models';
+import { ResumeService } from '../../../../shared/services/resume.service';
 import { getDeveloper, State } from 'app/core/developers/store';
 import { setDeveloper } from 'app/core/developers/store/developers.actions';
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 export enum EDeveloperResumeSections {
   ProfessionalSkills,
@@ -33,17 +38,19 @@ export class DeveloperResumeFullComponent implements OnInit, OnDestroy {
 
   private inViewportChange;
 
-  constructor(private store: Store<State>, private router: Router, private route: ActivatedRoute) {
+  constructor(
+    private store: Store<State>,
+    private router: Router,
+    private route: ActivatedRoute,
+    private resumeService: ResumeService) {
   }
 
   ngOnInit(): void {
-    this.store.select(getDeveloper).pipe(untilDestroyed(this))
-      .subscribe((dev) => !dev
-        ? this.store.dispatch(setDeveloper({id: this.route.snapshot.params.id}))
-        : this.developer$ = this.store.select(getDeveloper)
-
-    );
-
+    this.developer$ = this.store.select(getDeveloper).pipe(tap((dev: Developer) => {
+      if (!dev) {
+        this.store.dispatch(setDeveloper({id: this.route.snapshot.params.id}));
+      }
+    }));
     this.projectCounter = 3;
 
     this.inViewportChange = new Subject<{ isInViewport: boolean, section: EDeveloperResumeSections }>()
@@ -59,9 +66,9 @@ export class DeveloperResumeFullComponent implements OnInit, OnDestroy {
   onShowMoreClick(): void {
     this.developer$.pipe(untilDestroyed(this))
       .subscribe(dev => this.projectCounter < dev.devProperties.projects.length
-      ? this.projectCounter += 3
-      : this.projectCounter = 3
-    );
+        ? this.projectCounter += 3
+        : this.projectCounter = 3
+      );
   }
 
 
@@ -97,5 +104,10 @@ export class DeveloperResumeFullComponent implements OnInit, OnDestroy {
     }
 
     return arr;
+  }
+
+  async exportResume(dev) {
+    const documentDefinition = await this.resumeService.getDocumentDefinition(dev);
+    pdfMake.createPdf(documentDefinition).download('Export CV As PDF');
   }
 }
