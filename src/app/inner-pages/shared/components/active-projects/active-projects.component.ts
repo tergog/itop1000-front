@@ -16,7 +16,7 @@ import { ActiveProject } from 'app/shared/models';
 export class ActiveProjectsComponent implements OnInit {
 
   public activeProject: ActiveProject;
-  projects$: Observable<any>;
+  projects$: Observable<ActiveProject>;
 
   constructor(
     private projectService: ActiveProjectsService,
