@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { DevProject } from '../models/dev-project.model';
-import { Developer, NameValueModel } from '../models';
+import { DevProject } from 'app/shared/models/dev-project.model';
+import { Developer, NameValueModel } from 'app/shared/models';
 
 @Injectable()
 export class ResumeService {
@@ -23,7 +23,7 @@ export class ResumeService {
                   style: '',
                   text: ''
                 },
-                await this.getLogo('http://localhost:4200/logo-preview-1.svg')
+                await this.getLogo('http://localhost:4200/logo-preview-1.svg'),
               ],
               [
                 await this.addContactInfo(developer),
@@ -136,32 +136,44 @@ export class ResumeService {
 
   private async addContactInfo(developer: Developer): Promise<any> {
     return [
-      await this.getProfilePicObject(developer.photo),
-      {
-        text: developer.firstName,
-        style: 'name'
-      },
-      {
-        text: developer.lastName,
-        style: 'name'
-      },
-      {
-        text: `${ developer.devProperties.hourlyRate }$/hr`,
-        style: 'hourlyRate'
-      },
-      {
-        style: 'mt10',
-        fontSize: 9,
-        text: developer.address
-      },
-      {
-        fontSize: 9,
-        text: developer.phone,
-      },
-      {
-        fontSize: 9,
-        text: developer.email,
-      }
+      developer.photo ? await this.getProfilePicObject(developer.photo) : {},
+      developer.firstName
+        ? {
+          text: developer.firstName,
+          style: 'name'
+        }
+        : {text: ''},
+      developer.lastName
+        ? {
+          text: developer.lastName,
+          style: 'name'
+        }
+        : {text: ''},
+      developer.devProperties.hourlyRate
+        ? {
+          text: `${ developer.devProperties.hourlyRate }$/hr`,
+          style: 'hourlyRate'
+        }
+        : {text: ''},
+      developer.address
+        ? {
+          style: 'mt10',
+          fontSize: 9,
+          text: developer.address
+        }
+        : {text: ''},
+      developer.phone
+        ? {
+          fontSize: 9,
+          text: developer.phone,
+        }
+        : {text: ''},
+      developer.email
+        ? {
+          fontSize: 9,
+          text: developer.email,
+        }
+        : {text: ''},
     ];
   }
 
@@ -192,12 +204,13 @@ export class ResumeService {
         text: 'WORK EXPERIENCE',
         style: 'header'
       },
-      ...developer.devProperties.projects.map(el => this.addExperience(el)),
-    ];
+      this.addExpirience(developer),
+  ];
   }
 
   private addSkills(developer: Developer): object {
-    return {
+    return developer.devProperties.skills
+      ? {
       style: 'skillsColumns',
       columns: [
         [
@@ -207,7 +220,7 @@ export class ResumeService {
           }
         ],
         [
-          ...developer.devProperties.skills.map(s => {
+           ...developer.devProperties.skills.map(s => {
             return {
               style: 'skills',
               text: `${ s.name }:`
@@ -223,11 +236,11 @@ export class ResumeService {
           }),
         ]
       ]
-    };
+    } : {text: ''};
   }
 
   private addSoftSkills(developer: Developer): object {
-    return {
+    return developer.devProperties.softSkills ? {
       style: 'languages',
       columns: [
         [
@@ -247,11 +260,11 @@ export class ResumeService {
           }),
         ]
       ]
-    };
+    } : {text: ''};
   }
 
   private addLanguages(languages: Array<NameValueModel>): object {
-    return {
+    return languages ? {
       style: 'languages',
       columns: [
         [
@@ -270,7 +283,7 @@ export class ResumeService {
         ],
         []
       ]
-    };
+    } : {text: ''} ;
   }
 
   private addLanguageLevel(val: number): string {
@@ -289,7 +302,12 @@ export class ResumeService {
     }
   }
 
-  private addExperience(exp: DevProject): object {
+  private addExpirience(developer: Developer): Array<object> {
+    return developer.devProperties.projects
+      ? developer.devProperties.projects.map(el => this.addProject(el)) : [{text: ''}];
+  }
+
+  private addProject(exp: DevProject): object {
     return {
       style: 'exp',
       columns: [
@@ -311,7 +329,6 @@ export class ResumeService {
           })
         ]
       ],
-
     };
   }
 

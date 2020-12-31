@@ -10,7 +10,7 @@ import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { Developer } from 'app/shared/models';
 import { getDeveloper, State } from 'app/core/developers';
 import { setDeveloper } from 'app/core/developers/developers.actions';
-import { ResumeService } from '../../../../shared/services/resume.service';
+import { ResumeService } from 'app/shared/services/resume.service';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -69,7 +69,6 @@ export class DeveloperResumeFullComponent implements OnInit, OnDestroy {
         : this.projectCounter = 3
       );
   }
-
 
   public onSectionCLick(selectedSection: DeveloperResumeSections, element: HTMLElement): void {
     this.activeSection = selectedSection;
