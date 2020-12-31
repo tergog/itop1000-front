@@ -10,6 +10,8 @@ export const developers = [
       lastName: 'Hohol',
       title: 'Angular Developer',
       availability: true,
+      email: 'qwer@qwe.re',
+      phone: '+380987612345',
       devProperties: {
         skills: [
           {
@@ -126,7 +128,7 @@ export const developers = [
         monthRate: 20000,
         duration: 12,
       },
-      location: 'Ukraine, Kyiv',
+      address: 'Ukraine, Kyiv',
       dateUpdated: '19 July 2020',
       photo : 'http://localhost:4000/1594974664857.png'
     }
