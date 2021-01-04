@@ -1,0 +1,22 @@
+div {
+
+  &.textarea {
+    text-align: center;
+  }
+
+  &.button {
+    text-align: left;
+  }
+}
+
+mat-form-field {
+  margin-top: 20px;
+}
+
+::ng-deep {
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+
