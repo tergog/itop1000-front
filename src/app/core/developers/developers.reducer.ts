@@ -128,18 +128,26 @@ export const developers = [
       },
       location: 'Ukraine, Kyiv',
       dateUpdated: '19 July 2020',
-      photo : 'http://localhost:4000/1594974664857.png'
+      photo : 'http://localhost:4000/1594974664857.png',
     }
   ];
 
 export interface State {
   developers: Developer[];
   developer: Developer;
+  categories: [];
+  skills: [];
+  softSkills: [];
+  languages: [];
 }
 
 const INIT_STATE: State = {
   developers: [],
-  developer: null // developers[0]
+  developer: null, // developers[0]
+  categories: [],
+  skills: [],
+  softSkills: [],
+  languages: []
 };
 
 export const reducer = createReducer(
@@ -168,12 +176,57 @@ export const reducer = createReducer(
       developer: {...developer}
     })
   ),
+  on(
+    actions.setDeveloperCategories,
+    (state, {data}) => ({
+      ...state,
+      categories: data[0]['categories']
+    })
+  ),
+  on(
+    actions.setDeveloperSkills,
+    (state, {data}) => ({
+      ...state,
+      skills: data[0]['skills']
+    })
+  ),
+  on(
+    actions.setDeveloperLanguages,
+    (state, {data}) => ({
+      ...state,
+      languages: data[0]['languages']
+    })
+  ),
+  on(
+    actions.setDeveloperSoftSkills,
+    (state, {data}) => ({
+      ...state,
+      softSkills: data[0]['softSkills']
+    })
+  ),
 );
 
 /** Selector return is Authenticated */
 export const getDevelopers = (state: State): Developer[] => {
   return state.developers;
 };
+
 export const getDeveloper = (state: State): Developer => {
   return state.developer;
+};
+
+export const getCategories = (state: State): any => {
+  return state.categories;
+};
+
+export const getSkills = (state: State): any => {
+  return state.skills;
+};
+
+export const getSoftSkills = (state: State): any => {
+  return state.softSkills;
+};
+
+export const getLanguages = (state: State): any => {
+  return state.languages;
 };

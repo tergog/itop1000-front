@@ -25,4 +25,26 @@ export class DevelopersService {
   public uploadProjectImage(image: string | ArrayBuffer): Observable<string> {
     return this.http.post<string>(`${this.apiUrl}${ApiConstants.accounts.uploadProjectImage}`, {image});
   }
+
+  public getDeveloperCategories(): Observable<object> {
+
+    return this.http.post(`${this.apiUrl}${ApiConstants.accounts.getDeveloporCategories}`, {});
+  }
+
+  public getDeveloperSkills(): Observable<object> {
+
+    return this.http.post(`${this.apiUrl}${ApiConstants.accounts.getDeveloporSkills}`, {});
+  }
+
+  public getDeveloperSoftSkills(): Observable<object> {
+
+    return this.http.post(`${this.apiUrl}${ApiConstants.accounts.getDeveloporSoftSkills}`, {});
+  }
+
+  public getDeveloperLanguages(): Observable<object> {
+
+    return this.http.post(`${this.apiUrl}${ApiConstants.accounts.getDeveloporLanguages}`, {});
+  }
+
+
 }

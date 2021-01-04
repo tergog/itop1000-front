@@ -41,3 +41,19 @@ export const getDevelopers = createSelector(
 export const getDeveloper = createSelector(
   getDevelopersState,
   fromDevelopers.getDeveloper);
+
+export const getCategories = createSelector(
+  getDevelopersState,
+  fromDevelopers.getCategories);
+
+export const getSkills = createSelector(
+  getDevelopersState,
+  fromDevelopers.getSkills);
+
+export const getSoftSkills = createSelector(
+  getDevelopersState,
+  fromDevelopers.getSoftSkills);
+
+export const getLanguages = createSelector(
+  getDevelopersState,
+  fromDevelopers.getLanguages);

@@ -13,7 +13,11 @@ export const ApiConstants = {
     paymentMethods: 'accounts/payment-methods',
     searchDevelopers: 'accounts/search',
     getDeveloperById: 'accounts/get-developer',
-    chargesList: 'accounts/charges-list'
+    chargesList: 'accounts/charges-list',
+    getDeveloporCategories: 'accounts/data-categories',
+    getDeveloporSkills: 'accounts/data-skills',
+    getDeveloporLanguages: 'accounts/data-languages',
+    getDeveloporSoftSkills: 'accounts/data-soft-skills'
   },
   jobs: {
     main: 'jobs',
