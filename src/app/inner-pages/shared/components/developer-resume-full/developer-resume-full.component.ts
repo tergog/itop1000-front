@@ -8,7 +8,7 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 
 import { Developer } from 'app/shared/models';
-import { ResumeService } from '../../../../shared/services/resume.service';
+import { ResumeService } from 'app/shared/services/resume.service';
 import { getDeveloper, State } from 'app/core/developers/store';
 import { setDeveloper } from 'app/core/developers/store/developers.actions';
 
@@ -70,7 +70,6 @@ export class DeveloperResumeFullComponent implements OnInit, OnDestroy {
         : this.projectCounter = 3
       );
   }
-
 
   public onSectionCLick(selectedSection: EDeveloperResumeSections, element: HTMLElement): void {
     this.activeSection = selectedSection;
