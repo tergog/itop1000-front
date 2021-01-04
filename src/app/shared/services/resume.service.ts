@@ -134,7 +134,7 @@ export class ResumeService {
     });
   }
 
-  private async addContactInfo(developer: Developer): Promise<any> {
+  private async addContactInfo(developer: Developer): Promise<Array<object>> {
     return [
       developer.photo ? await this.getProfilePicObject(developer.photo) : {},
       developer.firstName
