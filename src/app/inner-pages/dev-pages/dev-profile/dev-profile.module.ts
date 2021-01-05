@@ -6,6 +6,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ReactiveComponentModule } from '@ngrx/component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
 
 import { DevProfileSectionsComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-profile-sections/dev-profile-sections.component';
 import { ProfileSidenavComponent } from 'app/inner-pages/dev-pages/dev-profile/profile-sidenav/profile-sidenav.component';
@@ -62,7 +65,10 @@ const routes: Routes = [
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,
-    ReactiveComponentModule
+    ReactiveComponentModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSelectModule
   ],
   providers: [
     DevProfileService

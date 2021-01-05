@@ -33,6 +33,7 @@ import { HeaderLandingComponent } from 'app/inner-pages/components/header-landin
 import { FooterLandingComponent } from 'app/inner-pages/components/footer-landing/footer-landing.component';
 import { RouterModule } from '@angular/router';
 import { GetPaidNowDialogComponent } from './components/get-paid-now-dialog/get-paid-now-dialog.component';
+import { BankAccountDialogComponent } from './components/bank-account-dialog/bank-account-dialog.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { GetPaidNowDialogComponent } from './components/get-paid-now-dialog/get-
     EditJobDialogComponent,
     LandingComponent,
     HeaderLandingComponent,
-    FooterLandingComponent
+    FooterLandingComponent,
+    BankAccountDialogComponent
   ],
   imports: [
     RouterModule,
