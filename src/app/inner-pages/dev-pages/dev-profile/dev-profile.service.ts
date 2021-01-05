@@ -8,7 +8,7 @@ import { TOKEN } from 'app/constants/constants';
 import { UserService } from 'app/shared/services';
 import { UserInfo, NameValueModel } from 'app/shared/models';
 import * as fromCore from 'app/core/reducers';
-import * as fromDevelopers from 'app/core/developers/index';
+import * as fromDevelopers from 'app/core/developers/store/index';
 import { DevProperties } from 'app/shared/models/dev-properties.model';
 import { NotificationsService } from 'app/shared/services/notifications.service';
 

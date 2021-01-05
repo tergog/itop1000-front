@@ -1,4 +1,3 @@
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { createAction, props } from '@ngrx/store';
 
 import { Developer, Job } from 'app/shared/models';
@@ -17,6 +16,10 @@ export const SEARCH_JOBS_ERROR = '[Developers] Search jobs error';
 
 export const UPDATE_DEVELOPER = '[Developers] Update developer';
 
+export const SET_DEVELOPER_CATEGORIES = '[Developers] Set developer categories';
+export const SET_DEVELOPER_SKILLS = '[Developers] Set developer skills';
+export const SET_DEVELOPER_LANGUAGES = '[Developers] Set developer soft languages';
+export const SET_DEVELOPER_SOFT_SKILLS = '[Developers] Set developer soft skills';
 
 export const searchDevelopers = createAction(SEARCH_DEVELOPERS, props<{ payload: string }>());
 export const searchDevelopersSuccess = createAction(SEARCH_DEVELOPERS_SUCCESS, (developersList: Developer[]) => ({developersList}));
@@ -28,3 +31,8 @@ export const setDeveloper = createAction(SET_DEVELOPER, props<{ id: string }>())
 export const setDeveloperSuccess = createAction(SET_DEVELOPER_SUCCESS, (developer: Developer) => ({developer}));
 export const setDeveloperError = createAction(SET_DEVELOPER_ERROR, (error: any) => (error));
 export const updateDeveloper = createAction(UPDATE_DEVELOPER, props<{ id: string }>());
+
+export const setDeveloperCategories = createAction(SET_DEVELOPER_CATEGORIES, (data: object) => ({data}));
+export const setDeveloperSkills = createAction(SET_DEVELOPER_SKILLS, (data: object) => ({data}));
+export const setDeveloperLanguages = createAction(SET_DEVELOPER_LANGUAGES, (data: object) => ({data}));
+export const setDeveloperSoftSkills = createAction(SET_DEVELOPER_SOFT_SKILLS, (data: object) => ({data}));

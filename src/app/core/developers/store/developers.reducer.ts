@@ -247,28 +247,28 @@ export const reducer = createReducer(
     actions.setDeveloperCategories,
     (state, {data}) => ({
       ...state,
-      categories: data[0]['categories']
+      categories: data[0].categories
     })
   ),
   on(
     actions.setDeveloperSkills,
     (state, {data}) => ({
       ...state,
-      skills: data[0]['skills']
+      skills: data[0].skills
     })
   ),
   on(
     actions.setDeveloperLanguages,
     (state, {data}) => ({
       ...state,
-      languages: data[0]['languages']
+      languages: data[0].languages
     })
   ),
   on(
     actions.setDeveloperSoftSkills,
     (state, {data}) => ({
       ...state,
-      softSkills: data[0]['softSkills']
+      softSkills: data[0].softSkills
     })
   ),
 );
