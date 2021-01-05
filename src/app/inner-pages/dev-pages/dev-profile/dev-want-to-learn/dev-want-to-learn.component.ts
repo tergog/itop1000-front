@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { Store } from '@ngrx/store';
+import { first } from 'rxjs/operators';
+
+import * as fromCore from 'app/core/reducers';
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
 import { UserInfo } from 'app/shared/models';
-import { Store } from '@ngrx/store';
-import * as fromCore from 'app/core/reducers';
-import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dev-want-to-learn',

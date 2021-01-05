@@ -54,17 +54,17 @@ const routes: Routes = [
     DevProfileEditFormComponent,
     DevWantToLearnComponent,
   ],
-    imports: [
-        CommonModule,
-        RouterModule.forChild(routes),
-        PagesSharedModule,
-        SharedModule,
-        ReactiveFormsModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatInputModule,
-        FormsModule
-    ],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    PagesSharedModule,
+    SharedModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
+    FormsModule
+  ],
   providers: [
     DevProfileService
   ],
