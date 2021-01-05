@@ -1,4 +1,4 @@
-import { Component, EventEmitter, forwardRef, HostBinding, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, forwardRef, HostBinding, Input, OnInit, Output, Renderer2 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -18,6 +18,7 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   @HostBinding('class.inner') get valid() { return this.type === 'inner' }
   @Input() type: string;
   @Input() placeholder;
+  @Input() disabled: boolean;
   @Input() isHiddenPassword: boolean;
   @Output() enterKey = new EventEmitter();
   @Output() onFocusField = new EventEmitter();
@@ -61,5 +62,9 @@ export class InputComponent implements OnInit, ControlValueAccessor {
 
   public onFocus(): void {
     this.onFocusField.emit();
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
   }
 }
