@@ -7,10 +7,16 @@ import { filter, tap } from 'rxjs/operators';
 import * as fromCore from 'app/core/reducers';
 import { UserInfo } from 'app/shared/models';
 import { getUserInfo } from 'app/core/reducers';
-import { SearchJobsAction, SetOnLogoutAction } from 'app/core/actions/core.actions';
+import { SetOnLogoutAction } from 'app/core/actions/core.actions';
 import { opacityInOutAnimation } from 'app/shared/animations';
-import { UserRole } from 'app/shared/enums';
-import { searchDevelopers } from 'app/core/developers/developers.actions';
+import { EUserRole } from 'app/shared/enums';
+import { searchDevelopers } from 'app/core/developers/store/developers.actions';
+import { GetJobsSuccessAction } from '../../../core/client/store/actions';
+
+enum ESearchFor {
+  SearchForDeveloper = 'Search for a developer',
+  SearchForJob = 'Search for a job'
+}
 
 @Component({
   selector: 'app-header',
@@ -22,9 +28,10 @@ export class HeaderComponent implements OnInit {
 
   public isPopupOpen: boolean;
   public userInfo$: Observable<UserInfo>;
-  public UserRole = UserRole;
+  public UserRole = EUserRole;
   public userRole: string;
   public searchTerm = new FormControl();
+  SearchFor = ESearchFor;
 
   constructor(private store: Store<fromCore.State>) {
   }
@@ -47,7 +54,7 @@ export class HeaderComponent implements OnInit {
 
   public onSearch(): void {
     if (this.userRole === this.UserRole.Dev) {
-      this.store.dispatch(new SearchJobsAction(this.searchTerm.value));
+      this.store.dispatch(new GetJobsSuccessAction(this.searchTerm.value));
     } else {
       this.store.dispatch(searchDevelopers({payload: this.searchTerm.value}));
     }

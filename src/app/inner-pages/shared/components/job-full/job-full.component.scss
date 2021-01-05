@@ -83,15 +83,15 @@
       width: 15px;
 
       &.project {
-        background-image: url(assets/icons/project.svg);
+        background-image: url(~assets/icons/project.svg);
       }
 
       &.duration {
-        background-image: url(assets/icons/duration.svg);
+        background-image: url(~assets/icons/duration.svg);
       }
 
       &.idea {
-        background-image: url(assets/icons/idea.svg);
+        background-image: url(~assets/icons/idea.svg);
       }
 
     }
@@ -103,15 +103,15 @@
       .job-nav-icon {
 
         &.project {
-          background-image: url(assets/icons/project-red.svg);
+          background-image: url(~assets/icons/project-red.svg);
         }
 
         &.duration {
-          background-image: url(assets/icons/duration-red.svg);
+          background-image: url(~assets/icons/duration-red.svg);
         }
 
         &.idea {
-          background-image: url(assets/icons/idea-red.svg);
+          background-image: url(~assets/icons/idea-red.svg);
         }
       }
     }

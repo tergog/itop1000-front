@@ -11,6 +11,7 @@ import { TermsPagesComponent } from 'app/core/components/terms-pages/terms-pages
 
 import { reducer } from './reducers/core.reducer';
 import { metaReducers } from './reducers';
+import { LoaderComponent } from './components/loader/loader.component';
 
 
 @NgModule({
@@ -18,12 +19,13 @@ import { metaReducers } from './reducers';
     LandingPageComponent,
     NotificationComponent,
     TermsPagesComponent,
+    LoaderComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     StoreModule.forFeature('core', reducer, {metaReducers}),
     EffectsModule.forFeature([CoreEffects])],
-  exports: [NotificationComponent, TermsPagesComponent],
+  exports: [NotificationComponent, TermsPagesComponent, LoaderComponent],
 })
 export class CoreModule {}

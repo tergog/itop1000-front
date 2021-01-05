@@ -3,16 +3,16 @@
 .logo {
   width: 60px;
   height: 60px;
-  background-image: url(assets/icons/logo.svg);
+  background-image: url(~assets/icons/logo.svg);
 }
 
 .edit {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: url(assets/icons/edit.svg) no-repeat $color-3 center center;
+  background: url(~assets/icons/edit.svg) no-repeat $color-3 center center;
   border: 1px solid $color-4;
-  box-shadow: inset 0px 6px 5px rgba(255, 255, 255, 0.3);
+  box-shadow: inset 0 6px 5px rgba(255, 255, 255, 0.3);
 
   &:hover {
     border-color: $color-2-hover;
@@ -23,16 +23,16 @@
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: url(assets/icons/arrow-down.svg) no-repeat $color-3 center center;
+  background: url(~assets/icons/arrow-down.svg) no-repeat $color-3 center center;
 }
 
 .delete {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: url(assets/icons/delete.svg) no-repeat $color-3 center center;
+  background: url(~assets/icons/delete.svg) no-repeat $color-3 center center;
   border: 1px solid $color-4;
-  box-shadow: inset 0px 6px 5px rgba(255, 255, 255, 0.3);
+  box-shadow: inset 0 6px 5px rgba(255, 255, 255, 0.3);
 
   &:hover {
     border-color: $color-2-hover;
@@ -43,25 +43,25 @@
   width: 37px;
   height: 37px;
   border-radius: 50%;
-  background: url(assets/icons/plus.svg) no-repeat $color-1 center center;
+  background: url(~assets/icons/plus.svg) no-repeat $color-1 center center;
 }
 
 .close {
   width: 15px;
   height: 15px;
-  background: url(assets/icons/close.svg);
+  background: url(~assets/icons/close.svg);
 }
 
 .user {
   width: 15px;
   height: 15px;
-  background: url(assets/icons/user.svg);
+  background: url(~assets/icons/user.svg);
 }
 
 .user {
   width: 15px;
   height: 15px;
-  background: url(assets/icons/user.svg);
+  background: url(~assets/icons/user.svg);
 
   &-gray {
     background: url(~assets/icons/user-gray.svg);
@@ -71,13 +71,13 @@
 .profile-photo {
   width: 154px;
   height: 154px;
-  background: url(assets/icons/profile-photo.svg);
+  background: url(~assets/icons/profile-photo.svg);
 }
 
 .email {
   width: 15px;
   height: 15px;
-  background: url(assets/icons/email.svg);
+  background: url(~assets/icons/email.svg);
 
   &-gray {
     background: url(~assets/icons/email-gray.svg);
@@ -87,13 +87,13 @@
 .search {
   width: 15px;
   height: 15px;
-  background: url(assets/icons/search.svg);
+  background: url(~assets/icons/search.svg);
 }
 
 .phone {
   width: 15px;
   height: 15px;
-  background: url(assets/icons/phone.svg);
+  background: url(~assets/icons/phone.svg);
 
   &-gray {
     background-image: url(~assets/icons/phone-gray.svg);
@@ -103,32 +103,42 @@
 .checked {
   width: 15px;
   height: 15px;
-  background: url(assets/icons/checked.svg);
+  background: url(~assets/icons/checked.svg);
 }
 
 .eye {
   width: 15px;
   height: 10px;
-  background: url(assets/icons/eye.svg);
+  background: url(~assets/icons/eye.svg);
 }
 
 .eye-line {
   width: 15px;
   height: 13px;
-  background: url(assets/icons/eye-line.svg);
+  background: url(~assets/icons/eye-line.svg);
 }
 
 .logo-preview-1 {
   width: 240px;
   height: 106px;
-  background-image: url(assets/icons/logo-preview-1.svg);
+  background-image: url(~assets/icons/logo-preview-1.svg);
 }
 
 .logo-preview-2 {
   display: block;
   width: 118px;
   height: 52px;
-  background-image: url(assets/icons/logo-preview-2.svg);
+  background-image: url(~assets/icons/logo-preview-2.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.logo-preview-3 {
+  display: block;
+  width: 236px;
+  height: 104px;
+  background-image: url(~assets/icons/logo-preview-2.svg);
+  background-repeat: no-repeat;
   background-size: contain;
 }
 
@@ -136,7 +146,7 @@
   width: 15px;
   height: 15px;
   opacity: 0.25;
-  background-image: url(assets/icons/contact-info.svg);
+  background-image: url(~assets/icons/contact-info.svg);
 
   &-gray {
     opacity: 1;
@@ -148,82 +158,129 @@
   width: 15px;
   height: 15px;
   opacity: 0.25;
-  background-image: url(assets/icons/settings.svg);
+  background-image: url(~assets/icons/settings.svg);
 }
 
 .payments {
   width: 15px;
   height: 11px;
   opacity: 0.25;
-  background-image: url(assets/icons/payments.svg);
+  background-image: url(~assets/icons/payments.svg);
 }
 
 .security {
   width: 11px;
   height: 15px;
   opacity: 0.25;
-  background-image: url(assets/icons/security.svg);
+  background-image: url(~assets/icons/security.svg);
 }
 
 .categories {
   width: 15px;
   height: 15px;
   opacity: 0.25;
-  background-image: url(assets/icons/categories.svg);
+  background-image: url(~assets/icons/categories.svg);
 }
 
 .categories-light {
   width: 15px;
   height: 15px;
-  background-image: url(assets/icons/categories-light.svg);
+  background-image: url(~assets/icons/categories-light.svg);
 }
 
 .project {
   width: 15px;
   height: 15px;
-  background-image: url(assets/icons/project.svg);
+  background-image: url(~assets/icons/project.svg);
 }
 
 .education-light {
   width: 15px;
   height: 10px;
-  background-image: url(assets/icons/education-light.svg);
+  background-image: url(~assets/icons/education-light.svg);
 }
 
 .soft-skills-light {
   width: 15px;
   height: 15px;
-  background-image: url(assets/icons/soft-skills-light.svg);
+  background-image: url(~assets/icons/soft-skills-light.svg);
 }
 
 .books {
   width: 15px;
   height: 12px;
-  background-image: url(assets/icons/books-light.svg);
+  background-image: url(~assets/icons/books-light.svg);
 }
 
 .certificates {
   width: 15px;
   height: 15px;
-  background-image: url(assets/icons/certificates-light.svg);
+  background-image: url(~assets/icons/certificates-light.svg);
 }
 
 .reviews {
   width: 15px;
   height: 15px;
-  background-image: url(assets/icons/reviews-light.svg);
+  background-image: url(~assets/icons/reviews-light.svg);
 }
 
 .location {
   width: 20px;
   height: 20px;
-  background-image: url(assets/icons/location.svg);
+  background-image: url(~assets/icons/location.svg);
 
   &-gray {
     background-image: url(~assets/icons/location-gray.svg);
   }
 }
 
+.instagram-color {
+  width: 32px;
+  height: 32px;
+  background-image: url(~assets/icons/instagram.svg);
+  display: block;
+  background-size: contain;
+}
+
+.facebook-color {
+  width: 32px;
+  height: 32px;
+  background: url(~assets/icons/facebook.svg);
+  display: block;
+  background-size: contain;
+}
+
+.linkedin {
+  width: 32px;
+  height: 32px;
+  background: url(~assets/icons/linkedin2.svg);
+  display: block;
+  background-size: contain;
+}
+
+.instagram {
+  width: 32px;
+  height: 32px;
+  background-image: url(~assets/icons/instagram2.svg);
+  display: block;
+  background-size: contain;
+}
+
+.facebook {
+  width: 26px;
+  height: 26px;
+  background: url(~assets/icons/facebook2.svg);
+  display: block;
+  background-size: contain;
+}
+
+.linkedin-color {
+  width: 32px;
+  height: 32px;
+  background: url(~assets/icons/linkedin.svg);
+  display: block;
+  background-size: contain;
+}
 
 .card {
   width: 32px;
@@ -231,87 +288,88 @@
   background-size: cover;
 
   &.amex {
-    background-image: url(assets/icons/amex-card.png);
+    background-image: url(~assets/icons/amex-card.png);
   }
 
   &.diners {
-    background-image: url(assets/icons/diners-card.png);
+    background-image: url(~assets/icons/diners-card.png);
   }
 
   &.discover {
-    background-image: url(assets/icons/discover-card.png);
+    background-image: url(~assets/icons/discover-card.png);
   }
 
   &.jcb {
-    background-image: url(assets/icons/jcb-card.png);
+    background-image: url(~assets/icons/jcb-card.png);
   }
 
   &.mastercard {
-    background-image: url(assets/icons/mastercard-card.png);
+    background-image: url(~assets/icons/mastercard-card.png);
   }
 
   &.unionpay {
-    background-image: url(assets/icons/unionpay-card.png);
+    background-image: url(~assets/icons/unionpay-card.png);
   }
 
   &.visa {
-    background-image: url(assets/icons/visa-card.png);
+    background-image: url(~assets/icons/visa-card.png);
   }
 
   &.unknown {
-    background-image: url(assets/icons/unknown-card.png);
+    background-image: url(~assets/icons/unknown-card.png);
   }
 }
 
 .active {
   .contact-info {
     opacity: 1;
-    background-image: url(assets/icons/contact-info-active.svg);
+    background-image: url(~assets/icons/contact-info-active.svg);
   }
 
   .settings {
     opacity: 1;
-    background-image: url(assets/icons/settings-active.svg);
+    background-image: url(~assets/icons/settings-active.svg);
   }
 
   .payments {
     opacity: 1;
-    background-image: url(assets/icons/payments-active.svg);
+    background-image: url(~assets/icons/payments-active.svg);
   }
 
   .security {
     opacity: 1;
-    background-image: url(assets/icons/security-active.svg);
+    background-image: url(~assets/icons/security-active.svg);
   }
 
   .categories, .categories-light {
     opacity: 1;
-    background-image: url(assets/icons/categories-active.svg);
+    background-image: url(~assets/icons/categories-active.svg);
   }
 
   .project {
     opacity: 1;
-    background-image: url(assets/icons/project-red.svg);
+    background-image: url(~assets/icons/project-red.svg);
   }
 
   .education-light {
-    background-image: url(assets/icons/education-active.svg);
+    background-image: url(~assets/icons/education-active.svg);
   }
 
   .soft-skills-light {
-    background-image: url(assets/icons/soft-skills-active.svg);
+    background-image: url(~assets/icons/soft-skills-active.svg);
   }
 
   .books {
-    background-image: url(assets/icons/books-active.svg);
+    background-image: url(~assets/icons/books-active.svg);
   }
 
   .certificates {
-    background-image: url(assets/icons/certificates-active.svg);
+    background-image: url(~assets/icons/certificates-active.svg);
   }
 
   .reviews {
-    background-image: url(assets/icons/reviews-active.svg);
+    background-image: url(~assets/icons/reviews-active.svg);
   }
+
 }
 

@@ -1,18 +1,10 @@
-@import 'assets/scss/variables';
+@import '~assets/scss/variables';
 
 :host {
   display: block;
   width: 100%;
   min-height: 100%;
-  background-image: url(~assets/img/search-bg.png);
-}
-
-.red-line {
-  height: 12px;
-  width: 100%;
-  background: $color-2;
-  box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.18);
-  transform: matrix(1, 0, 0, -1, 0, 0);
+  background-image: url('~assets/img/search-bg.png');
 }
 
 .search-wrap {

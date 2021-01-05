@@ -7,6 +7,7 @@ export const SEARCH_DEVELOPERS_SUCCESS = '[Developers] Search developers success
 export const SET_DEVELOPER = '[Developers] Set developer';
 export const SET_DEVELOPER_SUCCESS = '[Developers] Set developer success';
 export const UPDATE_DEVELOPER = '[Developers] Update developer';
+
 export const SET_DEVELOPER_CATEGORIES = '[Developers] Set developer categories';
 export const SET_DEVELOPER_SKILLS = '[Developers] Set developer skills';
 export const SET_DEVELOPER_LANGUAGES = '[Developers] Set developer soft languages';
@@ -18,6 +19,7 @@ export const searchDevelopersSuccess = createAction(SEARCH_DEVELOPERS_SUCCESS, (
 export const setDeveloper = createAction(SET_DEVELOPER, props<{ id: string }>());
 export const setDeveloperSuccess = createAction(SET_DEVELOPER_SUCCESS, (developer: Developer) => ({developer}));
 export const updateDeveloper = createAction(UPDATE_DEVELOPER, props<{ id: string }>());
+
 export const setDeveloperCategories = createAction(SET_DEVELOPER_CATEGORIES, (data: object) => ({data}));
 export const setDeveloperSkills = createAction(SET_DEVELOPER_SKILLS, (data: object) => ({data}));
 export const setDeveloperLanguages = createAction(SET_DEVELOPER_LANGUAGES, (data: object) => ({data}));

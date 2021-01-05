@@ -3,8 +3,11 @@ import { ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { createSelector } from 'reselect';
 
 // Imports from reducers
+import * as fromClient from 'app/core/client/store/reducer';
 import * as fromCore from 'app/core/reducers/core.reducer';
+import * as fromDevelopers from 'app/core/developers/store/developers.reducer';
 import { environment } from 'environments/environment';
+import { getDevelopersState } from '../developers/store';
 
 export const metaReducers: MetaReducer<any, any>[] = !environment.production ? [] : [];
 
@@ -13,6 +16,8 @@ export const metaReducers: MetaReducer<any, any>[] = !environment.production ? [
  */
 export interface State {
   core: fromCore.State;
+  client: fromClient.State;
+  developers: fromDevelopers.State;
 }
 
 export interface RouterStateUrl {
@@ -22,13 +27,16 @@ export interface RouterStateUrl {
 
 // Map of the reducers
 export const reducers: ActionReducerMap<State> = {
-  core: fromCore.reducer
+  core: fromCore.reducer,
+  client: fromClient.reducer,
+  developers: fromDevelopers.reducer
 };
 
 /**
  * Selectors returns smaller piece of state out of the root state
  */
 export const getCoreState = (state: State) => state.core;
+export const getClientState = (state: State) => state.client;
 
 /**
  * Selectors from Core module
@@ -44,6 +52,16 @@ export const getUserInfo = createSelector(
 );
 
 export const getJobs = createSelector(
-  getCoreState,
-  fromCore.getJobs
+  getClientState,
+  fromClient.getJobs
 );
+
+export const getClientLoading = createSelector(
+  getClientState,
+  fromClient.getLoading
+);
+
+export const getDevelopersLoading = createSelector(
+  getDevelopersState,
+  fromDevelopers.getLoading
+)

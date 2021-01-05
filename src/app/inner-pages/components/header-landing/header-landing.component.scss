@@ -1,0 +1,17 @@
+@import 'assets/scss/variables';
+
+:host {
+  height: 80px;
+  background-color: $color-1;
+  padding: 15px 125px;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.registration-btn {
+  padding: 12px 20px;
+  border-radius: 50px;
+  display: block;
+  border: 1px solid $text-color-5;
+}

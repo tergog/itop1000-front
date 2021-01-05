@@ -6,3 +6,4 @@ export * from './notification.model';
 export * from './name-value.model';
 export * from './developers.model';
 export * from './dev-properties.model';
+export * from './active-project.model';

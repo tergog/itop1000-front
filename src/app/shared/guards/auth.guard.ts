@@ -6,16 +6,17 @@ import { first, map, shareReplay } from 'rxjs/operators';
 import * as jwtDecode from 'jwt-decode';
 
 import { UserService } from '../services';
-import * as fromCore from 'app/core/reducers';
-import * as coreActions from 'app/core/actions/core.actions';
+import * as fromCore from 'app/core/reducers/index';
 import { TOKEN } from 'app/constants/constants';
+import { State } from 'app/core/reducers/index';
+import { SetOnLoginAction } from 'app/core/actions/core.actions';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
     constructor(
       private router: Router,
       private userService: UserService,
-      private store: Store<fromCore.State>,
+      private store: Store<State>,
     ) {}
 
     canActivate(): Observable<boolean> {
@@ -26,7 +27,7 @@ export class AuthGuard implements CanActivate {
                 if (isValid) {
                   const token = localStorage.getItem(TOKEN);
                   const userInfo = jwtDecode(token);
-                  this.store.dispatch(new coreActions.SetOnLoginAction(userInfo));
+                  this.store.dispatch(new SetOnLoginAction(userInfo));
                   return true;
                 }
                 // otherwise redirected to login page

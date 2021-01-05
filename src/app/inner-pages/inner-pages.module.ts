@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveComponentModule } from '@ngrx/component';
 
 import { HeaderComponent } from 'app/inner-pages/components/header/header.component';
 import { FooterComponent } from 'app/inner-pages/components/footer/footer.component';
@@ -26,13 +27,14 @@ const routes: Routes = [
       import('app/inner-pages/client-pages/client-pages.module').then(
         (m) => m.ClientPagesModule
       ),
-  },
+  }
 ];
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent, InnerPagesComponent],
   imports: [
     CommonModule,
+    ReactiveComponentModule,
     RouterModule.forChild(routes),
     SharedModule,
     FormsModule,

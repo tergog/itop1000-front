@@ -1,4 +1,4 @@
-<app-standard-bg-wrap>
+<app-standard-bg-wrap *ngrxLet="developers$ as developers">
   <div *ngIf="developersPaginated.length; else noDevelopers">
 
     <app-developer-resume *ngFor="let developer of developers"

@@ -14,6 +14,7 @@ export const ApiConstants = {
     searchDevelopers: 'accounts/search',
     getDeveloperById: 'accounts/get-developer',
     chargesList: 'accounts/charges-list',
+    activeProjects: 'accounts/active-projects',
     getDeveloporCategories: 'accounts/data-categories',
     getDeveloporSkills: 'accounts/data-skills',
     getDeveloporLanguages: 'accounts/data-languages',

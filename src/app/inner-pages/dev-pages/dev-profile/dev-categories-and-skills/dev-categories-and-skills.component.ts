@@ -1,45 +1,35 @@
-import { Component, OnInit } from '@angular/core';
-
-import { DevProfileSectionNames } from 'app/inner-pages/dev-pages/dev-profile/shared/enums/devProfileSectionNames';
-import { DevelopersService } from '../../../../shared/services';
-import { first } from 'rxjs/operators';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { setDeveloperCategories, setDeveloperSkills } from 'app/core/developers/developers.actions';
-import * as fromDevelopers from 'app/core/developers/index';
+import { first } from 'rxjs/operators';
+
+import { EDevProfileSectionNames } from 'app/inner-pages/dev-pages/dev-profile/shared/enums/devProfileSectionNames';
+import * as fromCore from 'app/core/reducers';
+
 
 @Component({
   selector: 'app-dev-categories-and-skills',
   templateUrl: './dev-categories-and-skills.component.html',
   styleUrls: ['./dev-categories-and-skills.component.scss']
 })
-export class DevCategoriesAndSkillsComponent implements OnInit {
+export class DevCategoriesAndSkillsComponent implements OnInit, OnDestroy {
 
   public isEdit: boolean;
-  public DevProfileSectionNames = DevProfileSectionNames;
+  public DevProfileSectionNames = EDevProfileSectionNames;
 
-
-  constructor(
-    private store: Store<fromDevelopers.State>,
-    private developersService: DevelopersService
-  ) { }
+  constructor(private store: Store<fromCore.State>) { }
 
   ngOnInit(): void {
-    this.developersService.getDeveloperCategories()
-      .pipe(first())
-      .subscribe(
-        (data) => this.store.dispatch(setDeveloperCategories(data)),
-        ({ error }) => console.log(error)
-      );
-    this.developersService.getDeveloperSkills()
-      .pipe(first())
-      .subscribe(
-        (data) => this.store.dispatch(setDeveloperSkills(data)),
-        ({ error }) => console.log(error)
-      );
+    this.store.select(fromCore.getUserInfo).pipe(first())
+    .subscribe((userInfo) => {
+      this.isEdit = !userInfo.devProperties.skills?.length && !userInfo.devProperties.categories?.length;
+    });
   }
 
   public onEditClick(): void {
     this.isEdit = !this.isEdit;
   }
 
+  ngOnDestroy(): void {
+
+  }
 }

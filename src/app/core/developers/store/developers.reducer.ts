@@ -1,7 +1,7 @@
-import * as actions from './developers.actions';
-
-import { Developer } from 'app/shared/models';
 import { createReducer, on } from '@ngrx/store';
+
+import * as actions from './developers.actions';
+import { Developer, Job } from 'app/shared/models';
 
 export const developers = [
     {
@@ -10,6 +10,8 @@ export const developers = [
       lastName: 'Hohol',
       title: 'Angular Developer',
       availability: true,
+      email: 'qwer@qwe.re',
+      phone: '+380987612345',
       devProperties: {
         skills: [
           {
@@ -126,15 +128,18 @@ export const developers = [
         monthRate: 20000,
         duration: 12,
       },
-      location: 'Ukraine, Kyiv',
+      address: 'Ukraine, Kyiv',
       dateUpdated: '19 July 2020',
-      photo : 'http://localhost:4000/1594974664857.png',
+      photo : 'http://localhost:4000/1594974664857.png'
     }
   ];
 
 export interface State {
   developers: Developer[];
   developer: Developer;
+  jobs: Job[];
+  loading: boolean;
+  error: boolean;
   categories: [];
   skills: [];
   softSkills: [];
@@ -144,6 +149,9 @@ export interface State {
 const INIT_STATE: State = {
   developers: [],
   developer: null, // developers[0]
+  jobs: [],
+  loading: false,
+  error: false,
   categories: [],
   skills: [],
   softSkills: [],
@@ -153,11 +161,31 @@ const INIT_STATE: State = {
 export const reducer = createReducer(
   INIT_STATE,
   on(
+    actions.searchDevelopers,
+    (state) => {
+      return {
+        ...state,
+        loading: true
+      };
+    }
+  ),
+  on(
     actions.searchDevelopersSuccess,
     (state, {developersList}) => ({
       ...state,
-      developers: developersList
+      developers: developersList,
+      loading: false
     })
+  ),
+  on(
+    actions.searchDevelopersError,
+    (state) => {
+      return {
+        ...state,
+        error: true,
+        loading: false
+      };
+    }
   ),
   on(
     actions.updateDeveloper,
@@ -170,11 +198,50 @@ export const reducer = createReducer(
     }
   ),
   on(
+    actions.searchJobsSuccess,
+    (state, payload) => {
+      return {
+        ...state,
+        jobs: payload.jobs,
+        loading: false
+      };
+    }
+  ),
+  on(
+    actions.searchJobs,
+    (state) => {
+      return {
+        ...state,
+        loading: true
+      };
+    }
+  ),
+  on(
+    actions.searchJobsError,
+    (state) => {
+      return {
+        ...state,
+        loading: false,
+        error: true
+      };
+    }
+  ),
+  on(
     actions.setDeveloperSuccess,
     (state, {developer}) => ({
       ...state,
       developer: {...developer}
     })
+  ),
+  on(
+    actions.setDeveloperError,
+    (state) => {
+      return {
+        ...state,
+        loading: false,
+        error: true
+      };
+    }
   ),
   on(
     actions.setDeveloperCategories,
@@ -211,8 +278,15 @@ export const getDevelopers = (state: State): Developer[] => {
   return state.developers;
 };
 
+export const getJobs = (state: State): Job[] => {
+  return state.jobs;
+};
+
 export const getDeveloper = (state: State): Developer => {
   return state.developer;
+};
+export const getLoading = (state: State): boolean => {
+  return state.loading;
 };
 
 export const getCategories = (state: State): any => {

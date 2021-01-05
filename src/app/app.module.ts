@@ -4,19 +4,20 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
-import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
-import { NgxStripeModule } from 'ngx-stripe';
 import { EffectsModule } from '@ngrx/effects';
+import { ReactiveComponentModule } from '@ngrx/component';
+import { NgxStripeModule } from 'ngx-stripe';
 
 import { AppRoutingModule } from 'app/app-routing.module';
 import { AppComponent } from 'app/app.component';
-import { metaReducers, reducers } from 'app/core/reducers';
 import { environment } from 'environments/environment';
 import { AuthGuard } from 'app/shared/guards/auth.guard';
 import { CoreModule } from 'app/core/core.module';
-import { DevelopersModule } from 'app/core/developers/developers.module';
+import { DevelopersModule } from 'app/core/developers/store/developers.module';
 import { HttpErrorHandlerService } from 'app/shared/services/http-error-handler.service';
 import { TokenInterceptor } from 'app/shared/interceptors/token.interceptor';
+import { ClientModule } from './core/client/store/client.module';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -27,12 +28,14 @@ import { TokenInterceptor } from 'app/shared/interceptors/token.interceptor';
     HttpClientModule,
     CoreModule,
     DevelopersModule,
+    ClientModule,
     BrowserAnimationsModule,
     NgxStripeModule.forRoot('pk_test_51HfRHCEuY58zLN527L8buA0YyVEdwwmwCiPgRNRiMhWdDdXaKgYOYeQ6bDNwDPXMtaAmtSSnbpaSzYYceAl7bSwh00wB02HoJj'),
     StoreModule.forRoot({}),
+    SharedModule,
     EffectsModule.forRoot(),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    GooglePlaceModule
+    ReactiveComponentModule
   ],
   providers: [
     {

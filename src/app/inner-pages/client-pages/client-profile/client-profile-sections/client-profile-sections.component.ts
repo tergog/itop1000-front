@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
 
-import { ClientProfileSections } from 'app/inner-pages/client-pages/client-profile/client-profile-sections.enum';
+import { EClientProfileSections } from 'app/inner-pages/client-pages/client-profile/client-profile-sections.enum';
 
 @Component({
   selector: 'app-client-profile-sections',
@@ -18,8 +18,8 @@ import { ClientProfileSections } from 'app/inner-pages/client-pages/client-profi
 })
 export class ClientProfileSectionsComponent implements OnInit {
 
-  @Input() public section: ClientProfileSections;
-  public ClientProfileSections = ClientProfileSections;
+  @Input() public section: EClientProfileSections;
+  public ClientProfileSections = EClientProfileSections;
 
   constructor() { }
 

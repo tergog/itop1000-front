@@ -20,6 +20,14 @@ $min-width-left: 170px;
   box-shadow: 4px 2px 6px 8px rgba(192,192,192, 0.25);
 }
 
+app-button {
+  display: none;
+}
+
+:host:hover  app-button {
+  display: block;
+}
+
 .left-side {
   position: relative;
   display: flex;
