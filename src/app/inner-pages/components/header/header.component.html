@@ -1,4 +1,4 @@
-<i class="logo-preview-2 cursor__pointer" routerLink="profile"></i>
+<script src="header.component.ts"></script><i class="logo-preview-2 cursor__pointer" routerLink="profile"></i>
 
 <ng-container *ngrxLet="userInfo$ as userInfo">
   <div class="w__350">
@@ -6,13 +6,13 @@
       <i class="search" (click)="onSearch()"></i>
     </app-input>
   </div>
-
-
-  <div class="photo-preview with-chevron cursor__pointer" [style.backgroundImage]="userInfo.photo ? 'url(' + userInfo?.photo + ')' : 'none'" (click)="togglePopup()"></div>
-
+  <div class="photo-wrap">
+    <div class="photo-preview with-border cursor__pointer" [style.backgroundImage]="userInfo.photo ? 'url(' + userInfo?.photo + ')' : 'url(assets/icons/profile-photo.svg'"></div>
+    <div class="chevron cursor__pointer" (click)="togglePopup()"></div>
+  </div>
   <div [@opacityInOut] class="logout-popup" *ngIf="isPopupOpen">
     <div class="d__flex d__flex--items-center">
-      <div class="photo-preview m__right--10" [style.backgroundImage]="userInfo.photo ? 'url(' + userInfo.photo + ')' : 'none'"></div>
+      <div class="photo-preview photo-preview__logout with-border photo-preview__wrap m__right--10" [style.backgroundImage]="userInfo.photo ? 'url(' + userInfo?.photo + ')' : 'url(assets/icons/profile-photo.svg)'"></div>
       <div class="d__flex d__flex--direction-column">
         <span class="text text__lg text__fw--500 text__color--1">{{ userInfo.firstName }} {{ userInfo.lastName }}</span>
         <span class="text text__sm text__color--6">{{ userInfo.email }}</span>
@@ -20,9 +20,8 @@
     </div>
 
     <div class="separator m__top--10"></div>
-
-    <div class="m__top--10 text__right">
-      <span class="text text__color--2 text__md text__fw--500 text__uppercase cursor__pointer" (click)="logout()">log out</span>
+    <div class="m__top--10 text__left">
+      <span class="text text__color--2 text__md text__fw--500 text__uppercase cursor__pointer logout-popup__button" (click)="logout()">log out</span>
     </div>
   </div>
 </ng-container>
