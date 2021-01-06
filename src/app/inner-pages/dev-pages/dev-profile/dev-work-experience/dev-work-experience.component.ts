@@ -66,7 +66,6 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
 
     this.userInfo$ = this.store.select(fromCore.getUserInfo).pipe(
       tap((userInfo: UserInfo) => {
-        console.log(userInfo);
         this.devProfileService.devProperties = userInfo.devProperties;
         this.userInfo = userInfo;
         this.updateTechnologies(this.selectedTechnologies);
@@ -92,7 +91,7 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
     this.showError = false;
     const newDevProperties: DevProperties = {projects: [...(this.userInfo.devProperties.projects || []), this.form.value]};
     this.userInfo = {...this.userInfo, devProperties: newDevProperties};
-    this.store.dispatch(new UpdateUserProfileAction(this.userInfo));   
+    this.store.dispatch(new UpdateUserProfileAction(this.userInfo));
     this.devProfileService.onSaveClick({devProperties: newDevProperties});
     this.isNewProject = false;
     this.availableTechnologies.push(...this.selectedTechnologies);

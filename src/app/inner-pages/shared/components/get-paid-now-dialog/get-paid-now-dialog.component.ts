@@ -56,23 +56,22 @@ export class GetPaidNowDialogComponent implements OnInit {
       lastName: new FormControl('', [Validators.required])
     });
   }
-  
+
   getPaid(): void {
-    this.stripeService.createToken(this.card.element, {name: `${this.form.controls.firstName.value} ${this.form.controls.lastName.value}`})
-        .pipe(untilDestroyed(this))
-        .subscribe(
-          result => this.createPaymentMethod(result.token.id),
-          error => console.log(error));
+    this.stripeService.createToken(this.card.element, {name: `${ this.form.controls.firstName.value } ${ this.form.controls.lastName.value }`})
+      .pipe(untilDestroyed(this))
+      .subscribe(
+        result => this.createPaymentMethod(result.token.id),
+        error => console.log(error));
   }
 
-  public createPaymentMethod(token): void {
-    let cardToken  = {
-      type: "card",
+  public createPaymentMethod(token: any): void {
+    const cardToken = {
+      type: 'card',
       card: {
         token: token
       }
     };
-
     this.paymentService.createPaymentMethod(cardToken)
       .pipe(untilDestroyed(this))
       .subscribe(
@@ -80,7 +79,7 @@ export class GetPaidNowDialogComponent implements OnInit {
         (error) => this.errorMessage = error.message);
   }
 
-  ngOnDestroy(): void { 
+  ngOnDestroy(): void {
 
   }
 

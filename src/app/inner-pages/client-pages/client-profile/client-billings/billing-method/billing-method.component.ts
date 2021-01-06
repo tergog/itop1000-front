@@ -25,7 +25,7 @@ export class BillingMethodComponent implements OnInit, OnDestroy {
   }
 
   onDeleteClick(): void {
-    const deleteDialogRef = this.matDialog.open(DeleteBillingMethodDialogComponent, {data: {paymentMethod: this.paymentMethod}})
+    const deleteDialogRef = this.matDialog.open(DeleteBillingMethodDialogComponent, {data: {paymentMethod: this.paymentMethod}});
 
     deleteDialogRef.afterClosed()
       .pipe(untilDestroyed(this))
