@@ -29,9 +29,15 @@
     <app-input class="m__top--10 light" formControlName="account_holder_name" [type]="'light'" [placeholder]="'Account holder name'"></app-input>
   </div>
 
-  <div class="m__top--30 d__flex d__flex--direction-column">
+  <div class="d__flex d__flex--direction-column m__top--30">
     <span class="text text__sm text__color--1 text__fw--600">Account holder type</span>
-    <app-input class="m__top--10 light" formControlName="account_holder_type" [type]="'light'" [placeholder]="'Account holder type'"></app-input>
+    <mat-form-field appearance="fill">
+      <mat-label>Account holder type</mat-label>
+      <mat-select (selectionChange)="onSelect($event)">
+        <mat-option value="individual">Individual</mat-option>
+        <mat-option value="company">Company</mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
 
   <div class="m__top--30" *ngIf="errorMessage">

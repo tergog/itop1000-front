@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MatSelectChange } from '@angular/material/select';
+import { untilDestroyed } from 'ngx-take-until-destroy';
 
-import { PaymentService } from '../../../../shared/services/payment.service';
+import { PaymentService } from 'app/shared/services/payment.service';
 
 @Component({
   selector: 'app-bank-account-dialog',
   templateUrl: './bank-account-dialog.component.html',
   styleUrls: ['./bank-account-dialog.component.scss']
 })
-export class BankAccountDialogComponent implements OnInit {
+export class BankAccountDialogComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   errorMessage: string;
@@ -32,19 +34,24 @@ export class BankAccountDialogComponent implements OnInit {
       account_holder_type: new FormControl('', [Validators.required])
     });
   }
+
   onConnect(): void {
     if (this.form.invalid){
       return;
     }
-    this.paymentService.verifyBankAccount(this.form.value).subscribe((res) => {
-      console.log(res);
+    this.paymentService.verifyBankAccount(this.form.value).pipe(untilDestroyed(this)).subscribe((res) => {
       this.errorMessage = null;
       this.dialogRef.close(res);
       },
       (error: HttpErrorResponse) => {
       this.errorMessage = error.error.error.raw.message;
       });
-
   }
 
+  onSelect(event: MatSelectChange): void {
+    this.form.get('account_holder_type').setValue(event.value);
+  }
+
+  ngOnDestroy(): void {
+  }
 }
