@@ -28,16 +28,16 @@ export class SearchDevelopersComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.store.select(getDevelopers)
       .pipe(untilDestroyed(this))
-      .subscribe(developers => {
+      .subscribe((developers: Developer[]) => {
         this.developers = developers;
         this.developersPaginated = this.developers.slice(0, 2);
     });
   }
 
-  onPageChange($event): void {
+  onPageChange({ pageIndex, pageSize }): void {
     this.developersPaginated = this.developers.slice(
-      $event.pageIndex * $event.pageSize,
-      $event.pageIndex * $event.pageSize + $event.pageSize
+      pageIndex * pageSize,
+      pageIndex * pageSize + pageSize
     );
   }
 

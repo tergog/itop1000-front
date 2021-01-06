@@ -31,7 +31,7 @@ export class ActiveProjectsComponent implements OnInit {
       );
   }
 
-  public onProjectClick(project): void {
+  public onProjectClick(project: ActiveProject): void {
     this.activeProject = project;
   }
 

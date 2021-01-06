@@ -7,9 +7,7 @@ import { NgxStripeModule } from 'ngx-stripe';
 import { ReactiveComponentModule } from '@ngrx/component';
 
 import { ChangePasswordDialogComponent } from 'app/inner-pages/shared/components//change-password-dialog/change-password-dialog.component';
-import {
-  ProfileChangePasswordComponent
-} from 'app/inner-pages/shared/components/profile-change-password/profile-change-password.component';
+import { ProfileChangePasswordComponent } from 'app/inner-pages/shared/components/profile-change-password/profile-change-password.component';
 import { ProfileSectionHeaderComponent } from 'app/inner-pages/shared/components/profile-section-header/profile-section-header.component';
 import { SharedModule } from 'app/shared/shared.module';
 import { JobComponent } from 'app/inner-pages/shared/components/job/job.component';
@@ -27,7 +25,6 @@ import { DeleteBillingMethodDialogComponent } from 'app/inner-pages/shared/compo
 import { ConfirmationDialogComponent } from 'app/inner-pages/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { EditJobDialogComponent } from 'app/inner-pages/shared/components/edit-job-dialog/edit-job-dialog.component';
 import { ActiveProjectsComponent } from './components/active-projects/active-projects.component';
-
 
 
 @NgModule({
@@ -60,16 +57,16 @@ import { ActiveProjectsComponent } from './components/active-projects/active-pro
     NgxStripeModule,
     MatProgressSpinnerModule,
   ],
-    exports: [
-        ChangePasswordDialogComponent,
-        ProfileChangePasswordComponent,
-        ProfileSectionHeaderComponent,
-        JobComponent,
-        DeveloperResumeComponent,
-        StandardBgWrapComponent,
-        ProjectCardComponent,
-        ActiveProjectsComponent
-    ],
+  exports: [
+    ChangePasswordDialogComponent,
+    ProfileChangePasswordComponent,
+    ProfileSectionHeaderComponent,
+    JobComponent,
+    DeveloperResumeComponent,
+    StandardBgWrapComponent,
+    ProjectCardComponent,
+    ActiveProjectsComponent
+  ],
 })
 export class PagesSharedModule {
 }
