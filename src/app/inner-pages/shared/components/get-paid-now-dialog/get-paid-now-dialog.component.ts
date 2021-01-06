@@ -41,7 +41,6 @@ export class GetPaidNowDialogComponent implements OnInit {
   elementsOptions: StripeElementsOptions = {
     locale: 'auto',
   };
-
   constructor(private stripeService: StripeService,
               private paymentService: PaymentService,
               private dialogRef: MatDialogRef<GetPaidNowDialogComponent>) {}
@@ -56,7 +55,7 @@ export class GetPaidNowDialogComponent implements OnInit {
       lastName: new FormControl('', [Validators.required])
     });
   }
-  
+
   getPaid(): void {
     this.stripeService.createToken(this.card.element, {name: `${this.form.controls.firstName.value} ${this.form.controls.lastName.value}`})
         .pipe(untilDestroyed(this))
@@ -80,7 +79,7 @@ export class GetPaidNowDialogComponent implements OnInit {
         (error) => this.errorMessage = error.message);
   }
 
-  ngOnDestroy(): void { 
+  ngOnDestroy(): void {
 
   }
 
