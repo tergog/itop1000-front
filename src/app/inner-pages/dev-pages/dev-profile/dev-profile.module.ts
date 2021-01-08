@@ -26,6 +26,7 @@ import { DevWorkExperienceComponent } from './dev-work-experience/dev-work-exper
 import { DevProjectCardComponent } from './dev-work-experience/dev-project-card/dev-project-card.component';
 import { DevProfileEditFormComponent } from './shared/dev-profile-edit-form/dev-profile-edit-form.component';
 import { DevWantToLearnComponent } from './dev-want-to-learn/dev-want-to-learn.component';
+import { DevCertificatesComponent } from './dev-certificates/dev-certificates.component';
 
 
 const routes: Routes = [
@@ -53,6 +54,7 @@ const routes: Routes = [
     DevProjectCardComponent,
     DevProfileEditFormComponent,
     DevWantToLearnComponent,
+    DevCertificatesComponent,
   ],
   imports: [
     CommonModule,
