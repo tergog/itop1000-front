@@ -3,7 +3,6 @@ import { untilDestroyed } from 'ngx-take-until-destroy';
 import { MatDialog } from '@angular/material/dialog';
 import { PaymentMethod } from '@stripe/stripe-js';
 
-
 import { PaymentService } from 'app/shared/services/payment.service';
 import { UpdateBillingMethodDialogComponent } from 'app/inner-pages/shared/components/update-billing-method-dialog/update-billing-method-dialog.component';
 import { DeleteBillingMethodDialogComponent } from 'app/inner-pages/shared/components/delete-billing-method-dialog/delete-billing-method-dialog.component';
