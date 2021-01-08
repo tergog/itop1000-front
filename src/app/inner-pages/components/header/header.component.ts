@@ -26,6 +26,7 @@ enum ESearchFor {
 })
 export class HeaderComponent implements OnInit {
 
+  public isNotificationsOpen: boolean;
   public isPopupOpen: boolean;
   public userInfo$: Observable<UserInfo>;
   public UserRole = EUserRole;

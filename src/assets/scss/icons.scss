@@ -20,7 +20,7 @@
 }
 
 .arrow-down {
-  width: 18px;
+  min-width: 18px;
   height: 18px;
   border-radius: 50%;
   background: url(~assets/icons/arrow-down.svg) no-repeat $color-3 center center;
@@ -47,7 +47,7 @@
 }
 
 .close {
-  width: 15px;
+  min-width: 15px;
   height: 15px;
   background: url(~assets/icons/close.svg);
 }
@@ -110,6 +110,20 @@
   width: 15px;
   height: 10px;
   background: url(~assets/icons/eye.svg);
+}
+
+.bell {
+  background: url(~assets/icons/bell.png);
+  width: 25px;
+  height: 25px;
+  background-size: contain;
+}
+
+.left-arrow {
+  background: url(~assets/icons/left-arrow.png);
+  min-width: 20px;
+  height: 20px;
+  background-size: contain;
 }
 
 .eye-line {

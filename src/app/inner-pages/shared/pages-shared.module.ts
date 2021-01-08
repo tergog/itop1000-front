@@ -32,6 +32,7 @@ import { HeaderLandingComponent } from 'app/inner-pages/components/header-landin
 import { FooterLandingComponent } from 'app/inner-pages/components/footer-landing/footer-landing.component';
 import { GetPaidNowDialogComponent } from './components/get-paid-now-dialog/get-paid-now-dialog.component';
 import { ActiveProjectsComponent } from './components/active-projects/active-projects.component';
+import { NotificationsPopupComponent } from './components/notifications-popup/notifications-popup.component';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import { ActiveProjectsComponent } from './components/active-projects/active-pro
     HeaderLandingComponent,
     FooterLandingComponent,
     ActiveProjectsComponent,
+    NotificationsPopupComponent,
   ],
   imports: [
     RouterModule,
@@ -79,7 +81,8 @@ import { ActiveProjectsComponent } from './components/active-projects/active-pro
     DeveloperResumeComponent,
     StandardBgWrapComponent,
     ProjectCardComponent,
-    ActiveProjectsComponent
+    ActiveProjectsComponent,
+    NotificationsPopupComponent
   ],
   providers: [
     DevProfileService
