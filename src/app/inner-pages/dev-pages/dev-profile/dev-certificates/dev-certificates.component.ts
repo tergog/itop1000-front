@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { filter, first } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
@@ -16,10 +16,10 @@ import { UserInfo } from 'app/shared/models';
   templateUrl: './dev-certificates.component.html',
   styleUrls: ['./dev-certificates.component.scss']
 })
-export class DevCertificatesComponent implements OnInit {
+export class DevCertificatesComponent implements OnInit, OnDestroy {
   public certificates: string[] = [];
   public form: FormGroup;
-  public userInfo$: Observable<UserInfo>;
+  public userInfo$: Subscription;
   public canEdit = true;
   public logoUrl: string;
   public developer: UserInfo;
@@ -33,8 +33,7 @@ export class DevCertificatesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userInfo$ = this.store.select(fromCore.getUserInfo);
-    this.userInfo$.subscribe((dev: UserInfo) => {
+    this.userInfo$ = this.store.select(fromCore.getUserInfo).subscribe((dev: UserInfo) => {
       if (dev) {
         this.developer = JSON.parse(JSON.stringify(dev));
       }
@@ -88,5 +87,9 @@ export class DevCertificatesComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  ngOnDestroy(): void {
+    this.userInfo$.unsubscribe();
   }
 }
