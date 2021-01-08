@@ -15,17 +15,18 @@
   height: 66px;
   border: 1px solid $color-3;
   border-radius: 50%;
-  background-size: cover;
+  background-position: center;
+  background-size: 140%;
   background-repeat: no-repeat;
-  border: 10px solid rgba(50, 46, 46, 0.8);
+  border: 10px solid rgba(50, 46, 46, 0.6);
   margin-top: -5px;
   &__logout {
     width: 108px;
     height: 108px;
+    background-size: 135%;
   }
   &__wrap {
-    border: 14px solid rgba(50, 46, 46, 0.8);
-    background-size: cover;
+    border: 14px solid rgba(50, 46, 46, 0.6);
     border-radius: 50%;
   }
 

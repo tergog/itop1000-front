@@ -7,7 +7,7 @@
     </app-input>
   </div>
   <div class="photo-wrap">
-    <div class="photo-preview with-border cursor__pointer" [style.backgroundImage]="userInfo.photo ? 'url(' + userInfo?.photo + ')' : 'url(assets/icons/profile-photo.svg'"></div>
+    <div class="photo-preview with-border cursor__pointer" [style.backgroundImage]="userInfo.photo ? 'url(' + userInfo?.photo + ')' : 'url(assets/icons/profile-photo.svg)'"></div>
     <div class="chevron cursor__pointer" (click)="togglePopup()"></div>
   </div>
   <div [@opacityInOut] class="logout-popup" *ngIf="isPopupOpen">
