@@ -28,6 +28,10 @@
   p {
     color: $text-color-3
   }
+  .icon  i {
+    margin-left: 10px;
+    margin-bottom: 5px;
+  }
 }
 
 .warning {
@@ -45,6 +49,10 @@
   background-color: $color-2;
   .icon {
     border: 1px solid #000000;
+    i {
+      width: 14px;
+      height: 14px;
+    }
   }
   p {
     color: $text-color-1

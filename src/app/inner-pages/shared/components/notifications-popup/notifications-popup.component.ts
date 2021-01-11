@@ -57,7 +57,6 @@ export class NotificationsPopupComponent implements OnInit {
 
   delete(id: number): void {
     this.mockData = this.mockData.filter(el => el.id !== id);
-    console.log(this.mockData);
   }
 
 }
