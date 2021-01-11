@@ -2,11 +2,23 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { NotificationMessage } from 'app/shared/models';
 import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',
   styleUrls: ['./notification.component.scss'],
+  animations: [
+    trigger('notification', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateX(400px)' }),
+        animate('300ms ease-out', style({ opacity: 1, transform: 'translateX(0)' })),
+      ]),
+      transition(':leave', [
+        animate('300ms', style({ opacity: 0, transform: 'translateX(400px)' }))
+      ])
+    ])
+  ]
 })
 export class NotificationComponent implements OnInit {
   /** message to show */
