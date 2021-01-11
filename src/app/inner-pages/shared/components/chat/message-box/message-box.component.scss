@@ -7,53 +7,35 @@
 
 .chat__message-box {
   overflow: auto;
+  height: 100%;
 
   &__header {
-    text-align: right;
+    display: grid;
+    grid-template-columns: 1fr 200px 30px 30px;
+    grid-template-rows: 50px;
+    gap: 0 10px;
+    grid-template-areas: ". . . .";
+    padding-bottom: 20px;
+    border-bottom: 1px solid $color-11;
 
-    &__top {
-      border-bottom: 1px solid $color-6;
-
-      &__icon-settings {
-        transition: transform .2s;
-
-        &:hover {
-          transform: rotateZ(45deg);
-        }
-      }
+    &__title {
+      line-height: 50px;
+      font-size: 30px;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: $text-color-5;
     }
 
-    &__bottom {
-      position: relative;
-      line-height: 40px;
-      height: 40px;
+    &__settings i,
+    &__mark i {
+      margin: 10px 0;
+    }
 
-      &__title {
-        position: absolute;
-        left: 0;
-        font-weight: 500;
-        font-size: 30px;
-        color: $text-color-4;
+    &__settings i {
+      transition: transform .2s;
 
-        @media screen and (max-width: $screen-xl) {
-          font-size: 25px;
-        }
-
-        &__name {
-          text-transform: uppercase;
-        }
-
-        &__from {
-          color: $text-color-5;
-        }
-      }
-
-      &__last-message {
-        position: absolute;
-        right: 0;
-        font-weight: 300;
-        font-size: 12px;
-        color: $text-color-5;
+      &:hover {
+        transform: rotateZ(45deg);
       }
     }
   }
@@ -61,17 +43,30 @@
   &__body {
     overflow: auto;
     background-color: rgba(0, 0, 0, .1);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, .25);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, .25);
     border-radius: 15px;
     margin-top: 20px;
+    height: calc(100% - 50px - 20px - 20px - 1px); // 85px - header, 20px - self margin, 20px - header margin, 1px - header border
 
     &__message-list {
       overflow: auto;
-      margin: 20px 32px;
+      margin: 20px 32px 0 32px;
+      height: calc(100% - 202px - 50px - 40px); // 222px - control height, 50px - control paddings, 20px - self paddings
 
       &__message {
         & + & {
           margin-top: 25px;
+        }
+
+        &--empty {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          &__message {
+            font-size: 20px;
+            color: $text-color-6;
+          }
         }
 
         &__header {
@@ -133,7 +128,6 @@
         }
 
         &__body {
-          padding: 30px 0;
           margin-left: 50px;
           font-family: $font-1;
           font-weight: 200;
@@ -146,7 +140,17 @@
     }
 
     &__control {
-      margin: 0 32px 32px 82px;
+      margin: 25px 32px 25px 82px;
+      height: 222px;
+      position: relative;
+
+      &__typing {
+        position: absolute;
+        top: -20px;
+        color: $text-color-6;
+        font-style: italic;
+        transition: opacity .1s;
+      }
 
       &__button-send {
         margin-top: 25px;

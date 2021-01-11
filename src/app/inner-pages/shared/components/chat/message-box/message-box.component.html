@@ -1,64 +1,74 @@
 <div class="chat__message-box">
   <div class="chat__message-box__header">
-    <div class="chat__message-box__header__top">
-      <i class="gear m__right--10 m__bottom--10 cursor__pointer chat__message-box__header__top__icon-settings"></i>
-      <i class="star m__bottom--10 cursor__pointer chat__message-box__header__top__icon-mark"></i>
-    </div>
-    <div class="chat__message-box__header__bottom">
-      <span class="chat__message-box__header__bottom__title">
-        <span class="chat__message-box__header__bottom__title__name">Script development</span>
-        /
-        <span class="chat__message-box__header__bottom__title__from">Boris stelman</span>
+    <div class="chat__message-box__header__title">
+      <span class="chat__message-box__header__title__from" *ngIf="chat.conversations.active">
+        {{ getConversationPartnerName(chat.conversations.active) }}
       </span>
-      <span class="chat__message-box__header__bottom__last-message">2 Months ago</span>
+    </div>
+    <div class="chat__message-box__header__search">
+      <app-input [placeholder]="'Search this conversation'" [formControl]="searchFC">
+        <i class="search" (click)="onMessagesSearch()"></i>
+      </app-input>
+    </div>
+    <div class="chat__message-box__header__settings">
+      <i class="gear cursor__pointer"></i>
+    </div>
+    <div class="chat__message-box__header__mark">
+      <i class="star cursor__pointer"></i>
     </div>
   </div>
   <div class="chat__message-box__body">
-    <div class="chat__message-box__body__message-list">
-      <div class="chat__message-box__body__message-list__message">
+    <div class="chat__message-box__body__message-list" #messages>
+      <div class="chat__message-box__body__message-list__message--empty" *ngIf="chat.messages.data.length === 0">
+        <div class="chat__message-box__body__message-list__message--empty__message" *ngIf="chat.conversations.active === null">Select the chat</div>
+        <div class="chat__message-box__body__message-list__message--empty__message" *ngIf="chat.conversations.active && !searchFC.value.length">You have no messages yet</div>
+        <div class="chat__message-box__body__message-list__message--empty__message" *ngIf="searchFC.value.length > 0">Nothing found :(</div>
+      </div>
+
+      <!-- Message markup -->
+      <div class="chat__message-box__body__message-list__message" *ngFor="let message of chat.messages.data">
         <div class="chat__message-box__body__message-list__message__header">
           <span class="chat__message-box__body__message-list__message__header__avatar">
             <img src="" alt="">
           </span>
           <span class="chat__message-box__body__message-list__message__header__name">
-            <span class="chat__from">Boris stelman</span> / <span class="chat__to">Oleg</span>
+            <span class="chat__from">
+              {{ message.sender.user.firstName }}
+              {{ message.sender.user.lastName }}
+            </span>
+            /
+            <span class="chat__to">
+              {{ getMessageWhom(message) }}
+            </span>
           </span>
-          <span class="chat__message-box__body__message-list__message__header__time">18:30 РМ</span>
+          <span
+            class="chat__message-box__body__message-list__message__header__time">{{ messageTimeFormat(message.date) }}</span>
         </div>
         <div class="chat__message-box__body__message-list__message__body">
-          1. The other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized.
-          <br>
-          2. By the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and
-          trouble that are bound to ensue; and equal blame...http://www......../........
-          <br>
-          3. The other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized.
+          <quill-view [content]="message.message"></quill-view>
         </div>
       </div>
 
-      <div class="chat__message-box__body__message-list__message">
-        <div class="chat__message-box__body__message-list__message__header">
-          <span class="chat__message-box__body__message-list__message__header__avatar">
-            <img src="" alt="">
-          </span>
-          <span class="chat__message-box__body__message-list__message__header__name">
-            <span class="chat__from">Oleg</span> / <span class="chat__to">Boris stelman</span>
-          </span>
-          <span class="chat__message-box__body__message-list__message__header__time">10:32 АМ</span>
-        </div>
-        <div class="chat__message-box__body__message-list__message__body">
-          The other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized. e
-          denounce with righteous indignation and dislike men.
-        </div>
+      <!-- Loader shows only during first loadging or conversation searching -->
+      <div class="chat__message-box__body__message-list__message--empty" *ngIf="chat.messages.loading">
+        <div class="chat__message-box__body__message-list__message--empty__message"><i class="loader"></i></div>
       </div>
+
     </div>
     <div class="chat__message-box__body__control clearfix">
+      <div class="chat__message-box__body__control__typing" *ngIf="userTyping">{{ userTyping }} is typing...</div>
       <div class="chat__message-box__body__control__input">
-        <app-rich-text-editor></app-rich-text-editor>
+        <app-rich-text-editor
+          (shareTextContent)="textContentChange($event)"
+          (shareQuillInstance)="getEditorInstance($event)"
+        ></app-rich-text-editor>
       </div>
       <div class="chat__message-box__body__control__button-send">
         <app-button
           [type]="'main'"
           [text]="'SEND'"
+          [disabled]="chat.conversations.active === null"
+          (buttonClick)="sendButtonClick()"
         ></app-button>
       </div>
     </div>
