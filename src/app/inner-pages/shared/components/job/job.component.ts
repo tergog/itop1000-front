@@ -12,6 +12,7 @@ import { NotificationsService } from 'app/shared/services/notifications.service'
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { EditJobDialogComponent } from '../edit-job-dialog/edit-job-dialog.component';
 import { EJobSections } from '../job-full/job-full.component';
+import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
 
 @Component({
   selector: 'app-job',
@@ -70,14 +71,14 @@ export class JobComponent implements OnInit, OnDestroy {
   private handleSuccessResponse(res: any): void {
     this.notificationsService.message.emit({
       message: res,
-      type: 'success'
+      type: ENotificationStatus.Success
     });
   }
 
   private handleErrorResponse(error: Error): void {
     this.notificationsService.message.emit({
       message: error.message,
-      type: 'error'
+      type: ENotificationStatus.Error
     });
   }
 

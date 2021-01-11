@@ -1,13 +1,13 @@
 <div class="d__flex d__flex--items-center d__flex--justify-between">
-  <span class="text text__fw--300 text__md">Notifications</span>
-  <span class="text text__fw--300 text__md text__color--2">{{mockData.length}}</span>
+  <span class="text text__fw--500 text__lg">Notifications</span>
+  <span class="text text__fw--500 text__lg text__color--2">{{mockData.length}}</span>
 </div>
 
-<div [@notification] *ngFor="let item of mockData; let i = index" [ngStyle]="{ 'z-index' : mockData.length - i}" class="notification d__flex d__flex--items-center d__flex--justify-between m__top--10">
+<div [@notification] *ngFor="let item of mockData; let i = index" [ngStyle]="{ 'z-index' : mockData.length - i }" class="notification d__flex d__flex--items-center d__flex--justify-between m__top--15">
   <div class="img m__right--10"></div>
   <div class="d__flex d__flex--direction-column m__right--10">
-    <span class="text text__sm text__fw--300 text__color--5">{{ item.name }}</span>
-    <span class="text text__sm text__fw--300 text__color--6">{{ item.message }}</span>
+    <span class="text text__md text__fw--400 text__color--5">{{ item.name }}</span>
+    <span class="text text__sm text__fw--400 text__color--6">{{ item.message }}</span>
   </div>
   <i class="left-arrow cursor__pointer m__right--10"></i>
   <i class="close cursor__pointer" (click)="delete(item.id)"></i>

@@ -9,6 +9,7 @@ import { Job, NameValueModel, NotificationMessage } from 'app/shared/models';
 import { State } from 'app/core/reducers/index';
 import { GetJobsAction } from 'app/core/client/store/actions';
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
+import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
 
 @Component({
   selector: 'app-create-job',
@@ -32,18 +33,18 @@ export class CreateJobComponent implements OnInit, OnDestroy {
   public onPostClick(): void {
     if (!this.form.valid) {
       this.showError = true;
-      return
+      return;
     }
     this.jobsService.createJob(this.form.value).pipe(untilDestroyed(this))
     .subscribe(() => {
-      let msg: NotificationMessage = {message: "Added project", type: "success"};
+      const msg: NotificationMessage = { message: 'Added project', type: ENotificationStatus.Success };
       this.store.dispatch(new GetJobsAction());
       this.notificationService.message.emit(msg);
       this.form.reset();
       this.devProfileService.availableCategories.push(...this.devProfileService.selectedCategories);
       this.devProfileService.selectedCategories = [];
       this.isEdit.emit();
-    }); 
+    });
   }
 
   public onCancelClick(): void {
@@ -73,7 +74,7 @@ export class CreateJobComponent implements OnInit, OnDestroy {
     this.form.get('categories').patchValue(this.devProfileService.selectedCategories);
     this.focusReset();
   }
-  
+
   onChipRemove(category: NameValueModel): void {
     this.devProfileService.availableCategories.push(category);
     this.devProfileService.selectedCategories = this.devProfileService.selectedCategories.filter(el => el.value !== category.value);
@@ -82,7 +83,7 @@ export class CreateJobComponent implements OnInit, OnDestroy {
 
   focusReset(): void {
     this.category.nativeElement.blur();
-    setTimeout(() => this.category.nativeElement.focus(), 0)
+    setTimeout(() => this.category.nativeElement.focus(), 0);
   }
 
   onSelect(event: MatSelectChange): void {
@@ -90,6 +91,6 @@ export class CreateJobComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    
+
   }
 }

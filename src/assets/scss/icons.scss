@@ -50,6 +50,28 @@
   min-width: 15px;
   height: 15px;
   background: url(~assets/icons/close.svg);
+  background-size: contain;
+}
+
+.close-black {
+  min-width: 10px;
+  height: 10px;
+  background: url(~assets/icons/close-black.svg);
+  background-size: contain;
+}
+
+.success-icon {
+  width: 30px;
+  height: 22px;
+  background: url(~assets/icons/success.svg) no-repeat;
+  background-size: contain;
+}
+
+.warning-icon {
+  width: 2px;
+  height: 15px;
+  background: url(~assets/icons/warning.svg) no-repeat;
+  background-size: contain;
 }
 
 .user {

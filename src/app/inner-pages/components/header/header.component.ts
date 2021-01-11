@@ -32,6 +32,7 @@ export class HeaderComponent implements OnInit {
   public UserRole = EUserRole;
   public userRole: string;
   public searchTerm = new FormControl();
+  public isNotification: boolean;
   SearchFor = ESearchFor;
 
   constructor(private store: Store<fromCore.State>) {
