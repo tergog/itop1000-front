@@ -18,6 +18,7 @@ import { DevelopersModule } from 'app/core/developers/store/developers.module';
 import { HttpErrorHandlerService } from 'app/shared/services/http-error-handler.service';
 import { TokenInterceptor } from 'app/shared/interceptors/token.interceptor';
 import { ClientModule } from './core/client/store/client.module';
+import { ChatModule } from './core/chats/store/chat.module';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { ClientModule } from './core/client/store/client.module';
     StoreModule.forRoot({}),
     EffectsModule.forRoot(),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    GooglePlaceModule
+    GooglePlaceModule,
+    ChatModule
   ],
   providers: [
     {

@@ -1,5 +1,4 @@
 <div class="chat">
-  <app-chat-header></app-chat-header>
-  <app-sidebar-rooms></app-sidebar-rooms>
-  <app-message-box></app-message-box>
+  <app-sidebar-rooms [user]="user$ | async" [chat]="chat$ | async"></app-sidebar-rooms>
+  <app-message-box [user]="user$ | async" [chat]="chat$ | async"></app-message-box>
 </div>
