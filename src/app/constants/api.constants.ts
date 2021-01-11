@@ -23,5 +23,13 @@ export const ApiConstants = {
   developers: {
     main: 'developers',
     search: 'developers/search'
+  },
+  chat: {
+    create: 'conversations/create',
+    getConversationsByMemberId: 'conversations/member',
+    search: 'conversations/search',
+    getMessagesById: 'messages/get',
+    getUnreadMessageById: 'messages/unread',
+    sendConversationMessage: 'messages/new'
   }
 };
