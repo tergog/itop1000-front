@@ -10,15 +10,15 @@ export interface IVerticalSpacingConfig {
   btnDec: string;
   input: string;
   spacing: number;
-};
+}
 
 export interface HTMLFocusEvent extends FocusEvent {
   target: HTMLInputElement & EventTarget;
-};
+}
 
 export interface HTMLKeyboardEvent extends KeyboardEvent {
   target: HTMLInputElement & EventTarget;
-};
+}
 
 class VerticalSpacing {
   private options: IVerticalSpacingConfig;
@@ -43,7 +43,7 @@ class VerticalSpacing {
         this.onNewSpacingSubmit(e.target.value);
         e.target.blur();
       }
-    }
+    };
 
     this.init();
   }
@@ -57,9 +57,13 @@ class VerticalSpacing {
   }
 
   setSpacing(value: number): void {
-    if (value < MIN_SPACING) { this.options.spacing = MIN_SPACING; }
-    else if (value > MAX_SPACING) { this.options.spacing = MAX_SPACING; }
-    else { this.options.spacing = value; };
+    if (value < MIN_SPACING) {
+      this.options.spacing = MIN_SPACING;
+    } else if (value > MAX_SPACING) {
+      this.options.spacing = MAX_SPACING;
+    } else {
+      this.options.spacing = value;
+    }
 
     this.updateEditor();
   }

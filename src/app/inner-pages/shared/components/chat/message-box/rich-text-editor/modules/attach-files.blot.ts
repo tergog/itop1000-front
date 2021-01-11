@@ -5,9 +5,10 @@ const SOURCE_ATTRIBUTE = 'data-source';
 export interface IFileBlotCreationData {
   template: string;
   data: string;
-};
+}
 
 let BlockEmbed = Quill.import('blots/block/embed');
+
 class FileBlot extends BlockEmbed {
   static blotName = 'file';
   static className = 'ql-file-embedded';
