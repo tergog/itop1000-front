@@ -3,6 +3,7 @@ import { ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { createSelector } from 'reselect';
 
 // Imports from reducers
+import * as fromChats from 'app/core/chats/store/chat.reducer';
 import * as fromClient from 'app/core/client/store/reducer'
 import * as fromCore from 'app/core/reducers/core.reducer';
 import { environment } from 'environments/environment';
@@ -14,7 +15,8 @@ export const metaReducers: MetaReducer<any, any>[] = !environment.production ? [
  */
 export interface State {
   core: fromCore.State;
-  client: fromClient.State
+  client: fromClient.State;
+  chat: fromChats.State;
 }
 
 export interface RouterStateUrl {
@@ -25,7 +27,8 @@ export interface RouterStateUrl {
 // Map of the reducers
 export const reducers: ActionReducerMap<State> = {
   core: fromCore.reducer,
-  client: fromClient.reducer
+  client: fromClient.reducer,
+  chat: fromChats.reducer
 };
 
 /**
@@ -33,6 +36,7 @@ export const reducers: ActionReducerMap<State> = {
  */
 export const getCoreState = (state: State) => state.core;
 export const getClientState = (state: State) => state.client;
+export const getChatsState = (state: State) => state.chat;
 
 /**
  * Selectors from Core module
@@ -50,4 +54,9 @@ export const getUserInfo = createSelector(
 export const getJobs = createSelector(
   getClientState,
   fromClient.getJobs
+);
+
+export const getChats = createSelector(
+  getChatsState,
+  fromChats.getChats
 );
