@@ -2,9 +2,9 @@
 <div>
   <div class="m__bottom--10 m__top--20">
     <div class="profile-photo-wrap">
-      <span class="certificate" *ngFor="let image of certificates">
-        <img class="m__right--20" [src]=image alt="certificateImg">
-        <button class="delete cert" (click)="deleteCertificate(image)"></button>
+      <span class="certificate" *ngFor="let certificate of certificates; let i = index">
+        <img class="m__right--20" [src]=certificate alt="certificateImg">
+        <button class="delete button-certificate" (click)="deleteCertificate(certificate, i)"></button>
       </span>
       <app-button [text]="'add new'" (buttonClick)="addCertificates()"></app-button>
     </div>

@@ -3,8 +3,12 @@
   display: inline-block;
 }
 
-.cert {
+.button-certificate {
   position: absolute;
   top: 0;
   right: 0.7em;
+
+  &:hover {
+    cursor: pointer;
+  }
 }

@@ -1,7 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { FormGroup } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
 import { filter, first } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
@@ -16,12 +15,9 @@ import { UserInfo } from 'app/shared/models';
   templateUrl: './dev-certificates.component.html',
   styleUrls: ['./dev-certificates.component.scss']
 })
-export class DevCertificatesComponent implements OnInit, OnDestroy {
+export class DevCertificatesComponent implements OnInit {
   public certificates: string[] = [];
   public form: FormGroup;
-  public userInfo$: Subscription;
-  public canEdit = true;
-  public logoUrl: string;
   public developer: UserInfo;
 
   constructor(
@@ -33,7 +29,7 @@ export class DevCertificatesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.userInfo$ = this.store.select(fromCore.getUserInfo).subscribe((dev: UserInfo) => {
+    this.store.select(fromCore.getUserInfo).pipe(first()).subscribe((dev: UserInfo) => {
       if (dev) {
         this.developer = JSON.parse(JSON.stringify(dev));
       }
@@ -50,21 +46,22 @@ export class DevCertificatesComponent implements OnInit, OnDestroy {
     }
   }
 
-  private uploadImage(image: string, forLogo: boolean): void {
-    this.developersService.uploadCertificate(image)
+  private uploadImage(certificate: string): void {
+    this.developersService.uploadCertificate(certificate)
       .subscribe(
         (url) => {
-          forLogo ? this.logoUrl = url : this.certificates.push(url);
+          this.certificates.push(url);
           this.onSaveCertificates();
         },
-        ({error}) => console.log(error)
+        ({ error }) => console.log(error)
       );
   }
 
-  public addCertificates(forLogo: boolean = false): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = {
-      destination: 'Certificates'
+  public addCertificates(): void {
+    const dialogConfig = {
+      data: {
+        destination: 'Certificates'
+      }
     };
 
     this.matDialog.open(UploadPhotoDialogComponent, dialogConfig)
@@ -73,13 +70,12 @@ export class DevCertificatesComponent implements OnInit, OnDestroy {
         filter(result => !!result),
         first()
       )
-      .subscribe((image: string) => this.uploadImage(image, forLogo));
+      .subscribe((certificate: string) => this.uploadImage(certificate));
   }
 
-  public deleteCertificate(url): void {
+  public deleteCertificate(url: string, index: number): void {
     this.developersService.deleteCertificate(url).subscribe(
       () => {
-        const index = this.certificates.indexOf(url);
         this.certificates.splice(index, 1);
         this.onSaveCertificates();
       },
@@ -87,9 +83,5 @@ export class DevCertificatesComponent implements OnInit, OnDestroy {
         console.log(err);
       }
     );
-  }
-
-  ngOnDestroy(): void {
-    this.userInfo$.unsubscribe();
   }
 }
