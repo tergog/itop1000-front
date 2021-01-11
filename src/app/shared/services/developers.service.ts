@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { environment } from 'environments/environment';
 import { ApiConstants } from 'app/constants/api.constants';
-import { Developer } from 'app/shared/models';
+import {Developer, NameValueModel} from 'app/shared/models';
 
 @Injectable({
   providedIn: 'root'
@@ -26,24 +26,24 @@ export class DevelopersService {
     return this.http.post<string>(`${this.apiUrl}${ApiConstants.accounts.uploadProjectImage}`, {image});
   }
 
-  public getDeveloperCategories(): Observable<object> {
+  public getDeveloperCategories(): Observable<NameValueModel[]> {
 
-    return this.http.post(`${this.apiUrl}${ApiConstants.accounts.getDeveloporCategories}`, {});
+    return this.http.get<NameValueModel[]>(`${this.apiUrl}${ApiConstants.accounts.getDeveloporCategories}`);
   }
 
-  public getDeveloperSkills(): Observable<object> {
+  public getDeveloperSkills(): Observable<NameValueModel[]> {
 
-    return this.http.post(`${this.apiUrl}${ApiConstants.accounts.getDeveloporSkills}`, {});
+    return this.http.get<NameValueModel[]>(`${this.apiUrl}${ApiConstants.accounts.getDeveloporSkills}`);
   }
 
-  public getDeveloperSoftSkills(): Observable<object> {
+  public getDeveloperSoftSkills(): Observable<NameValueModel[]> {
 
-    return this.http.post(`${this.apiUrl}${ApiConstants.accounts.getDeveloporSoftSkills}`, {});
+    return this.http.get<NameValueModel[]>(`${this.apiUrl}${ApiConstants.accounts.getDeveloporSoftSkills}`);
   }
 
-  public getDeveloperLanguages(): Observable<object> {
+  public getDeveloperLanguages(): Observable<NameValueModel[]> {
 
-    return this.http.post(`${this.apiUrl}${ApiConstants.accounts.getDeveloporLanguages}`, {});
+    return this.http.get<NameValueModel[]>(`${this.apiUrl}${ApiConstants.accounts.getDeveloporLanguages}`);
   }
 
 

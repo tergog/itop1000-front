@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 
 import * as actions from './developers.actions';
-import { Developer, Job } from 'app/shared/models';
+import {Developer, Job, NameValueModel} from 'app/shared/models';
 
 export const developers = [
     {
@@ -140,10 +140,10 @@ export interface State {
   jobs: Job[];
   loading: boolean;
   error: boolean;
-  categories: [];
-  skills: [];
-  softSkills: [];
-  languages: [];
+  categories: NameValueModel[];
+  skills: NameValueModel[];
+  softSkills: NameValueModel[];
+  languages: NameValueModel[];
 }
 
 const INIT_STATE: State = {
@@ -157,6 +157,7 @@ const INIT_STATE: State = {
   softSkills: [],
   languages: []
 };
+
 
 export const reducer = createReducer(
   INIT_STATE,
@@ -244,31 +245,31 @@ export const reducer = createReducer(
     }
   ),
   on(
-    actions.setDeveloperCategories,
+    actions.getDeveloperCategories,
     (state, {data}) => ({
       ...state,
-      categories: data[0].categories
+      categories: data
     })
   ),
   on(
-    actions.setDeveloperSkills,
+    actions.getDeveloperSkills,
     (state, {data}) => ({
       ...state,
-      skills: data[0].skills
+      skills: data
     })
   ),
   on(
-    actions.setDeveloperLanguages,
+    actions.getDeveloperLanguages,
     (state, {data}) => ({
       ...state,
-      languages: data[0].languages
+      languages: data
     })
   ),
   on(
-    actions.setDeveloperSoftSkills,
+    actions.getDeveloperSoftSkills,
     (state, {data}) => ({
       ...state,
-      softSkills: data[0].softSkills
+      softSkills: data
     })
   ),
 );

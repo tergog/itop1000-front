@@ -40,7 +40,8 @@ export class DevProfileService {
                 selectedCat => selectedCat.value === category.value)
         ));
     this.developersStore.select(fromDevelopers.getSkills)
-      .subscribe(val => this.availableSkills = val.filter(
+      .subscribe(
+        val => this.availableSkills = val.filter(
           skill => !this.selectedSkills.find((
             selectedSkill => selectedSkill.value === skill.value))
         ));
