@@ -1,4 +1,4 @@
-<button class="{{ type }}" (click)="buttonClick.emit()">
+<button class="{{ type }}" (click)="buttonClick.emit()" [disabled]="disabled">
   <span class="text text__lg text__fw--500 text__color--3 text__uppercase">
     {{ text }}
   </span>

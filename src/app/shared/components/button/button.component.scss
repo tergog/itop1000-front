@@ -1,4 +1,4 @@
-@import 'assets/scss/variables';
+@import '~assets/scss/variables';
 
 :host {
   @media (max-width: 576px) {
@@ -16,12 +16,18 @@
     cursor: pointer;
     transition: ease 0.2s;
 
-    &:hover {
+    &:not(:disabled):hover {
       background-color: $color-2-hover;
     }
 
-    &:active, &:focus {
+    &:not(:disabled):active,
+    &:not(:disabled):focus {
       background-color: $color-2-active;
+    }
+
+    &:disabled {
+      background-color: $text-color-6;
+      cursor: not-allowed;
     }
 
     &.main {
