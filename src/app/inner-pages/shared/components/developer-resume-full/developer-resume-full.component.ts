@@ -78,8 +78,8 @@ export class DeveloperResumeFullComponent implements OnInit, OnDestroy {
     this.router.navigate([`in/c/search-developers/${id}/project/${projectId}`]);
   }
 
-  public onMessageClick(): void {
-    this.router.navigate(['in/c/chat']);
+  public onMessageClick(id: string): void {
+    this.router.navigate([`in/c/chat/${id}`]);
   }
 
   public inViewport(isInViewport: boolean, section: DeveloperResumeSections): void {
