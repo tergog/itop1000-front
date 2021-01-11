@@ -25,10 +25,10 @@ export class DevCategoriesAndSkillsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    // this.store.select(fromCore.getUserInfo).pipe(first())
-    // .subscribe((userInfo) => {
-    //   this.isEdit = !userInfo.devProperties.skills?.length && !userInfo.devProperties.categories?.length;
-    // });
+    this.store.select(fromCore.getUserInfo).pipe(first())
+    .subscribe((userInfo) => {
+      this.isEdit = !userInfo.devProperties.skills?.length && !userInfo.devProperties.categories?.length;
+    });
 
     this.developerService.getDeveloperCategories().pipe(
       first()

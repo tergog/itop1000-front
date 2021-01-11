@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import { Store } from '@ngrx/store';
-import { first } from 'rxjs/operators';
+import {first, map} from 'rxjs/operators';
 import * as jwtDecode from 'jwt-decode';
 
 import * as coreActions from 'app/core/actions/core.actions';
@@ -34,17 +34,19 @@ export class DevProfileService {
     private developersStore: Store<fromDevelopers.State>
   ) {
     this.developersStore.select(fromDevelopers.getCategories)
-      .subscribe(
-        val => this.availableCategories = val.filter(
-              category => !this.selectedCategories.find(
-                selectedCat => selectedCat.value === category.value)
-        ));
+      .pipe(
+        map(val => val.filter(
+          category => !this.selectedCategories.find(
+            selectedCat => selectedCat.value === category.value)
+        )))
+      .subscribe(val => this.availableCategories = val);
     this.developersStore.select(fromDevelopers.getSkills)
-      .subscribe(
-        val => this.availableSkills = val.filter(
-          skill => !this.selectedSkills.find((
-            selectedSkill => selectedSkill.value === skill.value))
-        ));
+      .pipe(
+        map(val => val.filter(
+          skill => !this.selectedCategories.find(
+            selectedSkill => selectedSkill.value === skill.value)
+        )))
+      .subscribe(val => this.availableSkills = val);
   }
 
   public onSaveClick(userInfo: Partial<UserInfo>): void {

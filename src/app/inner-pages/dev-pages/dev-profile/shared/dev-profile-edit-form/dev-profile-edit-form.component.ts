@@ -11,6 +11,7 @@ import { UserService, NotificationsService } from 'app/shared/services';
 import { UserInfo } from 'app/shared/models/user-info.model';
 import { DevProperties } from 'app/shared/models/dev-properties.model';
 import { NameValueModel } from 'app/shared/models/name-value.model';
+import {Observable} from 'rxjs';
 
 export enum SelectedChips {
   Category = 'selectedCategories',
@@ -36,12 +37,15 @@ export class DevProfileEditFormComponent implements OnInit {
   public form: FormGroup;
   public DevProfileSectionNames = EDevProfileSectionNames;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  public availableCategoriesObservable: Observable<any>;
+  public availableSkillsObservable: Observable<any>;
 
   constructor(
     public devProfileService: DevProfileService,
     private store: Store<fromCore.State>,
     private notificationsService: NotificationsService,
-    private userService: UserService
+    private userService: UserService,
+
   ) { }
 
   ngOnInit(): void {
@@ -122,15 +126,15 @@ export class DevProfileEditFormComponent implements OnInit {
     // this.devProfileService.selectedSoftSkills = [...devProperties.softSkills] || [];
     // this.devProfileService.selectedLanguages = [...devProperties.languages] || [];
 
-    this.devProfileService.availableCategories = this.devProfileService.availableCategories
-      .filter(
-        (category) => !this.devProfileService.selectedCategories.find(selectedCat => selectedCat.value === category.value)
-      );
+    // this.devProfileService.availableCategories = this.devProfileService.availableCategories
+    //   .filter(
+    //     (category) => !this.devProfileService.selectedCategories.find(selectedCat => selectedCat.value === category.value)
+    //   );
 
-    this.devProfileService.availableSkills = this.devProfileService.availableSkills
-      .filter(
-        (skill) => !this.devProfileService.selectedSkills.find(selectedSkill => selectedSkill.value === skill.value)
-      );
+    // this.devProfileService.availableSkills = this.devProfileService.availableSkills
+    //   .filter(
+    //     (skill) => !this.devProfileService.selectedSkills.find(selectedSkill => selectedSkill.value === skill.value)
+    //   );
   }
 
 }
