@@ -14,7 +14,7 @@ export class NotificationComponent implements OnInit {
   /** notification closed output event */
   @Output() notificationClosed = new EventEmitter();
   /** show notification message by default time */
-  public defaultTimeout = 500000;
+  public defaultTimeout = 5000;
   NotificationStatus = ENotificationStatus;
 
   constructor() {}
