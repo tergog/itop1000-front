@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FormGroup } from '@angular/forms';
 import { filter, first } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import * as fromCore from 'app/core/reducers';
@@ -10,15 +11,17 @@ import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-pro
 import { DevelopersService } from 'app/shared/services';
 import { UserInfo } from 'app/shared/models';
 
+
 @Component({
   selector: 'app-dev-certificates',
   templateUrl: './dev-certificates.component.html',
   styleUrls: ['./dev-certificates.component.scss']
 })
-export class DevCertificatesComponent implements OnInit {
+export class DevCertificatesComponent implements OnInit, OnDestroy {
   public certificates: string[] = [];
   public form: FormGroup;
   public developer: UserInfo;
+  public subscription: Subscription;
 
   constructor(
     private store: Store<fromCore.State>,
@@ -29,7 +32,7 @@ export class DevCertificatesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.select(fromCore.getUserInfo).pipe(first()).subscribe((dev: UserInfo) => {
+    this.subscription = this.store.select(fromCore.getUserInfo).subscribe((dev: UserInfo) => {
       if (dev) {
         this.developer = JSON.parse(JSON.stringify(dev));
       }
@@ -83,5 +86,8 @@ export class DevCertificatesComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
