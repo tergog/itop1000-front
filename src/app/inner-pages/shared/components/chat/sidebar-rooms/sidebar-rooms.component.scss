@@ -20,15 +20,19 @@
 }
 
 .chat__sidebar {
+  height: 100%;
+
   &__search {
     padding-bottom: 20px;
-    border-bottom: 1px solid #4F4D4D;
+    border-bottom: 1px solid $color-11;
   }
 
   &__rooms {
     list-style: none;
     margin: 20px 0 0 0;
     padding: 0;
+    overflow: auto;
+    height: calc(100% - 20px - 71px); // 20px - self margin, 71px - search height
 
     &__room {
       display: grid;
@@ -42,7 +46,6 @@
       font-size: 25px;
       height: 75px;
       padding: 5px;
-      cursor: pointer;
       transition: background-color .2s;
 
       @media screen and (max-width: $screen-xl) {
@@ -50,7 +53,12 @@
         font-size: 20px;
       }
 
-      &:hover {
+      @media screen and (max-width: $screen-l) {
+        display: block;
+      }
+
+      &:not(&--empty):hover {
+        cursor: pointer;
         background-color: rgba(0, 0, 0, .2);
       }
 
@@ -61,6 +69,12 @@
         border-radius: 50%;
         grid-area: chat__sidebar__rooms__room__avatar;
         position: relative;
+
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: inherit;
+        }
 
         @media screen and (max-width: $screen-xl) {
           width: 40px;
@@ -91,6 +105,10 @@
         grid-template-rows: 25px;
         gap: 0 5px;
         grid-area: chat__sidebar__rooms__room__meta;
+
+        @media screen and (max-width: $screen-l) {
+          display: none;
+        }
 
         &__name {
           grid-area: 1 / 1 / 2 / 2;
@@ -124,6 +142,7 @@
           font-size: .5em;
           line-height: 25px;
           color: $text-color-6;
+          text-align: right;
         }
       }
 
@@ -135,6 +154,22 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         color: $text-color-6;
+
+        @media screen and (max-width: $screen-l) {
+          display: none;
+        }
+      }
+
+
+      &--empty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &__message {
+          font-size: 20px;
+          color: $text-color-6;
+        }
       }
     }
   }

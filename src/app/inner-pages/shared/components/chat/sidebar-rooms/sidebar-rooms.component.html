@@ -1,33 +1,38 @@
 <div class="chat__sidebar">
   <div class="chat__sidebar__search">
-    <app-input [placeholder]="'Search'">
-      <i class="search"></i>
+    <app-input
+      [placeholder]="'Search'"
+      [formControl]="searchFC"
+      (ngModelChange)="onConversationSearchCancel($event)"
+      (enterKey)="onConversationsSearch()"
+    >
+      <i class="search" (click)="onConversationsSearch()"></i>
     </app-input>
   </div>
   <ul class="chat__sidebar__rooms">
-    <li class="chat__sidebar__rooms__room">
+    <!--  -->
+    <li class="chat__sidebar__rooms__room chat__sidebar__rooms__room--empty" *ngIf="!chat.conversations.data.length">
+      <div class="chat__sidebar__rooms__room--empty__message" *ngIf="!searchFC.value.length">You have no conversations yet</div>
+      <div class="chat__sidebar__rooms__room--empty__message" *ngIf="searchFC.value.length > 0 && chat.conversations.search">Nothing found :(</div>
+    </li>
+
+    <!-- Conversation markup -->
+    <li class="chat__sidebar__rooms__room" *ngFor="let chat of chat.conversations.data" (click)="onConversationClick(chat.id)">
       <div class="chat__sidebar__rooms__room__avatar">
-        <img src="" alt="">
+        <img *ngIf="getConversationPartners(chat)[0].user.photo" [src]="getConversationPartners(chat)[0].user.photo" alt="Avatar">
       </div>
       <div class="chat__sidebar__rooms__room__meta">
-        <div class="chat__sidebar__rooms__room__meta__name">Boris Stelman</div>
+        <div class="chat__sidebar__rooms__room__meta__name">{{ getConversationPartnerName(chat) }}</div>
         <div class="chat__sidebar__rooms__room__meta__counter chat--new-message">19</div>
         <div class="chat__sidebar__rooms__room__meta__indicator"><i class="email email-yellow"></i></div>
         <div class="chat__sidebar__rooms__room__meta__time">11:59 AM</div>
       </div>
       <div class="chat__sidebar__rooms__room__cut">Lorem ipsum dolor sit amet / consectetur adipiscing elit / sed do eiusmod</div>
     </li>
-    <li class="chat__sidebar__rooms__room">
-      <div class="chat__sidebar__rooms__room__avatar">
-        <img src="" alt="">
-      </div>
-      <div class="chat__sidebar__rooms__room__meta">
-        <div class="chat__sidebar__rooms__room__meta__name">Boris Stelman</div>
-        <div class="chat__sidebar__rooms__room__meta__counter">0</div>
-        <div class="chat__sidebar__rooms__room__meta__indicator"><i class="email email-yellow-open"></i></div>
-        <div class="chat__sidebar__rooms__room__meta__time">3:15 PM</div>
-      </div>
-      <div class="chat__sidebar__rooms__room__cut">Lorem ipsum dolor sit amet / consectetur adipiscing elit / sed do eiusmod</div>
+
+    <!-- Loader shows only during first loadging or conversation searching -->
+    <li class="chat__sidebar__rooms__room chat__sidebar__rooms__room--empty" *ngIf="chat.conversations.loading">
+      <div class="chat__sidebar__rooms__room--empty__message"><i class="loader"></i></div>
     </li>
   </ul>
 </div>
