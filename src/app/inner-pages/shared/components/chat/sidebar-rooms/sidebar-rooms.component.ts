@@ -71,7 +71,7 @@ export class SidebarRoomsComponent implements OnInit {
 
   getConversationPartnerName(conv: ConversationModel): string {
     const partners: ConversationMemberModel[] = this.getConversationPartners(conv);
-    return partners.length > 1 ? conv.title : `${partners[0].user.firstName} ${partners[0].user.lastName}`;
+    return `${partners[0].user.firstName} ${partners[0].user.lastName}`;
   }
 
   // async getUnreadMessages(conv: ConversationModel): Promise<string> {

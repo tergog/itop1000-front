@@ -37,7 +37,7 @@ export class RichTextEditorComponent {
     },
     counterModule: {
       container: '.ql-counter',
-      maxLength: 1024
+      maxLength: 4096
     },
     "emoji-toolbar": true
   };
