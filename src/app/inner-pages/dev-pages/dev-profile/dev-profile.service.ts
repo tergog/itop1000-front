@@ -73,12 +73,42 @@ export class DevProfileService {
     this.userService.updateProfile(userInfo)
       .pipe(first())
       .subscribe(
-        (userInfo: UserInfo) => this.handleSuccessResponse(userInfo),
-        ({ error }) => this.handleErrorResponse(error)
+        (user: UserInfo) => this.handleSuccessResponse(user),
+        ({error}) => this.handleErrorResponse(error)
       );
   }
 
-  private onUpdateProfileInfo(token: string): void {
+  public onUploadCertificate(certificate: string): void {
+    this.userService.uploadCertificate(certificate)
+      .pipe(first())
+      .subscribe(
+        (token) => {
+          this.notificationsService.message.emit({
+            message: 'Certificate added successfully',
+            type: 'success'
+          });
+          this.onUpdateProfileInfo(token);
+        },
+        ({error}) => this.handleErrorResponse(error)
+      );
+  }
+
+  public onDeleteCertificate(certificate: string, index: number): void {
+    this.userService.deleteCertificate(certificate, index)
+      .pipe(first())
+      .subscribe(
+        (token) => {
+          this.notificationsService.message.emit({
+            message: 'Certificate deleted successfully',
+            type: 'success'
+          });
+          this.onUpdateProfileInfo(token);
+        },
+        ({error}) => this.handleErrorResponse(error)
+      );
+  }
+
+  private onUpdateProfileInfo(token: string) {
 
     localStorage.setItem(TOKEN, token);
 
