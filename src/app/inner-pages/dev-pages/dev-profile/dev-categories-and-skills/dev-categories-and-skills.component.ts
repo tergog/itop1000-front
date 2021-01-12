@@ -44,8 +44,6 @@ export class DevCategoriesAndSkillsComponent implements OnInit, OnDestroy {
     this.isEdit = !this.isEdit;
   }
 
-
-
   ngOnDestroy(): void {
 
   }

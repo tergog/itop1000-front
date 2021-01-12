@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import {first, map} from 'rxjs/operators';
+import { first, map } from 'rxjs/operators';
 import * as jwtDecode from 'jwt-decode';
 
 import * as coreActions from 'app/core/actions/core.actions';
@@ -11,7 +11,6 @@ import * as fromCore from 'app/core/reducers';
 import * as fromDevelopers from 'app/core/developers/store/index';
 import { DevProperties } from 'app/shared/models/dev-properties.model';
 import { NotificationsService } from 'app/shared/services/notifications.service';
-import { Observable } from 'rxjs';
 
 @Injectable()
 export class DevProfileService {
@@ -27,8 +26,6 @@ export class DevProfileService {
   public availableSkills: NameValueModel[];
   public availableSoftSkills: NameValueModel[];
   public availableLanguages: NameValueModel[];
-  // public avaliableCategories$: Observable<any>;
-  // public availableSkills$: Observable<any>;
 
   constructor(
     private store: Store<fromCore.State>,

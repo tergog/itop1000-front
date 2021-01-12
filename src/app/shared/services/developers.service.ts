@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { environment } from 'environments/environment';
 import { ApiConstants } from 'app/constants/api.constants';
-import {Developer, NameValueModel} from 'app/shared/models';
+import { Developer, NameValueModel } from 'app/shared/models';
 
 @Injectable({
   providedIn: 'root'
