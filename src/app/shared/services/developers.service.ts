@@ -26,11 +26,4 @@ export class DevelopersService {
     return this.http.post<string>(`${this.apiUrl}${ApiConstants.accounts.uploadProjectImage}`, {image});
   }
 
-  public uploadCertificate(image: string | ArrayBuffer): Observable<string> {
-    return this.http.post<string>(`${this.apiUrl}${ApiConstants.accounts.uploadCertificate}`, {image});
-  }
-
-  public deleteCertificate(url: string): Observable<string> {
-    return this.http.post<string>(`${this.apiUrl}${ApiConstants.accounts.deleteCertificate}`, {url});
-  }
 }

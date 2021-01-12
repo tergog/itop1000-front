@@ -42,22 +42,9 @@ export class DevCertificatesComponent implements OnInit, OnDestroy {
     });
   }
 
-  private onSaveCertificates(): void {
-    if (this.developer.devProperties.certificates !== this.certificates) {
-      this.developer.devProperties.certificates = this.certificates;
-      this.devProfileService.onSaveClick(this.developer);
-    }
-  }
-
   private uploadImage(certificate: string): void {
-    this.developersService.uploadCertificate(certificate)
-      .subscribe(
-        (url) => {
-          this.certificates.push(url);
-          this.onSaveCertificates();
-        },
-        ({ error }) => console.log(error)
-      );
+    this.devProfileService.onUploadCertificate(certificate);
+
   }
 
   public addCertificates(): void {
@@ -77,16 +64,9 @@ export class DevCertificatesComponent implements OnInit, OnDestroy {
   }
 
   public deleteCertificate(url: string, index: number): void {
-    this.developersService.deleteCertificate(url).subscribe(
-      () => {
-        this.certificates.splice(index, 1);
-        this.onSaveCertificates();
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    this.devProfileService.onDeleteCertificate(url, index);
   }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
