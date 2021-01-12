@@ -95,7 +95,7 @@ export class DevProfileEditFormComponent implements OnInit {
     this.isEdit = false;
   }
 
-  public onChipSelect(chip, selectedChips, availableChips): void {
+  public onChipSelect(chip, selectedChips): void {
     this.devProfileService[selectedChips].push(chip);
     this.inicializeObservers();
     this.resetFocus(selectedChips);
@@ -107,7 +107,7 @@ export class DevProfileEditFormComponent implements OnInit {
     setTimeout(() => { element.nativeElement.focus()}, 0);
   }
 
-  public onChipRemove(chip: NameValueModel, selectedChips, availableChips): void {
+  public onChipRemove(chip: NameValueModel, selectedChips): void {
     this.devProfileService[selectedChips] = this.devProfileService[selectedChips].filter(item => item.value !== chip.value);
     this.inicializeObservers();
   }
