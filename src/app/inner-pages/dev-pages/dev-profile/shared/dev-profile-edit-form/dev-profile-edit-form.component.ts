@@ -67,31 +67,19 @@ export class DevProfileEditFormComponent implements OnInit {
       });
 
     this.availableCategories$ = this.availableCategories.asObservable().pipe(
-        map(val => {
-          return this.allCategories.filter(
-            category => !val.find(item => item.value === category.value)
-          );
-        })
-      );
+        map(val => this.allCategories.filter(category => !val.find(item => item.value === category.value))));
 
     this.availableSkills$ = this.availableSkills.asObservable().pipe(
-      map(val => {
-        return this.allSkills.filter(
-          skill => !val.find(item => item.value === skill.value)
-        );
-      })
-    );
+      map(val => this.allSkills.filter(skill => !val.find(item => item.value === skill.value))));
 
-    this.developersStore.select(fromDevelopers.getCategories).pipe(
-      filter(res => res.length)
-    ).subscribe(res => {
+    this.developersStore.select(fromDevelopers.getCategories).pipe(filter(res => res.length))
+      .subscribe(res => {
         this.allCategories = res;
         this.availableCategories.next(this.devProfileService.selectedCategories);
       });
 
-    this.developersStore.select(fromDevelopers.getSkills).pipe(
-      filter(res => res.length)
-    ).subscribe(res => {
+    this.developersStore.select(fromDevelopers.getSkills).pipe(filter(res => res.length))
+      .subscribe(res => {
       this.allSkills = res;
       this.availableSkills.next(this.devProfileService.selectedSkills);
     });
