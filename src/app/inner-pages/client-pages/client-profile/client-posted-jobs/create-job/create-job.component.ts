@@ -36,15 +36,15 @@ export class CreateJobComponent implements OnInit, OnDestroy {
       return;
     }
     this.jobsService.createJob(this.form.value).pipe(untilDestroyed(this))
-    .subscribe(() => {
-      const msg: NotificationMessage = { message: 'Added project', type: ENotificationStatus.Success };
-      this.store.dispatch(new GetJobsAction());
-      this.notificationService.message.emit(msg);
-      this.form.reset();
-      this.devProfileService.availableCategories.push(...this.devProfileService.selectedCategories);
-      this.devProfileService.selectedCategories = [];
-      this.isEdit.emit();
-    });
+      .subscribe(() => {
+        const msg: NotificationMessage = { message: 'Added project', type: ENotificationStatus.Success };
+        this.store.dispatch(new GetJobsAction());
+        this.notificationService.message.emit(msg);
+        this.form.reset();
+        this.devProfileService.availableCategories.push(...this.devProfileService.selectedCategories);
+        this.devProfileService.selectedCategories = [];
+        this.isEdit.emit();
+      });
   }
 
   public onCancelClick(): void {

@@ -7,6 +7,6 @@ export const opacityInOutAnimation = trigger('opacityInOut', [
   ]),
   transition(':leave', [
     style({ top: '{{to}}px', opacity: 1 }),
-    animate('200ms ease-in', style({ top: '{{from}}px', opacity: 0  }))
+    animate('200ms ease-in', style({ top: '{{from}}px', opacity: 0 }))
   ])
 ]);

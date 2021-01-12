@@ -7,18 +7,17 @@
     </app-input>
   </div>
 
-  <div class="d__flex">
-    <div class="bell-button d__flex d__flex--items-center m__right--30">
-      <i class="bell cursor__pointer" (click)="isNotificationsOpen = !isNotificationsOpen">
-        <div *ngIf="isNotification" class="dot"></div>
-      </i>
-    </div>
+  <div class="d__flex d__flex--items-center">
 
-    <app-notifications-popup [@opacityInOut]="{value: ':enter', params: {from: 60, to: 80}}" *ngIf="isNotificationsOpen"></app-notifications-popup>
+    <i class="bell cursor__pointer m__right--30" (click)="isNotificationsOpen = !isNotificationsOpen">
+      <div *ngIf="true" class="dot"></div>
+    </i>
+
+    <app-notifications-popup [@opacityInOut]="{ value: ':enter', params: { from: 60, to: 80 } }" *ngIf="isNotificationsOpen"></app-notifications-popup>
 
     <div class="photo-preview with-chevron cursor__pointer" [style.backgroundImage]="userInfo.photo ? 'url(' + userInfo?.photo + ')' : 'none'" (click)="togglePopup()"></div>
 
-    <div [@opacityInOut]="{value: ':enter', params: {from: 85, to: 90}}" class="logout-popup" *ngIf="isPopupOpen">
+    <div [@opacityInOut]="{ value: ':enter', params: { from: 85, to: 90 } }" class="logout-popup" *ngIf="isPopupOpen">
       <div class="d__flex d__flex--items-center">
         <div class="photo-preview m__right--10" [style.backgroundImage]="userInfo.photo ? 'url(' + userInfo.photo + ')' : 'none'"></div>
         <div class="d__flex d__flex--direction-column">

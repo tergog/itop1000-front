@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { opacityInOutAnimation } from 'app/shared/animations';
-import { animate, style, transition, trigger } from '@angular/animations';
+import { marginAnimation } from 'app/shared/animations/margin.animation';
 
 export interface Mock {
   name: string;
@@ -13,16 +12,7 @@ export interface Mock {
   selector: 'app-notifications-popup',
   templateUrl: './notifications-popup.component.html',
   styleUrls: ['./notifications-popup.component.scss'],
-  animations: [ trigger('notification', [
-    transition(':enter', [
-      style({ opacity: 0, marginTop: '-51px' }),
-      animate('300ms', style({ opacity: 1, marginTop: '10px' })),
-    ]),
-    transition(':leave', [
-      animate('300ms', style({ opacity: 0, marginTop: '-51px' }))
-    ])
-  ])
-  ]
+  animations: [marginAnimation]
 })
 
 export class NotificationsPopupComponent implements OnInit {

@@ -11,7 +11,6 @@ import { SetOnLogoutAction } from 'app/core/actions/core.actions';
 import { opacityInOutAnimation } from 'app/shared/animations';
 import { EUserRole } from 'app/shared/enums';
 import { searchDevelopers, searchJobs } from 'app/core/developers/store/developers.actions';
-import { GetJobsAction, GetJobsSuccessAction } from '../../../core/client/store/actions';
 
 enum ESearchFor {
   SearchForDeveloper = 'Search for a developer',
@@ -32,7 +31,6 @@ export class HeaderComponent implements OnInit {
   public UserRole = EUserRole;
   public userRole: string;
   public searchTerm = new FormControl();
-  public isNotification: boolean;
   SearchFor = ESearchFor;
 
   constructor(private store: Store<State>) {
@@ -58,7 +56,7 @@ export class HeaderComponent implements OnInit {
     if (this.userRole === this.UserRole.Dev) {
       this.store.dispatch(searchJobs(this.searchTerm.value));
     } else {
-      this.store.dispatch(searchDevelopers({payload: this.searchTerm.value}));
+      this.store.dispatch(searchDevelopers({ payload: this.searchTerm.value }));
     }
   }
 
