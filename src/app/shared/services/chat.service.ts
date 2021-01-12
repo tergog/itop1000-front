@@ -33,12 +33,4 @@ export class ChatService {
   public getMessagesByConversationId(convId: string, count: number = 20): Observable<object> {
     return this.http.get(`${this.apiURL}${ApiConstants.chat.getMessagesById}/${convId}/${count}`, {});
   }
-
-  public getUnreadMessagesByConversationId(convId: string): Observable<object> {
-    return this.http.get(`${this.apiURL}${ApiConstants.chat.getUnreadMessageById}/${convId}`, {});
-  }
-
-  public sendConversationMessage(chat: ConversationMessageModel): Observable<object> {
-    return this.http.post(`${this.apiURL}${ApiConstants.chat.sendConversationMessage}`, chat);
-  }
 }

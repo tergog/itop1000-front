@@ -28,8 +28,6 @@ export const ApiConstants = {
     create: 'conversations/create',
     getConversationsByMemberId: 'conversations/member',
     search: 'conversations/search',
-    getMessagesById: 'messages/get',
-    getUnreadMessageById: 'messages/unread',
-    sendConversationMessage: 'messages/new'
+    getMessagesById: 'messages/get'
   }
 };
