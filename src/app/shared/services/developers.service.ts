@@ -41,6 +41,4 @@ export class DevelopersService {
   public getDeveloperLanguages(): Observable<NameValueModel[]> {
     return this.http.get<NameValueModel[]>(`${this.apiUrl}${ApiConstants.accounts.developerLanguages}`);
   }
-
-
 }
