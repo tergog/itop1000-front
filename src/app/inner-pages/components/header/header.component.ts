@@ -4,14 +4,14 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 
-import * as fromCore from 'app/core/reducers';
+import { State } from 'app/core/reducers/index';
 import { UserInfo } from 'app/shared/models';
 import { getUserInfo } from 'app/core/reducers';
 import { SetOnLogoutAction } from 'app/core/actions/core.actions';
 import { opacityInOutAnimation } from 'app/shared/animations';
 import { EUserRole } from 'app/shared/enums';
-import { searchDevelopers } from 'app/core/developers/store/developers.actions';
-import { GetJobsSuccessAction } from '../../../core/client/store/actions';
+import { searchDevelopers, searchJobs } from 'app/core/developers/store/developers.actions';
+import { GetJobsAction, GetJobsSuccessAction } from '../../../core/client/store/actions';
 
 enum ESearchFor {
   SearchForDeveloper = 'Search for a developer',
@@ -35,7 +35,7 @@ export class HeaderComponent implements OnInit {
   public isNotification: boolean;
   SearchFor = ESearchFor;
 
-  constructor(private store: Store<fromCore.State>) {
+  constructor(private store: Store<State>) {
   }
 
   ngOnInit(): void {
@@ -56,7 +56,7 @@ export class HeaderComponent implements OnInit {
 
   public onSearch(): void {
     if (this.userRole === this.UserRole.Dev) {
-      this.store.dispatch(new GetJobsSuccessAction(this.searchTerm.value));
+      this.store.dispatch(searchJobs(this.searchTerm.value));
     } else {
       this.store.dispatch(searchDevelopers({payload: this.searchTerm.value}));
     }
