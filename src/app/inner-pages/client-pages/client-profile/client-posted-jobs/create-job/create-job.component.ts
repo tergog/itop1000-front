@@ -23,7 +23,12 @@ export class CreateJobComponent implements OnInit, OnDestroy {
   public form: FormGroup;
   showError: boolean;
 
-  constructor(private jobsService: JobsService, private notificationService: NotificationsService, private store: Store<State>, public devProfileService: DevProfileService) { }
+  constructor(
+    private jobsService: JobsService,
+    private notificationService: NotificationsService,
+    private store: Store<State>,
+    public devProfileService: DevProfileService
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -43,7 +48,7 @@ export class CreateJobComponent implements OnInit, OnDestroy {
       this.devProfileService.availableCategories.push(...this.devProfileService.selectedCategories);
       this.devProfileService.selectedCategories = [];
       this.isEdit.emit();
-    }); 
+    });
   }
 
   public onCancelClick(): void {
@@ -73,7 +78,7 @@ export class CreateJobComponent implements OnInit, OnDestroy {
     this.form.get('categories').patchValue(this.devProfileService.selectedCategories);
     this.focusReset();
   }
-  
+
   onChipRemove(category: NameValueModel): void {
     this.devProfileService.availableCategories.push(category);
     this.devProfileService.selectedCategories = this.devProfileService.selectedCategories.filter(el => el.value !== category.value);
@@ -90,6 +95,6 @@ export class CreateJobComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    
+
   }
 }

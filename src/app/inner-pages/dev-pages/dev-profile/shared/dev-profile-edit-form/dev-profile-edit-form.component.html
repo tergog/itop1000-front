@@ -1,7 +1,8 @@
 <div [formGroup]="form">
     <!-- categories and skills -->
-  <div class="d__flex d__flex--direction-column p__20"
-    *ngIf="devProfileService.availableCategories && sectionName === DevProfileSectionNames.CategoriesSkills">
+<!--  <div class="d__flex d__flex&#45;&#45;direction-column p__20"-->
+<!--    *ngIf="devProfileService.availableCategories && sectionName === DevProfileSectionNames.CategoriesSkills">-->
+  <div class="d__flex d__flex--direction-column p__20">
     <span class="text text__title text__color--1">
       Categories
     </span>
@@ -24,8 +25,8 @@
                 [matChipInputAddOnBlur]="true">
       </mat-chip-list>
 
-      <mat-autocomplete #autoCategories="matAutocomplete" (optionSelected)="onChipSelect($event.option.value, selectedChip.Category, 'availableCategories')">
-        <mat-option *ngFor="let category of devProfileService.availableCategories" [value]="category">
+      <mat-autocomplete #autoCategories="matAutocomplete" (optionSelected)="onChipSelect($event.option.value, selectedChip.Category, 'availableCategories$')">
+        <mat-option *ngFor="let category of avaliableCategories$ | ngrxPush" [value]="category">
           {{ category.name }}
         </mat-option>
       </mat-autocomplete>
@@ -53,8 +54,8 @@
                 [matChipInputAddOnBlur]="true">
       </mat-chip-list>
 
-      <mat-autocomplete #autoSkills="matAutocomplete" (optionSelected)="onChipSelect($event.option.value, selectedChip.Skill, 'availableSkills')">
-        <mat-option *ngFor="let skill of devProfileService.availableSkills" [value]="skill">
+      <mat-autocomplete #autoSkills="matAutocomplete" (optionSelected)="onChipSelect($event.option.value, selectedChip.Skill, 'availableSkills$')">
+        <mat-option *ngFor="let skill of availableSkills$ | ngrxPush" [value]="skill">
           {{ skill.name }}
         </mat-option>
       </mat-autocomplete>

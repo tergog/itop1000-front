@@ -11,6 +11,7 @@ import * as fromCore from 'app/core/reducers';
 import * as fromDevelopers from 'app/core/developers/store/index';
 import { DevProperties } from 'app/shared/models/dev-properties.model';
 import { NotificationsService } from 'app/shared/services/notifications.service';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class DevProfileService {
@@ -26,6 +27,8 @@ export class DevProfileService {
   public availableSkills: NameValueModel[];
   public availableSoftSkills: NameValueModel[];
   public availableLanguages: NameValueModel[];
+  // public avaliableCategories$: Observable<any>;
+  // public availableSkills$: Observable<any>;
 
   constructor(
     private store: Store<fromCore.State>,
@@ -43,7 +46,7 @@ export class DevProfileService {
     this.developersStore.select(fromDevelopers.getSkills)
       .pipe(
         map(val => val.filter(
-          skill => !this.selectedCategories.find(
+          skill => !this.selectedSkills.find(
             selectedSkill => selectedSkill.value === skill.value)
         )))
       .subscribe(val => this.availableSkills = val);

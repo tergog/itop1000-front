@@ -15,10 +15,10 @@ export const ApiConstants = {
     getDeveloperById: 'accounts/get-developer',
     chargesList: 'accounts/charges-list',
     activeProjects: 'accounts/active-projects',
-    getDeveloporCategories: 'accounts/data-categories',
-    getDeveloporSkills: 'accounts/data-skills',
-    getDeveloporLanguages: 'accounts/data-languages',
-    getDeveloporSoftSkills: 'accounts/data-soft-skills'
+    developerCategories: 'accounts/data/categories',
+    developerSkills: 'accounts/data/skills',
+    developerLanguages: 'accounts/data/languages',
+    developerSoftSkills: 'accounts/data/soft-skills'
   },
   jobs: {
     main: 'jobs',

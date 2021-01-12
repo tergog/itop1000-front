@@ -14,7 +14,7 @@
                  [value]="form.get('title').value"></app-input>
                  <mat-error *ngIf="showError && form.get('title').errors?.required">Title required</mat-error>
     </div>
-    
+
 
     <div class="d__flex d__flex--direction-column m__top--20">
       <span class="text text__sm text__color--1 text__fw--600">Description</span>
@@ -27,7 +27,7 @@
 
     <div class="d__flex d__flex--direction-column m__top--20">
       <span class="text text__sm text__color--1 text__fw--600">Categories</span>
-      
+
       <mat-form-field class="m__top--10" [class.edit-mode]="true">
         <mat-chip-list #chipListCategories formControlName="categories">
           <mat-chip *ngFor="let category of devProfileService.selectedCategories"
@@ -43,7 +43,7 @@
                   [matAutocomplete]="autoCategories"
                   [matChipInputAddOnBlur]="true">
         </mat-chip-list>
-  
+
         <mat-autocomplete #autoCategories="matAutocomplete" (optionSelected)="onChipSelect($event.option.value)">
           <mat-option *ngFor="let category of devProfileService.availableCategories" [value]="category">
             {{ category.name }}
@@ -109,7 +109,7 @@
 
     <div class="d__flex d__flex--direction-column m__top--20">
       <span class="text text__sm text__color--1 text__fw--600">Address</span>
-      <app-address 
+      <app-address
       class="m__top--10 light w__100per"
       formControlName="address"
       [currentAddress]="form.get('address').value">

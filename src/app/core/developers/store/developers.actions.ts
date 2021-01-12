@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import {Developer, Job, NameValueModel} from 'app/shared/models';
+import { Developer, Job, NameValueModel } from 'app/shared/models';
 
 export const SEARCH_DEVELOPERS = '[Developers] Search developers';
 export const SEARCH_DEVELOPERS_SUCCESS = '[Developers] Search developers success';

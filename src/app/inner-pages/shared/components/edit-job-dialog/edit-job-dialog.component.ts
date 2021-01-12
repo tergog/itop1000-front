@@ -35,8 +35,8 @@ export class EditJobDialogComponent implements OnInit, OnDestroy {
     this.job = this.data.job;
     this.initForm();
     this.form.patchValue(this.job);
-    this.devProfileService.selectedCategories.push(...this.job.categories)
-    for(let category of this.devProfileService.selectedCategories) {
+    this.devProfileService.selectedCategories.push(...this.job.categories);
+    for (let category of this.devProfileService.selectedCategories) {
       this.devProfileService.availableCategories = this.devProfileService.availableCategories.filter(el => el.name !== category.name)
     }
   }
@@ -76,7 +76,7 @@ export class EditJobDialogComponent implements OnInit, OnDestroy {
     this.form.get('categories').patchValue(this.devProfileService.selectedCategories);
     this.focusReset();
   }
-  
+
   onChipRemove(category: NameValueModel): void {
     this.devProfileService.availableCategories.push(category);
     this.devProfileService.selectedCategories = this.devProfileService.selectedCategories.filter(el => el.value !== category.value);

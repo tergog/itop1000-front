@@ -2,7 +2,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { Store } from '@ngrx/store';
-import { first } from 'rxjs/operators';
+import { first, map } from 'rxjs/operators';
 
 import { EDevProfileSectionNames } from 'app/inner-pages/dev-pages/dev-profile/shared/enums/devProfileSectionNames';
 import * as fromCore from 'app/core/reducers';
@@ -11,7 +11,8 @@ import { UserService, NotificationsService } from 'app/shared/services';
 import { UserInfo } from 'app/shared/models/user-info.model';
 import { DevProperties } from 'app/shared/models/dev-properties.model';
 import { NameValueModel } from 'app/shared/models/name-value.model';
-import {Observable} from 'rxjs';
+import * as fromDevelopers from 'app/core/developers/store';
+import { Observable } from 'rxjs';
 
 export enum SelectedChips {
   Category = 'selectedCategories',
@@ -36,16 +37,16 @@ export class DevProfileEditFormComponent implements OnInit {
 
   public form: FormGroup;
   public DevProfileSectionNames = EDevProfileSectionNames;
+  public avaliableCategories$: Observable<any>;
+  public availableSkills$: Observable<any>;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  public availableCategoriesObservable: Observable<any>;
-  public availableSkillsObservable: Observable<any>;
 
   constructor(
     public devProfileService: DevProfileService,
     private store: Store<fromCore.State>,
     private notificationsService: NotificationsService,
     private userService: UserService,
-
+    private developersStore: Store<fromDevelopers.State>
   ) { }
 
   ngOnInit(): void {
@@ -56,6 +57,22 @@ export class DevProfileEditFormComponent implements OnInit {
         this.devProfileService.devProperties = userInfo.devProperties ? userInfo.devProperties : {};
         this.updateChips(this.devProfileService.devProperties);
       });
+    this.inicializeObservers();
+  }
+
+  private inicializeObservers(): void {
+    this.avaliableCategories$ = this.developersStore.select(fromDevelopers.getCategories)
+    .pipe(
+      map(val => val.filter(
+        category => !this.devProfileService.selectedCategories.find(
+          selectedCat => selectedCat.value === category.value)
+      )));
+    this.availableSkills$ = this.developersStore.select(fromDevelopers.getSkills)
+    .pipe(
+      map(val => val.filter(
+        skill => !this.devProfileService.selectedSkills.find(
+          selectedSkill => selectedSkill.value === skill.value)
+      )));
   }
 
   public onEditClick(): void {
@@ -71,9 +88,7 @@ export class DevProfileEditFormComponent implements OnInit {
     this.devProfileService.devProperties = {
       ...this.devProfileService.devProperties,
       skills: this.devProfileService.selectedSkills,
-      categories: this.devProfileService.selectedCategories,
-      // softSkills: this.devProfileService.selectedSoftSkills,
-      // languages: this.devProfileService.selectedLanguages,
+      categories: this.devProfileService.selectedCategories
     };
     this.disableEmptyFields();
     this.devProfileService.onSaveClick({devProperties: this.devProfileService.devProperties});
@@ -81,8 +96,8 @@ export class DevProfileEditFormComponent implements OnInit {
   }
 
   public onChipSelect(chip, selectedChips, availableChips): void {
-    this.devProfileService[availableChips] = this.devProfileService[availableChips].filter(ch => ch.value !== chip.value);
     this.devProfileService[selectedChips].push(chip);
+    this.inicializeObservers();
     this.resetFocus(selectedChips);
   }
 
@@ -94,7 +109,7 @@ export class DevProfileEditFormComponent implements OnInit {
 
   public onChipRemove(chip: NameValueModel, selectedChips, availableChips): void {
     this.devProfileService[selectedChips] = this.devProfileService[selectedChips].filter(item => item.value !== chip.value);
-    this.devProfileService[availableChips].push(chip);
+    this.inicializeObservers();
   }
 
   private initForm() {
@@ -117,24 +132,7 @@ export class DevProfileEditFormComponent implements OnInit {
   }
 
   private updateChips(devProperties: DevProperties): void {
-    // selectedChips = [ ...chips ] || [];
-    // availableChips = xorBy(selectedChips, availableChips);
-
     this.devProfileService.selectedCategories = devProperties.categories ? [...devProperties.categories] : [];
     this.devProfileService.selectedSkills = devProperties.skills ? [...devProperties.skills] : [];
-
-    // this.devProfileService.selectedSoftSkills = [...devProperties.softSkills] || [];
-    // this.devProfileService.selectedLanguages = [...devProperties.languages] || [];
-
-    // this.devProfileService.availableCategories = this.devProfileService.availableCategories
-    //   .filter(
-    //     (category) => !this.devProfileService.selectedCategories.find(selectedCat => selectedCat.value === category.value)
-    //   );
-
-    // this.devProfileService.availableSkills = this.devProfileService.availableSkills
-    //   .filter(
-    //     (skill) => !this.devProfileService.selectedSkills.find(selectedSkill => selectedSkill.value === skill.value)
-    //   );
   }
-
 }

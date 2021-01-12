@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import {first} from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 
 import { EDevProfileSectionNames } from 'app/inner-pages/dev-pages/dev-profile/shared/enums/devProfileSectionNames';
 import * as fromCore from 'app/core/reducers';
 import * as fromDev from 'app/core/developers/store';
-import {DevelopersService} from '../../../../shared/services';
+import { DevelopersService } from 'app/shared/services';
 import { getDeveloperCategories, getDeveloperSkills } from 'app/core/developers/store/developers.actions'
 
 @Component({
