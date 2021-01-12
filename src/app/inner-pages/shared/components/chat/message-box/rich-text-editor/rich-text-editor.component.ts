@@ -31,13 +31,6 @@ export class RichTextEditorComponent {
     toolbar: {
       container: '.chat__text-editor__toolbar'
     },
-    verticalSpacing: {
-      root: '.chat__text-editor',
-      btnInc: '.ql-spacing__inc',
-      btnDec: '.ql-spacing__dec',
-      input: '#ql-spacing',
-      spacing: 1
-    },
     attachFiles: {
       button: '.ql-attach-file',
       errorEmmiter: this.notificationsService.message
