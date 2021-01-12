@@ -38,6 +38,7 @@ export class DevCategoriesAndSkillsComponent implements OnInit, OnDestroy {
       first()
     ).subscribe(value => this.storeDev.dispatch(getDeveloperSkills(value)));
 
+    // storeDev.getCate
   }
 
   public onEditClick(): void {

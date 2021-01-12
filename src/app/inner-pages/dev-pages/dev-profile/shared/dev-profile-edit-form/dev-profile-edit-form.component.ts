@@ -1,23 +1,23 @@
-import { FormGroup, FormControl } from '@angular/forms';
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
-import { ENTER, COMMA } from '@angular/cdk/keycodes';
-import { Store } from '@ngrx/store';
-import { first, map } from 'rxjs/operators';
+import {FormControl, FormGroup} from '@angular/forms';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {Store} from '@ngrx/store';
+import {filter, first, map, take} from 'rxjs/operators';
 
-import { EDevProfileSectionNames } from 'app/inner-pages/dev-pages/dev-profile/shared/enums/devProfileSectionNames';
+import {EDevProfileSectionNames} from 'app/inner-pages/dev-pages/dev-profile/shared/enums/devProfileSectionNames';
 import * as fromCore from 'app/core/reducers';
-import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
-import { UserService, NotificationsService } from 'app/shared/services';
-import { UserInfo } from 'app/shared/models/user-info.model';
-import { DevProperties } from 'app/shared/models/dev-properties.model';
-import { NameValueModel } from 'app/shared/models/name-value.model';
+import {DevProfileService} from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
+import {NotificationsService, UserService} from 'app/shared/services';
+import {UserInfo} from 'app/shared/models/user-info.model';
+import {DevProperties} from 'app/shared/models/dev-properties.model';
+import {NameValueModel} from 'app/shared/models/name-value.model';
 import * as fromDevelopers from 'app/core/developers/store';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 export enum SelectedChips {
   Category = 'selectedCategories',
   Skill = 'selectedSkills'
-};
+}
 
 @Component({
   selector: 'app-dev-profile-edit-form',
@@ -37,8 +37,16 @@ export class DevProfileEditFormComponent implements OnInit {
 
   public form: FormGroup;
   public DevProfileSectionNames = EDevProfileSectionNames;
-  public avaliableCategories$: Observable<any>;
-  public availableSkills$: Observable<any>;
+
+  public allCategories: NameValueModel[] = [];
+  public allSkills: NameValueModel[] = [];
+
+  public availableCategories: Subject<NameValueModel[]> = new Subject<NameValueModel[]>();
+  public availableSkills: Subject<NameValueModel[]> = new Subject<NameValueModel[]>();
+
+  public availableCategories$: Observable<NameValueModel[]>;
+  public availableSkills$: Observable<NameValueModel[]>;
+
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   constructor(
@@ -57,22 +65,36 @@ export class DevProfileEditFormComponent implements OnInit {
         this.devProfileService.devProperties = userInfo.devProperties ? userInfo.devProperties : {};
         this.updateChips(this.devProfileService.devProperties);
       });
-    this.inicializeObservers();
-  }
 
-  private inicializeObservers(): void {
-    this.avaliableCategories$ = this.developersStore.select(fromDevelopers.getCategories)
-    .pipe(
-      map(val => val.filter(
-        category => !this.devProfileService.selectedCategories.find(
-          selectedCat => selectedCat.value === category.value)
-      )));
-    this.availableSkills$ = this.developersStore.select(fromDevelopers.getSkills)
-    .pipe(
-      map(val => val.filter(
-        skill => !this.devProfileService.selectedSkills.find(
-          selectedSkill => selectedSkill.value === skill.value)
-      )));
+    this.availableCategories$ = this.availableCategories.asObservable().pipe(
+        map(val => {
+          return this.allCategories.filter(
+            category => !val.find(item => item.value === category.value)
+          );
+        })
+      );
+
+    this.availableSkills$ = this.availableSkills.asObservable().pipe(
+      map(val => {
+        return this.allSkills.filter(
+          skill => !val.find(item => item.value === skill.value)
+        );
+      })
+    );
+
+    this.developersStore.select(fromDevelopers.getCategories).pipe(
+      filter(res => res.length)
+    ).subscribe(res => {
+        this.allCategories = res;
+        this.availableCategories.next(this.devProfileService.selectedCategories);
+      });
+
+    this.developersStore.select(fromDevelopers.getSkills).pipe(
+      filter(res => res.length)
+    ).subscribe(res => {
+      this.allSkills = res;
+      this.availableSkills.next(this.devProfileService.selectedSkills);
+    });
   }
 
   public onEditClick(): void {
@@ -95,9 +117,9 @@ export class DevProfileEditFormComponent implements OnInit {
     this.isEdit = false;
   }
 
-  public onChipSelect(chip, selectedChips): void {
+  public onChipSelect(chip, selectedChips , availableChip): void {
     this.devProfileService[selectedChips].push(chip);
-    this.inicializeObservers();
+    availableChip.next(this.devProfileService[selectedChips]);
     this.resetFocus(selectedChips);
   }
 
@@ -107,9 +129,9 @@ export class DevProfileEditFormComponent implements OnInit {
     setTimeout(() => { element.nativeElement.focus()}, 0);
   }
 
-  public onChipRemove(chip: NameValueModel, selectedChips): void {
+  public onChipRemove(chip: NameValueModel, selectedChips, availableChip): void {
     this.devProfileService[selectedChips] = this.devProfileService[selectedChips].filter(item => item.value !== chip.value);
-    this.inicializeObservers();
+    availableChip.next(this.devProfileService[selectedChips]);
   }
 
   private initForm() {
