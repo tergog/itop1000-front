@@ -5,6 +5,7 @@
       [formControl]="searchFC"
       (ngModelChange)="onConversationSearchCancel($event)"
       (enterKey)="onConversationsSearch()"
+      [disabled]="!chat.conversations.search && !chat.conversations.data.length"
     >
       <i class="search" (click)="onConversationsSearch()"></i>
     </app-input>
@@ -23,8 +24,11 @@
       </div>
       <div class="chat__sidebar__rooms__room__meta">
         <div class="chat__sidebar__rooms__room__meta__name">{{ getConversationPartnerName(chat) }}</div>
-        <div class="chat__sidebar__rooms__room__meta__counter chat--new-message">19</div>
-        <div class="chat__sidebar__rooms__room__meta__indicator"><i class="email email-yellow"></i></div>
+        <div class="chat__sidebar__rooms__room__meta__counter chat--new-message">{{ chat.unreadCount }}</div>
+        <div class="chat__sidebar__rooms__room__meta__indicator">
+          <i class="email email-yellow" *ngIf="chat.unreadCount > 0"></i>
+          <i class="email email-yellow-open" *ngIf="chat.unreadCount === 0"></i>
+        </div>
         <div class="chat__sidebar__rooms__room__meta__time">11:59 AM</div>
       </div>
       <div class="chat__sidebar__rooms__room__cut">Lorem ipsum dolor sit amet / consectetur adipiscing elit / sed do eiusmod</div>

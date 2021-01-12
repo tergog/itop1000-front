@@ -1,7 +1,7 @@
-<div class="chat__message-box">
+<div [@slideInLeft] *ngIf="chat.conversations.active" class="chat__message-box">
   <div class="chat__message-box__header">
     <div class="chat__message-box__header__title">
-      <span class="chat__message-box__header__title__from" *ngIf="chat.conversations.active">
+      <span class="chat__message-box__header__title__from">
         {{ getConversationPartnerName(chat.conversations.active) }}
       </span>
     </div>
@@ -20,7 +20,6 @@
   <div class="chat__message-box__body">
     <div class="chat__message-box__body__message-list" #messages>
       <div class="chat__message-box__body__message-list__message--empty" *ngIf="chat.messages.data.length === 0">
-        <div class="chat__message-box__body__message-list__message--empty__message" *ngIf="chat.conversations.active === null">Select the chat</div>
         <div class="chat__message-box__body__message-list__message--empty__message" *ngIf="chat.conversations.active && !searchFC.value.length">You have no messages yet</div>
         <div class="chat__message-box__body__message-list__message--empty__message" *ngIf="searchFC.value.length > 0">Nothing found :(</div>
       </div>

@@ -1,7 +1,17 @@
-import { AfterViewChecked, Component, ElementRef, HostListener, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterContentChecked,
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ContentChange } from 'ngx-quill';
+import { iif, of } from 'rxjs';
+import { delay, switchMap, tap } from 'rxjs/operators';
 
 import { ChatService, NotificationsService, WebsocketService } from 'app/shared/services';
 import {
@@ -13,16 +23,16 @@ import {
 } from 'app/shared/models';
 import * as fromCore from 'app/core/reducers';
 import * as fromChat from 'app/core/chats/store/chat.reducer';
-import { addNewMessage, cancelActiveConversation } from 'app/core/chats/store/chats.actions';
-import { delay, switchMap, tap } from 'rxjs/operators';
-import { iif, of } from 'rxjs';
+import { addNewMessage } from 'app/core/chats/store/chats.actions';
+import { slideInLeftAnimation } from 'app/shared/animations';
 
 @Component({
   selector: 'app-message-box',
   templateUrl: './message-box.component.html',
-  styleUrls: [ './message-box.component.scss' ]
+  styleUrls: [ './message-box.component.scss' ],
+  animations: [ slideInLeftAnimation ]
 })
-export class MessageBoxComponent implements OnInit, OnChanges, AfterViewChecked {
+export class MessageBoxComponent implements OnInit, OnChanges, AfterContentChecked {
   @Input() user: UserInfo;
   @Input() chat: fromChat.State;
   @ViewChild('messages') messagesContainer: ElementRef;
@@ -76,8 +86,10 @@ export class MessageBoxComponent implements OnInit, OnChanges, AfterViewChecked 
     }
   }
 
-  ngAfterViewChecked(): void { // Scroll to last message when view updated
-    this.messagesContainer.nativeElement.scrollTop = this.messagesContainer.nativeElement.scrollHeight;
+  ngAfterContentChecked(): void { // Scroll to last message when view updated
+    if (this.messagesContainer) {
+      this.messagesContainer.nativeElement.scrollTop = this.messagesContainer.nativeElement.scrollHeight;
+    }
   }
 
   getEditorInstance(quill: SharedQuillInstanceModel): void {
@@ -106,13 +118,6 @@ export class MessageBoxComponent implements OnInit, OnChanges, AfterViewChecked 
     }
   }
 
-  @HostListener('document:keydown.enter')
-  onKeydownHandler(): void {
-    if (this.textEditorInstance.hasFocus()) {
-      this.sendButtonClick();
-    }
-  }
-
   onMessagesSearch(): void {
     if (this.searchFC.enabled) {
       if (this.searchFC.value && this.searchFC.valid) {
@@ -138,7 +143,7 @@ export class MessageBoxComponent implements OnInit, OnChanges, AfterViewChecked 
     const now = new Date();
     const timeStr = `${hh}:${mm} ${date.getHours() > 11 ? 'PM' : 'AM'}`;
 
-    if (now.getFullYear() !== date.getFullYear() && now.getMonth() !== date.getMonth() && now.getDate() !== date.getDate()) { // Not today
+    if (now.getDate() !== date.getDate()) { // Not today
       const YY = date.getFullYear();
       const MM = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ][date.getMonth()];
       const DD = String(date.getDate()).padStart(2, '0');
