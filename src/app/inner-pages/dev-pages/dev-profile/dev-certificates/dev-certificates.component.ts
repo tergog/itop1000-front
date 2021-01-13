@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FormGroup } from '@angular/forms';
-import { filter, first, map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Subject } from 'rxjs';
+import { filter, first, takeUntil } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
 import * as fromCore from 'app/core/reducers';
@@ -10,16 +10,16 @@ import { UploadPhotoDialogComponent } from 'app/inner-pages/shared/components/up
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
 import { UserInfo } from 'app/shared/models';
 
-
 @Component({
   selector: 'app-dev-certificates',
   templateUrl: './dev-certificates.component.html',
   styleUrls: ['./dev-certificates.component.scss']
 })
-export class DevCertificatesComponent implements OnInit {
-  public certificates$: Observable<string[]>;
+export class DevCertificatesComponent implements OnInit, OnDestroy {
+  public certificates: string[];
   public form: FormGroup;
   public developer: UserInfo;
+  private subject$ = new Subject<any>();
 
   constructor(
     private store: Store<fromCore.State>,
@@ -29,15 +29,16 @@ export class DevCertificatesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.certificates$ = this.store.select(fromCore.getUserInfo).pipe(map((dev: UserInfo) => {
+    this.store.select(fromCore.getUserInfo).pipe(takeUntil(this.subject$)).subscribe((dev: UserInfo) => {
       if (dev) {
         this.developer = JSON.parse(JSON.stringify(dev));
       }
       if (this.developer.devProperties.certificates) {
-        return [...this.developer.devProperties.certificates];
+        this.certificates = [...this.developer.devProperties.certificates];
+      } else {
+        this.certificates = [];
       }
-      return [];
-    }));
+    });
   }
 
   private uploadImage(certificate: string): void {
@@ -65,4 +66,8 @@ export class DevCertificatesComponent implements OnInit {
     this.devProfileService.onDeleteCertificate(url, index);
   }
 
+    ngOnDestroy() {
+    this.subject$.next(null);
+    this.subject$.complete();
+    }
 }
