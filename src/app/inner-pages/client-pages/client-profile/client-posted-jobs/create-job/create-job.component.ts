@@ -9,6 +9,8 @@ import { Job, NameValueModel, NotificationMessage } from 'app/shared/models';
 import { State } from 'app/core/reducers/index';
 import { GetJobsAction } from 'app/core/client/store/actions';
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
+import { Observable, Subject } from "rxjs";
+import { map } from "rxjs/operators";
 
 @Component({
   selector: 'app-create-job',
@@ -22,6 +24,11 @@ export class CreateJobComponent implements OnInit, OnDestroy {
   @ViewChild('category', {static: false}) category: ElementRef;
   public form: FormGroup;
   showError: boolean;
+
+  public allCategories: NameValueModel[] = [];
+  public availableCategories: Subject<NameValueModel[]> = new Subject<NameValueModel[]>();
+  public availableCategories$: Observable<NameValueModel[]> = this.availableCategories.asObservable().pipe(
+    map(val => this.allCategories.filter(category => !val.find(item => item.value === category.value))));
 
   constructor(
     private jobsService: JobsService,

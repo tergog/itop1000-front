@@ -4,9 +4,12 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { Job } from 'app/shared/models';
-import { JobsService } from 'app/shared/services';
+import { DevelopersService, JobsService } from 'app/shared/services';
 import { getJobs, State } from 'app/core/reducers/index';
 import { GetJobsAction } from 'app/core/client/store/actions';
+import { first } from "rxjs/operators";
+import { getDeveloperCategories } from 'app/core/developers/store/developers.actions';
+import * as fromDev from 'app/core/developers/store';
 
 @Component({
   selector: 'app-client-posted-jobs',
@@ -21,12 +24,18 @@ export class ClientPostedJobsComponent implements OnInit {
   constructor(
     private store: Store<State>,
     private jobsService: JobsService,
-    private router: Router
+    private router: Router,
+    private developerService: DevelopersService,
+    private storeDev: Store<fromDev.State>
   ) { }
 
   ngOnInit(): void {
     this.store.dispatch(new GetJobsAction());
     this.jobs$ = this.store.select(getJobs);
+
+    this.developerService.getDeveloperCategories().pipe(
+      first()
+    ).subscribe(value => this.storeDev.dispatch(getDeveloperCategories(value)));
   }
 
   public postJobClick(): void {
