@@ -74,7 +74,7 @@ export class DevProfileService {
       .pipe(first())
       .subscribe(
         (user: UserInfo) => this.handleSuccessResponse(user),
-        ({error}) => this.handleErrorResponse(error)
+        ({ error }) => this.handleErrorResponse(error)
       );
   }
 
