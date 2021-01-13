@@ -33,20 +33,20 @@ export class DevProfileService {
     private userService: UserService,
     private developersStore: Store<fromDevelopers.State>
   ) {
-    this.developersStore.select(fromDevelopers.getCategories)
-      .pipe(
-        map(val => val.filter(
-          category => !this.selectedCategories.find(
-            selectedCat => selectedCat.value === category.value)
-        )))
-      .subscribe(val => this.availableCategories = val);
-    this.developersStore.select(fromDevelopers.getSkills)
-      .pipe(
-        map(val => val.filter(
-          skill => !this.selectedSkills.find(
-            selectedSkill => selectedSkill.value === skill.value)
-        )))
-      .subscribe(val => this.availableSkills = val);
+    // this.developersStore.select(fromDevelopers.getCategories)
+    //   .pipe(
+    //     map(val => val.filter(
+    //       category => !this.selectedCategories.find(
+    //         selectedCat => selectedCat.value === category.value)
+    //     )))
+    //   .subscribe(val => this.availableCategories = val);
+    // this.developersStore.select(fromDevelopers.getSkills)
+    //   .pipe(
+    //     map(val => val.filter(
+    //       skill => !this.selectedSkills.find(
+    //         selectedSkill => selectedSkill.value === skill.value)
+    //     )))
+    //   .subscribe(val => this.availableSkills = val);
   }
 
   public onSaveClick(userInfo: Partial<UserInfo>): void {

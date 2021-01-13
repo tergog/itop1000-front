@@ -31,9 +31,6 @@
       </mat-chip-list>
 
       <mat-autocomplete #autoCategories="matAutocomplete" (optionSelected)="onChipSelect($event.option.value)">
-<!--        <mat-option *ngFor="let category of devProfileService.availableCategories" [value]="category">-->
-<!--          {{ category.name }}-->
-<!--        </mat-option>-->
         <mat-option *ngFor="let category of availableCategories$  | ngrxPush" [value]="category">
           {{ category.name }}
         </mat-option>

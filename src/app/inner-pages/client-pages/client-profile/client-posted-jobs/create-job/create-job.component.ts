@@ -51,6 +51,7 @@ export class CreateJobComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
     this.initForm();
+    this.form.get('categories').patchValue(this.devProfileService.selectedCategories);
   }
 
   ngAfterViewInit() {
@@ -87,7 +88,6 @@ export class CreateJobComponent implements OnInit, OnDestroy, AfterViewInit {
     this.isEdit.emit();
     this.form.reset();
     this.availableCategories.next(this.devProfileService.selectedCategories);
-    // this.devProfileService.availableCategories.push(...this.devProfileService.selectedCategories);
     this.devProfileService.selectedCategories = [];
   }
 
@@ -114,11 +114,9 @@ export class CreateJobComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onChipRemove(category: NameValueModel): void {
-    // this.devProfileService.availableCategories.push(category);
-    //
     this.devProfileService.selectedCategories = this.devProfileService.selectedCategories.filter(el => el.value !== category.value);
     this.availableCategories.next(this.devProfileService.selectedCategories);
-    // this.form.get('categories').patchValue(this.devProfileService.selectedCategories);
+    this.form.get('categories').patchValue(this.devProfileService.selectedCategories);
   }
 
   focusReset(): void {
