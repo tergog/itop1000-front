@@ -1,4 +1,13 @@
-import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  AfterViewInit, ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
@@ -9,8 +18,9 @@ import { Job, NameValueModel, NotificationMessage } from 'app/shared/models';
 import { State } from 'app/core/reducers/index';
 import { GetJobsAction } from 'app/core/client/store/actions';
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
-import { Observable, Subject } from "rxjs";
-import { map } from "rxjs/operators";
+import { Observable, Subject } from 'rxjs';
+import { filter, first, map } from 'rxjs/operators';
+import * as fromDevelopers from 'app/core/developers/store';
 
 @Component({
   selector: 'app-create-job',
@@ -18,7 +28,7 @@ import { map } from "rxjs/operators";
   styleUrls: ['./create-job.component.scss']
 })
 
-export class CreateJobComponent implements OnInit, OnDestroy {
+export class CreateJobComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @Output() isEdit = new EventEmitter<Job>();
   @ViewChild('category', {static: false}) category: ElementRef;
@@ -34,11 +44,26 @@ export class CreateJobComponent implements OnInit, OnDestroy {
     private jobsService: JobsService,
     private notificationService: NotificationsService,
     private store: Store<State>,
+    private developersStore: Store<fromDevelopers.State>,
+    private cdr: ChangeDetectorRef,
     public devProfileService: DevProfileService
   ) { }
 
   ngOnInit(): void {
     this.initForm();
+  }
+
+  ngAfterViewInit() {
+    this.developersStore.select(fromDevelopers.getCategories)
+      .pipe(
+        filter(res => !!res.length),
+        first()
+      )
+      .subscribe(res => {
+        this.allCategories = res;
+        this.availableCategories.next(this.devProfileService.selectedCategories);
+        this.cdr.detectChanges();
+      });
   }
 
   public onPostClick(): void {
@@ -52,8 +77,8 @@ export class CreateJobComponent implements OnInit, OnDestroy {
       this.store.dispatch(new GetJobsAction());
       this.notificationService.message.emit(msg);
       this.form.reset();
-      this.devProfileService.availableCategories.push(...this.devProfileService.selectedCategories);
       this.devProfileService.selectedCategories = [];
+      this.availableCategories.next(this.devProfileService.selectedCategories);
       this.isEdit.emit();
     });
   }
@@ -61,7 +86,8 @@ export class CreateJobComponent implements OnInit, OnDestroy {
   public onCancelClick(): void {
     this.isEdit.emit();
     this.form.reset();
-    this.devProfileService.availableCategories.push(...this.devProfileService.selectedCategories);
+    this.availableCategories.next(this.devProfileService.selectedCategories);
+    // this.devProfileService.availableCategories.push(...this.devProfileService.selectedCategories);
     this.devProfileService.selectedCategories = [];
   }
 
@@ -81,15 +107,18 @@ export class CreateJobComponent implements OnInit, OnDestroy {
 
   onChipSelect(category: NameValueModel): void {
     this.devProfileService.selectedCategories.push(category);
-    this.devProfileService.availableCategories = this.devProfileService.availableCategories.filter(el => el.value !== category.value);
+    // this.devProfileService.availableCategories = this.devProfileService.availableCategories.filter(el => el.value !== category.value);
     this.form.get('categories').patchValue(this.devProfileService.selectedCategories);
+    this.availableCategories.next(this.devProfileService.selectedCategories);
     this.focusReset();
   }
 
   onChipRemove(category: NameValueModel): void {
-    this.devProfileService.availableCategories.push(category);
+    // this.devProfileService.availableCategories.push(category);
+    //
     this.devProfileService.selectedCategories = this.devProfileService.selectedCategories.filter(el => el.value !== category.value);
-    this.form.get('categories').patchValue(this.devProfileService.selectedCategories);
+    this.availableCategories.next(this.devProfileService.selectedCategories);
+    // this.form.get('categories').patchValue(this.devProfileService.selectedCategories);
   }
 
   focusReset(): void {

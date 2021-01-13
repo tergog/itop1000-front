@@ -6,7 +6,7 @@ import { EDevProfileSectionNames } from 'app/inner-pages/dev-pages/dev-profile/s
 import * as fromCore from 'app/core/reducers';
 import * as fromDev from 'app/core/developers/store';
 import { DevelopersService } from 'app/shared/services';
-import { getDeveloperCategories, getDeveloperSkills } from 'app/core/developers/store/developers.actions'
+import { getDeveloperCategories, getDeveloperSkills } from 'app/core/developers/store/developers.actions';
 
 @Component({
   selector: 'app-dev-categories-and-skills',
