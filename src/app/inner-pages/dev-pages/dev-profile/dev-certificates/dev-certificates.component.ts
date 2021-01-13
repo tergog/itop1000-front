@@ -25,8 +25,7 @@ export class DevCertificatesComponent implements OnInit, OnDestroy {
     private store: Store<fromCore.State>,
     private devProfileService: DevProfileService,
     private matDialog: MatDialog,
-  ) {
-  }
+  ) {  }
 
   ngOnInit(): void {
     this.store.select(fromCore.getUserInfo).pipe(takeUntil(this.subject$)).subscribe((dev: UserInfo) => {
@@ -43,7 +42,6 @@ export class DevCertificatesComponent implements OnInit, OnDestroy {
 
   private uploadImage(certificate: string): void {
     this.devProfileService.onUploadCertificate(certificate);
-
   }
 
   public addCertificates(): void {
@@ -66,8 +64,8 @@ export class DevCertificatesComponent implements OnInit, OnDestroy {
     this.devProfileService.onDeleteCertificate(url, index);
   }
 
-    ngOnDestroy() {
+  ngOnDestroy() {
     this.subject$.next(null);
     this.subject$.complete();
-    }
+  }
 }
