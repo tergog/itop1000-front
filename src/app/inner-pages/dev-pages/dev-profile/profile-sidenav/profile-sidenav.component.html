@@ -32,6 +32,14 @@
   </li>
 
   <li class="d__flex"
+      [class.active]="activeSection === DevProfileSections.WantToLearn"
+      (click)="onSectionCLick(DevProfileSections.WantToLearn)"
+  >
+    <i class="categories m__right--10"></i>
+    <span class="text text__lg text__color--1">Want To Learn</span>
+  </li>
+
+  <li class="d__flex"
       [class.active]="activeSection === DevProfileSections.ActiveProjects"
       (click)="onSectionCLick(DevProfileSections.ActiveProjects)"
   >

@@ -18,7 +18,12 @@ export const ApiConstants = {
     developerCategories: 'accounts/data/categories',
     developerSkills: 'accounts/data/skills',
     developerLanguages: 'accounts/data/languages',
-    developerSoftSkills: 'accounts/data/soft-skills'
+    developerSoftSkills: 'accounts/data/soft-skills',
+    verifyBank: 'accounts/verify-bank',
+    verifyStripe: 'accounts/verify-stripe',
+    payout: 'accounts/payout',
+    paymentIntent: 'accounts/payment-intent',
+    // activeProjects: 'accounts/active-projects'
   },
   jobs: {
     main: 'jobs',

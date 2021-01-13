@@ -1,3 +1,4 @@
+/* tslint:disable:max-line-length */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -32,6 +33,7 @@ import { HeaderLandingComponent } from 'app/inner-pages/components/header-landin
 import { FooterLandingComponent } from 'app/inner-pages/components/footer-landing/footer-landing.component';
 import { GetPaidNowDialogComponent } from './components/get-paid-now-dialog/get-paid-now-dialog.component';
 import { ActiveProjectsComponent } from './components/active-projects/active-projects.component';
+import { BankAccountDialogComponent } from './components/bank-account-dialog/bank-account-dialog.component';
 
 
 @NgModule({
@@ -56,6 +58,7 @@ import { ActiveProjectsComponent } from './components/active-projects/active-pro
     LandingComponent,
     HeaderLandingComponent,
     FooterLandingComponent,
+    BankAccountDialogComponent,
     ActiveProjectsComponent,
   ],
   imports: [

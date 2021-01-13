@@ -4,8 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReactiveComponentModule } from '@ngrx/component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
 
 import { DevProfileSectionsComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-profile-sections/dev-profile-sections.component';
 import { ProfileSidenavComponent } from 'app/inner-pages/dev-pages/dev-profile/profile-sidenav/profile-sidenav.component';
@@ -26,6 +29,7 @@ import { DevContactInfoAccountEditComponent } from './dev-contact-info/dev-conta
 import { DevWorkExperienceComponent } from './dev-work-experience/dev-work-experience.component';
 import { DevProjectCardComponent } from './dev-work-experience/dev-project-card/dev-project-card.component';
 import { DevProfileEditFormComponent } from './shared/dev-profile-edit-form/dev-profile-edit-form.component';
+import { DevWantToLearnComponent } from './dev-want-to-learn/dev-want-to-learn.component';
 
 
 const routes: Routes = [
@@ -52,6 +56,7 @@ const routes: Routes = [
     DevWorkExperienceComponent,
     DevProjectCardComponent,
     DevProfileEditFormComponent,
+    DevWantToLearnComponent
   ],
   imports: [
     CommonModule,
@@ -62,7 +67,12 @@ const routes: Routes = [
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,
-    ReactiveComponentModule
+    ReactiveComponentModule,
+    FormsModule,
+    ReactiveComponentModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSelectModule
   ],
   providers: [
     DevProfileService
