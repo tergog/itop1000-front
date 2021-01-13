@@ -1,16 +1,16 @@
-import {FormControl, FormGroup} from '@angular/forms';
-import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {Store} from '@ngrx/store';
-import {filter, first, map, take} from 'rxjs/operators';
+import { FormControl, FormGroup} from '@angular/forms';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { Store } from '@ngrx/store';
+import { filter, first, map } from 'rxjs/operators';
 
-import {EDevProfileSectionNames} from 'app/inner-pages/dev-pages/dev-profile/shared/enums/devProfileSectionNames';
+import { EDevProfileSectionNames } from 'app/inner-pages/dev-pages/dev-profile/shared/enums/devProfileSectionNames';
 import * as fromCore from 'app/core/reducers';
-import {DevProfileService} from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
-import {NotificationsService, UserService} from 'app/shared/services';
-import {UserInfo} from 'app/shared/models/user-info.model';
-import {DevProperties} from 'app/shared/models/dev-properties.model';
-import {NameValueModel} from 'app/shared/models/name-value.model';
+import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
+import { NotificationsService, UserService } from 'app/shared/services';
+import { UserInfo } from 'app/shared/models/user-info.model';
+import { DevProperties } from 'app/shared/models/dev-properties.model';
+import { NameValueModel } from 'app/shared/models/name-value.model';
 import * as fromDevelopers from 'app/core/developers/store';
 import { Observable, Subject } from 'rxjs';
 
