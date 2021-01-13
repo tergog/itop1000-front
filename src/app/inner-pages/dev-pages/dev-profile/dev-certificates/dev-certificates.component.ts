@@ -19,7 +19,7 @@ export class DevCertificatesComponent implements OnInit, OnDestroy {
   public certificates: string[];
   public form: FormGroup;
   public developer: UserInfo;
-  private subject$ = new Subject<any>();
+  private ngUnsubscribe$ = new Subject<any>();
 
   constructor(
     private store: Store<fromCore.State>,
@@ -28,7 +28,7 @@ export class DevCertificatesComponent implements OnInit, OnDestroy {
   ) {  }
 
   ngOnInit(): void {
-    this.store.select(fromCore.getUserInfo).pipe(takeUntil(this.subject$)).subscribe((dev: UserInfo) => {
+    this.store.select(fromCore.getUserInfo).pipe(takeUntil(this.ngUnsubscribe$)).subscribe((dev: UserInfo) => {
       if (dev) {
         this.developer = JSON.parse(JSON.stringify(dev));
       }
@@ -65,7 +65,7 @@ export class DevCertificatesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subject$.next(null);
-    this.subject$.complete();
+    this.ngUnsubscribe$.next(null);
+    this.ngUnsubscribe$.complete();
   }
 }
