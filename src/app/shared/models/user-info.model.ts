@@ -15,6 +15,6 @@ export interface UserInfo {
   devProperties: DevProperties;
   photo: string;
   token?: string;
-  notifications: Notification;
+  notifications: Notification[];
 }
 

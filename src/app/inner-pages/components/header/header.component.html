@@ -10,10 +10,10 @@
   <div class="d__flex d__flex--items-center">
 
     <i class="bell cursor__pointer m__right--30" (click)="isNotificationsOpen = !isNotificationsOpen">
-      <div *ngIf="true" class="dot"></div>
+      <div *ngIf="userInfo.notifications.length" class="dot"></div>
     </i>
 
-    <app-notifications-popup [@opacityInOut]="{ value: ':enter', params: { from: 60, to: 80 } }" *ngIf="isNotificationsOpen"></app-notifications-popup>
+    <app-notifications-popup [notifications]="userInfo.notifications" [@opacityInOut]="{ value: ':enter', params: { from: 60, to: 80 } }" *ngIf="isNotificationsOpen"></app-notifications-popup>
 
     <div class="photo-preview with-chevron cursor__pointer" [style.backgroundImage]="userInfo.photo ? 'url(' + userInfo?.photo + ')' : 'none'" (click)="togglePopup()"></div>
 

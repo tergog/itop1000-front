@@ -1,12 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import * as jwtDecode from 'jwt-decode';
 
 import { marginAnimation } from 'app/shared/animations/margin.animation';
-
-export interface Mock {
-  name: string;
-  message: string;
-  id: number;
-}
+import { Notification } from 'app/shared/models/notification2.model';
+import { NotificationsService, UserService } from 'app/shared/services';
+import { State } from 'app/core/reducers/index';
+import { TOKEN } from 'app/constants/constants';
+import * as coreActions from 'app/core/actions/core.actions';
+import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-notifications-popup',
@@ -17,36 +20,35 @@ export interface Mock {
 
 export class NotificationsPopupComponent implements OnInit {
 
-  mockData: Mock[] = [
-    {
-      name: 'Boris Stelman',
-      message: 'At vero eds et accusamus et iusto',
-      id: 1
-    },
-    {
-      name: 'Boris Stelman',
-      message: 'At vero eds et accusamus et iusto',
-      id: 2
-    },
-    {
-      name: 'Boris Stelman',
-      message: 'At vero eds et accusamus et iusto',
-      id: 3
-    },
-    {
-      name: 'Boris Stelman',
-      message: 'At vero eds et accusamus et iusto',
-      id: 4
-    },
-  ];
+  @Input() notifications: Notification[];
 
-  constructor() { }
+  constructor(private userService: UserService, private store: Store<State>, private notificationService: NotificationsService) { }
 
   ngOnInit(): void {
   }
 
-  delete(id: number): void {
-    this.mockData = this.mockData.filter(el => el.id !== id);
+  delete(i: number): void {
+    const newArr: Notification[] = [...this.notifications];
+    newArr.splice(i, 1);
+    this.userService.updateProfile({ notifications: newArr })
+      .pipe(first())
+      .subscribe(
+        ({ token }: any) => this.handleSuccessResponse(token),
+        ({ error }) => this.handleErrorResponse(error)
+      );
   }
 
+  handleSuccessResponse(token: string): void {
+    localStorage.setItem(TOKEN, token);
+    const userInfo = jwtDecode(token);
+    this.store.dispatch(new coreActions.UpdateUserProfileAction(userInfo));
+  }
+
+  handleErrorResponse(error): void {
+    this.notificationService.message.emit({ message: error, type: ENotificationStatus.Error });
+  }
+
+  identify(index, item){
+    return item.message;
+  }
 }
