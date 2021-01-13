@@ -39,14 +39,14 @@ export class DevProfileService {
           category => !this.selectedCategories.find(
             selectedCat => selectedCat.value === category.value)
         )))
-      .subscribe(val => this.availableCategories = val);
+      // .subscribe(val => this.availableCategories = val);
     this.developersStore.select(fromDevelopers.getSkills)
       .pipe(
         map(val => val.filter(
           skill => !this.selectedSkills.find(
             selectedSkill => selectedSkill.value === skill.value)
         )))
-      .subscribe(val => this.availableSkills = val);
+      // .subscribe(val => this.availableSkills = val);
   }
 
   public onSaveClick(userInfo: Partial<UserInfo>): void {

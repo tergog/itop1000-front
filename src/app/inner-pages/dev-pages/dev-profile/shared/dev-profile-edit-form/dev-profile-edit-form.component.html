@@ -1,7 +1,7 @@
 <div [formGroup]="form">
     <!-- categories and skills -->
   <div class="d__flex d__flex--direction-column p__20"
-    *ngIf="devProfileService.availableCategories && sectionName === DevProfileSectionNames.CategoriesSkills">
+    *ngIf="availableCategories && sectionName === DevProfileSectionNames.CategoriesSkills">
     <span class="text text__title text__color--1">
       Categories
     </span>
