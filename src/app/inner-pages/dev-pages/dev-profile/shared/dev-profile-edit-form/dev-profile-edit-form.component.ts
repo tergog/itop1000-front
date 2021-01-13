@@ -1,5 +1,5 @@
-import { FormControl, FormGroup} from '@angular/forms';
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Store } from '@ngrx/store';
 import { filter, first, map } from 'rxjs/operators';
@@ -25,7 +25,7 @@ export enum SelectedChips {
   styleUrls: ['./dev-profile-edit-form.component.scss']
 })
 
-export class DevProfileEditFormComponent implements OnInit {
+export class DevProfileEditFormComponent implements OnInit, AfterViewInit {
 
   @Input() sectionName: string;
   @Input() isEdit: boolean;
@@ -44,18 +44,23 @@ export class DevProfileEditFormComponent implements OnInit {
   public availableCategories: Subject<NameValueModel[]> = new Subject<NameValueModel[]>();
   public availableSkills: Subject<NameValueModel[]> = new Subject<NameValueModel[]>();
 
-  public availableCategories$: Observable<NameValueModel[]>;
-  public availableSkills$: Observable<NameValueModel[]>;
+  public availableCategories$: Observable<NameValueModel[]> = this.availableCategories.asObservable().pipe(
+    map(val => this.allCategories.filter(category => !val.find(item => item.value === category.value))));
+
+  public availableSkills$: Observable<NameValueModel[]> = this.availableSkills.asObservable().pipe(
+    map(val => this.allSkills.filter(skill => !val.find(item => item.value === skill.value))));
 
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  public subscribes: [];
 
   constructor(
     public devProfileService: DevProfileService,
     private store: Store<fromCore.State>,
     private notificationsService: NotificationsService,
     private userService: UserService,
-    private developersStore: Store<fromDevelopers.State>
-  ) { }
+    private developersStore: Store<fromDevelopers.State>,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -66,23 +71,35 @@ export class DevProfileEditFormComponent implements OnInit {
         this.updateChips(this.devProfileService.devProperties);
       });
 
-    this.availableCategories$ = this.availableCategories.asObservable().pipe(
-        map(val => this.allCategories.filter(category => !val.find(item => item.value === category.value))));
+    this.developersStore.select(fromDevelopers.getSkills)
+      .subscribe(res => {
+        this.allSkills = res;
+        this.availableSkills.next(this.devProfileService.selectedSkills);
+      });
+  }
 
-    this.availableSkills$ = this.availableSkills.asObservable().pipe(
-      map(val => this.allSkills.filter(skill => !val.find(item => item.value === skill.value))));
-
-    this.developersStore.select(fromDevelopers.getCategories).pipe(filter(res => res.length))
+  ngAfterViewInit(): void {
+    this.developersStore.select(fromDevelopers.getCategories)
+      .pipe(
+        filter(res => !!res.length),
+        first()
+      )
       .subscribe(res => {
         this.allCategories = res;
         this.availableCategories.next(this.devProfileService.selectedCategories);
+        this.cdr.detectChanges();
       });
 
-    this.developersStore.select(fromDevelopers.getSkills).pipe(filter(res => res.length))
+    this.developersStore.select(fromDevelopers.getSkills)
+      .pipe(
+        filter(res => !!res.length),
+        first()
+      )
       .subscribe(res => {
-      this.allSkills = res;
-      this.availableSkills.next(this.devProfileService.selectedSkills);
-    });
+        this.allSkills = res;
+        this.availableSkills.next(this.devProfileService.selectedSkills);
+        this.cdr.detectChanges();
+      });
   }
 
   public onEditClick(): void {
@@ -105,7 +122,7 @@ export class DevProfileEditFormComponent implements OnInit {
     this.isEdit = false;
   }
 
-  public onChipSelect(chip, selectedChips , availableChip): void {
+  public onChipSelect(chip, selectedChips, availableChip): void {
     this.devProfileService[selectedChips].push(chip);
     availableChip.next(this.devProfileService[selectedChips]);
     this.resetFocus(selectedChips);
@@ -114,7 +131,9 @@ export class DevProfileEditFormComponent implements OnInit {
   resetFocus(selectedChips: SelectedChips): void {
     const element = selectedChips === SelectedChips.Category ? this.category : this.skills;
     element.nativeElement.blur();
-    setTimeout(() => { element.nativeElement.focus()}, 0);
+    setTimeout(() => {
+      element.nativeElement.focus()
+    }, 0);
   }
 
   public onChipRemove(chip: NameValueModel, selectedChips, availableChip): void {
