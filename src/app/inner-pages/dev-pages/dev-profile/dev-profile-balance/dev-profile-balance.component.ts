@@ -9,6 +9,7 @@ import { UserInfo } from 'app/shared/models/user-info.model';
 import { getUserInfo, State } from 'app/core/reducers/index';
 import { NotificationsService } from 'app/shared/services';
 import { BankAccountDialogComponent } from 'app/inner-pages/shared/components/bank-account-dialog/bank-account-dialog.component';
+import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
 
 
 @Component({
@@ -39,7 +40,7 @@ export class DevProfileBalanceComponent implements OnInit, OnDestroy {
 
       },
       error => {
-        this.notificationService.message.emit({ message: error.error.raw.message, type: 'error' });
+        this.notificationService.message.emit({ message: error.error.raw.message, type: ENotificationStatus.Error });
       }
     );
   }
