@@ -1,23 +1,21 @@
 <app-auth-container>
-  <span class="text text__title text__color--3 text__uppercase m__top--30">
-    Log in
-  </span>
 
   <div [formGroup]="form" class="w__594">
     <div class="m__top--36">
       <span class="text text__sm text__color--3 text__fw--600">Email address</span>
-      <app-input formControlName="email" [placeholder]="'email@example.com'" class="m__top--10"></app-input>
+      <app-input formControlName="email" [placeholder]="'email@example.com'" class="m__top--10 transparent"></app-input>
     </div>
 
-    <div class="m__top--25">
+    <div class="m__top--30">
       <span class="text text__sm text__color--3 text__fw--600">Password</span>
-      <app-input formControlName="password" (enterKey)="onLogInClick()" [isHiddenPassword]="isPasswordHidden" [placeholder]="'password'" class="m__top--10">
+      <app-input formControlName="password" (enterKey)="onLogInClick()" [isHiddenPassword]="isPasswordHidden" [placeholder]="'password'" class="m__top--10 transparent">
         <i [class.eye]="!isPasswordHidden" [class.eye-line]="isPasswordHidden" (click)="passwordHiddenToggle()"></i>
       </app-input>
     </div>
 
-    <div class="m__top--25 w__594">
+    <div class="m__top--30 w__594 d__flex d__flex--items-center d__flex--justify-between">
       <app-checkbox [label]="'Remember me'"></app-checkbox>
+      <a routerLink="../forgot-password" class="text text__color--3 text__sm cursor__pointer text__decoration--none">Forgot password?</a>
     </div>
   </div>
 
@@ -27,10 +25,4 @@
 
   <app-button class="m__top--60" (buttonClick)="onLogInClick()" [type]="'main'" [text]="'Sign in'"></app-button>
 
-  <div class="w__594 m__top--60 overflow--hidden">
-    <app-separator></app-separator>
-  </div>
-
-  <p class="text text__sm text__color--3 text__fw--600 m__top--50">New around here? <a routerLink="../signup" class="text__color--3 text__decoration--none">Sign up</a></p>
-  <p class="text text__sm text__color--3 text__fw--600 m__top--30"><a routerLink="../forgot-password" class="text__color--3 text__decoration--none">Forgot password?</a></p>
 </app-auth-container>

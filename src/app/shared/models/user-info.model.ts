@@ -16,5 +16,8 @@ export interface UserInfo {
   photo: string;
   token?: string;
   notifications: Notification[];
+  stripeAccountId: string;
+  stripeVerified: boolean;
+  balance: number;
 }
 

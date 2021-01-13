@@ -33,5 +33,21 @@ export class PaymentService {
   public getChargesList(): Observable<any> {
     return this.http.get(`${this.apiUrl}${ApiConstants.accounts.chargesList}`);
   }
+
+  public verifyBankAccount(bankInfo: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}${ApiConstants.accounts.verifyBank}`, bankInfo);
+  }
+
+  public instantPayout(paymentInfo: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}${ApiConstants.accounts.paymentIntent}`, paymentInfo);
+  }
+
+  public verifyStripeAccount(): Observable<any> {
+    return this.http.get(`${this.apiUrl}${ApiConstants.accounts.verifyStripe}`);
+  }
+
+  public payout(): Observable<any> {
+    return this.http.get(`${this.apiUrl}${ApiConstants.accounts.payout}`);
+  }
 }
 

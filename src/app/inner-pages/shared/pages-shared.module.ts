@@ -32,6 +32,7 @@ import { HeaderLandingComponent } from 'app/inner-pages/components/header-landin
 import { FooterLandingComponent } from 'app/inner-pages/components/footer-landing/footer-landing.component';
 import { GetPaidNowDialogComponent } from './components/get-paid-now-dialog/get-paid-now-dialog.component';
 import { ActiveProjectsComponent } from './components/active-projects/active-projects.component';
+import { BankAccountDialogComponent } from './components/bank-account-dialog/bank-account-dialog.component';
 import { NotificationsPopupComponent } from './components/notifications-popup/notifications-popup.component';
 
 
@@ -57,6 +58,7 @@ import { NotificationsPopupComponent } from './components/notifications-popup/no
     LandingComponent,
     HeaderLandingComponent,
     FooterLandingComponent,
+    BankAccountDialogComponent,
     ActiveProjectsComponent,
     NotificationsPopupComponent,
   ],

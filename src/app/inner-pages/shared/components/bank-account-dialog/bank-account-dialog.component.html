@@ -1,0 +1,51 @@
+<div class="dialog-header w__594">
+  <span class="text text__lg text__color--3 text__uppercase">Bank account</span>
+  <i class="close cursor__pointer" mat-dialog-close></i>
+</div>
+
+<div class="p__20" [formGroup]="form">
+  <div class="d__flex d__flex--direction-column">
+    <span class="text text__sm text__color--1 text__fw--600">Country</span>
+    <app-input class="m__top--10 light" formControlName="country" [type]="'light'" [placeholder]="'Country'"></app-input>
+  </div>
+
+  <div class="m__top--30 d__flex d__flex--direction-column">
+    <span class="text text__sm text__color--1 text__fw--600">Currency</span>
+    <app-input class="m__top--10 light" formControlName="currency" [type]="'light'" [placeholder]="'Currency'"></app-input>
+  </div>
+
+  <div class="m__top--30 d__flex d__flex--direction-column">
+    <span class="text text__sm text__color--1 text__fw--600">Routing number</span>
+    <app-input class="m__top--10 light" formControlName="routing_number" [type]="'light'" [placeholder]="'Routing number'"></app-input>
+  </div>
+
+  <div class="m__top--30 d__flex d__flex--direction-column">
+    <span class="text text__sm text__color--1 text__fw--600">Account number</span>
+    <app-input class="m__top--10 light" formControlName="account_number" [type]="'light'" [placeholder]="'Account number'"></app-input>
+  </div>
+
+  <div class="m__top--30 d__flex d__flex--direction-column">
+    <span class="text text__sm text__color--1 text__fw--600">Account holder name</span>
+    <app-input class="m__top--10 light" formControlName="account_holder_name" [type]="'light'" [placeholder]="'Account holder name'"></app-input>
+  </div>
+
+  <div class="d__flex d__flex--direction-column m__top--30">
+    <span class="text text__sm text__color--1 text__fw--600">Account holder type</span>
+    <mat-form-field appearance="fill">
+      <mat-label>Account holder type</mat-label>
+      <mat-select (selectionChange)="onSelect($event)">
+        <mat-option value="individual">Individual</mat-option>
+        <mat-option value="company">Company</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="m__top--30" *ngIf="errorMessage">
+    <span class="test text__color--2">{{errorMessage}}</span>
+  </div>
+
+  <div class="m__top--30 text__right">
+    <app-button [text]="'Connect'" (buttonClick)="onConnect()"></app-button>
+  </div>
+</div>
+
