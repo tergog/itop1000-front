@@ -107,7 +107,6 @@ export class CreateJobComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onChipSelect(category: NameValueModel): void {
     this.devProfileService.selectedCategories.push(category);
-    // this.devProfileService.availableCategories = this.devProfileService.availableCategories.filter(el => el.value !== category.value);
     this.form.get('categories').patchValue(this.devProfileService.selectedCategories);
     this.availableCategories.next(this.devProfileService.selectedCategories);
     this.focusReset();

@@ -56,9 +56,6 @@ export class EditJobDialogComponent implements OnInit, OnDestroy, AfterViewInit 
     this.initForm();
     this.form.patchValue(this.job);
     this.devProfileService.selectedCategories.push(...this.job.categories);
-    // for (const category of this.devProfileService.selectedCategories) {
-    //   this.devProfileService.availableCategories = this.devProfileService.availableCategories.filter(el => el.name !== category.name)
-    // }
   }
   ngAfterViewInit() {
     this.developersStore.select(fromDevelopers.getCategories)
@@ -104,14 +101,12 @@ export class EditJobDialogComponent implements OnInit, OnDestroy, AfterViewInit 
 
   onChipSelect(category: NameValueModel): void {
     this.devProfileService.selectedCategories.push(category);
-    // this.devProfileService.availableCategories = this.devProfileService.availableCategories.filter(el => el.value !== category.value);
     this.form.get('categories').patchValue(this.devProfileService.selectedCategories);
     this.availableCategories.next(this.devProfileService.selectedCategories);
     this.focusReset();
   }
 
   onChipRemove(category: NameValueModel): void {
-    // this.devProfileService.availableCategories.push(category);
     this.devProfileService.selectedCategories = this.devProfileService.selectedCategories.filter(el => el.value !== category.value);
     this.availableCategories.next(this.devProfileService.selectedCategories);
     this.form.get('categories').patchValue(this.devProfileService.selectedCategories);
@@ -127,7 +122,6 @@ export class EditJobDialogComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   ngOnDestroy(): void {
-    // this.devProfileService.availableCategories.push(...this.devProfileService.selectedCategories);
     this.devProfileService.selectedCategories = [];
   }
 }
