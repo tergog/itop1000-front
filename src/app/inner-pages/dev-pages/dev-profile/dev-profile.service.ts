@@ -86,7 +86,7 @@ export class DevProfileService {
         (token) => {
           this.notificationsService.message.emit({
             message: 'Certificate added successfully',
-            type: 'success'
+            type: ENotificationStatus.Success
           });
           this.onUpdateProfileInfo(token);
         },
@@ -101,7 +101,7 @@ export class DevProfileService {
         (token) => {
           this.notificationsService.message.emit({
             message: 'Certificate deleted successfully',
-            type: 'success'
+            type: ENotificationStatus.Success
           });
           this.onUpdateProfileInfo(token);
         },
