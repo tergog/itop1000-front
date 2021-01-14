@@ -1,5 +1,5 @@
 <app-standard-bg-wrap>
-  <div class="d__flex" *ngrxLet="developer$ as developer">
+  <div class="d__flex" *ngIf="developer$ | ngrxPush as developer">
     <div class="d__inline-flex d__flex--direction-column d__flex--items-center resume-nav p__20">
       <div class="d__flex d__flex--direction-column d__flex--items-center">
         <img [src]="developer.photo" alt="photo"/>
@@ -319,9 +319,9 @@
                                 *ngIf="i < projectCounter"
                                 (click)="onWorkExperienceClick(developer.id, i)" [project]="project"></app-project-card>
             </div>
-            <app-button class="m__top--60 m__bottom--10"
+            <app-button class="m__top--60 m__bottom--10" *ngIf="developer.devProperties.projects.length > 3"
                         [text]="projectCounter < developer.devProperties.projects.length ? 'Show more' : 'Hide'"
-                        [type]="'secondary'" (buttonClick)="onShowMoreClick()"></app-button>
+                        [type]="'secondary'" (buttonClick)="onShowMoreClick(developer)"></app-button>
           </div>
         </div>
 

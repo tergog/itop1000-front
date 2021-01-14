@@ -63,12 +63,10 @@ export class DeveloperResumeFullComponent implements OnInit, OnDestroy {
 
   }
 
-  onShowMoreClick(): void {
-    this.developer$.pipe(untilDestroyed(this))
-      .subscribe(dev => this.projectCounter < dev.devProperties.projects.length
-        ? this.projectCounter += 3
-        : this.projectCounter = 3
-      );
+  onShowMoreClick(dev): void {
+    this.projectCounter < dev.devProperties.projects.length
+      ? this.projectCounter += 3
+      : this.projectCounter = 3;
   }
 
   public onSectionCLick(selectedSection: EDeveloperResumeSections, element: HTMLElement): void {
