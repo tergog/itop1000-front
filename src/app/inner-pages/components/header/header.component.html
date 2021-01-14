@@ -12,7 +12,7 @@
   </div>
   <div [@opacityInOut] class="logout-popup" *ngIf="isPopupOpen">
     <div class="d__flex d__flex--items-center">
-      <div class="photo-preview photo-preview__logout with-border photo-preview__wrap m__right--10" [style.backgroundImage]="userInfo.photo ? 'url(' + userInfo?.photo + ')' : 'url(assets/icons/profile-photo.svg)'"></div>
+      <div class="photo-preview photo-preview__logout with-border__logout photo-preview__wrap m__right--10" [style.backgroundImage]="userInfo.photo ? 'url(' + userInfo?.photo + ')' : 'url(assets/icons/profile-photo.svg)'"></div>
       <div class="d__flex d__flex--direction-column">
         <span class="text text__lg text__fw--500 text__color--1">{{ userInfo.firstName }} {{ userInfo.lastName }}</span>
         <span class="text text__sm text__color--6">{{ userInfo.email }}</span>

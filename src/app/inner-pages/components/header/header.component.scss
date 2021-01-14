@@ -54,6 +54,18 @@
       border: 1px solid $color-2-hover;
       border-radius: 50%;
     }
+    &__logout {
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0px;
+        left: -1px;
+        right: 0px;
+        bottom: -1px;
+        border: 1px solid $color-2-hover;
+        border-radius: 50%;
+      }
+    }
   }
 }
 
