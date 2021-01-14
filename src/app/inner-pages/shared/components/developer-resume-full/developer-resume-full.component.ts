@@ -3,7 +3,6 @@ import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { bufferTime, tap } from 'rxjs/operators';
-import { untilDestroyed } from 'ngx-take-until-destroy';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 
@@ -42,8 +41,8 @@ export class DeveloperResumeFullComponent implements OnInit, OnDestroy {
     private store: Store<State>,
     private router: Router,
     private route: ActivatedRoute,
-    private resumeService: ResumeService) {
-  }
+    private resumeService: ResumeService
+  ) {  }
 
   ngOnInit(): void {
     this.developer$ = this.store.select(getDeveloper).pipe(tap((dev: Developer) => {
@@ -60,15 +59,12 @@ export class DeveloperResumeFullComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-
   }
 
-  onShowMoreClick(): void {
-    this.developer$.pipe(untilDestroyed(this))
-      .subscribe(dev => this.projectCounter < dev.devProperties.projects.length
-        ? this.projectCounter += 3
-        : this.projectCounter = 3
-      );
+  onShowMoreClick(dev): void {
+    this.projectCounter < dev.devProperties.projects.length
+      ? this.projectCounter += 3
+      : this.projectCounter = 3;
   }
 
   public onSectionCLick(selectedSection: EDeveloperResumeSections, element: HTMLElement): void {
@@ -81,7 +77,7 @@ export class DeveloperResumeFullComponent implements OnInit, OnDestroy {
   }
 
   public onWorkExperienceClick(id: string, projectId: number): void {
-    this.router.navigate([`in/c/search-developers/${id}/project/${projectId}`]);
+    this.router.navigate([`in/c/search-developers/${ id }/project/${ projectId }`]);
   }
 
   public onMessageClick(): void {
