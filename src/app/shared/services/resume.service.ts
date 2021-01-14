@@ -338,8 +338,8 @@ export class ResumeService {
 
   private addCertificates(certificates: Array<string>): Array<object> {
     return certificates ? [
-      ...certificates.map((el) => {
-        return {text: el};
+      ...certificates.map((certificate) => {
+        return { text: certificate };
       })
     ] : [];
   }
