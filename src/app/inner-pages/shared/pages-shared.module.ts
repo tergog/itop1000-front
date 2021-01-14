@@ -1,4 +1,3 @@
-/* tslint:disable:max-line-length */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -34,6 +33,7 @@ import { FooterLandingComponent } from 'app/inner-pages/components/footer-landin
 import { GetPaidNowDialogComponent } from './components/get-paid-now-dialog/get-paid-now-dialog.component';
 import { ActiveProjectsComponent } from './components/active-projects/active-projects.component';
 import { BankAccountDialogComponent } from './components/bank-account-dialog/bank-account-dialog.component';
+import { NotificationsPopupComponent } from './components/notifications-popup/notifications-popup.component';
 
 
 @NgModule({
@@ -60,6 +60,7 @@ import { BankAccountDialogComponent } from './components/bank-account-dialog/ban
     FooterLandingComponent,
     BankAccountDialogComponent,
     ActiveProjectsComponent,
+    NotificationsPopupComponent,
   ],
   imports: [
     RouterModule,
@@ -82,7 +83,8 @@ import { BankAccountDialogComponent } from './components/bank-account-dialog/ban
     DeveloperResumeComponent,
     StandardBgWrapComponent,
     ProjectCardComponent,
-    ActiveProjectsComponent
+    ActiveProjectsComponent,
+    NotificationsPopupComponent
   ],
   providers: [
     DevProfileService
