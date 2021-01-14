@@ -61,7 +61,7 @@ export class DeveloperResumeFullComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
   }
 
-  onShowMoreClick(dev): void {
+  onShowMoreClick(dev: Developer): void {
     this.projectCounter < dev.devProperties.projects.length
       ? this.projectCounter += 3
       : this.projectCounter = 3;
