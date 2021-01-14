@@ -11,4 +11,5 @@ export interface DevProperties {
   hourlyRate?: number;
   monthRate?: number;
   duration?: number;
+  certificates?: string[];
 }
