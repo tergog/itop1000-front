@@ -194,12 +194,11 @@ export class ResumeService {
         style: 'header'
       },
       this.addLanguages(developer.devProperties.languages),
-      /* \
-       {
-         text: 'CERTIFICATES',
-         style: 'header'
-       },
-       */
+      {
+        text: 'CERTIFICATES',
+        style: 'header'
+      },
+      this.addCertificates(developer.devProperties.certificates),
       {
         text: 'WORK EXPERIENCE',
         style: 'header'
@@ -335,5 +334,13 @@ export class ResumeService {
   private addDate(d: Date): string {
     const date = new Date(d);
     return `${ date.getDate() }-${ date.getMonth() }-${ date.getFullYear() }`;
+  }
+
+  private addCertificates(cert: Array<string>): Array<object> {
+    return cert ? [
+      ...cert.map((el) => {
+        return {text: el};
+      })
+    ] : [];
   }
 }
