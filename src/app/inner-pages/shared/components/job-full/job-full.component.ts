@@ -6,12 +6,13 @@ import { Observable, of } from 'rxjs';
 import { filter, flatMap, switchMap, tap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 
+import * as fromCore from 'app/core/reducers';
 import { getJobs, State } from 'app/core/reducers';
 import { Job } from 'app/shared/models';
 import { JobsService, NotificationsService } from 'app/shared/services';
-import * as fromCore from 'app/core/reducers';
 import { ConfirmationDialogComponent } from 'app/inner-pages/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { EditJobDialogComponent } from 'app/inner-pages/shared/components/edit-job-dialog/edit-job-dialog.component';
+import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
 
 export enum EJobSections {
   Project,
@@ -122,14 +123,14 @@ export class JobFullComponent implements OnInit, OnDestroy {
   private handleSuccessResponse(): void {
     this.notificationsService.message.emit({
       message: 'Changes successfully saved',
-      type: 'success'
+      type: ENotificationStatus.Success
     });
   }
 
   private handleErrorResponse(error: Error): void {
     this.notificationsService.message.emit({
       message: error.message,
-      type: 'error'
+      type: ENotificationStatus.Error
     });
   }
 

@@ -15,7 +15,7 @@ import { NameValueModel } from 'app/shared/models/name-value.model';
 export enum SelectedChips {
   Category = 'selectedCategories',
   Skill = 'selectedSkills'
-};
+}
 
 @Component({
   selector: 'app-dev-profile-edit-form',
@@ -85,7 +85,7 @@ export class DevProfileEditFormComponent implements OnInit {
   resetFocus(selectedChips: SelectedChips): void {
     const element = selectedChips === SelectedChips.Category ? this.category : this.skills;
     element.nativeElement.blur();
-    setTimeout(() => { element.nativeElement.focus()}, 0);
+    setTimeout(() => { element.nativeElement.focus(); }, 0);
   }
 
   public onChipRemove(chip: NameValueModel, selectedChips, availableChips): void {
