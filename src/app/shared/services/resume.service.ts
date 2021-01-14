@@ -336,9 +336,9 @@ export class ResumeService {
     return `${ date.getDate() }-${ date.getMonth() }-${ date.getFullYear() }`;
   }
 
-  private addCertificates(cert: Array<string>): Array<object> {
-    return cert ? [
-      ...cert.map((el) => {
+  private addCertificates(certificates: Array<string>): Array<object> {
+    return certificates ? [
+      ...certificates.map((el) => {
         return {text: el};
       })
     ] : [];
