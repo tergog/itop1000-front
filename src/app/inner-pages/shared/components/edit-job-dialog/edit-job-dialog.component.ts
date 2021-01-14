@@ -57,6 +57,7 @@ export class EditJobDialogComponent implements OnInit, OnDestroy, AfterViewInit 
     this.form.patchValue(this.job);
     this.devProfileService.selectedCategories.push(...this.job.categories);
   }
+
   ngAfterViewInit() {
     this.developersStore.select(fromDevelopers.getCategories)
       .pipe(

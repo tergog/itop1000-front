@@ -70,12 +70,6 @@ export class DevProfileEditFormComponent implements OnInit, AfterViewInit {
         this.devProfileService.devProperties = userInfo.devProperties ? userInfo.devProperties : {};
         this.updateChips(this.devProfileService.devProperties);
       });
-
-    // this.developersStore.select(fromDevelopers.getSkills)
-    //   .subscribe(res => {
-    //     this.allSkills = res;
-    //     this.availableSkills.next(this.devProfileService.selectedSkills);
-    //   });
   }
 
   ngAfterViewInit(): void {

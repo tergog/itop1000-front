@@ -22,8 +22,7 @@ export const ApiConstants = {
     verifyBank: 'accounts/verify-bank',
     verifyStripe: 'accounts/verify-stripe',
     payout: 'accounts/payout',
-    paymentIntent: 'accounts/payment-intent',
-    // activeProjects: 'accounts/active-projects'
+    paymentIntent: 'accounts/payment-intent'
   },
   jobs: {
     main: 'jobs',
