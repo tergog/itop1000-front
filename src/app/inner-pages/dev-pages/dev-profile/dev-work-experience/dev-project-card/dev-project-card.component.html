@@ -1,5 +1,8 @@
 <div class="dev-project-card d__flex d__flex--direction-column p__15">
-  <i class="edit cursor__pointer m--5" (click)="onEditClick()"></i>
+  <div class="d__flex">
+    <i class="edit cursor__pointer m--5" (click)="onEditClick()"></i>
+    <i class="delete cursor__pointer m--5" (click)="onDeleteClick()"></i>
+  </div>
   <ng-container *ngIf="!isEdit">
         <div class="d__flex d__flex d__flex--direction-column">
           <app-project-card class="m__right--10" [project]="project"></app-project-card>

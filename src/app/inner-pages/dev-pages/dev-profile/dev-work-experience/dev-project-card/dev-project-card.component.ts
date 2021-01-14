@@ -187,5 +187,15 @@ export class DevProjectCardComponent implements OnInit {
       );
   }
 
+  public onDeleteClick(): void {
+    let arr = [...this.devProfileService.devProperties.projects];
+    arr = arr.filter((el: any) => el.title !== this.project.title);
+    this.devProfileService.devProperties = {
+      ...this.devProfileService.devProperties,
+      projects: arr
+    };
+    this.devProfileService.onSaveClick({devProperties: this.devProfileService.devProperties});
+  }
+
 
 }
