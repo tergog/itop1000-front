@@ -5,6 +5,7 @@ import { first } from 'rxjs/operators';
 
 import { UserService, UtilsService } from 'app/shared/services';
 import { NotificationsService } from 'app/shared/services/notifications.service';
+import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
 
 @Component({
   selector: 'app-change-password-dialog',
@@ -74,7 +75,7 @@ export class ChangePasswordDialogComponent implements OnInit {
   private changePasswordResponse(): void {
     this.notificationsService.message.emit({
       message: 'Password changed successfully',
-      type: 'success'
+      type: ENotificationStatus.Success
     });
 
     this.dialogRef.close();

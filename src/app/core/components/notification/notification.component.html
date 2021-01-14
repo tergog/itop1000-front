@@ -1,14 +1,25 @@
-<div class="notification-popup">
-  <span
-    class="icon m__right--20"
-    [class.icon__success-sign-sm]="notification.type === 'success'"
-    [class.icon__error-sign-sm]="notification.type === 'error'"
-  ></span>
-  <span
-    class="d__flex--1 text text__md m__right--5"
-    [class.text__color--3]="notification.type === 'success'"
-    [class.text__color--2]="notification.type === 'error'"
-    [innerHTML]="notification.message"
-  ></span>
-  <i class="cursor__pointer close" (click)="onNotificationClose()"></i>
+<div class="notification-popup d__flex d__flex--items-center d__flex--justify-around"
+     [class.success]="notification.type === NotificationStatus.Success"
+     [class.error-message]="notification.type === NotificationStatus.Error"
+     [class.warning]="notification.type === NotificationStatus.Warning"
+>
+  <ng-container [ngSwitch]="notification.type">
+    <div *ngSwitchCase="NotificationStatus.Success" class="icon m__right--30 d__flex d__flex--direction-column d__flex--items-center d__flex--justify-center">
+      <i class="success-icon"></i>
+    </div>
+
+    <div *ngSwitchCase="NotificationStatus.Warning" class="icon m__right--30 d__flex d__flex--direction-column d__flex--items-center d__flex--justify-center">
+      <i class="warning-icon"></i>
+    </div>
+
+    <div *ngSwitchCase="NotificationStatus.Error" class="icon m__right--30 d__flex d__flex--direction-column d__flex--items-center d__flex--justify-center">
+      <i class="close-black"></i>
+    </div>
+  </ng-container>
+
+  <div class="m__right--30">
+    <span class="text text__fw--400 text__uppercase text__lg m__bottom--10" *ngIf="notification.type === NotificationStatus.Success">Success</span>
+    <p class="text m--0">{{ notification.message }}</p>
+  </div>
+  <i class="cursor__pointer close-black" (click)="onNotificationClose()"></i>
 </div>
