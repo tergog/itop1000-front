@@ -90,9 +90,9 @@
       </mat-chip-list>
 
       <mat-autocomplete #autoSoftSkills="matAutocomplete" (optionSelected)="onChipSelect($event, devProfileService.selectedSoftSkills, 'allSoftSkills')">
-        <mat-option *ngFor="let softSkill of devProfileService.availableSoftSkills" [value]="softSkill">
-          {{ softSkill }}
-        </mat-option>
+<!--        <mat-option *ngFor="let softSkill of devProfileService.availableSoftSkills" [value]="softSkill">-->
+<!--          {{ softSkill }}-->
+<!--        </mat-option>-->
       </mat-autocomplete>
     </mat-form-field>
 
@@ -118,9 +118,9 @@
       </mat-chip-list>
 
       <mat-autocomplete #autoLanguages="matAutocomplete" (optionSelected)="onChipSelect($event, devProfileService.selectedLanguages, 'allLanguge')">
-        <mat-option *ngFor="let language of devProfileService.availableLanguages" [value]="language">
-          {{ language }}
-        </mat-option>
+<!--        <mat-option *ngFor="let language of devProfileService.availableLanguages" [value]="language">-->
+<!--          {{ language }}-->
+<!--        </mat-option>-->
       </mat-autocomplete>
     </mat-form-field>
   </div>

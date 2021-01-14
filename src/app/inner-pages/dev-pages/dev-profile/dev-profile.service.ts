@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { first, map } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 import * as jwtDecode from 'jwt-decode';
 
 import * as coreActions from 'app/core/actions/core.actions';
@@ -8,7 +8,6 @@ import { TOKEN } from 'app/constants/constants';
 import { UserService } from 'app/shared/services';
 import { UserInfo, NameValueModel } from 'app/shared/models';
 import * as fromCore from 'app/core/reducers';
-import * as fromDevelopers from 'app/core/developers/store/index';
 import { DevProperties } from 'app/shared/models/dev-properties.model';
 import { NotificationsService } from 'app/shared/services/notifications.service';
 
@@ -22,32 +21,11 @@ export class DevProfileService {
   public selectedSoftSkills: NameValueModel[] = [];
   public selectedLanguages: NameValueModel[] = [];
 
-  public availableCategories: NameValueModel[];
-  public availableSkills: NameValueModel[];
-  public availableSoftSkills: NameValueModel[];
-  public availableLanguages: NameValueModel[];
-
   constructor(
     private store: Store<fromCore.State>,
     private notificationsService: NotificationsService,
     private userService: UserService,
-    private developersStore: Store<fromDevelopers.State>
-  ) {
-    // this.developersStore.select(fromDevelopers.getCategories)
-    //   .pipe(
-    //     map(val => val.filter(
-    //       category => !this.selectedCategories.find(
-    //         selectedCat => selectedCat.value === category.value)
-    //     )))
-    //   .subscribe(val => this.availableCategories = val);
-    // this.developersStore.select(fromDevelopers.getSkills)
-    //   .pipe(
-    //     map(val => val.filter(
-    //       skill => !this.selectedSkills.find(
-    //         selectedSkill => selectedSkill.value === skill.value)
-    //     )))
-    //   .subscribe(val => this.availableSkills = val);
-  }
+  ) {}
 
   public onSaveClick(userInfo: Partial<UserInfo>): void {
 
