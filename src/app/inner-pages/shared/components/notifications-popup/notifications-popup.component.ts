@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as jwtDecode from 'jwt-decode';
+import { first } from 'rxjs/operators';
 
 import { marginAnimation } from 'app/shared/animations/margin.animation';
 import { Notification } from 'app/shared/models/notification2.model';
@@ -9,7 +10,6 @@ import { State } from 'app/core/reducers/index';
 import { TOKEN } from 'app/constants/constants';
 import * as coreActions from 'app/core/actions/core.actions';
 import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
-import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-notifications-popup',
