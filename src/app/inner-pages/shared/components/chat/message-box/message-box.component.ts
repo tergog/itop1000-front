@@ -1,5 +1,4 @@
 import {
-  AfterContentChecked,
   Component,
   ElementRef,
   Input,
@@ -16,7 +15,6 @@ import { delay, switchMap, tap } from 'rxjs/operators';
 import { ChatService, NotificationsService, WebsocketService } from 'app/shared/services';
 import {
   ConversationMemberModel,
-  ConversationMessageModel,
   ConversationModel,
   SharedQuillInstanceModel,
   UserInfo
@@ -32,7 +30,7 @@ import { slideInLeftAnimation } from 'app/shared/animations';
   styleUrls: [ './message-box.component.scss' ],
   animations: [ slideInLeftAnimation ]
 })
-export class MessageBoxComponent implements OnInit, OnChanges, AfterContentChecked {
+export class MessageBoxComponent implements OnInit, OnChanges {
   @Input() user: UserInfo;
   @Input() chat: fromChat.State;
   @ViewChild('messages') messagesContainer: ElementRef;
@@ -64,9 +62,9 @@ export class MessageBoxComponent implements OnInit, OnChanges, AfterContentCheck
     ).subscribe();
 
     this.websocketService.receivedTyping().pipe(
-      switchMap(({ chat, username }) => iif(
-        () => chat === this.chat.conversations.active,
-        of(undefined).pipe(
+      switchMap(({ chatId, username }) => iif(
+        () => chatId === this.chat.conversations.active,
+        of(undefined).pipe( // TODO: Fix this stream. When received many typing events.
           tap(() => this.userTyping = username),
           delay(3000),
           tap(() => this.userTyping = null)
@@ -74,21 +72,19 @@ export class MessageBoxComponent implements OnInit, OnChanges, AfterContentCheck
       ))
     ).subscribe();
 
-    this.websocketService.receivedBeingOnline().pipe(
-      // Make the little circle below a user avatar yellow
-    ).subscribe();
+    // this.websocketService.receivedOnline().pipe(
+    //   // Make the little circle below a user avatar yellow
+    // ).subscribe();
   }
 
   ngOnChanges(): void {
     if (this.chat.conversations.active !== null) { // Send 'join' only when a user click on the conversation
-      this.websocketService.joinChat(this.user, this.chat.conversations.active);
-      this.websocketService.beingOnline(this.user);
-    }
-  }
-
-  ngAfterContentChecked(): void { // Scroll to last message when view updated
-    if (this.messagesContainer) {
-      this.messagesContainer.nativeElement.scrollTop = this.messagesContainer.nativeElement.scrollHeight;
+      // TODO: replace setTimeout
+      setTimeout(() => {
+        if (this.messagesContainer) {
+          this.messagesContainer.nativeElement.scrollTop = this.messagesContainer.nativeElement.scrollHeight;
+        }
+      }, 0);
     }
   }
 
@@ -100,7 +96,8 @@ export class MessageBoxComponent implements OnInit, OnChanges, AfterContentCheck
     this.textContent = value;
     this.websocketService.typing({
       username: `${this.user.firstName} ${this.user.lastName}`,
-      chat: this.chat.conversations.active
+      userId: this.user.id,
+      chatId: this.chat.conversations.active
     });
   }
 
@@ -110,10 +107,7 @@ export class MessageBoxComponent implements OnInit, OnChanges, AfterContentCheck
         chat: this.chat.conversations.active,
         sender: this.user.id,
         message: this.textContent.html
-      }, (savedMessage) => {
-        this.store.dispatch(addNewMessage(savedMessage));
-        // Make sender online (?)
-      });
+      }, (savedMessage) => this.store.dispatch(addNewMessage(savedMessage)));
       this.textEditorInstance.setContents([{ insert: '\n' }]); // Clear editor input
     }
   }
@@ -153,12 +147,6 @@ export class MessageBoxComponent implements OnInit, OnChanges, AfterContentCheck
     else { // Today
       return timeStr;
     }
-  }
-
-  getMessageWhom(message: ConversationMessageModel): string {
-    return message.sender.user.id === this.user.id ?
-      this.getConversationPartnerName(this.chat.conversations.active) :
-      `${this.user.firstName} ${this.user.lastName}`;
   }
 
   getConversationPartners(conv: ConversationModel): ConversationMemberModel[] {

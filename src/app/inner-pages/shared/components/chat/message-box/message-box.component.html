@@ -28,20 +28,13 @@
       <div class="chat__message-box__body__message-list__message" *ngFor="let message of chat.messages.data">
         <div class="chat__message-box__body__message-list__message__header">
           <span class="chat__message-box__body__message-list__message__header__avatar">
-            <img src="" alt="">
+            <img *ngIf="message.sender.user.photo" src="{{ message.sender.user.photo }}" alt="Avatar">
           </span>
           <span class="chat__message-box__body__message-list__message__header__name">
-            <span class="chat__from">
               {{ message.sender.user.firstName }}
               {{ message.sender.user.lastName }}
-            </span>
-            /
-            <span class="chat__to">
-              {{ getMessageWhom(message) }}
-            </span>
           </span>
-          <span
-            class="chat__message-box__body__message-list__message__header__time">{{ messageTimeFormat(message.date) }}</span>
+          <span class="chat__message-box__body__message-list__message__header__time">{{ messageTimeFormat(message.date) }}</span>
         </div>
         <div class="chat__message-box__body__message-list__message__body">
           <quill-view [content]="message.message"></quill-view>
@@ -60,15 +53,8 @@
         <app-rich-text-editor
           (shareTextContent)="textContentChange($event)"
           (shareQuillInstance)="getEditorInstance($event)"
+          (shareSendButtonClick)="sendButtonClick()"
         ></app-rich-text-editor>
-      </div>
-      <div class="chat__message-box__body__control__button-send">
-        <app-button
-          [type]="'main'"
-          [text]="'SEND'"
-          [disabled]="chat.conversations.active === null"
-          (buttonClick)="sendButtonClick()"
-        ></app-button>
       </div>
     </div>
   </div>
