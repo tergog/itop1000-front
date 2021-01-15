@@ -19,7 +19,7 @@
 </ng-container>
 
 <mat-autocomplete #autoTechnologies="matAutocomplete" (optionSelected)="onTechnologySelect($event)">
-      <mat-option *ngFor="let technology of availableSkills$ | ngrxPush"
+      <mat-option *ngFor="let technology of availableTechnologies$ | ngrxPush"
                   [value]="technology"> {{ technology.name }}
       </mat-option>
 </mat-autocomplete>
@@ -62,7 +62,7 @@
 
       <mat-form-field class="chip-list m__top--10 w__350" [class.edit-mode]="isNewProject">
         <mat-chip-list #chipListTechnologies formControlName="technologies">
-          <mat-chip *ngFor="let technology of selectedSkills"
+          <mat-chip *ngFor="let technology of selectedTechnologies"
                     [selectable]="false"
                     [removable]="isNewProject"
                     (removed)="onTechnologyRemove(technology)"> {{ technology.name }}

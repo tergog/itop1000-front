@@ -4,7 +4,6 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { filter, first, map, tap } from 'rxjs/operators';
-import xorBy from 'lodash.xorby';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 
@@ -37,11 +36,11 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy, AfterViewI
 
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
-  public allSkills: NameValueModel[] = [];
-  public selectedSkills: NameValueModel[] = [];
-  public availableSkills: Subject<NameValueModel[]> = new Subject<NameValueModel[]>();
-  public availableSkills$: Observable<NameValueModel[]> = this.availableSkills.asObservable().pipe(
-    map(val => this.allSkills.filter(skill => !val.find(item => item.value === skill.value))));
+  public allTechnologies: NameValueModel[] = [];
+  public selectedTechnologies: NameValueModel[] = [];
+  public availableTechnologies: Subject<NameValueModel[]> = new Subject<NameValueModel[]>();
+  public availableTechnologies$: Observable<NameValueModel[]> = this.availableTechnologies.asObservable().pipe(
+    map(val => this.allTechnologies.filter(skill => !val.find(item => item.value === skill.value))));
 
   constructor(
     private store: Store<fromCore.State>,
@@ -76,8 +75,8 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy, AfterViewI
         first()
       )
       .subscribe(res => {
-        this.allSkills = res;
-        this.availableSkills.next(this.selectedSkills);
+        this.allTechnologies = res;
+        this.availableTechnologies.next(this.selectedTechnologies);
         this.cdr.detectChanges();
       });
   }
@@ -103,20 +102,20 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy, AfterViewI
     this.store.dispatch(new UpdateUserProfileAction(this.userInfo));
     this.devProfileService.onSaveClick({devProperties: newDevProperties});
     this.isNewProject = false;
-    this.selectedSkills = [];
+    this.selectedTechnologies = [];
   }
 
   public onTechnologySelect({ option }: any): void {
-    this.selectedSkills.push(option.value);
-    this.availableSkills.next(this.selectedSkills);
-    this.form.get('technologies').patchValue(this.selectedSkills);
+    this.selectedTechnologies.push(option.value);
+    this.availableTechnologies.next(this.selectedTechnologies);
+    this.form.get('technologies').patchValue(this.selectedTechnologies);
     this.focusReset();
   }
 
   public onTechnologyRemove(technology: NameValueModel): void {
-    this.selectedSkills = this.selectedSkills.filter(item => item.value !== technology.value);
-    this.availableSkills.next(this.selectedSkills);
-    this.form.get('technologies').patchValue(this.selectedSkills);
+    this.selectedTechnologies = this.selectedTechnologies.filter(item => item.value !== technology.value);
+    this.availableTechnologies.next(this.selectedTechnologies);
+    this.form.get('technologies').patchValue(this.selectedTechnologies);
     this.focusReset();
   }
 
