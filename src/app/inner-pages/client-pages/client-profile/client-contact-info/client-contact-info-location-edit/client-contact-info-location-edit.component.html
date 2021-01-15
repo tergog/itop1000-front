@@ -14,7 +14,6 @@
 
     <app-timezone *ngIf="isPopupShown"
                   (ngModelChange)="hideTimezone()"
-                  [currentTimezone]="form.get('timezone').value"
                   formControlName="timezone"></app-timezone>
   </div>
 
@@ -22,18 +21,17 @@
     <i class="location location-gray"></i>
     <span class="text text__sm text__bold text__uppercase">ADDRESS</span>
 
-    <app-address formControlName="address"
-                 [currentAddress]="form.get('address').value"></app-address>
+    <app-address formControlName="address"></app-address>
   </div>
 
   <div class="w__320 d__inline-flex d__flex--justify-between d__flex--items-center m__right--30 m__bottom--10">
     <i class="phone phone-gray"></i>
     <span class="text text__sm text__bold text__uppercase">PHONE</span>
 
-    <app-input [type]="'inner'"
-               formControlName="phone"
-               [placeholder]="'Phone'"
-               [value]="form.get('phone').value"></app-input>
+    <app-phone-regex
+      formControlName="phone"
+      [placeholder]="'+1 (000) 000 00 00'"
+      [type]="'inner'"></app-phone-regex>
   </div>
 </div>
 

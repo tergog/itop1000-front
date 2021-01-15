@@ -21,7 +21,7 @@ export class ClientEffects {
     ofType(clientActions.GET_JOBS),
     switchMap(() => this.jobsService.getJobs().pipe(
       map((jobs: Job[]) => new clientActions.GetJobsSuccessAction(jobs)),
-      catchError(err => of(new clientActions.GetJobsFailAction(err)))
+      catchError((err: any) => of(new clientActions.GetJobsFailAction(err)))
     )   
   )
   ));

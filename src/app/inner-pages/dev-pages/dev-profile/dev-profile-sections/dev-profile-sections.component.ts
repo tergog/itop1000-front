@@ -1,15 +1,6 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { first } from 'rxjs/operators';
-import * as jwtDecode from 'jwt-decode';
+import { Component, Input, OnInit } from '@angular/core';
 
-import * as coreActions from 'app/core/actions/core.actions';
-import { TOKEN } from 'app/constants/constants';
-import { NotificationsService, UserService } from 'app/shared/services';
-import { NameValueModel, UserInfo } from 'app/shared/models';
-import * as fromCore from 'app/core/reducers';
-
-import { DevProfileSections } from 'app/inner-pages/dev-pages/dev-profile/dev-profile-sections/dev-profile-sections.enum';
+import { EDevProfileSections } from 'app/inner-pages/dev-pages/dev-profile/dev-profile-sections/dev-profile-sections.enum';
 import { slideInAnimation } from 'app/shared/animations';
 
 @Component({
@@ -20,9 +11,9 @@ import { slideInAnimation } from 'app/shared/animations';
 })
 export class DevProfileSectionsComponent implements OnInit {
 
-  @Input() public section: DevProfileSections;
+  @Input() public section: EDevProfileSections;
 
-  public DevProfileSections = DevProfileSections;
+  public DevProfileSections = EDevProfileSections;
 
   constructor() { }
 

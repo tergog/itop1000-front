@@ -1,0 +1,25 @@
+.active-project-cards {
+  margin-top: 10px;
+}
+
+.exit-arrow-button {
+  transform: rotate(90deg);
+  margin: 20px
+}
+
+.screenshots-board {
+  display: flex;
+  flex-wrap: wrap;
+
+  .screenshot {
+    width: 200px;
+    margin: 10px;
+  }
+
+  img {
+    width: 100%;
+  }
+}
+
+
+

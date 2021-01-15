@@ -10,6 +10,8 @@ export const developers = [
       lastName: 'Hohol',
       title: 'Angular Developer',
       availability: true,
+      email: 'qwer@qwe.re',
+      phone: '+380987612345',
       devProperties: {
         skills: [
           {
@@ -126,7 +128,7 @@ export const developers = [
         monthRate: 20000,
         duration: 12,
       },
-      location: 'Ukraine, Kyiv',
+      address: 'Ukraine, Kyiv',
       dateUpdated: '19 July 2020',
       photo : 'http://localhost:4000/1594974664857.png'
     }
@@ -151,11 +153,31 @@ const INIT_STATE: State = {
 export const reducer = createReducer(
   INIT_STATE,
   on(
+    actions.searchDevelopers,
+    (state) => {
+      return {
+        ...state,
+        loading: true
+      }
+    }
+  ),
+  on(
     actions.searchDevelopersSuccess,
     (state, {developersList}) => ({
       ...state,
-      developers: developersList
+      developers: developersList,
+      loading: false
     })
+  ),
+  on(
+    actions.searchDevelopersError,
+    (state) => {
+      return {
+        ...state,
+        error: true,
+        loading: false
+      }
+    }
   ),
   on(
     actions.updateDeveloper,
@@ -203,6 +225,16 @@ export const reducer = createReducer(
       developer: {...developer}
     })
   ),
+  on(
+    actions.setDeveloperError,
+    (state) => {
+      return {
+        ...state,
+        loading: false,
+        error: true
+      }
+    }
+  )
 );
 
 /** Selector return is Authenticated */
@@ -214,4 +246,7 @@ export const getJobs = (state: State): Job[] => {
 };
 export const getDeveloper = (state: State): Developer => {
   return state.developer;
+};
+export const getLoading = (state: State): boolean => {
+  return state.loading;
 };

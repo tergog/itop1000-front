@@ -1,0 +1,44 @@
+.container > * {
+    position: fixed;
+}
+
+.first {
+    animation: pulse1 2s infinite;
+    z-index: 5;
+}
+
+.second{
+    animation: pulse2 2s infinite;
+    z-index: 5;
+}
+
+
+@keyframes pulse1 {
+    0% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes pulse2 {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0;
+    }
+    75% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

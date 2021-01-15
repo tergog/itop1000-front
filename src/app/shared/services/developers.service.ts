@@ -25,4 +25,5 @@ export class DevelopersService {
   public uploadProjectImage(image: string | ArrayBuffer): Observable<string> {
     return this.http.post<string>(`${this.apiUrl}${ApiConstants.accounts.uploadProjectImage}`, {image});
   }
+
 }

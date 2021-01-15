@@ -1,4 +1,4 @@
-export enum DevProfileSectionNames {
+export enum EDevProfileSectionNames {
   CategoriesSkills = 'categoriesSkills',
-  softSkillsLanguages = 'softSkillsLanguages'
+  SoftSkillsLanguages = 'softSkillsLanguages'
 }

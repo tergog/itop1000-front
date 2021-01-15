@@ -1,0 +1,15 @@
+<app-profile-section-header [title]="'Want To Learn'" [canEdit]="disabled" (edit)="onEditClick()"></app-profile-section-header>
+<div class="textarea">
+  <mat-form-field>
+    <mat-label>Write what your want to learn</mat-label>
+    <textarea matInput
+              [disabled]="disabled"
+              [(ngModel)]="description"
+              cdkTextareaAutosize
+              #autosize="cdkTextareaAutosize"
+              cdkAutosizeMinRows="10"></textarea>
+  </mat-form-field>
+  <div class="m__top--10 m__bottom--10 button">
+    <app-button [text]="'Save'" (buttonClick)="onSaveClick()" *ngIf="!disabled"></app-button>
+  </div>
+</div>

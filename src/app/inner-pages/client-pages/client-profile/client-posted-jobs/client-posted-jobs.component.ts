@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
 import { Job } from 'app/shared/models';
 import { JobsService } from 'app/shared/services';
-import { getClientState, getJobs, State } from 'app/core/reducers/index';
+import { getJobs, State } from 'app/core/reducers/index';
 import { GetJobsAction } from 'app/core/client/store/actions';
 
 @Component({
@@ -26,7 +25,7 @@ export class ClientPostedJobsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.store.dispatch(new GetJobsAction())
+    this.store.dispatch(new GetJobsAction());
     this.jobs$ = this.store.select(getJobs);
   }
 

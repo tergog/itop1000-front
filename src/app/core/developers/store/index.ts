@@ -47,3 +47,8 @@ export const getJobs = createSelector(
   getDevelopersState,
   fromDevelopers.getJobs
 );
+
+export const getLoading = createSelector(
+  getDevelopersState,
+  fromDevelopers.getLoading
+);

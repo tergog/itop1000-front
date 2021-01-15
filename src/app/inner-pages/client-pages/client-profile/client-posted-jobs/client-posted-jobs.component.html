@@ -1,21 +1,24 @@
 <app-profile-section-header [title]="'Posted Jobs'" [canEdit]="false"></app-profile-section-header>
 
-<div class="p__20">
-  <ng-container *ngIf="!isCreateJob && !(jobs$ | async)?.length">
-    <span class="text text__md text__bold text__color--1 m__right--10">You have no posted jobs yet.</span>
-    <app-button [text]="'Post a Job'" (buttonClick)="postJobClick()"></app-button>
-  </ng-container>
+<ng-container *ngrxLet="jobs$ as jobs">
+  <div class="p__20">
+    <ng-container *ngIf="!isCreateJob && !jobs.length">
+      <span class="text text__md text__bold text__color--1 m__right--10">You have no posted jobs yet.</span>
+      <app-button [text]="'Post a Job'" (buttonClick)="postJobClick()"></app-button>
+    </ng-container>
 
-  <ng-container *ngIf="(jobs$ | async)?.length">
-    <app-job *ngFor="let job of jobs$ | async"
-             [job]="job"
-             (click)="onJobClick(job.id)">
-    </app-job>
+    <ng-container *ngIf="jobs.length">
+      <app-job *ngFor="let job of jobs"
+               [job]="job"
+               (click)="onJobClick(job.id)">
+      </app-job>
 
-    <app-button [text]="'Post new Job'" (buttonClick)="postJobClick()"></app-button>
-  </ng-container>
+      <app-button [text]="'Post new Job'" (buttonClick)="postJobClick()"></app-button>
+    </ng-container>
 
-  <ng-container *ngIf="isCreateJob">
-    <app-create-job (isEdit)="isCreateJob = false"></app-create-job>
-  </ng-container>
-</div>
+    <ng-container *ngIf="isCreateJob">
+      <app-create-job></app-create-job>
+    </ng-container>
+  </div>
+</ng-container>
+

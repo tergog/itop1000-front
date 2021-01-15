@@ -1,6 +1,22 @@
 <app-profile-section-header [title]="'Balance'" (edit)="onEditClick()"></app-profile-section-header>
 
-<div class="p__20 d__flex d__flex--items-center d__flex--justify-center">
-  <span class="text text__lg text__color--1 m__right--30">Your balance is <span class="text__bold">$20.01</span></span>
-  <app-button [text]="'Get Paid now'"></app-button>
-</div>
+<ng-container *ngrxLet="userInfo$ as userInfo">
+  <div *ngIf="userInfo.stripeVerified" class="p__20 d__flex d__flex--items-center d__flex--justify-center">
+    <span class="text text__lg text__color--1 m__right--30">Your balance is <span class="text__bold">${{userInfo.balance}}</span></span>
+    <app-button [text]="'Get Paid now'" (click)="onGetClick()"></app-button>
+  </div>
+
+  <div *ngIf="!userInfo.stripeVerified" class="p__20">
+    <h1>You should verify your stripe account before getting payouts</h1>
+
+    <div class="m__top--50 d__flex d__flex--items-center">
+      <h3>Stripe account is not verified</h3>
+      <app-button class="m__left--30" [text]="'Verify'" (buttonClick)="onVerify()"></app-button>
+    </div>
+
+    <div class="m__top--40 d__flex d__flex--items-center">
+      <h3>Bank account is not connected</h3>
+      <app-button class="m__left--30" [text]="'Connect'" (buttonClick)="onConnect()"></app-button>
+    </div>
+  </div>
+</ng-container>

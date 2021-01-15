@@ -1,0 +1,109 @@
+@import 'variables';
+
+:host {
+  position: relative;
+  display: block;
+  padding: 15px 20px 13px;
+  width: 100%;
+
+  background: $bg-color-opacity;
+  height: 100%;
+  border-radius: 5px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
+
+  &.inner {
+    display: inline-block;
+    width: 232px;
+    height: 40px;
+    padding: 10px 20px;
+    border: 1px solid $color-4;
+    border-radius: 5px;
+    background: transparent;
+
+    input[type='text'],
+    input[type='password'] {
+      height: auto;
+      color: $text-color-1;
+
+      &::placeholder {
+        opacity: 1;
+        color: $text-color-6;
+      }
+    }
+
+    &:after {
+      border-radius: 5px;
+    }
+  }
+
+  &.light {
+    padding: 14px;
+    border: 1px solid $color-4;
+    border-radius: 10px;
+    background: transparent;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.09);
+    font-family: "Raleway";
+    font-feature-settings: "lnum";
+    font-weight: 600;
+
+    input[type='text'],
+    input[type='password'] {
+      color: $color-1;
+      height: auto;
+    }
+
+    &::placeholder {
+      color: $text-color-4;
+    }
+  }
+
+  &.transparent {
+    padding: 15px;
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.24);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    font-feature-settings: "lnum";
+    font-weight: 600;
+    border-radius: 10px;
+
+    input[type='text'],
+    input[type='password'] {
+      color: $text-color-3;
+    }
+  }
+
+  input[type='text'],
+  input[type='password'] {
+    font-family: Raleway;
+    font-feature-settings: "lnum";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    width: 100%;
+    height: 22px;
+    color: $color-3;
+    outline: none;
+    background-color: transparent;
+    border: none;
+
+    &::placeholder {
+      opacity: 0.7;
+      color: $text-color-4;
+    }
+  }
+
+  &.ng-invalid.ng-dirty {
+    border-color: $color-2;
+  }
+
+  ::ng-deep {
+    i {
+      cursor: pointer;
+      position: absolute;
+      right: 20px;
+      top: calc(50% - 6px);
+    }
+  }
+}

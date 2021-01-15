@@ -6,6 +6,7 @@ export * from './notification.model';
 export * from './name-value.model';
 export * from './developers.model';
 export * from './dev-properties.model';
+export * from './active-project.model';
 export * from './conversation.model';
 export * from './conversation-message.model';
 export * from './conversation-member.model';

@@ -4,8 +4,9 @@ import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { first } from 'rxjs/operators';
 
-import { UtilsService, UserService, NotificationsService } from 'app/shared/services';
+import { NotificationsService, UserService, UtilsService } from 'app/shared/services';
 import { NotificationMessage } from 'app/shared/models';
+import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
 
 @Component({
   selector: 'app-sign-up',
@@ -76,7 +77,7 @@ export class SignUpComponent implements OnInit {
 
   private handleUserRegistrationSuccessResponse(res: NotificationMessage): void {
     this.router.navigate(['/auth', 'login']).then(() => {
-      res.type = 'success';
+      res.type = ENotificationStatus.Success;
       this.notificationsService.message.emit(res);
     });
   }
@@ -84,7 +85,7 @@ export class SignUpComponent implements OnInit {
   private handleUserRegistrationErrorResponse({ message }): void {
     this.notificationsService.message.emit({
       message,
-      type: 'error'
+      type: ENotificationStatus.Error
     });
   }
 

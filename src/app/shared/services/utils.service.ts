@@ -11,6 +11,8 @@ export class UtilsService {
   private passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,40}$/;
   private checkCyrillic = /[а-яА-ЯёЁ]/gi;
 
+  private linkPattern = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
+
   constructor() { }
 
   public emailValidator(): ValidatorFn {
@@ -43,6 +45,13 @@ export class UtilsService {
       return value === firstFieldValue.value && value.length === firstFieldValue.value.length
         ? null
         : { passwordsNotMatch: true };
+    };
+  }
+
+  public linkValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const result = new RegExp(this.linkPattern).test(control.value);
+      return result ? null : { linkInvalid: true };
     };
   }
 }

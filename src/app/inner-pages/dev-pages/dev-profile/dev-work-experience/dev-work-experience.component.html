@@ -1,19 +1,19 @@
 <app-profile-section-header [title]="'Work experience'" [canEdit]="false"></app-profile-section-header>
 
-<ng-container *ngIf="(userInfo$ | async).devProperties">
+<ng-container *ngrxLet="userInfo$; let userInfo">
   <app-dev-project-card class="m__top--30"
-                        *ngFor="let project of (userInfo$ | async).devProperties.projects; index as i"
+                        *ngFor="let project of userInfo.devProperties.projects; index as i"
                         [project]="project"
                         [id]="i"></app-dev-project-card>
-</ng-container>
 
-<div class="m__top--30 m__bottom--10">
+
+  <div class="m__top--30 m__bottom--10">
   <app-button [text]="'Add project'"
               (buttonClick)="onAddClick()"></app-button>
-</div>
+  </div>
 
-<ng-container *ngIf="!(userInfo$ | async).devProperties">
-  <div class="d__flex d__flex--direction-column d__flex--items-center p__20" *ngIf="!isNewProject">
+
+  <div class="d__flex d__flex--direction-column d__flex--items-center p__20" *ngIf="!isNewProject && !userInfo.devProperties.projects?.length">
     <span class="text text__title text__color--1 m__top--50"> You have not added any project </span>
   </div>
 </ng-container>
@@ -34,18 +34,25 @@
 
       <div class="d__inline-flex d__flex--justify-between d__flex--items-center m__bottom--10 w__350">
         <span class="text text__sm text__bold text__uppercase m__right--10">Title</span>
-        <app-input [type]="'inner'" formControlName="title" [placeholder]="'Title'"></app-input>
+        <app-input [ngClass]="{'errorBorder' : (showError && form.get('title').errors)}" [type]="'inner'" formControlName="title" [placeholder]="'Title'"></app-input>
       </div>
+      <mat-error class="m__bottom--10" *ngIf="(showError && form.get('title').errors?.required)">Title required</mat-error>
+      <mat-error class="m__bottom--10" *ngIf="(showError && form.get('title').errors?.minlength)">Title should have at least 8 characters</mat-error>
 
       <div class="d__inline-flex d__flex--justify-between d__flex--items-center m__bottom--10 w__350">
         <span class="text text__sm text__bold text__uppercase m__right--10">Description</span>
-        <app-input [type]="'inner'" formControlName="description" [placeholder]="'Description'"></app-input>
+        <app-input [ngClass]="{'errorBorder' : (showError && form.get('description').errors)}" [type]="'inner'" formControlName="description" [placeholder]="'Description'"></app-input>
       </div>
+      <mat-error class="m__bottom--10" *ngIf="(showError && form.get('description').errors?.required)">Description required</mat-error>
+      <mat-error class="m__bottom--10" *ngIf="(showError && form.get('description').errors?.minlength)">Description should has at least 100 characters</mat-error>
+
 
       <div class="d__inline-flex d__flex--justify-between d__flex--items-center m__bottom--10 w__350">
         <span class="text text__sm text__bold text__uppercase m__right--10">Link</span>
-        <app-input [type]="'inner'" formControlName="link" [placeholder]="'Link'"></app-input>
+        <app-input [ngClass]="{'errorBorder' : (showError && form.get('link').errors?.required)}" [type]="'inner'" formControlName="link" [placeholder]="'Link'"></app-input>
       </div>
+      <mat-error *ngIf="(showError && form.get('link').errors?.required)">Link required</mat-error>
+      <mat-error *ngIf="(showError && form.get('link').errors?.linkInvalid)">Link is not correct</mat-error>
 
       <mat-form-field class="chip-list m__top--10 w__350" [class.edit-mode]="isNewProject">
         <mat-chip-list #chipListTechnologies formControlName="technologies">
@@ -55,7 +62,7 @@
                     (removed)="onTechnologyRemove(technology)"> {{ technology.name }}
             <mat-icon matChipRemove *ngIf="isNewProject">cancel</mat-icon>
           </mat-chip>
-          <input placeholder="Add Technology..."
+          <input #category placeholder="Add Technology..."
                  [readOnly]="!isNewProject"
                  [matChipInputFor]="chipListTechnologies"
                  [matAutocomplete]="autoTechnologies"
@@ -69,6 +76,7 @@
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
+      <mat-error class="m__bottom--10" *ngIf="(showError && form.get('technologies').errors?.required)">Technologies required</mat-error>
 
       <div>
         <mat-form-field appearance="fill">
@@ -76,12 +84,14 @@
           <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
           <mat-datepicker #pickerFrom></mat-datepicker>
         </mat-form-field>
+        <mat-error class="m__bottom--10" *ngIf="(showError && form.get('from').errors?.required)">From required</mat-error>
 
         <mat-form-field appearance="fill">
           <input matInput formControlName="to" [placeholder]="'To'" [matDatepicker]="pickerTo">
           <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
           <mat-datepicker #pickerTo></mat-datepicker>
         </mat-form-field>
+        <mat-error *ngIf="(showError && form.get('to').errors?.required)">To required</mat-error>
       </div>
 
     </div>

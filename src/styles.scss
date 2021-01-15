@@ -60,6 +60,10 @@ body {
   background-color: $color-1;
 }
 
+.errorBorder {
+  border: 1px solid $color-2 !important;
+}
+
 i {
   display: inline-block;
 }
@@ -99,6 +103,10 @@ i {
 
   &__right {
     text-align: right;
+  }
+
+  &__left {
+    text-align: left;
   }
 
   &__uppercase {

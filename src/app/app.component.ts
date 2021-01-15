@@ -1,20 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 
-
 import { NotificationMessage } from 'app/shared/models';
 import { NotificationsService } from 'app/shared/services/notifications.service';
+import { opacityInOutAnimation } from 'app/shared/animations';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [opacityInOutAnimation]
 })
 export class AppComponent implements OnInit {
   title = 'ITOP1000';
   public notification: NotificationMessage;
 
   constructor(private notificationService: NotificationsService) {
-    
   }
 
   ngOnInit(): void {

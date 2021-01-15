@@ -1,0 +1,32 @@
+@import "~assets/scss/variables";
+
+:host {
+  background: $color-1;
+  width: 336px;
+  padding: 10px 22px;
+  color: $text-color-3;
+
+  ::ng-deep button {
+    min-width: 75px !important;
+    min-height: 30px !important;
+  }
+
+  ::ng-deep button span {
+    font-size: 14px !important;
+  }
+
+}
+
+.img {
+  min-width: 35px;
+  height: 35px;
+  border-radius: 50px;
+  background-color: $color-3;
+}
+
+.notification {
+  border-top: 1px solid $color-6;
+  padding-top: 15px;
+}
+
+

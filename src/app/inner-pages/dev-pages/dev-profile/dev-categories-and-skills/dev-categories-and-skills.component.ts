@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { first } from 'rxjs/operators';
 
-import { DevProfileSectionNames } from 'app/inner-pages/dev-pages/dev-profile/shared/enums/devProfileSectionNames';
+import { EDevProfileSectionNames } from 'app/inner-pages/dev-pages/dev-profile/shared/enums/devProfileSectionNames';
+import * as fromCore from 'app/core/reducers';
 
 
 @Component({
@@ -8,17 +11,25 @@ import { DevProfileSectionNames } from 'app/inner-pages/dev-pages/dev-profile/sh
   templateUrl: './dev-categories-and-skills.component.html',
   styleUrls: ['./dev-categories-and-skills.component.scss']
 })
-export class DevCategoriesAndSkillsComponent implements OnInit {
+export class DevCategoriesAndSkillsComponent implements OnInit, OnDestroy {
 
   public isEdit: boolean;
-  public DevProfileSectionNames = DevProfileSectionNames;
+  public DevProfileSectionNames = EDevProfileSectionNames;
 
-  constructor() { }
+  constructor(private store: Store<fromCore.State>) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.store.select(fromCore.getUserInfo).pipe(first())
+    .subscribe((userInfo) => {
+      this.isEdit = !userInfo.devProperties.skills?.length && !userInfo.devProperties.categories?.length;
+    });
+  }
 
   public onEditClick(): void {
     this.isEdit = !this.isEdit;
   }
 
+  ngOnDestroy(): void {
+
+  }
 }

@@ -1,7 +1,10 @@
 <router-outlet></router-outlet>
+
 <ng-container *ngIf="notification">
-  <app-notification
+  <app-notification [@opacityInOut]="{ value: ':enter', params: { from: 0, to: 0 } }"
     [notification]="notification"
     (notificationClosed)="onCloseNotification()"
   ></app-notification>
 </ng-container>
+
+<app-loader></app-loader>

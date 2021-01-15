@@ -1,5 +1,5 @@
 <app-standard-bg-wrap>
-  <div class="d__flex" *ngIf="developer$ | async as developer">
+  <div class="d__flex" *ngIf="developer$ | ngrxPush as developer">
     <div class="d__inline-flex d__flex--direction-column d__flex--items-center resume-nav p__20">
       <div class="d__flex d__flex--direction-column d__flex--items-center">
         <img [src]="developer.photo" alt="photo"/>
@@ -78,19 +78,22 @@
     >
       <div class="border-sparks"></div>
       <div class="m__left--30 m__right--30 d__flex d__flex--direction-column">
+        <div id="exportCV">
+          <button class="export-cv" title="export as pdf" (click)="exportResume(developer)">
+            <i class="download"></i>
+          </button>
+        </div>
         <div class="location-wrap">
           <div class="d__flex m__right--30">
             <i class="location m__right--10"></i>
-            <span class="text text__md text__font--2 text__color--3">{{ developer.location || 'Kharkov, Ukraine' }}</span>
+            <span class="text text__md text__font--2 text__color--3">{{ developer.address }}</span>
           </div>
 
           <div class="separator"></div>
 
-          <div>
          <span class="text text__md text__font--2 text__color--3 resume-date">
-          {{ developer.dateUpdated || '28 March'}}
-        </span>
-          </div>
+            {{ developer.dateUpdated }}
+         </span>
         </div>
 
         <div class="d__flex d__flex--direction-column m__top--20">
@@ -286,10 +289,10 @@
             [class.section-underline-active]="activeSection === DeveloperResumeSections.Certificates"
           ></div>
 
-          <div class="d__flex d__flex--justify-between m__top--20">
-            <img class="m__right--10" src="assets/img/cert-1.png" alt=""/>
-            <img class="m__right--10" src="assets/img/cert-2.png" alt=""/>
-            <img src="assets/img/cert-1.png" alt=""/>
+          <div class="d__flex d__flex--wrap d__flex--justify-center m__top--20">
+              <img class="m__right--10 m__bottom--30"
+                   *ngFor="let certificate of developer.devProperties.certificates"
+                   [src]="certificate" alt=""/>
           </div>
         </div>
 
@@ -310,15 +313,16 @@
             [class.section-underline-active]="activeSection === DeveloperResumeSections.WorkExperience"
           ></div>
 
-          <div class="d__flex d__flex d__flex--direction-column m__top--30">
+          <div class="d__flex d__flex d__flex--direction-column m__top--30" *ngIf="developer.devProperties.projects">
             <div *ngFor="let project of developer.devProperties.projects; index as i">
               <app-project-card class="m__top--10 m__right--10 m__bottom--10  cursor__pointer"
                                 *ngIf="i < projectCounter"
                                 (click)="onWorkExperienceClick(developer.id, i)" [project]="project"></app-project-card>
             </div>
             <app-button class="m__top--60 m__bottom--10"
+                        *ngIf="developer.devProperties.projects.length > 3"
                         [text]="projectCounter < developer.devProperties.projects.length ? 'Show more' : 'Hide'"
-                        [type]="'secondary'" (buttonClick)="onShowMoreClick()"></app-button>
+                        [type]="'secondary'" (buttonClick)="onShowMoreClick(developer)"></app-button>
           </div>
         </div>
 

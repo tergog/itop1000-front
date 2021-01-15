@@ -31,7 +31,7 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   @Input()
   set value(value: any) {
     this._value = value;
-    this.writeValue(value);
+    this.writeValue(this._value);
   }
 
   get value(): any {
@@ -41,7 +41,8 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   _value: any;
 
   writeValue(value: number): void {
-    this.onChange(this.value);
+    this._value = value;
+    this.onChange(this._value);
   }
 
   private onChange = (value: number) => {};
