@@ -76,11 +76,6 @@
                  [matChipInputAddOnBlur]="true">
         </mat-chip-list>
 
-<!--        <mat-autocomplete #autoTechnologies="matAutocomplete" (optionSelected)="onTechnologySelect($event)">-->
-<!--          <mat-option *ngFor="let technology of availableTechnologies"-->
-<!--                      [value]="technology"> {{ technology.name }}-->
-<!--          </mat-option>-->
-<!--        </mat-autocomplete>-->
       </mat-form-field>
       <mat-error class="m__bottom--10" *ngIf="(showError && form.get('technologies').errors?.required)">Technologies required</mat-error>
 

@@ -36,25 +36,10 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy, AfterViewI
   public projectImages: string[] = [];
 
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+
   public allSkills: NameValueModel[] = [];
-  public selectedSkills = [];
-  // public availableTechnologies: NameValueModel[] = [
-  //
-  //   {name: 'Javascript', value: 1},
-  //   {name: 'Typescript', value: 2},
-  //   {name: 'CSS3', value: 3},
-  //   {name: 'HTML5', value: 5},
-  //   {name: 'AngularJS', value: 6},
-  //   {name: 'Angular 9', value: 7},
-  //   {name: 'Angular 10', value: 8},
-  //   {name: 'Angular 7', value: 9},
-  //   {name: 'Angular 8', value: 10},
-  //   {name: 'Angular 2+', value: 11},
-  //
-  // ];
-
+  public selectedSkills: NameValueModel[] = [];
   public availableSkills: Subject<NameValueModel[]> = new Subject<NameValueModel[]>();
-
   public availableSkills$: Observable<NameValueModel[]> = this.availableSkills.asObservable().pipe(
     map(val => this.allSkills.filter(skill => !val.find(item => item.value === skill.value))));
 
@@ -92,7 +77,7 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy, AfterViewI
       )
       .subscribe(res => {
         this.allSkills = res;
-        this.availableSkills.next([]);
+        this.availableSkills.next(this.selectedSkills);
         this.cdr.detectChanges();
       });
   }
@@ -164,12 +149,6 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy, AfterViewI
       link: new FormControl('', [Validators.required, this.utilsService.linkValidator()]),
       from: new FormControl('', [Validators.required]),
       to: new FormControl('', [Validators.required]),
-    });
-  }
-
-  private disableEmptyFields(): void {
-    Object.keys(this.form.controls).forEach(field => {
-      return this.form.controls[field].value || this.form.controls[field].disable();
     });
   }
 
