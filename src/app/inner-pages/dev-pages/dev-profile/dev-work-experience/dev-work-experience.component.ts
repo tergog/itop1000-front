@@ -74,10 +74,8 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy, AfterViewI
 
     this.userInfo$ = this.store.select(fromCore.getUserInfo).pipe(
       tap((userInfo: UserInfo) => {
-        console.log(userInfo);
         this.devProfileService.devProperties = userInfo.devProperties;
         this.userInfo = userInfo;
-        this.updateTechnologies(this.selectedSkills);
       })
     );
 
@@ -173,12 +171,6 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy, AfterViewI
     Object.keys(this.form.controls).forEach(field => {
       return this.form.controls[field].value || this.form.controls[field].disable();
     });
-  }
-
-  private updateTechnologies(technologies: NameValueModel[]): void {
-    this.selectedSkills = [...technologies];
-    // this.availableTechnologies = xorBy(this.selectedSkills, this.availableTechnologies);
-
   }
 
   private uploadImage(image: string, forLogo: boolean): void {
