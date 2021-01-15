@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { environment } from 'environments/environment';
 import { ApiConstants } from 'app/constants/api.constants';
@@ -55,5 +55,9 @@ export class UserService {
 
   public changePassword({ oldPassword, password }): Observable<object> {
     return this.http.post(`${this.apiUrl}${ApiConstants.accounts.changePassword}`, { oldPassword, password });
+  }
+
+  public updateLastSeen(userId: string): Observable<object> {
+    return this.http.post(`${this.apiUrl}${ApiConstants.accounts.updateLastSeen}`, { userId, lastSeen: Date.now() });
   }
 }

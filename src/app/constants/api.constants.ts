@@ -13,7 +13,8 @@ export const ApiConstants = {
     paymentMethods: 'accounts/payment-methods',
     searchDevelopers: 'accounts/search',
     getDeveloperById: 'accounts/get-developer',
-    chargesList: 'accounts/charges-list'
+    chargesList: 'accounts/charges-list',
+    updateLastSeen: 'accounts/update-last-seen'
   },
   jobs: {
     main: 'jobs',
