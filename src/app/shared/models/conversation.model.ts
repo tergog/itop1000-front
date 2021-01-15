@@ -5,4 +5,5 @@ export interface ConversationModel {
   createdAt: string;
   participants: ConversationMemberModel[];
   unreadCount: number;
+  type: string;
 }

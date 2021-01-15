@@ -2,7 +2,11 @@ import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 import { io } from 'socket.io-client';
-import { ConversationMessageModel, UserInfo } from 'app/shared/models';
+import { ConversationMessageModel, UserInfo, WebsocketOnlineModel, WebsocketTypingModel } from 'app/shared/models';
+import { WSCONST } from 'app/constants/websocket.constants';
+import { Store } from '@ngrx/store';
+import * as fromCore from 'app/core/reducers';
+import * as coreActions from 'app/core/actions/core.actions';
 
 interface SendConversationMessageModel {
   chat: string;
@@ -16,30 +20,37 @@ interface SendConversationMessageModel {
 export class WebsocketService {
   private socket = io(environment.apiUrl);
 
-  constructor() {
+  constructor(
+    private store: Store<fromCore.State>
+  ) {
+  }
+
+  online(userId: string): void {
+    const lastSeen = new Date().toISOString();
+    this.socket.emit(WSCONST.SEND.ONLINE, { userId, lastSeen });
+    this.store.dispatch(new coreActions.UpdateUserLastSeen(userId, lastSeen));
   }
 
   joinChat(user: UserInfo, chatId: string): void {
-    this.socket.emit('join', { user, chatId });
+    this.socket.emit(WSCONST.SEND.JOIN, { chatId, userId: user.id });
+    this.online(user.id);
   }
 
-  typing(data: any): void {
-    this.socket.emit('typing', data);
-  }
-
-  beingOnline(data: any): void {
-    this.socket.emit('being online', data);
+  typing(data: WebsocketTypingModel): void {
+    this.socket.emit(WSCONST.SEND.TYPING, data);
+    this.online(data.userId);
   }
 
   sendConversationMessage(message: SendConversationMessageModel, savedMessageCb: Function = (message: ConversationMessageModel): void => {}): void {
-    this.socket.emit('message', message, (response: ConversationMessageModel) => {
+    this.socket.emit(WSCONST.SEND.MESSAGE, message, (response: ConversationMessageModel) => {
       savedMessageCb(response);
     });
+    this.online(message.sender);
   }
 
   receivedNewMessage() {
     return new Observable<ConversationMessageModel>((observer) => {
-      this.socket.on('message', (data: ConversationMessageModel): void => {
+      this.socket.on(WSCONST.ON.MESSAGE, (data: ConversationMessageModel): void => {
         observer.next(data);
       });
       return () => this.socket.disconnect();
@@ -47,17 +58,17 @@ export class WebsocketService {
   }
 
   receivedTyping() {
-    return new Observable<{ chat: string, username: string }>((observer) => {
-      this.socket.on('typing', (data: any): void => {
+    return new Observable<WebsocketTypingModel>((observer) => {
+      this.socket.on(WSCONST.ON.TYPING, (data: WebsocketTypingModel): void => {
         observer.next(data);
       })
       return () => this.socket.disconnect();
     });
   }
 
-  receivedBeingOnline() {
-    return new Observable<{ userId: string }>((observer) => {
-      this.socket.on('being online', (data: any): void => {
+  receivedOnline() {
+    return new Observable<WebsocketOnlineModel>((observer) => {
+      this.socket.on(WSCONST.ON.ONLINE, (data: WebsocketOnlineModel): void => {
         observer.next(data);
       })
       return () => this.socket.disconnect();
