@@ -1,4 +1,4 @@
-export enum ConversationTypeEnum {
+export enum EConversationTypeEnum {
   Private = 'private',
   Group = 'group'
 }

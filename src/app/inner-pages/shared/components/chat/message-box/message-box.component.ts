@@ -23,6 +23,7 @@ import * as fromCore from 'app/core/reducers';
 import * as fromChat from 'app/core/chats/store/chat.reducer';
 import { addNewMessage } from 'app/core/chats/store/chats.actions';
 import { slideInLeftAnimation } from 'app/shared/animations';
+import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
 
 @Component({
   selector: 'app-message-box',
@@ -53,11 +54,7 @@ export class MessageBoxComponent implements OnInit, OnChanges {
     this.websocketService.receivedNewMessage().pipe(
       switchMap((message) => iif(
         () => message.chat === this.chat.conversations.active,
-        of(undefined).pipe(tap(() => this.store.dispatch(addNewMessage(message)))),
-        of(undefined).pipe(tap(() => this.notificationsService.message.emit({
-          type: 'success',
-          message: 'You have new message from ...!'
-        })))
+        of(undefined).pipe(tap(() => this.store.dispatch(addNewMessage(message))))
       ))
     ).subscribe();
 
@@ -118,7 +115,7 @@ export class MessageBoxComponent implements OnInit, OnChanges {
         // Search
       } else {
         this.notificationsService.message.emit({
-          type: 'error',
+          type: ENotificationStatus.Error,
           message: 'Search request must be more 0 and less than 32 chars!'
         });
       }

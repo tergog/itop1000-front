@@ -8,8 +8,9 @@ import * as fromCore from 'app/core/reducers';
 import { ConversationModel, UserInfo } from 'app/shared/models';
 import { NotificationsService, WebsocketService } from 'app/shared/services';
 import { ConversationMemberModel } from 'app/shared/models/conversation-member.model';
-import { ConversationTypeEnum } from 'app/shared/enums';
+import { EConversationTypeEnum } from 'app/shared/enums';
 import { CHAT_ONLINE_DELTA_MS } from 'app/constants/constants';
+import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
 
 @Component({
   selector: 'app-sidebar-rooms',
@@ -43,7 +44,7 @@ export class SidebarRoomsComponent implements OnInit {
         this.store.dispatch(chatActions.searchConversations({ id: this.user.id, search: this.searchFC.value }));
       } else {
         this.notificationsService.message.emit({
-          type: 'error',
+          type: ENotificationStatus.Error,
           message: 'Search request must be more 0 and less than 32 chars!'
         });
       }
@@ -75,7 +76,7 @@ export class SidebarRoomsComponent implements OnInit {
 
   getConversationPartnerName(conv: ConversationModel): string {
     const partners: ConversationMemberModel[] = this.getConversationPartners(conv);
-    return (conv.type === ConversationTypeEnum.Private) ?
+    return (conv.type === EConversationTypeEnum.Private) ?
       `${partners[0].user.firstName} ${partners[0].user.lastName}` :
       `${partners.length} partners`;
   }
@@ -83,7 +84,7 @@ export class SidebarRoomsComponent implements OnInit {
   isConversationPartnerOnline(conv: ConversationModel): boolean { // true - online, false - offline, null - not a private conversation
     const partners: ConversationMemberModel[] = this.getConversationPartners(conv);
 
-    return (conv.type === ConversationTypeEnum.Private) ?
+    return (conv.type === EConversationTypeEnum.Private) ?
       new Date().getTime() - new Date(partners[0].user.lastSeen).getTime() < CHAT_ONLINE_DELTA_MS :
       null;
   }

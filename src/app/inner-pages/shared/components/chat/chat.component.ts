@@ -6,9 +6,9 @@ import { catchError } from 'rxjs/operators';
 
 import * as fromCore from 'app/core/reducers';
 import * as fromChats from 'app/core/chats/store/chat.reducer';
-import { ChatService } from 'app/shared/services';
+import { ChatService, WebsocketService } from 'app/shared/services';
 import { UserInfo } from 'app/shared/models';
-import { UserRole } from 'app/shared/enums';
+import { EUserRole } from 'app/shared/enums';
 
 @Component({
   selector: 'app-chat',
@@ -23,7 +23,8 @@ export class ChatComponent implements OnInit {
     private store: Store<fromCore.State>,
     private router: Router,
     private route: ActivatedRoute,
-    private chatService: ChatService
+    private chatService: ChatService,
+    private websocketService: WebsocketService
   ) {
   }
 
@@ -35,11 +36,24 @@ export class ChatComponent implements OnInit {
       if (this.route.snapshot.params.id) {
         this.chatService.createNewConversation(userInfo.id, this.route.snapshot.params.id).pipe(
           catchError(() => {
-            this.router.navigate([ userInfo.role === UserRole.Client ? 'in/c/chat' : 'in/d/chat' ]);
+            this.router.navigate([ userInfo.role === EUserRole.Client ? 'in/c/chat' : 'in/d/chat' ]);
             return NEVER;
           })
         ).subscribe();
       }
     });
+
+    this.websocketService.receivedNewMessage().pipe(
+      // tap(() => console.log('receivedNewMessage chat'))
+      /*switchMap((message) => iif(
+        () => message.chat !== chat.conversations.active,
+        of(undefined).pipe(tap(() => {
+          console.log('Background notification recieved!');
+          Push.create('Test Notification', { body: 'LOL!' }).then(() => {
+            console.log('Push promise');
+          });
+        }))
+      ))*/
+    ).subscribe();
   }
 }

@@ -8,6 +8,7 @@ import { ConversationMessageModel } from 'app/shared/models';
 import { ChatService, NotificationsService } from 'app/shared/services';
 import * as actions from './chats.actions';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
 
 @Injectable()
 export class ChatEffects {
@@ -23,7 +24,7 @@ export class ChatEffects {
       map((convs: ConversationModel[]) => actions.getConversationsByUserIdSuccess(convs)),
       catchError((err: HttpErrorResponse) => {
         this.notificationService.message.emit({
-          type: 'error',
+          type: ENotificationStatus.Error,
           message: `[${err.status}] ${err.statusText}: ${err.error.message}`
         });
         return of(actions.getConversationsByUserIdError(err));
@@ -37,7 +38,7 @@ export class ChatEffects {
       map((convs: ConversationModel[]) => actions.searchConversationsSuccess(convs)),
       catchError((err: HttpErrorResponse) => {
         this.notificationService.message.emit({
-          type: 'error',
+          type: ENotificationStatus.Error,
           message: `[${err.status}] ${err.statusText}: ${err.error.message}`
         });
         return of(actions.searchConversationsError(err))
@@ -52,7 +53,7 @@ export class ChatEffects {
       tap(() => actions.setActiveConversation(id)),
       catchError((err: HttpErrorResponse) => {
         this.notificationService.message.emit({
-          type: 'error',
+          type: ENotificationStatus.Error,
           message: `[${err.status}] ${err.statusText}: ${err.error.message}`
         });
         return of(actions.getConverastionMessageError(err))
