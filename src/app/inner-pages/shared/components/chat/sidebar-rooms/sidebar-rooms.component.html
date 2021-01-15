@@ -5,7 +5,7 @@
       [formControl]="searchFC"
       (ngModelChange)="onConversationSearchCancel($event)"
       (enterKey)="onConversationsSearch()"
-      [disabled]="!chat.conversations.search && !chat.conversations.data.length"
+      [attr.disabled]="!chat.conversations.search && !chat.conversations.data.length"
     >
       <i class="search" (click)="onConversationsSearch()"></i>
     </app-input>
@@ -19,7 +19,7 @@
 
     <!-- Conversation markup -->
     <li class="chat__sidebar__rooms__room" *ngFor="let chat of chat.conversations.data" (click)="onConversationClick(chat.id)">
-      <div class="chat__sidebar__rooms__room__avatar">
+      <div [ngClass]="{ 'chat__sidebar__rooms__room__avatar': true, 'online': isConversationPartnerOnline(chat) }">
         <img *ngIf="getConversationPartners(chat)[0].user.photo" [src]="getConversationPartners(chat)[0].user.photo" alt="Avatar">
       </div>
       <div class="chat__sidebar__rooms__room__meta">

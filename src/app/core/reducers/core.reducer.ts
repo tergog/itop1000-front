@@ -36,6 +36,8 @@ export function reducer(state: State = INIT_STATE, action: coreActions.Actions) 
             ...state.userInfo.devProperties.projects
             .map((obj, index) =>  index === action.id ? {...obj, photo: action.image} : obj)]}};
       return {...state, userInfo: account};
+    case coreActions.UPDATE_LAST_SEEN:
+      return { ...state, userInfo: { ...state.userInfo, lastSeen: action.lastSeen } }
     default:
       return state;
   }

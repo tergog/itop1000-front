@@ -153,6 +153,26 @@ export const reducer = createReducer(
       ...state.messages,
       data: []
     }
+  })),
+
+  // Online status
+  on(actions.updateParticipantLastSeen, (state, payload) => ({
+    ...state,
+    conversations: {
+      ...state.conversations,
+      data: state.conversations.data.map((conv) => ({
+        ...conv,
+        participants: conv.participants.map((part) => {
+          return (part.user.id === payload.userId) ? {
+            ...part,
+            user: {
+              ...part.user,
+              lastSeen: payload.lastSeen
+            }
+          } : part;
+        })
+      }))
+    }
   }))
 );
 

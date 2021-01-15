@@ -1,6 +1,6 @@
-import { Action, createAction, props } from '@ngrx/store';
+import { Action } from '@ngrx/store';
 
-import { Job, UserInfo } from 'app/shared/models';
+import { UserInfo } from 'app/shared/models';
 
 export const SAVE_TOKEN = '[Core] Saves user\'s auth token';
 
@@ -11,6 +11,8 @@ export const UPDATE_USER_PROFILE = '[Core] Update user profile';
 export const UPDATE_PROJECT_IMAGE = '[Core] Update project image';
 
 export const ON_VALID_SESSION = '[Core] On valid session';
+
+export const UPDATE_LAST_SEEN = '[Core] Update user last seen';
 
 /**
  * Save token to local storage
@@ -44,6 +46,11 @@ export class UpdateProjectImageAction implements Action {
   constructor(public image: string, public id: number) {}
 }
 
+export class UpdateUserLastSeen implements  Action {
+  readonly type = UPDATE_LAST_SEEN;
+  constructor(public userId: string, public lastSeen: string) {}
+}
+
 /**
  * Exports possible core action types
  */
@@ -53,4 +60,5 @@ export type Actions =
   | SetOnLogoutAction
   | UpdateUserProfileAction
   | OnValidSessionAction
-  | UpdateProjectImageAction;
+  | UpdateProjectImageAction
+  | UpdateUserLastSeen;

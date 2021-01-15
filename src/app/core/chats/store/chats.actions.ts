@@ -42,3 +42,8 @@ export const CANCEL_ACTIVE_CONV = '[Chat] Cancel active conversation';
 
 export const setActiveConversation = createAction(SET_ACTIVE_CONV, props<{ id: string }>());
 export const cancelActiveConversation = createAction(CANCEL_ACTIVE_CONV);
+
+// Online status
+export const UPDATE_PARTICIPANT_LAST_SEEN = '[Chat] Update participant last seen';
+
+export const updateParticipantLastSeen = createAction(UPDATE_PARTICIPANT_LAST_SEEN, props<{ userId: string, lastSeen: string }>());
