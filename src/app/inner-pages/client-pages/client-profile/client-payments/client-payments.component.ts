@@ -1,7 +1,8 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { PaymentService } from 'app/shared/services/payment.service';
 
@@ -17,6 +18,7 @@ export class ClientPaymentsComponent implements OnInit, AfterViewInit, OnDestroy
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   public chargesList: Array<object> = [];
   public errorMessage: string;
+  public ngUnsubscribe = new Subject<void>();
 
   constructor(private paymentService: PaymentService) { }
 
@@ -24,13 +26,13 @@ export class ClientPaymentsComponent implements OnInit, AfterViewInit, OnDestroy
     this.getChargesList();
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
 
-  getChargesList() {
+  getChargesList(): void{
     this.paymentService.getChargesList()
-      .pipe(untilDestroyed(this))
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(
         (chargesList) => this.chargesList = chargesList,
         ({error}) => this.errorMessage = error.message
@@ -38,6 +40,8 @@ export class ClientPaymentsComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   ngOnDestroy(): void {
+    this.ngUnsubscribe.next(null);
+    this.ngUnsubscribe.complete();
   }
 }
 

@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { untilDestroyed } from 'ngx-take-until-destroy';
 import { MatDialog } from '@angular/material/dialog';
 import { PaymentMethod } from '@stripe/stripe-js';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { PaymentService } from 'app/shared/services/payment.service';
 import { UpdateBillingMethodDialogComponent } from 'app/inner-pages/shared/components/update-billing-method-dialog/update-billing-method-dialog.component';
@@ -17,6 +18,8 @@ export class BillingMethodComponent implements OnInit, OnDestroy {
   @Input() paymentMethod: PaymentMethod;
   @Output() onMethodChanged = new EventEmitter();
 
+  public ngUnsubscribe = new Subject<void>();
+
   constructor(private paymentService: PaymentService,
               private matDialog: MatDialog) { }
 
@@ -24,10 +27,10 @@ export class BillingMethodComponent implements OnInit, OnDestroy {
   }
 
   onDeleteClick(): void {
-    const deleteDialogRef = this.matDialog.open(DeleteBillingMethodDialogComponent, {data: {paymentMethod: this.paymentMethod}})
+    const deleteDialogRef = this.matDialog.open(DeleteBillingMethodDialogComponent, {data: {paymentMethod: this.paymentMethod}});
 
     deleteDialogRef.afterClosed()
-      .pipe(untilDestroyed(this))
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => this.onMethodChanged.emit());
   }
 
@@ -35,10 +38,12 @@ export class BillingMethodComponent implements OnInit, OnDestroy {
     const dialogRef =  this.matDialog.open(UpdateBillingMethodDialogComponent, {data: {paymentMethod: this.paymentMethod}});
 
     dialogRef.afterClosed()
-      .pipe(untilDestroyed(this))
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(() => this.onMethodChanged.emit());
   }
 
-  ngOnDestroy(): void { }
-
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next(null);
+    this.ngUnsubscribe.complete();
+  }
 }

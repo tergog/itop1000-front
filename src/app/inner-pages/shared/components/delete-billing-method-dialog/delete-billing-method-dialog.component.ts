@@ -1,7 +1,8 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { PaymentMethod } from '@stripe/stripe-js';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { PaymentService } from 'app/shared/services/payment.service';
 
@@ -14,6 +15,7 @@ export class DeleteBillingMethodDialogComponent implements OnInit, OnDestroy {
 
   public paymentMethod: PaymentMethod;
   public errorMessage: string;
+  public ngUnsubscribe = new Subject<void>();
 
   constructor(private paymentService: PaymentService,
               @Inject(MAT_DIALOG_DATA) public data: any,
@@ -25,12 +27,14 @@ export class DeleteBillingMethodDialogComponent implements OnInit, OnDestroy {
 
   deletePaymentMethod(paymentMethodId) {
     this.paymentService.deletePaymentMethod(paymentMethodId)
-      .pipe(untilDestroyed(this))
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(
         () => this.dialogRef.close(),
         error => this.errorMessage = error.message);
-  };
+  }
 
-  ngOnDestroy():void {
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next(null);
+    this.ngUnsubscribe.complete();
   }
 }

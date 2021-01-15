@@ -2,7 +2,8 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { State } from 'app/core/reducers/index';
 import { GetJobsAction } from 'app/core/client/store/actions';
@@ -25,6 +26,7 @@ export class JobComponent implements OnInit, OnDestroy {
   JobSections = EJobSections;
   activeSection = EJobSections.Project;
   public canEdit: boolean;
+  public ngUnsubscribe = new Subject<void>();
 
   constructor(
     private store: Store<State>,
@@ -41,7 +43,7 @@ export class JobComponent implements OnInit, OnDestroy {
     const dialogRef = this.matDialog.open(EditJobDialogComponent, {data: {job: this.job}});
 
     dialogRef.afterClosed()
-      .pipe(untilDestroyed(this))
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(res => {
         if (res === 'Job updated successfully') {
         this.handleSuccessResponse(res);
@@ -52,13 +54,13 @@ export class JobComponent implements OnInit, OnDestroy {
     const dialogRef =  this.matDialog.open(ConfirmationDialogComponent, {data: {title: 'Archive job', text: `Are you sure you want to delete the ${this.job.title} job?`}});
 
     dialogRef.afterClosed()
-      .pipe(untilDestroyed(this))
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(res => { if (res === 'Confirmed') { this.onDeleteJob(); }});
   }
 
   onDeleteJob(): void{
     this.jobsService.deleteJob(this.job.id)
-      .pipe(untilDestroyed(this))
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(
         (res) => {
           this.handleSuccessResponse(res);
@@ -86,5 +88,8 @@ export class JobComponent implements OnInit, OnDestroy {
     this.router.navigate([`/in/c/profile/job/${this.job.id}`]);
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next(null);
+    this.ngUnsubscribe.complete();
+  }
 }

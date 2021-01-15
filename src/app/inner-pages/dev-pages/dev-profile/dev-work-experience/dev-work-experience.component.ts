@@ -2,11 +2,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { filter, first, tap } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { filter, first, takeUntil, tap } from 'rxjs/operators';
 import xorBy from 'lodash.xorby';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { untilDestroyed } from 'ngx-take-until-destroy';
 
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
 import { DevelopersService, UtilsService } from 'app/shared/services';
@@ -27,6 +26,7 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
   public form: FormGroup;
   public userInfo$: Observable<UserInfo>;
   public userInfo: UserInfo;
+  public ngUnsubscribe = new Subject<void>();
   @ViewChild('category', {static: false}) category: ElementRef;
 
   showError: boolean;
@@ -157,7 +157,7 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
 
   private uploadImage(image: string, forLogo: boolean): void {
     this.developersService.uploadProjectImage(image)
-      .pipe(untilDestroyed(this))
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(
         url => forLogo ? this.logoUrl = url : this.projectImages.push(url),
         ({error}) => console.log(error)
@@ -165,6 +165,8 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.ngUnsubscribe.next(null);
+    this.ngUnsubscribe.complete();
   }
 
 }

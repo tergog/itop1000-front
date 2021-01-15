@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { JobsService } from 'app/shared/services';
 import { Job } from 'app/shared/models';
@@ -16,6 +17,7 @@ export class SearchJobsComponent implements OnInit, OnDestroy {
 
   public jobs: Job[] = [];
   public jobsPaginated: Job[] = [];
+  public ngUnsubscribe = new Subject<void>();
 
   constructor(
     private jobsService: JobsService,
@@ -25,7 +27,7 @@ export class SearchJobsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.store.select(getJobs)
-      .pipe(untilDestroyed(this))
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(jobs => {
         this.jobs = jobs;
         this.jobsPaginated = this.jobs.slice(0, 2);
@@ -41,5 +43,7 @@ export class SearchJobsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.ngUnsubscribe.next(null);
+    this.ngUnsubscribe.complete();
   }
 }

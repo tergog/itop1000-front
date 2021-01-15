@@ -3,7 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { StripeService, StripeCardComponent } from 'ngx-stripe';
 import { StripeCardElementOptions, StripeElementsOptions } from '@stripe/stripe-js';
 import { MatDialogRef } from '@angular/material/dialog';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { UserService } from 'app/shared/services';
 import { PaymentService } from 'app/shared/services/payment.service';
@@ -19,6 +20,7 @@ export class AddBillingMethodDialogComponent implements OnInit, OnDestroy {
 
   public form: FormGroup;
   public errorMessage: string;
+  public ngUnsubscribe = new Subject<void>();
 
   cardOptions: StripeCardElementOptions = {
     style: {
@@ -53,23 +55,26 @@ export class AddBillingMethodDialogComponent implements OnInit, OnDestroy {
   }
 
   public createPaymentToken(): void {
-      this.stripeService.createToken(this.card.element, {name: `${this.form.controls.firstName.value} ${this.form.controls.lastName.value}`})
-        .pipe(untilDestroyed(this))
+      this.stripeService.createToken(
+        this.card.element,
+        {name: `${this.form.controls.firstName.value} ${this.form.controls.lastName.value}`}
+        )
+        .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe(
           result => this.createPaymentMethod(result.token.id),
           error => console.log(error));
   }
 
   public createPaymentMethod(token) {
-    let cardToken  = {
-      type: "card",
+    const cardToken  = {
+      type: 'card',
       card: {
         token: token
       }
     };
 
     this.paymentService.createPaymentMethod(cardToken)
-      .pipe(untilDestroyed(this))
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(
         () => this.dialogRef.close(),
         (error) => this.errorMessage = error.message);
@@ -79,12 +84,15 @@ export class AddBillingMethodDialogComponent implements OnInit, OnDestroy {
     this.form = new FormGroup({
 
       firstName: new FormControl('', {
-        validators: [Validators.required,],}),
+        validators: [Validators.required] }),
 
       lastName: new FormControl('', {
-        validators: [Validators.required,],}),
+        validators: [Validators.required] }),
     });
   }
 
-  ngOnDestroy(): void { }
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next(null);
+    this.ngUnsubscribe.complete();
+  }
 }

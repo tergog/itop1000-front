@@ -2,8 +2,9 @@ import { Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@an
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { untilDestroyed } from 'ngx-take-until-destroy';
 import { MatSelectChange } from '@angular/material/select';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { GetJobsAction } from 'app/core/client/store/actions';
 import { State } from 'app/core/reducers/index';
@@ -25,6 +26,8 @@ export class EditJobDialogComponent implements OnInit, OnDestroy {
   public errorMessage: string;
   showError: boolean;
   selectedOpt: string;
+  public ngUnsubscribe = new Subject<void>();
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private store: Store<State>,
               private jobService: JobsService,
@@ -35,9 +38,9 @@ export class EditJobDialogComponent implements OnInit, OnDestroy {
     this.job = this.data.job;
     this.initForm();
     this.form.patchValue(this.job);
-    this.devProfileService.selectedCategories.push(...this.job.categories)
-    for(let category of this.devProfileService.selectedCategories) {
-      this.devProfileService.availableCategories = this.devProfileService.availableCategories.filter(el => el.name !== category.name)
+    this.devProfileService.selectedCategories.push(...this.job.categories);
+    for (const category of this.devProfileService.selectedCategories) {
+      this.devProfileService.availableCategories = this.devProfileService.availableCategories.filter(el => el.name !== category.name);
     }
   }
 
@@ -61,7 +64,7 @@ export class EditJobDialogComponent implements OnInit, OnDestroy {
       return;
     }
     this.jobService.updateJob(this.job.id, this.form.value)
-    .pipe(untilDestroyed(this))
+    .pipe(takeUntil(this.ngUnsubscribe))
     .subscribe(
       () => {
         this.dialogRef.close('Job updated successfully');
@@ -76,7 +79,7 @@ export class EditJobDialogComponent implements OnInit, OnDestroy {
     this.form.get('categories').patchValue(this.devProfileService.selectedCategories);
     this.focusReset();
   }
-  
+
   onChipRemove(category: NameValueModel): void {
     this.devProfileService.availableCategories.push(category);
     this.devProfileService.selectedCategories = this.devProfileService.selectedCategories.filter(el => el.value !== category.value);
@@ -85,7 +88,7 @@ export class EditJobDialogComponent implements OnInit, OnDestroy {
 
   focusReset(): void {
     this.category.nativeElement.blur();
-    setTimeout(() => this.category.nativeElement.focus(), 0)
+    setTimeout(() => this.category.nativeElement.focus(), 0);
   }
 
   onSelect(event: MatSelectChange): void {
@@ -95,5 +98,7 @@ export class EditJobDialogComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.devProfileService.availableCategories.push(...this.devProfileService.selectedCategories);
     this.devProfileService.selectedCategories = [];
+    this.ngUnsubscribe.next(null);
+    this.ngUnsubscribe.complete();
   }
 }
