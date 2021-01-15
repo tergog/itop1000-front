@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { first } from 'rxjs/operators';
 
 import { Job } from 'app/shared/models';
 import { DevelopersService, JobsService } from 'app/shared/services';
 import { getJobs, State } from 'app/core/reducers/index';
 import { GetJobsAction } from 'app/core/client/store/actions';
-import { first } from "rxjs/operators";
 import { getDeveloperCategories } from 'app/core/developers/store/developers.actions';
 import * as fromDev from 'app/core/developers/store';
 

@@ -3,6 +3,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, 
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Store } from '@ngrx/store';
 import { filter, first, map } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
 
 import { EDevProfileSectionNames } from 'app/inner-pages/dev-pages/dev-profile/shared/enums/devProfileSectionNames';
 import * as fromCore from 'app/core/reducers';
@@ -12,7 +13,6 @@ import { UserInfo } from 'app/shared/models/user-info.model';
 import { DevProperties } from 'app/shared/models/dev-properties.model';
 import { NameValueModel } from 'app/shared/models/name-value.model';
 import * as fromDevelopers from 'app/core/developers/store';
-import { Observable, Subject } from 'rxjs';
 
 export enum SelectedChips {
   Category = 'selectedCategories',

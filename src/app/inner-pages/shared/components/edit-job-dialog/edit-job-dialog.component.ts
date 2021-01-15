@@ -13,14 +13,14 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { MatSelectChange } from '@angular/material/select';
+import { Observable, Subject } from 'rxjs';
+import { filter, first, map } from 'rxjs/operators';
 
 import { GetJobsAction } from 'app/core/client/store/actions';
 import { State } from 'app/core/reducers/index';
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
 import { Job, NameValueModel } from 'app/shared/models';
 import { JobsService } from 'app/shared/services';
-import { Observable, Subject } from 'rxjs';
-import { filter, first, map } from 'rxjs/operators';
 import * as fromDevelopers from 'app/core/developers/store';
 
 

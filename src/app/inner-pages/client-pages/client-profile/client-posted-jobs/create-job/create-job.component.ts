@@ -12,14 +12,14 @@ import { Store } from '@ngrx/store';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
 import { untilDestroyed } from 'ngx-take-until-destroy';
+import { Observable, Subject } from 'rxjs';
+import { filter, first, map } from 'rxjs/operators';
 
 import { JobsService, NotificationsService } from 'app/shared/services';
 import { Job, NameValueModel, NotificationMessage } from 'app/shared/models';
 import { State } from 'app/core/reducers/index';
 import { GetJobsAction } from 'app/core/client/store/actions';
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
-import { Observable, Subject } from 'rxjs';
-import { filter, first, map } from 'rxjs/operators';
 import * as fromDevelopers from 'app/core/developers/store';
 
 @Component({
