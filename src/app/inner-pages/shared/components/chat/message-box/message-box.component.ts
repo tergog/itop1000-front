@@ -1,10 +1,10 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   Input,
-  OnChanges,
-  OnInit,
-  ViewChild
+  OnInit, QueryList,
+  ViewChild, ViewChildren
 } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -31,10 +31,11 @@ import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
   styleUrls: [ './message-box.component.scss' ],
   animations: [ slideInLeftAnimation ]
 })
-export class MessageBoxComponent implements OnInit, OnChanges {
+export class MessageBoxComponent implements OnInit, AfterViewInit {
   @Input() user: UserInfo;
   @Input() chat: fromChat.State;
-  @ViewChild('messages') messagesContainer: ElementRef;
+  @ViewChild('messages') messagesWrapper: ElementRef;
+  @ViewChildren("messageContainer") messageContainers: QueryList<ElementRef>;
 
   private textEditorInstance: SharedQuillInstanceModel;
   private textContent: ContentChange;
@@ -69,20 +70,23 @@ export class MessageBoxComponent implements OnInit, OnChanges {
       ))
     ).subscribe();
 
-    // this.websocketService.receivedOnline().pipe(
-    //   // Make the little circle below a user avatar yellow
-    // ).subscribe();
+    this.websocketService.receivedOnline().subscribe((data) => {
+      console.log(data);
+    });
   }
 
-  ngOnChanges(): void {
-    if (this.chat.conversations.active !== null) { // Send 'join' only when a user click on the conversation
-      // TODO: replace setTimeout
-      setTimeout(() => {
-        if (this.messagesContainer) {
-          this.messagesContainer.nativeElement.scrollTop = this.messagesContainer.nativeElement.scrollHeight;
-        }
-      }, 0);
-    }
+  ngAfterViewInit(): void {
+    this.messageContainers.changes.subscribe((list: QueryList<ElementRef>) => {
+      if (this.chat.conversations.active !== null && list.length > 0) {
+        /**
+         * setTimeout used even on official angular example
+         * Check method "calculateSerializedPanes" in https://angular.io/api/core/ViewChildren#another-example
+         */
+        setTimeout(() => {
+          this.scrollToBottom();
+        }, 0);
+      }
+    });
   }
 
   getEditorInstance(quill: SharedQuillInstanceModel): void {
@@ -120,6 +124,10 @@ export class MessageBoxComponent implements OnInit, OnChanges {
         });
       }
     }
+  }
+
+  scrollToBottom(): void {
+    this.messagesWrapper.nativeElement.scrollTop = this.messagesWrapper.nativeElement.scrollHeight;
   }
 
   getActiveConversation(chatId: string): ConversationModel {

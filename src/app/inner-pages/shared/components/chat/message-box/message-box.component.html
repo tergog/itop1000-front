@@ -25,7 +25,7 @@
       </div>
 
       <!-- Message markup -->
-      <div class="chat__message-box__body__message-list__message" *ngFor="let message of chat.messages.data">
+      <div class="chat__message-box__body__message-list__message" #messageContainer *ngFor="let message of chat.messages.data">
         <div class="chat__message-box__body__message-list__message__header">
           <span class="chat__message-box__body__message-list__message__header__avatar">
             <img *ngIf="message.sender.user.photo" src="{{ message.sender.user.photo }}" alt="Avatar">
