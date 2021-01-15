@@ -1,7 +1,7 @@
 <div [formGroup]="form">
     <!-- categories and skills -->
   <div class="d__flex d__flex--direction-column p__20"
-    *ngIf="availableCategories && sectionName === DevProfileSectionNames.CategoriesSkills">
+    *ngIf="availableCategories$ && sectionName === DevProfileSectionNames.CategoriesSkills">
     <span class="text text__title text__color--1">
       Categories
     </span>
@@ -12,7 +12,7 @@
                   [selectable]="false"
                   [disabled]="!isEdit"
                   [removable]="isEdit"
-                  (removed)="onChipRemove(category, 'selectedCategories', availableCategories)">
+                  (removed)="onChipRemove(category, 'selectedCategories', availableCategories$, allCategories)">
           {{ category.name }}
           <mat-icon matChipRemove *ngIf="isEdit">cancel</mat-icon>
         </mat-chip>
@@ -24,7 +24,7 @@
                 [matChipInputAddOnBlur]="true">
       </mat-chip-list>
 
-      <mat-autocomplete #autoCategories="matAutocomplete" (optionSelected)="onChipSelect($event.option.value, selectedChip.Category, availableCategories)">
+      <mat-autocomplete #autoCategories="matAutocomplete" (optionSelected)="onChipSelect($event.option.value, selectedChip.Category, availableCategories$, allCategories)">
         <mat-option *ngFor="let category of availableCategories$  | ngrxPush" [value]="category">
           {{ category.name }}
         </mat-option>
@@ -41,7 +41,7 @@
                   [selectable]="false"
                   [disabled]="!isEdit"
                   [removable]="isEdit"
-                  (removed)="onChipRemove(skill, 'selectedSkills', availableSkills)">
+                  (removed)="onChipRemove(skill, 'selectedSkills', availableSkills$, allSkills)">
           {{ skill.name }}
           <mat-icon matChipRemove *ngIf="isEdit">cancel</mat-icon>
         </mat-chip>
@@ -53,7 +53,7 @@
                 [matChipInputAddOnBlur]="true">
       </mat-chip-list>
 
-      <mat-autocomplete #autoSkills="matAutocomplete" (optionSelected)="onChipSelect($event.option.value, selectedChip.Skill, availableSkills)">
+      <mat-autocomplete #autoSkills="matAutocomplete" (optionSelected)="onChipSelect($event.option.value, selectedChip.Skill, availableSkills$, allSkills)">
         <mat-option *ngFor="let skill of availableSkills$ | ngrxPush" [value]="skill">
           {{ skill.name }}
         </mat-option>
@@ -77,7 +77,7 @@
         <mat-chip *ngFor="let softSkill of devProfileService.selectedSoftSkills"
                   [selectable]="false"
                   [removable]="isEdit"
-                  (removed)="onChipRemove(softSkill, devProfileService.selectedSoftSkills , 'softSkill')">
+                  (removed)="onChipRemove(softSkill, devProfileService.selectedSoftSkills , 'softSkill', 'softSkill')">
           {{ softSkill.name }}
           <mat-icon matChipRemove *ngIf="isEdit">cancel</mat-icon>
         </mat-chip>
@@ -89,7 +89,7 @@
               [matChipInputAddOnBlur]="true">
       </mat-chip-list>
 
-      <mat-autocomplete #autoSoftSkills="matAutocomplete" (optionSelected)="onChipSelect($event, devProfileService.selectedSoftSkills, 'allSoftSkills')">
+      <mat-autocomplete #autoSoftSkills="matAutocomplete" (optionSelected)="onChipSelect($event, devProfileService.selectedSoftSkills, 'allSoftSkills', 'allSoftSkills')">
 <!--        <mat-option *ngFor="let softSkill of devProfileService.availableSoftSkills" [value]="softSkill">-->
 <!--          {{ softSkill }}-->
 <!--        </mat-option>-->
@@ -105,7 +105,7 @@
         <mat-chip *ngFor="let language of devProfileService.selectedLanguages"
                   [selectable]="false"
                   [removable]="isEdit"
-                  (removed)="onChipRemove(language, devProfileService.selectedLanguages , 'languages')">
+                  (removed)="onChipRemove(language, devProfileService.selectedLanguages , 'languages', 'languages')">
           {{ language.name }}
           <mat-icon matChipRemove *ngIf="isEdit">cancel</mat-icon>
         </mat-chip>
@@ -117,7 +117,7 @@
               [matChipInputAddOnBlur]="true">
       </mat-chip-list>
 
-      <mat-autocomplete #autoLanguages="matAutocomplete" (optionSelected)="onChipSelect($event, devProfileService.selectedLanguages, 'allLanguge')">
+      <mat-autocomplete #autoLanguages="matAutocomplete" (optionSelected)="onChipSelect($event, devProfileService.selectedLanguages, 'allLanguge', 'allLanguge')">
 <!--        <mat-option *ngFor="let language of devProfileService.availableLanguages" [value]="language">-->
 <!--          {{ language }}-->
 <!--        </mat-option>-->

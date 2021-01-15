@@ -41,17 +41,12 @@ export class DevProfileEditFormComponent implements OnInit, AfterViewInit {
   public allCategories: NameValueModel[] = [];
   public allSkills: NameValueModel[] = [];
 
-  public availableCategories: Subject<NameValueModel[]> = new Subject<NameValueModel[]>();
-  public availableSkills: Subject<NameValueModel[]> = new Subject<NameValueModel[]>();
-
-  public availableCategories$: Observable<NameValueModel[]> = this.availableCategories.asObservable().pipe(
-    map(val => this.allCategories.filter(category => !val.find(item => item.value === category.value))));
-
-  public availableSkills$: Observable<NameValueModel[]> = this.availableSkills.asObservable().pipe(
-    map(val => this.allSkills.filter(skill => !val.find(item => item.value === skill.value))));
+  public availableCategories$: Subject<NameValueModel[]> = new Subject<NameValueModel[]>();
+  public availableSkills$: Subject<NameValueModel[]> = new Subject<NameValueModel[]>();
 
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   public subscribes: [];
+
 
   constructor(
     public devProfileService: DevProfileService,
@@ -80,7 +75,7 @@ export class DevProfileEditFormComponent implements OnInit, AfterViewInit {
       )
       .subscribe(res => {
         this.allCategories = res;
-        this.availableCategories.next(this.devProfileService.selectedCategories);
+        this.availableCategories$.next(this.filterData(this.allCategories, this.devProfileService.selectedCategories));
         this.cdr.detectChanges();
       });
 
@@ -91,13 +86,18 @@ export class DevProfileEditFormComponent implements OnInit, AfterViewInit {
       )
       .subscribe(res => {
         this.allSkills = res;
-        this.availableSkills.next(this.devProfileService.selectedSkills);
+        this.availableSkills$.next(this.filterData(this.allSkills, this.devProfileService.selectedSkills));
         this.cdr.detectChanges();
       });
   }
 
   public onEditClick(): void {
     this.editToggle.emit();
+  }
+
+  public filterData(allData, currentData): any {
+    const filteredData = allData.filter(staticItem => !currentData.find(currentItem => staticItem.value === currentItem.value));
+    return filteredData;
   }
 
   public onCancelClick(): void {
@@ -116,9 +116,9 @@ export class DevProfileEditFormComponent implements OnInit, AfterViewInit {
     this.isEdit = false;
   }
 
-  public onChipSelect(chip, selectedChips, availableChip): void {
+  public onChipSelect(chip, selectedChips, availableChip, allChip): void {
     this.devProfileService[selectedChips].push(chip);
-    availableChip.next(this.devProfileService[selectedChips]);
+    availableChip.next(this.filterData(allChip, this.devProfileService[selectedChips]));
     this.resetFocus(selectedChips);
   }
 
@@ -130,9 +130,9 @@ export class DevProfileEditFormComponent implements OnInit, AfterViewInit {
     }, 0);
   }
 
-  public onChipRemove(chip: NameValueModel, selectedChips, availableChip): void {
+  public onChipRemove(chip: NameValueModel, selectedChips, availableChip, allChip): void {
     this.devProfileService[selectedChips] = this.devProfileService[selectedChips].filter(item => item.value !== chip.value);
-    availableChip.next(this.devProfileService[selectedChips]);
+    availableChip.next(this.filterData(allChip, this.devProfileService[selectedChips]));
   }
 
   private initForm() {
