@@ -11,20 +11,30 @@ $editor-border: 1px solid $color-8;
 }
 
 .chat__text-editor {
+  display: grid;
+  grid-template-columns: 1fr 120px;
+  grid-template-rows: 50px 1px 90px 25px;
+  gap: 0 0;
+  grid-template-areas:
+    "chat__text-editor__toolbar chat__text-editor__send"
+    "chat__text-editor__divider chat__text-editor__divider"
+    "chat__text-editor__body chat__text-editor__body"
+    ". chat__text-editor__counter";
+
   &__toolbar {
     border: none;
     padding: 12px;
+    grid-area: chat__text-editor__toolbar;
 
     .ql-attach-file {
-      color: $text-color-5;
-      width: 130px;
-      line-height: 1.2rem;
-      float: right;
-
-      @media screen and (max-width: $screen-xl) {
-        float: none;
-      }
+      width: 28px;
+      height: 24px;
     }
+  }
+
+  &__send {
+    grid-area: chat__text-editor__send;
+    padding: 8px 42px;
   }
 
   &__divider {
@@ -32,14 +42,22 @@ $editor-border: 1px solid $color-8;
     height: 1px;
     margin: 0 auto;
     background-color: rgba(105, 105, 105, .9);
+    grid-area: chat__text-editor__divider;
+  }
+
+  &__body {
+    grid-area: chat__text-editor__body;
+    max-width: 100%;
   }
 
   &__counter {
     text-align: right;
     padding: 5px 12px;
     color: $text-color-6;
+    grid-area: chat__text-editor__counter;
   }
 }
+
 
 ::ng-deep {
   .ql-snow.ql-toolbar,
@@ -117,35 +135,38 @@ $editor-border: 1px solid $color-8;
       border: $editor-border !important;
     }
   }
+}
 
-  .ql-container {
-    border: none !important;
-    max-height: 68px !important;
-    overflow: auto;
-  }
-
-  .ql-editor {
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 16px;
-    padding: 26px 35px;
-    max-height: 400px;
-    overflow: auto;
-    color: $text-color-8 !important;
-
-    &:before {
-      color: $text-color-8 !important;
-      font-style: normal !important;
-      left: 35px !important;
-      right: 35px !important;
+.chat__text-editor {
+  ::ng-deep {
+    .ql-container {
+      border: none !important;
+      overflow: auto;
     }
 
-    .ql-file-embedded {
-      margin: 10px auto;
-      padding: 5px 10px;
-      font-size: 14px;
-      border: 1px solid rgba(105, 105, 105, .9);
-      user-select: none;
+    .ql-editor {
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 16px;
+      padding: 26px 35px;
+      max-height: 400px;
+      overflow: auto;
+      color: $text-color-8 !important;
+
+      &:before {
+        color: $text-color-8 !important;
+        font-style: normal !important;
+        left: 35px !important;
+        right: 35px !important;
+      }
+
+      .ql-file-embedded {
+        margin: 10px auto;
+        padding: 5px 10px;
+        font-size: 14px;
+        border: 1px solid rgba(105, 105, 105, .9);
+        user-select: none;
+      }
     }
   }
 }

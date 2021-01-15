@@ -7,6 +7,7 @@ import { RichTextEditorComponent } from './rich-text-editor.component';
 import { AttachFiles } from './modules/attach-files.module';
 import { CounterModule } from './modules/counter.module';
 import { FileBlot } from './modules/attach-files.blot';
+import { SharedModule } from 'app/shared/shared.module';
 
 const quillConfig: QuillConfig = {
   placeholder: 'Message',
@@ -25,6 +26,7 @@ const quillConfig: QuillConfig = {
 
 @NgModule({
   imports: [
+    SharedModule,
     CommonModule,
     FormsModule,
     QuillModule.forRoot(quillConfig)

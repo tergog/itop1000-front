@@ -13,7 +13,8 @@ import { SharedQuillInstanceModel } from 'app/shared/models';
 export class RichTextEditorComponent {
   constructor(
     private notificationsService: NotificationsService
-  ) {}
+  ) {
+  }
 
   public textContent: string = '';
 
@@ -25,6 +26,11 @@ export class RichTextEditorComponent {
   @Output() shareQuillInstance = new EventEmitter<any>();
   getEditorInstance(quill: SharedQuillInstanceModel): void {
     this.shareQuillInstance.emit(quill);
+  }
+
+  @Output() shareSendButtonClick = new EventEmitter<MouseEvent>();
+  onSendButtonClick(evt: MouseEvent): void {
+    this.shareSendButtonClick.emit(evt);
   }
 
   public quillModules = {
@@ -39,6 +45,6 @@ export class RichTextEditorComponent {
       container: '.ql-counter',
       maxLength: 4096
     },
-    "emoji-toolbar": true
+    'emoji-toolbar': true
   };
 }
