@@ -22,6 +22,7 @@ import { TimezoneComponent } from './components/timezone/timezone.component';
 import { AddressComponent } from 'app/shared/components/address/address.component';
 import { PhoneRegexComponent } from './components/phone-regex/phone-regex.component';
 import { ResumeService } from './services/resume.service';
+import { DropDownListComponent } from './components/drop-down-list/drop-down-list.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ResumeService } from './services/resume.service';
     SeparatorComponent,
     TimezoneComponent,
     AddressComponent,
-    PhoneRegexComponent
+    PhoneRegexComponent,
+    DropDownListComponent
   ],
   exports: [
     InputComponent,
@@ -52,7 +54,8 @@ import { ResumeService } from './services/resume.service';
     SeparatorComponent,
     TimezoneComponent,
     AddressComponent,
-    PhoneRegexComponent
+    PhoneRegexComponent,
+    DropDownListComponent
   ],
   imports: [
     CommonModule,
