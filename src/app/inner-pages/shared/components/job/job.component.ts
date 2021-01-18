@@ -26,7 +26,7 @@ export class JobComponent implements OnInit, OnDestroy {
   JobSections = EJobSections;
   activeSection = EJobSections.Project;
   public canEdit: boolean;
-  public ngUnsubscribe = new Subject<void>();
+  public ngUnsubscribe$ = new Subject<void>();
 
   constructor(
     private store: Store<State>,
@@ -43,7 +43,7 @@ export class JobComponent implements OnInit, OnDestroy {
     const dialogRef = this.matDialog.open(EditJobDialogComponent, {data: {job: this.job}});
 
     dialogRef.afterClosed()
-      .pipe(takeUntil(this.ngUnsubscribe))
+      .pipe(takeUntil(this.ngUnsubscribe$))
       .subscribe(res => {
         if (res === 'Job updated successfully') {
         this.handleSuccessResponse(res);
@@ -54,13 +54,13 @@ export class JobComponent implements OnInit, OnDestroy {
     const dialogRef =  this.matDialog.open(ConfirmationDialogComponent, {data: {title: 'Archive job', text: `Are you sure you want to delete the ${this.job.title} job?`}});
 
     dialogRef.afterClosed()
-      .pipe(takeUntil(this.ngUnsubscribe))
+      .pipe(takeUntil(this.ngUnsubscribe$))
       .subscribe(res => { if (res === 'Confirmed') { this.onDeleteJob(); }});
   }
 
   onDeleteJob(): void{
     this.jobsService.deleteJob(this.job.id)
-      .pipe(takeUntil(this.ngUnsubscribe))
+      .pipe(takeUntil(this.ngUnsubscribe$))
       .subscribe(
         (res) => {
           this.handleSuccessResponse(res);
@@ -89,7 +89,7 @@ export class JobComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.ngUnsubscribe.next(null);
-    this.ngUnsubscribe.complete();
+    this.ngUnsubscribe$.next(null);
+    this.ngUnsubscribe$.complete();
   }
 }

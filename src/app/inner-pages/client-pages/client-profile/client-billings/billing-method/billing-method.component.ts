@@ -18,7 +18,7 @@ export class BillingMethodComponent implements OnInit, OnDestroy {
   @Input() paymentMethod: PaymentMethod;
   @Output() onMethodChanged = new EventEmitter();
 
-  public ngUnsubscribe = new Subject<void>();
+  public ngUnsubscribe$ = new Subject<void>();
 
   constructor(private paymentService: PaymentService,
               private matDialog: MatDialog) { }
@@ -30,7 +30,7 @@ export class BillingMethodComponent implements OnInit, OnDestroy {
     const deleteDialogRef = this.matDialog.open(DeleteBillingMethodDialogComponent, {data: {paymentMethod: this.paymentMethod}});
 
     deleteDialogRef.afterClosed()
-      .pipe(takeUntil(this.ngUnsubscribe))
+      .pipe(takeUntil(this.ngUnsubscribe$))
       .subscribe(() => this.onMethodChanged.emit());
   }
 
@@ -38,12 +38,12 @@ export class BillingMethodComponent implements OnInit, OnDestroy {
     const dialogRef =  this.matDialog.open(UpdateBillingMethodDialogComponent, {data: {paymentMethod: this.paymentMethod}});
 
     dialogRef.afterClosed()
-      .pipe(takeUntil(this.ngUnsubscribe))
+      .pipe(takeUntil(this.ngUnsubscribe$))
       .subscribe(() => this.onMethodChanged.emit());
   }
 
   ngOnDestroy(): void {
-    this.ngUnsubscribe.next(null);
-    this.ngUnsubscribe.complete();
+    this.ngUnsubscribe$.next(null);
+    this.ngUnsubscribe$.complete();
   }
 }

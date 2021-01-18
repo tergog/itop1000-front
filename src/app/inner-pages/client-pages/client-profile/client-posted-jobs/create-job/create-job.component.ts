@@ -23,7 +23,7 @@ export class CreateJobComponent implements OnInit, OnDestroy {
   @Output() isEdit = new EventEmitter<Job>();
   @ViewChild('category', {static: false}) category: ElementRef;
   public form: FormGroup;
-  public ngUnsubscribe = new Subject<void>();
+  public ngUnsubscribe$ = new Subject<void>();
   showError: boolean;
 
   constructor(
@@ -42,7 +42,7 @@ export class CreateJobComponent implements OnInit, OnDestroy {
       this.showError = true;
       return;
     }
-    this.jobsService.createJob(this.form.value).pipe(takeUntil(this.ngUnsubscribe))
+    this.jobsService.createJob(this.form.value).pipe(takeUntil(this.ngUnsubscribe$))
       .subscribe(() => {
         const msg: NotificationMessage = { message: 'Added project', type: ENotificationStatus.Success };
         this.store.dispatch(new GetJobsAction());
@@ -98,7 +98,7 @@ export class CreateJobComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.ngUnsubscribe.next(null);
-    this.ngUnsubscribe.complete();
+    this.ngUnsubscribe$.next(null);
+    this.ngUnsubscribe$.complete();
   }
 }

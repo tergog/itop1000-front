@@ -20,7 +20,7 @@ export class SearchDevelopersComponent implements OnInit, OnDestroy {
   public developers: Developer[];
   public developers$: Observable<Developer[]>;
   public developersPaginated: Developer[] = [];
-  public ngUnsubscribe = new Subject<void>();
+  public ngUnsubscribe$ = new Subject<void>();
 
   constructor(
     private developersService: DevelopersService,
@@ -31,7 +31,7 @@ export class SearchDevelopersComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.developers$ = this.store.select(getDevelopers)
-      .pipe(takeUntil(this.ngUnsubscribe),
+      .pipe(takeUntil(this.ngUnsubscribe$),
         tap((developers: Developer[]) => {
           this.developers = developers;
           this.developersPaginated = this.developers.slice(0, 2);
@@ -51,8 +51,8 @@ export class SearchDevelopersComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.ngUnsubscribe.next(null);
-    this.ngUnsubscribe.complete();
+    this.ngUnsubscribe$.next(null);
+    this.ngUnsubscribe$.complete();
   }
 
 }

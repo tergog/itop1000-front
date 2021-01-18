@@ -19,7 +19,7 @@ export class GetPaidNowDialogComponent implements OnInit, OnDestroy {
 
   public form: FormGroup;
   public errorMessage: string;
-  public ngUnsubscribe = new Subject<void>();
+  public ngUnsubscribe$ = new Subject<void>();
   cardOptions: StripeCardElementOptions = {
     style: {
       base: {
@@ -60,7 +60,7 @@ export class GetPaidNowDialogComponent implements OnInit, OnDestroy {
 
   getPaid(): void {
     this.stripeService.createToken(this.card.element, {name: `${this.form.controls.firstName.value} ${this.form.controls.lastName.value}`})
-        .pipe(takeUntil(this.ngUnsubscribe))
+        .pipe(takeUntil(this.ngUnsubscribe$))
         .subscribe(
           result => this.createPaymentMethod(result.token.id),
           error => console.log(error));
@@ -75,15 +75,15 @@ export class GetPaidNowDialogComponent implements OnInit, OnDestroy {
     };
 
     this.paymentService.createPaymentMethod(cardToken)
-      .pipe(takeUntil(this.ngUnsubscribe))
+      .pipe(takeUntil(this.ngUnsubscribe$))
       .subscribe(
         () => this.dialogRef.close(),
         (error) => this.errorMessage = error.message);
   }
 
   ngOnDestroy(): void {
-    this.ngUnsubscribe.next(null);
-    this.ngUnsubscribe.complete();
+    this.ngUnsubscribe$.next(null);
+    this.ngUnsubscribe$.complete();
   }
 
 }

@@ -26,7 +26,7 @@ export class EditJobDialogComponent implements OnInit, OnDestroy {
   public errorMessage: string;
   showError: boolean;
   selectedOpt: string;
-  public ngUnsubscribe = new Subject<void>();
+  public ngUnsubscribe$ = new Subject<void>();
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private store: Store<State>,
@@ -64,7 +64,7 @@ export class EditJobDialogComponent implements OnInit, OnDestroy {
       return;
     }
     this.jobService.updateJob(this.job.id, this.form.value)
-    .pipe(takeUntil(this.ngUnsubscribe))
+    .pipe(takeUntil(this.ngUnsubscribe$))
     .subscribe(
       () => {
         this.dialogRef.close('Job updated successfully');
@@ -98,7 +98,7 @@ export class EditJobDialogComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.devProfileService.availableCategories.push(...this.devProfileService.selectedCategories);
     this.devProfileService.selectedCategories = [];
-    this.ngUnsubscribe.next(null);
-    this.ngUnsubscribe.complete();
+    this.ngUnsubscribe$.next(null);
+    this.ngUnsubscribe$.complete();
   }
 }

@@ -16,7 +16,7 @@ export class ClientBillingsComponent implements OnInit, OnDestroy {
 
   public billingMethods: PaymentMethod[] = [];
   public errorMessage: string;
-  public ngUnsubscribe = new Subject<void>();
+  public ngUnsubscribe$ = new Subject<void>();
 
   constructor(private matDialog: MatDialog,
               private paymentService: PaymentService) { }
@@ -29,21 +29,21 @@ export class ClientBillingsComponent implements OnInit, OnDestroy {
     const dialogRef =  this.matDialog.open(AddBillingMethodDialogComponent);
 
     dialogRef.afterClosed()
-      .pipe(takeUntil(this.ngUnsubscribe))
+      .pipe(takeUntil(this.ngUnsubscribe$))
       .subscribe(() => this.getPaymentMethods());
   }
 
   public getPaymentMethods(): void  {
     this.paymentService.getPaymentMethods()
-      .pipe(takeUntil(this.ngUnsubscribe))
+      .pipe(takeUntil(this.ngUnsubscribe$))
       .subscribe((billingsMethods) => this.billingMethods = billingsMethods,
-        ({error}) => this.errorMessage = error.message
+        ({ error }) => this.errorMessage = error.message
       );
   }
 
   ngOnDestroy(): void {
-    this.ngUnsubscribe.next(null);
-    this.ngUnsubscribe.complete();
+    this.ngUnsubscribe$.next(null);
+    this.ngUnsubscribe$.complete();
   }
 }
 

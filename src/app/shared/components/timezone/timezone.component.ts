@@ -20,7 +20,7 @@ import { timezones } from 'app/constants/constants';
 export class TimezoneComponent implements OnInit, OnDestroy, ControlValueAccessor, OnChanges {
   @Input() currentTimezone: string;
   public filteredTimezones: string[] = timezones;
-  public ngUnsubscribe = new Subject<void>();
+  public ngUnsubscribe$ = new Subject<void>();
 
   private timezoneSource = new BehaviorSubject<string>(null);
 
@@ -42,7 +42,7 @@ export class TimezoneComponent implements OnInit, OnDestroy, ControlValueAccesso
         of(timezones.filter((timezone) => timezone.includes(value)))
       ),
       filter((timezone) => !timezone.includes(this.timezoneSource.value)),
-      takeUntil(this.ngUnsubscribe),
+      takeUntil(this.ngUnsubscribe$),
     ).subscribe((timezonesArr: string[]) => this.filteredTimezones = timezonesArr);
   }
 
@@ -52,8 +52,8 @@ export class TimezoneComponent implements OnInit, OnDestroy, ControlValueAccesso
   }
 
   ngOnDestroy() {
-    this.ngUnsubscribe.next(null);
-    this.ngUnsubscribe.complete();
+    this.ngUnsubscribe$.next(null);
+    this.ngUnsubscribe$.complete();
   }
 
   private onChange = (timezone: string) => {};

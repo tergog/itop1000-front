@@ -20,7 +20,7 @@ export class AddBillingMethodDialogComponent implements OnInit, OnDestroy {
 
   public form: FormGroup;
   public errorMessage: string;
-  public ngUnsubscribe = new Subject<void>();
+  public ngUnsubscribe$ = new Subject<void>();
 
   cardOptions: StripeCardElementOptions = {
     style: {
@@ -59,7 +59,7 @@ export class AddBillingMethodDialogComponent implements OnInit, OnDestroy {
         this.card.element,
         {name: `${this.form.controls.firstName.value} ${this.form.controls.lastName.value}`}
         )
-        .pipe(takeUntil(this.ngUnsubscribe))
+        .pipe(takeUntil(this.ngUnsubscribe$))
         .subscribe(
           result => this.createPaymentMethod(result.token.id),
           error => console.log(error));
@@ -74,7 +74,7 @@ export class AddBillingMethodDialogComponent implements OnInit, OnDestroy {
     };
 
     this.paymentService.createPaymentMethod(cardToken)
-      .pipe(takeUntil(this.ngUnsubscribe))
+      .pipe(takeUntil(this.ngUnsubscribe$))
       .subscribe(
         () => this.dialogRef.close(),
         (error) => this.errorMessage = error.message);
@@ -92,7 +92,7 @@ export class AddBillingMethodDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.ngUnsubscribe.next(null);
-    this.ngUnsubscribe.complete();
+    this.ngUnsubscribe$.next(null);
+    this.ngUnsubscribe$.complete();
   }
 }

@@ -35,7 +35,7 @@ export class JobFullComponent implements OnInit, OnDestroy {
   resMessage = EResMessage;
   activeSection = EJobSections.Project;
   public canEdit: boolean;
-  public ngUnsubscribe = new Subject<void>();
+  public ngUnsubscribe$ = new Subject<void>();
 
   constructor(
     private store: Store<State>,
@@ -52,7 +52,7 @@ export class JobFullComponent implements OnInit, OnDestroy {
   getJobInfo() {
     this.store.select(getJobs)
       .pipe(
-        takeUntil(this.ngUnsubscribe),
+        takeUntil(this.ngUnsubscribe$),
         flatMap(jobs => this.getJobFromStore(jobs)),
         tap((job: Job) => this.job = job),
         switchMap(() => this.store.select(fromCore.getUserInfo)),
@@ -88,7 +88,7 @@ export class JobFullComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed()
       .pipe(
-        takeUntil(this.ngUnsubscribe),
+        takeUntil(this.ngUnsubscribe$),
         filter(res => res === this.resMessage.Confirmed),
         tap(() => this.onDeleteJob())
       )
@@ -97,7 +97,7 @@ export class JobFullComponent implements OnInit, OnDestroy {
 
   public onDeleteJob(): void {
     this.jobsService.deleteJob(this.job.id)
-      .pipe(takeUntil(this.ngUnsubscribe))
+      .pipe(takeUntil(this.ngUnsubscribe$))
       .subscribe(
         () => {
           this.handleSuccessResponse();
@@ -111,7 +111,7 @@ export class JobFullComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed()
       .pipe(
-        takeUntil(this.ngUnsubscribe),
+        takeUntil(this.ngUnsubscribe$),
         filter(res => res === this.resMessage.Updated),
         tap(() => {
           this.getJobInfo();
@@ -135,7 +135,7 @@ export class JobFullComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.ngUnsubscribe.next(null);
-    this.ngUnsubscribe.complete();
+    this.ngUnsubscribe$.next(null);
+    this.ngUnsubscribe$.complete();
   }
 }

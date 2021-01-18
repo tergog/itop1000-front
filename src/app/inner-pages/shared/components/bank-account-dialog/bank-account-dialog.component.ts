@@ -17,7 +17,7 @@ export class BankAccountDialogComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   errorMessage: string;
-  public ngUnsubscribe = new Subject<void>();
+  public ngUnsubscribe$ = new Subject<void>();
 
   constructor(private paymentService: PaymentService,
               private dialogRef: MatDialogRef<BankAccountDialogComponent>) { }
@@ -41,7 +41,7 @@ export class BankAccountDialogComponent implements OnInit, OnDestroy {
     if (this.form.invalid){
       return;
     }
-    this.paymentService.verifyBankAccount(this.form.value).pipe(takeUntil(this.ngUnsubscribe)).subscribe((res) => {
+    this.paymentService.verifyBankAccount(this.form.value).pipe(takeUntil(this.ngUnsubscribe$)).subscribe((res) => {
       this.errorMessage = null;
       this.dialogRef.close(res);
       },
@@ -55,7 +55,7 @@ export class BankAccountDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.ngUnsubscribe.next(null);
-    this.ngUnsubscribe.complete();
+    this.ngUnsubscribe$.next(null);
+    this.ngUnsubscribe$.complete();
   }
 }

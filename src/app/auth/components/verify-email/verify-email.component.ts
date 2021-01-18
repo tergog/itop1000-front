@@ -17,7 +17,7 @@ export class VerifyEmailComponent implements OnInit, OnDestroy {
 
   public form: FormGroup;
   public errorMessage: string;
-  public ngUnsubscribe = new Subject<void>();
+  public ngUnsubscribe$ = new Subject<void>();
 
   constructor(
               private route: ActivatedRoute,
@@ -29,7 +29,7 @@ export class VerifyEmailComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.route.queryParams.pipe(
-      takeUntil(this.ngUnsubscribe),
+      takeUntil(this.ngUnsubscribe$),
       switchMap(({ token }) => this.userService.verifyToken(token))
     ).subscribe(() => {
       this.router.navigate(['/auth', 'login']);
@@ -48,8 +48,8 @@ export class VerifyEmailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.ngUnsubscribe.next(null);
-    this.ngUnsubscribe.complete();
+    this.ngUnsubscribe$.next(null);
+    this.ngUnsubscribe$.complete();
   }
 
   private initForm(): void {

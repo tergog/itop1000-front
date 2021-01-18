@@ -17,7 +17,7 @@ export class SearchJobsComponent implements OnInit, OnDestroy {
 
   public jobs: Job[] = [];
   public jobsPaginated: Job[] = [];
-  public ngUnsubscribe = new Subject<void>();
+  public ngUnsubscribe$ = new Subject<void>();
 
   constructor(
     private jobsService: JobsService,
@@ -27,7 +27,7 @@ export class SearchJobsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.store.select(getJobs)
-      .pipe(takeUntil(this.ngUnsubscribe))
+      .pipe(takeUntil(this.ngUnsubscribe$))
       .subscribe(jobs => {
         this.jobs = jobs;
         this.jobsPaginated = this.jobs.slice(0, 2);
@@ -43,7 +43,7 @@ export class SearchJobsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.ngUnsubscribe.next(null);
-    this.ngUnsubscribe.complete();
+    this.ngUnsubscribe$.next(null);
+    this.ngUnsubscribe$.complete();
   }
 }

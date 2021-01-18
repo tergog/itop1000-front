@@ -26,7 +26,7 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
   public form: FormGroup;
   public userInfo$: Observable<UserInfo>;
   public userInfo: UserInfo;
-  public ngUnsubscribe = new Subject<void>();
+  public ngUnsubscribe$ = new Subject<void>();
   @ViewChild('category', {static: false}) category: ElementRef;
 
   showError: boolean;
@@ -39,16 +39,16 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
   public selectedTechnologies = [];
   public availableTechnologies: NameValueModel[] = [
 
-    {name: 'Javascript', value: 1},
-    {name: 'Typescript', value: 2},
-    {name: 'CSS3', value: 3},
-    {name: 'HTML5', value: 5},
-    {name: 'AngularJS', value: 6},
-    {name: 'Angular 9', value: 7},
-    {name: 'Angular 10', value: 8},
-    {name: 'Angular 7', value: 9},
-    {name: 'Angular 8', value: 10},
-    {name: 'Angular 2+', value: 11},
+    { name: 'Javascript', value: 1 },
+    { name: 'Typescript', value: 2 },
+    { name: 'CSS3', value: 3 },
+    { name: 'HTML5', value: 5 },
+    { name: 'AngularJS', value: 6 },
+    { name: 'Angular 9', value: 7 },
+    { name: 'Angular 10', value: 8 },
+    { name: 'Angular 7', value: 9 },
+    { name: 'Angular 8', value: 10 },
+    { name: 'Angular 2+', value: 11 },
 
   ];
 
@@ -89,10 +89,10 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
       return;
     }
     this.showError = false;
-    const newDevProperties: DevProperties = {projects: [...(this.userInfo.devProperties.projects || []), this.form.value]};
-    this.userInfo = {...this.userInfo, devProperties: newDevProperties};
+    const newDevProperties: DevProperties = { projects: [...(this.userInfo.devProperties.projects || []), this.form.value] };
+    this.userInfo = { ...this.userInfo, devProperties: newDevProperties };
     this.store.dispatch(new UpdateUserProfileAction(this.userInfo));
-    this.devProfileService.onSaveClick({devProperties: newDevProperties});
+    this.devProfileService.onSaveClick({ devProperties: newDevProperties });
     this.isNewProject = false;
     this.availableTechnologies.push(...this.selectedTechnologies);
     this.selectedTechnologies = [];
@@ -157,16 +157,16 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
 
   private uploadImage(image: string, forLogo: boolean): void {
     this.developersService.uploadProjectImage(image)
-      .pipe(takeUntil(this.ngUnsubscribe))
+      .pipe(takeUntil(this.ngUnsubscribe$))
       .subscribe(
         url => forLogo ? this.logoUrl = url : this.projectImages.push(url),
-        ({error}) => console.log(error)
+        ({ error }) => console.log(error)
       );
   }
 
   ngOnDestroy(): void {
-    this.ngUnsubscribe.next(null);
-    this.ngUnsubscribe.complete();
+    this.ngUnsubscribe$.next(null);
+    this.ngUnsubscribe$.complete();
   }
 
 }

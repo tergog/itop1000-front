@@ -18,7 +18,7 @@ export class UpdateBillingMethodDialogComponent implements OnInit, OnDestroy {
   public name: string;
   public firstName: string;
   public lastName: string;
-  public ngUnsubscribe = new Subject<void>();
+  public ngUnsubscribe$ = new Subject<void>();
 
   constructor(private paymentService: PaymentService,
               @Inject(MAT_DIALOG_DATA) public data: any,
@@ -60,14 +60,14 @@ export class UpdateBillingMethodDialogComponent implements OnInit, OnDestroy {
     };
 
     this.paymentService.updatePaymentMethod(paymentMethodData)
-      .pipe(takeUntil(this.ngUnsubscribe))
+      .pipe(takeUntil(this.ngUnsubscribe$))
       .subscribe(
         () => this.dialogRef.close(),
         error => this.errorMessage = error.message);
   }
 
   ngOnDestroy(): void {
-    this.ngUnsubscribe.next(null);
-    this.ngUnsubscribe.complete();
+    this.ngUnsubscribe$.next(null);
+    this.ngUnsubscribe$.complete();
   }
 }
