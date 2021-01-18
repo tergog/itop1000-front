@@ -15,14 +15,16 @@ export const ApiConstants = {
     getDeveloperById: 'accounts/get-developer',
     chargesList: 'accounts/charges-list',
     activeProjects: 'accounts/active-projects',
-    developerCategories: 'data/categories',
-    developerSkills: 'data/skills',
-    developerLanguages: 'data/languages',
-    developerSoftSkills: 'data/soft-skills',
     verifyBank: 'accounts/verify-bank',
     verifyStripe: 'accounts/verify-stripe',
     payout: 'accounts/payout',
     paymentIntent: 'accounts/payment-intent'
+  },
+  data: {
+    developerCategories: 'data/categories',
+    developerSkills: 'data/skills',
+    developerLanguages: 'data/languages',
+    developerSoftSkills: 'data/soft-skills'
   },
   jobs: {
     main: 'jobs',

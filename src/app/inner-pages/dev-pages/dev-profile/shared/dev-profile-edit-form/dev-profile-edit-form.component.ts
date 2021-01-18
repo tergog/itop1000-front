@@ -42,6 +42,7 @@ export class DevProfileEditFormComponent implements OnInit, AfterViewInit {
   public allSkills: NameValueModel[] = [];
 
   public availableCategories$: Subject<NameValueModel[]> = new Subject<NameValueModel[]>();
+
   public availableSkills$: Subject<NameValueModel[]> = new Subject<NameValueModel[]>();
 
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -95,7 +96,7 @@ export class DevProfileEditFormComponent implements OnInit, AfterViewInit {
     this.editToggle.emit();
   }
 
-  public filterData(allData, currentData): any {
+  public filterData(allData, currentData): NameValueModel[] {
     const filteredData = allData.filter(staticItem => !currentData.find(currentItem => staticItem.value === currentItem.value));
     return filteredData;
   }

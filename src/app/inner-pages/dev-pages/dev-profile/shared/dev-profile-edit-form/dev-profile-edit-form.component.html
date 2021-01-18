@@ -25,9 +25,11 @@
       </mat-chip-list>
 
       <mat-autocomplete #autoCategories="matAutocomplete" (optionSelected)="onChipSelect($event.option.value, selectedChip.Category, availableCategories$, allCategories)">
-        <mat-option *ngFor="let category of availableCategories$  | ngrxPush" [value]="category">
-          {{ category.name }}
-        </mat-option>
+        <mat-optgroup *ngrxLet="availableCategories$; let availableCategories" >
+          <mat-option *ngFor="let category of availableCategories " [value]="category">
+            {{ category.name }}
+          </mat-option>
+        </mat-optgroup>
       </mat-autocomplete>
     </mat-form-field>
 
@@ -54,9 +56,11 @@
       </mat-chip-list>
 
       <mat-autocomplete #autoSkills="matAutocomplete" (optionSelected)="onChipSelect($event.option.value, selectedChip.Skill, availableSkills$, allSkills)">
-        <mat-option *ngFor="let skill of availableSkills$ | ngrxPush" [value]="skill">
-          {{ skill.name }}
-        </mat-option>
+        <mat-optgroup *ngrxLet="availableSkills$; let availableSkills">
+          <mat-option *ngFor="let skill of availableSkills " [value]="skill">
+            {{ skill.name }}
+          </mat-option>
+        </mat-optgroup>
       </mat-autocomplete>
     </mat-form-field>
 
@@ -65,64 +69,4 @@
       <app-button [text]="'Save'" (buttonClick)="onSaveClick()"></app-button>
     </div>
   </div>
-
-  <!-- softSkills and languages -->
-  <div class="d__flex d__flex--direction-column p__20" *ngIf="sectionName === DevProfileSectionNames.SoftSkillsLanguages">
-    <span class="text text__title text__color--1">
-      SoftSkills
-    </span>
-
-    <mat-form-field class="chip-list m__top--10" [class.edit-mode]="isEdit">
-      <mat-chip-list #chipListSoftSkills formControlName="softSkills">
-        <mat-chip *ngFor="let softSkill of devProfileService.selectedSoftSkills"
-                  [selectable]="false"
-                  [removable]="isEdit"
-                  (removed)="onChipRemove(softSkill, devProfileService.selectedSoftSkills , 'softSkill', 'softSkill')">
-          {{ softSkill.name }}
-          <mat-icon matChipRemove *ngIf="isEdit">cancel</mat-icon>
-        </mat-chip>
-        <input placeholder="Add softSkill..."
-              [readOnly]="!isEdit"
-              [matChipInputFor]="chipListSoftSkills"
-              [matAutocomplete]="autoSoftSkills"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-              [matChipInputAddOnBlur]="true">
-      </mat-chip-list>
-
-      <mat-autocomplete #autoSoftSkills="matAutocomplete" (optionSelected)="onChipSelect($event, devProfileService.selectedSoftSkills, 'allSoftSkills', 'allSoftSkills')">
-<!--        <mat-option *ngFor="let softSkill of devProfileService.availableSoftSkills" [value]="softSkill">-->
-<!--          {{ softSkill }}-->
-<!--        </mat-option>-->
-      </mat-autocomplete>
-    </mat-form-field>
-
-    <span class="text text__title text__color--1">
-      Languages
-    </span>
-
-    <mat-form-field class="chip-list m__top--10" [class.edit-mode]="isEdit">
-      <mat-chip-list #chipListLanguages formControlName="languages">
-        <mat-chip *ngFor="let language of devProfileService.selectedLanguages"
-                  [selectable]="false"
-                  [removable]="isEdit"
-                  (removed)="onChipRemove(language, devProfileService.selectedLanguages , 'languages', 'languages')">
-          {{ language.name }}
-          <mat-icon matChipRemove *ngIf="isEdit">cancel</mat-icon>
-        </mat-chip>
-        <input placeholder="Add language..."
-              [readOnly]="!isEdit"
-              [matChipInputFor]="chipListLanguages"
-              [matAutocomplete]="autoLanguages"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-              [matChipInputAddOnBlur]="true">
-      </mat-chip-list>
-
-      <mat-autocomplete #autoLanguages="matAutocomplete" (optionSelected)="onChipSelect($event, devProfileService.selectedLanguages, 'allLanguge', 'allLanguge')">
-<!--        <mat-option *ngFor="let language of devProfileService.availableLanguages" [value]="language">-->
-<!--          {{ language }}-->
-<!--        </mat-option>-->
-      </mat-autocomplete>
-    </mat-form-field>
-  </div>
-
 </div>
