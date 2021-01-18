@@ -27,7 +27,7 @@ export class BillingMethodComponent implements OnInit, OnDestroy {
   }
 
   onDeleteClick(): void {
-    const deleteDialogRef = this.matDialog.open(DeleteBillingMethodDialogComponent, {data: {paymentMethod: this.paymentMethod}});
+    const deleteDialogRef = this.matDialog.open(DeleteBillingMethodDialogComponent, { data: { paymentMethod: this.paymentMethod }});
 
     deleteDialogRef.afterClosed()
       .pipe(takeUntil(this.ngUnsubscribe$))
@@ -35,7 +35,7 @@ export class BillingMethodComponent implements OnInit, OnDestroy {
   }
 
   onEditClick() {
-    const dialogRef =  this.matDialog.open(UpdateBillingMethodDialogComponent, {data: {paymentMethod: this.paymentMethod}});
+    const dialogRef =  this.matDialog.open(UpdateBillingMethodDialogComponent, { data: { paymentMethod: this.paymentMethod }});
 
     dialogRef.afterClosed()
       .pipe(takeUntil(this.ngUnsubscribe$))
