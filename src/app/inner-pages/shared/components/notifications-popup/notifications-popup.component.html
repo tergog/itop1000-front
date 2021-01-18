@@ -1,6 +1,6 @@
 <div class="d__flex d__flex--items-center d__flex--justify-between">
   <span class="text text__fw--500 text__lg">Notifications</span>
-  <span class="text text__fw--500 text__lg text__color--2">{{ notifications.length }}</span>
+  <span class="text text__fw--500 text__lg text__color--2">{{ notifications?.length }}</span>
 </div>
 
 <ng-container *ngFor="let item of notifications; let i = index; trackBy:identify">
