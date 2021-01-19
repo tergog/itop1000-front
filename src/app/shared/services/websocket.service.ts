@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'environments/environment';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { io } from 'socket.io-client';
-import { ConversationMessageModel, UserInfo, WebsocketOnlineModel, WebsocketTypingModel } from 'app/shared/models';
+
+import { environment } from 'environments/environment';
+import { ConversationMessageModel, WebsocketOnlineModel, WebsocketTypingModel } from 'app/shared/models';
 import { WSCONST } from 'app/constants/websocket.constants';
-import { Store } from '@ngrx/store';
 import * as fromCore from 'app/core/reducers';
 import * as coreActions from 'app/core/actions/core.actions';
 
@@ -31,9 +32,9 @@ export class WebsocketService {
     this.store.dispatch(new coreActions.UpdateUserLastSeen(userId, lastSeen));
   }
 
-  joinChat(user: UserInfo, chatId: string): void {
-    this.socket.emit(WSCONST.SEND.JOIN, { chatId, userId: user.id });
-    this.online(user.id);
+  joinChat(userId: string, chatId: string): void {
+    this.socket.emit(WSCONST.SEND.JOIN, { chatId, userId });
+    this.online(userId);
   }
 
   typing(data: WebsocketTypingModel): void {
