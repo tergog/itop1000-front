@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FormControl, FormGroup } from '@angular/forms';
-import { filter, first } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { filter, first, takeUntil } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
 import * as fromCore from 'app/core/reducers';
@@ -14,11 +15,11 @@ import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-pro
   templateUrl: './dev-profile-settings.component.html',
   styleUrls: ['./dev-profile-settings.component.scss']
 })
-export class DevProfileSettingsComponent implements OnInit {
+export class DevProfileSettingsComponent implements OnInit, OnDestroy {
 
   public form: FormGroup;
-  public imageUrl: string;
   public isEdit: boolean;
+  public ngUnsubscribe$ = new Subject<any>();
 
   constructor(
     private devProfileService: DevProfileService,
@@ -29,10 +30,10 @@ export class DevProfileSettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.store.select(fromCore.getUserInfo).pipe(first()).subscribe((user) => {
-      this.form.patchValue(user);
-      this.imageUrl = user.photo ? user.photo : '';
-    });
+    this.store.select(fromCore.getUserInfo)
+      .pipe(takeUntil(this.ngUnsubscribe$))
+      .subscribe((user) => this.form && user ? this.form.patchValue(user) : null
+    );
   }
 
   public onEditClick(): void {
@@ -71,7 +72,8 @@ export class DevProfileSettingsComponent implements OnInit {
       address: new FormControl('', []),
       phone: new FormControl('', []),
       email: new FormControl('', []),
-      timezone: new FormControl('', [])
+      timezone: new FormControl('', []),
+      photo: new FormControl('')
     });
   }
 
@@ -82,12 +84,12 @@ export class DevProfileSettingsComponent implements OnInit {
   }
 
   private uploadImage(image: string): void {
-    this.userService.uploadPhoto(image)
-      .pipe(first())
-      .subscribe(
-        ({ url }) => this.imageUrl = url,
-        ({ error }) => console.log(error.message)
-      );
+    this.devProfileService.onUploadPhoto(image);
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe$.next(null);
+    this.ngUnsubscribe$.complete();
   }
 
 }

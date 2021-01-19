@@ -79,6 +79,21 @@ export class DevProfileService {
       );
   }
 
+  public onUploadPhoto(image: string): void {
+    this.userService.uploadPhoto(image)
+      .pipe(first())
+      .subscribe(
+        (token) => {
+          this.notificationsService.message.emit({
+            message: 'Photo added successfully',
+            type: ENotificationStatus.Success
+          });
+          this.onUpdateProfileInfo(token);
+        },
+        ({ error }) => this.handleErrorResponse(error)
+      );
+  }
+
   public onUploadCertificate(certificate: string): void {
     this.userService.uploadCertificate(certificate)
       .pipe(first())
@@ -90,7 +105,7 @@ export class DevProfileService {
           });
           this.onUpdateProfileInfo(token);
         },
-        ({error}) => this.handleErrorResponse(error)
+        ({ error }) => this.handleErrorResponse(error)
       );
   }
 
@@ -105,7 +120,7 @@ export class DevProfileService {
           });
           this.onUpdateProfileInfo(token);
         },
-        ({error}) => this.handleErrorResponse(error)
+        ({ error }) => this.handleErrorResponse(error)
       );
   }
 
