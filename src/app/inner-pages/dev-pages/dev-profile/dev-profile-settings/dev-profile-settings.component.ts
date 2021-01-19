@@ -29,7 +29,10 @@ export class DevProfileSettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.store.select(fromCore.getUserInfo);
+    this.store.select(fromCore.getUserInfo).pipe(first()).subscribe((user) => {
+      this.form.patchValue(user);
+      this.imageUrl = user ? user.photo : '';
+    });
   }
 
   public onEditClick(): void {
