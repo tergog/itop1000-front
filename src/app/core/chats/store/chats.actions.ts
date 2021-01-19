@@ -7,7 +7,7 @@ export const GET_CONVS_BY_USER_ID = '[Chat] Get all conversation by user id';
 export const GET_CONVS_BY_USER_ID_SUCCESS = '[Chat] Get all conversation by user id success';
 export const GET_CONVS_BY_USER_ID_ERROR = '[Chat] Get all conversation by user id error';
 
-export const getConversationsByUserId = createAction(GET_CONVS_BY_USER_ID, props<{ id: string }>());
+export const getConversationsByUserId = createAction(GET_CONVS_BY_USER_ID, props<{ id: string, openWith: string }>());
 export const getConversationsByUserIdSuccess = createAction(GET_CONVS_BY_USER_ID_SUCCESS, (convs: ConversationModel[]) => ({ convs }));
 export const getConversationsByUserIdError = createAction(GET_CONVS_BY_USER_ID_ERROR, (err: any) => err);
 

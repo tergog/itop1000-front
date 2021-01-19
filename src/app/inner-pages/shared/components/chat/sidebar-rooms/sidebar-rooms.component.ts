@@ -31,8 +31,6 @@ export class SidebarRoomsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(chatActions.getConversationsByUserId({ id: this.user.id }));
-
     this.websocketService.receivedOnline().subscribe((data) => {
       this.store.dispatch(chatActions.updateParticipantLastSeen(data));
     });
@@ -41,7 +39,10 @@ export class SidebarRoomsComponent implements OnInit {
   onConversationsSearch(): void {
     if (this.searchFC.enabled) {
       if (this.searchFC.value && this.searchFC.valid) {
-        this.store.dispatch(chatActions.searchConversations({ id: this.user.id, search: this.searchFC.value }));
+        this.store.dispatch(chatActions.searchConversations({
+          id: this.user.id,
+          search: this.searchFC.value
+        }));
       } else {
         this.notificationsService.message.emit({
           type: ENotificationStatus.Error,
@@ -54,7 +55,7 @@ export class SidebarRoomsComponent implements OnInit {
   onConversationClick(chatId: string): void {
     if (chatId !== this.chat.conversations.active) {
       this.store.dispatch(chatActions.setActiveConversation({ id: chatId }));
-      this.websocketService.joinChat(this.user, chatId);
+      this.websocketService.joinChat(this.user.id, chatId);
     }
   }
 
@@ -65,7 +66,10 @@ export class SidebarRoomsComponent implements OnInit {
 
   onConversationSearchCancel(value: string): void {
     if (!value.length) {
-      this.store.dispatch(chatActions.getConversationsByUserId({ id: this.user.id }));
+      this.store.dispatch(chatActions.getConversationsByUserId({
+        id: this.user.id,
+        openWith: null
+      }));
       this.store.dispatch(chatActions.searchConversationsCancel());
     }
   }

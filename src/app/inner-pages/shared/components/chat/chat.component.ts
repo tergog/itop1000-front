@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { NEVER, Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { iif, Observable, of } from 'rxjs';
+import { catchError, first, switchMap, tap } from 'rxjs/operators';
 
 import * as fromCore from 'app/core/reducers';
 import * as fromChats from 'app/core/chats/store/chat.reducer';
-import { ChatService, WebsocketService } from 'app/shared/services';
+import { ChatService } from 'app/shared/services';
 import { UserInfo } from 'app/shared/models';
+import * as chatActions from 'app/core/chats/store/chats.actions';
 import { EUserRole } from 'app/shared/enums';
 
 @Component({
@@ -24,28 +26,38 @@ export class ChatComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private chatService: ChatService,
-    private websocketService: WebsocketService
+    private location: Location
   ) {
   }
 
   ngOnInit(): void {
-    this.chat$ = this.store.select(fromCore.getChats);
     this.user$ = this.store.select(fromCore.getUserInfo);
+    this.chat$ = this.store.select(fromCore.getChats);
 
-    this.user$.subscribe((userInfo) => {
-      if (this.route.snapshot.params.id) {
+    this.user$.pipe(
+      first(),
+      switchMap((userInfo) => iif(
+        () => !!this.route.snapshot.params.id,
         this.chatService.createNewConversation(userInfo.id, this.route.snapshot.params.id).pipe(
-          catchError(() => {
-            this.router.navigate([ userInfo.role === EUserRole.Client ? 'in/c/chat' : 'in/d/chat' ]);
-            return NEVER;
-          })
-        ).subscribe();
-      }
-    });
+          catchError(() => of(this.store.dispatch(chatActions.getConversationsByUserId({
+            id: userInfo.id,
+            openWith: this.route.snapshot.params.id
+          }))).pipe(
+            tap(() => this.location.replaceState(
+              userInfo.role === EUserRole.Client ? '/in/c/chat' : '/in/d/chat'
+            ))
+          )),
+        ),
+        of(this.store.dispatch(chatActions.getConversationsByUserId({
+          id: userInfo.id,
+          openWith: null
+        })))
+      ))
+    ).subscribe();
 
-    this.websocketService.receivedNewMessage().pipe(
+    /*this.websocketService.receivedNewMessage().pipe(
       // tap(() => console.log('receivedNewMessage chat'))
-      /*switchMap((message) => iif(
+      /!*switchMap((message) => iif(
         () => message.chat !== chat.conversations.active,
         of(undefined).pipe(tap(() => {
           console.log('Background notification recieved!');
@@ -53,7 +65,7 @@ export class ChatComponent implements OnInit {
             console.log('Push promise');
           });
         }))
-      ))*/
-    ).subscribe();
+      ))*!/
+    ).subscribe();*/
   }
 }
