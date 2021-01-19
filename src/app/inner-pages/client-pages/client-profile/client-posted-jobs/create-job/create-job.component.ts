@@ -2,7 +2,8 @@ import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChi
 import { Store } from '@ngrx/store';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { JobsService, NotificationsService } from 'app/shared/services';
 import { Job, NameValueModel, NotificationMessage } from 'app/shared/models';
@@ -22,9 +23,15 @@ export class CreateJobComponent implements OnInit, OnDestroy {
   @Output() isEdit = new EventEmitter<Job>();
   @ViewChild('category', {static: false}) category: ElementRef;
   public form: FormGroup;
+  public ngUnsubscribe$ = new Subject<void>();
   showError: boolean;
 
-  constructor(private jobsService: JobsService, private notificationService: NotificationsService, private store: Store<State>, public devProfileService: DevProfileService) { }
+  constructor(
+    private jobsService: JobsService,
+    private notificationService: NotificationsService,
+    private store: Store<State>,
+    public devProfileService: DevProfileService
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -35,7 +42,7 @@ export class CreateJobComponent implements OnInit, OnDestroy {
       this.showError = true;
       return;
     }
-    this.jobsService.createJob(this.form.value).pipe(untilDestroyed(this))
+    this.jobsService.createJob(this.form.value).pipe(takeUntil(this.ngUnsubscribe$))
       .subscribe(() => {
         const msg: NotificationMessage = { message: 'Added project', type: ENotificationStatus.Success };
         this.store.dispatch(new GetJobsAction());
@@ -91,6 +98,7 @@ export class CreateJobComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-
+    this.ngUnsubscribe$.next(null);
+    this.ngUnsubscribe$.complete();
   }
 }

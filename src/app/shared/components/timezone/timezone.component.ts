@@ -1,8 +1,7 @@
 import { Component, forwardRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
-import { BehaviorSubject, of } from 'rxjs';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+import { debounceTime, distinctUntilChanged, filter, map, switchMap, takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, of, Subject } from 'rxjs';
 
 import { timezones } from 'app/constants/constants';
 
@@ -21,6 +20,7 @@ import { timezones } from 'app/constants/constants';
 export class TimezoneComponent implements OnInit, OnDestroy, ControlValueAccessor, OnChanges {
   @Input() currentTimezone: string;
   public filteredTimezones: string[] = timezones;
+  public ngUnsubscribe$ = new Subject<void>();
 
   private timezoneSource = new BehaviorSubject<string>(null);
 
@@ -42,7 +42,7 @@ export class TimezoneComponent implements OnInit, OnDestroy, ControlValueAccesso
         of(timezones.filter((timezone) => timezone.includes(value)))
       ),
       filter((timezone) => !timezone.includes(this.timezoneSource.value)),
-      untilDestroyed(this),
+      takeUntil(this.ngUnsubscribe$),
     ).subscribe((timezonesArr: string[]) => this.filteredTimezones = timezonesArr);
   }
 
@@ -52,6 +52,8 @@ export class TimezoneComponent implements OnInit, OnDestroy, ControlValueAccesso
   }
 
   ngOnDestroy() {
+    this.ngUnsubscribe$.next(null);
+    this.ngUnsubscribe$.complete();
   }
 
   private onChange = (timezone: string) => {};
