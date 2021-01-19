@@ -109,12 +109,13 @@ export class DevProfileEditFormComponent implements OnInit, AfterViewInit {
   public onSaveClick(): void {
     this.devProfileService.devProperties = {
       ...this.devProfileService.devProperties,
-      skills: this.devProfileService.selectedSkills,
-      categories: this.devProfileService.selectedCategories
+      skills: this.form.get('skills').value,
+      categories: this.form.get('categories').value
     };
     this.disableEmptyFields();
-    this.devProfileService.onSaveClick({devProperties: this.devProfileService.devProperties});
+    this.devProfileService.onSaveClick({ devProperties: this.devProfileService.devProperties });
     this.isEdit = false;
+
   }
 
   public onChipSelect(chip, selectedChips, availableChip, allChip): void {
@@ -138,14 +139,8 @@ export class DevProfileEditFormComponent implements OnInit, AfterViewInit {
 
   private initForm() {
     this.form = new FormGroup({
-      firstName: new FormControl('', []),
-      lastName: new FormControl('', []),
-      address: new FormControl('', []),
-      phone: new FormControl('', []),
-      email: new FormControl('', []),
-      timezone: new FormControl('', []),
-      categories: new FormControl('', []),
-      skills: new FormControl('', []),
+      categories: new FormControl([], []),
+      skills: new FormControl([], []),
     });
   }
 

@@ -1,0 +1,10 @@
+::ng-deep {
+  mat-form-field {
+    width: 100%;
+  }
+  mat-optgroup {
+    .mat-optgroup-label {
+      display: none;
+    }
+  }
+}
