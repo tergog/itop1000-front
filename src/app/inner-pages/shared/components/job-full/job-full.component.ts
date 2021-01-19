@@ -56,6 +56,7 @@ export class JobFullComponent implements OnInit, OnDestroy {
         flatMap(jobs => this.getJobFromStore(jobs)),
         tap((job: Job) => this.job = job),
         switchMap(() => this.store.select(fromCore.getUserInfo)),
+        filter(user => user !== undefined && user !== null)
       )
       .subscribe(user => this.canEdit = user.id === this.job.userId);
   }
