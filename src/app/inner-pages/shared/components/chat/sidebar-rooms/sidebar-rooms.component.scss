@@ -53,10 +53,6 @@
         font-size: 20px;
       }
 
-      @media screen and (max-width: $screen-l) {
-        display: block;
-      }
-
       &:not(&--empty):hover {
         cursor: pointer;
         background-color: rgba(0, 0, 0, .2);
@@ -101,13 +97,13 @@
 
       &__meta {
         display: grid;
-        grid-template-columns: 5fr 16px 16px 2fr;
+        grid-template-columns: 1fr 16px 16px 65px;
         grid-template-rows: 25px;
         gap: 0 5px;
         grid-area: chat__sidebar__rooms__room__meta;
 
-        @media screen and (max-width: $screen-l) {
-          display: none;
+        @media screen and (max-width: $screen-xl) {
+          grid-template-columns: 1fr 16px 16px 45px;
         }
 
         &__name {
@@ -154,10 +150,6 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         color: $text-color-6;
-
-        @media screen and (max-width: $screen-l) {
-          display: none;
-        }
       }
 
 
