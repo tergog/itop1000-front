@@ -1,6 +1,6 @@
 <mat-form-field class="m__top--10" [class.edit-mode]="isEdit">
   <mat-chip-list #chipListData>
-    <mat-chip *ngFor="let item of selectedData"
+    <mat-chip *ngFor="let item of parent.get(formControlName).value"
               [selectable]="false"
               [disabled]="!isEdit"
               [removable]="isEdit"
@@ -8,7 +8,7 @@
       {{ item.name }}
       <mat-icon matChipRemove *ngIf="isEdit">cancel</mat-icon>
     </mat-chip>
-    <input #data placeholder="Add skill..."
+    <input #data [placeholder]="placeholder"
            [readOnly]="!isEdit"
            [matChipInputFor]="chipListData"
            [matAutocomplete]="autoData"

@@ -51,7 +51,7 @@ export class CreateJobComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
     this.initForm();
-    this.form.get('categories').patchValue(this.devProfileService.selectedCategories);
+    // this.form.get('categories').patchValue(this.devProfileService.selectedCategories);
   }
 
   ngAfterViewInit() {
@@ -68,6 +68,7 @@ export class CreateJobComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   public onPostClick(): void {
+    debugger
     if (!this.form.valid) {
       this.showError = true;
       return
@@ -78,24 +79,26 @@ export class CreateJobComponent implements OnInit, OnDestroy, AfterViewInit {
       this.store.dispatch(new GetJobsAction());
       this.notificationService.message.emit(msg);
       this.form.reset();
-      this.devProfileService.selectedCategories = [];
-      this.availableCategories.next(this.devProfileService.selectedCategories);
+      // this.initForm();
+      // this.devProfileService.selectedCategories = [];
+      // this.availableCategories.next(this.devProfileService.selectedCategories);
       this.isEdit.emit();
     });
   }
 
   public onCancelClick(): void {
     this.isEdit.emit();
-    this.form.reset();
-    this.availableCategories.next(this.devProfileService.selectedCategories);
-    this.devProfileService.selectedCategories = [];
+    this.form.reset({categories: new FormControl([], [])});
+
+    // this.availableCategories.next(this.devProfileService.selectedCategories);
+    // this.devProfileService.selectedCategories = [];
   }
 
   private initForm(): void {
     this.form = new FormGroup({
       title: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
-      categories: new FormControl('', [Validators.required]),
+      categories: new FormControl([], []),
       requirements: new FormControl('', [Validators.required]),
       duration: new FormControl('', [Validators.required, Validators.pattern(/^\d+$/)]),
       contractType: new FormControl('', [Validators.required]),
@@ -105,23 +108,23 @@ export class CreateJobComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  onChipSelect(category: NameValueModel): void {
-    this.devProfileService.selectedCategories.push(category);
-    this.form.get('categories').patchValue(this.devProfileService.selectedCategories);
-    this.availableCategories.next(this.devProfileService.selectedCategories);
-    this.focusReset();
-  }
+  // onChipSelect(category: NameValueModel): void {
+  //   this.devProfileService.selectedCategories.push(category);
+  //   this.form.get('categories').patchValue(this.devProfileService.selectedCategories);
+  //   this.availableCategories.next(this.devProfileService.selectedCategories);
+  //   this.focusReset();
+  // }
 
-  onChipRemove(category: NameValueModel): void {
-    this.devProfileService.selectedCategories = this.devProfileService.selectedCategories.filter(el => el.value !== category.value);
-    this.availableCategories.next(this.devProfileService.selectedCategories);
-    this.form.get('categories').patchValue(this.devProfileService.selectedCategories);
-  }
+  // onChipRemove(category: NameValueModel): void {
+  //   this.devProfileService.selectedCategories = this.devProfileService.selectedCategories.filter(el => el.value !== category.value);
+  //   this.availableCategories.next(this.devProfileService.selectedCategories);
+  //   this.form.get('categories').patchValue(this.devProfileService.selectedCategories);
+  // }
 
-  focusReset(): void {
-    this.category.nativeElement.blur();
-    setTimeout(() => this.category.nativeElement.focus(), 0)
-  }
+  // focusReset(): void {
+  //   this.category.nativeElement.blur();
+  //   setTimeout(() => this.category.nativeElement.focus(), 0)
+  // }
 
   onSelect(event: MatSelectChange): void {
     this.form.get('contractType').setValue(event.value);

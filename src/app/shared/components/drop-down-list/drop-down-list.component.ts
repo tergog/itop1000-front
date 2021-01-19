@@ -1,24 +1,24 @@
 import {
   AfterViewInit,
   ChangeDetectorRef,
-  Component, ElementRef, EventEmitter,
+  Component,
+  ElementRef,
   forwardRef,
-  Input, OnChanges,
+  Input,
   OnDestroy,
   OnInit,
-  Output, ViewChild
+  ViewChild
 } from '@angular/core';
 import { FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { filter, first } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 
 import * as fromDevelopers from 'app/core/developers/store';
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
 import * as fromCore from 'app/core/reducers';
 import { NameValueModel, UserInfo } from 'app/shared/models';
-import { COMMA, ENTER } from "@angular/cdk/keycodes";
-
 
 @Component({
   selector: 'app-drop-down-list',
@@ -37,12 +37,12 @@ export class DropDownListComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() parent: FormGroup;
   @Input() dataName: string;
   @Input() isEdit: boolean;
+  @Input() placeholder: string;
   @ViewChild('data', {static: false}) data: ElementRef;
 
-  private formControlName: string;
+  public formControlName: string;
 
   public allData: NameValueModel[] = [];
-  public selectedData: NameValueModel[] = [];
   public availableData$: Subject<NameValueModel[]> = new Subject<NameValueModel[]>();
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
@@ -54,16 +54,8 @@ export class DropDownListComponent implements OnInit, AfterViewInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.store.select(fromCore.getUserInfo)
-      .pipe(first())
-      .subscribe((userInfo: UserInfo) => {
-        this.devProfileService.devProperties = userInfo.devProperties ? userInfo.devProperties : {};
-        this.selectedData.push(...this.devProfileService.devProperties[this.dataName.toLocaleLowerCase()]);
-      });
     this.formControlName = this.dataName.toLocaleLowerCase();
-    this.parent.get(this.formControlName).setValue(this.selectedData);
   }
-
 
   ngAfterViewInit() {
     this.developersStore.select(fromDevelopers[`get${this.dataName}`])
@@ -73,7 +65,7 @@ export class DropDownListComponent implements OnInit, AfterViewInit, OnDestroy {
       )
       .subscribe(res => {
         this.allData = res;
-        this.availableData$.next(this.filterData(this.allData, this.selectedData));
+        this.availableData$.next(this.filterData(this.allData, this.parent.get(this.formControlName).value));
         this.cdr.detectChanges();
       });
   }
@@ -87,14 +79,17 @@ export class DropDownListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public onChipSelect(chip): void {
-    this.selectedData.push(chip);
-    this.availableData$.next(this.filterData(this.allData, this.selectedData));
+    debugger
+    this.parent.get(this.formControlName).value.push(chip);
+    this.availableData$.next(this.filterData(this.allData, this.parent.get(this.formControlName).value));
     this.resetFocus();
   }
 
   public onChipRemove(chip: NameValueModel): void {
-    this.selectedData.splice(this.selectedData.findIndex(item => item.value === chip.value), 1);
-    this.availableData$.next(this.filterData(this.allData, this.selectedData));
+    this.parent.get(this.formControlName).value
+      .splice(this.parent.get(this.formControlName).value
+        .findIndex(item => item.value === chip.value), 1);
+    this.availableData$.next(this.filterData(this.allData,  this.parent.get(this.formControlName).value));
   }
 
   resetFocus(): void {
@@ -103,5 +98,4 @@ export class DropDownListComponent implements OnInit, AfterViewInit, OnDestroy {
       this.data.nativeElement.focus();
     }, 0);
   }
-
 }
