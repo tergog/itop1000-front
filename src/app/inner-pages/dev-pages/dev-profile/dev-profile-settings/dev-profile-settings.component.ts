@@ -31,7 +31,7 @@ export class DevProfileSettingsComponent implements OnInit {
     this.initForm();
     this.store.select(fromCore.getUserInfo).pipe(first()).subscribe((user) => {
       this.form.patchValue(user);
-      this.imageUrl = user ? user.photo : '';
+      this.imageUrl = user.photo ? user.photo : '';
     });
   }
 
