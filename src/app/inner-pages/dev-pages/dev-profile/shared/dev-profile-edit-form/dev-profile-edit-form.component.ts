@@ -36,7 +36,6 @@ export class DevProfileEditFormComponent implements OnInit {
         this.devProfileService.devProperties = userInfo.devProperties ? userInfo.devProperties : {};
         this.form.get('skills').setValue([...this.devProfileService.devProperties.skills]);
         this.form.get('categories').setValue([...this.devProfileService.devProperties.categories]);
-        debugger
       });
   }
 
