@@ -5,8 +5,8 @@ import {
   EventEmitter,
   OnDestroy,
   OnInit,
-  Output,
-  ViewChild
+  Output, TemplateRef,
+  ViewChild, ViewContainerRef
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -31,7 +31,9 @@ import * as fromDevelopers from 'app/core/developers/store';
 export class CreateJobComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @Output() isEdit = new EventEmitter<Job>();
-  @ViewChild('category', {static: false}) category: ElementRef;
+  // @ViewChild('category', {read: ViewContainerRef}) categoryRef: ViewContainerRef;
+  @ViewChild('outlet', { read: ViewContainerRef }) outletRef: ViewContainerRef;
+  @ViewChild('content', { read: TemplateRef }) contentRef: TemplateRef<any>;
   public form: FormGroup;
   showError: boolean;
 
@@ -65,10 +67,11 @@ export class CreateJobComponent implements OnInit, OnDestroy, AfterViewInit {
         this.availableCategories.next(this.devProfileService.selectedCategories);
         this.cdr.detectChanges();
       });
+    this.outletRef.createEmbeddedView(this.contentRef);
   }
 
   public onPostClick(): void {
-    debugger
+    // debugger
     if (!this.form.valid) {
       this.showError = true;
       return
@@ -78,11 +81,16 @@ export class CreateJobComponent implements OnInit, OnDestroy, AfterViewInit {
       let msg: NotificationMessage = {message: "Added project", type: "success"};
       this.store.dispatch(new GetJobsAction());
       this.notificationService.message.emit(msg);
-      this.form.reset();
+      this.form.reset({
+        categories: []
+      });
+      // this.form.reset({categories: new FormControl([], [])});
       // this.initForm();
       // this.devProfileService.selectedCategories = [];
       // this.availableCategories.next(this.devProfileService.selectedCategories);
       this.isEdit.emit();
+      this.outletRef.clear();
+      this.outletRef.createEmbeddedView(this.contentRef);
     });
   }
 

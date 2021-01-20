@@ -11,7 +11,7 @@
     <mat-error *ngIf="showError && form.get('description').errors?.required">Description required</mat-error>
   </div>
 
-  <div class="d__flex d__flex--direction-column">
+  <div class="d__flex d__flex--direction-column" #outlet>
     <span class="text text__sm text__color--1 text__fw--600">Categories</span>
 <!--    <mat-form-field class="m__top&#45;&#45;10" [class.edit-mode]="true">-->
 <!--      <mat-chip-list #chipListCategories formControlName="categories">-->
@@ -36,8 +36,11 @@
 <!--        </mat-option>-->
 <!--      </mat-autocomplete>-->
 <!--    </mat-form-field>-->
-    <app-drop-down-list [isEdit]="isEdit" dataName="Categories" [parent]="form" [placeholder]="'Add Categories...'"></app-drop-down-list>
-    <mat-error *ngIf="showError && form.get('categories').errors?.required">Categories required</mat-error>
+    <ng-template #content>
+      <app-drop-down-list  [isEdit]="isEdit" dataName="Categories" [parent]="form" [placeholder]="'Add Categories...'"></app-drop-down-list>
+      <mat-error *ngIf="showError && form.get('categories').errors?.required">Categories required</mat-error>
+    </ng-template>
+
   </div>
 
   <div class="d__flex d__flex--direction-column">

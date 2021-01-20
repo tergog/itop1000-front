@@ -55,6 +55,7 @@ export class DropDownListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     this.formControlName = this.dataName.toLocaleLowerCase();
+    this.cdr.detectChanges();
   }
 
   ngAfterViewInit() {
@@ -79,7 +80,6 @@ export class DropDownListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public onChipSelect(chip): void {
-    debugger
     this.parent.get(this.formControlName).value.push(chip);
     this.availableData$.next(this.filterData(this.allData, this.parent.get(this.formControlName).value));
     this.resetFocus();
