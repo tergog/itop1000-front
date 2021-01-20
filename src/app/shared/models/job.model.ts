@@ -1,4 +1,4 @@
-import { NameValueModel } from 'app/shared/models/name-value.model'
+import { NameValueModel } from 'app/shared/models/name-value.model';
 
 export interface Job {
   id: string;

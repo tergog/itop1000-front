@@ -27,29 +27,8 @@
     <div class="d__flex d__flex--direction-column m__top--20">
       <span class="text text__sm text__color--1 text__fw--600">Categories</span>
 
-      <mat-form-field class="m__top--10" [class.edit-mode]="true">
-        <mat-chip-list #chipListCategories formControlName="categories">
-          <mat-chip *ngFor="let category of devProfileService.selectedCategories"
-                    [selectable]="false"
-                    [removable]="true"
-                    (removed)="onChipRemove(category)"
-                    >
-            {{ category.name }}
-            <mat-icon matChipRemove>cancel</mat-icon>
-          </mat-chip>
-          <input #category placeholder="Add category..."
-                  [matChipInputFor]="chipListCategories"
-                  [matAutocomplete]="autoCategories"
-                  [matChipInputAddOnBlur]="true">
-        </mat-chip-list>
-
-        <mat-autocomplete #autoCategories="matAutocomplete" (optionSelected)="onChipSelect($event.option.value)">
-          <mat-option *ngFor="let category of availableCategories$  | ngrxPush" [value]="category">
-            {{ category.name }}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-      <mat-error *ngIf="showError && form.get('categories').errors?.required">Categories required</mat-error>
+      <app-drop-down-list  [isEdit]="isEdit" dataName="Categories" [parent]="form" [placeholder]="'Add Categories...'"></app-drop-down-list>
+      <mat-error *ngIf="showError && form.get('categories').value.length == 0">Categories required</mat-error>
     </div>
 
     <div class="d__flex d__flex--direction-column m__top--20">

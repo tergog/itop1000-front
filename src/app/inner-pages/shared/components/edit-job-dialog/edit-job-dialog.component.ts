@@ -2,10 +2,10 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
-  ElementRef,
+  ElementRef, EventEmitter,
   Inject,
   OnDestroy,
-  OnInit,
+  OnInit, Output,
   ViewChild
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -15,6 +15,7 @@ import { untilDestroyed } from 'ngx-take-until-destroy';
 import { MatSelectChange } from '@angular/material/select';
 import { Observable, Subject } from 'rxjs';
 import { filter, first, map } from 'rxjs/operators';
+import { cloneDeep } from 'lodash';
 
 import { GetJobsAction } from 'app/core/client/store/actions';
 import { State } from 'app/core/reducers/index';
@@ -29,8 +30,9 @@ import * as fromDevelopers from 'app/core/developers/store';
   templateUrl: './edit-job-dialog.component.html',
   styleUrls: ['./edit-job-dialog.component.scss']
 })
-export class EditJobDialogComponent implements OnInit, OnDestroy, AfterViewInit {
+export class EditJobDialogComponent implements OnInit, OnDestroy {
 
+  @Output() isEdit = new EventEmitter<Job>();
   @ViewChild('category', {static: false}) category: ElementRef;
   public form: FormGroup;
   public job: Job;
@@ -55,27 +57,15 @@ export class EditJobDialogComponent implements OnInit, OnDestroy, AfterViewInit 
     this.job = this.data.job;
     this.initForm();
     this.form.patchValue(this.job);
-    this.devProfileService.selectedCategories.push(...this.job.categories);
-  }
+    this.form.get('categories').setValue(cloneDeep(this.form.get('categories').value));
 
-  ngAfterViewInit() {
-    this.developersStore.select(fromDevelopers.getCategories)
-      .pipe(
-        filter(res => !!res.length),
-        first()
-      )
-      .subscribe(res => {
-        this.allCategories = res;
-        this.availableCategories.next(this.devProfileService.selectedCategories);
-        this.cdr.detectChanges();
-      });
   }
 
   private initForm(): void {
     this.form = new FormGroup({
       title: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
-      categories: new FormControl('', [Validators.required]),
+      categories: new FormControl([], []),
       requirements: new FormControl('', [Validators.required]),
       duration: new FormControl('', [Validators.required, Validators.pattern(/^\d+$/)]),
       contractType: new FormControl('', [Validators.required]),
@@ -86,10 +76,16 @@ export class EditJobDialogComponent implements OnInit, OnDestroy, AfterViewInit 
   }
 
   onPostClick(): void {
+    if (!this.form.value.categories.length) {
+      this.showError = true;
+      return;
+    }
+
     if (!this.form.valid) {
       this.showError = true;
       return;
     }
+    debugger
     this.jobService.updateJob(this.job.id, this.form.value)
     .pipe(untilDestroyed(this))
     .subscribe(
@@ -100,29 +96,12 @@ export class EditJobDialogComponent implements OnInit, OnDestroy, AfterViewInit 
       error => this.errorMessage = error.message);
   }
 
-  onChipSelect(category: NameValueModel): void {
-    this.devProfileService.selectedCategories.push(category);
-    this.form.get('categories').patchValue(this.devProfileService.selectedCategories);
-    this.availableCategories.next(this.devProfileService.selectedCategories);
-    this.focusReset();
-  }
 
-  onChipRemove(category: NameValueModel): void {
-    this.devProfileService.selectedCategories = this.devProfileService.selectedCategories.filter(el => el.value !== category.value);
-    this.availableCategories.next(this.devProfileService.selectedCategories);
-    this.form.get('categories').patchValue(this.devProfileService.selectedCategories);
-  }
-
-  focusReset(): void {
-    this.category.nativeElement.blur();
-    setTimeout(() => this.category.nativeElement.focus(), 0);
-  }
 
   onSelect(event: MatSelectChange): void {
     this.form.get('contractType').setValue(event.value);
   }
 
   ngOnDestroy(): void {
-    this.devProfileService.selectedCategories = [];
   }
 }
