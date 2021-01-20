@@ -56,4 +56,13 @@ export class UserService {
   public changePassword({ oldPassword, password }): Observable<object> {
     return this.http.post(`${this.apiUrl}${ApiConstants.accounts.changePassword}`, { oldPassword, password });
   }
+
+  public uploadCertificate(image: string | ArrayBuffer): Observable<string> {
+    return this.http.post<string>(`${this.apiUrl}${ApiConstants.accounts.uploadCertificate}`, {image});
+  }
+
+  public deleteCertificate(url: string, index: number): Observable<string> {
+    return this.http.post<string>(`${this.apiUrl}${ApiConstants.accounts.deleteCertificate}`, {url, index});
+  }
+
 }

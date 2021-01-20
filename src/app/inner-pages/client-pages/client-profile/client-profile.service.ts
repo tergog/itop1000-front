@@ -6,6 +6,7 @@ import * as jwtDecode from 'jwt-decode';
 import { NotificationsService, UserService } from 'app/shared/services';
 import { UserInfo } from 'app/shared/models';
 import { TOKEN } from 'app/constants/constants';
+import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
 import * as coreActions from 'app/core/actions/core.actions';
 import * as fromCore from 'app/core/reducers';
 
@@ -39,7 +40,7 @@ export class ClientProfileService {
   private handleSuccessResponse(userInfo: UserInfo): void {
     this.notificationsService.message.emit({
       message: 'Profile updated successfully',
-      type: 'success'
+      type: ENotificationStatus.Success
     });
     this.onUpdateProfileInfo(userInfo.token);
   }
@@ -47,7 +48,7 @@ export class ClientProfileService {
   private handleErrorResponse(error: Error): void {
     this.notificationsService.message.emit({
       message: error.message,
-      type: 'error'
+      type: ENotificationStatus.Error
     });
   }
 }

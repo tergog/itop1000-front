@@ -3,7 +3,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnI
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
-import { filter, first, map, tap } from 'rxjs/operators';
+import { filter, first, map, tap, takeUntil } from 'rxjs/operators';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 
@@ -27,6 +27,7 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy, AfterViewI
   public form: FormGroup;
   public userInfo$: Observable<UserInfo>;
   public userInfo: UserInfo;
+  public ngUnsubscribe$ = new Subject<void>();
   @ViewChild('category', {static: false}) category: ElementRef;
 
   showError: boolean;
@@ -58,8 +59,10 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy, AfterViewI
 
     this.userInfo$ = this.store.select(fromCore.getUserInfo).pipe(
       tap((userInfo: UserInfo) => {
+        console.log(userInfo);
         this.devProfileService.devProperties = userInfo.devProperties;
         this.userInfo = userInfo;
+        this.updateTechnologies(this.selectedTechnologies);
       })
     );
 
@@ -153,7 +156,7 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy, AfterViewI
 
   private uploadImage(image: string, forLogo: boolean): void {
     this.developersService.uploadProjectImage(image)
-      .pipe(untilDestroyed(this))
+      .pipe(takeUntil(this.ngUnsubscribe$))
       .subscribe(
         url => forLogo ? this.logoUrl = url : this.projectImages.push(url),
         ({error}) => console.log(error)

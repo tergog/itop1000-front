@@ -8,13 +8,15 @@ import {
 import { Store } from '@ngrx/store';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { JobsService, NotificationsService } from 'app/shared/services';
 import { NotificationMessage } from 'app/shared/models';
 import { State } from 'app/core/reducers/index';
 import { GetJobsAction } from 'app/core/client/store/actions';
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
+import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
 
 @Component({
   selector: 'app-create-job',
@@ -27,6 +29,7 @@ export class CreateJobComponent implements OnInit, OnDestroy {
   @Output() isEdit = new EventEmitter();
   @Output() editToggle = new EventEmitter();
   public form: FormGroup;
+  public ngUnsubscribe$ = new Subject<void>();
   showError: boolean;
 
   constructor(
@@ -50,16 +53,16 @@ export class CreateJobComponent implements OnInit, OnDestroy {
       this.showError = true;
       return;
     }
-    this.jobsService.createJob(this.form.value).pipe(untilDestroyed(this))
-    .subscribe(() => {
-      const msg: NotificationMessage = {message: 'Added project', type: 'success'};
-      this.store.dispatch(new GetJobsAction());
-      this.notificationService.message.emit(msg);
-      this.form.reset({
-        categories: []
+    this.jobsService.createJob(this.form.value).pipe(takeUntil(this.ngUnsubscribe$))
+      .subscribe(() => {
+        const msg: NotificationMessage = { message: 'Added project', type: ENotificationStatus.Success };
+        this.store.dispatch(new GetJobsAction());
+        this.notificationService.message.emit(msg);
+        this.form.reset({
+          categories: []
+        });
+        this.editToggle.emit();
       });
-      this.editToggle.emit();
-    });
   }
 
   public onCancelClick(): void {
@@ -85,6 +88,7 @@ export class CreateJobComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-
+    this.ngUnsubscribe$.next(null);
+    this.ngUnsubscribe$.complete();
   }
 }

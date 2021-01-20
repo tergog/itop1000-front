@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { untilDestroyed } from 'ngx-take-until-destroy';
-import { tap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { takeUntil, tap } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
 
 import { Developer } from 'app/shared/models';
 import { DevelopersService } from 'app/shared/services';
@@ -21,6 +20,7 @@ export class SearchDevelopersComponent implements OnInit, OnDestroy {
   public developers: Developer[];
   public developers$: Observable<Developer[]>;
   public developersPaginated: Developer[] = [];
+  public ngUnsubscribe$ = new Subject<void>();
 
   constructor(
     private developersService: DevelopersService,
@@ -31,7 +31,7 @@ export class SearchDevelopersComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.developers$ = this.store.select(getDevelopers)
-      .pipe(untilDestroyed(this),
+      .pipe(takeUntil(this.ngUnsubscribe$),
         tap((developers: Developer[]) => {
           this.developers = developers;
           this.developersPaginated = this.developers.slice(0, 2);
@@ -51,6 +51,8 @@ export class SearchDevelopersComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.ngUnsubscribe$.next(null);
+    this.ngUnsubscribe$.complete();
   }
 
 }

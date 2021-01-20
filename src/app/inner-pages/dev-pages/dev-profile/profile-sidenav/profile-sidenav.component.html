@@ -40,6 +40,14 @@
   </li>
 
   <li class="d__flex"
+      [class.active]="activeSection === DevProfileSections.Certificates"
+      (click)="onSectionCLick(DevProfileSections.Certificates)"
+  >
+    <i class="categories m__right--10"></i>
+    <span class="text text__lg text__color--1">Certificates</span>
+  </li>
+
+  <li class="d__flex"
       [class.active]="activeSection === DevProfileSections.ActiveProjects"
       (click)="onSectionCLick(DevProfileSections.ActiveProjects)"
   >
