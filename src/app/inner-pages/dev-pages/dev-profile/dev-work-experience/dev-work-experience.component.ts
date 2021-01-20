@@ -5,7 +5,6 @@ import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { filter, first, map, tap, takeUntil } from 'rxjs/operators';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { untilDestroyed } from 'ngx-take-until-destroy';
 
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
 import { DevelopersService, UtilsService } from 'app/shared/services';
@@ -62,7 +61,7 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy, AfterViewI
         console.log(userInfo);
         this.devProfileService.devProperties = userInfo.devProperties;
         this.userInfo = userInfo;
-        this.updateTechnologies(this.selectedTechnologies);
+        // this.updateTechnologies(this.selectedTechnologies);
       })
     );
 
@@ -164,6 +163,8 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy, AfterViewI
   }
 
   ngOnDestroy(): void {
+    this.ngUnsubscribe$.next(null);
+    this.ngUnsubscribe$.complete();
   }
 
 }

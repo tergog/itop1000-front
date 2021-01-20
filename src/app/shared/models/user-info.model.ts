@@ -20,4 +20,3 @@ export interface UserInfo {
   stripeVerified: boolean;
   balance: number;
 }
-
