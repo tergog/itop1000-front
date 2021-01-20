@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
 import { UserInfo } from 'app/shared/models';
@@ -28,8 +28,6 @@ export class DevContactInfoLocationEditComponent implements OnInit {
   }
 
   public saveChanges(): void {
-    const aaa = this.form
-    debugger
     this.disableEmptyFields();
     this.save.emit();
     this.devProfileService.onSaveClick(this.form.value);

@@ -18,9 +18,11 @@
   </mat-chip-list>
 
   <mat-autocomplete #autoData="matAutocomplete" (optionSelected)="onChipSelect($event.option.value)">
-    <mat-option *ngFor="let item of availableData$ | ngrxPush" [value]="item">
+    <mat-optgroup *ngrxLet="availableData$ as availableData">
+      <mat-option *ngFor="let item of availableData" [value]="item">
         {{ item.name }}
       </mat-option>
+    </mat-optgroup>
   </mat-autocomplete>
 
 </mat-form-field>
