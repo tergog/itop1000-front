@@ -1,28 +1,22 @@
 import {
-  AfterViewInit,
-  ChangeDetectorRef,
   Component,
-  ElementRef, EventEmitter,
+  EventEmitter,
   Inject,
   OnDestroy,
   OnInit, Output,
-  ViewChild
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { MatSelectChange } from '@angular/material/select';
-import { Observable, Subject } from 'rxjs';
-import { filter, first, map } from 'rxjs/operators';
 import { cloneDeep } from 'lodash';
 
 import { GetJobsAction } from 'app/core/client/store/actions';
 import { State } from 'app/core/reducers/index';
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
-import { Job, NameValueModel } from 'app/shared/models';
+import { Job } from 'app/shared/models';
 import { JobsService } from 'app/shared/services';
-import * as fromDevelopers from 'app/core/developers/store';
 
 
 @Component({
@@ -33,32 +27,23 @@ import * as fromDevelopers from 'app/core/developers/store';
 export class EditJobDialogComponent implements OnInit, OnDestroy {
 
   @Output() isEdit = new EventEmitter<Job>();
-  @ViewChild('category', {static: false}) category: ElementRef;
   public form: FormGroup;
   public job: Job;
   public errorMessage: string;
   showError: boolean;
   selectedOpt: string;
 
-  public allCategories: NameValueModel[] = [];
-  public availableCategories: Subject<NameValueModel[]> = new Subject<NameValueModel[]>();
-  public availableCategories$: Observable<NameValueModel[]> = this.availableCategories.asObservable().pipe(
-    map(val => this.allCategories.filter(category => !val.find(item => item.value === category.value))));
-
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private store: Store<State>,
               private jobService: JobsService,
               public devProfileService: DevProfileService,
               private dialogRef: MatDialogRef<EditJobDialogComponent>,
-              private developersStore: Store<fromDevelopers.State>,
-              private cdr: ChangeDetectorRef) { }
+  ) { }
 
   ngOnInit(): void {
-    this.job = this.data.job;
+    this.job = cloneDeep(this.data.job);
     this.initForm();
     this.form.patchValue(this.job);
-    this.form.get('categories').setValue(cloneDeep(this.form.get('categories').value));
-
   }
 
   private initForm(): void {
@@ -85,7 +70,7 @@ export class EditJobDialogComponent implements OnInit, OnDestroy {
       this.showError = true;
       return;
     }
-    debugger
+
     this.jobService.updateJob(this.job.id, this.form.value)
     .pipe(untilDestroyed(this))
     .subscribe(
@@ -95,8 +80,6 @@ export class EditJobDialogComponent implements OnInit, OnDestroy {
       },
       error => this.errorMessage = error.message);
   }
-
-
 
   onSelect(event: MatSelectChange): void {
     this.form.get('contractType').setValue(event.value);

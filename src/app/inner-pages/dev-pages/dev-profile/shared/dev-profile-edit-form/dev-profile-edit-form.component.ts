@@ -5,7 +5,7 @@ import { first } from 'rxjs/operators';
 
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
 import * as fromCore from 'app/core/reducers';
-import { NameValueModel, UserInfo } from 'app/shared/models';
+import { UserInfo } from 'app/shared/models';
 
 @Component({
   selector: 'app-dev-profile-edit-form',

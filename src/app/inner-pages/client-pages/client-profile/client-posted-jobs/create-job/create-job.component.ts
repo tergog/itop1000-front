@@ -11,7 +11,7 @@ import { MatSelectChange } from '@angular/material/select';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 
 import { JobsService, NotificationsService } from 'app/shared/services';
-import { Job, NotificationMessage } from 'app/shared/models';
+import { NotificationMessage } from 'app/shared/models';
 import { State } from 'app/core/reducers/index';
 import { GetJobsAction } from 'app/core/client/store/actions';
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
@@ -24,7 +24,7 @@ import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-pro
 
 export class CreateJobComponent implements OnInit, OnDestroy {
 
-  @Output() isEdit = new EventEmitter<Job>();
+  @Output() isEdit = new EventEmitter();
   @Output() editToggle = new EventEmitter();
   public form: FormGroup;
   showError: boolean;
@@ -52,7 +52,7 @@ export class CreateJobComponent implements OnInit, OnDestroy {
     }
     this.jobsService.createJob(this.form.value).pipe(untilDestroyed(this))
     .subscribe(() => {
-      let msg: NotificationMessage = {message: 'Added project', type: 'success'};
+      const msg: NotificationMessage = {message: 'Added project', type: 'success'};
       this.store.dispatch(new GetJobsAction());
       this.notificationService.message.emit(msg);
       this.form.reset({

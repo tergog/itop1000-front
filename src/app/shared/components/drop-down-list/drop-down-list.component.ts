@@ -18,7 +18,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import * as fromDevelopers from 'app/core/developers/store';
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
 import * as fromCore from 'app/core/reducers';
-import { NameValueModel, UserInfo } from 'app/shared/models';
+import { NameValueModel } from 'app/shared/models';
 
 @Component({
   selector: 'app-drop-down-list',
