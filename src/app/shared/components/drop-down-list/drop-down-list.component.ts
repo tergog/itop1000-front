@@ -36,11 +36,10 @@ export class DropDownListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Input() parent: FormGroup;
   @Input() dataName: string;
+  @Input() controllerName: string;
   @Input() isEdit: boolean;
   @Input() placeholder: string;
   @ViewChild('data', {static: false}) data: ElementRef;
-
-  public formControlName: string;
 
   public allData: NameValueModel[] = [];
   public availableData$: Subject<NameValueModel[]> = new Subject<NameValueModel[]>();
@@ -54,11 +53,11 @@ export class DropDownListComponent implements OnInit, AfterViewInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.formControlName = this.dataName.toLocaleLowerCase();
     this.cdr.detectChanges();
   }
 
   ngAfterViewInit() {
+
     this.developersStore.select(fromDevelopers[`get${this.dataName}`])
       .pipe(
         filter(res => !!res.length),
@@ -66,9 +65,11 @@ export class DropDownListComponent implements OnInit, AfterViewInit, OnDestroy {
       )
       .subscribe(res => {
         this.allData = res;
-        this.availableData$.next(this.filterData(this.allData, this.parent.get(this.formControlName).value));
+        const test = this.filterData(this.allData, this.parent.get(this.controllerName).value);
+        this.availableData$.next(test);
         this.cdr.detectChanges();
       });
+
   }
 
   ngOnDestroy() {
@@ -80,16 +81,16 @@ export class DropDownListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public onChipSelect(chip): void {
-    this.parent.get(this.formControlName).value.push(chip);
-    this.availableData$.next(this.filterData(this.allData, this.parent.get(this.formControlName).value));
+    this.parent.get(this.controllerName).value.push(chip);
+    this.availableData$.next(this.filterData(this.allData, this.parent.get(this.controllerName).value));
     this.resetFocus();
   }
 
   public onChipRemove(chip: NameValueModel): void {
-    this.parent.get(this.formControlName).value
-      .splice(this.parent.get(this.formControlName).value
+    this.parent.get(this.controllerName).value
+      .splice(this.parent.get(this.controllerName).value
         .findIndex(item => item.value === chip.value), 1);
-    this.availableData$.next(this.filterData(this.allData,  this.parent.get(this.formControlName).value));
+    this.availableData$.next(this.filterData(this.allData,  this.parent.get(this.controllerName).value));
   }
 
   resetFocus(): void {
