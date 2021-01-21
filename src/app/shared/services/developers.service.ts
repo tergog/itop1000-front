@@ -27,18 +27,18 @@ export class DevelopersService {
   }
 
   public getDeveloperCategories(): Observable<NameValueModel[]> {
-    return this.http.get<NameValueModel[]>(`${this.apiUrl}${ApiConstants.accounts.developerCategories}`);
+    return this.http.get<NameValueModel[]>(`${this.apiUrl}${ApiConstants.data.developerCategories}`);
   }
 
   public getDeveloperSkills(): Observable<NameValueModel[]> {
-    return this.http.get<NameValueModel[]>(`${this.apiUrl}${ApiConstants.accounts.developerSkills}`);
+    return this.http.get<NameValueModel[]>(`${this.apiUrl}${ApiConstants.data.developerSkills}`);
   }
 
   public getDeveloperSoftSkills(): Observable<NameValueModel[]> {
-    return this.http.get<NameValueModel[]>(`${this.apiUrl}${ApiConstants.accounts.developerSoftSkills}`);
+    return this.http.get<NameValueModel[]>(`${this.apiUrl}${ApiConstants.data.developerSoftSkills}`);
   }
 
   public getDeveloperLanguages(): Observable<NameValueModel[]> {
-    return this.http.get<NameValueModel[]>(`${this.apiUrl}${ApiConstants.accounts.developerLanguages}`);
+    return this.http.get<NameValueModel[]>(`${this.apiUrl}${ApiConstants.data.developerLanguages}`);
   }
 }

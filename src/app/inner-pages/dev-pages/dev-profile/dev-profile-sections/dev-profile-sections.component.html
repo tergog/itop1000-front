@@ -18,6 +18,10 @@
   <app-dev-want-to-learn></app-dev-want-to-learn>
 </div>
 
+<div [@slideIn] *ngIf="section === DevProfileSections.Certificates">
+  <app-dev-certificates></app-dev-certificates>
+</div>
+
 <div [@slideIn] *ngIf="section === DevProfileSections.ActiveProjects">
   <app-active-projects></app-active-projects>
 </div>

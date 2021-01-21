@@ -1,31 +1,35 @@
-@import 'assets/scss/variables';
+//@import 'assets/scss/variables';
+//
+//:host ::ng-deep {
+//  mat-form-field {
+//    .mat-form-field-label {
+//      display: none !important;
+//    }
+//
+//    .mat-form-field-underline {
+//      display: none !important;
+//    }
+//
+//    .mat-chip-input {
+//      display: none !important;
+//    }
+//
+//    &.edit-mode {
+//      .mat-form-field-label {
+//        display: block !important;
+//      }
+//
+//      .mat-form-field-underline {
+//        display: block !important;
+//      }
+//
+//      .mat-chip-input {
+//        display: block !important;
+//      }
+//    }
+//  }
+//}
 
-:host ::ng-deep {
-  mat-form-field {
-    .mat-form-field-label {
-      display: none !important;
-    }
-
-    .mat-form-field-underline {
-      display: none !important;
-    }
-
-    .mat-chip-input {
-      display: none !important;
-    }
-
-    &.edit-mode {
-      .mat-form-field-label {
-        display: block !important;
-      }
-
-      .mat-form-field-underline {
-        display: block !important;
-      }
-
-      .mat-chip-input {
-        display: block !important;
-      } 
-    }
-  }
+.drop-down__wrapper {
+  width: 100%;
 }

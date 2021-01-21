@@ -15,7 +15,7 @@ export class UploadPhotoDialogComponent implements OnInit {
   croppedImage: any = '';
 
   public inputData: {
-    destination: 'Profile' | 'ProjectLogo' | 'ProjectImage',
+    destination: 'Profile' | 'ProjectLogo' | 'ProjectImage' | 'Certificates',
   };
 
 

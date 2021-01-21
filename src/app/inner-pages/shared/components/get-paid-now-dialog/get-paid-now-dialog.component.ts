@@ -3,7 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { StripeService, StripeCardComponent } from 'ngx-stripe';
 import { StripeCardElementOptions, StripeElementsOptions } from '@stripe/stripe-js';
 import { MatDialogRef } from '@angular/material/dialog';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { PaymentService } from 'app/shared/services/payment.service';
 
@@ -12,13 +13,13 @@ import { PaymentService } from 'app/shared/services/payment.service';
   templateUrl: './get-paid-now-dialog.component.html',
   styleUrls: ['./get-paid-now-dialog.component.scss']
 })
-export class GetPaidNowDialogComponent implements OnInit {
+export class GetPaidNowDialogComponent implements OnInit, OnDestroy {
 
   @ViewChild(StripeCardComponent) card: StripeCardComponent;
 
   public form: FormGroup;
   public errorMessage: string;
-
+  public ngUnsubscribe$ = new Subject<void>();
   cardOptions: StripeCardElementOptions = {
     style: {
       base: {
@@ -56,32 +57,33 @@ export class GetPaidNowDialogComponent implements OnInit {
       lastName: new FormControl('', [Validators.required])
     });
   }
-  
+
   getPaid(): void {
     this.stripeService.createToken(this.card.element, {name: `${this.form.controls.firstName.value} ${this.form.controls.lastName.value}`})
-        .pipe(untilDestroyed(this))
+        .pipe(takeUntil(this.ngUnsubscribe$))
         .subscribe(
           result => this.createPaymentMethod(result.token.id),
           error => console.log(error));
   }
 
   public createPaymentMethod(token): void {
-    let cardToken  = {
-      type: "card",
+    const cardToken  = {
+      type: 'card',
       card: {
         token: token
       }
     };
 
     this.paymentService.createPaymentMethod(cardToken)
-      .pipe(untilDestroyed(this))
+      .pipe(takeUntil(this.ngUnsubscribe$))
       .subscribe(
         () => this.dialogRef.close(),
         (error) => this.errorMessage = error.message);
   }
 
-  ngOnDestroy(): void { 
-
+  ngOnDestroy(): void {
+    this.ngUnsubscribe$.next(null);
+    this.ngUnsubscribe$.complete();
   }
 
 }

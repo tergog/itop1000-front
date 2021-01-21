@@ -12,31 +12,11 @@
   </div>
 
   <div class="d__flex d__flex--direction-column">
+  <div class="d__flex d__flex--direction-column">
     <span class="text text__sm text__color--1 text__fw--600">Categories</span>
-    <mat-form-field class="m__top--10" [class.edit-mode]="true">
-      <mat-chip-list #chipListCategories formControlName="categories">
-        <mat-chip *ngFor="let category of devProfileService.selectedCategories"
-                  [selectable]="false"
-                  [removable]="true"
-                  (removed)="onChipRemove(category)"
-                  >
-          {{ category.name }}
-          <mat-icon matChipRemove *ngIf="isEdit">cancel</mat-icon>
-        </mat-chip>
-        <input #category placeholder="Add category..."
-                [readOnly]="!isEdit"
-                [matChipInputFor]="chipListCategories"
-                [matAutocomplete]="autoCategories"
-                [matChipInputAddOnBlur]="true">
-      </mat-chip-list>
+      <app-drop-down-list  [isEdit]="isEdit" dataName="Categories" controllerName="categories" [parent]="form" [placeholder]="'Add Categories...'"></app-drop-down-list>
+      <mat-error *ngIf="showError && form.get('categories').value?.length == 0">Categories required</mat-error>
 
-      <mat-autocomplete #autoCategories="matAutocomplete" (optionSelected)="onChipSelect($event.option.value)">
-        <mat-option *ngFor="let category of devProfileService.availableCategories" [value]="category">
-          {{ category.name }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-    <mat-error *ngIf="showError && form.get('categories').errors?.required">Categories required</mat-error>
   </div>
 
   <div class="d__flex d__flex--direction-column">
@@ -86,7 +66,9 @@
 
 </div>
 
-<div class="m__top--10 text__right">
-  <app-button [type]="'transparent'" [text]="'Cancel'" (buttonClick)="onCancelClick()"></app-button>
-  <app-button [text]="'Post'" (buttonClick)="onPostClick()"></app-button>
+  <div class="m__top--10 text__right">
+    <app-button [type]="'transparent'" [text]="'Cancel'" (buttonClick)="onCancelClick()"></app-button>
+    <app-button [text]="'Post'" (buttonClick)="onPostClick()"></app-button>
+  </div>
 </div>
+

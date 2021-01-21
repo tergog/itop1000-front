@@ -3,7 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { PaymentService } from 'app/shared/services/payment.service';
 
@@ -16,6 +17,7 @@ export class BankAccountDialogComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   errorMessage: string;
+  public ngUnsubscribe$ = new Subject<void>();
 
   constructor(private paymentService: PaymentService,
               private dialogRef: MatDialogRef<BankAccountDialogComponent>) { }
@@ -39,7 +41,7 @@ export class BankAccountDialogComponent implements OnInit, OnDestroy {
     if (this.form.invalid){
       return;
     }
-    this.paymentService.verifyBankAccount(this.form.value).pipe(untilDestroyed(this)).subscribe((res) => {
+    this.paymentService.verifyBankAccount(this.form.value).pipe(takeUntil(this.ngUnsubscribe$)).subscribe((res) => {
       this.errorMessage = null;
       this.dialogRef.close(res);
       },
@@ -53,5 +55,7 @@ export class BankAccountDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.ngUnsubscribe$.next(null);
+    this.ngUnsubscribe$.complete();
   }
 }

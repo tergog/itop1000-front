@@ -1,7 +1,8 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { PaymentService } from 'app/shared/services/payment.service';
 
@@ -17,6 +18,7 @@ export class UpdateBillingMethodDialogComponent implements OnInit, OnDestroy {
   public name: string;
   public firstName: string;
   public lastName: string;
+  public ngUnsubscribe$ = new Subject<void>();
 
   constructor(private paymentService: PaymentService,
               @Inject(MAT_DIALOG_DATA) public data: any,
@@ -33,11 +35,11 @@ export class UpdateBillingMethodDialogComponent implements OnInit, OnDestroy {
     this.form = new FormGroup({
 
       firstName: new FormControl('', {
-        validators: [Validators.required,],
+        validators: [Validators.required],
       }),
 
       lastName: new FormControl('', {
-        validators: [Validators.required,],
+        validators: [Validators.required],
       }),
     });
   }
@@ -46,7 +48,7 @@ export class UpdateBillingMethodDialogComponent implements OnInit, OnDestroy {
     const firstNameInput = this.form.value['firstName'] ? this.form.value['firstName'] : this.firstName;
     const lastNameInput = this.form.value['lastName'] ? this.form.value['lastName'] : this.lastName;
 
-    if(firstNameInput == this.firstName && lastNameInput == this.lastName) {
+    if(firstNameInput === this.firstName && lastNameInput === this.lastName) {
       return;
     }
 
@@ -55,14 +57,17 @@ export class UpdateBillingMethodDialogComponent implements OnInit, OnDestroy {
       billing_details: {
         name: `${firstNameInput} ${lastNameInput}`
       }
-    }
+    };
 
     this.paymentService.updatePaymentMethod(paymentMethodData)
-      .pipe(untilDestroyed(this))
+      .pipe(takeUntil(this.ngUnsubscribe$))
       .subscribe(
         () => this.dialogRef.close(),
         error => this.errorMessage = error.message);
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.ngUnsubscribe$.next(null);
+    this.ngUnsubscribe$.complete();
+  }
 }

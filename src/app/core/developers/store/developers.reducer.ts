@@ -290,18 +290,18 @@ export const getLoading = (state: State): boolean => {
   return state.loading;
 };
 
-export const getCategories = (state: State): any => {
+export const getCategories = (state: State): NameValueModel[] => {
   return state.categories;
 };
 
-export const getSkills = (state: State): any => {
+export const getSkills = (state: State): NameValueModel[] => {
   return state.skills;
 };
 
-export const getSoftSkills = (state: State): any => {
+export const getSoftSkills = (state: State): NameValueModel[] => {
   return state.softSkills;
 };
 
-export const getLanguages = (state: State): any => {
+export const getLanguages = (state: State): NameValueModel[] => {
   return state.languages;
 };
