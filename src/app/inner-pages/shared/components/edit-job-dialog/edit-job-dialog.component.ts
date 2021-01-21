@@ -89,8 +89,6 @@ export class EditJobDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // this.devProfileService.availableCategories.push(...this.devProfileService.selectedCategories);
-    // this.devProfileService.selectedCategories = [];
     this.ngUnsubscribe$.next(null);
     this.ngUnsubscribe$.complete();
   }
