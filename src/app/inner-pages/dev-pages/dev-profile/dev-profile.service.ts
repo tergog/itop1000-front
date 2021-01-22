@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { first } from 'rxjs/operators';
+import { filter, first } from 'rxjs/operators';
 import * as jwtDecode from 'jwt-decode';
 
 import * as coreActions from 'app/core/actions/core.actions';
 import { TOKEN } from 'app/constants/constants';
 import { UserService } from 'app/shared/services';
-import { NameValueModel, UserInfo } from 'app/shared/models';
+import { UserInfo } from 'app/shared/models';
 import * as fromCore from 'app/core/reducers';
 import { DevProperties } from 'app/shared/models/dev-properties.model';
 import { NotificationsService } from 'app/shared/services/notifications.service';
