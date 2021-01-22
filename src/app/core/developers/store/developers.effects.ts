@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
-import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { catchError, first, map, switchMap, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
@@ -47,4 +47,43 @@ export class DevelopersEffects {
     )),
   ));
 
+  getSkills$ = createEffect(() => this.actions$.pipe(
+    ofType(actions.GET_DEVELOPER_SKILLS),
+    switchMap((payload) => this.developersService.getDeveloperSkills().pipe(
+      first(),
+      map(value => {
+        return actions.getDeveloperSkillsSuccess(value);
+      }),
+    )),
+  ));
+
+  getCategories$ = createEffect(() => this.actions$.pipe(
+    ofType(actions.GET_DEVELOPER_CATEGORIES),
+    switchMap((payload) => this.developersService.getDeveloperCategories().pipe(
+      first(),
+      map(value => {
+        return actions.getDeveloperCategoriesSuccess(value);
+      }),
+    )),
+  ));
+
+  getLanguages$ = createEffect(() => this.actions$.pipe(
+    ofType(actions.GET_DEVELOPER_LANGUAGES),
+    switchMap((payload) => this.developersService.getDeveloperLanguages().pipe(
+      first(),
+      map(value => {
+        return actions.getDeveloperLanguagesSuccess(value);
+      }),
+    )),
+  ));
+
+  getSoftSkills$ = createEffect(() => this.actions$.pipe(
+    ofType(actions.GET_DEVELOPER_SOFT_SKILLS),
+    switchMap((payload) => this.developersService.getDeveloperSoftSkills().pipe(
+      first(),
+      map(value => {
+        return actions.getDeveloperSoftSkillsSuccess(value);
+      }),
+    )),
+  ));
 }

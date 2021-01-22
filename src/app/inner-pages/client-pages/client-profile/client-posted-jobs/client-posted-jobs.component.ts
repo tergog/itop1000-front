@@ -32,10 +32,7 @@ export class ClientPostedJobsComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(new GetJobsAction());
     this.jobs$ = this.store.select(getJobs);
-
-    this.developerService.getDeveloperCategories().pipe(
-      first()
-    ).subscribe(value => this.storeDev.dispatch(getDeveloperCategories(value)));
+    this.storeDev.dispatch(getDeveloperCategories());
   }
 
   public postJobClick(): void {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { first } from 'rxjs/operators';
+import { filter, first } from 'rxjs/operators';
 import * as jwtDecode from 'jwt-decode';
 
 import * as coreActions from 'app/core/actions/core.actions';
@@ -11,6 +11,7 @@ import * as fromCore from 'app/core/reducers';
 import { DevProperties } from 'app/shared/models/dev-properties.model';
 import { NotificationsService } from 'app/shared/services/notifications.service';
 import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
+import * as fromDevelopers from 'app/core/developers/store';
 
 @Injectable()
 export class DevProfileService {
@@ -26,6 +27,7 @@ export class DevProfileService {
     private store: Store<fromCore.State>,
     private notificationsService: NotificationsService,
     private userService: UserService,
+    private developersStore: Store<fromDevelopers.State>,
   ) {}
 
   public onSaveClick(userInfo: Partial<UserInfo>): void {
@@ -35,6 +37,14 @@ export class DevProfileService {
       .subscribe(
         (user: UserInfo) => this.handleSuccessResponse(user),
         ({ error }) => this.handleErrorResponse(error)
+      );
+  }
+
+  public getStaticData(data: string) {
+    return this.developersStore.select(fromDevelopers[`get${data}`], )
+      .pipe(
+        filter(res => !!res.length),
+        first()
       );
   }
 

@@ -245,28 +245,28 @@ export const reducer = createReducer(
     }
   ),
   on(
-    actions.getDeveloperCategories,
+    actions.getDeveloperCategoriesSuccess,
     (state, {data}) => ({
       ...state,
       categories: data
     })
   ),
   on(
-    actions.getDeveloperSkills,
+    actions.getDeveloperSkillsSuccess,
     (state, {data}) => ({
       ...state,
       skills: data
     })
   ),
   on(
-    actions.getDeveloperLanguages,
+    actions.getDeveloperLanguagesSuccess,
     (state, {data}) => ({
       ...state,
       languages: data
     })
   ),
   on(
-    actions.getDeveloperSoftSkills,
+    actions.getDeveloperSoftSkillsSuccess,
     (state, {data}) => ({
       ...state,
       softSkills: data

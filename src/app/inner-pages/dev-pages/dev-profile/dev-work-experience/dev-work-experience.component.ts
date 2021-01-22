@@ -18,8 +18,8 @@ import { DevProperties, UserInfo } from 'app/shared/models';
 import * as fromCore from 'app/core/reducers';
 import { UploadPhotoDialogComponent } from 'app/inner-pages/shared/components/upload-photo-dialog/upload-photo-dialog.component';
 import { UpdateUserProfileAction } from 'app/core/actions/core.actions';
-import { getDeveloperSkills } from 'app/core/developers/store/developers.actions';
 import * as fromDev from 'app/core/developers/store';
+import { getDeveloperSkills } from 'app/core/developers/store/developers.actions';
 
 @Component({
   selector: 'app-dev-work-experience',
@@ -62,9 +62,7 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
       })
     );
 
-    this.developerService.getDeveloperSkills().pipe(
-      first()
-    ).subscribe(value => this.storeDev.dispatch(getDeveloperSkills(value)));
+    this.storeDev.dispatch(getDeveloperSkills());
   }
 
   public onAddClick(): void {

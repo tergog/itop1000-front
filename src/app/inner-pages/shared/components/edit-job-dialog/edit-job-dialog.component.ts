@@ -19,7 +19,6 @@ import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-pro
 import { Job } from 'app/shared/models';
 import { JobsService } from 'app/shared/services';
 
-
 @Component({
   selector: 'app-edit-job-dialog',
   templateUrl: './edit-job-dialog.component.html',

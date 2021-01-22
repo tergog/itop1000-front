@@ -30,13 +30,8 @@ export class DevCategoriesAndSkillsComponent implements OnInit, OnDestroy {
       this.isEdit = !userInfo.devProperties.skills?.length && !userInfo.devProperties.categories?.length;
     });
 
-    this.developerService.getDeveloperCategories().pipe(
-      first()
-    ).subscribe(value => this.storeDev.dispatch(getDeveloperCategories(value)));
-
-    this.developerService.getDeveloperSkills().pipe(
-      first()
-    ).subscribe(value => this.storeDev.dispatch(getDeveloperSkills(value)));
+    this.storeDev.dispatch(getDeveloperSkills());
+    this.storeDev.dispatch(getDeveloperCategories());
   }
 
   public onEditClick(): void {

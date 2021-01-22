@@ -4,16 +4,14 @@
     <span class="text text__title text__color--1">
       Categories
     </span>
-    <app-drop-down-list [isEdit]="isEdit" dataName="Categories" controllerName="categories" [parent]="form" [placeholder]="'Add Categories...'"></app-drop-down-list>
+    <app-drop-down-list [isEdit]="isEdit" dataName="Categories" formControlName="categories" [placeholder]="'Add Categories...'"></app-drop-down-list>
     <span class="text text__title text__color--1 m__top--20">
       Skills
     </span>
-    <app-drop-down-list [isEdit]="isEdit" dataName="Skills" controllerName="skills" [parent]="form"  [placeholder]="'Add Skills...'"></app-drop-down-list>
+    <app-drop-down-list [isEdit]="isEdit" dataName="Skills"  formControlName="skills" [placeholder]="'Add Skills...'"></app-drop-down-list>
     <div class="text__right" *ngIf="isEdit">
       <app-button [type]="'transparent'" [text]="'Cancel'" (buttonClick)="onEditClick()"></app-button>
       <app-button [text]="'Save'" (buttonClick)="onSaveClick()"></app-button>
     </div>
   </div>
-
-
 </div>

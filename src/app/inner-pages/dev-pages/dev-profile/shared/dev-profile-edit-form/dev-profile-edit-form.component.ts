@@ -1,14 +1,19 @@
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { first } from 'rxjs/operators';
 
-import { EDevProfileSectionNames } from 'app/inner-pages/dev-pages/dev-profile/shared/enums/devProfileSectionNames';
-import { UserService, NotificationsService } from 'app/shared/services';
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
 import * as fromCore from 'app/core/reducers';
-import { UserInfo } from 'app/shared/models';
+import { NameValueModel, UserInfo } from 'app/shared/models';
 
 @Component({
   selector: 'app-dev-profile-edit-form',
@@ -25,15 +30,13 @@ export class DevProfileEditFormComponent implements OnInit {
   @ViewChild('skills', {static: false}) skills: ElementRef;
 
   public form: FormGroup;
-  public DevProfileSectionNames = EDevProfileSectionNames;
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  public allCategories: NameValueModel[] = [];
+  public allSkills: NameValueModel[] = [];
 
   constructor(
     public devProfileService: DevProfileService,
     private store: Store<fromCore.State>,
-    private notificationsService: NotificationsService,
-    private userService: UserService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
