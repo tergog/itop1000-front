@@ -2,15 +2,16 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  Input,
-  OnInit, QueryList,
+  Input, OnChanges, OnDestroy,
+  OnInit, QueryList, SimpleChanges,
   ViewChild, ViewChildren
 } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ContentChange } from 'ngx-quill';
 import { iif, of } from 'rxjs';
-import { delay, switchMap, tap } from 'rxjs/operators';
+import { delay, first, switchMap, tap } from 'rxjs/operators';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import { ChatService, NotificationsService, WebsocketService } from 'app/shared/services';
 import {
@@ -24,18 +25,21 @@ import * as fromChat from 'app/core/chats/store/chat.reducer';
 import { addNewMessage } from 'app/core/chats/store/chats.actions';
 import { slideInLeftAnimation } from 'app/shared/animations';
 import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
+import { EConversationTypeEnum } from 'app/shared/enums';
+import { CHAT_MESSAGES_PER_PAGE, CHAT_ONLINE_DELTA_MS } from 'app/constants/constants';
 
+@UntilDestroy()
 @Component({
   selector: 'app-message-box',
   templateUrl: './message-box.component.html',
   styleUrls: [ './message-box.component.scss' ],
   animations: [ slideInLeftAnimation ]
 })
-export class MessageBoxComponent implements OnInit, AfterViewInit {
+export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, OnChanges {
   @Input() user: UserInfo;
   @Input() chat: fromChat.State;
   @ViewChild('messages') messagesWrapper: ElementRef;
-  @ViewChildren("messageContainer") messageContainers: QueryList<ElementRef>;
+  @ViewChildren('messageContainer') messageContainers: QueryList<ElementRef>;
 
   private textEditorInstance: SharedQuillInstanceModel;
   private textContent: ContentChange;
@@ -53,40 +57,45 @@ export class MessageBoxComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.websocketService.receivedNewMessage().pipe(
+      untilDestroyed(this),
       switchMap((message) => iif(
         () => message.chat === this.chat.conversations.active,
-        of(undefined).pipe(tap(() => this.store.dispatch(addNewMessage(message))))
+        of(undefined).pipe(tap(() => {
+          this.store.dispatch(addNewMessage(message));
+
+          const $msgWrpr = this.messagesWrapper.nativeElement;
+          if ($msgWrpr.clientHeight + $msgWrpr.scrollTop === $msgWrpr.scrollHeight) { // If scroll is at bottom
+            this.expectChangesThanScroll();
+          }
+          // Show notification on scroll-bottom element
+        }))
       ))
     ).subscribe();
 
     this.websocketService.receivedTyping().pipe(
+      untilDestroyed(this),
       switchMap(({ chatId, username }) => iif(
         () => chatId === this.chat.conversations.active,
-        of(undefined).pipe( // TODO: Fix this stream. When received many typing events.
+        of(undefined).pipe(
           tap(() => this.userTyping = username),
           delay(3000),
           tap(() => this.userTyping = null)
         )
       ))
     ).subscribe();
+  }
 
-    this.websocketService.receivedOnline().subscribe((data) => {
-      console.log(data);
-    });
+  ngOnDestroy(): void {
   }
 
   ngAfterViewInit(): void {
-    this.messageContainers.changes.subscribe((list: QueryList<ElementRef>) => {
-      if (this.chat.conversations.active !== null && list.length > 0) {
-        /**
-         * setTimeout used even on official angular example
-         * Check method "calculateSerializedPanes" in https://angular.io/api/core/ViewChildren#another-example
-         */
-        setTimeout(() => {
-          this.scrollToBottom();
-        }, 0);
-      }
-    });
+    this.expectChangesThanScroll();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if(!changes.chat?.firstChange && changes.chat?.previousValue?.conversations.active !== changes.chat?.currentValue.conversations.active) {
+      this.expectChangesThanScroll();
+    }
   }
 
   getEditorInstance(quill: SharedQuillInstanceModel): void {
@@ -108,8 +117,11 @@ export class MessageBoxComponent implements OnInit, AfterViewInit {
         chat: this.chat.conversations.active,
         sender: this.user.id,
         message: this.textContent.html
-      }, (savedMessage) => this.store.dispatch(addNewMessage(savedMessage)));
-      this.textEditorInstance.setContents([{ insert: '\n' }]); // Clear editor input
+      }, (savedMessage) => {
+        this.store.dispatch(addNewMessage(savedMessage));
+        this.expectChangesThanScroll();
+      });
+      this.textEditorInstance.setContents([ { insert: '\n' } ]); // Clear editor input
     }
   }
 
@@ -126,13 +138,36 @@ export class MessageBoxComponent implements OnInit, AfterViewInit {
     }
   }
 
-  scrollToBottom(): void {
-    this.messagesWrapper.nativeElement.scrollTop = this.messagesWrapper.nativeElement.scrollHeight;
+  onHistoryScroll(): void {
+    if (this.messagesWrapper?.nativeElement.scrollTop === 0 && this.chat.messages.data.length >= CHAT_MESSAGES_PER_PAGE) {
+
+      console.log('load more');
+    }
+  }
+
+  onScrollBottomClick(): void {
+    this.expectChangesThanScroll(true);
+  }
+
+  expectChangesThanScroll(force: boolean = false): void {
+    if (force) {
+      this.scrollToElement(this.messageContainers.last.nativeElement);
+    }
+    else {
+      this.messageContainers.changes
+        .pipe(first())
+        .subscribe((list: QueryList<ElementRef>) => {
+          if (this.chat.conversations.active !== null && list.length > 0) {
+            this.scrollToElement(list.last.nativeElement);
+          }
+        });
+    }
   }
 
   getActiveConversation(chatId: string): ConversationModel {
-    if (chatId === null) { return null; }
-    return this.chat.conversations.data.filter((conv) => conv.id === chatId)[0];
+    return chatId !== null ?
+      this.chat.conversations.data.filter((conv) => conv.id === chatId)[0] :
+      null;
   }
 
   messageTimeFormat(dateStr: string): string {
@@ -148,8 +183,7 @@ export class MessageBoxComponent implements OnInit, AfterViewInit {
       const DD = String(date.getDate()).padStart(2, '0');
 
       return `${MM} ${DD}, ${YY} ${timeStr}`;
-    }
-    else { // Today
+    } else { // Today
       return timeStr;
     }
   }
@@ -162,5 +196,36 @@ export class MessageBoxComponent implements OnInit, AfterViewInit {
     const conv: ConversationModel = this.getActiveConversation(activeConv);
     const partner: ConversationMemberModel = this.getConversationPartners(conv)[0];
     return `${partner.user.firstName} ${partner.user.lastName}`;
+  }
+
+  getActiveConversationById(convId: string): ConversationModel {
+    return this.chat.conversations.data.filter((conv) => conv.id === convId)[0];
+  }
+
+  isConversationPartnerOnline(convId: string): boolean { // true - online, false - offline, null - not a private conversation
+    const conv = this.getActiveConversationById(convId);
+    const partners: ConversationMemberModel[] = this.getConversationPartners(conv);
+
+    return (conv.type === EConversationTypeEnum.Private) ?
+      new Date().getTime() - new Date(partners[0].user.lastSeen).getTime() < CHAT_ONLINE_DELTA_MS :
+      null;
+  }
+
+  isScrollerToBottomVisible(): boolean {
+    return this.messagesWrapper?.nativeElement.scrollHeight - this.messagesWrapper?.nativeElement.scrollTop > 500;
+  }
+
+  scrollToElement($element: HTMLElement): void {
+    /**
+     * setTimeout used even in official angular example
+     * Check method "calculateSerializedPanes" in https://angular.io/api/core/ViewChildren#another-example
+     */
+    setTimeout(() => {
+      $element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'end',
+        inline: 'nearest',
+      });
+    });
   }
 }

@@ -1,27 +1,31 @@
 <div class="chat__text-editor">
-  <div class="chat__text-editor__toolbar">
+  <div class="chat__text-editor__header">
+    <div class="chat__text-editor__header__toolbar">
     <span class="ql-formats">
-      <button class="ql-bold"></button>
-      <button class="ql-italic"></button>
-      <button class="ql-underline"></button>
-      <button class="ql-strike"></button>
-      <select class="ql-align">
-        <option value="right"></option>
-        <option value="center"></option>
-        <option value="" selected></option>
-      </select>
+      <button class="ql-bold" [title]="'Bold'"></button>
+      <button class="ql-italic" [title]="'Italic'"></button>
+      <button class="ql-underline" [title]="'Underline'"></button>
+      <button class="ql-strike" [title]="'Strike'"></button>
     </span>
-    <span class="ql-formats">
-      <select class="ql-font"></select>
+      <span class="ql-formats">
+      <button class="ql-emoji" [title]="'Emoji'"></button>
+      <button class="ql-link" [title]="'Link'"></button>
+      <button class="ql-attach-file" [title]="'Attach file'">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 511.988 511.988">
+          <path class="ql-fill" d="M490.305 186.463c-8.354-8.309-21.861-8.272-30.17.081L203.687 444.379c-33.271 33.271-87.308 33.271-120.641-.045-33.308-33.325-33.308-87.362.004-120.674L347.089 58.234c20.772-20.771 54.543-20.771 75.375.045 20.826 20.826 20.826 54.593-.005 75.425l-218.732 218.73-.04.044c-8.333 8.287-21.8 8.276-30.116-.04-8.33-8.33-8.33-21.831 0-30.161l105.58-105.602c8.33-8.332 8.329-21.84-.003-30.17-8.332-8.33-21.84-8.329-30.17.003l-105.579 105.6c-24.991 24.991-24.991 65.507.002 90.499 24.992 24.992 65.508 24.992 90.501 0 .029-.029.052-.06.08-.089l218.646-218.646c37.494-37.494 37.494-98.276 0-135.77-37.499-37.472-98.277-37.472-135.749 0L52.84 293.53c-49.934 49.934-49.934 130.979.036 180.974 50.003 49.977 131.049 49.977 181.022.004l256.489-257.875c8.308-8.354 8.271-21.861-.082-30.17z"/>
+        </svg>
+      </button>
     </span>
-    <span class="ql-formats">
-      <button class="ql-emoji"></button>
-      <button class="ql-link"></button>
-      <button class="ql-attach-file"><i class="upload"></i></button>
-    </span>
-  </div>
-  <div class="chat__text-editor__send">
-    <app-button [type]="'chat-send'" (buttonClick)="onSendButtonClick($event)"><i class="send"></i></app-button>
+    </div>
+    <div class="chat__text-editor__header__send">
+      <app-button
+        [text]="'SEND'"
+        [type]="'chat-send'"
+        (buttonClick)="onSendButtonClick($event)"
+      >
+        <i class="send"></i>
+      </app-button>
+    </div>
   </div>
   <div class="chat__text-editor__divider"></div>
   <div class="chat__text-editor__body">
@@ -32,5 +36,4 @@
       (onEditorCreated)="getEditorInstance($event)"
     ></quill-editor>
   </div>
-  <div class="chat__text-editor__counter ql-counter"></div>
 </div>

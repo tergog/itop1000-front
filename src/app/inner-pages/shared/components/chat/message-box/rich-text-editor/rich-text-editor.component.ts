@@ -35,15 +35,11 @@ export class RichTextEditorComponent {
 
   public quillModules = {
     toolbar: {
-      container: '.chat__text-editor__toolbar'
+      container: '.chat__text-editor__header__toolbar'
     },
     attachFiles: {
       button: '.ql-attach-file',
       errorEmmiter: this.notificationsService.message
-    },
-    counterModule: {
-      container: '.ql-counter',
-      maxLength: 4096
     },
     'emoji-toolbar': true
   };

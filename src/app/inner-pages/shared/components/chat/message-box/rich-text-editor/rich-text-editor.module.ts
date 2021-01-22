@@ -5,7 +5,6 @@ import { QuillConfig, QuillModule } from 'ngx-quill';
 
 import { RichTextEditorComponent } from './rich-text-editor.component';
 import { AttachFiles } from './modules/attach-files.module';
-import { CounterModule } from './modules/counter.module';
 import { FileBlot } from './modules/attach-files.blot';
 import { SharedModule } from 'app/shared/shared.module';
 
@@ -15,9 +14,6 @@ const quillConfig: QuillConfig = {
   customModules: [{
     implementation: AttachFiles,
     path: 'modules/attachFiles'
-  }, {
-    implementation: CounterModule,
-    path: 'modules/counterModule'
   }, {
     implementation: FileBlot,
     path: 'blots/file'

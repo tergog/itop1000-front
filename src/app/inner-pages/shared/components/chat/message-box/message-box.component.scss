@@ -8,8 +8,18 @@
 .chat__message-box {
   overflow: auto;
   height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 70px 1fr 20px minmax(70px, auto);
+  gap: 0 0;
+  grid-template-areas:
+    "chat__message-box__header"
+    "chat__message-box__body"
+    "chat__message-box__typing-container"
+    "chat__message-box__editor";
 
   &__header {
+    grid-area: chat__message-box__header;
     display: grid;
     grid-template-columns: 1fr 200px 30px 30px;
     grid-template-rows: 50px;
@@ -24,6 +34,9 @@
       font-weight: 500;
       text-transform: uppercase;
       color: $text-color-5;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     &__settings i,
@@ -41,119 +54,163 @@
   }
 
   &__body {
-    overflow: auto;
+    grid-area: chat__message-box__body;
+    overflow: hidden;
     background-color: rgba(0, 0, 0, .1);
-    box-shadow: 0 4px 4px rgba(0, 0, 0, .25);
-    border-radius: 15px;
     margin-top: 20px;
-    height: calc(100% - 50px - 20px - 20px - 1px); // 85px - header, 20px - self margin, 20px - header margin, 1px - header border
+    position: relative;
 
-    &__message-list {
+    &__history {
       overflow: auto;
-      margin: 20px 32px 0 32px;
-      height: calc(100% - 146px - 50px - 40px); // 146px - control height, 50px - control paddings, 20px - self paddings
+      height: 100%;
 
-      &__message {
-        & + & {
-          margin-top: 25px;
-        }
+      &__message-list {
+        overflow: auto;
+        margin: 20px 32px 0 32px;
 
-        &--empty {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-
-          &__message {
-            font-size: 20px;
-            color: $text-color-6;
+        &__message {
+          & + & {
+            margin-top: 25px;
           }
-        }
 
-        &__header {
-          line-height: 35px;
-          height: 35px;
+          &:not(:last-child) &__body {
+            border-bottom: 1px solid rgba(79, 77, 77, .9);
+          }
 
-          &__avatar {
+          &--empty {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &__message {
+              font-size: 20px;
+              color: $text-color-6;
+            }
+          }
+
+          &__header {
+            line-height: 35px;
             height: 35px;
-            width: 35px;
-            border-radius: 50%;
-            background: url(~assets/icons/profile-photo.svg);
-            background-repeat: no-repeat;
-            background-size: contain;
-            background-color: $color-8;
-            float: left;
-            position: relative;
 
-            img {
-              width: 100%;
-              height: 100%;
-              border-radius: inherit;
-            }
-
-            &:after {
-              content: '';
-              display: block;
-              width: 8px;
-              height: 8px;
+            &__avatar {
+              height: 35px;
+              width: 35px;
               border-radius: 50%;
-              background-color: $color-6;
-              transition: background-color .2s;
-              position: absolute;
-              right: 0;
-              bottom: 0;
+              background: url(~assets/icons/profile-photo.svg);
+              background-repeat: no-repeat;
+              background-size: contain;
+              background-color: $color-8;
+              float: left;
+              position: relative;
+
+              img {
+                width: 100%;
+                height: 100%;
+                border-radius: inherit;
+              }
+
+              &.partner:after {
+                content: '';
+                display: block;
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background-color: $color-6;
+                transition: background-color .2s;
+                position: absolute;
+                right: 0;
+                bottom: 0;
+              }
+
+              &.partner.online:after {
+                background-color: $color-5;
+              }
             }
 
-            &.online:after {
-              background-color: $color-5;
+            &__name {
+              display: inline-block;
+              margin-left: 15px;
+              font-style: normal;
+              font-weight: 500;
+              font-size: 18px;
+              color: $text-color-5;
+            }
+
+            &__time {
+              font-size: 12px;
+              font-weight: 300;
+              color: $text-color-6;
+              float: right;
             }
           }
 
-          &__name {
-            display: inline-block;
-            margin-left: 15px;
-            font-style: normal;
-            font-weight: 500;
-            font-size: 18px;
-            color: $text-color-5;
+          &__body {
+            margin-left: 50px;
+            color: $text-color-8;
           }
-
-          &__time {
-            font-size: 12px;
-            font-weight: 300;
-            color: $text-color-6;
-            float: right;
-          }
-        }
-
-        &__body {
-          margin-left: 50px;
-          font-family: $font-1;
-          font-weight: 200;
-          font-size: 16px;
-          line-height: 24px;
-          color: $text-color-8;
-          border-bottom: 1px solid rgba(79, 77, 77, .9);
         }
       }
     }
 
-    &__control {
-      margin: 25px 32px 25px 82px;
-      height: 166px;
-      position: relative;
+    &__scroll-bottom {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: $color-11;
+      text-align: center;
+      cursor: pointer;
+      padding: 12px 10px;
+      animation: unreadScrollerSlideIn .15s;
 
-      &__typing {
+      &.has-unread::after {
+        content: attr(data-unread);
         position: absolute;
-        top: -20px;
-        color: $text-color-6;
-        font-style: italic;
-        transition: opacity .1s;
-      }
-
-      &__button-send {
-        margin-top: 25px;
-        float: right;
+        width: 20px;
+        height: 20px;
+        background-color: $color-5;
+        border-radius: 50%;
+        top: -5px;
+        right: -5px;
+        font-size: .9em;
+        text-align: center;
+        line-height: 20px;
+        color: $color-11;
+        font-weight: 500;
       }
     }
+  }
+
+  &__typing-container {
+    grid-area: chat__message-box__typing-container;
+    width: 100%;
+    height: 20px;
+    color: $text-color-6;
+    font-style: italic;
+  }
+
+  &__editor {
+    grid-area: chat__message-box__editor;
+    margin: 0 0 20px 0;
+  }
+}
+
+::ng-deep {
+  .chat__message-box {
+    .ql-container {
+      font-family: $font-1 !important;
+    }
+  }
+}
+
+@keyframes unreadScrollerSlideIn {
+  from {
+    bottom: -20px;
+  }
+
+  to {
+    bottom: 10px;
   }
 }

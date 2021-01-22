@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
@@ -17,7 +17,7 @@ import { EUserRole } from 'app/shared/enums';
   templateUrl: './chat.component.html',
   styleUrls: [ './chat.component.scss' ],
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, OnDestroy {
   public user$: Observable<UserInfo>;
   public chat$: Observable<fromChats.State>;
 
@@ -36,9 +36,15 @@ export class ChatComponent implements OnInit {
 
     this.user$.pipe(
       first(),
+      tap((a) => {
+        console.log('user.pipe', this.route.snapshot.params.id, a);
+      }),
       switchMap((userInfo) => iif(
         () => !!this.route.snapshot.params.id,
         this.chatService.createNewConversation(userInfo.id, this.route.snapshot.params.id).pipe(
+          tap((a) => {
+            console.log('createNewConversation success', a);
+          }),
           catchError(() => of(this.store.dispatch(chatActions.getConversationsByUserId({
             id: userInfo.id,
             openWith: this.route.snapshot.params.id
@@ -67,5 +73,8 @@ export class ChatComponent implements OnInit {
         }))
       ))*!/
     ).subscribe();*/
+  }
+
+  ngOnDestroy(): void {
   }
 }

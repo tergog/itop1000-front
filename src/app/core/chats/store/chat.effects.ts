@@ -24,7 +24,7 @@ export class ChatEffects {
   }
 
   getUserConversations$ = createEffect(() => this.actions$.pipe(
-    ofType(actions.GET_CONVS_BY_USER_ID),
+    ofType(actions.getConversationsByUserId),
     switchMap(({ id, openWith }) => this.chatService.getConversationsByUserId(id).pipe(
       map((convs: ConversationModel[]) => actions.getConversationsByUserIdSuccess(convs)),
       tap(({ convs }) => {
@@ -45,7 +45,7 @@ export class ChatEffects {
   ));
 
   searchConversations$ = createEffect(() => this.actions$.pipe(
-    ofType(actions.SEARCH_CONVS),
+    ofType(actions.searchConversations),
     switchMap(({ id, search }) => this.chatService.searchConversations(id, search).pipe(
       map((convs: ConversationModel[]) => actions.searchConversationsSuccess(convs)),
       catchError((err: HttpErrorResponse) => {
@@ -59,8 +59,8 @@ export class ChatEffects {
   ));
 
   setActiveConversation$ = createEffect(() => this.actions$.pipe(
-    ofType(actions.SET_ACTIVE_CONV),
-    switchMap(({ id, count }) => this.chatService.getMessagesByConversationId(id, count).pipe(
+    ofType(actions.setActiveConversation),
+    switchMap(({ id }) => this.chatService.getMessagesByConversationId(id).pipe(
       map((messages: ConversationMessageModel[]) => actions.getConverastionMessagesSuccess(messages)),
       catchError((err: HttpErrorResponse) => {
         this.notificationService.message.emit({

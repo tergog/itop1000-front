@@ -58,8 +58,8 @@
       margin: 0 auto;
       min-width: 35px;
       min-height: 35px;
-      width: 35px;
-      height: 35px;
+      width: 90px;
+      height: 40px;
       padding: 5px;
       background: none;
       box-shadow: none;
@@ -76,7 +76,9 @@
       }
 
       span {
-        display: none;
+        float: left;
+        font-weight: 600;
+        color: $text-color-5;
       }
     }
   }
