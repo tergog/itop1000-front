@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { filter, first } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 import * as jwtDecode from 'jwt-decode';
 
 import * as coreActions from 'app/core/actions/core.actions';
@@ -40,6 +40,21 @@ export class DevProfileService {
       .pipe(
         filter(res => !!res.length),
         first()
+      );
+  }
+
+  public onUploadPhoto(image: string): void {
+    this.userService.uploadPhoto(image)
+      .pipe(first())
+      .subscribe(
+        (token) => {
+          this.notificationsService.message.emit({
+            message: 'Photo added successfully',
+            type: ENotificationStatus.Success
+          });
+          this.onUpdateProfileInfo(token);
+        },
+        ({ error }) => this.handleErrorResponse(error)
       );
   }
 
