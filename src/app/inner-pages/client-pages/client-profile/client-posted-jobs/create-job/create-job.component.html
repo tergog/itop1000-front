@@ -12,7 +12,6 @@
   </div>
 
   <div class="d__flex d__flex--direction-column">
-  <div class="d__flex d__flex--direction-column">
     <span class="text text__sm text__color--1 text__fw--600">Categories</span>
       <app-drop-down-list [isEdit]="isEdit" dataName="Categories" formControlName="categories" [placeholder]="'Add Categories...'"></app-drop-down-list>
       <mat-error *ngIf="showError && form.get('categories').value?.length == 0">Categories required</mat-error>
@@ -69,5 +68,4 @@
     <app-button [type]="'transparent'" [text]="'Cancel'" (buttonClick)="onCancelClick()"></app-button>
     <app-button [text]="'Post'" (buttonClick)="onPostClick()"></app-button>
   </div>
-</div>
 

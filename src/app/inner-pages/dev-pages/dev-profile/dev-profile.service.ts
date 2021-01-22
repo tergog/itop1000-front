@@ -18,11 +18,6 @@ export class DevProfileService {
 
   public devProperties: DevProperties;
 
-  public selectedCategories: NameValueModel[] = [];
-  public selectedSkills: NameValueModel[] = [];
-  public selectedSoftSkills: NameValueModel[] = [];
-  public selectedLanguages: NameValueModel[] = [];
-
   constructor(
     private store: Store<fromCore.State>,
     private notificationsService: NotificationsService,
