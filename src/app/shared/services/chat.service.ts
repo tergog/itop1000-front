@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { ApiConstants } from 'app/constants/api.constants';
-import { ConversationMessageModel } from 'app/shared/models';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +29,7 @@ export class ChatService {
   }
 
   // Messages
-  public getMessagesByConversationId(convId: string, count: number = 20): Observable<object> {
-    return this.http.get(`${this.apiURL}${ApiConstants.chat.getMessagesById}/${convId}/${count}`, {});
+  public getMessagesByConversationId(convId: string, page: number, count: number): Observable<object> {
+    return this.http.get(`${this.apiURL}${ApiConstants.chat.getMessagesById}/${convId}/${page}/${count}`, {});
   }
 }

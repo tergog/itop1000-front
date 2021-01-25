@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Actions, ofType, createEffect } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -23,6 +23,13 @@ export class ChatEffects {
   ) {
   }
 
+  private emitErrorNotification(data: HttpErrorResponse) {
+    this.notificationService.message.emit({
+      type: ENotificationStatus.Error,
+      message: `[${data.status}] ${data.statusText}: ${data.error.message}`
+    });
+  }
+
   getUserConversations$ = createEffect(() => this.actions$.pipe(
     ofType(actions.getConversationsByUserId),
     switchMap(({ id, openWith }) => this.chatService.getConversationsByUserId(id).pipe(
@@ -35,10 +42,7 @@ export class ChatEffects {
         }
       }),
       catchError((err: HttpErrorResponse) => {
-        this.notificationService.message.emit({
-          type: ENotificationStatus.Error,
-          message: `[${err.status}] ${err.statusText}: ${err.error.message}`
-        });
+        this.emitErrorNotification(err);
         return of(actions.getConversationsByUserIdError(err));
       })
     ))
@@ -49,24 +53,18 @@ export class ChatEffects {
     switchMap(({ id, search }) => this.chatService.searchConversations(id, search).pipe(
       map((convs: ConversationModel[]) => actions.searchConversationsSuccess(convs)),
       catchError((err: HttpErrorResponse) => {
-        this.notificationService.message.emit({
-          type: ENotificationStatus.Error,
-          message: `[${err.status}] ${err.statusText}: ${err.error.message}`
-        });
+        this.emitErrorNotification(err);
         return of(actions.searchConversationsError(err));
       })
     ))
   ));
 
-  setActiveConversation$ = createEffect(() => this.actions$.pipe(
-    ofType(actions.setActiveConversation),
-    switchMap(({ id }) => this.chatService.getMessagesByConversationId(id).pipe(
+  getConversationMessages$ = createEffect(() => this.actions$.pipe(
+    ofType(actions.getConverastionMessages),
+    switchMap(({ convId, page, count }) => this.chatService.getMessagesByConversationId(convId, page, count).pipe(
       map((messages: ConversationMessageModel[]) => actions.getConverastionMessagesSuccess(messages)),
       catchError((err: HttpErrorResponse) => {
-        this.notificationService.message.emit({
-          type: ENotificationStatus.Error,
-          message: `[${err.status}] ${err.statusText}: ${err.error.message}`
-        });
+        this.emitErrorNotification(err);
         return of(actions.getConverastionMessageError(err));
       })
     ))

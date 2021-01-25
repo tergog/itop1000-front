@@ -27,7 +27,7 @@ export const GET_CONVS_MESSAGES = '[Chat] Get conversation messages';
 export const GET_CONVS_MESSAGES_SUCCESS = '[Chat] Get conversation messages success';
 export const GET_CONVS_MESSAGES_ERROR = '[Chat] Get conversation messages error';
 
-export const getConverastionMessages = createAction(GET_CONVS_MESSAGES, props<{ id: string, count: number }>());
+export const getConverastionMessages = createAction(GET_CONVS_MESSAGES, props<{ convId: string, page: number, count: number }>());
 export const getConverastionMessagesSuccess = createAction(GET_CONVS_MESSAGES_SUCCESS, (messages: ConversationMessageModel[]) => ({ messages }));
 export const getConverastionMessageError = createAction(GET_CONVS_MESSAGES_ERROR, (err: any) => err);
 

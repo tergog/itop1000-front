@@ -22,6 +22,7 @@ import {
 } from 'app/shared/models';
 import * as fromCore from 'app/core/reducers';
 import * as fromChat from 'app/core/chats/store/chat.reducer';
+import * as chatActions from 'app/core/chats/store/chats.actions';
 import { addNewMessage } from 'app/core/chats/store/chats.actions';
 import { slideInLeftAnimation } from 'app/shared/animations';
 import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
@@ -43,6 +44,7 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
 
   private textEditorInstance: SharedQuillInstanceModel;
   private textContent: ContentChange;
+  private lastPageLoaded: number = 1;
 
   public userTyping: string = null;
   public searchFC: FormControl = new FormControl('', [ Validators.required, Validators.maxLength(32) ]);
@@ -56,6 +58,12 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
   }
 
   ngOnInit(): void {
+    this.store.dispatch(chatActions.getConverastionMessages({
+      convId: this.chat.conversations.active,
+      page: this.lastPageLoaded++,
+      count: CHAT_MESSAGES_PER_PAGE
+    }));
+
     this.websocketService.receivedNewMessage().pipe(
       untilDestroyed(this),
       switchMap((message) => iif(
@@ -140,8 +148,11 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
 
   onHistoryScroll(): void {
     if (this.messagesWrapper?.nativeElement.scrollTop === 0 && this.chat.messages.data.length >= CHAT_MESSAGES_PER_PAGE) {
-
-      console.log('load more');
+      this.store.dispatch(chatActions.getConverastionMessages({
+        convId: this.chat.conversations.active,
+        page: this.lastPageLoaded++,
+        count: CHAT_MESSAGES_PER_PAGE
+      }))
     }
   }
 

@@ -110,7 +110,7 @@ export const reducer = createReducer(
     ...state,
     messages: {
       ...state.messages,
-      data: payload.messages,
+      data: payload.messages.concat(state.messages.data),
       loading: false
     }
   })),
@@ -141,6 +141,10 @@ export const reducer = createReducer(
     conversations: {
       ...state.conversations,
       active: payload.id
+    },
+    messages: {
+      ...state.messages,
+      data: []
     }
   })),
   on(actions.cancelActiveConversation, (state) => ({
