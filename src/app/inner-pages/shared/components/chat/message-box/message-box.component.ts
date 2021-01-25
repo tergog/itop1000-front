@@ -102,6 +102,14 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
 
   ngOnChanges(changes: SimpleChanges) {
     if(!changes.chat?.firstChange && changes.chat?.previousValue?.conversations.active !== changes.chat?.currentValue.conversations.active) {
+      this.lastPageLoaded = 1;
+
+      this.store.dispatch(chatActions.getConverastionMessages({
+        convId: this.chat.conversations.active,
+        page: this.lastPageLoaded++,
+        count: CHAT_MESSAGES_PER_PAGE
+      }));
+
       this.expectChangesThanScroll();
     }
   }
