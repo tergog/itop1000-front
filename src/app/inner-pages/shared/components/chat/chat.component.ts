@@ -3,13 +3,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { iif, Observable, of } from 'rxjs';
-import { catchError, first, switchMap, tap } from 'rxjs/operators';
+import { first, map, switchMap, tap } from 'rxjs/operators';
 
 import * as fromCore from 'app/core/reducers';
 import * as fromChats from 'app/core/chats/store/chat.reducer';
-import { ChatService } from 'app/shared/services';
-import { UserInfo } from 'app/shared/models';
 import * as chatActions from 'app/core/chats/store/chats.actions';
+import { ChatService } from 'app/shared/services';
+import { ConversationModel, UserInfo } from 'app/shared/models';
 import { EUserRole } from 'app/shared/enums';
 
 @Component({
@@ -36,29 +36,29 @@ export class ChatComponent implements OnInit, OnDestroy {
 
     this.user$.pipe(
       first(),
-      tap((a) => {
-        console.log('user.pipe', this.route.snapshot.params.id, a);
-      }),
-      switchMap((userInfo) => iif(
-        () => !!this.route.snapshot.params.id,
-        this.chatService.createNewConversation(userInfo.id, this.route.snapshot.params.id).pipe(
-          tap((a) => {
-            console.log('createNewConversation success', a);
-          }),
-          catchError(() => of(this.store.dispatch(chatActions.getConversationsByUserId({
-            id: userInfo.id,
-            openWith: this.route.snapshot.params.id
-          }))).pipe(
-            tap(() => this.location.replaceState(
-              userInfo.role === EUserRole.Client ? '/in/c/chat' : '/in/d/chat'
-            ))
-          )),
-        ),
-        of(this.store.dispatch(chatActions.getConversationsByUserId({
-          id: userInfo.id,
-          openWith: null
-        })))
-      ))
+      switchMap((user) => this.chatService.getConversationsByUserId(user.id).pipe(
+        tap((convs) => this.store.dispatch(chatActions.updateConversationsListSuccess(convs))),
+        switchMap((convs) => iif(
+          () => !!this.route.snapshot.params.id,
+          of(convs).pipe(
+            // mergeMap((convs) => convs),
+            map((convs: ConversationModel[]) => {
+              return convs.filter((conv) => {
+                return conv.participants.filter((part) => part.user.id === this.route.snapshot.params.id).length;
+              })[0];
+            }),
+            // filter((conv) => !!conv.participants.filter((part) => part.user.id === this.route.snapshot.params.id).length),
+            switchMap((conv: ConversationModel) => iif(
+              () => !!conv,
+              of(conv).pipe(tap((conv) => this.store.dispatch(chatActions.setActiveConversation({ convId: conv.id })))),
+              this.chatService.createNewConversation(user.id, this.route.snapshot.params.id).pipe(
+                tap((conv) => this.store.dispatch(chatActions.createNewConversation({ conv, open: true })))
+              )
+            )),
+            tap(() => this.location.replaceState(user.role === EUserRole.Client ? '/in/c/chat' : '/in/d/chat'))
+          )
+        ))
+      )),
     ).subscribe();
 
     /*this.websocketService.receivedNewMessage().pipe(
