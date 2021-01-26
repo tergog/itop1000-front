@@ -52,7 +52,6 @@
       <mat-error *ngIf="(showError && form.get('link').errors?.required)">Link required</mat-error>
       <mat-error *ngIf="(showError && form.get('link').errors?.linkInvalid)">Link is not correct</mat-error>
 
-
       <div class="w__100per">
         <app-drop-down-list [isEdit]="true" [allData]="allSkills$ | ngrxPush" formControlName="technologies" [placeholder]="'Add Technologies...'"></app-drop-down-list>
       </div>
