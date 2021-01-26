@@ -1,10 +1,13 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import {
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
-import { filter, first, takeUntil, tap } from 'rxjs/operators';
-import xorBy from 'lodash.xorby';
+import { filter, first, tap, takeUntil } from 'rxjs/operators';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
@@ -22,35 +25,16 @@ import { UpdateUserProfileAction } from 'app/core/actions/core.actions';
 })
 export class DevWorkExperienceComponent implements OnInit, OnDestroy {
 
+  @Input() isEdit: boolean;
   public isNewProject: boolean;
   public form: FormGroup;
   public userInfo$: Observable<UserInfo>;
   public userInfo: UserInfo;
   public ngUnsubscribe$ = new Subject<void>();
-  @ViewChild('category', {static: false}) category: ElementRef;
-
-  showError: boolean;
-
+  public showError: boolean;
   public logoUrl: string;
   public projectImages: string[] = [];
-
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-
-  public selectedTechnologies = [];
-  public availableTechnologies: NameValueModel[] = [
-
-    { name: 'Javascript', value: 1 },
-    { name: 'Typescript', value: 2 },
-    { name: 'CSS3', value: 3 },
-    { name: 'HTML5', value: 5 },
-    { name: 'AngularJS', value: 6 },
-    { name: 'Angular 9', value: 7 },
-    { name: 'Angular 10', value: 8 },
-    { name: 'Angular 7', value: 9 },
-    { name: 'Angular 8', value: 10 },
-    { name: 'Angular 2+', value: 11 },
-
-  ];
+  public allSkills$: Observable<NameValueModel[]>;
 
   constructor(
     private store: Store<fromCore.State>,
@@ -58,8 +42,7 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
     private matDialog: MatDialog,
     private developersService: DevelopersService,
     private utilsService: UtilsService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -68,9 +51,9 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
       tap((userInfo: UserInfo) => {
         this.devProfileService.devProperties = userInfo.devProperties;
         this.userInfo = userInfo;
-        this.updateTechnologies(this.selectedTechnologies);
       })
     );
+    this.allSkills$ = this.devProfileService.getStaticData('Skills');
   }
 
   public onAddClick(): void {
@@ -84,37 +67,20 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
   }
 
   public onSaveClick(): void {
+    if (!this.form.value.technologies.length) {
+      this.showError = true;
+      return;
+    }
+
     if (!this.form.valid) {
       this.showError = true;
       return;
     }
-    this.showError = false;
     const newDevProperties: DevProperties = { projects: [...(this.userInfo.devProperties.projects || []), this.form.value] };
     this.userInfo = { ...this.userInfo, devProperties: newDevProperties };
     this.store.dispatch(new UpdateUserProfileAction(this.userInfo));
     this.devProfileService.onSaveClick({ devProperties: newDevProperties });
     this.isNewProject = false;
-    this.availableTechnologies.push(...this.selectedTechnologies);
-    this.selectedTechnologies = [];
-  }
-
-  public onTechnologySelect({ option }: any): void {
-    this.availableTechnologies = this.availableTechnologies.filter(technology => technology.value !== option.value.value);
-    this.selectedTechnologies.push(option.value);
-    this.form.get('technologies').patchValue(this.selectedTechnologies);
-    this.focusReset();
-  }
-
-  public onTechnologyRemove(technology: NameValueModel): void {
-    this.selectedTechnologies = this.selectedTechnologies.filter(item => item.value !== technology.value);
-    this.availableTechnologies.push(technology);
-    this.form.get('technologies').patchValue(this.selectedTechnologies);
-    this.focusReset();
-  }
-
-  focusReset(): void {
-    this.category.nativeElement.blur();
-    setTimeout(() => this.category.nativeElement.focus(), 0);
   }
 
   public openUploadImageDialog(forLogo: boolean = false): void {
@@ -137,22 +103,11 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
     this.form = new FormGroup({
       title: new FormControl('', [Validators.required, Validators.minLength(8)]),
       description: new FormControl('', [Validators.required, Validators.minLength(10)]),
-      technologies: new FormControl([], [Validators.required]),
+      technologies: new FormControl([], []),
       link: new FormControl('', [Validators.required, this.utilsService.linkValidator()]),
       from: new FormControl('', [Validators.required]),
       to: new FormControl('', [Validators.required]),
     });
-  }
-
-  private disableEmptyFields(): void {
-    Object.keys(this.form.controls).forEach(field => {
-      return this.form.controls[field].value || this.form.controls[field].disable();
-    });
-  }
-
-  private updateTechnologies(technologies: NameValueModel[]): void {
-    this.selectedTechnologies = [...technologies];
-    this.availableTechnologies = xorBy(this.selectedTechnologies, this.availableTechnologies);
   }
 
   private uploadImage(image: string, forLogo: boolean): void {
@@ -168,5 +123,4 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe$.next(null);
     this.ngUnsubscribe$.complete();
   }
-
 }

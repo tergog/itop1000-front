@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { environment } from 'environments/environment';
 import { ApiConstants } from 'app/constants/api.constants';
-import { Developer } from 'app/shared/models';
+import { Developer, NameValueModel } from 'app/shared/models';
 
 @Injectable({
   providedIn: 'root'
@@ -26,4 +26,19 @@ export class DevelopersService {
     return this.http.post<string>(`${this.apiUrl}${ApiConstants.accounts.uploadProjectImage}`, {image});
   }
 
+  public getDeveloperCategories(): Observable<NameValueModel[]> {
+    return this.http.get<NameValueModel[]>(`${this.apiUrl}${ApiConstants.data.developerCategories}`);
+  }
+
+  public getDeveloperSkills(): Observable<NameValueModel[]> {
+    return this.http.get<NameValueModel[]>(`${this.apiUrl}${ApiConstants.data.developerSkills}`);
+  }
+
+  public getDeveloperSoftSkills(): Observable<NameValueModel[]> {
+    return this.http.get<NameValueModel[]>(`${this.apiUrl}${ApiConstants.data.developerSoftSkills}`);
+  }
+
+  public getDeveloperLanguages(): Observable<NameValueModel[]> {
+    return this.http.get<NameValueModel[]>(`${this.apiUrl}${ApiConstants.data.developerLanguages}`);
+  }
 }

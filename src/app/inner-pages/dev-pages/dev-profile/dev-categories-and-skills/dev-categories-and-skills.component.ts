@@ -5,7 +5,6 @@ import { first } from 'rxjs/operators';
 import { EDevProfileSectionNames } from 'app/inner-pages/dev-pages/dev-profile/shared/enums/devProfileSectionNames';
 import * as fromCore from 'app/core/reducers';
 
-
 @Component({
   selector: 'app-dev-categories-and-skills',
   templateUrl: './dev-categories-and-skills.component.html',
@@ -16,7 +15,9 @@ export class DevCategoriesAndSkillsComponent implements OnInit, OnDestroy {
   public isEdit: boolean;
   public DevProfileSectionNames = EDevProfileSectionNames;
 
-  constructor(private store: Store<fromCore.State>) { }
+  constructor(
+    private store: Store<fromCore.State>
+  ) { }
 
   ngOnInit(): void {
     this.store.select(fromCore.getUserInfo).pipe(first())
@@ -29,7 +30,5 @@ export class DevCategoriesAndSkillsComponent implements OnInit, OnDestroy {
     this.isEdit = !this.isEdit;
   }
 
-  ngOnDestroy(): void {
-
-  }
+  ngOnDestroy(): void {}
 }

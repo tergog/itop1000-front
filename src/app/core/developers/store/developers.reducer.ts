@@ -1,7 +1,7 @@
-import * as actions from './developers.actions';
 import { createReducer, on } from '@ngrx/store';
 
-import { Developer, Job } from 'app/shared/models';
+import * as actions from './developers.actions';
+import { Developer, Job, NameValueModel } from 'app/shared/models';
 
 export const developers = [
     {
@@ -140,6 +140,10 @@ export interface State {
   jobs: Job[];
   loading: boolean;
   error: boolean;
+  categories: NameValueModel[];
+  skills: NameValueModel[];
+  softSkills: NameValueModel[];
+  languages: NameValueModel[];
 }
 
 const INIT_STATE: State = {
@@ -147,8 +151,13 @@ const INIT_STATE: State = {
   developer: null, // developers[0]
   jobs: [],
   loading: false,
-  error: false
+  error: false,
+  categories: [],
+  skills: [],
+  softSkills: [],
+  languages: []
 };
+
 
 export const reducer = createReducer(
   INIT_STATE,
@@ -158,12 +167,12 @@ export const reducer = createReducer(
       return {
         ...state,
         loading: true
-      }
+      };
     }
   ),
   on(
     actions.searchDevelopersSuccess,
-    (state, {developersList}) => ({
+    (state, { developersList }) => ({
       ...state,
       developers: developersList,
       loading: false
@@ -176,12 +185,12 @@ export const reducer = createReducer(
         ...state,
         error: true,
         loading: false
-      }
+      };
     }
   ),
   on(
     actions.updateDeveloper,
-    (state, {id}) => {
+    (state, { id }) => {
       const developerById: Developer = state.developers.find((dev: Developer) => dev.id === id);
       return {
         ...state,
@@ -196,7 +205,7 @@ export const reducer = createReducer(
         ...state,
         jobs: payload.jobs,
         loading: false
-      }
+      };
     }
   ),
   on(
@@ -205,7 +214,7 @@ export const reducer = createReducer(
       return {
         ...state,
         loading: true
-      }
+      };
     }
   ),
   on(
@@ -215,14 +224,14 @@ export const reducer = createReducer(
         ...state,
         loading: false,
         error: true
-      }
+      };
     }
   ),
   on(
     actions.setDeveloperSuccess,
-    (state, {developer}) => ({
+    (state, { developer }) => ({
       ...state,
-      developer: {...developer}
+      developer: { ...developer }
     })
   ),
   on(
@@ -232,21 +241,67 @@ export const reducer = createReducer(
         ...state,
         loading: false,
         error: true
-      }
+      };
     }
-  )
+  ),
+  on(
+    actions.getDeveloperCategoriesSuccess,
+    (state, { data }) => ({
+      ...state,
+      categories: data
+    })
+  ),
+  on(
+    actions.getDeveloperSkillsSuccess,
+    (state, { data }) => ({
+      ...state,
+      skills: data
+    })
+  ),
+  on(
+    actions.getDeveloperLanguagesSuccess,
+    (state, { data }) => ({
+      ...state,
+      languages: data
+    })
+  ),
+  on(
+    actions.getDeveloperSoftSkillsSuccess,
+    (state, { data }) => ({
+      ...state,
+      softSkills: data
+    })
+  ),
 );
 
 /** Selector return is Authenticated */
 export const getDevelopers = (state: State): Developer[] => {
   return state.developers;
 };
+
 export const getJobs = (state: State): Job[] => {
   return state.jobs;
 };
+
 export const getDeveloper = (state: State): Developer => {
   return state.developer;
 };
 export const getLoading = (state: State): boolean => {
   return state.loading;
+};
+
+export const getCategories = (state: State): NameValueModel[] => {
+  return state.categories;
+};
+
+export const getSkills = (state: State): NameValueModel[] => {
+  return state.skills;
+};
+
+export const getSoftSkills = (state: State): NameValueModel[] => {
+  return state.softSkills;
+};
+
+export const getLanguages = (state: State): NameValueModel[] => {
+  return state.languages;
 };

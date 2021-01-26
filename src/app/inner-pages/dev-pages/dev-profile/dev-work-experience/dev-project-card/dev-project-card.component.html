@@ -71,30 +71,7 @@
         <mat-datepicker #pickerTo></mat-datepicker>
       </mat-form-field>
     </div>
-
-    <mat-form-field class="chip-list m__top--10" [class.edit-mode]="isEdit">
-      <mat-chip-list #chipListTechnologies formControlName="technologies">
-        <mat-chip *ngFor="let technology of selectedTechnologies"
-                  [selectable]="false"
-                  [removable]="isEdit"
-                  (removed)="onTechnologyRemove(technology)">
-          {{ technology.name }}
-          <mat-icon matChipRemove *ngIf="isEdit">cancel</mat-icon>
-        </mat-chip>
-        <input placeholder="Add Technology..."
-               [readOnly]="!isEdit"
-               [matChipInputFor]="chipListTechnologies"
-               [matAutocomplete]="autoTechnologies"
-               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-               [matChipInputAddOnBlur]="true">
-      </mat-chip-list>
-
-      <mat-autocomplete #autoTechnologies="matAutocomplete" (optionSelected)="onTechnologySelect($event)">
-        <mat-option *ngFor="let technology of availableTechnologies" [value]="technology">
-          {{ technology.name }}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
+    <app-drop-down-list [isEdit]="isEdit" [allData]="allSkills$ | ngrxPush" formControlName="technologies" [placeholder]="'Add Technologies...'"></app-drop-down-list>
   </div>
 
   <div class="text__right" *ngIf="isEdit">

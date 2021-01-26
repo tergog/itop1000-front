@@ -6,12 +6,10 @@
                         [project]="project"
                         [id]="i"></app-dev-project-card>
 
-
   <div class="m__top--30 m__bottom--10">
   <app-button [text]="'Add project'"
               (buttonClick)="onAddClick()"></app-button>
   </div>
-
 
   <div class="d__flex d__flex--direction-column d__flex--items-center p__20" *ngIf="!isNewProject && !userInfo.devProperties.projects?.length">
     <span class="text text__title text__color--1 m__top--50"> You have not added any project </span>
@@ -54,29 +52,10 @@
       <mat-error *ngIf="(showError && form.get('link').errors?.required)">Link required</mat-error>
       <mat-error *ngIf="(showError && form.get('link').errors?.linkInvalid)">Link is not correct</mat-error>
 
-      <mat-form-field class="chip-list m__top--10 w__350" [class.edit-mode]="isNewProject">
-        <mat-chip-list #chipListTechnologies formControlName="technologies">
-          <mat-chip *ngFor="let technology of selectedTechnologies"
-                    [selectable]="false"
-                    [removable]="isNewProject"
-                    (removed)="onTechnologyRemove(technology)"> {{ technology.name }}
-            <mat-icon matChipRemove *ngIf="isNewProject">cancel</mat-icon>
-          </mat-chip>
-          <input #category placeholder="Add Technology..."
-                 [readOnly]="!isNewProject"
-                 [matChipInputFor]="chipListTechnologies"
-                 [matAutocomplete]="autoTechnologies"
-                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                 [matChipInputAddOnBlur]="true">
-        </mat-chip-list>
-
-        <mat-autocomplete #autoTechnologies="matAutocomplete" (optionSelected)="onTechnologySelect($event)">
-          <mat-option *ngFor="let technology of availableTechnologies"
-                      [value]="technology"> {{ technology.name }}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-      <mat-error class="m__bottom--10" *ngIf="(showError && form.get('technologies').errors?.required)">Technologies required</mat-error>
+      <div class="w__100per">
+        <app-drop-down-list [isEdit]="true" [allData]="allSkills$ | ngrxPush" formControlName="technologies" [placeholder]="'Add Technologies...'"></app-drop-down-list>
+      </div>
+      <mat-error class="m__bottom--10" *ngIf="(showError && !form.get('technologies').value.length)">Technologies required</mat-error>
 
       <div>
         <mat-form-field appearance="fill">

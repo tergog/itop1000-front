@@ -4,6 +4,11 @@ import { Observable } from 'rxjs';
 
 import { UserInfo } from 'app/shared/models';
 import * as fromCore from 'app/core/reducers';
+import {
+  getDeveloperCategoriesAction,
+  getDeveloperSkillsAction
+} from 'app/core/developers/store/developers.actions';
+import * as fromDev from 'app/core/developers/store';
 
 @Component({
   selector: 'app-dev-contact-info',
@@ -21,10 +26,13 @@ export class DevContactInfoComponent implements OnInit {
 
   constructor(
     private store: Store<fromCore.State>,
-    ) { }
+    private storeDev: Store<fromDev.State>
+  ) { }
 
   ngOnInit(): void {
     this.userInfo$ = this.store.select(fromCore.getUserInfo);
+    this.storeDev.dispatch(getDeveloperSkillsAction());
+    this.storeDev.dispatch(getDeveloperCategoriesAction());
   }
 
   public editAccountToggle(): void {

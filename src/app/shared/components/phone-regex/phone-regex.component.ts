@@ -1,5 +1,5 @@
-import {Component, EventEmitter, forwardRef, HostBinding, Input, OnInit, Output} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
+import { Component, forwardRef, HostBinding, Input, OnInit } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-phone-regex',
@@ -15,7 +15,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 })
 export class PhoneRegexComponent implements OnInit, ControlValueAccessor {
 
-  @HostBinding('class.inner') get valid() { return this.type === 'inner' }
+  @HostBinding('class.inner') get valid() { return this.type === 'inner'; }
   @Input() type: string;
   @Input() placeholder;
   @Input() isHiddenPassword: boolean;
