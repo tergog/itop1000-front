@@ -1,6 +1,8 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import * as fromChats from 'app/core/chats/store/chat.reducer';
 import * as chatActions from 'app/core/chats/store/chats.actions';
@@ -10,18 +12,20 @@ import { NotificationsService, WebsocketService } from 'app/shared/services';
 import { ConversationMemberModel } from 'app/shared/models/conversation-member.model';
 import { EConversationTypeEnum } from 'app/shared/enums';
 import { CHAT_ONLINE_DELTA_MS } from 'app/constants/constants';
-import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
 
+@UntilDestroy()
 @Component({
   selector: 'app-sidebar-rooms',
   templateUrl: './sidebar-rooms.component.html',
   styleUrls: [ './sidebar-rooms.component.scss' ]
 })
-export class SidebarRoomsComponent implements OnInit {
+export class SidebarRoomsComponent implements OnInit, OnDestroy {
   @Input() user: UserInfo;
   @Input() chat: fromChats.State;
 
-  public searchFC: FormControl = new FormControl('', [ Validators.required, Validators.maxLength(32) ]);
+  @ViewChild('search', { read: ElementRef }) searchInput: ElementRef;
+
+  public searchFC: FormControl = new FormControl('', [ Validators.maxLength(32) ]);
 
   constructor(
     private store: Store<fromCore.State>,
@@ -31,30 +35,24 @@ export class SidebarRoomsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.searchFC.valueChanges.pipe(
+      untilDestroyed(this),
+      debounceTime(500),
+      distinctUntilChanged(),
+      tap((term) => this.searchFC.valid && this.store.dispatch(chatActions.searchConversations({ userId: this.user.id, term })))
+    ).subscribe();
+
     this.websocketService.receivedOnline().subscribe((data) => {
       this.store.dispatch(chatActions.updateParticipantLastSeen(data));
     });
   }
 
-  onConversationsSearch(): void {
-    if (this.searchFC.enabled) {
-      if (this.searchFC.value && this.searchFC.valid) {
-        this.store.dispatch(chatActions.searchConversations({
-          id: this.user.id,
-          search: this.searchFC.value
-        }));
-      } else {
-        this.notificationsService.message.emit({
-          type: ENotificationStatus.Error,
-          message: 'Search request must be more 0 and less than 32 chars!'
-        });
-      }
-    }
+  ngOnDestroy(): void {
   }
 
   onConversationClick(chatId: string): void {
     if (chatId !== this.chat.conversations.active) {
-      this.store.dispatch(chatActions.setActiveConversation({ id: chatId }));
+      this.store.dispatch(chatActions.setActiveConversation({ convId: chatId }));
       this.websocketService.joinChat(this.user.id, chatId);
     }
   }
@@ -62,16 +60,6 @@ export class SidebarRoomsComponent implements OnInit {
   @HostListener('document:keydown.escape')
   onKeydownHandler(): void {
     this.store.dispatch(chatActions.cancelActiveConversation());
-  }
-
-  onConversationSearchCancel(value: string): void {
-    if (!value.length) {
-      this.store.dispatch(chatActions.getConversationsByUserId({
-        id: this.user.id,
-        openWith: null
-      }));
-      this.store.dispatch(chatActions.searchConversationsCancel());
-    }
   }
 
   getConversationPartners(conv: ConversationModel): ConversationMemberModel[] {
