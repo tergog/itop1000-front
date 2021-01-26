@@ -9,7 +9,6 @@ export interface State {
   conversations: {
     data: ConversationModel[];
     loading: boolean;
-    search: boolean;
     error: HttpErrorResponse;
     active: string;
   };
@@ -24,7 +23,6 @@ const INIT_STATE: State = {
   conversations: {
     data: [],
     loading: false,
-    search: false,
     error: null,
     active: null
   },
@@ -39,14 +37,14 @@ export const reducer = createReducer(
   INIT_STATE,
 
   // Common
-  on(actions.getConversationsByUserId, (state) => ({
+  on(actions.updateConversationsList, (state) => ({
     ...state,
     conversations: {
       ...state.conversations,
       loading: true
     }
   })),
-  on(actions.getConversationsByUserIdSuccess, (state, payload) => ({
+  on(actions.updateConversationsListSuccess, (state, payload) => ({
     ...state,
     conversations: {
       ...state.conversations,
@@ -54,7 +52,7 @@ export const reducer = createReducer(
       loading: false
     }
   })),
-  on(actions.getConversationsByUserIdError, (state, err) => ({
+  on(actions.updateConversationsListError, (state, err) => ({
     ...state,
     conversations: {
       ...state.conversations,
@@ -69,7 +67,6 @@ export const reducer = createReducer(
     ...state,
     conversations: {
       ...state.conversations,
-      search: true,
       loading: true
     }
   })),
@@ -87,13 +84,6 @@ export const reducer = createReducer(
       ...state.conversations,
       error: err,
       loading: false
-    }
-  })),
-  on(actions.searchConversationsCancel, (state) => ({
-    ...state,
-    conversations: {
-      ...state.conversations,
-      search: false
     }
   })),
 
@@ -140,7 +130,7 @@ export const reducer = createReducer(
     ...state,
     conversations: {
       ...state.conversations,
-      active: payload.id
+      active: payload.convId
     },
     messages: {
       ...state.messages,
@@ -176,6 +166,16 @@ export const reducer = createReducer(
           } : part;
         })
       }))
+    }
+  })),
+
+  // Create new conversation
+  on(actions.createNewConversation, (state, payload) => ({
+    ...state,
+    conversations: {
+      ...state.conversations,
+      data: state.conversations.data.concat(payload.conv),
+      active: payload.open ? payload.conv[0].id : null
     }
   }))
 );

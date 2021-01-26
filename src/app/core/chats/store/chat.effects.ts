@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
@@ -24,33 +24,19 @@ export class ChatEffects {
   }
 
   private emitErrorNotification(data: HttpErrorResponse) {
+    if (isDevMode) {
+      console.error('[Chat effects]:', data);
+    }
+
     this.notificationService.message.emit({
       type: ENotificationStatus.Error,
-      message: `[${data.status}] ${data.statusText}: ${data.error.message}`
+      message: `[${data.status || 'Unknown status'}] ${data.statusText || 'Unknown error'}: ${data.error?.message || 'Unknown'}`
     });
   }
 
-  getUserConversations$ = createEffect(() => this.actions$.pipe(
-    ofType(actions.getConversationsByUserId),
-    switchMap(({ id, openWith }) => this.chatService.getConversationsByUserId(id).pipe(
-      map((convs: ConversationModel[]) => actions.getConversationsByUserIdSuccess(convs)),
-      tap(({ convs }) => {
-        if (openWith) {
-          const chatId = convs.filter((conv) => conv.participants.filter((part) => part.user.id === openWith).length)[0].id;
-          this.store.dispatch(actions.setActiveConversation({ id: chatId }));
-          this.websocketService.joinChat(id, chatId);
-        }
-      }),
-      catchError((err: HttpErrorResponse) => {
-        this.emitErrorNotification(err);
-        return of(actions.getConversationsByUserIdError(err));
-      })
-    ))
-  ));
-
   searchConversations$ = createEffect(() => this.actions$.pipe(
     ofType(actions.searchConversations),
-    switchMap(({ id, search }) => this.chatService.searchConversations(id, search).pipe(
+    switchMap(({ userId, term }) => this.chatService.searchConversations(userId, term).pipe(
       map((convs: ConversationModel[]) => actions.searchConversationsSuccess(convs)),
       catchError((err: HttpErrorResponse) => {
         this.emitErrorNotification(err);
