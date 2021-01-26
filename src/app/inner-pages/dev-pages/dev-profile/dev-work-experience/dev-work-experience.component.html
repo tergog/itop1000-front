@@ -54,9 +54,9 @@
 
 
       <div class="w__100per">
-        <app-drop-down-list [isEdit]="true" dataName="Skills" formControlName="technologies" [placeholder]="'Add Technologies...'"></app-drop-down-list>
+        <app-drop-down-list [isEdit]="true" [allData]="allSkills$ | ngrxPush" formControlName="technologies" [placeholder]="'Add Technologies...'"></app-drop-down-list>
       </div>
-      <mat-error class="m__bottom--10" *ngIf="(showError && form.get('technologies').value.length == 0)">Technologies required</mat-error>
+      <mat-error class="m__bottom--10" *ngIf="(showError && !form.get('technologies').value.length)">Technologies required</mat-error>
 
       <div>
         <mat-form-field appearance="fill">

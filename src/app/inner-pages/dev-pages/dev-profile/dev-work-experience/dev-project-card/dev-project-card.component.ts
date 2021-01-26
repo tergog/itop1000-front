@@ -8,6 +8,7 @@ import { Store } from '@ngrx/store';
 import { filter, first } from 'rxjs/operators';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { cloneDeep } from 'lodash';
+import { Observable } from 'rxjs';
 
 import * as coreActions from 'app/core/actions/core.actions';
 import * as fromCore from 'app/core/reducers';
@@ -15,6 +16,7 @@ import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-pro
 import { UserService, NotificationsService, DevelopersService } from 'app/shared/services';
 import { DevProject } from 'app/shared/models/dev-project.model';
 import { UploadPhotoDialogComponent } from 'app/inner-pages/shared/components/upload-photo-dialog/upload-photo-dialog.component';
+import { NameValueModel } from 'app/shared/models';
 
 @Component({
   selector: 'app-dev-project-card',
@@ -30,6 +32,7 @@ export class DevProjectCardComponent implements OnInit {
   public projectImages: string[];
   public form: FormGroup;
   public isEdit = false;
+  public allSkills$: Observable<NameValueModel[]>;
 
   constructor(
     private devProfileService: DevProfileService,
@@ -46,6 +49,7 @@ export class DevProjectCardComponent implements OnInit {
     this.form.get('technologies').setValue(cloneDeep(this.project.technologies));
     this.logoUrl = this.project.logo;
     this.projectImages = this.project.images;
+    this.allSkills$ = this.devProfileService.getStaticData('Skills');
   }
 
   private disableEmptyFields(): void {

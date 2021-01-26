@@ -8,11 +8,11 @@ import {
 import { Store } from '@ngrx/store';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { JobsService, NotificationsService } from 'app/shared/services';
-import { NotificationMessage } from 'app/shared/models';
+import { NameValueModel, NotificationMessage } from 'app/shared/models';
 import { State } from 'app/core/reducers/index';
 import { GetJobsAction } from 'app/core/client/store/actions';
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
@@ -29,6 +29,7 @@ export class CreateJobComponent implements OnInit, OnDestroy {
   @Output() isEdit = new EventEmitter();
   @Output() editToggle = new EventEmitter();
   public form: FormGroup;
+  public allCategories$: Observable<NameValueModel[]>;
   public ngUnsubscribe$ = new Subject<void>();
   showError: boolean;
 
@@ -41,6 +42,7 @@ export class CreateJobComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initForm();
+    this.allCategories$ = this.devProfileService.getStaticData('Categories');
   }
 
   public onPostClick(): void {

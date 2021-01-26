@@ -55,16 +55,20 @@ export const getLoading = createSelector(
 
 export const getCategories = createSelector(
   getDevelopersState,
-  fromDevelopers.getCategories);
+  fromDevelopers.getCategories
+);
 
 export const getSkills = createSelector(
   getDevelopersState,
-  fromDevelopers.getSkills);
+  fromDevelopers.getSkills
+);
 
 export const getSoftSkills = createSelector(
   getDevelopersState,
-  fromDevelopers.getSoftSkills);
+  fromDevelopers.getSoftSkills
+);
 
 export const getLanguages = createSelector(
   getDevelopersState,
-  fromDevelopers.getLanguages);
+  fromDevelopers.getLanguages
+);

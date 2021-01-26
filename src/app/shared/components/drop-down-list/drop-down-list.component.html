@@ -1,10 +1,11 @@
-<mat-form-field class="m__top--10" [class.edit-mode]="isEdit">
-  <mat-chip-list #chipListData [(ngModel)]="value">
+<mat-form-field  class="m__top--10" [class.edit-mode]="isEdit">
+  <mat-chip-list #chipListData>
     <mat-chip *ngFor="let item of value"
               [selectable]="false"
               [disabled]="!isEdit"
               [removable]="isEdit"
-              (removed)="onChipRemove(item)">
+              (removed)="onChipRemove(item)"
+    >
       {{ item.name }}
       <mat-icon matChipRemove *ngIf="isEdit">cancel</mat-icon>
     </mat-chip>
@@ -17,12 +18,11 @@
     >
   </mat-chip-list>
 
-  <mat-autocomplete #autoData="matAutocomplete" (optionSelected)="onChipSelect($event.option.value)">
-    <mat-optgroup *ngrxLet="availableData$ as availableData">
+  <mat-autocomplete #autoData="matAutocomplete"  (optionSelected)="onChipSelect($event.option.value)">
+    <mat-optgroup *ngrxLet="availableData$ as availableData" >
       <mat-option *ngFor="let item of availableData" [value]="item">
         {{ item.name }}
       </mat-option>
     </mat-optgroup>
   </mat-autocomplete>
-
 </mat-form-field>

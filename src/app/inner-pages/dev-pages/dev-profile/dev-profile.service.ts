@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { filter, first } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 import * as jwtDecode from 'jwt-decode';
 
 import * as coreActions from 'app/core/actions/core.actions';
@@ -36,11 +36,7 @@ export class DevProfileService {
   }
 
   public getStaticData(data: string) {
-    return this.developersStore.select(fromDevelopers[`get${data}`], )
-      .pipe(
-        filter(res => !!res.length),
-        first()
-      );
+    return this.developersStore.select(fromDevelopers[`get${data}`], );
   }
 
   public onUploadPhoto(image: string): void {
@@ -69,7 +65,7 @@ export class DevProfileService {
           });
           this.onUpdateProfileInfo(token);
         },
-        ({error}) => this.handleErrorResponse(error)
+        ({ error }) => this.handleErrorResponse(error)
       );
   }
 
@@ -84,7 +80,7 @@ export class DevProfileService {
           });
           this.onUpdateProfileInfo(token);
         },
-        ({error}) => this.handleErrorResponse(error)
+        ({ error }) => this.handleErrorResponse(error)
       );
   }
 

@@ -10,6 +10,7 @@ import {
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
 import * as fromCore from 'app/core/reducers';
@@ -29,9 +30,9 @@ export class DevProfileEditFormComponent implements OnInit {
   @ViewChild('category', {static: false}) category: ElementRef;
   @ViewChild('skills', {static: false}) skills: ElementRef;
 
+  public allCategories$: Observable<NameValueModel[]>;
+  public allSkills$: Observable<NameValueModel[]>;
   public form: FormGroup;
-  public allCategories: NameValueModel[] = [];
-  public allSkills: NameValueModel[] = [];
 
   constructor(
     public devProfileService: DevProfileService,
@@ -44,9 +45,12 @@ export class DevProfileEditFormComponent implements OnInit {
       .pipe(first())
       .subscribe((userInfo: UserInfo) => {
         this.devProfileService.devProperties = userInfo.devProperties ? userInfo.devProperties : {};
-        this.form.get('skills').setValue([...this.devProfileService.devProperties.skills]);
-        this.form.get('categories').setValue([...this.devProfileService.devProperties.categories]);
+        this.form.get('skills').setValue([ ...this.devProfileService.devProperties.skills ]);
+        this.form.get('categories').setValue([ ...this.devProfileService.devProperties.categories ]);
       });
+
+    this.allCategories$ = this.devProfileService.getStaticData('Categories');
+    this.allSkills$ = this.devProfileService.getStaticData('Skills');
   }
 
   public onEditClick(): void {

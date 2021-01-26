@@ -1,11 +1,9 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   Component,
-  ElementRef,
   Input,
   OnDestroy,
   OnInit,
-  ViewChild
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
@@ -14,12 +12,11 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
 import { DevelopersService, UtilsService } from 'app/shared/services';
-import { DevProperties, UserInfo } from 'app/shared/models';
+import { DevProperties, NameValueModel, UserInfo } from 'app/shared/models';
 import * as fromCore from 'app/core/reducers';
 import { UploadPhotoDialogComponent } from 'app/inner-pages/shared/components/upload-photo-dialog/upload-photo-dialog.component';
 import { UpdateUserProfileAction } from 'app/core/actions/core.actions';
-import * as fromDev from 'app/core/developers/store';
-import { getDeveloperSkills } from 'app/core/developers/store/developers.actions';
+
 
 @Component({
   selector: 'app-dev-work-experience',
@@ -28,18 +25,16 @@ import { getDeveloperSkills } from 'app/core/developers/store/developers.actions
 })
 export class DevWorkExperienceComponent implements OnInit, OnDestroy {
 
+  @Input() isEdit: boolean;
   public isNewProject: boolean;
   public form: FormGroup;
   public userInfo$: Observable<UserInfo>;
   public userInfo: UserInfo;
   public ngUnsubscribe$ = new Subject<void>();
-  @Input() isEdit: boolean;
-  @ViewChild('category', {static: false}) category: ElementRef;
-
-  showError: boolean;
-
+  public showError: boolean;
   public logoUrl: string;
   public projectImages: string[] = [];
+  public allSkills$: Observable<NameValueModel[]>;
 
   constructor(
     private store: Store<fromCore.State>,
@@ -47,8 +42,6 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
     private matDialog: MatDialog,
     private developersService: DevelopersService,
     private utilsService: UtilsService,
-    private developerService: DevelopersService,
-    private storeDev: Store<fromDev.State>,
   ) {}
 
   ngOnInit(): void {
@@ -56,13 +49,11 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
 
     this.userInfo$ = this.store.select(fromCore.getUserInfo).pipe(
       tap((userInfo: UserInfo) => {
-        console.log(userInfo);
         this.devProfileService.devProperties = userInfo.devProperties;
         this.userInfo = userInfo;
       })
     );
-
-    this.storeDev.dispatch(getDeveloperSkills());
+    this.allSkills$ = this.devProfileService.getStaticData('Skills');
   }
 
   public onAddClick(): void {
@@ -85,10 +76,10 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
       this.showError = true;
       return;
     }
-    const newDevProperties: DevProperties = {projects: [...(this.userInfo.devProperties.projects || []), this.form.value]};
-    this.userInfo = {...this.userInfo, devProperties: newDevProperties};
+    const newDevProperties: DevProperties = { projects: [...(this.userInfo.devProperties.projects || []), this.form.value] };
+    this.userInfo = { ...this.userInfo, devProperties: newDevProperties };
     this.store.dispatch(new UpdateUserProfileAction(this.userInfo));
-    this.devProfileService.onSaveClick({devProperties: newDevProperties});
+    this.devProfileService.onSaveClick({ devProperties: newDevProperties });
     this.isNewProject = false;
   }
 
@@ -124,7 +115,7 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe$))
       .subscribe(
         url => forLogo ? this.logoUrl = url : this.projectImages.push(url),
-        ({error}) => console.log(error)
+        ({ error }) => console.log(error)
       );
   }
 

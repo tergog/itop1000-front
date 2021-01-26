@@ -9,14 +9,14 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { MatSelectChange } from '@angular/material/select';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { cloneDeep } from 'lodash';
 
 import { GetJobsAction } from 'app/core/client/store/actions';
 import { State } from 'app/core/reducers/index';
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
-import { Job } from 'app/shared/models';
+import { Job, NameValueModel } from 'app/shared/models';
 import { JobsService } from 'app/shared/services';
 
 @Component({
@@ -34,6 +34,7 @@ export class EditJobDialogComponent implements OnInit, OnDestroy {
   selectedOpt: string;
 
   public ngUnsubscribe$ = new Subject<void>();
+  public allCategories$: Observable<NameValueModel[]>;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private store: Store<State>,
@@ -46,6 +47,7 @@ export class EditJobDialogComponent implements OnInit, OnDestroy {
     this.job = cloneDeep(this.data.job);
     this.initForm();
     this.form.patchValue(this.job);
+    this.allCategories$ = this.devProfileService.getStaticData('Categories');
   }
 
   private initForm(): void {

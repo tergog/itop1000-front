@@ -4,9 +4,6 @@ import { first } from 'rxjs/operators';
 
 import { EDevProfileSectionNames } from 'app/inner-pages/dev-pages/dev-profile/shared/enums/devProfileSectionNames';
 import * as fromCore from 'app/core/reducers';
-import * as fromDev from 'app/core/developers/store';
-import { DevelopersService } from 'app/shared/services';
-import { getDeveloperCategories, getDeveloperSkills } from 'app/core/developers/store/developers.actions';
 
 @Component({
   selector: 'app-dev-categories-and-skills',
@@ -20,8 +17,6 @@ export class DevCategoriesAndSkillsComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<fromCore.State>,
-    private developerService: DevelopersService,
-    private storeDev: Store<fromDev.State>
   ) { }
 
   ngOnInit(): void {
@@ -29,16 +24,11 @@ export class DevCategoriesAndSkillsComponent implements OnInit, OnDestroy {
     .subscribe((userInfo) => {
       this.isEdit = !userInfo.devProperties.skills?.length && !userInfo.devProperties.categories?.length;
     });
-
-    this.storeDev.dispatch(getDeveloperSkills());
-    this.storeDev.dispatch(getDeveloperCategories());
   }
 
   public onEditClick(): void {
     this.isEdit = !this.isEdit;
   }
 
-  ngOnDestroy(): void {
-
-  }
+  ngOnDestroy(): void {}
 }

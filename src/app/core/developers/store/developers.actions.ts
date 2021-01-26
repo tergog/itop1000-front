@@ -36,10 +36,10 @@ export const setDeveloperSuccess = createAction(SET_DEVELOPER_SUCCESS, (develope
 export const setDeveloperError = createAction(SET_DEVELOPER_ERROR, (error: any) => (error));
 export const updateDeveloper = createAction(UPDATE_DEVELOPER, props<{ id: string }>());
 
-export const getDeveloperSkills = createAction(GET_DEVELOPER_SKILLS);
-export const getDeveloperCategories = createAction(GET_DEVELOPER_CATEGORIES);
-export const getDeveloperLanguages = createAction(GET_DEVELOPER_LANGUAGES);
-export const getDeveloperSoftSkills = createAction(GET_DEVELOPER_SOFT_SKILLS);
+export const getDeveloperSkillsAction = createAction(GET_DEVELOPER_SKILLS);
+export const getDeveloperCategoriesAction = createAction(GET_DEVELOPER_CATEGORIES);
+export const getDeveloperLanguagesAction = createAction(GET_DEVELOPER_LANGUAGES);
+export const getDeveloperSoftSkillsAction = createAction(GET_DEVELOPER_SOFT_SKILLS);
 
 export const getDeveloperSkillsSuccess = createAction(
   GET_DEVELOPER_SKILLS_SUCCESS
