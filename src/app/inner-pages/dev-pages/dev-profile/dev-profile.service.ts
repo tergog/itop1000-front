@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs/operators';
 import * as jwtDecode from 'jwt-decode';
+import { Observable } from 'rxjs';
 
 import * as coreActions from 'app/core/actions/core.actions';
 import { TOKEN } from 'app/constants/constants';
 import { UserService } from 'app/shared/services';
-import { UserInfo } from 'app/shared/models';
+import { NameValueModel, UserInfo } from 'app/shared/models';
 import * as fromCore from 'app/core/reducers';
 import { DevProperties } from 'app/shared/models/dev-properties.model';
 import { NotificationsService } from 'app/shared/services/notifications.service';
@@ -22,7 +23,7 @@ export class DevProfileService {
     private store: Store<fromCore.State>,
     private notificationsService: NotificationsService,
     private userService: UserService,
-    private developersStore: Store<fromDevelopers.State>,
+    private developersStore: Store<fromDevelopers.State>
   ) {}
 
   public onSaveClick(userInfo: Partial<UserInfo>): void {
@@ -35,7 +36,7 @@ export class DevProfileService {
       );
   }
 
-  public getStaticData(data: string) {
+  public getStaticData(data: string): Observable<NameValueModel[]> {
     return this.developersStore.select(fromDevelopers[`get${data}`], );
   }
 

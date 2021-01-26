@@ -21,7 +21,7 @@ export class ClientPostedJobsComponent implements OnInit {
   constructor(
     private store: Store<State>,
     private jobsService: JobsService,
-    private router: Router,
+    private router: Router
   ) { }
 
   ngOnInit(): void {

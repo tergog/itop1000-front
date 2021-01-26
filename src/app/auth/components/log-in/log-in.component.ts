@@ -20,7 +20,7 @@ export class LogInComponent implements OnInit, OnDestroy {
   constructor(
     private utilsService: UtilsService,
     private userService: UserService,
-    private router: Router,
+    private router: Router
   ) { }
 
   ngOnInit(): void {

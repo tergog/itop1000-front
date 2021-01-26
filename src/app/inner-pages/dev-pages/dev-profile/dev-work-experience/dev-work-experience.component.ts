@@ -41,7 +41,7 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
     private devProfileService: DevProfileService,
     private matDialog: MatDialog,
     private developersService: DevelopersService,
-    private utilsService: UtilsService,
+    private utilsService: UtilsService
   ) {}
 
   ngOnInit(): void {

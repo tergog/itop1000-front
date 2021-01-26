@@ -172,7 +172,7 @@ export const reducer = createReducer(
   ),
   on(
     actions.searchDevelopersSuccess,
-    (state, {developersList}) => ({
+    (state, { developersList }) => ({
       ...state,
       developers: developersList,
       loading: false
@@ -190,7 +190,7 @@ export const reducer = createReducer(
   ),
   on(
     actions.updateDeveloper,
-    (state, {id}) => {
+    (state, { id }) => {
       const developerById: Developer = state.developers.find((dev: Developer) => dev.id === id);
       return {
         ...state,
@@ -229,9 +229,9 @@ export const reducer = createReducer(
   ),
   on(
     actions.setDeveloperSuccess,
-    (state, {developer}) => ({
+    (state, { developer }) => ({
       ...state,
-      developer: {...developer}
+      developer: { ...developer }
     })
   ),
   on(
@@ -246,28 +246,28 @@ export const reducer = createReducer(
   ),
   on(
     actions.getDeveloperCategoriesSuccess,
-    (state, {data}) => ({
+    (state, { data }) => ({
       ...state,
       categories: data
     })
   ),
   on(
     actions.getDeveloperSkillsSuccess,
-    (state, {data}) => ({
+    (state, { data }) => ({
       ...state,
       skills: data
     })
   ),
   on(
     actions.getDeveloperLanguagesSuccess,
-    (state, {data}) => ({
+    (state, { data }) => ({
       ...state,
       languages: data
     })
   ),
   on(
     actions.getDeveloperSoftSkillsSuccess,
-    (state, {data}) => ({
+    (state, { data }) => ({
       ...state,
       softSkills: data
     })

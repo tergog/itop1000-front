@@ -42,21 +42,21 @@ export const getDeveloperLanguagesAction = createAction(GET_DEVELOPER_LANGUAGES)
 export const getDeveloperSoftSkillsAction = createAction(GET_DEVELOPER_SOFT_SKILLS);
 
 export const getDeveloperSkillsSuccess = createAction(
-  GET_DEVELOPER_SKILLS_SUCCESS
-  , (data: NameValueModel[]) => ({ data })
+  GET_DEVELOPER_SKILLS_SUCCESS,
+  (data: NameValueModel[]) => ({ data })
 );
 
 export const getDeveloperCategoriesSuccess = createAction(
-  GET_DEVELOPER_CATEGORIES_SUCCESS
-  , (data: NameValueModel[]) => ({ data })
+  GET_DEVELOPER_CATEGORIES_SUCCESS,
+  (data: NameValueModel[]) => ({ data })
 );
 
 export const getDeveloperLanguagesSuccess = createAction(
-  GET_DEVELOPER_LANGUAGES_SUCCESS
-  , (data: NameValueModel[]) => ({ data })
+  GET_DEVELOPER_LANGUAGES_SUCCESS,
+  (data: NameValueModel[]) => ({ data })
 );
 
 export const getDeveloperSoftSkillsSuccess = createAction(
-  GET_DEVELOPER_SOFT_SKILLS_SUCCESS
-  , (data: NameValueModel[]) => ({ data })
+  GET_DEVELOPER_SOFT_SKILLS_SUCCESS,
+  (data: NameValueModel[]) => ({ data })
 );

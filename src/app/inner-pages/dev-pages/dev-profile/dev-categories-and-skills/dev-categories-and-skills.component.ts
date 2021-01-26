@@ -16,7 +16,7 @@ export class DevCategoriesAndSkillsComponent implements OnInit, OnDestroy {
   public DevProfileSectionNames = EDevProfileSectionNames;
 
   constructor(
-    private store: Store<fromCore.State>,
+    private store: Store<fromCore.State>
   ) { }
 
   ngOnInit(): void {

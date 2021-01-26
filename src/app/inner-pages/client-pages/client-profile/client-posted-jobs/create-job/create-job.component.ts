@@ -60,9 +60,7 @@ export class CreateJobComponent implements OnInit, OnDestroy {
         const msg: NotificationMessage = { message: 'Added project', type: ENotificationStatus.Success };
         this.store.dispatch(new GetJobsAction());
         this.notificationService.message.emit(msg);
-        this.form.reset({
-          categories: []
-        });
+        this.form.reset({ categories: [] });
         this.editToggle.emit();
       });
   }
