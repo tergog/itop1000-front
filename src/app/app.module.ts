@@ -14,7 +14,7 @@ import { environment } from 'environments/environment';
 import { AuthGuard } from 'app/shared/guards/auth.guard';
 import { CoreModule } from 'app/core/core.module';
 import { DevelopersModule } from 'app/core/developers/store/developers.module';
-import { HttpErrorHandlerService } from 'app/shared/services/http-error-handler.service';
+import { HttpErrorInterceptor } from 'app/shared/interceptors/http-error.interceptor';
 import { TokenInterceptor } from 'app/shared/interceptors/token.interceptor';
 import { ClientModule } from './core/client/store/client.module';
 import { SharedModule } from './shared/shared.module';
@@ -22,7 +22,7 @@ import { ChatModule } from './core/chats/store/chat.module';
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [ AppComponent ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -42,7 +42,7 @@ import { ChatModule } from './core/chats/store/chat.module';
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: HttpErrorHandlerService,
+      useClass: HttpErrorInterceptor,
       multi: true,
     },
     {
@@ -52,6 +52,7 @@ import { ChatModule } from './core/chats/store/chat.module';
     },
     AuthGuard,
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [ AppComponent ],
 })
-export class AppModule {}
+export class AppModule {
+}
