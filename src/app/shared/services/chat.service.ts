@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { ApiConstants } from 'app/constants/api.constants';
+import { ConversationMessageModel, ConversationModel } from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -13,23 +14,23 @@ export class ChatService {
 
   constructor(private http: HttpClient) { }
 
-  public createNewConversation(creator_id: string, with_id: string): Observable<object> {
-    return this.http.post(`${this.apiURL}${ApiConstants.chat.create}`, {
-      creator_id,
-      with_id
+  public createNewConversation(creatorId: string, withId: string): Observable<ConversationModel> {
+    return this.http.post<ConversationModel>(`${this.apiURL}${ApiConstants.chat.create}`, {
+      creatorId,
+      withId
     });
   }
 
-  public getConversationsByUserId(userId: string): Observable<object> {
-    return this.http.get(`${this.apiURL}${ApiConstants.chat.getConversationsByMemberId}/${userId}`,{});
+  public getConversationsByUserId(userId: string): Observable<ConversationModel[]> {
+    return this.http.get<ConversationModel[]>(`${this.apiURL}${ApiConstants.chat.getConversationsByMemberId}/${userId}`,{});
   }
 
-  public searchConversations(userId: string, search: string): Observable<object> {
-    return this.http.get(`${this.apiURL}${ApiConstants.chat.search}/${userId}/${search}`, {});
+  public searchConversations(userId: string, search: string): Observable<ConversationModel[]> {
+    return this.http.get<ConversationModel[]>(`${this.apiURL}${ApiConstants.chat.search}/${userId}/${search}`, {});
   }
 
   // Messages
-  public getMessagesByConversationId(convId: string, page: number, count: number): Observable<object> {
-    return this.http.get(`${this.apiURL}${ApiConstants.chat.getMessagesById}/${convId}/${page}/${count}`, {});
+  public getMessagesByConversationId(convId: string, page: number, count: number): Observable<ConversationMessageModel[]> {
+    return this.http.get<ConversationMessageModel[]>(`${this.apiURL}${ApiConstants.chat.getMessagesById}/${convId}/${page}/${count}`, {});
   }
 }
