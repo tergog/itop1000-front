@@ -155,7 +155,8 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
   }
 
   onHistoryScroll(): void {
-    if (this.messagesWrapper?.nativeElement.scrollTop === 0 && this.chat.messages.data.length >= CHAT_MESSAGES_PER_PAGE) {
+    if (this.messagesWrapper?.nativeElement.scrollTop === 0 && this.chat.messages.data.length >= CHAT_MESSAGES_PER_PAGE &&
+      this.chat.messages.data.length < this.getActiveConversationById(this.chat.conversations.active).messages.total) {
       this.store.dispatch(chatActions.getConverastionMessages({
         convId: this.chat.conversations.active,
         page: this.lastPageLoaded++,
