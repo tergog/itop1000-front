@@ -51,9 +51,7 @@ export class DevelopersEffects {
     ofType(actions.GET_DEVELOPER_SKILLS),
     switchMap((payload) => this.developersService.getDeveloperSkills().pipe(
       first(),
-      map(value => {
-        return actions.getDeveloperSkillsSuccess(value);
-      }),
+      map(value => actions.getDeveloperSkillsSuccess(value)),
     )),
   ));
 
@@ -61,9 +59,7 @@ export class DevelopersEffects {
     ofType(actions.GET_DEVELOPER_CATEGORIES),
     switchMap((payload) => this.developersService.getDeveloperCategories().pipe(
       first(),
-      map(value => {
-        return actions.getDeveloperCategoriesSuccess(value);
-      }),
+      map(value => actions.getDeveloperCategoriesSuccess(value)),
     )),
   ));
 
@@ -71,9 +67,7 @@ export class DevelopersEffects {
     ofType(actions.GET_DEVELOPER_LANGUAGES),
     switchMap((payload) => this.developersService.getDeveloperLanguages().pipe(
       first(),
-      map(value => {
-        return actions.getDeveloperLanguagesSuccess(value);
-      }),
+      map(value => actions.getDeveloperLanguagesSuccess(value)),
     )),
   ));
 
@@ -81,9 +75,7 @@ export class DevelopersEffects {
     ofType(actions.GET_DEVELOPER_SOFT_SKILLS),
     switchMap((payload) => this.developersService.getDeveloperSoftSkills().pipe(
       first(),
-      map(value => {
-        return actions.getDeveloperSoftSkillsSuccess(value);
-      }),
+      map(value => actions.getDeveloperSoftSkillsSuccess(value)),
     )),
   ));
 }
