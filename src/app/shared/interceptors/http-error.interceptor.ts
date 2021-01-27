@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
@@ -22,11 +22,12 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           this.store.dispatch(new SetOnLogoutAction());
         }
 
-        return throwError(
-          (error.error instanceof ErrorEvent) ?
-            `Client error: ${error.error.message}` :
-            `Server error[${error.status}]: ${error.message}`
-        );
+        throw error;
+        // return throwError(
+        //   (error.error instanceof ErrorEvent) ?
+        //     `Client error: ${error.error.message}` :
+        //     `Server error[${error.status}]: ${error.message}`
+        // );
       })
     );
   }
