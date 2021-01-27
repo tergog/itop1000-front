@@ -10,7 +10,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ContentChange } from 'ngx-quill';
 import { iif, of } from 'rxjs';
-import { delay, first, switchMap, tap } from 'rxjs/operators';
+import { delay, switchMap, take, tap } from 'rxjs/operators';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import { ChatService, NotificationsService, WebsocketService } from 'app/shared/services';
@@ -44,7 +44,7 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
 
   private textEditorInstance: SharedQuillInstanceModel;
   private textContent: ContentChange;
-  private lastPageLoaded: number = 1;
+  private pageLoaded: number = 1;
 
   public userTyping: string = null;
   public searchFC: FormControl = new FormControl('', [ Validators.required, Validators.maxLength(32) ]);
@@ -60,7 +60,7 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
   ngOnInit(): void {
     this.store.dispatch(chatActions.getConverastionMessages({
       convId: this.chat.conversations.active,
-      page: this.lastPageLoaded++,
+      page: this.pageLoaded++,
       count: CHAT_MESSAGES_PER_PAGE
     }));
 
@@ -102,11 +102,11 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
 
   ngOnChanges(changes: SimpleChanges) {
     if(!changes.chat?.firstChange && changes.chat?.previousValue?.conversations.active !== changes.chat?.currentValue.conversations.active) {
-      this.lastPageLoaded = 1;
+      this.pageLoaded = 1;
 
       this.store.dispatch(chatActions.getConverastionMessages({
         convId: this.chat.conversations.active,
-        page: this.lastPageLoaded++,
+        page: this.pageLoaded++,
         count: CHAT_MESSAGES_PER_PAGE
       }));
 
@@ -159,7 +159,7 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
       this.chat.messages.data.length < this.getActiveConversationById(this.chat.conversations.active).messages.total) {
       this.store.dispatch(chatActions.getConverastionMessages({
         convId: this.chat.conversations.active,
-        page: this.lastPageLoaded++,
+        page: this.pageLoaded++,
         count: CHAT_MESSAGES_PER_PAGE
       }))
     }
@@ -175,7 +175,7 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
     }
     else {
       this.messageContainers.changes
-        .pipe(first())
+        .pipe(take(2)) // take(2) instead first() for fix bug when history isnt scrolls
         .subscribe((list: QueryList<ElementRef>) => {
           if (this.chat.conversations.active !== null && list.length > 0) {
             this.scrollToElement(list.last.nativeElement);
