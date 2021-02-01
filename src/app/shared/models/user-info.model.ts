@@ -7,6 +7,7 @@ export interface UserInfo {
   title: string;
   firstName: string;
   lastName: string;
+  companyName: string;
   email: string;
   role: EUserRole;
   dateCreated: string;
