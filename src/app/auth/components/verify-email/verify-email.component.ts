@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { untilDestroyed } from 'ngx-take-until-destroy';
-import { first, switchMap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { first, switchMap, takeUntil } from 'rxjs/operators';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { UserService, UtilsService } from 'app/shared/services';
-import { UserInfo } from '../../../shared/models';
+import { UserInfo } from 'app/shared/models';
 
 @Component({
   selector: 'app-verify-email',
@@ -17,6 +17,7 @@ export class VerifyEmailComponent implements OnInit, OnDestroy {
 
   public form: FormGroup;
   public errorMessage: string;
+  public ngUnsubscribe$ = new Subject<void>();
 
   constructor(
               private route: ActivatedRoute,
@@ -28,7 +29,7 @@ export class VerifyEmailComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.route.queryParams.pipe(
-      untilDestroyed(this),
+      takeUntil(this.ngUnsubscribe$),
       switchMap(({ token }) => this.userService.verifyToken(token))
     ).subscribe(() => {
       this.router.navigate(['/auth', 'login']);
@@ -46,7 +47,10 @@ export class VerifyEmailComponent implements OnInit, OnDestroy {
       );
   }
 
-  ngOnDestroy(): void { }
+  ngOnDestroy(): void {
+    this.ngUnsubscribe$.next(null);
+    this.ngUnsubscribe$.complete();
+  }
 
   private initForm(): void {
     this.form = new FormGroup({

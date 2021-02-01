@@ -1,0 +1,21 @@
+<div class="d__flex d__flex--items-center d__flex--justify-between">
+  <span class="text text__fw--500 text__lg">Notifications</span>
+  <span class="text text__fw--500 text__lg text__color--2">{{ notifications?.length }}</span>
+</div>
+
+<ng-container *ngFor="let item of notifications; let i = index; trackBy:identify">
+  <div *ngIf="notifications.length - i <= 5" [@notification]="{ value: ':enter', params: { from: -51, to: 10 } }" [ngStyle]="{ 'z-index' : notifications.length - i }" class="notification d__flex d__flex--items-center d__flex--justify-between m__top--15">
+    <div class="img m__right--10"></div>
+    <div class="d__flex d__flex--direction-column m__right--auto">
+      <span class="text text__md text__fw--400 text__color--5">{{ item.name }}</span>
+      <span class="text text__sm text__fw--400 text__color--6">{{ item.message }}</span>
+    </div>
+    <i class="left-arrow cursor__pointer m__right--20"></i>
+    <i class="close cursor__pointer" (click)="delete(i)"></i>
+  </div>
+</ng-container>
+
+
+<div class="w__100per d__flex d__flex--justify-center m__top--30 m__bottom--30">
+  <app-button [text]="'See all'" class="text__center"></app-button>
+</div>

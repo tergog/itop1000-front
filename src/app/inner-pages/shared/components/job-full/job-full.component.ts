@@ -1,17 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { untilDestroyed } from 'ngx-take-until-destroy';
-import { Observable, of } from 'rxjs';
-import { filter, flatMap, switchMap, tap } from 'rxjs/operators';
+import { Observable, of, Subject } from 'rxjs';
+import { filter, flatMap, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 
+import * as fromCore from 'app/core/reducers';
 import { getJobs, State } from 'app/core/reducers';
 import { Job } from 'app/shared/models';
 import { JobsService, NotificationsService } from 'app/shared/services';
-import * as fromCore from 'app/core/reducers';
 import { ConfirmationDialogComponent } from 'app/inner-pages/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { EditJobDialogComponent } from 'app/inner-pages/shared/components/edit-job-dialog/edit-job-dialog.component';
+import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
 
 export enum EJobSections {
   Project,
@@ -35,6 +35,7 @@ export class JobFullComponent implements OnInit, OnDestroy {
   resMessage = EResMessage;
   activeSection = EJobSections.Project;
   public canEdit: boolean;
+  public ngUnsubscribe$ = new Subject<void>();
 
   constructor(
     private store: Store<State>,
@@ -51,10 +52,11 @@ export class JobFullComponent implements OnInit, OnDestroy {
   getJobInfo() {
     this.store.select(getJobs)
       .pipe(
-        untilDestroyed(this),
+        takeUntil(this.ngUnsubscribe$),
         flatMap(jobs => this.getJobFromStore(jobs)),
         tap((job: Job) => this.job = job),
         switchMap(() => this.store.select(fromCore.getUserInfo)),
+        filter(user => !!user)
       )
       .subscribe(user => this.canEdit = user.id === this.job.userId);
   }
@@ -87,7 +89,7 @@ export class JobFullComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed()
       .pipe(
-        untilDestroyed(this),
+        takeUntil(this.ngUnsubscribe$),
         filter(res => res === this.resMessage.Confirmed),
         tap(() => this.onDeleteJob())
       )
@@ -96,7 +98,7 @@ export class JobFullComponent implements OnInit, OnDestroy {
 
   public onDeleteJob(): void {
     this.jobsService.deleteJob(this.job.id)
-      .pipe(untilDestroyed(this))
+      .pipe(takeUntil(this.ngUnsubscribe$))
       .subscribe(
         () => {
           this.handleSuccessResponse();
@@ -110,7 +112,7 @@ export class JobFullComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed()
       .pipe(
-        untilDestroyed(this),
+        takeUntil(this.ngUnsubscribe$),
         filter(res => res === this.resMessage.Updated),
         tap(() => {
           this.getJobInfo();
@@ -122,16 +124,19 @@ export class JobFullComponent implements OnInit, OnDestroy {
   private handleSuccessResponse(): void {
     this.notificationsService.message.emit({
       message: 'Changes successfully saved',
-      type: 'success'
+      type: ENotificationStatus.Success
     });
   }
 
   private handleErrorResponse(error: Error): void {
     this.notificationsService.message.emit({
       message: error.message,
-      type: 'error'
+      type: ENotificationStatus.Error
     });
   }
 
-  ngOnDestroy() { }
+  ngOnDestroy() {
+    this.ngUnsubscribe$.next(null);
+    this.ngUnsubscribe$.complete();
+  }
 }

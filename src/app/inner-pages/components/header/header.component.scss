@@ -1,4 +1,4 @@
-@import 'assets/scss/variables';
+@import '~assets/scss/variables';
 
 :host {
   height: 80px;
@@ -11,11 +11,24 @@
 
 .photo-preview {
   position: relative;
-  width: 52px;
-  height: 52px;
+  width: 66px;
+  height: 66px;
   border: 1px solid $color-3;
   border-radius: 50%;
-  background-size: contain;
+  background-position: center;
+  background-size: 140%;
+  background-repeat: no-repeat;
+  border: 10px solid rgba(50, 46, 46, 0.6);
+  margin-top: -5px;
+  &__logout {
+    width: 108px;
+    height: 108px;
+    background-size: 135%;
+  }
+  &__wrap {
+    border: 14px solid rgba(50, 46, 46, 0.6);
+    border-radius: 50%;
+  }
 
   &.with-chevron {
     &:after {
@@ -30,6 +43,46 @@
       border-top: 5px solid $color-2;
     }
   }
+  &.with-border {
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      right: 0px;
+      bottom: 0px;
+      border: 1px solid $color-2-hover;
+      border-radius: 50%;
+    }
+    &__logout {
+      &:after {
+        content: '';
+        position: absolute;
+        top: -1px;
+        left: -1px;
+        right: -2px;
+        bottom: -2px;
+        border: 1px solid $color-2-hover;
+        border-radius: 50%;
+      }
+    }
+  }
+}
+
+.photo-wrap {
+  display: flex;
+}
+.chevron {
+  position: relative;
+  content: '';
+  top: 40%;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 5px solid $color-2;
+  margin: 10px;
+
 }
 
 .logout-popup {
@@ -40,9 +93,32 @@
   border: 1px solid $color-1;
   padding: 20px 25px;
   z-index: 1;
+  &__button {
+    display: block;
+    width: 111px;
+    text-align: center;
+    height: 23px;
+  }
+}
+
+app-notifications-popup {
+  position: absolute;
+  right: 70px;
+  top: 80px;
+  z-index: 1;
+  box-shadow: 0px 6px 5px rgba(255, 255, 255, 0.3);
 }
 
 .separator {
   width: 100%;
   border-top: 1px solid $color-4;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: $color-2;
+  margin-top: 2px;
+  margin-left: 15px;
 }

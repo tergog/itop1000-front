@@ -64,4 +64,4 @@ export const getClientLoading = createSelector(
 export const getDevelopersLoading = createSelector(
   getDevelopersState,
   fromDevelopers.getLoading
-)
+);

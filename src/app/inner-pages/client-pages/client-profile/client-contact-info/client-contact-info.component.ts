@@ -6,6 +6,8 @@ import { UserService } from 'app/shared/services';
 import { UserInfo } from 'app/shared/models';
 import * as fromCore from 'app/core/reducers';
 import { ClientProfileService } from 'app/inner-pages/client-pages/client-profile/client-profile.service';
+import * as fromDev from 'app/core/developers/store';
+import { getDeveloperCategoriesAction } from 'app/core/developers/store/developers.actions';
 
 @Component({
   selector: 'app-client-contact-info',
@@ -24,10 +26,12 @@ export class ClientContactInfoComponent implements OnInit {
     private userService: UserService,
     private clientProfileService: ClientProfileService,
     private store: Store<fromCore.State>,
+    private storeDev: Store<fromDev.State>
   ) { }
 
   ngOnInit(): void {
     this.userInfo$ = this.store.select(fromCore.getUserInfo);
+    this.storeDev.dispatch(getDeveloperCategoriesAction());
   }
 
   public editAccountToggle(): void {
@@ -47,6 +51,4 @@ export class ClientContactInfoComponent implements OnInit {
     this.clientProfileService.onSaveClick(userInfo);
     this.isLocationEdit = false;
   }
-
-  ngOnDestroy(): void {}
 }

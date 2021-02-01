@@ -1,28 +1,36 @@
 <i class="logo-preview-2 cursor__pointer" routerLink="profile"></i>
 
-<ng-container *ngrxLet="userInfo$ as userInfo">
+<ng-container *ngIf="userInfo$ | ngrxPush as userInfo">
   <div class="w__350">
     <app-input (enterKey)="onSearch()" [placeholder]="userInfo.role === UserRole.Client ? SearchFor.SearchForDeveloper : SearchFor.SearchForJob" [formControl]="searchTerm">
       <i class="search" (click)="onSearch()"></i>
     </app-input>
   </div>
 
+  <div class="d__flex d__flex--items-center">
+    <i class="bell cursor__pointer m__right--30" (click)="isNotificationsOpen = !isNotificationsOpen">
+      <div *ngIf="userInfo.notifications" class="dot"></div>
+    </i>
 
-  <div class="photo-preview with-chevron cursor__pointer" [style.backgroundImage]="userInfo.photo ? 'url(' + userInfo?.photo + ')' : 'none'" (click)="togglePopup()"></div>
+    <app-notifications-popup [notifications]="userInfo.notifications" [@opacityInOut]="{ value: ':enter', params: { from: 60, to: 80 } }" *ngIf="isNotificationsOpen"></app-notifications-popup>
 
-  <div [@opacityInOut] class="logout-popup" *ngIf="isPopupOpen">
-    <div class="d__flex d__flex--items-center">
-      <div class="photo-preview m__right--10" [style.backgroundImage]="userInfo.photo ? 'url(' + userInfo.photo + ')' : 'none'"></div>
-      <div class="d__flex d__flex--direction-column">
-        <span class="text text__lg text__fw--500 text__color--1">{{ userInfo.firstName }} {{ userInfo.lastName }}</span>
-        <span class="text text__sm text__color--6">{{ userInfo.email }}</span>
-      </div>
+    <div class="photo-wrap d__flex d__flex--items-center">
+      <div class="photo-preview with-border cursor__pointer" [style.backgroundImage]="userInfo.photo ? 'url(' + userInfo?.photo + ')' : 'url(assets/icons/profile-photo.svg)'"></div>
+      <div class="chevron cursor__pointer" (click)="togglePopup()"></div>
     </div>
+    <div [@opacityInOut]="{ value: ':enter', params: { from: 85, to: 90 } }" class="logout-popup" *ngIf="isPopupOpen">
+      <div class="d__flex d__flex--items-center">
+        <div class="photo-preview photo-preview__logout with-border photo-preview__wrap m__right--10" [style.backgroundImage]="userInfo.photo ? 'url(' + userInfo?.photo + ')' : 'url(assets/icons/profile-photo.svg)'"></div>
+        <div class="d__flex d__flex--direction-column">
+          <span class="text text__lg text__fw--500 text__color--1">{{ userInfo.firstName }} {{ userInfo.lastName }}</span>
+          <span class="text text__sm text__color--6">{{ userInfo.email }}</span>
+        </div>
+      </div>
 
-    <div class="separator m__top--10"></div>
-
-    <div class="m__top--10 text__right">
-      <span class="text text__color--2 text__md text__fw--500 text__uppercase cursor__pointer" (click)="logout()">log out</span>
+      <div class="separator m__top--10"></div>
+      <div class="m__top--10 text__left">
+        <span class="text text__color--2 text__md text__fw--500 text__uppercase cursor__pointer logout-popup__button" (click)="logout()">log out</span>
+      </div>
     </div>
   </div>
 </ng-container>

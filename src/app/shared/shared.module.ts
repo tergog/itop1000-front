@@ -11,6 +11,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { CircleProgressOptions, NgCircleProgressModule } from 'ng-circle-progress';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { NgxPhoneMaskModule } from 'ngx-phone-mask';
+import { ReactiveComponentModule } from '@ngrx/component';
 
 import { InputComponent } from 'app/shared/components/input/input.component';
 import { CheckboxComponent } from 'app/shared/components/checkbox/checkbox.component';
@@ -23,6 +24,7 @@ import { AddressComponent } from 'app/shared/components/address/address.componen
 import { PhoneRegexComponent } from './components/phone-regex/phone-regex.component';
 import { ResumeService } from './services/resume.service';
 import { SelectComponent } from './components/select/select.component';
+import { DropDownListComponent } from './components/drop-down-list/drop-down-list.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { SelectComponent } from './components/select/select.component';
     TimezoneComponent,
     AddressComponent,
     PhoneRegexComponent,
-    SelectComponent
+    SelectComponent,
+    DropDownListComponent
   ],
   exports: [
     InputComponent,
@@ -55,7 +58,8 @@ import { SelectComponent } from './components/select/select.component';
     TimezoneComponent,
     AddressComponent,
     PhoneRegexComponent,
-    SelectComponent
+    SelectComponent,
+    DropDownListComponent
   ],
   imports: [
     CommonModule,
