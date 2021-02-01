@@ -62,6 +62,7 @@ import { DropDownListComponent } from './components/drop-down-list/drop-down-lis
     DropDownListComponent
   ],
   imports: [
+    ReactiveComponentModule,
     CommonModule,
     FormsModule,
     MatAutocompleteModule,
