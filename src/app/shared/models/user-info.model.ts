@@ -1,5 +1,6 @@
 import { DevProperties } from 'app/shared/models/dev-properties.model';
 import { Notification } from 'app/shared/models/notification2.model';
+import { EUserRole } from 'app/shared/enums';
 
 export interface UserInfo {
   id: string;
@@ -7,7 +8,7 @@ export interface UserInfo {
   firstName: string;
   lastName: string;
   email: string;
-  role: string;
+  role: EUserRole;
   dateCreated: string;
   phone: string;
   address: string;

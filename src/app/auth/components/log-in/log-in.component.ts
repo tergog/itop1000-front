@@ -7,6 +7,7 @@ import * as jwtDecode from 'jwt-decode';
 import { UserService, UtilsService } from 'app/shared/services';
 import { UserInfo } from 'app/shared/models';
 import { TOKEN } from 'app/constants/constants';
+import { EUserRole } from 'app/shared/enums';
 
 
 @Component({
@@ -47,9 +48,10 @@ export class LogInComponent implements OnInit, OnDestroy {
   private loginSuccess(userInfo: UserInfo): void {
     this.errorMessage = '';
     localStorage.setItem(TOKEN, userInfo.token);
-    if (jwtDecode(userInfo.token).role === 'Dev') {
+    const role = jwtDecode(userInfo.token).role;
+    if (role === EUserRole.Dev) {
       this.router.navigate(['in/d/search-jobs']);
-    } else if (jwtDecode(userInfo.token).role === 'Client') {
+    } else if (role === EUserRole.Client) {
       this.router.navigate(['in/c/search-developers']);
     }
 

@@ -8,8 +8,9 @@ import { NotificationsService, UserService, UtilsService } from 'app/shared/serv
 import { NotificationMessage } from 'app/shared/models';
 import { MatDialog } from '@angular/material/dialog';
 import { TermsPagesComponent } from 'app/core/components/terms-pages/terms-pages.component';
-import { termsData, privacyData } from 'app/constants/terms-pages-data';
+import { privacyData, termsData } from 'app/constants/terms-pages-data';
 import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
+import { EUserRole } from 'app/shared/enums';
 
 @Component({
   selector: 'app-sign-up',
@@ -21,6 +22,7 @@ export class SignUpComponent implements OnInit {
   public role = 'Role';
   public termsData = termsData;
   public privacyData = privacyData;
+  public userRole = EUserRole;
 
 
   public passwordFirst = new FormControl('', {
@@ -35,9 +37,6 @@ export class SignUpComponent implements OnInit {
   public passwordSecond = new FormControl('', {
     validators: [
       Validators.required,
-      Validators.minLength(8),
-      Validators.maxLength(20),
-      this.utilsService.passwordCombinationValidator(),
       this.utilsService.passwordMatchValidator(this.passwordFirst),
     ]
   });
@@ -54,10 +53,10 @@ export class SignUpComponent implements OnInit {
 
   }
 
-  selectRole(event: any): void {
-    if (event === 'Client') {
+  selectRole(event: string): void {
+    if (event === EUserRole.Client) {
       this.initClientForm();
-    } else if (event === 'Dev') {
+    } else if (event === EUserRole.Dev) {
       this.initDevForm();
     }
   }
@@ -119,7 +118,7 @@ export class SignUpComponent implements OnInit {
   }
 
   showDialog(dialog: object): void {
-    const dialogRef = this.dialog.open(TermsPagesComponent, {
+    this.dialog.open(TermsPagesComponent, {
       height: '800px',
       width: '1400px',
       data: dialog

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { EUserRole } from 'app/shared/enums';
 
 @Component({
   selector: 'app-select',
@@ -16,9 +17,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class SelectComponent implements OnInit, ControlValueAccessor {
 
-  @Input() options = ['Client', 'Dev'];
-  value;
-  isExpand: boolean;
+  @Input() options = [EUserRole.Client, EUserRole.Dev];
+  value: string;
+  isExpand = false;
 
   constructor() { }
 
