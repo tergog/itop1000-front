@@ -35,8 +35,12 @@
         <app-input formControlName="confirmPassword" [placeholder]="'Confirm Password'" class="m__top--10 transparent"></app-input>
       </div>
 
-      <div class="m__top--25">
-        <app-checkbox formControlName="acceptTerms" [label]="'Accept Terms of Use and Privacy'"></app-checkbox>
+      <div class="m__top--25 d__flex d__flex--items-center">
+        <app-checkbox class="w__60" formControlName="acceptTerms"></app-checkbox>
+        <span class="text text__color--4 text__fw--500 text__md m__right--5">Accept </span>
+        <span class="text text__color--5 text__fw--500 text__md cursor__pointer m__right--5" (mouseup)="showDialog(termsData)">Terms</span>
+        <span class="text text__color--4 text__fw--500 text__md m__right--5">of Use and</span>
+        <span class="text text__color--5 text__fw--500 text__md cursor__pointer" (mouseup)="showDialog(privacyData)">Privacy</span>
       </div>
     </ng-container>
 
@@ -61,8 +65,12 @@
         <app-input formControlName="confirmPassword" [placeholder]="'Confirm Password'" class="m__top--10 transparent"></app-input>
       </div>
 
-      <div class="m__top--25">
-        <app-checkbox formControlName="acceptTerms" [label]="'Accept Terms of Use and Privacy'"></app-checkbox>
+      <div class="m__top--25 d__flex d__flex--items-center">
+        <app-checkbox class="w__60" formControlName="acceptTerms"></app-checkbox>
+        <span class="text text__color--4 text__fw--500 text__md m__right--5">Accept </span>
+        <span class="text text__color--5 text__fw--500 text__md cursor__pointer m__right--5" (mouseup)="showDialog(termsData)">Terms</span>
+        <span class="text text__color--4 text__fw--500 text__md m__right--5">of Use and</span>
+        <span class="text text__color--5 text__fw--500 text__md cursor__pointer" (mouseup)="showDialog(privacyData)">Privacy</span>
       </div>
     </ng-container>
 

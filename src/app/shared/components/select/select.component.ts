@@ -30,6 +30,9 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
   }
 
   select(event: string): void {
+    if (event === this.value) {
+      return;
+    }
     this.value = event;
     this.isExpand = false;
     this.onChange(this.value);

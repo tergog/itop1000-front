@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { termsData, privacyData } from 'app/constants/terms-pages-data';
 
@@ -9,12 +10,12 @@ import { termsData, privacyData } from 'app/constants/terms-pages-data';
   styleUrls: ['./terms-pages.component.scss'],
 })
 export class TermsPagesComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router, @Inject(MAT_DIALOG_DATA) public type: object) {}
 
   data;
 
   ngOnInit(): void {
-    this.initData();
+    this.data = this.type;
   }
 
   private initData(): void {

@@ -48,9 +48,9 @@ export class LogInComponent implements OnInit, OnDestroy {
     this.errorMessage = '';
     localStorage.setItem(TOKEN, userInfo.token);
     if (jwtDecode(userInfo.token).role === 'Dev') {
-      this.router.navigate(['in/d/profile']);
+      this.router.navigate(['in/d/search-jobs']);
     } else if (jwtDecode(userInfo.token).role === 'Client') {
-      this.router.navigate(['in/c/profile']);
+      this.router.navigate(['in/c/search-developers']);
     }
 
   }

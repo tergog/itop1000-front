@@ -6,6 +6,9 @@ import { first } from 'rxjs/operators';
 
 import { UtilsService, UserService, NotificationsService } from 'app/shared/services';
 import { NotificationMessage } from 'app/shared/models';
+import { MatDialog } from '@angular/material/dialog';
+import { TermsPagesComponent } from 'app/core/components/terms-pages/terms-pages.component';
+import { termsData, privacyData } from 'app/constants/terms-pages-data';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,7 +17,10 @@ import { NotificationMessage } from 'app/shared/models';
 })
 export class SignUpComponent implements OnInit {
   public form: FormGroup;
-  private role = 'Role';
+  public role = 'Role';
+  public termsData = termsData;
+  public privacyData = privacyData;
+
 
   public passwordFirst = new FormControl('', {
     validators: [
@@ -39,7 +45,8 @@ export class SignUpComponent implements OnInit {
     private utilsService: UtilsService,
     private userService: UserService,
     private notificationsService: NotificationsService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -107,6 +114,14 @@ export class SignUpComponent implements OnInit {
     this.notificationsService.message.emit({
       message,
       type: 'error'
+    });
+  }
+
+  showDialog(dialog: object): void {
+    const dialogRef = this.dialog.open(TermsPagesComponent, {
+      height: '800px',
+      width: '1400px',
+      data: dialog
     });
   }
 
