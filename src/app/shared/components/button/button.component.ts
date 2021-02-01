@@ -10,7 +10,7 @@ export class ButtonComponent implements OnInit {
   @Input() type: 'main' | 'secondary' | 'transparent';
   @Input() text: string;
   @Output() buttonClick = new EventEmitter();
-
+  @Input() disabled: boolean;
   constructor() { }
 
   ngOnInit(): void {

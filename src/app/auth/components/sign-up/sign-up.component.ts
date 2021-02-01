@@ -61,7 +61,7 @@ export class SignUpComponent implements OnInit {
       password: this.passwordFirst,
       confirmPassword: this.passwordSecond,
       acceptTerms: new FormControl(null, [Validators.required]),
-      role: new FormControl('Dev', [Validators.required]),
+      role: new FormControl('Role', [Validators.required]),
     });
   }
 

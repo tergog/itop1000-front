@@ -1,0 +1,20 @@
+<div class="container d__flex d__flex--items-center p__15" cdkOverlayOrigin #origin="cdkOverlayOrigin">
+  <span class="text__color--6 text__sm">{{value}}</span>
+  <img (click)="expand()" class="m__left--auto cursor__pointer" src="assets/icons/arrow.svg" alt="arrow">
+</div>
+
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="origin"
+  [cdkConnectedOverlayOpen]="isExpand"
+  [cdkConnectedOverlayWidth]="'594px'"
+>
+  <div class="options w__100per">
+    <div class="d__flex d__flex--direction-column d__flex--items-center" *ngFor="let item of options; let last = last">
+      <span (click)="select(item)" class="d__block m__top--10 cursor__pointer" >{{item}}</span>
+      <div class="border m__top--10" *ngIf="!last"></div>
+    </div>
+  </div>
+</ng-template>
+
+
