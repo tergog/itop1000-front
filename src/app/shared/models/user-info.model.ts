@@ -5,9 +5,9 @@ import { EUserRole } from 'app/shared/enums';
 export interface UserInfo {
   id: string;
   title: string;
-  firstName: string;
-  lastName: string;
-  companyName: string;
+  firstName?: string;
+  lastName?: string;
+  companyName?: string;
   email: string;
   role: EUserRole;
   dateCreated: string;
