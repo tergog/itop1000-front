@@ -2,10 +2,12 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
+import * as jwtDecode from 'jwt-decode';
 
 import { UserService, UtilsService } from 'app/shared/services';
 import { UserInfo } from 'app/shared/models';
 import { TOKEN } from 'app/constants/constants';
+
 
 @Component({
   selector: 'app-log-in',
@@ -45,7 +47,12 @@ export class LogInComponent implements OnInit, OnDestroy {
   private loginSuccess(userInfo: UserInfo): void {
     this.errorMessage = '';
     localStorage.setItem(TOKEN, userInfo.token);
-    this.router.navigate(['in/d/profile']);
+    if (jwtDecode(userInfo.token).role === 'Dev') {
+      this.router.navigate(['in/d/profile']);
+    } else if (jwtDecode(userInfo.token).role === 'Client') {
+      this.router.navigate(['in/c/profile']);
+    }
+
   }
 
   private initForm(): void {

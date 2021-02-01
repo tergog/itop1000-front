@@ -14,8 +14,26 @@ import { NotificationMessage } from 'app/shared/models';
 })
 export class SignUpComponent implements OnInit {
   public form: FormGroup;
-  public passwordFirst: FormControl;
-  public passwordSecond: FormControl;
+  private role = 'Role';
+
+  public passwordFirst = new FormControl('', {
+    validators: [
+      Validators.required,
+      Validators.minLength(8),
+      Validators.maxLength(20),
+      this.utilsService.passwordCombinationValidator(),
+    ]
+  });
+
+  public passwordSecond = new FormControl('', {
+    validators: [
+      Validators.required,
+      Validators.minLength(8),
+      Validators.maxLength(20),
+      this.utilsService.passwordCombinationValidator(),
+      this.utilsService.passwordMatchValidator(this.passwordFirst),
+    ]
+  });
 
   constructor(
     private utilsService: UtilsService,
@@ -25,29 +43,34 @@ export class SignUpComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.initForm();
+
   }
 
-  private initForm(): void {
-    this.passwordFirst = new FormControl('', {
-      validators: [
-        Validators.required,
-        Validators.minLength(8),
-        Validators.maxLength(20),
-        this.utilsService.passwordCombinationValidator(),
-      ]
-    });
+  selectRole(event: any): void {
+    if (event === 'Client') {
+      this.initClientForm();
+    } else if (event === 'Dev') {
+      this.initDevForm();
+    }
+  }
 
-    this.passwordSecond = new FormControl('', {
-      validators: [
+  private initClientForm(): void {
+    this.form = new FormGroup({
+      title: new FormControl('Mr.', [Validators.required]),
+      companyName: new FormControl(null, [Validators.required]),
+      email: new FormControl(null, [
         Validators.required,
-        Validators.minLength(8),
-        Validators.maxLength(20),
-        this.utilsService.passwordCombinationValidator(),
-        this.utilsService.passwordMatchValidator(this.passwordFirst),
-      ]
+        this.utilsService.emailValidator(),
+        this.utilsService.specialCharacterValidator(),
+        Validators.maxLength(40)
+      ]),
+      password: this.passwordFirst,
+      confirmPassword: this.passwordSecond,
+      acceptTerms: new FormControl(null, [Validators.required])
     });
+  }
 
+  private initDevForm(): void {
     this.form = new FormGroup({
       title: new FormControl('Mr.', [Validators.required]),
       firstName: new FormControl(null, [Validators.required]),
@@ -60,13 +83,12 @@ export class SignUpComponent implements OnInit {
       ]),
       password: this.passwordFirst,
       confirmPassword: this.passwordSecond,
-      acceptTerms: new FormControl(null, [Validators.required]),
-      role: new FormControl('Role', [Validators.required]),
+      acceptTerms: new FormControl(null, [Validators.required])
     });
   }
 
   onSignUpClick(): void {
-    this.userService.userRegistration(this.form.value)
+    this.userService.userRegistration({ ...this.form.value, role: this.role })
       .pipe(first())
       .subscribe(
         (res: NotificationMessage) => this.handleUserRegistrationSuccessResponse(res),

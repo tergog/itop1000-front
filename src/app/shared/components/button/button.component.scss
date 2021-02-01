@@ -1,4 +1,4 @@
-@import 'assets/scss/variables';
+@import '~assets/scss/variables';
 
 :host {
   @media (max-width: 576px) {
@@ -22,6 +22,10 @@
 
     &:active, &:focus {
       background-color: $color-2-active;
+    }
+
+    &:disabled {
+      background-color: $color-6;
     }
 
     &.main {
