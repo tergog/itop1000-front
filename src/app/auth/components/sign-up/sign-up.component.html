@@ -1,8 +1,8 @@
 <app-auth-container>
 
   <div class="m__top--30 w__594">
-    <span class="text text__sm text__color--3 text__fw--600">Role</span>
-    <app-select [(ngModel)]="role" (ngModelChange)="selectRole($event)" class="m__top--10 w__100per"></app-select>
+    <span class="text text__sm text__color--3 text__fw--600 m__bottom--10 d__block">Role</span>
+    <app-select [(ngModel)]="role" (ngModelChange)="selectRole($event)" class="w__100per"></app-select>
   </div>
 
   <div *ngIf="role !== 'Role'" class="w__594">
