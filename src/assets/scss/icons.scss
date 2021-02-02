@@ -106,6 +106,12 @@
   }
 }
 
+.email-popup {
+  width: 44px;
+  height: 44px;
+  background: url(~assets/icons/email-popup.svg);
+}
+
 .search {
   width: 15px;
   height: 15px;
@@ -147,6 +153,7 @@
   height: 20px;
   background-size: contain;
 }
+
 
 .eye-line {
   width: 15px;

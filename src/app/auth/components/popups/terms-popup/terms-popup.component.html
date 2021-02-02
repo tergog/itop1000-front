@@ -1,0 +1,10 @@
+<div class="header w__100per d__flex d__flex--items-center d__flex--justify-center">
+  <span class="text__fw--500 text__lg text__uppercase text__color--3">{{ data.title }}</span>
+  <i class="close cursor__pointer" mat-dialog-close></i>
+</div>
+<div class="p__30 w__100per">
+  <div *ngFor="let item of data.articles" class="m__bottom--30 d__flex d__flex--direction-column" >
+    <span class="text__xlg text__color--5 text__fw--300">{{ item.title }}</span>
+    <span class="text__md text__color--4 m__top--10">{{ item.text }}</span>
+  </div>
+</div>

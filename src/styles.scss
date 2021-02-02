@@ -274,5 +274,13 @@ a:hover {
   border-radius: 50%;
 }
 
+.popup .mat-dialog-container {
+  background-color: rgba(36, 36, 36, 0.95);
+}
+
+.popup-email .mat-dialog-container {
+  background-color: rgba(36, 36, 36, 0.95);
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

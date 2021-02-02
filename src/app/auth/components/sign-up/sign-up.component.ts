@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -11,19 +11,22 @@ import { TermsPagesComponent } from 'app/core/components/terms-pages/terms-pages
 import { privacyData, termsData } from 'app/constants/terms-pages-data';
 import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
 import { EUserRole } from 'app/shared/enums';
+import { TermsPopupComponent } from 'app/auth/components/popups/terms-popup/terms-popup.component';
+import { EmailPopupComponent } from 'app/auth/components/popups/email-popup/email-popup.component';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
-export class SignUpComponent implements OnInit {
+export class SignUpComponent {
   public form: FormGroup;
   public role = 'Role';
   public termsData = termsData;
   public privacyData = privacyData;
   public userRole = EUserRole;
-
+  public isPasswordHidden = true;
+  public isPasswordRepeatHidden = true;
 
   public passwordFirst = new FormControl('', {
     validators: [
@@ -49,8 +52,12 @@ export class SignUpComponent implements OnInit {
     public dialog: MatDialog
   ) { }
 
-  ngOnInit(): void {
+  public passwordHiddenToggle(): void {
+    this.isPasswordHidden = !this.isPasswordHidden;
+  }
 
+  public passwordRepeatHiddenToggle(): void {
+    this.isPasswordRepeatHidden = !this.isPasswordRepeatHidden;
   }
 
   selectRole(event: string): void {
@@ -73,7 +80,8 @@ export class SignUpComponent implements OnInit {
       ]),
       password: this.passwordFirst,
       confirmPassword: this.passwordSecond,
-      acceptTerms: new FormControl(null, [Validators.required])
+      acceptTerms: new FormControl(null, [Validators.required]),
+      acceptPrivacy: new FormControl(null, [Validators.required])
     });
   }
 
@@ -90,7 +98,8 @@ export class SignUpComponent implements OnInit {
       ]),
       password: this.passwordFirst,
       confirmPassword: this.passwordSecond,
-      acceptTerms: new FormControl(null, [Validators.required])
+      acceptTerms: new FormControl(null, [Validators.required]),
+      acceptPrivacy: new FormControl(null, [Validators.required])
     });
   }
 
@@ -105,8 +114,11 @@ export class SignUpComponent implements OnInit {
 
   private handleUserRegistrationSuccessResponse(res: NotificationMessage): void {
     this.router.navigate(['/auth', 'login']).then(() => {
-      res.type = ENotificationStatus.Success;
-      this.notificationsService.message.emit(res);
+      this.dialog.open(EmailPopupComponent, {
+        height: '345px',
+        width: '475px',
+        panelClass: 'popup-email'
+      });
     });
   }
 
@@ -118,10 +130,11 @@ export class SignUpComponent implements OnInit {
   }
 
   showDialog(dialog: object): void {
-    this.dialog.open(TermsPagesComponent, {
-      height: '800px',
-      width: '1400px',
-      data: dialog
+    this.dialog.open(TermsPopupComponent, {
+      height: '730px',
+      width: '710px',
+      data: dialog,
+      panelClass: 'popup'
     });
   }
 

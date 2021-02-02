@@ -5,20 +5,20 @@ import { EUserRole } from 'app/shared/enums';
 export interface UserInfo {
   id: string;
   title: string;
-  firstName?: string;
-  lastName?: string;
-  companyName?: string;
   email: string;
+  companyName: string;
+  firstName: string;
+  lastName: string;
+  devProperties: DevProperties;
+  stripeAccountId: string;
+  stripeVerified: boolean;
   role: EUserRole;
   dateCreated: string;
   phone: string;
   address: string;
   timezone: string;
-  devProperties: DevProperties;
   photo: string;
   token?: string;
   notifications: Notification[];
-  stripeAccountId: string;
-  stripeVerified: boolean;
   balance: number;
 }

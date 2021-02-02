@@ -19,7 +19,7 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
 
   @Input() options = [EUserRole.Client, EUserRole.Dev];
   value: string;
-  isExpand = false;
+  isExpand: boolean;
 
   constructor() { }
 

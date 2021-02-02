@@ -1,0 +1,8 @@
+@import "src/assets/scss/variables";
+
+:host {
+  padding: 95px 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}

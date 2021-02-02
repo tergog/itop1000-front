@@ -1,0 +1,12 @@
+@import "src/assets/scss/variables";
+
+.header {
+  position: relative;
+  height: 62px;
+  background-color: $color-1;
+
+  .close {
+    position: absolute;
+    right: 20px;
+  }
+}
