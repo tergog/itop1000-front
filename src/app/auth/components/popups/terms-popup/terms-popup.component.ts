@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { termsData } from 'app/constants/terms-pages-data';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-terms-popup',
@@ -11,7 +10,7 @@ export class TermsPopupComponent implements OnInit {
 
 
 
-  constructor(private dialogRef: MatDialogRef<TermsPopupComponent>, @Inject(MAT_DIALOG_DATA) public data) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data) { }
 
   ngOnInit(): void {
   }

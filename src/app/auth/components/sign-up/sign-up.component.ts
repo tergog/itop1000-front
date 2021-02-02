@@ -7,7 +7,6 @@ import { first } from 'rxjs/operators';
 import { NotificationsService, UserService, UtilsService } from 'app/shared/services';
 import { NotificationMessage } from 'app/shared/models';
 import { MatDialog } from '@angular/material/dialog';
-import { TermsPagesComponent } from 'app/core/components/terms-pages/terms-pages.component';
 import { privacyData, termsData } from 'app/constants/terms-pages-data';
 import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
 import { EUserRole } from 'app/shared/enums';
