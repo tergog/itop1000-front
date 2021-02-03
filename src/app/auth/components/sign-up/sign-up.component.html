@@ -1,6 +1,6 @@
 <app-auth-container>
 
-  <div class="m__top--30 w__594">
+  <div class="m__top--25 w__594">
     <span class="text text__sm text__color--3 text__fw--600 m__bottom--10 d__block">Role</span>
     <app-select [(ngModel)]="role" (ngModelChange)="selectRole($event)" class="w__100per"></app-select>
   </div>
@@ -8,12 +8,12 @@
   <div *ngIf="role !== 'Role'" class="w__594">
 
     <ng-container *ngIf="role === userRole.Dev" [formGroup]="form">
-      <div class="m__top--36">
+      <div class="m__top--25">
         <span class="text text__sm text__color--3 text__fw--600">Email address</span>
         <app-input formControlName="email" [placeholder]="'email@example.com'" class="m__top--10 transparent"></app-input>
       </div>
 
-      <div class="m__top--30 d__flex d__flex--justify-between">
+      <div class="m__top--25 d__flex d__flex--justify-between">
         <div class="w__280 input__half">
           <span class="text text__sm text__color--3 text__fw--600">First Name</span>
           <app-input formControlName="firstName" [placeholder]="'First Name'" class="m__top--10 h__auto transparent"></app-input>
@@ -25,14 +25,14 @@
         </div>
       </div>
 
-      <div class="m__top--30">
+      <div class="m__top--25">
         <span class="text text__sm text__color--3 text__fw--600">Password</span>
         <app-input formControlName="password" [placeholder]="'Password'" [isHiddenPassword]="isPasswordHidden" class="m__top--10 transparent">
           <i [class.eye]="!isPasswordHidden" [class.eye-line]="isPasswordHidden" (click)="passwordHiddenToggle()"></i>
         </app-input>
       </div>
 
-      <div class="m__top--30">
+      <div class="m__top--25">
         <span class="text text__sm text__color--3 text__fw--600">Confirm Password</span>
         <app-input formControlName="confirmPassword" [placeholder]="'Confirm Password'" [isHiddenPassword]="isPasswordRepeatHidden" class="m__top--10 transparent">
           <i [class.eye]="!isPasswordRepeatHidden" [class.eye-line]="isPasswordRepeatHidden" (click)="passwordRepeatHiddenToggle()"></i>
@@ -45,32 +45,32 @@
         <span class="text text__color--5 text__fw--500 text__md cursor__pointer m__right--5" (mouseup)="showDialog(termsData)">Terms and conditions</span>
       </div>
 
-      <div class="m__top--20 d__flex d__flex--items-center">
+      <div class="m__top--15 d__flex d__flex--items-center">
         <app-checkbox class="w__60" formControlName="acceptPrivacy"></app-checkbox>
         <span class="text text__color--4 text__fw--500 text__md m__right--5">Accept </span>
-        <span class="text text__color--5 text__fw--500 text__md cursor__pointer m__right--5" (mouseup)="showDialog(privacyData)">Privacy Pollicy</span>
+        <span class="text text__color--5 text__fw--500 text__md cursor__pointer m__right--5" (mouseup)="showDialog(privacyData)">Privacy Policy</span>
       </div>
     </ng-container>
 
     <ng-container *ngIf="role === userRole.Client" [formGroup]="form">
-      <div class="m__top--36">
+      <div class="m__top--25">
         <span class="text text__sm text__color--3 text__fw--600">Email address</span>
         <app-input formControlName="email" [placeholder]="'email@example.com'" class="m__top--10 transparent"></app-input>
       </div>
 
-      <div class="m__top--30">
+      <div class="m__top--25">
         <span class="text text__sm text__color--3 text__fw--600">Company name</span>
         <app-input formControlName="companyName" [placeholder]="'Company name'" class="m__top--10 transparent"></app-input>
       </div>
 
-      <div class="m__top--30">
+      <div class="m__top--25">
         <span class="text text__sm text__color--3 text__fw--600">Password</span>
         <app-input formControlName="password" [placeholder]="'Password'" [isHiddenPassword]="isPasswordHidden" class="m__top--10 transparent">
           <i [class.eye]="!isPasswordHidden" [class.eye-line]="isPasswordHidden" (click)="passwordHiddenToggle()"></i>
         </app-input>
       </div>
 
-      <div class="m__top--30">
+      <div class="m__top--25">
         <span class="text text__sm text__color--3 text__fw--600">Confirm Password</span>
         <app-input formControlName="confirmPassword" [placeholder]="'Confirm Password'" [isHiddenPassword]="isPasswordRepeatHidden" class="m__top--10 transparent">
           <i [class.eye]="!isPasswordRepeatHidden" [class.eye-line]="isPasswordRepeatHidden" (click)="passwordRepeatHiddenToggle()"></i>
@@ -83,15 +83,15 @@
         <span class="text text__color--5 text__fw--500 text__md cursor__pointer m__right--5" (mouseup)="showDialog(termsData)">Terms and conditions</span>
       </div>
 
-      <div class="m__top--20 d__flex d__flex--items-center">
+      <div class="m__top--15 d__flex d__flex--items-center">
         <app-checkbox class="w__60" formControlName="acceptPrivacy"></app-checkbox>
         <span class="text text__color--4 text__fw--500 text__md m__right--5">Accept </span>
-        <span class="text text__color--5 text__fw--500 text__md cursor__pointer m__right--5" (mouseup)="showDialog(privacyData)">Privacy Pollicy</span>
+        <span class="text text__color--5 text__fw--500 text__md cursor__pointer m__right--5" (mouseup)="showDialog(privacyData)">Privacy Policy</span>
       </div>
     </ng-container>
 
   </div>
 
-  <app-button class="m__top--60" [disabled]="!form?.valid" (buttonClick)="onSignUpClick()" [type]="'main'" [text]="'Sign Up'"></app-button>
+  <app-button class="m__top--45" [disabled]="!form?.valid" (buttonClick)="onSignUpClick()" [type]="'main'" [text]="'Sign Up'"></app-button>
 
 </app-auth-container>

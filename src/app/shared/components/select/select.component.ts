@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, HostListener, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { EUserRole } from 'app/shared/enums';
 
@@ -21,14 +21,16 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
   value: string;
   isExpand: boolean;
 
+  @HostListener('click', ['$event'])
+  expand(): void {
+    this.isExpand = !this.isExpand;
+  }
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  expand(): void {
-    this.isExpand = !this.isExpand;
-  }
 
   select(event: string): void {
     if (event === this.value) {
