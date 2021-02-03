@@ -38,7 +38,7 @@ export class UserService {
   }
 
   public updateProfile(userInfo: Partial<UserInfo>): Observable<object> {
-    return this.http.post(`${this.apiUrl}${ApiConstants.accounts.updateProfile}`, userInfo);
+    return this.http.patch(`${this.apiUrl}${ApiConstants.accounts.updateProfile}/${userInfo.id}`, userInfo);
   }
 
   public uploadPhoto(image: string): Observable<any> {
