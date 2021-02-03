@@ -23,6 +23,7 @@ import { TimezoneComponent } from './components/timezone/timezone.component';
 import { AddressComponent } from 'app/shared/components/address/address.component';
 import { PhoneRegexComponent } from './components/phone-regex/phone-regex.component';
 import { ResumeService } from './services/resume.service';
+import { SelectComponent } from './components/select/select.component';
 import { DropDownListComponent } from './components/drop-down-list/drop-down-list.component';
 
 @NgModule({
@@ -36,6 +37,7 @@ import { DropDownListComponent } from './components/drop-down-list/drop-down-lis
     TimezoneComponent,
     AddressComponent,
     PhoneRegexComponent,
+    SelectComponent,
     DropDownListComponent
   ],
   exports: [
@@ -56,9 +58,11 @@ import { DropDownListComponent } from './components/drop-down-list/drop-down-lis
     TimezoneComponent,
     AddressComponent,
     PhoneRegexComponent,
+    SelectComponent,
     DropDownListComponent
   ],
   imports: [
+    ReactiveComponentModule,
     CommonModule,
     FormsModule,
     MatAutocompleteModule,
@@ -71,8 +75,7 @@ import { DropDownListComponent } from './components/drop-down-list/drop-down-lis
     NgCircleProgressModule,
     GooglePlaceModule,
     ReactiveFormsModule,
-    NgxPhoneMaskModule,
-    ReactiveComponentModule
+    NgxPhoneMaskModule
   ],
   providers: [
     CircleProgressOptions,
