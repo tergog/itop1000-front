@@ -6,8 +6,8 @@ import {
   OnInit,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, Subject } from 'rxjs';
-import { filter, first, tap, takeUntil } from 'rxjs/operators';
+import { EMPTY, Observable, Subject } from 'rxjs';
+import { filter, first, tap, takeUntil, catchError } from 'rxjs/operators';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
@@ -51,7 +51,8 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
       tap((userInfo: UserInfo) => {
         this.devProfileService.devProperties = userInfo.devProperties;
         this.userInfo = userInfo;
-      })
+      }),
+      catchError(_ => EMPTY)
     );
     this.allSkills$ = this.devProfileService.getStaticData('Skills');
   }
@@ -111,7 +112,7 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
   }
 
   private uploadImage(image: string, forLogo: boolean): void {
-    this.developersService.uploadProjectImage(image)
+    this.developersService.uploadProjectImage(image, 0)
       .pipe(takeUntil(this.ngUnsubscribe$))
       .subscribe(
         url => forLogo ? this.logoUrl = url : this.projectImages.push(url),

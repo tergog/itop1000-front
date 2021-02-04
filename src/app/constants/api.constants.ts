@@ -1,26 +1,27 @@
 export const ApiConstants = {
-  accounts: {
+  accounts: 'accounts',
+  accountsSearch: 'accounts/search',
+  jobs: 'jobs',
+  jobsSearch: 'jobs/search',
+  email: {
+    verify: 'email/verify?',
+    isAvailable: 'email/is-available'
+  },
+  auth: {
+    login: 'auth/login',
+    resetPassword: 'auth/reset-password',
     register: 'auth/register',
-    authenticate: 'auth/login',
-    verifyEmail: 'email/verify',
-    verifyToken: 'auth/verify-token',
-    isEmailAvailable: 'email/is-available',
-    updateProfile: 'accounts',
-    changePassword: 'accounts/change-password',
-    upload: 'accounts/upload',
-    uploadProjectImage: 'accounts/upload-project-image',
-    uploadCertificate: 'accounts/upload-certificate',
-    deleteCertificate: 'accounts/delete-certificate',
-    paymentMethod: 'accounts/payment-method',
-    paymentMethods: 'accounts/payment-methods',
-    searchDevelopers: 'accounts/search',
-    getDeveloperById: 'accounts/get-developer',
-    chargesList: 'accounts/charges-list',
-    activeProjects: 'accounts/active-projects',
-    verifyBank: 'accounts/verify-bank',
-    verifyStripe: 'accounts/verify-stripe',
-    payout: 'accounts/payout',
-    paymentIntent: 'accounts/payment-intent'
+    changePassword: 'auth/change-password',
+    forgotPassword: 'auth/forgot-password',
+    verifyToken: 'auth/verify-token'
+  },
+  payments: {
+    payments: 'payments',
+    intent: 'payments/intent',
+    payout: 'payments/payout',
+    bankAccount: 'payments/bank-account',
+    accountLink: 'payments/account-link',
+    charges: 'payments/charges'
   },
   data: {
     developerCategories: 'data/categories',
@@ -28,10 +29,11 @@ export const ApiConstants = {
     developerLanguages: 'data/languages',
     developerSoftSkills: 'data/soft-skills'
   },
-  jobs: {
-    main: 'jobs',
-    search: 'jobs/search',
-    delete: 'jobs'
+  chat: {
+    conversations: 'chat/conversations',
+    conversationsMembers: 'chat/conversations/members',
+    conversationsSearch: 'chat/conversations/search',
+    messages: 'chat/messages'
   },
   developers: {
     main: 'developers',

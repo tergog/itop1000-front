@@ -64,7 +64,7 @@ export class DevProfileService {
             message: 'Certificate added successfully',
             type: ENotificationStatus.Success
           });
-          this.onUpdateProfileInfo(token);
+          //this.onUpdateProfileInfo(token);
         },
         ({ error }) => this.handleErrorResponse(error)
       );
@@ -79,17 +79,13 @@ export class DevProfileService {
             message: 'Certificate deleted successfully',
             type: ENotificationStatus.Success
           });
-          this.onUpdateProfileInfo(token);
+          //this.onUpdateProfileInfo(token);
         },
         ({ error }) => this.handleErrorResponse(error)
       );
   }
 
-  private onUpdateProfileInfo(token: string) {
-
-    localStorage.setItem(TOKEN, token);
-
-    const userInfo = jwtDecode(token);
+  private onUpdateProfileInfo(userInfo: UserInfo) {
     this.store.dispatch(new coreActions.UpdateUserProfileAction(userInfo));
   }
 
@@ -98,7 +94,7 @@ export class DevProfileService {
       message: 'Profile updated successfully',
       type: ENotificationStatus.Success
     });
-    this.onUpdateProfileInfo(userInfo.token);
+    this.onUpdateProfileInfo(userInfo);
   }
 
   private handleErrorResponse(error: Error): void {

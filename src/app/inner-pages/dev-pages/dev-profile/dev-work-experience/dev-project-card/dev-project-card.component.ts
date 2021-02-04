@@ -134,7 +134,7 @@ export class DevProjectCardComponent implements OnInit {
   }
 
   private uploadLogo(image: string): void {
-    this.developersService.uploadProjectImage(image)
+    this.developersService.uploadProjectImage(image, this.id)
       .subscribe(
         (url) => {
             this.logoUrl = url;
@@ -144,7 +144,7 @@ export class DevProjectCardComponent implements OnInit {
   }
 
   private uploadImage(image: string, id?: number): void {
-    this.developersService.uploadProjectImage(image)
+    this.developersService.uploadProjectImage(image, id)
       .subscribe(
         (url) => {
           const project = Object.assign([], this.projectImages);

@@ -32,8 +32,8 @@ export class DevCertificatesComponent implements OnInit, OnDestroy {
       if (dev) {
         this.developer = JSON.parse(JSON.stringify(dev));
       }
-      if (this.developer.devProperties.certificates) {
-        this.certificates = [ ...this.developer.devProperties.certificates ];
+      if (this.developer.devProperties?.certificates) {
+        this.certificates = [ ...this.developer.devProperties?.certificates ];
       } else {
         this.certificates = [];
       }

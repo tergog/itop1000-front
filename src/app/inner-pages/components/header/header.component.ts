@@ -54,7 +54,7 @@ export class HeaderComponent implements OnInit {
 
   public onSearch(): void {
     if (this.userRole === this.UserRole.Dev) {
-      this.store.dispatch(searchJobs(this.searchTerm.value));
+      this.store.dispatch(searchJobs({ payload: this.searchTerm.value }));
     } else {
       this.store.dispatch(searchDevelopers({ payload: this.searchTerm.value }));
     }

@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from 'environments/environment';
 import { ApiConstants } from 'app/constants/api.constants';
 import { Developer, NameValueModel } from 'app/shared/models';
+import { USER_ID } from 'app/shared/providers/user-id.provider';
 
 @Injectable({
   providedIn: 'root'
@@ -12,18 +13,18 @@ import { Developer, NameValueModel } from 'app/shared/models';
 export class DevelopersService {
   apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(@Inject(USER_ID) private id: string, private http: HttpClient) { }
 
   public getDeveloper(id: string): Observable<Developer> {
-    return this.http.get<Developer>(`${this.apiUrl}${ApiConstants.accounts.getDeveloperById}/${id}`);
+    return this.http.get<Developer>(`${this.apiUrl}${ApiConstants.accounts}/${id}`);
   }
 
   public searchDevelopers(searchTerm: string): Observable<Developer[]> {
-    return this.http.get<Developer[]>(`${this.apiUrl}${ApiConstants.accounts.searchDevelopers}?searchTerm=${searchTerm}`);
+    return this.http.get<Developer[]>(`${this.apiUrl}${ApiConstants.accountsSearch}?searchTerm=${searchTerm}`);
   }
 
-  public uploadProjectImage(image: string | ArrayBuffer): Observable<string> {
-    return this.http.post<string>(`${this.apiUrl}${ApiConstants.accounts.uploadProjectImage}`, {image});
+  public uploadProjectImage(image: string | ArrayBuffer, projectId: number): Observable<string> {
+    return this.http.post<string>(`${this.apiUrl}${ApiConstants.accounts}/${this.id}/projects/${projectId}/image`, {image});
   }
 
   public getDeveloperCategories(): Observable<NameValueModel[]> {

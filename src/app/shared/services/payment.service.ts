@@ -15,39 +15,35 @@ export class PaymentService {
   constructor(private http: HttpClient) { }
 
   public createPaymentMethod(paymentMethodData): Observable<object> {
-    return this.http.post(`${this.apiUrl}${ApiConstants.accounts.paymentMethod}`, paymentMethodData);
+    return this.http.post(`${this.apiUrl}${ApiConstants.payments.payments}`, paymentMethodData.card.token);
   }
 
   public deletePaymentMethod(paymentMethodId): Observable<any> {
-    return this.http.delete(`${this.apiUrl}${ApiConstants.accounts.paymentMethod}/${paymentMethodId}`);
+    return this.http.delete(`${this.apiUrl}${ApiConstants.payments.payments}/${paymentMethodId}`);
   }
 
   public updatePaymentMethod(paymentMethodData): Observable<any> {
-    return this.http.put(`${this.apiUrl}${ApiConstants.accounts.paymentMethod}`, paymentMethodData);
+    return this.http.put(`${this.apiUrl}${ApiConstants.payments.payments}`, paymentMethodData);
   }
 
   public getPaymentMethods(): Observable<any> {
-    return this.http.get(`${this.apiUrl}${ApiConstants.accounts.paymentMethods}`);
+    return this.http.get(`${this.apiUrl}${ApiConstants.payments.payments}`);
   }
 
   public getChargesList(): Observable<any> {
-    return this.http.get(`${this.apiUrl}${ApiConstants.accounts.chargesList}`);
+    return this.http.get(`${this.apiUrl}${ApiConstants.payments.charges}`);
   }
 
   public verifyBankAccount(bankInfo: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}${ApiConstants.accounts.verifyBank}`, bankInfo);
-  }
-
-  public instantPayout(paymentInfo: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}${ApiConstants.accounts.paymentIntent}`, paymentInfo);
+    return this.http.post(`${this.apiUrl}${ApiConstants.payments.bankAccount}`, bankInfo);
   }
 
   public verifyStripeAccount(): Observable<any> {
-    return this.http.get(`${this.apiUrl}${ApiConstants.accounts.verifyStripe}`);
+    return this.http.get(`${this.apiUrl}${ApiConstants.payments.accountLink}`);
   }
 
   public payout(): Observable<any> {
-    return this.http.get(`${this.apiUrl}${ApiConstants.accounts.payout}`);
+    return this.http.get(`${this.apiUrl}${ApiConstants.payments.payout}`);
   }
 }
 

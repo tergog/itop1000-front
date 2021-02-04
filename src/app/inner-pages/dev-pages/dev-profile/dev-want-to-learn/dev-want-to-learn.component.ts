@@ -30,7 +30,7 @@ export class DevWantToLearnComponent implements OnInit {
       .pipe(first())
       .subscribe((userInfo: UserInfo) => {
         this.developer = JSON.parse(JSON.stringify(userInfo));
-        this.description = userInfo.devProperties.description;
+        this.description = userInfo.devProperties?.description;
       });
   }
 
@@ -40,9 +40,14 @@ export class DevWantToLearnComponent implements OnInit {
 
   onSaveClick(): void {
     this.onEditClick();
-    if (this.developer.devProperties.description !== this.description) {
-      this.developer.devProperties.description = this.description;
-      this.devProfileService.onSaveClick(this.developer);
+    if (this.developer.devProperties?.description !== this.description) {
+      if (!this.developer.devProperties) {
+        this.developer = {...this.developer, devProperties: { description: this.description }};
+        this.devProfileService.onSaveClick(this.developer);
+      } else {
+        this.developer.devProperties.description = this.description;
+        this.devProfileService.onSaveClick(this.developer);
+      }
     }
   }
 

@@ -16,6 +16,7 @@ export class DeveloperResumeComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.developer);
   }
 
   public onProfileClick(): void {
