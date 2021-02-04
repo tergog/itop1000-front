@@ -12,25 +12,35 @@ import { ConversationMessageModel, ConversationModel } from '../models';
 export class ChatService {
   private apiURL = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
+  // Conversations
   public createNewConversation(creatorId: string, withId: string): Observable<ConversationModel> {
-    return this.http.post<ConversationModel>(`${this.apiURL}${ApiConstants.chat.create}`, {
+    return this.http.post<ConversationModel>(`${this.apiURL}${ApiConstants.chat.createConversation}`, {
       creatorId,
       withId
     });
   }
 
-  public getConversationsByUserId(userId: string): Observable<ConversationModel[]> {
-    return this.http.get<ConversationModel[]>(`${this.apiURL}${ApiConstants.chat.getConversationsByMemberId}/${userId}`,{});
-  }
+  public getConversationsByUserId(userId: string, searchTerm?: string): Observable<ConversationModel[]> {
+    let query = `${this.apiURL}${ApiConstants.chat.getConversationsByMemberId}/${userId}`;
 
-  public searchConversations(userId: string, search: string): Observable<ConversationModel[]> {
-    return this.http.get<ConversationModel[]>(`${this.apiURL}${ApiConstants.chat.search}/${userId}/${search}`, {});
+    if (typeof searchTerm !== 'undefined') {
+      query += `?searchTerm=${searchTerm}`;
+    }
+
+    return this.http.get<ConversationModel[]>(query, {});
   }
 
   // Messages
-  public getMessagesByConversationId(convId: string, page: number, count: number): Observable<ConversationMessageModel[]> {
-    return this.http.get<ConversationMessageModel[]>(`${this.apiURL}${ApiConstants.chat.getMessagesById}/${convId}/${page}/${count}`, {});
+  public getMessagesByConversationId(convId: string, page: number, count: number, searchTerm?: string): Observable<ConversationMessageModel[]> {
+    let query = `${this.apiURL}${ApiConstants.chat.getMessagesByConversationId}/${convId}?page=${page}&count=${count}`;
+
+    if (typeof searchTerm !== 'undefined') {
+      query += `&searchTerm=${searchTerm}`;
+    }
+
+    return this.http.get<ConversationMessageModel[]>(query, {});
   }
 }

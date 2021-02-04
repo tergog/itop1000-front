@@ -1,12 +1,12 @@
 export const ApiConstants = {
   accounts: {
-    register: 'accounts/register',
-    authenticate: 'accounts/authenticate',
-    verifyEmail: 'accounts/verify-email',
-    verifyToken: 'accounts/verify-token',
-    isEmailAvailable: 'accounts/is-email-available',
-    updateProfile: 'accounts/update-profile',
-    changePassword: 'accounts/change-password',
+    register: 'auth/register',
+    authenticate: 'auth/login',
+    verifyEmail: 'email/verify-email',
+    verifyToken: 'auth/verify-token',
+    isEmailAvailable: 'email/is-available',
+    updateProfile: 'accounts',
+    changePassword: 'auth/change-password',
     upload: 'accounts/upload',
     uploadProjectImage: 'accounts/upload-project-image',
     uploadCertificate: 'accounts/upload-certificate',
@@ -32,9 +32,9 @@ export const ApiConstants = {
     search: 'developers/search'
   },
   chat: {
-    create: 'conversations/create',
-    getConversationsByMemberId: 'conversations/member',
-    search: 'conversations/search',
-    getMessagesById: 'messages/get'
+    createConversation: 'chat/conversations', // POST
+    getConversationsByMemberId: 'chat/conversations/members', // GET
+    getMessagesByConversationId: 'chat/messages', // GET
+    updateChatMember: 'chat/members' // PATCH
   }
 };

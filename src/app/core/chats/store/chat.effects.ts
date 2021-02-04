@@ -36,7 +36,7 @@ export class ChatEffects {
 
   searchConversations$ = createEffect(() => this.actions$.pipe(
     ofType(actions.searchConversations),
-    switchMap(({ userId, term }) => this.chatService.searchConversations(userId, term).pipe(
+    switchMap(({ userId, term }) => this.chatService.getConversationsByUserId(userId, term).pipe(
       map((convs: ConversationModel[]) => actions.searchConversationsSuccess(convs)),
       catchError((err: HttpErrorResponse) => {
         this.emitErrorNotification(err);
