@@ -52,6 +52,15 @@
       overflow: auto;
       height: 100%;
 
+      &::-webkit-scrollbar {
+        background-color: transparent;
+        width: 5px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $color-5;
+      }
+
       &__message-list {
         overflow: auto;
         margin: 20px 32px 0 32px;
