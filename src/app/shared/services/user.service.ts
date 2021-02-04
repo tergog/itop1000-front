@@ -1,22 +1,23 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import * as jwtDecode from 'jwt-decode';
 
 import { environment } from 'environments/environment';
 import { ApiConstants } from 'app/constants/api.constants';
 import { UserInfo, UserLoginInfo, UserRegistrationInfo } from 'app/shared/models';
 import { TOKEN } from 'app/constants/constants';
-import { USER_ID } from 'app/shared/providers/user-id.provider';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   apiUrl = environment.apiUrl;
+  private id: string;
 
-  constructor(@Inject(USER_ID) private id, private http: HttpClient) {
+  constructor(private http: HttpClient) {
+    this.id = jwtDecode(localStorage.getItem(TOKEN)).id;
   }
 
   public registerVerifyEmail(email: string): Observable<object> {

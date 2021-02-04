@@ -18,7 +18,6 @@ import { HttpErrorHandlerService } from 'app/shared/services/http-error-handler.
 import { TokenInterceptor } from 'app/shared/interceptors/token.interceptor';
 import { ClientModule } from './core/client/store/client.module';
 import { SharedModule } from './shared/shared.module';
-import { USER_ID_PROVIDER } from 'app/shared/providers/user-id.provider';
 
 
 @NgModule({
@@ -49,7 +48,6 @@ import { USER_ID_PROVIDER } from 'app/shared/providers/user-id.provider';
       useClass: TokenInterceptor,
       multi: true,
     },
-    USER_ID_PROVIDER,
     AuthGuard,
   ],
   bootstrap: [AppComponent],

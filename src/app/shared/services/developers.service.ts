@@ -1,19 +1,23 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import * as jwtDecode from 'jwt-decode';
 
 import { environment } from 'environments/environment';
 import { ApiConstants } from 'app/constants/api.constants';
 import { Developer, NameValueModel } from 'app/shared/models';
-import { USER_ID } from 'app/shared/providers/user-id.provider';
+import { TOKEN } from 'app/constants/constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DevelopersService {
   apiUrl = environment.apiUrl;
+  id: string;
 
-  constructor(@Inject(USER_ID) private id: string, private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.id = jwtDecode(localStorage.getItem(TOKEN)).id;
+  }
 
   public getDeveloper(id: string): Observable<Developer> {
     return this.http.get<Developer>(`${this.apiUrl}${ApiConstants.accounts}/${id}`);
