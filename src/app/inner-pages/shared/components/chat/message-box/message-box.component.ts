@@ -10,7 +10,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ContentChange } from 'ngx-quill';
 import { iif, of } from 'rxjs';
-import { delay, switchMap, take, tap } from 'rxjs/operators';
+import { debounceTime, delay, distinctUntilChanged, switchMap, take, tap } from 'rxjs/operators';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 import { ChatService, NotificationsService, WebsocketService } from 'app/shared/services';
@@ -47,7 +47,7 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
   private pageLoaded: number = 1;
 
   public userTyping: string = null;
-  public searchFC: FormControl = new FormControl('', [ Validators.required, Validators.maxLength(32) ]);
+  public searchFC: FormControl = new FormControl('', [ Validators.maxLength(32) ]);
 
   constructor(
     private websocketService: WebsocketService,
@@ -63,6 +63,19 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
       page: this.pageLoaded++,
       count: CHAT_MESSAGES_PER_PAGE
     }));
+
+    // Typeahead searching
+    this.searchFC.valueChanges.pipe(
+      untilDestroyed(this),
+      debounceTime(500),
+      distinctUntilChanged(),
+      tap((term) => this.searchFC.valid && this.store.dispatch(chatActions.searchMessages({
+        userId: this.user.id,
+        convId: this.chat.conversations.active,
+        term
+      })))
+    ).subscribe();
+
 
     this.websocketService.receivedNewMessage().pipe(
       untilDestroyed(this),
