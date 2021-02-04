@@ -13,7 +13,7 @@ import { iif, of } from 'rxjs';
 import { debounceTime, delay, distinctUntilChanged, switchMap, take, tap } from 'rxjs/operators';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
-import { ChatService, NotificationsService, WebsocketService } from 'app/shared/services';
+import { ChatService, WebsocketService } from 'app/shared/services';
 import {
   ConversationMemberModel,
   ConversationModel,
@@ -25,7 +25,6 @@ import * as fromChat from 'app/core/chats/store/chat.reducer';
 import * as chatActions from 'app/core/chats/store/chats.actions';
 import { addNewMessage } from 'app/core/chats/store/chats.actions';
 import { slideInLeftAnimation } from 'app/shared/animations';
-import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
 import { EConversationTypeEnum } from 'app/shared/enums';
 import { CHAT_MESSAGES_PER_PAGE, CHAT_ONLINE_DELTA_MS } from 'app/constants/constants';
 
@@ -52,8 +51,7 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
   constructor(
     private websocketService: WebsocketService,
     private chatService: ChatService,
-    private store: Store<fromCore.State>,
-    private notificationsService: NotificationsService
+    private store: Store<fromCore.State>
   ) {
   }
 
@@ -114,7 +112,7 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if(!changes.chat?.firstChange && changes.chat?.previousValue?.conversations.active !== changes.chat?.currentValue.conversations.active) {
+    if (!changes.chat?.firstChange && changes.chat?.previousValue?.conversations.active !== changes.chat?.currentValue.conversations.active) {
       this.pageLoaded = 1;
 
       this.store.dispatch(chatActions.getConverastionMessages({
@@ -154,19 +152,6 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
     }
   }
 
-  onMessagesSearch(): void {
-    if (this.searchFC.enabled) {
-      if (this.searchFC.value && this.searchFC.valid) {
-        // Search
-      } else {
-        this.notificationsService.message.emit({
-          type: ENotificationStatus.Error,
-          message: 'Search request must be more 0 and less than 32 chars!'
-        });
-      }
-    }
-  }
-
   onHistoryScroll(): void {
     if (this.messagesWrapper?.nativeElement.scrollTop === 0 && this.chat.messages.data.length >= CHAT_MESSAGES_PER_PAGE &&
       this.chat.messages.data.length < this.getActiveConversationById(this.chat.conversations.active).messages.total) {
@@ -174,7 +159,7 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
         convId: this.chat.conversations.active,
         page: this.pageLoaded++,
         count: CHAT_MESSAGES_PER_PAGE
-      }))
+      }));
     }
   }
 
@@ -185,8 +170,7 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
   expectChangesThanScroll(force: boolean = false): void {
     if (force) {
       this.scrollToElement(this.messageContainers.last.nativeElement);
-    }
-    else {
+    } else {
       this.messageContainers.changes
         .pipe(take(2)) // take(2) instead first() for fix bug when history isnt scrolls
         .subscribe((list: QueryList<ElementRef>) => {
