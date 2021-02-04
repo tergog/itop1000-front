@@ -1,0 +1,8 @@
+@import "~assets/scss/variables";
+
+:host {
+  display: block;
+  padding-bottom: 20px;
+  border-bottom: 1px solid $color-11;
+  height: 70px;
+}

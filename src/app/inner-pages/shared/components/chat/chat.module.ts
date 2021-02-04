@@ -8,9 +8,10 @@ import { PagesSharedModule } from 'app/inner-pages/shared/pages-shared.module';
 import { RichTextEditorModule } from './message-box/rich-text-editor/rich-text-editor.module';
 
 import { ChatComponent } from './chat.component';
-import { SidebarRoomsComponent } from './sidebar-rooms/sidebar-rooms.component';
 import { MessageBoxComponent } from './message-box/message-box.component';
 import { QuillModule } from 'ngx-quill';
+import { ConversationsComponent } from './conversations/conversations.component';
+import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
   { path: '', component: ChatComponent },
@@ -20,8 +21,9 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     ChatComponent,
-    SidebarRoomsComponent,
-    MessageBoxComponent
+    MessageBoxComponent,
+    ConversationsComponent,
+    SearchComponent
   ],
   imports: [
     CommonModule,

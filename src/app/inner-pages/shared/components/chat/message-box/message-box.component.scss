@@ -1,10 +1,5 @@
 @import "~assets/scss/variables";
 
-:host {
-  margin-top: 20px;
-  padding-left: 20px;
-}
-
 .chat__message-box {
   overflow: auto;
   height: 100%;
@@ -21,7 +16,7 @@
   &__header {
     grid-area: chat__message-box__header;
     display: grid;
-    grid-template-columns: 1fr 200px 30px 30px;
+    grid-template-columns: 1fr repeat(3, 30px);
     grid-template-rows: 50px;
     gap: 0 10px;
     grid-template-areas: ". . . .";
@@ -39,17 +34,10 @@
       white-space: nowrap;
     }
 
+    &__search i,
     &__settings i,
     &__mark i {
       margin: 10px 0;
-    }
-
-    &__settings i {
-      transition: transform .2s;
-
-      &:hover {
-        transform: rotateZ(45deg);
-      }
     }
   }
 

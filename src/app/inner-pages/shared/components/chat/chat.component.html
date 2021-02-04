@@ -1,14 +1,19 @@
 <div class="chat">
 
-  <app-sidebar-rooms
-    [user]="user$ | async"
-    [chat]="chat$ | async"
-  ></app-sidebar-rooms>
+  <div class="chat__sidebar">
+    <app-search></app-search>
+    <app-conversations
+      [user]="user$ | async"
+      [chat]="chat$ | async"
+    ></app-conversations>
+  </div>
 
-  <app-message-box
-    *ngIf="(chat$ | async).conversations.active"
-    [user]="user$ | async"
-    [chat]="chat$ | async"
-  ></app-message-box>
+  <div class="chat__history">
+    <app-message-box
+      *ngIf="(chat$ | async).conversations.active"
+      [user]="user$ | async"
+      [chat]="chat$ | async"
+    ></app-message-box>
+  </div>
 
 </div>

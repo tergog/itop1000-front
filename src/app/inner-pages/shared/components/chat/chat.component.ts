@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { iif, Observable, of } from 'rxjs';
-import { first, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, first, map, switchMap, tap } from 'rxjs/operators';
 
 import * as fromCore from 'app/core/reducers';
 import * as fromChats from 'app/core/chats/store/chat.reducer';
@@ -57,6 +57,9 @@ export class ChatComponent implements OnInit, OnDestroy {
             )),
             tap(() => this.location.replaceState(user.role === EUserRole.Client ? '/in/c/chat' : '/in/d/chat'))
           )
+        )),
+        catchError(() => this.chatService.createNewConversation(user.id, this.route.snapshot.params.id).pipe(
+          tap((conv) => this.store.dispatch(chatActions.createNewConversation({ conv, open: true })))
         ))
       )),
     ).subscribe();
