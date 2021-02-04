@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { io } from 'socket.io-client';
+import * as io from 'socket.io-client';
 
 import { environment } from 'environments/environment';
 import { ConversationMessageModel, WebsocketOnlineModel, WebsocketTypingModel } from 'app/shared/models';
@@ -19,7 +19,9 @@ interface SendConversationMessageModel {
   providedIn: 'root'
 })
 export class WebsocketService {
-  private socket = io(environment.apiUrl);
+  private readonly socket = io(`${environment.wsUrl}/chat`, {
+    transports: [ 'websocket' ]
+  });
 
   constructor(
     private store: Store<fromCore.State>
@@ -42,7 +44,7 @@ export class WebsocketService {
     this.online(data.userId);
   }
 
-  sendConversationMessage(message: SendConversationMessageModel, savedMessageCb: Function = (message: ConversationMessageModel): void => {}): void {
+  sendConversationMessage(message: SendConversationMessageModel, savedMessageCb: (message: ConversationMessageModel) => void): void {
     this.socket.emit(WSCONST.SEND.MESSAGE, message, (response: ConversationMessageModel) => {
       savedMessageCb(response);
     });
@@ -62,16 +64,25 @@ export class WebsocketService {
     return new Observable<WebsocketTypingModel>((observer) => {
       this.socket.on(WSCONST.ON.TYPING, (data: WebsocketTypingModel): void => {
         observer.next(data);
-      })
+      });
       return () => this.socket.disconnect();
     });
   }
 
   receivedOnline() {
     return new Observable<WebsocketOnlineModel>((observer) => {
-      this.socket.on(WSCONST.ON.ONLINE, (data: WebsocketOnlineModel): void => {
+      this.socket.on(WSCONST.ON.ONLINE, (data): void => {
         observer.next(data);
-      })
+      });
+      return () => this.socket.disconnect();
+    });
+  }
+
+  receivedError() {
+    return new Observable((observer) => {
+      this.socket.on(WSCONST.ON.EXCEPTION, (err) => {
+        observer.next(err);
+      });
       return () => this.socket.disconnect();
     });
   }
