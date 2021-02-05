@@ -36,7 +36,7 @@ export class ClientBillingsComponent implements OnInit, OnDestroy {
   public getPaymentMethods(): void  {
     this.paymentService.getPaymentMethods()
       .pipe(takeUntil(this.ngUnsubscribe$))
-      .subscribe((billingsMethods) => this.billingMethods = billingsMethods,
+      .subscribe((billingsMethods) => this.billingMethods = billingsMethods.data,
         ({ error }) => this.errorMessage = error.message
       );
   }

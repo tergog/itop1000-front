@@ -17,7 +17,11 @@ export class UserService {
   private id: string;
 
   constructor(private http: HttpClient) {
-    this.id = jwtDecode(localStorage.getItem(TOKEN)).id;
+    try {
+      this.id = jwtDecode(localStorage.getItem(TOKEN)).id;
+    } catch (err) {
+      localStorage.clear();
+    }
   }
 
   public registerVerifyEmail(email: string): Observable<object> {
@@ -38,7 +42,7 @@ export class UserService {
   }
 
   public userRegistration(userInfo: UserRegistrationInfo): Observable<object> {
-    return this.http.post(`${this.apiUrl}${ApiConstants.auth.register}/`, userInfo);
+    return this.http.post(`${this.apiUrl}${ApiConstants.auth.register}/${userInfo.role.toLocaleLowerCase()}`, userInfo);
   }
 
   public userLogin(userInfo: UserLoginInfo): Observable<object> {

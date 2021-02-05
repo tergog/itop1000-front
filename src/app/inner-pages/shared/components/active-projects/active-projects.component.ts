@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import { ActiveProjectsService } from 'app/shared/services';
@@ -27,7 +27,7 @@ export class ActiveProjectsComponent implements OnInit {
   ngOnInit(): void {
     this.projects$ = this.store.select(fromCore.getUserInfo).pipe(
         map((user: UserInfo) => user.id),
-        switchMap((id: string) => this.projectService.getActiveProjects(id))
+        switchMap((id: string) => this.projectService.getActiveProjects(id).pipe(tap(res => console.log(res))))
       );
   }
 

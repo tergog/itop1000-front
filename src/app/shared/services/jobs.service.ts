@@ -1,18 +1,27 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import * as jwtDecode from 'jwt-decode';
 
 import { environment } from 'environments/environment';
 import { ApiConstants } from 'app/constants/api.constants';
 import { Job } from 'app/shared/models';
+import { TOKEN } from 'app/constants/constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JobsService {
   apiUrl = environment.apiUrl;
+  id: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    try {
+      this.id = jwtDecode(localStorage.getItem(TOKEN)).id;
+    } catch (err) {
+      localStorage.clear();
+    }
+  }
 
   public getJobs(): Observable<Job[]> {
     return this.http.get<Job[]>(`${this.apiUrl}${ApiConstants.jobs}`);
@@ -27,7 +36,7 @@ export class JobsService {
   }
 
   public createJob(jobData): Observable<object> {
-    return this.http.post(`${this.apiUrl}${ApiConstants.jobs}`, jobData);
+    return this.http.post(`${this.apiUrl}${ApiConstants.jobs}`, { ...jobData, userId: this.id });
   }
 
   public deleteJob(jobId: string): Observable<object> {

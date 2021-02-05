@@ -1,12 +1,10 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { catchError, first, map, shareReplay, switchMap, tap } from 'rxjs/operators';
 
-
 import { UserService } from '../services';
-import { TOKEN } from 'app/constants/constants';
 import { State } from 'app/core/reducers/index';
 import { SetOnLoginAction } from 'app/core/actions/core.actions';
 import { UserInfo } from 'app/shared/models';

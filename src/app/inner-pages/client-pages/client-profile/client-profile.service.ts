@@ -30,10 +30,7 @@ export class ClientProfileService {
       );
   }
 
-  private onUpdateProfileInfo(token: string): void {
-    localStorage.setItem(TOKEN, token);
-
-    const userInfo = jwtDecode(token);
+  private onUpdateProfileInfo(userInfo: UserInfo): void {
     this.store.dispatch(new coreActions.UpdateUserProfileAction(userInfo));
   }
 
@@ -42,7 +39,7 @@ export class ClientProfileService {
       message: 'Profile updated successfully',
       type: ENotificationStatus.Success
     });
-    this.onUpdateProfileInfo(userInfo.token);
+    this.onUpdateProfileInfo(userInfo);
   }
 
   private handleErrorResponse(error: Error): void {

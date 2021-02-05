@@ -77,7 +77,8 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
       this.showError = true;
       return;
     }
-    const newDevProperties: DevProperties = { projects: [...(this.userInfo.devProperties.projects || []), this.form.value] };
+    const newDevProperties: DevProperties = { ...this.userInfo.devProperties || {}, projects: [...(this.userInfo.devProperties.projects || []), this.form.value] };
+
     this.userInfo = { ...this.userInfo, devProperties: newDevProperties };
     this.store.dispatch(new UpdateUserProfileAction(this.userInfo));
     this.devProfileService.onSaveClick({ devProperties: newDevProperties });
