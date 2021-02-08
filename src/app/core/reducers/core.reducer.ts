@@ -36,6 +36,16 @@ export function reducer(state: State = INIT_STATE, action: coreActions.Actions) 
             ...state.userInfo.devProperties.projects
             .map((obj, index) =>  index === action.id ? {...obj, photo: action.image} : obj)]}};
       return {...state, userInfo: account};
+    case coreActions.ADD_CERTIFICATE:
+      return {
+        ...state,
+        userInfo: { ...state.userInfo, devProperties: { ...state.userInfo.devProperties, certificates: [ ...state.userInfo.devProperties.certificates, action.payload ] } }
+      };
+    case coreActions.DELETE_CERTIFICATE:
+      return {
+        ...state,
+        userInfo: { ...state.userInfo, devProperties: { ...state.userInfo.devProperties, certificates: state.userInfo.devProperties.certificates.filter(el => el !== action.payload) } }
+      };
     default:
       return state;
   }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { first } from 'rxjs/operators';
+import { first, tap } from 'rxjs/operators';
 import * as jwtDecode from 'jwt-decode';
 import { Observable } from 'rxjs';
 
@@ -13,6 +13,7 @@ import { DevProperties } from 'app/shared/models/dev-properties.model';
 import { NotificationsService } from 'app/shared/services/notifications.service';
 import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
 import * as fromDevelopers from 'app/core/developers/store';
+import { AddCertificateAction, DeleteCertificateAction, LoadUserAction, UpdateUserProfileAction } from 'app/core/actions/core.actions';
 
 @Injectable()
 export class DevProfileService {
@@ -40,7 +41,7 @@ export class DevProfileService {
     return this.developersStore.select(fromDevelopers[`get${data}`], );
   }
 
-  public onUploadPhoto(image: string): void {
+  public onUploadPhoto(image: FormData): void {
     this.userService.uploadPhoto(image)
       .pipe(first())
       .subscribe(
@@ -49,22 +50,24 @@ export class DevProfileService {
             message: 'Photo added successfully',
             type: ENotificationStatus.Success
           });
-          this.onUpdateProfileInfo(token);
+          //this.onUpdateProfileInfo(token);
         },
         ({ error }) => this.handleErrorResponse(error)
       );
   }
 
-  public onUploadCertificate(certificate: string): void {
+  public onUploadCertificate(certificate: FormData): void {
     this.userService.uploadCertificate(certificate)
-      .pipe(first())
+      .pipe(
+        first()
+      )
       .subscribe(
-        (token) => {
+        (res) => {
+          this.store.dispatch(new AddCertificateAction(res.certificate));
           this.notificationsService.message.emit({
             message: 'Certificate added successfully',
             type: ENotificationStatus.Success
           });
-          //this.onUpdateProfileInfo(token);
         },
         ({ error }) => this.handleErrorResponse(error)
       );
@@ -72,14 +75,16 @@ export class DevProfileService {
 
   public onDeleteCertificate(certificate: string, index: number): void {
     this.userService.deleteCertificate(certificate, index)
-      .pipe(first())
+      .pipe(
+        first()
+        )
       .subscribe(
-        (token) => {
+        (res) => {
           this.notificationsService.message.emit({
             message: 'Certificate deleted successfully',
             type: ENotificationStatus.Success
           });
-          //this.onUpdateProfileInfo(token);
+          this.store.dispatch(new DeleteCertificateAction(res.deletedCertificate));
         },
         ({ error }) => this.handleErrorResponse(error)
       );

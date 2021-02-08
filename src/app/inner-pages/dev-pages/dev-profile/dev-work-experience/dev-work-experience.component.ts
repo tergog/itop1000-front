@@ -98,7 +98,7 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
         filter(result => !!result),
         first()
       )
-      .subscribe((image: string) => this.uploadImage(image, forLogo));
+      .subscribe((image: FormData) => this.uploadImage(image, forLogo));
   }
 
   private initForm(): void {
@@ -112,7 +112,7 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
     });
   }
 
-  private uploadImage(image: string, forLogo: boolean): void {
+  private uploadImage(image: FormData, forLogo: boolean): void {
     this.developersService.uploadProjectImage(image, 0)
       .pipe(takeUntil(this.ngUnsubscribe$))
       .subscribe(

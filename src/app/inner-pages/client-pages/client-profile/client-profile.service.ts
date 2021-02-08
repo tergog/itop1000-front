@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs/operators';
-import * as jwtDecode from 'jwt-decode';
 
 import { NotificationsService, UserService } from 'app/shared/services';
 import { UserInfo } from 'app/shared/models';
-import { TOKEN } from 'app/constants/constants';
 import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
 import * as coreActions from 'app/core/actions/core.actions';
 import * as fromCore from 'app/core/reducers';

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
-import { tap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
@@ -8,6 +8,8 @@ import * as coreActions from 'app/core/actions/core.actions';
 import { UserService, DevelopersService } from 'app/shared/services';
 import { TOKEN } from 'app/constants/constants';
 import { State } from 'app/core/reducers';
+import { UpdateUserProfileAction } from 'app/core/actions/core.actions';
+import { UserInfo } from 'app/shared/models';
 
 @Injectable()
 export class CoreEffects {
@@ -27,6 +29,13 @@ export class CoreEffects {
       tap(action => this.setUserInfoToLocalStorage(action)),
       tap(() => this.redirectToProfile())
   ), { dispatch: false });*/
+
+  onLoadUser$ = createEffect(() => this.actions$.pipe(
+    ofType(coreActions.LOAD_USER_PROFILE),
+    switchMap(res => this.userService.getUserInfo().pipe(
+      map((res: UserInfo) => new UpdateUserProfileAction(res))
+    ))
+  ));
 
   onLogout$ = createEffect(() => this.actions$.pipe(
       ofType(coreActions.ON_LOGOUT),

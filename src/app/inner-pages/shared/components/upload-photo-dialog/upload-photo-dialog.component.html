@@ -14,6 +14,7 @@
       [imageChangedEvent]="imageChangedEvent"
       [maintainAspectRatio]="inputData.destination !== 'ProjectImage'"
       [roundCropper]="inputData.destination !== 'ProjectImage'"
+      [imageFile]=""
       format="png"
       (imageCropped)="imageCropped($event)"
       (imageLoaded)="imageLoaded()"

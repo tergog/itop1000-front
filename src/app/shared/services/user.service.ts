@@ -54,8 +54,8 @@ export class UserService {
     return this.http.patch(`${this.apiUrl}${ApiConstants.accounts}/${this.id}`, userInfo);
   }
 
-  public uploadPhoto(image: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}${ApiConstants.accounts}/${this.id}/photo`, { image });
+  public uploadPhoto(image: FormData): Observable<any> {
+    return this.http.post(`${this.apiUrl}${ApiConstants.accounts}/${this.id}/photo`,  image );
   }
 
   public isValidSession() {
@@ -70,12 +70,12 @@ export class UserService {
     return this.http.post(`${this.apiUrl}${ApiConstants.auth.changePassword}`, { oldPassword, password });
   }
 
-  public uploadCertificate(image: string | ArrayBuffer): Observable<string> {
-    return this.http.post<string>(`${this.apiUrl}${ApiConstants.accounts}/${this.id}/certificate`, {image});
+  public uploadCertificate(image: FormData): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}${ApiConstants.accounts}/${this.id}/certificate`, image);
   }
 
-  public deleteCertificate(url: string, index: number): Observable<string> {
-    return this.http.post<string>(`${this.apiUrl}${ApiConstants.accounts}/${this.id}/certificate`, {url, index});
+  public deleteCertificate(url: string, index: number): Observable<any> {
+    return this.http.patch<string>(`${this.apiUrl}${ApiConstants.accounts}/${this.id}/certificate`, {url, index});
   }
 
 }

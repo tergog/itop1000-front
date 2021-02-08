@@ -8,7 +8,7 @@
     </ng-container>
 
     <ng-container *ngIf="jobs.length">
-      <app-job *ngFor="let job of jobs"
+      <app-job *ngFor="let job of jobs; trackBy:identify"
                [job]="job"
                (click)="onJobClick(job.id)">
       </app-job>

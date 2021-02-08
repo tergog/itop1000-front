@@ -53,7 +53,7 @@ export class DevProfileSettingsComponent implements OnInit, OnDestroy {
         filter(result => !!result),
         first()
       )
-      .subscribe((image: string) => this.uploadImage(image));
+      .subscribe((image: FormData) => this.uploadImage(image));
   }
 
 
@@ -83,7 +83,7 @@ export class DevProfileSettingsComponent implements OnInit, OnDestroy {
     });
   }
 
-  private uploadImage(image: string): void {
+  private uploadImage(image: FormData): void {
     this.devProfileService.onUploadPhoto(image);
   }
 

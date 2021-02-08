@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { filter, first, takeUntil } from 'rxjs/operators';
+import { filter, first, takeUntil, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
 import * as fromCore from 'app/core/reducers';
@@ -40,7 +40,7 @@ export class DevCertificatesComponent implements OnInit, OnDestroy {
     });
   }
 
-  private uploadImage(certificate: string): void {
+  private uploadImage(certificate: FormData): void {
     this.devProfileService.onUploadCertificate(certificate);
   }
 
@@ -57,7 +57,9 @@ export class DevCertificatesComponent implements OnInit, OnDestroy {
         filter(result => !!result),
         first()
       )
-      .subscribe((certificate: string) => this.uploadImage(certificate));
+      .subscribe((certificate: FormData) => {
+        this.uploadImage(certificate);
+      });
   }
 
   public deleteCertificate(url: string, index: number): void {

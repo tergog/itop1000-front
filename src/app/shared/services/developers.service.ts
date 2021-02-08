@@ -51,8 +51,8 @@ export class DevelopersService {
     return this.http.get<Developer[]>(`${this.apiUrl}${ApiConstants.accountsSearch}?searchTerm=${searchTerm}`);
   }
 
-  public uploadProjectImage(image: string | ArrayBuffer, projectId: number): Observable<string> {
-    return this.http.post<string>(`${this.apiUrl}${ApiConstants.accounts}/${this.id}/projects/${projectId}/image`, {image});
+  public uploadProjectImage(image: FormData, projectId: number): Observable<string> {
+    return this.http.post<string>(`${this.apiUrl}${ApiConstants.accounts}/${this.id}/projects/${projectId}/image`, image);
   }
 
   public getDeveloperCategories(): Observable<NameValueModel[]> {

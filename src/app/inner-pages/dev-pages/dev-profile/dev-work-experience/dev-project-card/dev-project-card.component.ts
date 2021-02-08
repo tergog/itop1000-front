@@ -102,7 +102,7 @@ export class DevProjectCardComponent implements OnInit {
         filter(result => !!result),
         first()
       )
-      .subscribe((image: string) => image === 'delete' ? this.deleteImage(forLogo, id) : this.uploadProjectImages(image, forLogo, id) );
+      .subscribe((image: FormData | string) => image === 'delete' ? this.deleteImage(forLogo, id) : this.uploadProjectImages(image as FormData, forLogo, id) );
   }
 
   private deleteImage(forLogo: boolean, id?: number): void {
@@ -129,11 +129,11 @@ export class DevProjectCardComponent implements OnInit {
   }
 
 
-  private uploadProjectImages(image: string, forLogo: boolean = false, id?: number): void {
+  private uploadProjectImages(image: FormData, forLogo: boolean = false, id?: number): void {
     forLogo ? this.uploadLogo(image) : this.uploadImage(image, id);
   }
 
-  private uploadLogo(image: string): void {
+  private uploadLogo(image: FormData): void {
     this.developersService.uploadProjectImage(image, this.id)
       .subscribe(
         (url) => {
@@ -143,7 +143,7 @@ export class DevProjectCardComponent implements OnInit {
       );
   }
 
-  private uploadImage(image: string, id?: number): void {
+  private uploadImage(image: FormData, id?: number): void {
     this.developersService.uploadProjectImage(image, id)
       .subscribe(
         (url) => {

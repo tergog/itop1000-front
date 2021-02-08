@@ -41,7 +41,6 @@ export class JobComponent implements OnInit, OnDestroy {
 
   onEditClick(): void {
     const dialogRef = this.matDialog.open(EditJobDialogComponent, {data: {job: this.job}});
-
     dialogRef.afterClosed()
       .pipe(takeUntil(this.ngUnsubscribe$))
       .subscribe(res => {
