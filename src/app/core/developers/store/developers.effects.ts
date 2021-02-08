@@ -40,7 +40,7 @@ export class DevelopersEffects {
 
   onSearchJobs$ = createEffect(() => this.actions$.pipe(
     ofType(actions.SEARCH_JOBS),
-    switchMap((payload: any) => this.jobsService.searchJobs(payload.payload).pipe(
+    switchMap((payload) => this.jobsService.searchJobs(payload).pipe(
       map((jobs: Job[]) => actions.searchJobsSuccess(jobs)),
       tap(() => this.router.navigate(['in/d/search-jobs'])),
       catchError((err: any) => of(actions.searchJobsError(err)))

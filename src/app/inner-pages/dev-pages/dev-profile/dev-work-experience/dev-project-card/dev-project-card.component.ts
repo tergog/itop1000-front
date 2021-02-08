@@ -61,9 +61,7 @@ export class DevProjectCardComponent implements OnInit {
   public onEditClick(): void {
     this.isEdit = !this.isEdit;
     this.logoUrl = this.project.logo;
-    console.log(this.projectImages, this.project.images);
     this.projectImages = this.project.images;
-
   }
 
   public onSaveClick(): void {
