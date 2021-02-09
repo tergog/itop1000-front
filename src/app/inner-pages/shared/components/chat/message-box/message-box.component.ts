@@ -1,50 +1,52 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  Input, OnChanges, OnDestroy,
-  OnInit, QueryList, SimpleChanges,
-  ViewChild, ViewChildren
-} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, QueryList, SimpleChanges, ViewChild, ViewChildren } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ContentChange } from 'ngx-quill';
 import { iif, of } from 'rxjs';
-import { debounceTime, delay, distinctUntilChanged, switchMap, take, tap } from 'rxjs/operators';
+import { debounceTime, delay, distinctUntilChanged, first, switchMap, tap } from 'rxjs/operators';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { cloneDeep } from 'lodash';
 
 import { ChatService, WebsocketService } from 'app/shared/services';
-import {
-  ConversationMemberModel,
-  ConversationModel,
-  SharedQuillInstanceModel,
-  UserInfo
-} from 'app/shared/models';
+import { ConversationMemberModel, ConversationModel, SharedQuillInstanceModel, UserInfo } from 'app/shared/models';
 import * as fromCore from 'app/core/reducers';
 import * as fromChat from 'app/core/chats/store/chat.reducer';
 import * as chatActions from 'app/core/chats/store/chats.actions';
 import { addNewMessage } from 'app/core/chats/store/chats.actions';
-import { slideInLeftAnimation } from 'app/shared/animations';
+import { slideInLeftAnimation, slideUpDownAnimation } from 'app/shared/animations';
 import { EConversationTypeEnum } from 'app/shared/enums';
-import { CHAT_MESSAGES_PER_PAGE, CHAT_ONLINE_DELTA_MS } from 'app/constants/constants';
+import { CHAT_MESSAGES_PER_PAGE, CHAT_ONLINE_DELTA_MS, CHAT_SCROLL_BUFFER } from 'app/constants/constants';
+
+enum EScrollSource {
+  USER = 'user',
+  API = 'api'
+}
+
+interface IScrollBehavior {
+  force?: boolean;
+  instantly?: boolean;
+}
 
 @UntilDestroy()
 @Component({
   selector: 'app-message-box',
   templateUrl: './message-box.component.html',
   styleUrls: [ './message-box.component.scss' ],
-  animations: [ slideInLeftAnimation ]
+  animations: [ slideInLeftAnimation, slideUpDownAnimation ]
 })
 export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, OnChanges {
   @Input() user: UserInfo;
   @Input() chat: fromChat.State;
-  @ViewChild('messages') messagesWrapper: ElementRef;
-  @ViewChildren('messageContainer') messageContainers: QueryList<ElementRef>;
+  @ViewChild('messages') messagesWrapper: ElementRef<HTMLElement>;
+  @ViewChildren('messageContainer') messageContainers: QueryList<ElementRef<HTMLElement>>;
 
   private textEditorInstance: SharedQuillInstanceModel;
   private textContent: ContentChange;
-  private pageLoaded: number = 1;
+  private pageLoaded: number = 0;
+  private lastScrollTop: number = 0;
 
+  public lastScrollStatus: EScrollSource | null = null;
+  public isScrollToBottomBtnVisible: boolean = false;
   public userTyping: string = null;
   public searchFC: FormControl = new FormControl('', [ Validators.maxLength(32) ]);
 
@@ -74,7 +76,7 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
       })))
     ).subscribe();
 
-
+    // On message from another user received
     this.websocketService.receivedNewMessage().pipe(
       untilDestroyed(this),
       switchMap((message) => iif(
@@ -91,6 +93,7 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
       ))
     ).subscribe();
 
+    // On another user is typing
     this.websocketService.receivedTyping().pipe(
       untilDestroyed(this),
       switchMap(({ chatId, username }) => iif(
@@ -108,20 +111,30 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
   }
 
   ngAfterViewInit(): void {
-    this.expectChangesThanScroll();
+    /**
+     * requestAnimationFrame fix the problem
+     * when data is not exists after ngAfterViewInit called
+     */
+    requestAnimationFrame(() => {
+      this.expectChangesThanScroll({ instantly: true });
+    });
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (!changes.chat?.firstChange && changes.chat?.previousValue?.conversations.active !== changes.chat?.currentValue.conversations.active) {
-      this.pageLoaded = 1;
+    if (changes.chat) {
+      if (!changes.chat.firstChange && changes.chat.currentValue.conversations.active !== changes.chat.previousValue.conversations.active) {
+        this.pageLoaded = 0;
 
-      this.store.dispatch(chatActions.getConverastionMessages({
-        convId: this.chat.conversations.active,
-        page: this.pageLoaded++,
-        count: CHAT_MESSAGES_PER_PAGE
-      }));
+        this.store.dispatch(chatActions.getConverastionMessages({
+          convId: this.chat.conversations.active,
+          page: this.pageLoaded++,
+          count: CHAT_MESSAGES_PER_PAGE
+        }));
 
-      this.expectChangesThanScroll();
+        requestAnimationFrame(() => {
+          this.expectChangesThanScroll({ instantly: true });
+        });
+      }
     }
   }
 
@@ -152,32 +165,79 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
     }
   }
 
-  onHistoryScroll(): void {
-    if (this.messagesWrapper?.nativeElement.scrollTop === 0 && this.chat.messages.data.length >= CHAT_MESSAGES_PER_PAGE &&
-      this.chat.messages.data.length < this.getActiveConversationById(this.chat.conversations.active).messages.total) {
-      this.store.dispatch(chatActions.getConverastionMessages({
-        convId: this.chat.conversations.active,
-        page: this.pageLoaded++,
-        count: CHAT_MESSAGES_PER_PAGE
-      }));
+  onHistoryScroll(evt: Event): void {
+    const target: HTMLElement = evt.target as HTMLElement;
+
+    if (this.lastScrollStatus === EScrollSource.USER) {
+      if (target.scrollTop > this.lastScrollTop) { // Scroll DOWN
+        this.isScrollToBottomBtnVisible = target.scrollTop < target.scrollHeight;
+      } else { // Scroll UP
+        this.isScrollToBottomBtnVisible = false;
+      }
+      this.lastScrollTop = target.scrollTop;
+    }
+
+    // Load new messages even when user use the scrollbar
+    const totalMessages = this.getActiveConversationById(this.chat.conversations.active).messages.total;
+    if (this.messagesWrapper?.nativeElement.scrollTop < CHAT_SCROLL_BUFFER &&
+      this.chat.messages.data.length < totalMessages &&
+      this.chat.messages.loading === false
+    ) {
+      this.loadMoreMessages();
+    }
+
+    if (target.clientHeight + target.scrollTop === target.scrollHeight) { // When scroll was reach a page's bottom
+      this.isScrollToBottomBtnVisible = false;
     }
   }
 
-  onScrollBottomClick(): void {
-    this.expectChangesThanScroll(true);
+  private loadMoreMessages(): void {
+    let prevContainer = cloneDeep(this.messageContainers); // Copy of previous data
+
+    // Load more messages
+    this.store.dispatch(chatActions.getConverastionMessages({
+      convId: this.chat.conversations.active,
+      page: this.pageLoaded++,
+      count: CHAT_MESSAGES_PER_PAGE
+    }));
+
+    // Wait for DOM updated, then update scroll position
+    this.expectChanges(() => {
+      this.messagesWrapper.nativeElement.scrollTop += prevContainer.first.nativeElement.offsetTop;
+      prevContainer = null; // Free memory
+      this.lastScrollStatus = EScrollSource.API;
+    });
   }
 
-  expectChangesThanScroll(force: boolean = false): void {
-    if (force) {
+  onWheelScroll(): void {
+    this.lastScrollStatus = EScrollSource.USER;
+  }
+
+  onScrollBottomClick(): void {
+    this.isScrollToBottomBtnVisible = false;
+    this.expectChangesThanScroll({ force: true });
+  }
+
+  private expectChanges(callback: (list: QueryList<ElementRef>) => void): void {
+    this.messageContainers.changes
+      .pipe(first())
+      .subscribe((data) => callback(data));
+  }
+
+  private expectChangesThanScroll(behavior?: IScrollBehavior): void {
+    if (behavior?.force) {
       this.scrollToElement(this.messageContainers.last.nativeElement);
+      this.lastScrollStatus = EScrollSource.API;
     } else {
-      this.messageContainers.changes
-        .pipe(take(2)) // take(2) instead first() for fix bug when history isnt scrolls
-        .subscribe((list: QueryList<ElementRef>) => {
-          if (this.chat.conversations.active !== null && list.length > 0) {
+      if (this.chat.conversations.active !== null) {
+        this.expectChanges((list) => {
+          (behavior && behavior.instantly) ?
+            this.setScrollToBottom(this.messagesWrapper.nativeElement) :
             this.scrollToElement(list.last.nativeElement);
-          }
+
+          this.lastScrollStatus = EScrollSource.API;
         });
+      }
     }
   }
 
@@ -228,8 +288,8 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
       null;
   }
 
-  isScrollerToBottomVisible(): boolean {
-    return this.messagesWrapper?.nativeElement.scrollHeight - this.messagesWrapper?.nativeElement.scrollTop > 500;
+  setScrollToBottom($container: HTMLElement): void {
+    $container.scrollTop = $container.scrollHeight;
   }
 
   scrollToElement($element: HTMLElement): void {
@@ -240,7 +300,7 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
     setTimeout(() => {
       $element.scrollIntoView({
         behavior: 'smooth',
-        block: 'end',
+        block: 'center',
         inline: 'nearest',
       });
     });

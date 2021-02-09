@@ -63,9 +63,11 @@
 
       &__message-list {
         overflow: auto;
-        margin: 20px 32px 0 32px;
+        padding: 20px 32px;
 
         &__message {
+          min-height: 80px;
+
           & + & {
             margin-top: 25px;
           }
@@ -144,6 +146,12 @@
           &__body {
             margin-left: 50px;
             color: $text-color-8;
+            min-height: 45px;
+
+            &__view {
+              display: block;
+              height: 100%;
+            }
           }
         }
       }
@@ -160,7 +168,6 @@
       text-align: center;
       cursor: pointer;
       padding: 12px 10px;
-      animation: unreadScrollerSlideIn .15s;
 
       &.has-unread::after {
         content: attr(data-unread);
@@ -199,15 +206,5 @@
     .ql-container {
       font-family: $font-1 !important;
     }
-  }
-}
-
-@keyframes unreadScrollerSlideIn {
-  from {
-    bottom: -20px;
-  }
-
-  to {
-    bottom: 10px;
   }
 }

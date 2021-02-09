@@ -14,11 +14,16 @@
     </div>
   </div>
   <div class="chat__message-box__body">
-    <div class="chat__message-box__body__history" (scroll)="onHistoryScroll()" #messages>
+    <div class="chat__message-box__body__history" (scroll)="onHistoryScroll($event)" (wheel)="onWheelScroll()" #messages>
       <div class="chat__message-box__body__history__message-list">
-        <div class="chat__message-box__body__history__message-list__message--empty" *ngIf="chat.messages.data.length === 0">
-          <div class="chat__message-box__body__history__message-list__message--empty__message" *ngIf="chat.conversations.active && !searchFC.value.length">You have no messages yet</div>
-          <div class="chat__message-box__body__history__message-list__message--empty__message" *ngIf="searchFC.value.length > 0">Nothing found :(</div>
+        <div class="chat__message-box__body__history__message-list__message--empty"
+             *ngIf="chat.messages.data.length === 0">
+          <div class="chat__message-box__body__history__message-list__message--empty__message"
+               *ngIf="chat.conversations.active && !searchFC.value.length">You have no messages yet
+          </div>
+          <div class="chat__message-box__body__history__message-list__message--empty__message"
+               *ngIf="searchFC.value.length > 0">Nothing found :(
+          </div>
         </div>
 
         <!-- Message markup -->
@@ -49,17 +54,20 @@
 
         <!-- Loader shows only during first loadging or conversation searching -->
         <div class="chat__message-box__body__history__message-list__message--empty" *ngIf="chat.messages.loading">
-          <div class="chat__message-box__body__history__message-list__message--empty__message"><i class="loader"></i></div>
+          <div class="chat__message-box__body__history__message-list__message--empty__message"><i class="loader"></i>
+          </div>
         </div>
       </div>
     </div>
     <div
       class="chat__message-box__body__scroll-bottom"
-      *ngIf="chat.messages.data.length > 0 && isScrollerToBottomVisible()"
+      [@slideUpDown]="{ value: ':enter', params: { from: -50, to: 10 } }"
+      *ngIf="isScrollToBottomBtnVisible"
       (click)="onScrollBottomClick()"
     >
       <svg width="20" height="20" viewBox="0 0 4.7625 4.7625" xmlns="http://www.w3.org/2000/svg">
-        <path d="m0.52917 1.5875 1.8521 1.5875 1.8521-1.5875" fill="none" stroke="#F1D261" stroke-linecap="round" stroke-linejoin="round" stroke-width=".52917"/>
+        <path d="m0.52917 1.5875 1.8521 1.5875 1.8521-1.5875" fill="none" stroke="#F1D261" stroke-linecap="round"
+              stroke-linejoin="round" stroke-width=".52917"/>
       </svg>
     </div>
   </div>
