@@ -4,9 +4,8 @@ import { Store } from '@ngrx/store';
 import * as fromChats from 'app/core/chats/store/chat.reducer';
 import * as fromCore from 'app/core/reducers';
 import * as chatActions from 'app/core/chats/store/chats.actions';
-import { WebsocketService } from 'app/shared/services';
+import { ChatUtilsService, WebsocketService } from 'app/shared/services';
 import { UserInfo } from 'app/shared/models';
-import { ChatUtilsService } from 'app/shared/services/chat-utils.service';
 
 @Component({
   selector: 'app-conversations',
@@ -33,7 +32,7 @@ export class ConversationsComponent implements OnInit {
   onConversationClick(chatId: string): void {
     if (chatId !== this.chat.conversations.active) {
       this.store.dispatch(chatActions.setActiveConversation({ convId: chatId }));
-      this.websocketService.joinChat(this.user.id, chatId);
+      this.websocketService.sendJoinChat(this.user.id, chatId);
     }
   }
 

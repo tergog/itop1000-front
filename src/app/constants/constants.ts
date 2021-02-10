@@ -1,7 +1,8 @@
 export const TOKEN = 'token';
-export const CHAT_ONLINE_DELTA_MS = 5e3// 5 sec in MS
+export const CHAT_ONLINE_DELTA_MS = 5e3 // 5 sec in MS
 export const CHAT_MESSAGES_PER_PAGE = 20;
 export const CHAT_SCROLL_BUFFER = 200; // Approx two message height
+export const CHAT_TYPING_DURATION = 3e3; // 3 sec in MS
 
 export const timezones = Object.entries({
   "(GMT-11:00) Pago Pago": "Pacific/Pago_Pago",

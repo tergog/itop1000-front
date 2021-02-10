@@ -1,9 +1,9 @@
-import { ConversationMemberModel } from './conversation-member.model';
+import { IConversationMember } from './conversation-member.model';
 
-export interface ConversationMessageModel {
+export interface IConversationMessage {
   chat: string;
   message: string;
-  sender: ConversationMemberModel;
+  sender: IConversationMember;
   isRead?: boolean;
   date?: string;
 }

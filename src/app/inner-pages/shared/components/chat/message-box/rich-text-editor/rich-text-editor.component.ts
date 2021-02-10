@@ -3,7 +3,7 @@ import { ContentChange } from 'ngx-quill';
 import 'quill-emoji';
 
 import { NotificationsService } from 'app/shared/services';
-import { SharedQuillInstanceModel } from 'app/shared/models';
+import { ISharedQuillInstance } from 'app/shared/models';
 
 @Component({
   selector: 'app-rich-text-editor',
@@ -24,7 +24,7 @@ export class RichTextEditorComponent {
   }
 
   @Output() shareQuillInstance = new EventEmitter<any>();
-  getEditorInstance(quill: SharedQuillInstanceModel): void {
+  getEditorInstance(quill: ISharedQuillInstance): void {
     this.shareQuillInstance.emit(quill);
   }
 

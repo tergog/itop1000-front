@@ -6,8 +6,8 @@ import { catchError, map, switchMap } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
-import { ConversationModel } from 'app/shared/models/conversation.model';
-import { ConversationMessageModel } from 'app/shared/models';
+import { IConversation } from 'app/shared/models/conversation.model';
+import { IConversationMessage } from 'app/shared/models';
 import { ChatService, NotificationsService, WebsocketService } from 'app/shared/services';
 import * as actions from './chats.actions';
 import * as fromCore from 'app/core/reducers';
@@ -37,7 +37,7 @@ export class ChatEffects {
   searchConversations$ = createEffect(() => this.actions$.pipe(
     ofType(actions.searchConversations),
     switchMap(({ userId, term }) => this.chatService.getConversationsByUserId(userId, term).pipe(
-      map((convs: ConversationModel[]) => actions.searchConversationsSuccess(convs)),
+      map((convs: IConversation[]) => actions.searchConversationsSuccess(convs)),
       catchError((err: HttpErrorResponse) => {
         this.emitErrorNotification(err);
         return of(actions.searchConversationsError(err));
@@ -48,7 +48,7 @@ export class ChatEffects {
   getConversationMessages$ = createEffect(() => this.actions$.pipe(
     ofType(actions.getConverastionMessages),
     switchMap(({ convId, page, count }) => this.chatService.getMessagesByConversationId(convId, page, count).pipe(
-      map((messages: ConversationMessageModel[]) => actions.getConverastionMessagesSuccess(messages)),
+      map((messages: IConversationMessage[]) => actions.getConverastionMessagesSuccess(messages)),
       catchError((err: HttpErrorResponse) => {
         this.emitErrorNotification(err);
         return of(actions.getConverastionMessageError(err));

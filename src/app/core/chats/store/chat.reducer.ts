@@ -1,19 +1,19 @@
 import { createReducer, on } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { ConversationModel } from 'app/shared/models/conversation.model';
-import { ConversationMessageModel } from 'app/shared/models';
+import { IConversation } from 'app/shared/models/conversation.model';
+import { IConversationMessage } from 'app/shared/models';
 import * as actions from './chats.actions';
 
 export interface State {
   conversations: {
-    data: ConversationModel[];
+    data: IConversation[];
     loading: boolean;
     error: HttpErrorResponse;
     active: string;
   };
   messages: {
-    data: ConversationMessageModel[];
+    data: IConversationMessage[];
     loading: boolean;
     error: HttpErrorResponse;
   }

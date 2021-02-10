@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { QuillModule } from 'ngx-quill';
 
 import { SharedModule } from 'app/shared/shared.module';
 import { PagesSharedModule } from 'app/inner-pages/shared/pages-shared.module';
@@ -9,7 +10,6 @@ import { RichTextEditorModule } from './message-box/rich-text-editor/rich-text-e
 
 import { ChatComponent } from './chat.component';
 import { MessageBoxComponent } from './message-box/message-box.component';
-import { QuillModule } from 'ngx-quill';
 import { ConversationsComponent } from './conversations/conversations.component';
 import { SearchComponent } from './search/search.component';
 
