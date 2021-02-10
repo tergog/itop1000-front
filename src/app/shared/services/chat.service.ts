@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { ApiConstants } from 'app/constants/api.constants';
-import { ConversationMessageModel, ConversationModel } from '../models';
+import { IConversationMessage, IConversation } from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -16,31 +16,31 @@ export class ChatService {
   }
 
   // Conversations
-  public createNewConversation(creatorId: string, withId: string): Observable<ConversationModel> {
-    return this.http.post<ConversationModel>(`${this.apiURL}${ApiConstants.chat.createConversation}`, {
+  public createNewConversation(creatorId: string, withId: string): Observable<IConversation> {
+    return this.http.post<IConversation>(`${this.apiURL}${ApiConstants.chat.createConversation}`, {
       creatorId,
       withId
     });
   }
 
-  public getConversationsByUserId(userId: string, searchTerm?: string): Observable<ConversationModel[]> {
+  public getConversationsByUserId(userId: string, searchTerm?: string): Observable<IConversation[]> {
     let query = `${this.apiURL}${ApiConstants.chat.getConversationsByMemberId}/${userId}`;
 
     if (typeof searchTerm !== 'undefined') {
       query += `?searchTerm=${searchTerm}`;
     }
 
-    return this.http.get<ConversationModel[]>(query, {});
+    return this.http.get<IConversation[]>(query, {});
   }
 
   // Messages
-  public getMessagesByConversationId(convId: string, page: number, count: number, searchTerm?: string): Observable<ConversationMessageModel[]> {
+  public getMessagesByConversationId(convId: string, page: number, count: number, searchTerm?: string): Observable<IConversationMessage[]> {
     let query = `${this.apiURL}${ApiConstants.chat.getMessagesByConversationId}/${convId}?page=${page}&count=${count}`;
 
     if (typeof searchTerm !== 'undefined') {
       query += `&searchTerm=${searchTerm}`;
     }
 
-    return this.http.get<ConversationMessageModel[]>(query, {});
+    return this.http.get<IConversationMessage[]>(query, {});
   }
 }

@@ -1,12 +1,13 @@
-import { ConversationMemberModel } from './conversation-member.model';
+import { IConversationMember } from './conversation-member.model';
+import { EConversationType } from '../enums';
 
-export interface ConversationModel {
+export interface IConversation {
   id: string;
   createdAt: string;
-  participants: ConversationMemberModel[];
+  participants: IConversationMember[];
   messages: {
     unread: number,
     total: number
   };
-  type: string;
+  type: EConversationType;
 }

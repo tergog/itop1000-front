@@ -2,20 +2,19 @@ import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnDestroy, OnIn
 import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ContentChange } from 'ngx-quill';
-import { iif, of } from 'rxjs';
-import { debounceTime, delay, distinctUntilChanged, first, switchMap, tap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, first } from 'rxjs/operators';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { cloneDeep } from 'lodash';
 
 import { ChatService, WebsocketService } from 'app/shared/services';
-import { ConversationMemberModel, ConversationModel, SharedQuillInstanceModel, UserInfo } from 'app/shared/models';
+import { IConversation, IConversationMember, IConversationMessage, ISharedQuillInstance, IWebsocketTyping, UserInfo } from 'app/shared/models';
+import { EConversationType } from 'app/shared/enums';
 import * as fromCore from 'app/core/reducers';
 import * as fromChat from 'app/core/chats/store/chat.reducer';
 import * as chatActions from 'app/core/chats/store/chats.actions';
 import { addNewMessage } from 'app/core/chats/store/chats.actions';
 import { slideInLeftAnimation, slideUpDownAnimation } from 'app/shared/animations';
-import { EConversationTypeEnum } from 'app/shared/enums';
-import { CHAT_MESSAGES_PER_PAGE, CHAT_ONLINE_DELTA_MS, CHAT_SCROLL_BUFFER } from 'app/constants/constants';
+import { CHAT_MESSAGES_PER_PAGE, CHAT_ONLINE_DELTA_MS, CHAT_SCROLL_BUFFER, CHAT_TYPING_DURATION } from 'app/constants/constants';
 
 enum EScrollSource {
   USER = 'user',
@@ -40,14 +39,14 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
   @ViewChild('messages') messagesWrapper: ElementRef<HTMLElement>;
   @ViewChildren('messageContainer') messageContainers: QueryList<ElementRef<HTMLElement>>;
 
-  private textEditorInstance: SharedQuillInstanceModel;
+  private textEditorInstance: ISharedQuillInstance;
   private textContent: ContentChange;
   private pageLoaded: number = 0;
   private lastScrollTop: number = 0;
 
   public lastScrollStatus: EScrollSource | null = null;
   public isScrollToBottomBtnVisible: boolean = false;
-  public userTyping: string = null;
+  public typingUsername: string | null = null;
   public searchFC: FormControl = new FormControl('', [ Validators.maxLength(32) ]);
 
   constructor(
@@ -64,47 +63,33 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
       count: CHAT_MESSAGES_PER_PAGE
     }));
 
-    // Typeahead searching
     this.searchFC.valueChanges.pipe(
       untilDestroyed(this),
       debounceTime(500),
-      distinctUntilChanged(),
-      tap((term) => this.searchFC.valid && this.store.dispatch(chatActions.searchMessages({
-        userId: this.user.id,
-        convId: this.chat.conversations.active,
-        term
-      })))
-    ).subscribe();
+      distinctUntilChanged()
+    ).subscribe((searchTerm: string) => {
+      // TODO: Implement search
+    });
 
-    // On message from another user received
-    this.websocketService.receivedNewMessage().pipe(
-      untilDestroyed(this),
-      switchMap((message) => iif(
-        () => message.chat === this.chat.conversations.active,
-        of(undefined).pipe(tap(() => {
-          this.store.dispatch(addNewMessage(message));
+    this.websocketService.receivedNewMessage().pipe(untilDestroyed(this)).subscribe((payload: IConversationMessage) => {
+      if (this.chat.conversations.active === payload.chat) {
+        this.store.dispatch(addNewMessage(payload));
 
-          const $msgWrpr = this.messagesWrapper.nativeElement;
-          if ($msgWrpr.clientHeight + $msgWrpr.scrollTop === $msgWrpr.scrollHeight) { // If scroll is at bottom
-            this.expectChangesThanScroll();
-          }
-          // Show notification on scroll-bottom element
-        }))
-      ))
-    ).subscribe();
+        const $messagesWrapper = this.messagesWrapper.nativeElement;
+        if ($messagesWrapper.clientHeight + $messagesWrapper.scrollTop === $messagesWrapper.scrollHeight) { // If scroll at the bottom
+          this.expectChangesThanScroll();
+        }
+      }
+    });
 
-    // On another user is typing
-    this.websocketService.receivedTyping().pipe(
-      untilDestroyed(this),
-      switchMap(({ chatId, username }) => iif(
-        () => chatId === this.chat.conversations.active,
-        of(undefined).pipe(
-          tap(() => this.userTyping = username),
-          delay(3000),
-          tap(() => this.userTyping = null)
-        )
-      ))
-    ).subscribe();
+    this.websocketService.receivedTyping().pipe(untilDestroyed(this)).subscribe((payload: IWebsocketTyping) => {
+      if (this.chat.conversations.active === payload.convId) {
+        this.typingUsername = payload.username;
+        setTimeout(() => {
+          this.typingUsername = null;
+        }, CHAT_TYPING_DURATION);
+      }
+    });
   }
 
   ngOnDestroy(): void {
@@ -138,24 +123,24 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
     }
   }
 
-  getEditorInstance(quill: SharedQuillInstanceModel): void {
+  getEditorInstance(quill: ISharedQuillInstance): void {
     this.textEditorInstance = quill;
   }
 
   textContentChange(value: ContentChange): void {
     this.textContent = value;
-    this.websocketService.typing({
+    this.websocketService.sendTyping({
       username: `${this.user.firstName} ${this.user.lastName}`,
       userId: this.user.id,
-      chatId: this.chat.conversations.active
+      convId: this.chat.conversations.active
     });
   }
 
   sendButtonClick(): void {
     if (this.textContent && this.textContent.html && this.chat.conversations.active) {
       this.websocketService.sendConversationMessage({
-        chat: this.chat.conversations.active,
-        sender: this.user.id,
+        convId: this.chat.conversations.active,
+        userId: this.user.id,
         message: this.textContent.html
       }, (savedMessage) => {
         this.store.dispatch(addNewMessage(savedMessage));
@@ -241,7 +226,7 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
     }
   }
 
-  getActiveConversation(chatId: string): ConversationModel {
+  getActiveConversation(chatId: string): IConversation {
     return chatId !== null ?
       this.chat.conversations.data.filter((conv) => conv.id === chatId)[0] :
       null;
@@ -265,25 +250,25 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
     }
   }
 
-  getConversationPartners(conv: ConversationModel): ConversationMemberModel[] {
+  getConversationPartners(conv: IConversation): IConversationMember[] {
     return conv.participants.filter((participant) => participant.user.id !== this.user.id);
   }
 
   getConversationPartnerName(activeConv: string): string {
-    const conv: ConversationModel = this.getActiveConversation(activeConv);
-    const partner: ConversationMemberModel = this.getConversationPartners(conv)[0];
+    const conv: IConversation = this.getActiveConversation(activeConv);
+    const partner: IConversationMember = this.getConversationPartners(conv)[0];
     return `${partner.user.firstName} ${partner.user.lastName}`;
   }
 
-  getActiveConversationById(convId: string): ConversationModel {
+  getActiveConversationById(convId: string): IConversation {
     return this.chat.conversations.data.filter((conv) => conv.id === convId)[0];
   }
 
   isConversationPartnerOnline(convId: string): boolean { // true - online, false - offline, null - not a private conversation
     const conv = this.getActiveConversationById(convId);
-    const partners: ConversationMemberModel[] = this.getConversationPartners(conv);
+    const partners: IConversationMember[] = this.getConversationPartners(conv);
 
-    return (conv.type === EConversationTypeEnum.Private) ?
+    return (conv.type === EConversationType.Private) ?
       new Date().getTime() - new Date(partners[0].user.lastSeen).getTime() < CHAT_ONLINE_DELTA_MS :
       null;
   }

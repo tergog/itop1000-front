@@ -6,3 +6,4 @@ export * from './developers.service';
 export * from './active-projects.service';
 export * from './chat.service';
 export * from './websocket.service';
+export * from './chat-utils.service';

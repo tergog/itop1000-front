@@ -72,7 +72,7 @@
     </div>
   </div>
   <div class="chat__message-box__typing-container">
-    <ng-container *ngIf="userTyping">{{ userTyping }} is typing...</ng-container>
+    <ng-container *ngIf="typingUsername">{{ typingUsername }} is typing...</ng-container>
   </div>
   <div class="chat__message-box__editor">
     <app-rich-text-editor

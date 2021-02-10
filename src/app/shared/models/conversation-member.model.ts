@@ -1,7 +1,7 @@
 import { UserInfo } from './user-info.model';
-import { EChatMemberStatus } from '../enums/chat-member-status.enum';
+import { EChatMemberStatus } from '../enums';
 
-export interface ConversationMemberModel {
+export interface IConversationMember {
   user: UserInfo;
   status: EChatMemberStatus;
   isNotification: boolean;
