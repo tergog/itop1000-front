@@ -78,4 +78,8 @@ export class UserService {
     return this.http.patch<string>(`${this.apiUrl}${ApiConstants.accounts}/${this.id}/certificate`, {url, index});
   }
 
+  public deletePhoto(): Observable<any> {
+    return this.http.patch<string>(`${this.apiUrl}${ApiConstants.accounts}/${this.id}/photo`, {});
+  }
+
 }

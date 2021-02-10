@@ -12,6 +12,7 @@ import { JobsService, NotificationsService } from 'app/shared/services';
 import { ConfirmationDialogComponent } from 'app/inner-pages/shared/components/confirmation-dialog/confirmation-dialog.component';
 import { EditJobDialogComponent } from 'app/inner-pages/shared/components/edit-job-dialog/edit-job-dialog.component';
 import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
+import { UpdateJobAction } from 'app/core/client/store/actions';
 
 export enum EJobSections {
   Project,
@@ -113,7 +114,7 @@ export class JobFullComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed()
       .pipe(
         takeUntil(this.ngUnsubscribe$),
-        filter(res => res === this.resMessage.Updated),
+        filter(res => res.msg === this.resMessage.Updated),
         tap(() => {
           this.getJobInfo();
           this.handleSuccessResponse();

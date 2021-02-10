@@ -3,17 +3,18 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { first, map, takeUntil } from 'rxjs/operators';
 
-import { State } from 'app/core/reducers/index';
-import { GetJobsAction } from 'app/core/client/store/actions';
-import { Job } from 'app/shared/models';
+import { getUserInfo, State } from 'app/core/reducers/index';
+import { DeleteJobAction, GetJobsAction, UpdateJobAction } from 'app/core/client/store/actions';
+import { Job, UserInfo } from 'app/shared/models';
 import { JobsService } from 'app/shared/services/jobs.service';
 import { NotificationsService } from 'app/shared/services/notifications.service';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { EditJobDialogComponent } from '../edit-job-dialog/edit-job-dialog.component';
 import { EJobSections } from '../job-full/job-full.component';
 import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
+import { EUserRole } from 'app/shared/enums';
 
 @Component({
   selector: 'app-job',
@@ -23,11 +24,15 @@ import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
 export class JobComponent implements OnInit, OnDestroy {
   @Input() job: Job;
 
+  userRole = this.store.select(getUserInfo).pipe(
+    first(),
+    map((user: UserInfo) => user.role)
+  );
+  role = EUserRole;
   JobSections = EJobSections;
   activeSection = EJobSections.Project;
   public canEdit: boolean;
   public ngUnsubscribe$ = new Subject<void>();
-
   constructor(
     private store: Store<State>,
     private route: ActivatedRoute,
@@ -44,8 +49,9 @@ export class JobComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed()
       .pipe(takeUntil(this.ngUnsubscribe$))
       .subscribe(res => {
-        if (res === 'Job updated successfully') {
-        this.handleSuccessResponse(res);
+        if (res.msg === 'Job updated successfully') {
+          this.store.dispatch(new UpdateJobAction(res.data));
+          this.handleSuccessResponse(res.msg);
       }});
   }
 
@@ -54,7 +60,11 @@ export class JobComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed()
       .pipe(takeUntil(this.ngUnsubscribe$))
-      .subscribe(res => { if (res === 'Confirmed') { this.onDeleteJob(); }});
+      .subscribe(res => {
+        if (res === 'Confirmed') {
+          this.onDeleteJob();
+        }
+      });
   }
 
   onDeleteJob(): void{
@@ -63,7 +73,7 @@ export class JobComponent implements OnInit, OnDestroy {
       .subscribe(
         (res) => {
           this.handleSuccessResponse(res);
-          this.store.dispatch(new GetJobsAction());
+          this.store.dispatch(new DeleteJobAction(this.job.id));
           },
           error => this.handleErrorResponse(error)
       );

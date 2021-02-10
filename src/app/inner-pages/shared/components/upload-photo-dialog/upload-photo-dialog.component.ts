@@ -39,7 +39,7 @@ export class UploadPhotoDialogComponent implements OnInit {
   }
 
   deleteImage() {
-    this.croppedImage = 'delete';
+    this.dialogRef.close('delete');
   }
 
   imageLoaded() {

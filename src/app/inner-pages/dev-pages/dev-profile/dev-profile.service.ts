@@ -50,7 +50,9 @@ export class DevProfileService {
             message: 'Photo added successfully',
             type: ENotificationStatus.Success
           });
-          //this.onUpdateProfileInfo(token);
+          this.userService.getUserInfo().subscribe(res =>
+            this.store.dispatch(new UpdateUserProfileAction(res))
+          );
         },
         ({ error }) => this.handleErrorResponse(error)
       );

@@ -28,7 +28,7 @@
   <div class="m__top--20">
     <span
       class="text text__color--3 text__sm text__uppercase m__right--10"
-      *ngFor="let skill of developer.devProperties.skills"
+      *ngFor="let skill of developer.devProperties?.skills"
     >
       {{ skill.name }}
     </span>
