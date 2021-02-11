@@ -27,7 +27,7 @@ export class ActiveProjectsComponent implements OnInit {
   ngOnInit(): void {
     this.projects$ = this.store.select(fromCore.getUserInfo).pipe(
         map((user: UserInfo) => user.id),
-        switchMap((id: string) => this.projectService.getActiveProjects(id).pipe(tap(res => console.log(res))))
+        switchMap((id: string) => this.projectService.getActiveProjects(id))
       );
   }
 

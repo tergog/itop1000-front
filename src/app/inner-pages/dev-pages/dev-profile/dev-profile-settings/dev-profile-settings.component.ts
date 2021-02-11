@@ -9,7 +9,7 @@ import * as fromCore from 'app/core/reducers';
 import { UploadPhotoDialogComponent } from 'app/inner-pages/shared/components/upload-photo-dialog/upload-photo-dialog.component';
 import { UserService } from 'app/shared/services';
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
-import { UpdateUserProfileAction } from 'app/core/actions/core.actions';
+import { DeletePhotoAction, UpdateUserProfileAction } from 'app/core/actions/core.actions';
 
 @Component({
   selector: 'app-dev-profile-settings',
@@ -52,22 +52,19 @@ export class DevProfileSettingsComponent implements OnInit, OnDestroy {
       .afterClosed()
       .pipe(
         filter(result => !!result),
-        first()
-      )
-      .subscribe((image: FormData | string) => {
-        if (image === 'delete') {
-          this.userService.deletePhoto().pipe(
-            first(),
-            switchMap(_ => this.userService.getUserInfo().pipe(
-              tap(res => this.store.dispatch(new UpdateUserProfileAction(res)))
-            ))
-          ).subscribe();
-        } else {
-          this.uploadImage(image as FormData);
-        }
-      });
+        first(),
+        tap(image => {
+          if (image !== 'delete') {
+            this.uploadImage(image as FormData);
+          }
+        }),
+        filter(image => image === 'delete'),
+        switchMap((image: FormData | string) => this.userService.deletePhoto().pipe(
+          first(),
+          tap(res => this.store.dispatch(new DeletePhotoAction()))
+        ))
+      ).subscribe();
   }
-
 
   public onCancelClick(): void {}
 

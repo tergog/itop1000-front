@@ -22,8 +22,7 @@ export class DevelopersEffects {
 
   onSearchDevelopers$ = createEffect(() => this.actions$.pipe(
     ofType(actions.SEARCH_DEVELOPERS),
-    tap(res => console.log(res)),
-    switchMap(( {payload} ) => this.developersService.searchDevelopers(payload).pipe(
+    switchMap(( { payload } ) => this.developersService.searchDevelopers(payload).pipe(
       map((developers: Developer[]) => actions.searchDevelopersSuccess(developers)),
       tap(() => this.router.navigate(['in/c/search-developers'])),
       catchError((err: any) => of(actions.searchDevelopersError(err)))

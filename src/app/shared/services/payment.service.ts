@@ -15,7 +15,7 @@ export class PaymentService {
   constructor(private http: HttpClient) { }
 
   public createPaymentMethod(paymentMethodData): Observable<object> {
-    return this.http.post(`${this.apiUrl}${ApiConstants.payments.payments}`, {cardToken: paymentMethodData.card.token});
+    return this.http.post(`${this.apiUrl}${ApiConstants.payments.payments}`, { cardToken: paymentMethodData.card.token });
   }
 
   public deletePaymentMethod(paymentMethodId): Observable<any> {

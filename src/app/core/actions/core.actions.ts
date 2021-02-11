@@ -11,6 +11,9 @@ export const LOAD_USER_PROFILE = '[Core] Load user profile';
 export const UPDATE_USER_PROFILE = '[Core] Update user profile';
 export const UPDATE_PROJECT_IMAGE = '[Core] Update project image';
 
+export const UPDATE_PHOTO = '[Core] Update user photo';
+export const DELETE_PHOTO = '[Core] Delete user photo';
+
 export const ADD_CERTIFICATE = '[Core] Add certificate';
 export const DELETE_CERTIFICATE = '[Core] Delete certificate';
 
@@ -40,6 +43,16 @@ export class LoadUserAction implements Action {
 export class UpdateUserProfileAction implements Action {
   readonly type = UPDATE_USER_PROFILE;
   constructor(public payload: UserInfo) {}
+}
+
+export class UpdatePhotoAction implements Action {
+  readonly type = UPDATE_PHOTO;
+  constructor(public payload: string) {
+  }
+}
+
+export class DeletePhotoAction implements Action {
+  readonly type = DELETE_PHOTO;
 }
 
 export class OnValidSessionAction implements Action {
@@ -74,4 +87,6 @@ export type Actions =
   | OnValidSessionAction
   | UpdateProjectImageAction
   | AddCertificateAction
-  | DeleteCertificateAction;
+  | DeleteCertificateAction
+  | UpdatePhotoAction
+  | DeletePhotoAction;

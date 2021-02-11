@@ -39,12 +39,30 @@ export function reducer(state: State = INIT_STATE, action: coreActions.Actions) 
     case coreActions.ADD_CERTIFICATE:
       return {
         ...state,
-        userInfo: { ...state.userInfo, devProperties: { ...state.userInfo.devProperties, certificates: [ ...state.userInfo.devProperties.certificates, action.payload ] } }
+        userInfo: {
+          ...state.userInfo,
+          devProperties: {...state.userInfo.devProperties, certificates: [...state.userInfo.devProperties.certificates, action.payload]}
+        }
       };
     case coreActions.DELETE_CERTIFICATE:
       return {
         ...state,
-        userInfo: { ...state.userInfo, devProperties: { ...state.userInfo.devProperties, certificates: state.userInfo.devProperties.certificates.filter(el => el !== action.payload) } }
+        userInfo: {...state.userInfo,
+          devProperties: {
+            ...state.userInfo.devProperties,
+            certificates: state.userInfo.devProperties.certificates.filter(el => el !== action.payload)
+          }
+        }
+      };
+    case coreActions.UPDATE_PHOTO:
+      return {
+        ...state,
+        userInfo: { ...state.userInfo, photo: action.payload }
+      };
+    case coreActions.DELETE_PHOTO:
+      return {
+        ...state,
+        userInfo: { ...state.userInfo, photo: null }
       };
     default:
       return state;
