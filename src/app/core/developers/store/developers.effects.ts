@@ -31,7 +31,7 @@ export class DevelopersEffects {
 
   onSetDeveloper$ = createEffect(() => this.actions$.pipe(
     ofType(actions.SET_DEVELOPER),
-    switchMap(( {id} ) => this.developersService.getDeveloper(id).pipe(
+    switchMap(( { id } ) => this.developersService.getDeveloper(id).pipe(
       map((developer: Developer) => actions.setDeveloperSuccess(developer)),
       tap((obj) => this.router.navigate([`in/c/search-developers/${obj.developer.id}`])),
       catchError((err: any) => of(actions.setDeveloperError(err)))

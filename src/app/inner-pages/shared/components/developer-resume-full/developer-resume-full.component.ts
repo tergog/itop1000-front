@@ -10,6 +10,8 @@ import { Developer } from 'app/shared/models';
 import { ResumeService } from 'app/shared/services/resume.service';
 import { getDeveloper, State } from 'app/core/developers/store';
 import { setDeveloper } from 'app/core/developers/store/developers.actions';
+import { DevProjectsService } from 'app/shared/services/dev-projects.service';
+import { DevProject } from 'app/shared/models/dev-project.model';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -32,12 +34,15 @@ export class DeveloperResumeFullComponent implements OnInit, OnDestroy {
   public developer$: Observable<Developer>;
   public DeveloperResumeSections = EDeveloperResumeSections;
   public activeSection = EDeveloperResumeSections.ProfessionalSkills;
+  public projects$: Observable<DevProject[]>;
+  public projects: DevProject[];
 
   public projectCounter = 0;
 
   private inViewportChange;
 
   constructor(
+    private devProjectService: DevProjectsService,
     private store: Store<State>,
     private router: Router,
     private route: ActivatedRoute,
@@ -50,6 +55,10 @@ export class DeveloperResumeFullComponent implements OnInit, OnDestroy {
         this.store.dispatch(setDeveloper({id: this.route.snapshot.params.id}));
       }
     }));
+    this.projects$ = this.devProjectService.getProjectsById(this.route.snapshot.params.id)
+      .pipe(
+        tap(res => this.projects = res)
+      );
     this.projectCounter = 3;
 
     this.inViewportChange = new Subject<{ isInViewport: boolean, section: EDeveloperResumeSections }>()
@@ -62,7 +71,7 @@ export class DeveloperResumeFullComponent implements OnInit, OnDestroy {
   }
 
   onShowMoreClick(dev: Developer): void {
-    this.projectCounter < dev.devProperties.projects.length
+    this.projectCounter < this.projects.length
       ? this.projectCounter += 3
       : this.projectCounter = 3;
   }
@@ -76,7 +85,7 @@ export class DeveloperResumeFullComponent implements OnInit, OnDestroy {
     });
   }
 
-  public onWorkExperienceClick(id: string, projectId: number): void {
+  public onWorkExperienceClick(id: string, projectId: string): void {
     this.router.navigate([`in/c/search-developers/${ id }/project/${ projectId }`]);
   }
 

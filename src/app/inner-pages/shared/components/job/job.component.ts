@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
-import { first, map, takeUntil } from 'rxjs/operators';
+import { filter, first, map, takeUntil } from 'rxjs/operators';
 
 import { getUserInfo, State } from 'app/core/reducers/index';
 import { DeleteJobAction, GetJobsAction, UpdateJobAction } from 'app/core/client/store/actions';
@@ -24,7 +24,7 @@ import { EUserRole } from 'app/shared/enums';
 export class JobComponent implements OnInit, OnDestroy {
   @Input() job: Job;
 
-  userRole = this.store.select(getUserInfo).pipe(
+  userRole$ = this.store.select(getUserInfo).pipe(
     first(),
     map((user: UserInfo) => user.role)
   );
@@ -59,12 +59,11 @@ export class JobComponent implements OnInit, OnDestroy {
     const dialogRef =  this.matDialog.open(ConfirmationDialogComponent, {data: {title: 'Archive job', text: `Are you sure you want to delete the ${this.job.title} job?`}});
 
     dialogRef.afterClosed()
-      .pipe(takeUntil(this.ngUnsubscribe$))
-      .subscribe(res => {
-        if (res === 'Confirmed') {
-          this.onDeleteJob();
-        }
-      });
+      .pipe(
+        takeUntil(this.ngUnsubscribe$),
+        filter(res => res === 'Confirmed')
+      )
+      .subscribe(res => this.onDeleteJob());
   }
 
   onDeleteJob(): void{

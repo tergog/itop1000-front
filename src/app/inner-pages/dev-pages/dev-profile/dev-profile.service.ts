@@ -42,46 +42,42 @@ export class DevProfileService {
     this.userService.uploadPhoto(image)
       .pipe(
         first(),
-        tap(_ => {
-            this.notificationsService.message.emit({
-              message: 'Photo added successfully',
-              type: ENotificationStatus.Success
-            });
-          }
-        ),
-        catchError(err => of(this.handleErrorResponse(err))),
-        tap(res => this.store.dispatch(new UpdatePhotoAction(res.photo))),
-      ).subscribe();
+      ).subscribe(res => {
+        this.showSuccessMessage('Photo added successfully');
+        this.store.dispatch(new UpdatePhotoAction(res.photo));
+      },
+      error => {
+        this.handleErrorResponse(error);
+      });
+  }
+
+  private showSuccessMessage(message: string): void {
+    this.notificationsService.message.emit({
+      "message": message,
+      type: ENotificationStatus.Success
+    });
   }
 
   public onUploadCertificate(certificate: FormData): void {
     this.userService.uploadCertificate(certificate)
       .pipe(
         first(),
-        tap((res) => {
-          this.store.dispatch(new AddCertificateAction(res.certificate));
-          this.notificationsService.message.emit({
-            message: 'Certificate added successfully',
-            type: ENotificationStatus.Success
-          });
-        }),
         catchError(err => of(this.handleErrorResponse(err)))
-      ).subscribe();
+      ).subscribe(res => {
+      this.store.dispatch(new AddCertificateAction(res.certificate));
+      this.showSuccessMessage('Certificate added successfully');
+    });
   }
 
   public onDeleteCertificate(certificate: string, index: number): void {
     this.userService.deleteCertificate(certificate, index)
       .pipe(
         first(),
-        tap((res) => {
-          this.notificationsService.message.emit({
-            message: 'Certificate deleted successfully',
-            type: ENotificationStatus.Success
-          });
-          this.store.dispatch(new DeleteCertificateAction(res.deletedCertificate));
-        }),
         catchError(err => of(this.handleErrorResponse(err)))
-      ).subscribe();
+      ).subscribe(res => {
+      this.showSuccessMessage('Certificate deleted successfully');
+      this.store.dispatch(new DeleteCertificateAction(res.deletedCertificate));
+    });
   }
 
   private onUpdateProfileInfo(userInfo: UserInfo) {

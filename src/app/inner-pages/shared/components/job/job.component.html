@@ -23,7 +23,7 @@
         <span class="text__underline text__color--3">Project duration</span> {{ job.duration }} months
       </div>
     </div>
-    <div *ngIf="(userRole | ngrxPush) === role.Client" class="d__flex m__left--auto">
+    <div *ngIf="(userRole$ | ngrxPush) === role.Client" class="d__flex m__left--auto">
       <i class="edit cursor__pointer m__right--10" (click)="$event.stopPropagation();onEditClick()"></i>
       <i class="delete cursor__pointer" (click)="$event.stopPropagation();onArchiveClick()"></i>
     </div>

@@ -8,14 +8,17 @@ import * as coreActions from 'app/core/actions/core.actions';
 import { UserService, DevelopersService } from 'app/shared/services';
 import { TOKEN } from 'app/constants/constants';
 import { State } from 'app/core/reducers';
-import { UpdateUserProfileAction } from 'app/core/actions/core.actions';
+import { LoadProjectsSuccessAction, UpdateUserProfileAction } from 'app/core/actions/core.actions';
 import { UserInfo } from 'app/shared/models';
+import { DevProjectsService } from 'app/shared/services/dev-projects.service';
+import { DevProject } from 'app/shared/models/dev-project.model';
 
 @Injectable()
 export class CoreEffects {
   constructor(
       private actions$: Actions,
       private userService: UserService,
+      private devProjectsService: DevProjectsService,
       private developersService: DevelopersService,
       private store: Store<State>,
       private router: Router
@@ -33,7 +36,14 @@ export class CoreEffects {
   onLoadUser$ = createEffect(() => this.actions$.pipe(
     ofType(coreActions.LOAD_USER_PROFILE),
     switchMap(res => this.userService.getUserInfo().pipe(
-      map((res: UserInfo) => new UpdateUserProfileAction(res))
+      map((info: UserInfo) => new UpdateUserProfileAction(info))
+    ))
+  ));
+
+  onLoadProjects$ = createEffect(() => this.actions$.pipe(
+    ofType(coreActions.LOAD_PROJECTS),
+    switchMap(res => this.devProjectsService.getProjects().pipe(
+      map((projects: DevProject[]) => new LoadProjectsSuccessAction(projects))
     ))
   ));
 

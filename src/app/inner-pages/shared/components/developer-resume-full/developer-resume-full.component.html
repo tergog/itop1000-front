@@ -306,18 +306,18 @@
           ></div>
         </div>
 
-        <div class="m__top--60 m__bottom--10">
+        <div class="m__top--60 m__bottom--10" *ngrxLet="projects$ as projects">
           <span class="text text__color--3 text__font--2 text__xxlg text__uppercase">Work Experience</span>
           <div
             class="section-underline m__top--10"
             [class.section-underline-active]="activeSection === DeveloperResumeSections.WorkExperience"
           ></div>
 
-          <div class="d__flex d__flex d__flex--direction-column m__top--30" *ngIf="developer.devProperties.projects">
-            <div *ngFor="let project of developer.devProperties.projects; index as i">
+          <div class="d__flex d__flex d__flex--direction-column m__top--30" *ngIf="projects">
+            <div *ngFor="let project of projects; index as i">
               <app-project-card class="m__top--10 m__right--10 m__bottom--10  cursor__pointer"
                                 *ngIf="i < projectCounter"
-                                (click)="onWorkExperienceClick(developer.id, i)" [project]="project"></app-project-card>
+                                (click)="onWorkExperienceClick(developer.id, project.id)" [project]="project"></app-project-card>
             </div>
             <app-button class="m__top--60 m__bottom--10"
                         *ngIf="developer.devProperties.projects.length > 3"

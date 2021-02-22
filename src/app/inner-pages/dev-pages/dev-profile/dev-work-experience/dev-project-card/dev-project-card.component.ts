@@ -10,13 +10,15 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { cloneDeep } from 'lodash';
 import { Observable } from 'rxjs';
 
-import * as coreActions from 'app/core/actions/core.actions';
 import * as fromCore from 'app/core/reducers';
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
 import { UserService, NotificationsService, DevelopersService } from 'app/shared/services';
 import { DevProject } from 'app/shared/models/dev-project.model';
 import { UploadPhotoDialogComponent } from 'app/inner-pages/shared/components/upload-photo-dialog/upload-photo-dialog.component';
 import { NameValueModel } from 'app/shared/models';
+import { DevProjectsService } from 'app/shared/services/dev-projects.service';
+import { UpdateProjectAction } from 'app/core/actions/core.actions';
+import { ImgResponse } from 'app/shared/models/uploadImgResponse';
 
 @Component({
   selector: 'app-dev-project-card',
@@ -35,6 +37,7 @@ export class DevProjectCardComponent implements OnInit {
   public allSkills$: Observable<NameValueModel[]>;
 
   constructor(
+    private devProjectsService: DevProjectsService,
     private devProfileService: DevProfileService,
     private notificationsService: NotificationsService,
     private userService: UserService,
@@ -68,26 +71,22 @@ export class DevProjectCardComponent implements OnInit {
 
     this.disableEmptyFields();
 
-    const arr = [...this.devProfileService.devProperties.projects];
 
-    const updatedProject = {
+    const updatedProject: DevProject = {
       ...this.form.value,
+      id: this.project.id,
       logo: this.logoUrl,
       images: this.projectImages
     };
-    arr.splice(this.id, 1, updatedProject);
 
-    this.devProfileService.devProperties = {
-      ...this.devProfileService.devProperties,
-      projects: arr
-    };
+    this.devProjectsService.update(updatedProject)
+      .pipe(first())
+      .subscribe((res: DevProject) => this.store.dispatch(new UpdateProjectAction(res, this.id)));
 
-    this.devProfileService.onSaveClick({ devProperties: this.devProfileService.devProperties });
-    this.store.dispatch(new coreActions.UpdateProjectImageAction(this.logoUrl, this.id));
     this.isEdit = false;
   }
 
-  public openUploadPhotoDialog(forLogo: boolean = false, id?: number): void {
+  public openUploadPhotoDialog(forLogo: boolean = false, index?: number): void {
 
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
@@ -100,19 +99,24 @@ export class DevProjectCardComponent implements OnInit {
         filter(result => !!result),
         first()
       )
-      .subscribe((image: FormData | string) => image === 'delete' ? this.deleteImage(forLogo, id) : this.uploadProjectImages(image as FormData, forLogo, id) );
+      .subscribe((image: FormData | string) => image === 'delete' ? this.deleteImage(forLogo, index) : this.uploadProjectImages(image as FormData, forLogo));
   }
 
-  private deleteImage(forLogo: boolean, id?: number): void {
-    forLogo ? this.deleteLogo() : this.deleteFromProjectImages(id);
+  private deleteImage(forLogo: boolean, index: number): void {
+    forLogo ? this.deleteLogo() : this.deleteFromProjectImages(index);
   }
 
   private deleteLogo(): void {
     this.logoUrl = '';
   }
 
-  private deleteFromProjectImages(id: number): void {
-    this.projectImages = this.projectImages.filter( (image, index) =>  index !== id);
+  private deleteFromProjectImages(index: number): void {
+    const newImages = [...this.projectImages];
+    console.log(newImages);
+    newImages.splice(index, 1);
+
+    console.log(newImages);
+    this.projectImages = newImages;
   }
 
   private initForm(): void {
@@ -127,27 +131,20 @@ export class DevProjectCardComponent implements OnInit {
   }
 
 
-  private uploadProjectImages(image: FormData, forLogo: boolean = false, id?: number): void {
-    forLogo ? this.uploadLogo(image) : this.uploadImage(image, id);
+  private uploadProjectImages(image: FormData, forLogo: boolean = false): void {
+    forLogo ?
+      this.uploadLogo(image)
+      :
+      this.devProjectsService.uploadImage(image).subscribe(res => {
+        this.projectImages = [ ...this.projectImages, res.image as string ];
+      });
   }
 
   private uploadLogo(image: FormData): void {
-    this.developersService.uploadProjectImage(image, this.id)
+    this.devProjectsService.uploadLogo(image)
       .subscribe(
-        (url) => {
-            this.logoUrl = url;
-        },
-        ({error}) => console.log(error)
-      );
-  }
-
-  private uploadImage(image: FormData, id?: number): void {
-    this.developersService.uploadProjectImage(image, id)
-      .subscribe(
-        (url) => {
-          const project = Object.assign([], this.projectImages);
-          (id || project[id]) ? project[id] = url : project.push(url);
-          this.projectImages = project;
+        (res: ImgResponse) => {
+            this.logoUrl = res.image as string;
         },
         ({error}) => console.log(error)
       );

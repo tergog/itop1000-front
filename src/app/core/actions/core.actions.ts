@@ -1,6 +1,7 @@
 import { Action } from '@ngrx/store';
 
 import { UserInfo } from 'app/shared/models';
+import { DevProject } from 'app/shared/models/dev-project.model';
 
 export const SAVE_TOKEN = '[Core] Saves user\'s auth token';
 
@@ -10,6 +11,13 @@ export const ON_LOGOUT = '[Core] On logout';
 export const LOAD_USER_PROFILE = '[Core] Load user profile';
 export const UPDATE_USER_PROFILE = '[Core] Update user profile';
 export const UPDATE_PROJECT_IMAGE = '[Core] Update project image';
+
+export const LOAD_PROJECTS = '[Core] Load projects';
+export const LOAD_PROJECTS_SUCCESS = '[Core] load projects success';
+export const LOAD_PROJECTS_ERROR = '[Core] load projects error';
+export const UPDATE_PROJECT = '[Core] Update project';
+export const ADD_PROJECT = '[Core] Add project';
+export const DELETE_PROJECT = '[Core] Delete project';
 
 export const UPDATE_PHOTO = '[Core] Update user photo';
 export const DELETE_PHOTO = '[Core] Delete user photo';
@@ -75,6 +83,38 @@ export class UpdateProjectImageAction implements Action {
   constructor(public image: string, public id: number) {}
 }
 
+export class LoadProjectsAction implements Action {
+  readonly type = LOAD_PROJECTS;
+}
+
+export class LoadProjectsSuccessAction implements Action {
+  readonly type = LOAD_PROJECTS_SUCCESS;
+  constructor(public payload: DevProject[]) {
+  }
+}
+
+export class UpdateProjectAction implements Action {
+  readonly type = UPDATE_PROJECT;
+  constructor(public payload: DevProject, public id: number) {
+  }
+}
+
+export class LoadProjectsErrorAction implements Action {
+  readonly type = LOAD_PROJECTS_ERROR;
+}
+
+export class AddProjectAction implements Action {
+  readonly type = ADD_PROJECT;
+  constructor(public payload: DevProject) {
+  }
+}
+
+export class DeleteProjectAction implements Action {
+  readonly type = DELETE_PROJECT;
+  constructor(public payload: string) {
+  }
+}
+
 /**
  * Exports possible core action types
  */
@@ -89,4 +129,10 @@ export type Actions =
   | AddCertificateAction
   | DeleteCertificateAction
   | UpdatePhotoAction
-  | DeletePhotoAction;
+  | DeletePhotoAction
+  | LoadProjectsAction
+  | LoadProjectsSuccessAction
+  | LoadProjectsErrorAction
+  | UpdateProjectAction
+  | AddProjectAction
+  | DeleteProjectAction;

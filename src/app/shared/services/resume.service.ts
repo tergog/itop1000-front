@@ -1,12 +1,19 @@
 import { Injectable } from '@angular/core';
+import { first } from 'rxjs/operators';
 
 import { DevProject } from 'app/shared/models/dev-project.model';
 import { Developer, NameValueModel } from 'app/shared/models';
+import { DevProjectsService } from 'app/shared/services/dev-projects.service';
 
 @Injectable()
 export class ResumeService {
 
-  constructor() {
+  projects: DevProject[];
+
+  constructor(
+    private devProjectService: DevProjectsService
+  ) {
+
   }
 
   public async getDocumentDefinition(developer: Developer): Promise<object> {
@@ -178,6 +185,7 @@ export class ResumeService {
   }
 
   private addCommonInfo(developer: Developer): Array<object> {
+    this.devProjectService.getProjectsById(developer.id).pipe(first()).subscribe(res => this.projects = res);
     return [
       {
         text: 'PROFESSIONAL SKILLS',
@@ -203,7 +211,7 @@ export class ResumeService {
         text: 'WORK EXPERIENCE',
         style: 'header'
       },
-      this.addExperience(developer),
+      this.addExperience(),
     ];
   }
 
@@ -301,9 +309,9 @@ export class ResumeService {
     }
   }
 
-  private addExperience(developer: Developer): Array<object> {
-    return developer.devProperties.projects
-      ? developer.devProperties.projects.map(el => this.addProject(el)) : [{text: ''}];
+  private addExperience(): Array<DevProject> | Array<any> {
+    return this.projects
+      ? this.projects.map(el => this.addProject(el)) : [{text: ''}];
   }
 
   private addProject(exp: DevProject): object {

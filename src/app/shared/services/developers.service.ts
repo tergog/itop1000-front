@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import * as jwtDecode from 'jwt-decode';
@@ -51,7 +51,7 @@ export class DevelopersService {
     return this.http.get<Developer[]>(`${this.apiUrl}${ApiConstants.accountsSearch}?searchTerm=${searchTerm}`);
   }
 
-  public uploadProjectImage(image: FormData, projectId: number): Observable<string> {
+  public uploadProjectImage(image: FormData, projectId: string): Observable<string> {
     return this.http.post<string>(`${this.apiUrl}${ApiConstants.accounts}/${this.id}/projects/${projectId}/image`, image);
   }
 
