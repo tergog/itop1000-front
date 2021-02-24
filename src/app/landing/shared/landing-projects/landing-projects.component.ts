@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+
 import { RecentProjects } from 'app/landing/landing-freelancer/landing-freelancer.component';
 import { DemoProject } from 'app/landing/landing-client/landing-client.component';
 
