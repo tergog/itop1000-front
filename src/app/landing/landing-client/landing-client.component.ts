@@ -11,6 +11,11 @@ export interface Developer {
   price: number;
 }
 
+export interface DemoProject {
+  companyName: string;
+  date: string;
+}
+
 @Component({
   selector: 'app-landing-client',
   templateUrl: './landing-client.component.html',
@@ -70,6 +75,21 @@ export class LandingClientComponent {
       surname: 'surname',
       price: 40
     }
+  ];
+
+  public demoProjects: DemoProject[] = [
+    {
+      companyName: 'company name',
+      date: '28 March'
+    },
+    {
+      companyName: 'company name',
+      date: '28 March'
+    },
+    {
+      companyName: 'company name',
+      date: '28 March'
+    },
   ];
 
   constructor() { }

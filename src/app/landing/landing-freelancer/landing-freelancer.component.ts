@@ -1,6 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { GuideData } from 'app/landing/landing-client/landing-client.component';
 
+export interface RecentProjects {
+  projectName: string;
+  companyName: string;
+  budget: number;
+}
+
 @Component({
   selector: 'app-landing-freelancer',
   templateUrl: './landing-freelancer.component.html',
@@ -40,6 +46,24 @@ export class LandingFreelancerComponent {
     'project name',
     'project name',
     'project name'
+  ];
+
+  public recentProjects: RecentProjects[] = [
+    {
+      projectName: 'project name',
+      companyName: 'company name',
+      budget: 100
+    },
+    {
+      projectName: 'project name',
+      companyName: 'company name',
+      budget: 100
+    },
+    {
+      projectName: 'project name',
+      companyName: 'company name',
+      budget: 100
+    }
   ];
 
   constructor() { }

@@ -1,5 +1,4 @@
-<span class="text text__fw--700 text__x7lg text__uppercase" *ngIf="type === 'developers'">Top Talents (Developers)</span>
-<span class="text text__fw--700 text__x7lg text__uppercase" *ngIf="type === 'companies'">Top Companies</span>
+<span class="text text__fw--700 text__x7lg text__uppercase">{{type === 'developers' ? 'Top Talents (Developers)' : 'Top Companies'}}</span>
 
 <div class="m__top--50 d__flex d__flex--wrap d__flex--justify-center">
 
@@ -14,3 +13,7 @@
   </div>
 
 </div>
+
+<span class="m__top--60 text text__color--6 text__underline text__lg cursor__pointer">
+  {{ type === 'developers' ? 'See all our talented developers' : 'Discover all Companies' }}
+</span>
