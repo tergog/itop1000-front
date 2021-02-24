@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { GuideData } from 'app/landing/landing-client/landing-client.component';
 
 @Component({
   selector: 'app-landing-freelancer',
@@ -6,11 +7,31 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./landing-freelancer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LandingFreelancerComponent implements OnInit {
+export class LandingFreelancerComponent {
+
+  public guideData: GuideData[] = [
+    {
+      title: 'Create a profile',
+      description: 'Sign up on our platform and create a detailed profile'
+    },
+    {
+      title: 'Search for projects',
+      description: 'Go through current projects and choose the one that suits your skill.'
+    },
+    {
+      title: 'Send an offer',
+      description: ' Submit a well-crafted offer to stand a chance of winning the gig.'
+    },
+    {
+      title: 'Provide Quality Services',
+      description: 'Work on the project and deliver results within the deadline.'
+    },
+    {
+      title: 'Earn your money',
+      description: 'Get paid for your services with your preferred payment, option.'
+    }
+  ];
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }
