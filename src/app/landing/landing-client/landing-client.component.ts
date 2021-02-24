@@ -5,6 +5,12 @@ export interface GuideData {
   description: string;
 }
 
+export interface Developer {
+  name: string;
+  surname: string;
+  price: number;
+}
+
 @Component({
   selector: 'app-landing-client',
   templateUrl: './landing-client.component.html',
@@ -25,6 +31,44 @@ export class LandingClientComponent {
     {
       title: 'Work with preferred talent',
       description: 'Choose the freelancer that suits you best and start working with them.'
+    }
+  ];
+
+  public developers: Developer[] = [
+    {
+      name: 'name',
+      surname: 'surname',
+      price: 40
+    },
+    {
+      name: 'name',
+      surname: 'surname',
+      price: 40
+    },
+    {
+      name: 'name',
+      surname: 'surname',
+      price: 40
+    },
+    {
+      name: 'name',
+      surname: 'surname',
+      price: 40
+    },
+    {
+      name: 'name',
+      surname: 'surname',
+      price: 40
+    },
+    {
+      name: 'name',
+      surname: 'surname',
+      price: 40
+    },
+    {
+      name: 'name',
+      surname: 'surname',
+      price: 40
     }
   ];
 

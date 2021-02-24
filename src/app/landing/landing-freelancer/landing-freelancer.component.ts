@@ -32,6 +32,16 @@ export class LandingFreelancerComponent {
     }
   ];
 
+  public companies = [
+    'project name',
+    'project name',
+    'project name',
+    'project name',
+    'project name',
+    'project name',
+    'project name'
+  ];
+
   constructor() { }
 
 }

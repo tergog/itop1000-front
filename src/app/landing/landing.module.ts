@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LandingClientComponent } from './landing-client/landing-client.component';
-import { LandingFreelancerComponent } from './landing-freelancer/landing-freelancer.component';
 import { RouterModule, Routes } from '@angular/router';
+
 import { LandingComponent } from 'app/landing/landing.component';
-import { LandingTitleComponent } from './shared/landing-title/landing-title.component';
+import { LandingTitleComponent } from 'app/landing/shared/landing-title/landing-title.component';
 import { SharedModule } from 'app/shared/shared.module';
-import { LandingSeparatorComponent } from './shared/landing-separator/landing-separator.component';
-import { LandingBenefitsComponent } from './shared/landing-benefits/landing-benefits.component';
-import { LandingGuideComponent } from './shared/landing-guide/landing-guide.component';
+import { LandingSeparatorComponent } from 'app/landing/shared/landing-separator/landing-separator.component';
+import { LandingBenefitsComponent } from 'app/landing/shared/landing-benefits/landing-benefits.component';
+import { LandingGuideComponent } from 'app/landing/shared/landing-guide/landing-guide.component';
+import { LandingTopComponent } from 'app/landing/shared/landing-top/landing-top.component';
+import { LandingClientComponent } from 'app/landing/landing-client/landing-client.component';
+import { LandingFreelancerComponent } from 'app/landing/landing-freelancer/landing-freelancer.component';
 
 const routes: Routes = [
   {
@@ -39,7 +41,8 @@ const routes: Routes = [
     LandingTitleComponent,
     LandingSeparatorComponent,
     LandingBenefitsComponent,
-    LandingGuideComponent
+    LandingGuideComponent,
+    LandingTopComponent
   ],
   imports: [
     CommonModule,
