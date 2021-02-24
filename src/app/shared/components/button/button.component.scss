@@ -52,3 +52,13 @@
     }
   }
 }
+
+:host-context(.landing) button {
+  padding: 25px 50px;
+  border-radius: 100px;
+
+  span {
+    font-weight: 700;
+    font-size: 20px;
+  }
+}
