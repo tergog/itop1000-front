@@ -53,7 +53,7 @@ export class DevProfileService {
 
   private showSuccessMessage(message: string): void {
     this.notificationsService.message.emit({
-      "message": message,
+      'message': message,
       type: ENotificationStatus.Success
     });
   }
@@ -64,8 +64,8 @@ export class DevProfileService {
         first(),
         catchError(err => of(this.handleErrorResponse(err)))
       ).subscribe(res => {
-      this.store.dispatch(new AddCertificateAction(res.certificate));
-      this.showSuccessMessage('Certificate added successfully');
+        this.store.dispatch(new AddCertificateAction(res.certificate));
+        this.showSuccessMessage('Certificate added successfully');
     });
   }
 
@@ -75,8 +75,8 @@ export class DevProfileService {
         first(),
         catchError(err => of(this.handleErrorResponse(err)))
       ).subscribe(res => {
-      this.showSuccessMessage('Certificate deleted successfully');
-      this.store.dispatch(new DeleteCertificateAction(res.deletedCertificate));
+        this.showSuccessMessage('Certificate deleted successfully');
+        this.store.dispatch(new DeleteCertificateAction(res.deletedCertificate));
     });
   }
 

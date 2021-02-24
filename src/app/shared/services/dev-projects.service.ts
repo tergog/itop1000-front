@@ -4,7 +4,6 @@ import { DevProject } from 'app/shared/models/dev-project.model';
 import { Observable } from 'rxjs';
 import * as jwtDecode from 'jwt-decode';
 
-
 import { environment } from 'environments/environment';
 import { TOKEN } from 'app/constants/constants';
 import { ApiConstants } from 'app/constants/api.constants';

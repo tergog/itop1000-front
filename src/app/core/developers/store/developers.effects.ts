@@ -22,7 +22,7 @@ export class DevelopersEffects {
 
   onSearchDevelopers$ = createEffect(() => this.actions$.pipe(
     ofType(actions.SEARCH_DEVELOPERS),
-    switchMap(( { payload } ) => this.developersService.searchDevelopers(payload).pipe(
+    switchMap(({ payload }) => this.developersService.searchDevelopers(payload).pipe(
       map((developers: Developer[]) => actions.searchDevelopersSuccess(developers)),
       tap(() => this.router.navigate(['in/c/search-developers'])),
       catchError((err: any) => of(actions.searchDevelopersError(err)))
@@ -31,7 +31,7 @@ export class DevelopersEffects {
 
   onSetDeveloper$ = createEffect(() => this.actions$.pipe(
     ofType(actions.SET_DEVELOPER),
-    switchMap(( { id } ) => this.developersService.getDeveloper(id).pipe(
+    switchMap(({ id }) => this.developersService.getDeveloper(id).pipe(
       map((developer: Developer) => actions.setDeveloperSuccess(developer)),
       tap((obj) => this.router.navigate([`in/c/search-developers/${obj.developer.id}`])),
       catchError((err: any) => of(actions.setDeveloperError(err)))

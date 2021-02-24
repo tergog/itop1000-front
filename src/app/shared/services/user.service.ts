@@ -10,7 +10,7 @@ import { UserInfo, UserLoginInfo, UserRegistrationInfo } from 'app/shared/models
 import { TOKEN } from 'app/constants/constants';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class UserService {
   apiUrl = environment.apiUrl;
