@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LandingComponent } from 'app/landing/landing.component';
 import { LandingTitleComponent } from './shared/landing-title/landing-title.component';
 import { SharedModule } from 'app/shared/shared.module';
+import { LandingSeparatorComponent } from './shared/landing-separator/landing-separator.component';
 
 const routes: Routes = [
   {
@@ -33,7 +34,8 @@ const routes: Routes = [
   declarations: [
     LandingClientComponent,
     LandingFreelancerComponent,
-    LandingTitleComponent
+    LandingTitleComponent,
+    LandingSeparatorComponent
   ],
   imports: [
     CommonModule,
