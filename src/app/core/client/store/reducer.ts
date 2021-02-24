@@ -20,7 +20,20 @@ export function reducer(state: State = INIT_STATE, action: Actions.Actions) {
       case Actions.GET_JOBS_SUCCESS:
         return { ...state, jobs: action.payload, loading: false };
       case Actions.GET_JOBS_FAIL:
-        return  { ...state, error: true, loading: false };
+        return { ...state, error: true, loading: false };
+      case Actions.UPDATE_JOB:
+        const index = state.jobs.findIndex(el => el.id === action.payload.id);
+        const newArr = [...state.jobs];
+        newArr[index] = action.payload;
+        return {
+          ...state,
+          jobs: newArr
+        };
+      case Actions.DELETE_JOB:
+        return {
+          ...state,
+          jobs: state.jobs.filter(el => el.id !== action.payload)
+        };
       default:
         return state;
     }

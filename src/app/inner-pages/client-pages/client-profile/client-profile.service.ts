@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs/operators';
-import * as jwtDecode from 'jwt-decode';
 
 import { NotificationsService, UserService } from 'app/shared/services';
 import { UserInfo } from 'app/shared/models';
-import { TOKEN } from 'app/constants/constants';
 import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
 import * as coreActions from 'app/core/actions/core.actions';
 import * as fromCore from 'app/core/reducers';
@@ -30,10 +28,7 @@ export class ClientProfileService {
       );
   }
 
-  private onUpdateProfileInfo(token: string): void {
-    localStorage.setItem(TOKEN, token);
-
-    const userInfo = jwtDecode(token);
+  private onUpdateProfileInfo(userInfo: UserInfo): void {
     this.store.dispatch(new coreActions.UpdateUserProfileAction(userInfo));
   }
 
@@ -42,7 +37,7 @@ export class ClientProfileService {
       message: 'Profile updated successfully',
       type: ENotificationStatus.Success
     });
-    this.onUpdateProfileInfo(userInfo.token);
+    this.onUpdateProfileInfo(userInfo);
   }
 
   private handleErrorResponse(error: Error): void {

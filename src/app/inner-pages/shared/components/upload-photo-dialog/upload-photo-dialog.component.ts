@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { base64ToFile, ImageCroppedEvent } from 'ngx-image-cropper';
 
 @Component({
   selector: 'app-upload-photo-dialog',
@@ -13,6 +13,7 @@ export class UploadPhotoDialogComponent implements OnInit {
   public imageSrc: string | ArrayBuffer;
   imageChangedEvent: any = '';
   croppedImage: any = '';
+  formData = new FormData();
 
   public inputData: {
     destination: 'Profile' | 'ProjectLogo' | 'ProjectImage' | 'Certificates',
@@ -34,10 +35,11 @@ export class UploadPhotoDialogComponent implements OnInit {
 
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
+    this.croppedImage = base64ToFile(this.croppedImage);
   }
 
   deleteImage() {
-    this.croppedImage = 'delete';
+    this.dialogRef.close('delete');
   }
 
   imageLoaded() {
@@ -55,7 +57,8 @@ export class UploadPhotoDialogComponent implements OnInit {
   }
 
   public closeDialog(): void {
-    this.dialogRef.close(this.croppedImage);
+    this.formData.set('image', this.croppedImage);
+    this.dialogRef.close(this.formData);
   }
 
 }

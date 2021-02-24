@@ -2,13 +2,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { filter, first, takeUntil } from 'rxjs/operators';
+import { filter, first, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
 import * as fromCore from 'app/core/reducers';
 import { UploadPhotoDialogComponent } from 'app/inner-pages/shared/components/upload-photo-dialog/upload-photo-dialog.component';
 import { UserService } from 'app/shared/services';
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
+import { DeletePhotoAction, UpdateUserProfileAction } from 'app/core/actions/core.actions';
 
 @Component({
   selector: 'app-dev-profile-settings',
@@ -51,11 +52,19 @@ export class DevProfileSettingsComponent implements OnInit, OnDestroy {
       .afterClosed()
       .pipe(
         filter(result => !!result),
-        first()
-      )
-      .subscribe((image: string) => this.uploadImage(image));
+        first(),
+        tap(image => {
+          if (image !== 'delete') {
+            this.uploadImage(image as FormData);
+          }
+        }),
+        filter(image => image === 'delete'),
+        switchMap((image: FormData | string) => this.userService.deletePhoto().pipe(
+          first(),
+          tap(res => this.store.dispatch(new DeletePhotoAction()))
+        ))
+      ).subscribe();
   }
-
 
   public onCancelClick(): void {}
 
@@ -83,7 +92,7 @@ export class DevProfileSettingsComponent implements OnInit, OnDestroy {
     });
   }
 
-  private uploadImage(image: string): void {
+  private uploadImage(image: FormData): void {
     this.devProfileService.onUploadPhoto(image);
   }
 

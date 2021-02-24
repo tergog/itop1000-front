@@ -4,7 +4,7 @@
                             [canEdit]="false"></app-profile-section-header>
 
 <div *ngrxLet="projects$; let projects">
-  <div *ngIf="!activeProject">
+  <div *ngIf="!activeProject && projects">
     <app-project-card class="active-project-cards"
                       *ngFor="let project of projects;"
                       [project]="project"

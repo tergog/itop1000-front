@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { first } from 'rxjs/operators';
-import * as jwtDecode from 'jwt-decode';
-import { Observable } from 'rxjs';
+import { catchError, first, tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 
 import * as coreActions from 'app/core/actions/core.actions';
-import { TOKEN } from 'app/constants/constants';
 import { UserService } from 'app/shared/services';
 import { NameValueModel, UserInfo } from 'app/shared/models';
 import * as fromCore from 'app/core/reducers';
@@ -13,6 +11,7 @@ import { DevProperties } from 'app/shared/models/dev-properties.model';
 import { NotificationsService } from 'app/shared/services/notifications.service';
 import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
 import * as fromDevelopers from 'app/core/developers/store';
+import { AddCertificateAction, DeleteCertificateAction, UpdatePhotoAction, } from 'app/core/actions/core.actions';
 
 @Injectable()
 export class DevProfileService {
@@ -27,7 +26,6 @@ export class DevProfileService {
   ) {}
 
   public onSaveClick(userInfo: Partial<UserInfo>): void {
-
     this.userService.updateProfile(userInfo)
       .pipe(first())
       .subscribe(
@@ -40,56 +38,49 @@ export class DevProfileService {
     return this.developersStore.select(fromDevelopers[`get${data}`], );
   }
 
-  public onUploadPhoto(image: string): void {
+  public onUploadPhoto(image: FormData): void {
     this.userService.uploadPhoto(image)
-      .pipe(first())
-      .subscribe(
-        (token) => {
-          this.notificationsService.message.emit({
-            message: 'Photo added successfully',
-            type: ENotificationStatus.Success
-          });
-          this.onUpdateProfileInfo(token);
-        },
-        ({ error }) => this.handleErrorResponse(error)
-      );
+      .pipe(
+        first(),
+      ).subscribe(res => {
+        this.showSuccessMessage('Photo added successfully');
+        this.store.dispatch(new UpdatePhotoAction(res.photo));
+      },
+      error => {
+        this.handleErrorResponse(error);
+      });
   }
 
-  public onUploadCertificate(certificate: string): void {
+  private showSuccessMessage(message: string): void {
+    this.notificationsService.message.emit({
+      'message': message,
+      type: ENotificationStatus.Success
+    });
+  }
+
+  public onUploadCertificate(certificate: FormData): void {
     this.userService.uploadCertificate(certificate)
-      .pipe(first())
-      .subscribe(
-        (token) => {
-          this.notificationsService.message.emit({
-            message: 'Certificate added successfully',
-            type: ENotificationStatus.Success
-          });
-          this.onUpdateProfileInfo(token);
-        },
-        ({ error }) => this.handleErrorResponse(error)
-      );
+      .pipe(
+        first(),
+        catchError(err => of(this.handleErrorResponse(err)))
+      ).subscribe(res => {
+        this.store.dispatch(new AddCertificateAction(res.certificate));
+        this.showSuccessMessage('Certificate added successfully');
+    });
   }
 
   public onDeleteCertificate(certificate: string, index: number): void {
     this.userService.deleteCertificate(certificate, index)
-      .pipe(first())
-      .subscribe(
-        (token) => {
-          this.notificationsService.message.emit({
-            message: 'Certificate deleted successfully',
-            type: ENotificationStatus.Success
-          });
-          this.onUpdateProfileInfo(token);
-        },
-        ({ error }) => this.handleErrorResponse(error)
-      );
+      .pipe(
+        first(),
+        catchError(err => of(this.handleErrorResponse(err)))
+      ).subscribe(res => {
+        this.showSuccessMessage('Certificate deleted successfully');
+        this.store.dispatch(new DeleteCertificateAction(res.deletedCertificate));
+    });
   }
 
-  private onUpdateProfileInfo(token: string) {
-
-    localStorage.setItem(TOKEN, token);
-
-    const userInfo = jwtDecode(token);
+  private onUpdateProfileInfo(userInfo: UserInfo) {
     this.store.dispatch(new coreActions.UpdateUserProfileAction(userInfo));
   }
 
@@ -98,7 +89,7 @@ export class DevProfileService {
       message: 'Profile updated successfully',
       type: ENotificationStatus.Success
     });
-    this.onUpdateProfileInfo(userInfo.token);
+    this.onUpdateProfileInfo(userInfo);
   }
 
   private handleErrorResponse(error: Error): void {

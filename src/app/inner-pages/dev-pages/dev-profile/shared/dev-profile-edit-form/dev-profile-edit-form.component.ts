@@ -45,8 +45,8 @@ export class DevProfileEditFormComponent implements OnInit {
       .pipe(first())
       .subscribe((userInfo: UserInfo) => {
         this.devProfileService.devProperties = userInfo.devProperties ? userInfo.devProperties : {};
-        this.form.get('skills').setValue([ ...this.devProfileService.devProperties.skills ]);
-        this.form.get('categories').setValue([ ...this.devProfileService.devProperties.categories ]);
+        this.form.get('skills').setValue([ ...this.devProfileService?.devProperties?.skills || [] ]);
+        this.form.get('categories').setValue([ ...this.devProfileService?.devProperties?.categories || [] ]);
       });
 
     this.allCategories$ = this.devProfileService.getStaticData('Categories');

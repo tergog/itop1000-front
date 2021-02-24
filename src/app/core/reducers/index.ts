@@ -51,6 +51,11 @@ export const getUserInfo = createSelector(
     fromCore.getUserInfoSelector
 );
 
+export const getDevProjects = createSelector(
+  getCoreState,
+  fromCore.getDevProjectsSelector
+);
+
 export const getJobs = createSelector(
   getClientState,
   fromClient.getJobs

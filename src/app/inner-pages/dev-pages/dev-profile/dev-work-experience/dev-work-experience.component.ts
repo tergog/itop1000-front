@@ -7,15 +7,17 @@ import {
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
-import { filter, first, tap, takeUntil } from 'rxjs/operators';
+import { filter, first } from 'rxjs/operators';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
 import { DevelopersService, UtilsService } from 'app/shared/services';
-import { DevProperties, NameValueModel, UserInfo } from 'app/shared/models';
+import { NameValueModel } from 'app/shared/models';
 import * as fromCore from 'app/core/reducers';
 import { UploadPhotoDialogComponent } from 'app/inner-pages/shared/components/upload-photo-dialog/upload-photo-dialog.component';
-import { UpdateUserProfileAction } from 'app/core/actions/core.actions';
+import { AddProjectAction, LoadProjectsAction } from 'app/core/actions/core.actions';
+import { DevProjectsService } from 'app/shared/services/dev-projects.service';
+import { getDevProjects } from 'app/core/reducers';
 
 
 @Component({
@@ -28,31 +30,25 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
   @Input() isEdit: boolean;
   public isNewProject: boolean;
   public form: FormGroup;
-  public userInfo$: Observable<UserInfo>;
-  public userInfo: UserInfo;
   public ngUnsubscribe$ = new Subject<void>();
   public showError: boolean;
   public logoUrl: string;
   public projectImages: string[] = [];
   public allSkills$: Observable<NameValueModel[]>;
+  public projects$ = this.store.select(getDevProjects);
 
   constructor(
     private store: Store<fromCore.State>,
     private devProfileService: DevProfileService,
     private matDialog: MatDialog,
     private developersService: DevelopersService,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private devProjectsService: DevProjectsService
   ) {}
 
   ngOnInit(): void {
+    this.store.dispatch(new LoadProjectsAction());
     this.initForm();
-
-    this.userInfo$ = this.store.select(fromCore.getUserInfo).pipe(
-      tap((userInfo: UserInfo) => {
-        this.devProfileService.devProperties = userInfo.devProperties;
-        this.userInfo = userInfo;
-      })
-    );
     this.allSkills$ = this.devProfileService.getStaticData('Skills');
   }
 
@@ -61,8 +57,6 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
   }
 
   public onCancelClick(): void {
-    this.projectImages = [];
-    this.logoUrl = '';
     this.isNewProject = !this.isNewProject;
   }
 
@@ -76,11 +70,12 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
       this.showError = true;
       return;
     }
-    const newDevProperties: DevProperties = { projects: [...(this.userInfo.devProperties.projects || []), this.form.value] };
-    this.userInfo = { ...this.userInfo, devProperties: newDevProperties };
-    this.store.dispatch(new UpdateUserProfileAction(this.userInfo));
-    this.devProfileService.onSaveClick({ devProperties: newDevProperties });
+    this.devProjectsService.create({ ...this.form.value, logo: this.logoUrl || '', images: this.projectImages || [] })
+      .subscribe(res => this.store.dispatch(new AddProjectAction(res)));
     this.isNewProject = false;
+    this.projectImages = [];
+    this.logoUrl = '';
+    this.form.reset();
   }
 
   public openUploadImageDialog(forLogo: boolean = false): void {
@@ -96,7 +91,15 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
         filter(result => !!result),
         first()
       )
-      .subscribe((image: string) => this.uploadImage(image, forLogo));
+      .subscribe((image: FormData) => this.updateImages(image, forLogo));
+  }
+
+  private updateImages(image: FormData, forLogo: boolean): void {
+    if (forLogo) {
+      this.devProjectsService.uploadImage(image).pipe(first()).subscribe(res => this.logoUrl = res.image as string);
+    } else {
+      this.devProjectsService.uploadImage(image).pipe(first()).subscribe(res => this.projectImages.push(res.image as string));
+    }
   }
 
   private initForm(): void {
@@ -110,14 +113,6 @@ export class DevWorkExperienceComponent implements OnInit, OnDestroy {
     });
   }
 
-  private uploadImage(image: string, forLogo: boolean): void {
-    this.developersService.uploadProjectImage(image)
-      .pipe(takeUntil(this.ngUnsubscribe$))
-      .subscribe(
-        url => forLogo ? this.logoUrl = url : this.projectImages.push(url),
-        ({ error }) => console.log(error)
-      );
-  }
 
   ngOnDestroy(): void {
     this.ngUnsubscribe$.next(null);

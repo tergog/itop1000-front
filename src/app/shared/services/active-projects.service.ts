@@ -15,6 +15,6 @@ export class ActiveProjectsService {
   constructor(private http: HttpClient) { }
 
   public getActiveProjects(id: string): Observable<ActiveProject> {
-    return this.http.get<ActiveProject>(`${this.apiUrl}${ApiConstants.accounts.activeProjects}/${id}`);
+    return this.http.get<ActiveProject>(`${this.apiUrl}${ApiConstants.accounts}/${id}`);
   }
 }

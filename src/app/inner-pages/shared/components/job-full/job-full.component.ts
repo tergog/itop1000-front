@@ -113,7 +113,7 @@ export class JobFullComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed()
       .pipe(
         takeUntil(this.ngUnsubscribe$),
-        filter(res => res === this.resMessage.Updated),
+        filter(res => res.msg === this.resMessage.Updated),
         tap(() => {
           this.getJobInfo();
           this.handleSuccessResponse();

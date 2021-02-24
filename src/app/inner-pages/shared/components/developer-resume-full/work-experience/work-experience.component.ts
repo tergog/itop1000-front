@@ -4,9 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { trigger, transition, animate, style } from '@angular/animations';
 import { interval, Observable } from 'rxjs';
 
-import { State, getDeveloper } from 'app/core/developers/store';
+import { State } from 'app/core/developers/store';
 import { DevProject } from 'app/shared/models/dev-project.model';
-import { setDeveloper } from 'app/core/developers/store/developers.actions';
+import { DevProjectsService } from 'app/shared/services/dev-projects.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-work-experience',
@@ -22,22 +23,22 @@ import { setDeveloper } from 'app/core/developers/store/developers.actions';
 export class WorkExperienceComponent implements OnInit {
 
   public project: DevProject;
-  public projectId: number;
+  public project$: Observable<DevProject>;
+  public projectId: string;
   public projectImageId = 0;
   public interval: Observable<any>;
   private carousel: any;
 
   constructor(
+    private devProjectService: DevProjectsService,
     private store: Store<State>,
-    private router: Router, private route: ActivatedRoute
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.projectId = this.route.snapshot.params.projectId;
-    this.store.select(getDeveloper).subscribe(developer => developer
-      ? this.project = developer.devProperties.projects[this.projectId]
-      : this.store.dispatch(setDeveloper({id: this.route.snapshot.params.id})));
-
+    this.devProjectService.getProjectById(this.projectId).pipe(first()).subscribe(res => this.project = res);
     this.interval = interval(4000);
     this.carouselStart();
   }

@@ -40,4 +40,8 @@ export class ClientPostedJobsComponent implements OnInit {
   public onJobClick(id: string): void {
     this.router.navigate(['/in/c/profile/job', id]);
   }
+
+  identify(index: number, item: Job): string {
+    return item.id;
+  }
 }

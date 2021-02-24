@@ -40,7 +40,7 @@ export class ClientContactInfoEditComponent implements OnInit, OnDestroy {
   private initForm(): void {
     this.form = new FormGroup({
       id: new FormControl('', []),
-      firstName: new FormControl('', []),
+      companyName: new FormControl('', []),
       email: new FormControl('', []),
     });
   }

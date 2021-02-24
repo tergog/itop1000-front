@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
   public userInfo$: Observable<UserInfo>;
   public UserRole = EUserRole;
   public userRole: string;
-  public searchTerm = new FormControl();
+  public searchTerm = new FormControl('');
   SearchFor = ESearchFor;
 
   constructor(private store: Store<State>) {

@@ -2,6 +2,7 @@ import { NameValueModel } from 'app/shared/models';
 
 export interface DevProject {
   title: string;
+  id: string;
   description: string;
   technologies: NameValueModel[];
   link: string;

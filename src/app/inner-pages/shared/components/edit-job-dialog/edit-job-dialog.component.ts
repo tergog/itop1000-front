@@ -78,9 +78,8 @@ export class EditJobDialogComponent implements OnInit, OnDestroy {
     this.jobService.updateJob(this.job.id, this.form.value)
     .pipe(takeUntil(this.ngUnsubscribe$))
     .subscribe(
-      () => {
-        this.dialogRef.close('Job updated successfully');
-        this.store.dispatch(new GetJobsAction());
+      (res) => {
+        this.dialogRef.close({ msg: 'Job updated successfully', data: res});
       },
       error => this.errorMessage = error.message);
   }
