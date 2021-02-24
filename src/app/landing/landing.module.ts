@@ -7,6 +7,8 @@ import { LandingComponent } from 'app/landing/landing.component';
 import { LandingTitleComponent } from './shared/landing-title/landing-title.component';
 import { SharedModule } from 'app/shared/shared.module';
 import { LandingSeparatorComponent } from './shared/landing-separator/landing-separator.component';
+import { LandingBenefitsComponent } from './shared/landing-benefits/landing-benefits.component';
+import { LandingGuideComponent } from './shared/landing-guide/landing-guide.component';
 
 const routes: Routes = [
   {
@@ -35,7 +37,9 @@ const routes: Routes = [
     LandingClientComponent,
     LandingFreelancerComponent,
     LandingTitleComponent,
-    LandingSeparatorComponent
+    LandingSeparatorComponent,
+    LandingBenefitsComponent,
+    LandingGuideComponent
   ],
   imports: [
     CommonModule,
