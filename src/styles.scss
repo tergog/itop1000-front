@@ -231,6 +231,10 @@ i {
     &--600 {
       font-weight: 600;
     }
+
+    &--700 {
+      font-weight: 700;
+    }
   }
 }
 
@@ -281,6 +285,11 @@ a:hover {
 
 .popup-email .mat-dialog-container {
   background-color: rgba(36, 36, 36, 0.95);
+}
+
+.active-link {
+  font-weight: 500;
+  color: $text-color-5 !important;
 }
 
 html, body { height: 100%; }

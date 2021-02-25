@@ -1,0 +1,17 @@
+<span class="text text__fw--700 text__x7lg text__uppercase">{{ type === 'companies' ? 'our projects' : 'most recent projects'}}</span>
+
+<div class="m__top--45 d__flex d__flex--wrap d__flex--justify-center d__flex--items-center">
+ <div *ngFor="let item of data" class="card m__top--30 m--5 d__flex d__flex--direction-column d__flex--items-center">
+   <i class="m__top--60 project-logo"></i>
+   <span class="m__top--20 text text__color--5 text__fw--500 text__xxlg text__uppercase">
+     {{ type === 'companies' ? item.companyName : item.projectName}}
+   </span>
+   <span class="m__top--10 text text__uppercase text__fw--300 text__lg" *ngIf="type === 'projects'">{{ item.companyName }}</span>
+   <span class="m__top--10 text text__fw--300 text__md text__color--5" *ngIf="type === 'projects'">Budget {{ item.budget | currency }}</span>
+   <span class="m__top--10 text text__fw--300 text__sm text__color--6" *ngIf="type === 'companies'">{{ item.date }}</span>
+ </div>
+</div>
+
+<span class="m__top--60 text text__color--6 text__underline text__lg cursor__pointer">
+  {{ type === 'companies' ? 'See all our projects' : 'See all available projects' }}
+</span>

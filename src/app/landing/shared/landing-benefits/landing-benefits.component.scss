@@ -1,0 +1,19 @@
+@import "src/assets/scss/variables";
+
+:host {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.icon-outline {
+  width: 122px;
+  height: 122px;
+  border-radius: 50%;
+  border: 1px solid $color-5;
+}
+
+.description {
+  width: 400px;
+}

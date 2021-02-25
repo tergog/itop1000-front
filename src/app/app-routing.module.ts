@@ -5,10 +5,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'app/shared/guards/auth.guard';
 import { VerifyEmailComponent } from 'app/auth/components/verify-email/verify-email.component';
 import { TermsPagesComponent } from 'app/core/components/terms-pages/terms-pages.component';
-import { LandingComponent } from './landing/landing.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', component: LandingComponent },
+  { path: '',   redirectTo: '/landing/freelancer', pathMatch: 'full' },
   { path: 'account/verify-email', component: VerifyEmailComponent },
   {
     path: 'auth',
@@ -32,7 +31,9 @@ const routes: Routes = [
   },
   {
     path: 'landing',
-    component: LandingComponent
+    loadChildren: () => import('app/landing/landing.module').then(
+      (m) =>  m.LandingModule
+    ),
   }
 ];
 
