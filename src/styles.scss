@@ -287,5 +287,10 @@ a:hover {
   background-color: rgba(36, 36, 36, 0.95);
 }
 
+.active-link {
+  font-weight: 500;
+  color: $text-color-5 !important;
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
