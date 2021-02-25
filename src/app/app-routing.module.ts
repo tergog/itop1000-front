@@ -7,7 +7,7 @@ import { VerifyEmailComponent } from 'app/auth/components/verify-email/verify-em
 import { TermsPagesComponent } from 'app/core/components/terms-pages/terms-pages.component';
 
 const routes: Routes = [
-  { path: '',   redirectTo: '/landing', pathMatch: 'full' },
+  { path: '',   redirectTo: '/landing/freelancer', pathMatch: 'full' },
   { path: 'account/verify-email', component: VerifyEmailComponent },
   {
     path: 'auth',
