@@ -1,28 +1,47 @@
-@import '../../../../../assets/scss/variables';
+@import '~assets/scss/variables';
 
 :host {
-  display: inline-block;
-  min-width: 250px;
+  height: 600px;
+  padding: 0 35px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 420px;
+  background-color: $color-1;
+  position: relative;
+  z-index: 1;
 }
 
-ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+.btn {
+  height: 50px;
+  border: 1px solid $color-3;
+  border-left: 3px solid $color-2;
+}
 
-  li {
-    padding: 10px;
-    cursor: pointer;
-    transition: ease 0.1s;
+.container {
+  padding-left: 30px;
+  padding-top: 10px;
+}
 
-    &.active {
-      cursor: default;
-      transform: scale(1.05, 1.05);
+.line {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 600px;
+  border-right: 2px solid $color-5;
+}
 
-      span {
-        font-weight: 600;
-        color: $color-2;
-      }
-    }
-  }
+.light-point {
+  margin-right: -6px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: $color-5;
+}
+
+.inner-point {
+  background: $color-5;
+  filter: blur(5px);
+  width: 10px;
+  height: 10px;
 }

@@ -251,7 +251,6 @@
 .contact-info {
   width: 15px;
   height: 15px;
-  opacity: 0.25;
   background-image: url(~assets/icons/contact-info.svg);
 
   &-gray {
@@ -263,28 +262,72 @@
 .settings {
   width: 15px;
   height: 15px;
-  opacity: 0.25;
   background-image: url(~assets/icons/settings.svg);
+}
+
+.approved-projects {
+  width: 15px;
+  height: 11px;
+  background-image: url(~assets/icons/approved-projects.svg);
 }
 
 .payments {
   width: 15px;
   height: 11px;
-  opacity: 0.25;
   background-image: url(~assets/icons/payments.svg);
+}
+
+.categories-and-skills {
+  width: 15px;
+  height: 9px;
+  background-image: url(~assets/icons/categories-and-skills.svg);
+}
+
+.contracts {
+  width: 15px;
+  height: 15px;
+  background-image: url(~assets/icons/contracts.svg);
+}
+
+.education {
+  width: 15px;
+  height: 15px;
+  background-image: url(~assets/icons/education.svg);
+}
+
+.employment {
+  width: 13px;
+  height: 15px;
+  background-image: url(~assets/icons/employment.svg);
+}
+
+.profile {
+  width: 15px;
+  height: 15px;
+  background-image: url(~assets/icons/profile.svg);
+}
+
+.hourly-rate {
+  width: 15px;
+  height: 15px;
+  background-image: url(~assets/icons/hourly-rate.svg);
+}
+
+.languages {
+  width: 15px;
+  height: 15px;
+  background-image: url(~assets/icons/languages.svg);
 }
 
 .security {
   width: 11px;
   height: 15px;
-  opacity: 0.25;
   background-image: url(~assets/icons/security.svg);
 }
 
 .categories {
   width: 15px;
   height: 15px;
-  opacity: 0.25;
   background-image: url(~assets/icons/categories.svg);
 }
 
@@ -306,6 +349,24 @@
   background-image: url(~assets/icons/education-light.svg);
 }
 
+.star {
+  width: 15px;
+  height: 14px;
+  background-image: url(~assets/icons/star.svg);
+}
+
+.work-experience {
+  width: 15px;
+  height: 15px;
+  background-image: url(~assets/icons/work-experience.svg);
+}
+
+.balance {
+  width: 15px;
+  height: 15px;
+  background-image: url(~assets/icons/balance.svg);
+}
+
 .soft-skills-light {
   width: 15px;
   height: 15px;
@@ -322,6 +383,12 @@
   width: 15px;
   height: 15px;
   background-image: url(~assets/icons/certificates-light.svg);
+}
+
+.soft-skills {
+  width: 15px;
+  height: 15px;
+  background-image: url(~assets/icons/soft-skills.svg);
 }
 
 .reviews {
@@ -430,6 +497,54 @@
   .contact-info {
     opacity: 1;
     background-image: url(~assets/icons/contact-info-active.svg);
+  }
+
+  .approved-projects {
+    background-image: url(~assets/icons/approved-projects-active.svg);
+  }
+
+  .balance {
+    background-image: url(~assets/icons/balance-active.svg);
+  }
+
+  .categories-and-skills {
+    background-image: url(~assets/icons/categories-and-skills-active.svg);
+  }
+
+  .contracts {
+    background-image: url(~assets/icons/contracts-active.svg);
+  }
+
+  .education {
+    background-image: url(~assets/icons/education-active.svg);
+  }
+
+  .employment {
+    background-image: url(~assets/icons/employment-active.svg);
+  }
+
+  .hourly-rate {
+    background-image: url(~assets/icons/hourly-rate-active.svg);
+  }
+
+  .languages {
+    background-image: url(~assets/icons/languages-active.svg);
+  }
+
+  .profile {
+    background-image: url(~assets/icons/profile-active.svg);
+  }
+
+  .soft-skills {
+    background-image: url(~assets/icons/soft-skills-active.svg);
+  }
+
+  .star {
+    background-image: url(~assets/icons/star-active.svg);
+  }
+
+  .work-experience {
+    background-image: url(~assets/icons/work-experience-active.svg);
   }
 
   .settings {

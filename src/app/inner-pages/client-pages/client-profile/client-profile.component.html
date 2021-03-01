@@ -1,3 +1,6 @@
-<app-profile-sidenav (section)="onSectionSelect($event)"></app-profile-sidenav>
+<div class="w__100per d__flex m__top--100">
+  <app-profile-sidenav (section)="onSectionSelect($event)"></app-profile-sidenav>
 
-<app-client-profile-sections [section]="selectedSection"></app-client-profile-sections>
+  <app-client-profile-sections [section]="selectedSection"></app-client-profile-sections>
+</div>
+

@@ -7,5 +7,13 @@ export enum EDevProfileSections {
   WantToLearn,
   Certificates,
   Balance,
-  PasswordAndSecurity
+  PasswordAndSecurity,
+  BillingAndPayments,
+  Education,
+  SoftSkills,
+  ApprovedProjects,
+  Reviews,
+  Employment,
+  Languages,
+  HourlyRate
 }

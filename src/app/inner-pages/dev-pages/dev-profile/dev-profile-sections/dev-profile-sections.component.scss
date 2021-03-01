@@ -1,6 +1,9 @@
+@import "~assets/scss/variables";
+
 :host {
   flex: 1;
   height: 100%;
   position: relative;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
+  background-color: $color-1;
 }
