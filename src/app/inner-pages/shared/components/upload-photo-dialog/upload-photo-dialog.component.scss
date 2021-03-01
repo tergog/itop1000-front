@@ -1,4 +1,4 @@
-@import '../../../../../assets/scss/variables';
+@import '~assets/scss/variables';
 
 .dialog-header {
   position: relative;
@@ -12,6 +12,27 @@
     position: absolute;
     right: 20px;
   }
+}
+
+.container {
+  background: url("~assets/img/search-bg.png");
+  padding: 50px;
+}
+
+.default-image {
+  width: 230px;
+  height: 230px;
+  box-shadow: 0px 2px 3px rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  overflow: hidden;
+  img {
+    width: 100%;
+  }
+}
+
+.buttons {
+  padding-top: 50px;
+  border-top: 1px solid $color-6;
 }
 
 img,

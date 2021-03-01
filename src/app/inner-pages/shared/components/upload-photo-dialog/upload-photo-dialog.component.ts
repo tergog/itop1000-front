@@ -17,6 +17,7 @@ export class UploadPhotoDialogComponent implements OnInit {
 
   public inputData: {
     destination: 'Profile' | 'ProjectLogo' | 'ProjectImage' | 'Certificates',
+    img: string | null
   };
 
 

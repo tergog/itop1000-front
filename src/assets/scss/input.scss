@@ -40,7 +40,7 @@
     padding: 14px;
     border: 1px solid $color-4;
     border-radius: 10px;
-    background: transparent;
+    background:  rgba(255, 255, 255, 0.1);
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.09);
     font-family: "Raleway";
     font-feature-settings: "lnum";
@@ -48,7 +48,7 @@
 
     input[type='text'],
     input[type='password'] {
-      color: $color-1;
+      color: $color-3;
       height: auto;
     }
 

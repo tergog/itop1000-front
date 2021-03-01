@@ -4,6 +4,13 @@
 </div>
 
 <div class="container w__100per d__flex d__flex--direction-column">
+  <div *ngIf="activeSection !== DevProfileSections.AccountInfo" class="d__flex cursor__pointer m__top--30"
+       (click)="onSectionCLick(DevProfileSections.AccountInfo, 'Account info', 'contact-info')"
+  >
+    <i class="contact-info m__right--10"></i>
+    <span class="text text__lg text__color--3">Account info</span>
+  </div>
+
   <div *ngIf="activeSection !== DevProfileSections.ContactInfo" class="d__flex cursor__pointer m__top--30"
        (click)="onSectionCLick(DevProfileSections.ContactInfo, 'Contact info', 'contact-info')"
   >

@@ -15,5 +15,6 @@ export enum EDevProfileSections {
   Reviews,
   Employment,
   Languages,
-  HourlyRate
+  HourlyRate,
+  AccountInfo
 }
