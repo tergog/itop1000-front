@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import * as fromCore from 'app/core/reducers';
-import { getUserInfo } from 'app/core/reducers';
 import { Store } from '@ngrx/store';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { first, tap } from 'rxjs/operators';
+
+import * as fromCore from 'app/core/reducers';
+import { getUserInfo } from 'app/core/reducers';
 import { UserInfo } from 'app/shared/models';
 import { NotificationsService, UserService } from 'app/shared/services';
 import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
@@ -12,21 +13,21 @@ import { UpdateUserProfileAction } from 'app/core/actions/core.actions';
 
 @Component({
   selector: 'app-account-info',
-  templateUrl: './account-info.component.html',
-  styleUrls: ['./account-info.component.scss'],
+  templateUrl: './dev-account-info.component.html',
+  styleUrls: ['./dev-account-info.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AccountInfoComponent implements OnInit {
+export class DevAccountInfoComponent implements OnInit {
 
   public photo: string;
   public isEdit: boolean;
   public userInfo$: Observable<UserInfo>;
 
   public form = new FormGroup({
-    userId: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required]),
-    firstName: new FormControl('', [Validators.required]),
-    lastName: new FormControl('', [Validators.required])
+    userId: new FormControl(''),
+    email: new FormControl(''),
+    firstName: new FormControl(''),
+    lastName: new FormControl('')
   });
 
   constructor(
@@ -71,9 +72,8 @@ export class AccountInfoComponent implements OnInit {
       .subscribe((res: UserInfo) => {
         this.store.dispatch(new UpdateUserProfileAction(res));
         this.notificationsService.message
-          .emit({message: 'Account info updated successfully', type: ENotificationStatus.Success});
-        }
-      );
+          .emit({ message: 'Account info updated successfully', type: ENotificationStatus.Success });
+      });
 
     this.isEdit = false;
   }

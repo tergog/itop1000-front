@@ -1,42 +1,18 @@
-@import 'assets/scss/variables';
+@import '~assets/scss/variables';
+@import "~assets/scss/input";
 
-:host {
-  position: relative;
-  display: inline-block;
-  height: 40px;
-  width: 232px;
+input {
   background: transparent;
-  border-radius: 5px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
-  border: 1px solid $color-4;
-}
-
-.address-input {
   width: 100%;
-  padding: 10px 20px;
   border: none;
   outline: none;
-  background-color: transparent;
-  color: $text-color-1;
-  font-family: Raleway;
+  font-family: "Raleway";
   font-feature-settings: "lnum";
   font-size: 12px;
-  line-height: 16px;
-
+  font-weight: normal;
+  color: $text-color-3;
   &::placeholder {
     color: $text-color-6;
   }
-
-  &.ng-invalid.ng-dirty {
-    border-color: $color-2;
-  }
-
-  ::ng-deep {
-    i {
-      cursor: pointer;
-      position: absolute;
-      right: 20px;
-      top: calc(50% - 6px);
-    }
-  }
 }
+

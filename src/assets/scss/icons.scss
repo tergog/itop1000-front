@@ -195,6 +195,20 @@
   background: url(~assets/icons/email-popup.svg);
 }
 
+.earth {
+  width: 15px;
+  height: 15px;
+  background: url(~assets/icons/earth.svg);
+  background-size: contain;
+}
+
+.address {
+  width: 15px;
+  height: 15px;
+  background: url(~assets/icons/address.svg);
+  background-size: contain;
+}
+
 .search {
   width: 15px;
   height: 15px;
@@ -202,12 +216,17 @@
 }
 
 .phone {
-  width: 15px;
-  height: 15px;
+  min-width: 11px;
+  height: 11px;
   background: url(~assets/icons/phone.svg);
+  background-size: contain;
 
   &-gray {
     background-image: url(~assets/icons/phone-gray.svg);
+  }
+
+  &-yellow {
+    background-image: url(~assets/icons/phone-yellow.svg);
   }
 }
 
@@ -269,13 +288,18 @@
 }
 
 .contact-info {
-  width: 15px;
+  min-width: 15px;
   height: 15px;
   background-image: url(~assets/icons/contact-info.svg);
+  background-size: contain;
 
   &-gray {
     opacity: 1;
     background-image: url(~assets/icons/contact-info-gray.svg);
+  }
+
+  &-yellow {
+    background-image: url(~assets/icons/contact-info-yellow.svg);
   }
 }
 
@@ -426,12 +450,17 @@
 }
 
 .location {
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   background-image: url(~assets/icons/location.svg);
+  background-size: contain;
 
   &-gray {
     background-image: url(~assets/icons/location-gray.svg);
+  }
+
+  &-active {
+    background-image: url(~assets/icons/location-active.svg);
   }
 }
 

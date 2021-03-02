@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, forwardRef, HostBinding, Input, OnInit, ViewChild } from '@angular/core';
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -17,8 +17,11 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class AddressComponent implements OnInit, ControlValueAccessor {
 
-  @ViewChild('placesRef') placesRef : GooglePlaceDirective;
+  @HostBinding('class.inner') get valid() { return this.type === 'inner'; }
+  @ViewChild('placesRef') placesRef: GooglePlaceDirective;
   @Input('currentAddress') currentAddress: string;
+  @Input() type: string;
+  @Input() disabled: boolean;
 
   ngOnInit(): void {
   }

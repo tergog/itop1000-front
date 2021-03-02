@@ -1,6 +1,4 @@
 export enum EDevProfileSections {
-  ContactInfo,
-  ProfileSettings,
   CategoriesAndSkills,
   WorkExperience,
   ActiveProjects,
@@ -16,5 +14,6 @@ export enum EDevProfileSections {
   Employment,
   Languages,
   HourlyRate,
-  AccountInfo
+  AccountInfo,
+  LocationInfo
 }

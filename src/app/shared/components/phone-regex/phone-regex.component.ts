@@ -19,6 +19,7 @@ export class PhoneRegexComponent implements OnInit, ControlValueAccessor {
   @Input() type: string;
   @Input() placeholder;
   @Input() isHiddenPassword: boolean;
+  @Input() disabled: boolean;
 
   constructor() { }
 

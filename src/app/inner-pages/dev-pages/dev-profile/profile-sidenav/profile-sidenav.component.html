@@ -11,18 +11,11 @@
     <span class="text text__lg text__color--3">Account info</span>
   </div>
 
-  <div *ngIf="activeSection !== DevProfileSections.ContactInfo" class="d__flex cursor__pointer m__top--30"
-       (click)="onSectionCLick(DevProfileSections.ContactInfo, 'Contact info', 'contact-info')"
+  <div *ngIf="activeSection !== DevProfileSections.LocationInfo" class="d__flex cursor__pointer m__top--30"
+       (click)="onSectionCLick(DevProfileSections.LocationInfo, 'Location info', 'location location-active')"
   >
-    <i class="contact-info m__right--10"></i>
-    <span class="text text__lg text__color--3">Contact info</span>
-  </div>
-
-  <div *ngIf="activeSection !== DevProfileSections.ProfileSettings" class="d__flex m__top--30 cursor__pointer"
-       (click)="onSectionCLick(DevProfileSections.ProfileSettings, 'Profile settings', 'settings')"
-  >
-    <i class="settings m__right--10"></i>
-    <span class="text text__lg text__color--3">Profile settings</span>
+    <i class="location m__right--10"></i>
+    <span class="text text__lg text__color--3">Location info</span>
   </div>
 
   <div *ngIf="activeSection !== DevProfileSections.CategoriesAndSkills" class="d__flex m__top--30 cursor__pointer"

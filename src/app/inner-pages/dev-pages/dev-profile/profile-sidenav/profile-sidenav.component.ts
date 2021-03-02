@@ -17,8 +17,8 @@ export class ProfileSidenavComponent implements OnInit {
   @Output() section = new EventEmitter<EDevProfileSections>();
 
   public DevProfileSections = EDevProfileSections;
-  public activeSection: EDevProfileSections = EDevProfileSections.ContactInfo;
-  public selectedSection: SelectedSection = { title: 'Contact info', icon: 'contact-info' };
+  public activeSection: EDevProfileSections = EDevProfileSections.AccountInfo;
+  public selectedSection: SelectedSection = { title: 'Account info', icon: 'contact-info' };
 
   constructor() { }
 
