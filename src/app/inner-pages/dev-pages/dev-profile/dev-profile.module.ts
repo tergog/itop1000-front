@@ -33,6 +33,8 @@ import { DevWantToLearnComponent } from './dev-want-to-learn/dev-want-to-learn.c
 import { DevCertificatesComponent } from './dev-certificates/dev-certificates.component';
 import { DevAccountInfoComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-account-info/dev-account-info.component';
 import { DevLocationInfoComponent } from './dev-location-info/dev-location-info.component';
+import { DevCategoriesComponent } from './dev-categories-and-skills/dev-categories/dev-categories.component';
+import { DevSkillsComponent } from './dev-categories-and-skills/dev-skills/dev-skills.component';
 
 
 const routes: Routes = [
@@ -62,6 +64,8 @@ const routes: Routes = [
     DevCertificatesComponent,
     DevAccountInfoComponent,
     DevLocationInfoComponent,
+    DevCategoriesComponent,
+    DevSkillsComponent,
   ],
   imports: [
     CommonModule,

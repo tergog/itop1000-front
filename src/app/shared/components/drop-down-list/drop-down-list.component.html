@@ -7,7 +7,9 @@
               (removed)="onChipRemove(item)"
     >
       {{ item.name }}
-      <mat-icon matChipRemove *ngIf="isEdit">cancel</mat-icon>
+      <mat-icon matChipRemove *ngIf="isEdit">
+        <i class="close"></i>
+      </mat-icon>
     </mat-chip>
     <input #data [placeholder]="placeholder"
            [readOnly]="!isEdit"

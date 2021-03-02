@@ -1,0 +1,17 @@
+@import '~assets/scss/variables';
+
+:host {
+  display: block;
+  padding: 30px 15px;
+  border-bottom: 1px solid $color-3;
+  background: $bg-profile;
+}
+::ng-deep {
+  .mat-chip.mat-standard-chip {
+    background: rgba(243, 239, 239, 0.1);
+    border: 1px solid $text-color-6;
+    color: $color-3;
+    box-sizing: border-box;
+    border-radius: 5px;
+  }
+}

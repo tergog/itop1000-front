@@ -1,8 +1,9 @@
 import { NameValueModel } from 'app/shared/models';
+import { CategoriesAndSkills } from 'app/shared/models/categories-and-skills.model';
 
 export interface DevProperties {
-  categories?: NameValueModel[];
-  skills?: NameValueModel[];
+  categories?: CategoriesAndSkills[];
+  skills?: CategoriesAndSkills[];
   softSkills?: NameValueModel[];
   languages?: NameValueModel[];
   description?: string;
