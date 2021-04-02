@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 import { EClientProfileSections } from 'app/inner-pages/client-pages/client-profile/client-profile-sections.enum';
+import { SelectedSection } from 'app/inner-pages/dev-pages/dev-profile/profile-sidenav/profile-sidenav.component';
 
 @Component({
   selector: 'app-profile-sidenav',
@@ -13,13 +14,15 @@ export class ClientProfileSidenavComponent implements OnInit {
 
   public ClientProfileSections = EClientProfileSections;
   public activeSection: EClientProfileSections = EClientProfileSections.ContactInfo;
+  public selectedSection: SelectedSection = { title: 'Contact info', icon: 'contact-info' };
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  public onSectionCLick(selectedSection: EClientProfileSections): void {
+  public onSectionCLick(selectedSection: EClientProfileSections, selectedTitle: string, selectedIcon: string): void {
+    this.selectedSection = { title: selectedTitle, icon: selectedIcon };
     this.activeSection = selectedSection;
     this.section.emit(selectedSection);
   }

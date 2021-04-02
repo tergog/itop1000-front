@@ -34,6 +34,7 @@ import { GetPaidNowDialogComponent } from './components/get-paid-now-dialog/get-
 import { ActiveProjectsComponent } from './components/active-projects/active-projects.component';
 import { BankAccountDialogComponent } from './components/bank-account-dialog/bank-account-dialog.component';
 import { NotificationsPopupComponent } from './components/notifications-popup/notifications-popup.component';
+import { ProfilePhotoComponent } from './components/profile-photo/profile-photo.component';
 
 
 @NgModule({
@@ -61,6 +62,7 @@ import { NotificationsPopupComponent } from './components/notifications-popup/no
     BankAccountDialogComponent,
     ActiveProjectsComponent,
     NotificationsPopupComponent,
+    ProfilePhotoComponent,
   ],
   imports: [
     RouterModule,
@@ -84,7 +86,8 @@ import { NotificationsPopupComponent } from './components/notifications-popup/no
     StandardBgWrapComponent,
     ProjectCardComponent,
     ActiveProjectsComponent,
-    NotificationsPopupComponent
+    NotificationsPopupComponent,
+    ProfilePhotoComponent
   ],
   providers: [
     DevProfileService

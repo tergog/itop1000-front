@@ -1,5 +1,25 @@
+@import "src/assets/scss/variables";
+
 :host ::ng-deep {
   mat-form-field {
     width: 100%;
+  }
+
+  mat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mat-chip.mat-standard-chip {
+    background: rgba(243, 239, 239, 0.1);
+    border: 1px solid $text-color-6;
+    color: $color-3;
+    box-sizing: border-box;
+    border-radius: 5px;
+  }
+
+  .mat-chip.mat-standard-chip.mat-chip-disabled {
+   opacity: 1;
   }
 }

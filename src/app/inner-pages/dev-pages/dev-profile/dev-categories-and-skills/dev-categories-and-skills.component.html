@@ -1,3 +1,11 @@
-<app-profile-section-header [title]="'Categories and Skills'" (edit)="onEditClick()"></app-profile-section-header>
+<ng-container *ngrxLet="userInfo$ as userInfo">
+  <app-profile-section-header [title]="'Skills'" (edit)="editToggle()"></app-profile-section-header>
+  <app-dev-skills [skills]="userInfo?.devProperties?.skills"></app-dev-skills>
 
+  <app-profile-section-header class="m__top--45" [title]="'Categories'" (edit)="editToggle()"></app-profile-section-header>
+  <app-dev-categories [categories]="userInfo?.devProperties?.categories"></app-dev-categories>
+</ng-container>
+
+<!--
 <app-dev-profile-edit-form [sectionName]="DevProfileSectionNames.CategoriesSkills" [isEdit]="isEdit" (editToggle)="onEditClick()"></app-dev-profile-edit-form>
+-->

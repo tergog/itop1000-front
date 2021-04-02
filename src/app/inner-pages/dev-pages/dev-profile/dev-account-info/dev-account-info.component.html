@@ -1,0 +1,46 @@
+<app-profile-section-header [title]="'Account info'" (edit)="onEditClick()"></app-profile-section-header>
+
+<div *ngrxLet="userInfo$ as userInfo" class="container">
+  <div [formGroup]="form" class="d__flex d__flex--items-center">
+    <app-profile-photo (updatePhoto)="onUpdatePhoto($event)" class="m__right--20" [img]="photo" [isEdit]="isEdit"></app-profile-photo>
+
+    <div class="name m__left--60 d__flex d__flex--direction-column">
+      <span class="text text__xxlg text__color--3">{{ userInfo.firstName }}</span>
+      <span class="text text__xxlg text__color--3">{{ userInfo.lastName }}</span>
+    </div>
+
+    <div class="form m__left--auto text__color--3 d__flex d__flex--direction-column">
+      <div class="d__flex d__flex--items-center">
+        <i class="profile-yellow m__right--5"></i>
+        <span class="text text__fw--700 text__md text__uppercase m__right--10">User id</span>
+        <app-input formControlName="userId" [disabled]="!isEdit" placeholder="User id" class="light"></app-input>
+      </div>
+
+      <div class="d__flex d__flex--items-center m__top--25">
+        <i class="email email-yellow m__right--5"></i>
+        <span class="text text__fw--700 text__md text__uppercase m__right--10">Email</span>
+        <app-input formControlName="email" [disabled]="!isEdit" placeholder="Email" class="light"></app-input>
+      </div>
+
+      <div class="d__flex d__flex--items-center m__top--25">
+        <i class="user user-yellow m__right--5"></i>
+        <span class="text text__fw--700 text__md text__uppercase m__right--10">Name</span>
+        <app-input formControlName="firstName" [disabled]="!isEdit" placeholder="Name" class="light"></app-input>
+      </div>
+
+      <div class="d__flex d__flex--items-center m__top--25">
+        <i class="user user-yellow m__right--5"></i>
+        <span class="text text__fw--700 text__md text__uppercase m__right--10">Surname</span>
+        <app-input formControlName="lastName" [disabled]="!isEdit" placeholder="Surname" class="light"></app-input>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isEdit" class="text__right m__top--30">
+    <app-button (buttonClick)="onCancel()" type="transparent" text="cancel"></app-button>
+    <app-button (buttonClick)="onSave()" text="save"></app-button>
+  </div>
+
+</div>
+
+

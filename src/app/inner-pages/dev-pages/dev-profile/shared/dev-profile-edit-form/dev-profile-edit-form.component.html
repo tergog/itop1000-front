@@ -1,11 +1,11 @@
-<div [formGroup]="form">
+<div class="container" [formGroup]="form">
     <!-- categories and skills -->
   <div class="d__flex d__flex--direction-column p__20">
-    <span class="text text__title text__color--1">
+    <span class="text text__title text__color--3">
       Categories
     </span>
       <app-drop-down-list [isEdit]="isEdit" [allData]="allCategories$ | ngrxPush" formControlName="categories" [placeholder]="'Add Categories...'"></app-drop-down-list>
-    <span class="text text__title text__color--1 m__top--20">
+    <span class="text text__title text__color--3 m__top--20">
       Skills
     </span>
       <app-drop-down-list [isEdit]="isEdit" [allData]="allSkills$ | ngrxPush" formControlName="skills" [placeholder]="'Add Skills...'"></app-drop-down-list>

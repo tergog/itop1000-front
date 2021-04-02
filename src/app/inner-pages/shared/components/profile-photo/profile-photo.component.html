@@ -1,0 +1,14 @@
+<div class="container d__flex d__flex--items-center d__flex--justify-center">
+  <img src="{{ img ? img : 'assets/img/default-profile-photo.png' }}" alt="">
+</div>
+
+<div *ngIf="isEdit && !img" (click)="onAddPhoto()" class="img-btn add d__flex d__flex--items-center d__flex--justify-center cursor__pointer">
+  <i class="plus-black"></i>
+</div>
+
+<div *ngIf="isEdit && img" (click)="onEditPhoto()" class="img-btn edit d__flex d__flex--items-center d__flex--justify-center cursor__pointer">
+</div>
+
+<div *ngIf="isEdit && img" (click)="onDelete()" class="img-btn remove d__flex d__flex--items-center d__flex--justify-center cursor__pointer">
+  <i class="delete-black"></i>
+</div>

@@ -1,41 +1,79 @@
-<ul>
-  <li class="d__flex"
-      [class.active]="activeSection === ClientProfileSections.ContactInfo"
-      (click)="onSectionCLick(ClientProfileSections.ContactInfo)"
+<div class="btn w__100per m__top--50 active d__flex d__flex--items-center d__flex--justify-center">
+  <i [ngClass]="selectedSection?.icon"  class="m__right--10"></i>
+  <span class="text text__lg text__color--9 text__fw--600">{{ selectedSection?.title }}</span>
+</div>
+
+<div class="container w__100per d__flex d__flex--direction-column">
+  <div *ngIf="activeSection !== ClientProfileSections.ContactInfo" class="d__flex cursor__pointer m__top--30"
+      (click)="onSectionCLick(ClientProfileSections.ContactInfo, 'Contact info', 'contact-info')"
   >
     <i class="contact-info m__right--10"></i>
-    <span class="text text__lg">Contact info</span>
-  </li>
+    <span class="text text__lg text__color--3">Contact info</span>
+  </div>
 
-  <li class="d__flex"
-      [class.active]="activeSection === ClientProfileSections.Billings"
-      (click)="onSectionCLick(ClientProfileSections.Billings)"
+  <div *ngIf="activeSection !== ClientProfileSections.Billings" class="d__flex cursor__pointer m__top--30"
+      (click)="onSectionCLick(ClientProfileSections.Billings, 'Billings', 'payments')"
   >
     <i class="payments m__right--10"></i>
-    <span class="text text__lg text__color--1">Billings</span>
-  </li>
+    <span class="text text__lg text__color--3">Billings</span>
+  </div>
 
-  <li class="d__flex"
-      [class.active]="activeSection === ClientProfileSections.PostedJobs"
-      (click)="onSectionCLick(ClientProfileSections.PostedJobs)"
+  <div *ngIf="activeSection !== ClientProfileSections.PostedJobs" class="d__flex cursor__pointer m__top--30"
+      (click)="onSectionCLick(ClientProfileSections.PostedJobs, 'Posted Jobs', 'categories')"
   >
     <i class="categories m__right--10"></i>
-    <span class="text text__lg text__color--1">Posted Jobs</span>
-  </li>
+    <span class="text text__lg text__color--3">Posted Jobs</span>
+  </div>
 
-  <li class="d__flex"
-      [class.active]="activeSection === ClientProfileSections.Payments"
-      (click)="onSectionCLick(ClientProfileSections.Payments)"
+  <div *ngIf="activeSection !== ClientProfileSections.Payments" class="d__flex cursor__pointer m__top--30"
+      (click)="onSectionCLick(ClientProfileSections.Payments, 'Payments', 'payments')"
   >
     <i class="payments m__right--10"></i>
-    <span class="text text__lg text__color--1">Payments</span>
-  </li>
+    <span class="text text__lg text__color--3">Payments</span>
+  </div>
 
-  <li class="d__flex"
-      [class.active]="activeSection === ClientProfileSections.PasswordAndSecurity"
-      (click)="onSectionCLick(ClientProfileSections.PasswordAndSecurity)"
+  <div *ngIf="activeSection !== ClientProfileSections.PasswordAndSecurity" class="d__flex cursor__pointer m__top--30"
+      (click)="onSectionCLick(ClientProfileSections.PasswordAndSecurity, 'Password & Security', 'security')"
   >
     <i class="security m__right--10"></i>
-    <span class="text text__lg text__color--1">Password & Security</span>
-  </li>
-</ul>
+    <span class="text text__lg text__color--3">Password & Security</span>
+  </div>
+</div>
+
+<div class="line d__flex d__flex--items-center d__flex--direction-column d__flex--justify-between">
+  <div class="light-point d__flex d__flex--items-center">
+    <div class="inner-point"></div>
+  </div>
+
+  <div class="light-point d__flex d__flex--items-center">
+    <div class="inner-point"></div>
+  </div>
+
+  <div class="light-point d__flex d__flex--items-center">
+    <div class="inner-point"></div>
+  </div>
+
+  <div class="light-point d__flex d__flex--items-center">
+    <div class="inner-point"></div>
+  </div>
+
+  <div class="light-point d__flex d__flex--items-center">
+    <div class="inner-point"></div>
+  </div>
+
+  <div class="light-point d__flex d__flex--items-center">
+    <div class="inner-point"></div>
+  </div>
+
+  <div class="light-point d__flex d__flex--items-center">
+    <div class="inner-point"></div>
+  </div>
+
+  <div class="light-point d__flex d__flex--items-center">
+    <div class="inner-point"></div>
+  </div>
+
+  <div class="light-point d__flex d__flex--items-center">
+    <div class="inner-point"></div>
+  </div>
+</div>

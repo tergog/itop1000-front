@@ -1,0 +1,47 @@
+@import "src/assets/scss/variables";
+
+:host {
+  display: block;
+  position: absolute;
+}
+
+.container {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  background: $bg-color-dark;
+  box-shadow: 0px 2px 3px rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  overflow: hidden;
+  img {
+    width: 100%;
+  }
+}
+
+.img-btn {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: 5px;
+  top: 0;
+  border-radius: 50%;
+
+}
+
+.add {
+  background-color: $color-5;
+}
+
+.edit {
+  background-color: $color-3;
+}
+
+.remove {
+  bottom: 0;
+  background-color: $color-2;
+  top: auto;
+
+  &:hover {
+    background-color: $color-2-hover;
+  }
+}

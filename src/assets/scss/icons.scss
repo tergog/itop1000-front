@@ -39,6 +39,13 @@
   }
 }
 
+.delete-black {
+  width: 18px;
+  height: 18px;
+  background: url(~assets/icons/delete-black.svg);
+  background-size: contain;
+}
+
 .plus {
   width: 37px;
   height: 37px;
@@ -46,9 +53,16 @@
   background: url(~assets/icons/plus.svg) no-repeat $color-1 center center;
 }
 
+.plus-black {
+  width: 14px;
+  height: 14px;
+  background: url(~assets/icons/plus-black.svg);
+  background-size: contain;
+}
+
 .close {
-  min-width: 15px;
-  height: 15px;
+  min-width: 10px;
+  height: 10px;
   background: url(~assets/icons/close.svg);
   background-size: contain;
 }
@@ -137,19 +151,20 @@
   background-size: contain;
 }
 
-.user {
-  width: 15px;
-  height: 15px;
-  background: url(~assets/icons/user.svg);
-}
+
 
 .user {
   width: 15px;
   height: 15px;
   background: url(~assets/icons/user.svg);
+  background-size: contain;
 
   &-gray {
     background: url(~assets/icons/user-gray.svg);
+  }
+
+  &-yellow {
+    background: url(~assets/icons/user-yellow.svg);
   }
 }
 
@@ -163,9 +178,14 @@
   width: 15px;
   height: 15px;
   background: url(~assets/icons/email.svg);
+  background-size: contain;
 
   &-gray {
     background: url(~assets/icons/email-gray.svg);
+  }
+
+  &-yellow {
+    background: url(~assets/icons/email-yellow.svg);
   }
 }
 
@@ -175,6 +195,20 @@
   background: url(~assets/icons/email-popup.svg);
 }
 
+.earth {
+  width: 15px;
+  height: 15px;
+  background: url(~assets/icons/earth.svg);
+  background-size: contain;
+}
+
+.address {
+  width: 15px;
+  height: 15px;
+  background: url(~assets/icons/address.svg);
+  background-size: contain;
+}
+
 .search {
   width: 15px;
   height: 15px;
@@ -182,12 +216,17 @@
 }
 
 .phone {
-  width: 15px;
-  height: 15px;
+  min-width: 11px;
+  height: 11px;
   background: url(~assets/icons/phone.svg);
+  background-size: contain;
 
   &-gray {
     background-image: url(~assets/icons/phone-gray.svg);
+  }
+
+  &-yellow {
+    background-image: url(~assets/icons/phone-yellow.svg);
   }
 }
 
@@ -249,42 +288,98 @@
 }
 
 .contact-info {
-  width: 15px;
+  min-width: 15px;
   height: 15px;
-  opacity: 0.25;
   background-image: url(~assets/icons/contact-info.svg);
+  background-size: contain;
 
   &-gray {
     opacity: 1;
     background-image: url(~assets/icons/contact-info-gray.svg);
+  }
+
+  &-yellow {
+    background-image: url(~assets/icons/contact-info-yellow.svg);
   }
 }
 
 .settings {
   width: 15px;
   height: 15px;
-  opacity: 0.25;
   background-image: url(~assets/icons/settings.svg);
+}
+
+.approved-projects {
+  width: 15px;
+  height: 11px;
+  background-image: url(~assets/icons/approved-projects.svg);
 }
 
 .payments {
   width: 15px;
   height: 11px;
-  opacity: 0.25;
   background-image: url(~assets/icons/payments.svg);
+}
+
+.categories-and-skills {
+  width: 15px;
+  height: 9px;
+  background-image: url(~assets/icons/categories-and-skills.svg);
+}
+
+.contracts {
+  width: 15px;
+  height: 15px;
+  background-image: url(~assets/icons/contracts.svg);
+}
+
+.education {
+  width: 15px;
+  height: 15px;
+  background-image: url(~assets/icons/education.svg);
+}
+
+.employment {
+  width: 13px;
+  height: 15px;
+  background-image: url(~assets/icons/employment.svg);
+}
+
+.profile {
+  width: 15px;
+  height: 15px;
+  background-image: url(~assets/icons/profile.svg);
+  background-size: contain;
+}
+
+.profile-yellow {
+  width: 15px;
+  height: 15px;
+  background-image: url(~assets/icons/profile-yellow.svg);
+  background-size: contain;
+}
+
+.hourly-rate {
+  width: 15px;
+  height: 15px;
+  background-image: url(~assets/icons/hourly-rate.svg);
+}
+
+.languages {
+  width: 15px;
+  height: 15px;
+  background-image: url(~assets/icons/languages.svg);
 }
 
 .security {
   width: 11px;
   height: 15px;
-  opacity: 0.25;
   background-image: url(~assets/icons/security.svg);
 }
 
 .categories {
   width: 15px;
   height: 15px;
-  opacity: 0.25;
   background-image: url(~assets/icons/categories.svg);
 }
 
@@ -306,6 +401,24 @@
   background-image: url(~assets/icons/education-light.svg);
 }
 
+.star {
+  width: 15px;
+  height: 14px;
+  background-image: url(~assets/icons/star.svg);
+}
+
+.work-experience {
+  width: 15px;
+  height: 15px;
+  background-image: url(~assets/icons/work-experience.svg);
+}
+
+.balance {
+  width: 15px;
+  height: 15px;
+  background-image: url(~assets/icons/balance.svg);
+}
+
 .soft-skills-light {
   width: 15px;
   height: 15px;
@@ -324,6 +437,12 @@
   background-image: url(~assets/icons/certificates-light.svg);
 }
 
+.soft-skills {
+  width: 15px;
+  height: 15px;
+  background-image: url(~assets/icons/soft-skills.svg);
+}
+
 .reviews {
   width: 15px;
   height: 15px;
@@ -331,12 +450,17 @@
 }
 
 .location {
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
   background-image: url(~assets/icons/location.svg);
+  background-size: contain;
 
   &-gray {
     background-image: url(~assets/icons/location-gray.svg);
+  }
+
+  &-active {
+    background-image: url(~assets/icons/location-active.svg);
   }
 }
 
@@ -430,6 +554,54 @@
   .contact-info {
     opacity: 1;
     background-image: url(~assets/icons/contact-info-active.svg);
+  }
+
+  .approved-projects {
+    background-image: url(~assets/icons/approved-projects-active.svg);
+  }
+
+  .balance {
+    background-image: url(~assets/icons/balance-active.svg);
+  }
+
+  .categories-and-skills {
+    background-image: url(~assets/icons/categories-and-skills-active.svg);
+  }
+
+  .contracts {
+    background-image: url(~assets/icons/contracts-active.svg);
+  }
+
+  .education {
+    background-image: url(~assets/icons/education-active.svg);
+  }
+
+  .employment {
+    background-image: url(~assets/icons/employment-active.svg);
+  }
+
+  .hourly-rate {
+    background-image: url(~assets/icons/hourly-rate-active.svg);
+  }
+
+  .languages {
+    background-image: url(~assets/icons/languages-active.svg);
+  }
+
+  .profile {
+    background-image: url(~assets/icons/profile-active.svg);
+  }
+
+  .soft-skills {
+    background-image: url(~assets/icons/soft-skills-active.svg);
+  }
+
+  .star {
+    background-image: url(~assets/icons/star-active.svg);
+  }
+
+  .work-experience {
+    background-image: url(~assets/icons/work-experience-active.svg);
   }
 
   .settings {

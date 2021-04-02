@@ -3,24 +3,33 @@
   <i class="close cursor__pointer" mat-dialog-close></i>
 </div>
 
-<div class="p__20">
+<div class="container p__20">
 
-  <div class="d__flex">
+  <div class="w__100per d__flex d__flex--items-center">
     <ng-container *ngIf="imageSrc">
       <img [src]="croppedImage" alt="Profile image" />
     </ng-container>
 
-    <image-cropper
-      [imageChangedEvent]="imageChangedEvent"
-      [maintainAspectRatio]="inputData.destination !== 'ProjectImage'"
-      [roundCropper]="inputData.destination !== 'ProjectImage'"
-      [imageFile]=""
-      format="png"
-      (imageCropped)="imageCropped($event)"
-      (imageLoaded)="imageLoaded()"
-      (cropperReady)="cropperReady()"
-      (loadImageFailed)="loadImageFailed()"
-    ></image-cropper>
+    <div *ngIf="!inputData?.img && !imageChangedEvent" class="default-image d__flex d__flex--items-center d__flex--justify-center m__right--50">
+      <img src="assets/img/default-profile-photo.png" alt="">
+    </div>
+
+
+    <ng-container *ngIf="inputData?.img || imageChangedEvent">
+      <image-cropper
+        class="m__right--50"
+        [imageChangedEvent]="imageChangedEvent"
+        [maintainAspectRatio]="inputData.destination !== 'ProjectImage'"
+        [roundCropper]="inputData.destination !== 'ProjectImage'"
+        [imageURL]="inputData?.img"
+        format="png"
+        (imageCropped)="imageCropped($event)"
+        (imageLoaded)="imageLoaded()"
+        (cropperReady)="cropperReady()"
+        (loadImageFailed)="loadImageFailed()"
+      ></image-cropper>
+    </ng-container>
+
 
     <input
       class="d__none"
@@ -28,11 +37,13 @@
       (change)="fileChangeEvent($event);"
       #fileInput>
 
-    <app-button [type]="'secondary'" [text]="'Select ' + inputData.destination + ' Image'" (buttonClick)="fileInput.click()"></app-button>
-    <app-button [type]="'secondary'" [text]="'Delete Image'" (buttonClick)="deleteImage()"></app-button>
+    <div class="d__flex d__flex--items-center d__flex--direction-column">
+      <span class="text text__fw--300 text__sm text__color--4">Drag a frame to adjust portrait.</span>
+      <app-button class="m__top--20" [type]="'yellow'" [text]="'Select ' + inputData.destination + ' Image'" (buttonClick)="fileInput.click()"></app-button>
+    </div>
   </div>
 
-  <div class="text__center m__top--50">
+  <div class="buttons text__center m__top--50">
     <app-button [type]="'transparent'" [text]="'Cancel'" mat-dialog-close></app-button>
     <app-button [text]="'Save'" (buttonClick)="closeDialog()"></app-button>
   </div>

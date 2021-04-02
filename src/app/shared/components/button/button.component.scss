@@ -50,6 +50,27 @@
         color: $text-color-2;
       }
     }
+
+    &.yellow {
+      width: 300px;
+      border: 1px solid $color-5;
+      background: transparent;
+      box-shadow: none;
+      padding: 15px 30px;
+
+      &:hover {
+        background-color: $color-5;
+
+        span {
+          color: $color-1;
+        }
+      }
+
+      span {
+        color: $color-5;
+      }
+
+    }
   }
 }
 

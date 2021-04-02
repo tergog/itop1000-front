@@ -1,0 +1,56 @@
+<app-profile-section-header [title]="'Location info'" (edit)="onEditClick()"></app-profile-section-header>
+
+<div *ngrxLet="userInfo$ as userInfo" class="container">
+  <div [formGroup]="form" class="form text__color--3 d__flex d__flex--items-center d__flex--wrap">
+    <div class="d__inline-flex d__flex--justify-between d__flex--items-center m__right--30 m__bottom--30"
+         (clickOutside)="hideTimezone()">
+      <i class="earth m__right--5"></i>
+      <span class="text text__sm text__bold text__uppercase m__right--10">TIME ZONE</span>
+
+      <app-input class="timezone-input light w__350"
+                 [disabled]="!isEdit"
+                 (onFocusField)="showTimezone()"
+                 [type]="'light'"
+                 formControlName="timezone"
+                 [placeholder]="'Time Zone'"
+                 [value]="form.get('timezone').value">
+      </app-input>
+
+      <app-timezone *ngIf="isTimezoneShown"
+                    (ngModelChange)="hideTimezone()"
+                    formControlName="timezone">
+      </app-timezone>
+    </div>
+
+    <div class="d__inline-flex d__flex--justify-between d__flex--items-center m__right--30 m__bottom--30">
+      <i class="address m__right--5"></i>
+      <span class="text text__sm text__bold text__uppercase m__right--10">ADDRESS</span>
+
+      <app-address type="light"
+                   [disabled]="!isEdit"
+                   class="w__350 light"
+                   formControlName="address">
+      </app-address>
+    </div>
+
+    <div class="w__320 d__inline-flex d__flex--justify-between d__flex--items-center m__right--30 m__bottom--30">
+      <i class="phone phone-yellow m__right--5"></i>
+      <span class="text text__sm text__bold text__uppercase m__right--10">PHONE</span>
+
+      <app-phone-regex
+        class="w__350 light"
+        formControlName="phone"
+        [placeholder]="'+1 (000) 000 00 00'"
+        [disabled]="!isEdit"
+        [type]="'light'">
+      </app-phone-regex>
+
+    </div>
+  </div>
+
+  <div *ngIf="isEdit" class="text__right">
+    <app-button (buttonClick)="onCancel()" type="transparent" text="cancel"></app-button>
+    <app-button (buttonClick)="onSave()" text="save"></app-button>
+  </div>
+
+</div>

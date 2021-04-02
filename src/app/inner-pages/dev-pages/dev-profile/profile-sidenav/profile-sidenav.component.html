@@ -1,73 +1,107 @@
-<ul>
-  <li class="d__flex"
-      [class.active]="activeSection === DevProfileSections.ContactInfo"
-      (click)="onSectionCLick(DevProfileSections.ContactInfo)"
+<div class="btn w__100per m__top--50 active d__flex d__flex--items-center d__flex--justify-center">
+  <i [ngClass]="selectedSection.icon"  class="m__right--10"></i>
+  <span class="text text__lg text__color--9 text__fw--600">{{ selectedSection.title }}</span>
+</div>
+
+<div class="container w__100per d__flex d__flex--direction-column">
+  <div *ngIf="activeSection !== DevProfileSections.AccountInfo" class="d__flex cursor__pointer m__top--30"
+       (click)="onSectionCLick(DevProfileSections.AccountInfo, 'Account info', 'contact-info')"
   >
     <i class="contact-info m__right--10"></i>
-    <span class="text text__lg">Contact info</span>
-  </li>
+    <span class="text text__lg text__color--3">Account info</span>
+  </div>
 
-  <li class="d__flex"
-      [class.active]="activeSection === DevProfileSections.ProfileSettings"
-      (click)="onSectionCLick(DevProfileSections.ProfileSettings)"
+  <div *ngIf="activeSection !== DevProfileSections.LocationInfo" class="d__flex cursor__pointer m__top--30"
+       (click)="onSectionCLick(DevProfileSections.LocationInfo, 'Location info', 'location location-active')"
   >
-    <i class="settings m__right--10"></i>
-    <span class="text text__lg text__color--1">Profile settings</span>
-  </li>
+    <i class="location m__right--10"></i>
+    <span class="text text__lg text__color--3">Location info</span>
+  </div>
 
-  <li class="d__flex"
-      [class.active]="activeSection === DevProfileSections.CategoriesAndSkills"
-      (click)="onSectionCLick(DevProfileSections.CategoriesAndSkills)"
+  <div *ngIf="activeSection !== DevProfileSections.CategoriesAndSkills" class="d__flex m__top--30 cursor__pointer"
+       (click)="onSectionCLick(DevProfileSections.CategoriesAndSkills, 'Categories & Skills', 'categories-and-skills')"
   >
-    <i class="categories m__right--10"></i>
-    <span class="text text__lg text__color--1">Categories & Skills</span>
-  </li>
+    <i class="categories-and-skills m__right--10"></i>
+    <span class="text text__lg text__color--3">Categories & Skills</span>
+  </div>
 
-  <li class="d__flex"
-      [class.active]="activeSection === DevProfileSections.WorkExperience"
-      (click)="onSectionCLick(DevProfileSections.WorkExperience)"
+  <div *ngIf="activeSection !== DevProfileSections.WorkExperience" class="d__flex m__top--30 cursor__pointer"
+       (click)="onSectionCLick(DevProfileSections.WorkExperience, 'Work Experience', 'work-experience')"
   >
-    <i class="categories m__right--10"></i>
-    <span class="text text__lg text__color--1">Work Experience</span>
-  </li>
+    <i class="work-experience m__right--10"></i>
+    <span class="text text__lg text__color--3">Work Experience</span>
+  </div>
 
-  <li class="d__flex"
-      [class.active]="activeSection === DevProfileSections.WantToLearn"
-      (click)="onSectionCLick(DevProfileSections.WantToLearn)"
+  <div *ngIf="activeSection !== DevProfileSections.WantToLearn" class="d__flex m__top--30 cursor__pointer"
+       (click)="onSectionCLick(DevProfileSections.WantToLearn, 'Want to Learn', 'categories')"
   >
     <i class="categories m__right--10"></i>
-    <span class="text text__lg text__color--1">Want To Learn</span>
-  </li>
+    <span class="text text__lg text__color--3">Want To Learn</span>
+  </div>
 
-  <li class="d__flex"
-      [class.active]="activeSection === DevProfileSections.Certificates"
-      (click)="onSectionCLick(DevProfileSections.Certificates)"
+  <div *ngIf="activeSection !== DevProfileSections.Certificates" class="d__flex m__top--30 cursor__pointer"
+       (click)="onSectionCLick(DevProfileSections.Certificates, 'Certificates', 'categories')"
   >
     <i class="categories m__right--10"></i>
-    <span class="text text__lg text__color--1">Certificates</span>
-  </li>
+    <span class="text text__lg text__color--3">Certificates</span>
+  </div>
 
-  <li class="d__flex"
-      [class.active]="activeSection === DevProfileSections.ActiveProjects"
-      (click)="onSectionCLick(DevProfileSections.ActiveProjects)"
+  <div *ngIf="activeSection !== DevProfileSections.ActiveProjects" class="d__flex m__top--30 cursor__pointer"
+       (click)="onSectionCLick(DevProfileSections.ActiveProjects, 'Active Projects', 'categories')"
   >
     <i class="categories m__right--10"></i>
-    <span class="text text__lg text__color--1">Active Projects</span>
-  </li>
+    <span class="text text__lg text__color--3">Active Projects</span>
+  </div>
 
-  <li class="d__flex d__flex--items-center"
-      [class.active]="activeSection === DevProfileSections.Balance"
-      (click)="onSectionCLick(DevProfileSections.Balance)"
+  <div *ngIf="activeSection !== DevProfileSections.Balance" class="d__flex d__flex--items-center m__top--30 cursor__pointer"
+       (click)="onSectionCLick(DevProfileSections.Balance, 'Balance', 'payments')"
   >
     <i class="payments m__right--10"></i>
-    <span class="text text__lg text__color--1">Balance</span>
-  </li>
+    <span class="text text__lg text__color--3">Balance</span>
+  </div>
 
-  <li class="d__flex"
-      [class.active]="activeSection === DevProfileSections.PasswordAndSecurity"
-      (click)="onSectionCLick(DevProfileSections.PasswordAndSecurity)"
+  <div *ngIf="activeSection !== DevProfileSections.PasswordAndSecurity" class="d__flex m__top--30 cursor__pointer"
+       (click)="onSectionCLick(DevProfileSections.PasswordAndSecurity, 'Password & Security', 'security')"
   >
     <i class="security m__right--10"></i>
-    <span class="text text__lg text__color--1">Password & Security</span>
-  </li>
-</ul>
+    <span class="text text__lg text__color--3">Password & Security</span>
+  </div>
+</div>
+
+<div class="line d__flex d__flex--items-center d__flex--direction-column d__flex--justify-between">
+  <div class="light-point d__flex d__flex--items-center">
+    <div class="inner-point"></div>
+  </div>
+
+  <div class="light-point d__flex d__flex--items-center">
+    <div class="inner-point"></div>
+  </div>
+
+  <div class="light-point d__flex d__flex--items-center">
+    <div class="inner-point"></div>
+  </div>
+
+  <div class="light-point d__flex d__flex--items-center">
+    <div class="inner-point"></div>
+  </div>
+
+  <div class="light-point d__flex d__flex--items-center">
+    <div class="inner-point"></div>
+  </div>
+
+  <div class="light-point d__flex d__flex--items-center">
+    <div class="inner-point"></div>
+  </div>
+
+  <div class="light-point d__flex d__flex--items-center">
+    <div class="inner-point"></div>
+  </div>
+
+  <div class="light-point d__flex d__flex--items-center">
+    <div class="inner-point"></div>
+  </div>
+
+  <div class="light-point d__flex d__flex--items-center">
+    <div class="inner-point"></div>
+  </div>
+</div>

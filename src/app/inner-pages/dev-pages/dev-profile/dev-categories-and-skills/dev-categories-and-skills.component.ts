@@ -4,6 +4,7 @@ import { first } from 'rxjs/operators';
 
 import { EDevProfileSectionNames } from 'app/inner-pages/dev-pages/dev-profile/shared/enums/devProfileSectionNames';
 import * as fromCore from 'app/core/reducers';
+import { getUserInfo } from 'app/core/reducers';
 
 @Component({
   selector: 'app-dev-categories-and-skills',
@@ -12,6 +13,7 @@ import * as fromCore from 'app/core/reducers';
 })
 export class DevCategoriesAndSkillsComponent implements OnInit, OnDestroy {
 
+  public userInfo$ = this.store.select(getUserInfo);
   public isEdit: boolean;
   public DevProfileSectionNames = EDevProfileSectionNames;
 
@@ -33,4 +35,8 @@ export class DevCategoriesAndSkillsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {}
+
+  editToggle(): void {
+    this.isEdit = !this.isEdit;
+  }
 }

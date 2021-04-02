@@ -1,0 +1,9 @@
+<div class="section m__top--10" *ngFor="let skill of skills">
+  <span class="text text__md text__fw--700 text__color--3">{{ skill.title }}</span>
+  <div class="p__15">
+    <mat-chip-list>
+      <mat-chip *ngFor="let value of skill.value">{{ value.name }}</mat-chip>
+    </mat-chip-list>
+  </div>
+</div>
+

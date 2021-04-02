@@ -1,0 +1,23 @@
+@import '~assets/scss/variables';
+
+.container {
+  background: $bg-profile;
+  border-bottom: 1px solid $color-3;
+  padding: 40px;
+}
+
+app-input {
+  width: 350px;
+}
+
+.name {
+  margin-left: 160px;
+}
+
+.form {
+  align-items: flex-end;
+
+  & > div {
+    width: fit-content;
+  }
+}
