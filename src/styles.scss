@@ -292,12 +292,15 @@ a:hover {
   color: $text-color-5 !important;
 }
 
-.conteiner-alert{
+.conteiner-alert {
   line-height: 25px;
   height: 25px;
   padding-left: 15px;
   color: $text-color-2;
   font-weight: 400;
+  @media (max-width: 576px) {
+    height: 50px;
+  }
 }
 
 html, body { height: 100%; }
