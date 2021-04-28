@@ -10,22 +10,21 @@ import { AuthContainerComponent } from 'app/auth/components/auth-container/auth-
 import { VerifyEmailComponent } from 'app/auth/components/verify-email/verify-email.component';
 import { TermsPopupComponent } from './components/popups/terms-popup/terms-popup.component';
 import { EmailPopupComponent } from './components/popups/email-popup/email-popup.component';
-import { EmailConfirmationComponent } from '../inner-pages/shared/email-confirmation/email-confirmation.component';
+
 
 const routes: Routes = [
   { path: 'login', component: LogInComponent },
   { path: 'signup', component: SignUpComponent },
-  // { path: 'signup', component: EmailConfirmationComponent }, // For test
 ];
 
 @NgModule({
-  declarations: [LogInComponent, SignUpComponent, AuthContainerComponent, VerifyEmailComponent, TermsPopupComponent, EmailPopupComponent, EmailConfirmationComponent],
+  declarations: [LogInComponent, SignUpComponent, AuthContainerComponent, VerifyEmailComponent, TermsPopupComponent, EmailPopupComponent],
     imports: [
-        FormsModule,
-        CommonModule,
-        ReactiveFormsModule,
-        RouterModule.forChild(routes),
-        SharedModule
+      FormsModule,
+      CommonModule,
+      ReactiveFormsModule,
+      RouterModule.forChild(routes),
+      SharedModule,
     ]
 })
 export class AuthModule { }

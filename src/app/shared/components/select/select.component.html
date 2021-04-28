@@ -3,18 +3,23 @@
   <img class="m__left--auto" src="assets/icons/arrow.svg" alt="arrow">
 </div>
 
+<app-alert-container>
+  <small *ngIf="overlayUntouched">Please, enter required data</small>
+</app-alert-container>
+
 <ng-template
   cdkConnectedOverlay
+  (attach)="touchedOverlay()"
+  (overlayOutsideClick)="closeOverlay()"
   [cdkConnectedOverlayOrigin]="origin"
   [cdkConnectedOverlayOpen]="isExpand"
   [cdkConnectedOverlayWidth]="'594px'"
 >
   <div class="options w__100per">
     <div class="d__flex d__flex--direction-column d__flex--items-center" *ngFor="let item of options; let last = last">
-      <span (click)="select(item)" class="d__block m__top--10 cursor__pointer" >{{ item }}</span>
+      <span (click)="select(item)" class="d__block m__top--10 cursor__pointer" [class.active-item]="item === value">{{ item }}</span>
       <div class="border m__top--10" *ngIf="!last"></div>
     </div>
   </div>
 </ng-template>
-
 

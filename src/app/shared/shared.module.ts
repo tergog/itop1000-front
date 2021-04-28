@@ -25,6 +25,7 @@ import { PhoneRegexComponent } from './components/phone-regex/phone-regex.compon
 import { ResumeService } from './services/resume.service';
 import { SelectComponent } from './components/select/select.component';
 import { DropDownListComponent } from './components/drop-down-list/drop-down-list.component';
+import { AlertContainerComponent } from 'app/auth/components/alert-container/alert-container.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { DropDownListComponent } from './components/drop-down-list/drop-down-lis
     AddressComponent,
     PhoneRegexComponent,
     SelectComponent,
-    DropDownListComponent
+    DropDownListComponent,
+    AlertContainerComponent
   ],
   exports: [
     InputComponent,
@@ -59,7 +61,9 @@ import { DropDownListComponent } from './components/drop-down-list/drop-down-lis
     AddressComponent,
     PhoneRegexComponent,
     SelectComponent,
-    DropDownListComponent
+    DropDownListComponent,
+    AlertContainerComponent,
+    ReactiveComponentModule
   ],
   imports: [
     ReactiveComponentModule,

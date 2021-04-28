@@ -1,62 +1,42 @@
 @import '~assets/scss/variables';
 
-.element__container {
-display: flex;
-flex-direction: column;
-}
-
-.text-align--centre {
-  text-align: center;
-}
-
 .horizon-line {
   border: 1px solid $text-color-6;
-  width: 100%;
 }
 
 .bottom-notify {
-  font-family: $font-2;
-  color: $color-3;
   font-style: normal;
-  font-weight: 300;
   line-height: 24px;
   letter-spacing: 0em;
-  text-align: center;
-  font-size: 12px;
 }
 
 .p {
-  text-align: center;
+
   letter-spacing: 0em;
   font-family: Work Sans;
   font-style: normal;
 
   &__confirm {
     font-size: 18px;
-    font-weight: 300;
     line-height: 34px;
-    color: $color-6;
   }
 
   &__name {
     font-size: 24px;
     font-weight: 400;
     line-height: 34px;
-    color: $color-2;
+
   }
 
   &__text {
     font-size: 14px;
-    font-weight: 300;
     line-height: 24px;
-    color: $color-3;
+
   }
 
   &__link {
     font-size: 14px;
-    font-weight: 300;
     line-height: 24px;
-    color: $color-5;
     text-decoration: none;
 
     &:hover {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -50,6 +50,11 @@ export class SignUpComponent {
     private router: Router,
     public dialog: MatDialog
   ) { }
+
+  ngOnInit() {
+    this.role = EUserRole.Dev;
+    this.initDevForm();
+  }
 
   public passwordHiddenToggle(): void {
     this.isPasswordHidden = !this.isPasswordHidden;
