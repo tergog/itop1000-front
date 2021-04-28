@@ -1,2 +1,11 @@
-<app-auth-container><p>email-notification works!</p></app-auth-container>
+<app-auth-container [backgroundImageSearch]="true">
+  <div class="w__594 d__flex d__flex--direction-column d__flex--items-center">
+     <h2 class="m__top--45 title-notify">
+      check your email
+     </h2>
+     <p class="p__confirm">if you can not find our message, it might be in your <br> spam/junk. The email expires in 24 hous.</p>
+     <app-button (buttonClick)="handleClickButton()" [text]="'RESEND'" [type]="'main'"></app-button>
+     <p class="m__top--25 text-align--centre p__text">For further assistance accessing your account, please <a class="p__link" href="#">contact us</a>.</p>
+  </div>
+</app-auth-container>
 
