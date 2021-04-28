@@ -11,7 +11,6 @@ import { VerifyEmailComponent } from 'app/auth/components/verify-email/verify-em
 import { TermsPopupComponent } from './components/popups/terms-popup/terms-popup.component';
 import { EmailPopupComponent } from './components/popups/email-popup/email-popup.component';
 
-
 const routes: Routes = [
   { path: 'login', component: LogInComponent },
   { path: 'signup', component: SignUpComponent },
