@@ -12,11 +12,9 @@ import { TermsPopupComponent } from './components/popups/terms-popup/terms-popup
 import { EmailPopupComponent } from './components/popups/email-popup/email-popup.component';
 import { EmailNotificationComponent } from 'app/inner-pages/shared/email-notification/email-notification.component';
 
-
 const routes: Routes = [
   { path: 'login', component: LogInComponent },
-  // { path: 'signup', component: SignUpComponent },
-  { path: 'signup', component: EmailNotificationComponent },
+  { path: 'signup', component: SignUpComponent },
 ];
 
 @NgModule({

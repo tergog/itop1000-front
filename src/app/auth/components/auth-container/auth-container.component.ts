@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-auth-container',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./auth-container.component.scss']
 })
 export class AuthContainerComponent implements OnInit {
+  @Input() backgroundImageSearch = false
 
   constructor() { }
 

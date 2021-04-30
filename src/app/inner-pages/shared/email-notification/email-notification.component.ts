@@ -12,4 +12,6 @@ export class EmailNotificationComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  handleClickButton() { }
+
 }
