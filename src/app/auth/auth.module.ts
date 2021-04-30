@@ -10,6 +10,7 @@ import { AuthContainerComponent } from 'app/auth/components/auth-container/auth-
 import { VerifyEmailComponent } from 'app/auth/components/verify-email/verify-email.component';
 import { TermsPopupComponent } from './components/popups/terms-popup/terms-popup.component';
 import { EmailPopupComponent } from './components/popups/email-popup/email-popup.component';
+import { EmailConfirmationComponent } from 'app/inner-pages/shared/email-confirmation/email-confirmation.component';
 
 
 const routes: Routes = [
@@ -18,7 +19,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [LogInComponent, SignUpComponent, AuthContainerComponent, VerifyEmailComponent, TermsPopupComponent, EmailPopupComponent],
+  declarations: [LogInComponent, SignUpComponent, AuthContainerComponent, VerifyEmailComponent, TermsPopupComponent, EmailPopupComponent, EmailConfirmationComponent],
     imports: [
       FormsModule,
       CommonModule,
