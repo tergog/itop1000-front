@@ -62,7 +62,8 @@ import { AlertContainerComponent } from 'app/auth/components/alert-container/ale
     PhoneRegexComponent,
     SelectComponent,
     DropDownListComponent,
-    AlertContainerComponent
+    AlertContainerComponent,
+    ReactiveComponentModule
   ],
   imports: [
     ReactiveComponentModule,

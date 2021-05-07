@@ -10,6 +10,7 @@ import { AuthContainerComponent } from 'app/auth/components/auth-container/auth-
 import { VerifyEmailComponent } from 'app/auth/components/verify-email/verify-email.component';
 import { TermsPopupComponent } from './components/popups/terms-popup/terms-popup.component';
 import { EmailPopupComponent } from './components/popups/email-popup/email-popup.component';
+import { EmailConfirmationComponent } from 'app/inner-pages/shared/email-confirmation/email-confirmation.component';
 import { EmailNotificationComponent } from 'app/inner-pages/shared/email-notification/email-notification.component';
 
 const routes: Routes = [
@@ -18,13 +19,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [LogInComponent, SignUpComponent, AuthContainerComponent, VerifyEmailComponent, TermsPopupComponent, EmailPopupComponent, EmailNotificationComponent],
+  declarations: [LogInComponent, SignUpComponent, AuthContainerComponent, VerifyEmailComponent, TermsPopupComponent, EmailPopupComponent, EmailNotificationComponent, EmailConfirmationComponent],
     imports: [
-        FormsModule,
-        CommonModule,
-        ReactiveFormsModule,
-        RouterModule.forChild(routes),
-        SharedModule
+      FormsModule,
+      CommonModule,
+      ReactiveFormsModule,
+      RouterModule.forChild(routes),
+      SharedModule,
     ]
 })
 export class AuthModule { }
