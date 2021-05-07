@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-
+import { Store } from '@ngrx/store';
 import * as fromCore from 'app/core/reducers';
 import { UserInfo } from 'app/shared/models';
-import { Store } from '@ngrx/store';
-
 
 @Component({
   selector: 'app-email-confirmation',
