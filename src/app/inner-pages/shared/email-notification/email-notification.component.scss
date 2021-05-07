@@ -1,0 +1,7 @@
+@import '~assets/scss/variables';
+
+a {
+  &:hover {
+    text-decoration: underline;
+  }
+}

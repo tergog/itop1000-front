@@ -35,7 +35,6 @@ import { ActiveProjectsComponent } from './components/active-projects/active-pro
 import { BankAccountDialogComponent } from './components/bank-account-dialog/bank-account-dialog.component';
 import { NotificationsPopupComponent } from './components/notifications-popup/notifications-popup.component';
 
-
 @NgModule({
   declarations: [
     ChangePasswordDialogComponent,

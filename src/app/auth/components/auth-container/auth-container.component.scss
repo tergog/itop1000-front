@@ -28,6 +28,11 @@
   background-size: cover;
 }
 
+.background-search {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url(~assets/img/search-w-bg.png) no-repeat;
+  background-size: cover;
+}
+
 .aside {
   flex: 1;
   display: inline-flex;
