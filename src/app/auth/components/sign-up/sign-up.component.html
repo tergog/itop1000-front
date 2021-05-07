@@ -8,38 +8,70 @@
   <div *ngIf="role !== 'Role'" class="w__594">
 
     <ng-container *ngIf="role === userRole.Dev" [formGroup]="form">
-      <div class="m__top--25">
+      <div>
         <span class="text text__sm text__color--3 text__fw--600">Email address</span>
         <app-input formControlName="email" [placeholder]="'email@example.com'" class="m__top--10 transparent"></app-input>
+        <app-alert-container>
+          <small *ngIf="form.get('email').touched && form.get('email').invalid">
+            A mistake in email address, please, check and enter correct email address following the <a class="text__color--3" routerLink="/">Requirements</a>
+          </small>
+        </app-alert-container>
       </div>
 
-      <div class="m__top--25 d__flex d__flex--justify-between">
+      <div class="d__flex d__flex--justify-between">
         <div class="w__280 input__half">
           <span class="text text__sm text__color--3 text__fw--600">First Name</span>
           <app-input formControlName="firstName" [placeholder]="'First Name'" class="m__top--10 h__auto transparent"></app-input>
+          <app-alert-container>
+            <small *ngIf="form.get('firstName').touched && form.get('firstName').invalid">
+              Please, enter required data
+            </small>
+          </app-alert-container>
         </div>
 
         <div class="w__280 m__right--0">
           <span class="text text__sm text__color--3 text__fw--600">Last Name</span>
           <app-input formControlName="lastName" [placeholder]="'Last Name'" class="m__top--10 w_250 h__auto transparent"></app-input>
+          <app-alert-container>
+            <small *ngIf="form.get('lastName').touched && form.get('lastName').invalid">
+              Please, enter required data
+            </small>
+          </app-alert-container>
         </div>
       </div>
-
-      <div class="m__top--25">
+      <div>
         <span class="text text__sm text__color--3 text__fw--600">Password</span>
         <app-input formControlName="password" [placeholder]="'Password'" [isHiddenPassword]="isPasswordHidden" class="m__top--10 transparent">
           <i [class.eye]="!isPasswordHidden" [class.eye-line]="isPasswordHidden" (click)="passwordHiddenToggle()"></i>
         </app-input>
+        <app-alert-container>
+          <div *ngIf="form.get('password').touched && form.get('password').invalid">
+            <small *ngIf="form.get('password').errors.minlength">
+            The password must be more then 8 characters and 6 of them digit.
+            </small>
+            <small *ngIf="form.get('password').errors.required">
+            The password required.
+            </small>
+            <small *ngIf="form.get('password').errors.passwordValidation">
+             Please, enter data due to <a class="text__color--3" routerLink="/">Requirements</a>
+            </small>
+          </div>
+        </app-alert-container>
       </div>
 
-      <div class="m__top--25">
+      <div>
         <span class="text text__sm text__color--3 text__fw--600">Confirm Password</span>
         <app-input formControlName="confirmPassword" [placeholder]="'Confirm Password'" [isHiddenPassword]="isPasswordRepeatHidden" class="m__top--10 transparent">
           <i [class.eye]="!isPasswordRepeatHidden" [class.eye-line]="isPasswordRepeatHidden" (click)="passwordRepeatHiddenToggle()"></i>
         </app-input>
+      <app-alert-container>
+        <small *ngIf="form.get('confirmPassword').touched && form.get('confirmPassword').invalid">
+          The password doesn’t match
+        </small>
+      </app-alert-container>
       </div>
 
-      <div class="m__top--25 d__flex d__flex--items-center">
+      <div class="d__flex d__flex--items-center">
         <app-checkbox class="w__60" formControlName="acceptTerms"></app-checkbox>
         <span class="text text__color--4 text__fw--500 text__md m__right--5">Accept </span>
         <span class="text text__color--5 text__fw--500 text__md cursor__pointer m__right--5" (mouseup)="showDialog(termsData)">Terms and conditions</span>
@@ -53,31 +85,61 @@
     </ng-container>
 
     <ng-container *ngIf="role === userRole.Client" [formGroup]="form">
-      <div class="m__top--25">
+      <div>
         <span class="text text__sm text__color--3 text__fw--600">Email address</span>
-        <app-input formControlName="email" [placeholder]="'email@example.com'" class="m__top--10 transparent"></app-input>
+        <app-input formControlName="email" [placeholder]="'email@example.com'" class="m__top--10 transparent">
+        </app-input>
+        <app-alert-container>
+          <small *ngIf="form.get('email').touched && form.get('email').invalid">
+            A mistake in email address, please, check and enter correct email address following the<a class="text__color--3" routerLink="/">Requirements</a>
+          </small>
+        </app-alert-container>
       </div>
 
-      <div class="m__top--25">
+      <div>
         <span class="text text__sm text__color--3 text__fw--600">Company name</span>
-        <app-input formControlName="companyName" [placeholder]="'Company name'" class="m__top--10 transparent"></app-input>
+        <app-input formControlName="companyName" [placeholder]="'Company name'" class="m__top--10 transparent">
+        </app-input>
+        <app-alert-container>
+          <small *ngIf="form.get('companyName').touched && form.get('companyName').invalid">
+            Please, enter required data
+          </small>
+        </app-alert-container>
       </div>
 
-      <div class="m__top--25">
+      <div>
         <span class="text text__sm text__color--3 text__fw--600">Password</span>
         <app-input formControlName="password" [placeholder]="'Password'" [isHiddenPassword]="isPasswordHidden" class="m__top--10 transparent">
           <i [class.eye]="!isPasswordHidden" [class.eye-line]="isPasswordHidden" (click)="passwordHiddenToggle()"></i>
         </app-input>
+        <app-alert-container>
+          <div class="" *ngIf="form.get('password').touched && form.get('password').invalid">
+            <small *ngIf="form.get('password').errors.minlength">
+               The password must be more then 8 characters and 6 of them digit.
+              </small>
+            <small *ngIf="form.get('password').errors.required">
+               The password required.
+              </small>
+            <small *ngIf="form.get('password').errors.passwordValidation">
+               Please, enter data due to <a class="text__color--3" routerLink="/">Requirements</a>
+            </small>
+          </div>
+        </app-alert-container>
       </div>
 
-      <div class="m__top--25">
+      <div>
         <span class="text text__sm text__color--3 text__fw--600">Confirm Password</span>
         <app-input formControlName="confirmPassword" [placeholder]="'Confirm Password'" [isHiddenPassword]="isPasswordRepeatHidden" class="m__top--10 transparent">
           <i [class.eye]="!isPasswordRepeatHidden" [class.eye-line]="isPasswordRepeatHidden" (click)="passwordRepeatHiddenToggle()"></i>
         </app-input>
+        <app-alert-container>
+          <small *ngIf="form.get('confirmPassword').touched && form.get('confirmPassword').invalid">
+            The password doesn’t match
+          </small>
+        </app-alert-container>
       </div>
 
-      <div class="m__top--25 d__flex d__flex--items-center">
+      <div class="d__flex d__flex--items-center">
         <app-checkbox class="w__60" formControlName="acceptTerms"></app-checkbox>
         <span class="text text__color--4 text__fw--500 text__md m__right--5">Accept </span>
         <span class="text text__color--5 text__fw--500 text__md cursor__pointer m__right--5" (mouseup)="showDialog(termsData)">Terms and conditions</span>
@@ -92,6 +154,7 @@
 
   </div>
 
-  <app-button class="m__top--45" [disabled]="!form?.valid" (buttonClick)="onSignUpClick()" [type]="'main'" [text]="'Sign Up'"></app-button>
+  <app-button class="m__top--45" [disabled]="!(form?.valid && form.get('acceptPrivacy').value && form.get('acceptTerms').value)" (buttonClick)="onSignUpClick()" [type]="'main'"
+    [text]="'Sign Up'"></app-button>
 
 </app-auth-container>
