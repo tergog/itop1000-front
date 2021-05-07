@@ -68,12 +68,6 @@ i {
   font-weight: normal;
   font-feature-settings: "lnum";
 
-  &__transform {
-    &--capitalize {
-      text-transform: capitalize;
-    }
-  }
-
   &__font--2 {
     font-family: $font-2;
   }
