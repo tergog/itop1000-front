@@ -2,13 +2,13 @@
   <ng-container *ngrxLet="userInfo$; let userInfo">
    <div class="w__594 d__flex d__flex--direction-column d__flex--items-center">
       <div class="m__top--25">
-        <span class="text__font--2 text__color--3 text__center text__sm text__fw--300 bottom-notify">We need to confit you have access to this account, {{ userInfo ? userInfo.firstName : "User" }}</span>
+        <span class="text__font--2 text__color--3 text__center text__sm text__fw--300 text__lh--24">We need to confit you have access to this account, {{ userInfo ? userInfo.firstName : "User" }}</span>
       </div>
        <p class='horizon-line w__100per'></p>
       <div class="m__top--25 m__bottom--10">
-        <p class="text__center text__fw--300 text__color--6 p__confirm">Please confirm your identity to access your account</p>
-        <p class="text__center text__color--2 p__name">Hi {{ userInfo ? userInfo.firstName.toLocaleUpperCase() : "User" }},</p>
-        <p class="text__center text__color--3 text__fw--300 p__text">It looks like you are having trouble signing into your account. Please select the confirm button to verify your identity and access your account. (It is only good for 24 hours.) if you do not recognize this activity, please  <a class="text__fw--300 text__color--5 p__link" href="#">contact us</a>.</p>
+        <p class="text__center text__fw--300 text__color--6 text__lh--34 text__xlg">Please confirm your identity to access your account</p>
+        <p class="text__center text__color--2 text__lh--34 text__fw--400 text__xxlg">Hi {{ userInfo ? userInfo.firstName.toLocaleUpperCase() : "User" }},</p>
+        <p class="text__center text__color--3 text__fw--300 text__md text__lh--24">It looks like you are having trouble signing into your account. Please select the confirm button to verify your identity and access your account. (It is only good for 24 hours.) if you do not recognize this activity, please  <a class="text__fw--300 text__color--5 text__md text__lh--24 p__link" href="#">contact us</a>.</p>
       </div>
       <app-button (buttonClick)="handleClickButton()" [text]="'CONFIRM'" [type]="'main'"></app-button>
    </div>
