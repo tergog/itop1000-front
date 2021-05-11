@@ -11,22 +11,22 @@ import { VerifyEmailComponent } from 'app/auth/components/verify-email/verify-em
 import { TermsPopupComponent } from './components/popups/terms-popup/terms-popup.component';
 import { EmailPopupComponent } from './components/popups/email-popup/email-popup.component';
 import { EmailNotificationComponent } from 'app/inner-pages/shared/email-notification/email-notification.component';
+import { EmailConfirmationComponent } from 'app/inner-pages/shared/email-confirmation/email-confirmation.component';
 import { PasswordRecoveryComponent } from 'app/inner-pages/shared/password-recovery/password-recovery.component';
 
 const routes: Routes = [
   { path: 'login', component: LogInComponent },
-  // { path: 'signup', component: SignUpComponent },
-  { path: 'signup', component: PasswordRecoveryComponent },
+  { path: 'signup', component: SignUpComponent },
 ];
 
 @NgModule({
-  declarations: [LogInComponent, SignUpComponent, AuthContainerComponent, VerifyEmailComponent, TermsPopupComponent, EmailPopupComponent, EmailNotificationComponent, PasswordRecoveryComponent],
+ declarations: [LogInComponent, SignUpComponent, AuthContainerComponent, VerifyEmailComponent, TermsPopupComponent, EmailPopupComponent, EmailNotificationComponent, EmailConfirmationComponent, PasswordRecoveryComponent],
     imports: [
-        FormsModule,
-        CommonModule,
-        ReactiveFormsModule,
-        RouterModule.forChild(routes),
-        SharedModule
+      FormsModule,
+      CommonModule,
+      ReactiveFormsModule,
+      RouterModule.forChild(routes),
+      SharedModule,
     ]
 })
 export class AuthModule { }

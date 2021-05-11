@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { getUserInfo, State } from 'app/core/reducers';
 import { Observable, of } from 'rxjs';
@@ -13,19 +14,14 @@ export class PasswordRecoveryComponent implements OnInit {
 
   userInfo$: Observable<any>
 
-  constructor(public store: Store<State>) { }
+  constructor(public store: Store<State>, public router: Router) { }
 
   ngOnInit() {
-    this.userInfo$ = this.store.select(getUserInfo).pipe(map(user => user.email), catchError((err) => of("dummymail@mail.com")))
-    console.log(this.blurEmailUtility("dummymail@mail.com"))
+    this.userInfo$ = this.store.select(getUserInfo).pipe(map(user => user.email), catchError((err) => of(false)))
   }
 
-  handleClickButton() { }
-
-  blurEmailUtility(email: string) {
-    const nameEmail = email.split("@")[0]
-    const blurNameEmail = nameEmail[0] + '***' + nameEmail[nameEmail.length - 1]
-    return blurNameEmail + "@" + email.split("@")[1]
+  handleClickButton() {
+    this.router.navigate(["/"])
   }
 
 }

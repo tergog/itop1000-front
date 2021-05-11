@@ -9,8 +9,7 @@ export class EmailNotificationComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   handleClickButton() { }
 

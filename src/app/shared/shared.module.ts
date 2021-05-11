@@ -26,6 +26,7 @@ import { ResumeService } from './services/resume.service';
 import { SelectComponent } from './components/select/select.component';
 import { DropDownListComponent } from './components/drop-down-list/drop-down-list.component';
 import { AlertContainerComponent } from 'app/auth/components/alert-container/alert-container.component';
+import { BlurEmailPipe } from './pipes/blur-email.pipe';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { AlertContainerComponent } from 'app/auth/components/alert-container/ale
     PhoneRegexComponent,
     SelectComponent,
     DropDownListComponent,
-    AlertContainerComponent
+    AlertContainerComponent,
+    BlurEmailPipe
   ],
   exports: [
     InputComponent,
@@ -63,7 +65,8 @@ import { AlertContainerComponent } from 'app/auth/components/alert-container/ale
     SelectComponent,
     DropDownListComponent,
     AlertContainerComponent,
-    ReactiveComponentModule
+    ReactiveComponentModule,
+    BlurEmailPipe
   ],
   imports: [
     ReactiveComponentModule,

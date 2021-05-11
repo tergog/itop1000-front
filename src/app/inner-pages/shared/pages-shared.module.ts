@@ -34,9 +34,6 @@ import { GetPaidNowDialogComponent } from './components/get-paid-now-dialog/get-
 import { ActiveProjectsComponent } from './components/active-projects/active-projects.component';
 import { BankAccountDialogComponent } from './components/bank-account-dialog/bank-account-dialog.component';
 import { NotificationsPopupComponent } from './components/notifications-popup/notifications-popup.component';
-// import { PasswordRecoveryComponent } from './password-recovery/password-recovery.component';
-// import { EmailConfirmationComponent } from './email-confirmation/email-confirmation.component';
-// import { EmailNotificationComponent } from './email-notification/email-notification.component';
 
 @NgModule({
   declarations: [
@@ -63,9 +60,6 @@ import { NotificationsPopupComponent } from './components/notifications-popup/no
     BankAccountDialogComponent,
     ActiveProjectsComponent,
     NotificationsPopupComponent,
-    // PasswordRecoveryComponent,
-    // EmailConfirmationComponent,
-    // EmailNotificationComponent,
   ],
   imports: [
     RouterModule,

@@ -68,12 +68,6 @@ i {
   font-weight: normal;
   font-feature-settings: "lnum";
 
-  &__transform {
-    &--capitalize {
-      text-transform: capitalize;
-    }
-  }
-
   &__font--2 {
     font-family: $font-2;
   }
@@ -224,6 +218,10 @@ i {
       font-weight: 300;
     }
 
+    &--400 {
+      font-weight: 400;
+    }
+
     &--500 {
       font-weight: 500;
     }
@@ -234,6 +232,15 @@ i {
 
     &--700 {
       font-weight: 700;
+    }
+  }
+  &__lh {
+    &--24 {
+      line-height: 24px;
+    }
+
+    &--34 {
+      line-height: 34px;
     }
   }
 }

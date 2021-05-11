@@ -1,0 +1,14 @@
+@import '~assets/scss/variables';
+
+.horizon-line {
+  border: 1px solid $color-6;
+}
+
+.p {
+  &__link {
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
