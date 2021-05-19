@@ -9,3 +9,20 @@ export enum EDevProfileSections {
   Balance,
   PasswordAndSecurity
 }
+export enum EDevProfileSections1 {
+  Education,
+  SoftSAndSkills,
+  CategoriesAndSkills,
+  PasswordAndSecurity,
+  BillingAndPayments,
+  Reviews,
+  Employment,
+  ExpertiseLevel,
+  Contracts,
+  Languages,
+  HourlyRate,
+  ProfilePhoto,
+  Location,
+  ContactInfo,
+  ApprovedProjects
+}

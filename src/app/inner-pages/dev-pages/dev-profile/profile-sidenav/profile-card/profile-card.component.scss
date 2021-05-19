@@ -1,0 +1,81 @@
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 500px;
+  width: 100%;
+}
+
+.sidenav-photo {
+  width: 135px;
+  height: 135px;
+  border-radius: 50%;
+  background: #4d4d4d;
+  margin-bottom: 26px;
+  //color: #FFFFFF;
+}
+
+.profile-name {
+  font-size: 24px;
+  font-weight: 500;
+  text-transform: uppercase;
+  text-decoration: underline;
+  line-height: 25px;
+  margin-bottom: 5px;
+}
+
+.developer-id {
+  font-size: 14px;
+  font-weight: 400;
+  color: #4B4949;
+  margin-bottom: 12px;
+  text-decoration: underline;
+}
+
+.profile-email {
+  font-size: 16px;
+  font-weight: 300;
+  text-transform: lowercase;
+  color: #4B4949;
+  //color: #FFFFFF;
+  margin-bottom: 25px;
+}
+
+.profile-price {
+  font-weight: 500;
+  font-size: 20px;
+  color: #F1D261;
+  margin-bottom: 20px;
+}
+
+.gray-line {
+  opacity: 0.9;
+  width: 230px;
+  border: 1px solid #4B4949;
+  margin-bottom: 37px;
+}
+
+.profile-settings-btn {
+  border: 1px solid #F31D42;
+  border-radius: 30px;
+  color: #F31D42;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 10px;
+  background: transparent;
+  outline: none;
+  padding: 20px 30px;
+  margin-bottom: 18px;
+}
+
+.close-account-btn {
+  font-size: 14px;
+  font-weight: 300;
+  text-transform: capitalize;
+  text-decoration: underline;
+  line-height: 10px;
+  color: #F31D42;
+}
