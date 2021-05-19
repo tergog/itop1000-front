@@ -12,7 +12,7 @@ export class ProfileSidenavComponent implements OnInit {
   @Output() section = new EventEmitter<EDevProfileSections>();
 
   public DevProfileSections = EDevProfileSections;
-  public activeSection: EDevProfileSections = EDevProfileSections.ContactInfo;
+  // public activeSection: EDevProfileSections = EDevProfileSections.ContactInfo;
 
   constructor() { }
 
@@ -20,7 +20,7 @@ export class ProfileSidenavComponent implements OnInit {
   }
 
   public onSectionCLick(selectedSection: EDevProfileSections): void {
-    this.activeSection = selectedSection;
+    // this.activeSection = selectedSection;
     this.section.emit(selectedSection);
   }
 
