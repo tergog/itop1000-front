@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import * as fromCore from '../../../../../core/reducers';
+import {Store} from '@ngrx/store';
 
 @Component({
   selector: 'app-profile-card',
@@ -7,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileCardComponent implements OnInit {
 
-  constructor() { }
+  userInfo$
+  constructor(private store: Store<fromCore.State>) { }
 
   ngOnInit(): void {
+    this.userInfo$ = this.store.select(fromCore.getUserInfo);
   }
 
 }

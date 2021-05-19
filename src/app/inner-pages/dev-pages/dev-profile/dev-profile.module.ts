@@ -33,6 +33,7 @@ import { DevWantToLearnComponent } from './dev-want-to-learn/dev-want-to-learn.c
 import { DevCertificatesComponent } from './dev-certificates/dev-certificates.component';
 import { ProfileCardComponent } from './profile-sidenav/profile-card/profile-card.component';
 import { DevSidenavComponent } from './profile-sidenav/dev-sidenav/dev-sidenav.component';
+import {PortalModule} from "@angular/cdk/portal";
 
 
 const routes: Routes = [
@@ -78,7 +79,8 @@ const routes: Routes = [
     ReactiveComponentModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSelectModule
+    MatSelectModule,
+    PortalModule
   ],
   providers: [
     DevProfileService
