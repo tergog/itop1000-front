@@ -4,17 +4,17 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 500px;
+  height: auto;
   width: 100%;
+  padding-bottom: 60px;
 }
 
 .sidenav-photo {
   width: 135px;
   height: 135px;
   border-radius: 50%;
-  background: #4d4d4d;
+  background: #FFFFFF;
   margin-bottom: 26px;
-  //color: #FFFFFF;
 }
 
 .profile-name {
@@ -24,6 +24,7 @@
   text-decoration: underline;
   line-height: 25px;
   margin-bottom: 5px;
+  color: #FFFFFF;
 }
 
 .developer-id {
@@ -38,8 +39,8 @@
   font-size: 16px;
   font-weight: 300;
   text-transform: lowercase;
-  color: #4B4949;
-  //color: #FFFFFF;
+  //color: #4B4949;
+  color: #FFFFFF;
   margin-bottom: 25px;
 }
 
@@ -52,7 +53,7 @@
 
 .gray-line {
   opacity: 0.9;
-  width: 230px;
+  width: 276px;
   border: 1px solid #4B4949;
   margin-bottom: 37px;
 }
@@ -69,6 +70,9 @@
   outline: none;
   padding: 20px 30px;
   margin-bottom: 18px;
+  &:hover {
+  cursor: pointer;
+}
 }
 
 .close-account-btn {
@@ -78,4 +82,5 @@
   text-decoration: underline;
   line-height: 10px;
   color: #F31D42;
+  cursor: pointer;
 }
