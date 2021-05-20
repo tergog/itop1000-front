@@ -1,24 +1,12 @@
 @import '../../../../../../assets/scss/variables';
 
 ul {
-  //margin: 0;
   padding: 0;
   list-style: none;
-
   li {
-    padding: 20px;
+    padding: 20px 0;
     margin-left: 45px;
     cursor: pointer;
-    transition: ease 0.1s;
-    //&.active {
-    //  cursor: default;
-    //  transform: scale(1.05, 1.05);
-    //  color: $color-2 !important;
-    //  span {
-    //    font-weight: 600;
-    //    color: $color-2 !important;
-    //  }
-    //}
   }
 }
 
@@ -27,12 +15,7 @@ ul {
 }
 
 .active-menu-item {
-  width: 350px;
   margin: 0 auto;
-  height: 50px;
-  border: 0.5px solid #8c8c8c;
+  border: 0.5px solid $color-3;
   border-left: 3px solid $color-2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }

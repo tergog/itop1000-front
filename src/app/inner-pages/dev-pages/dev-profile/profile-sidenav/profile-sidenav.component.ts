@@ -11,16 +11,12 @@ export class ProfileSidenavComponent implements OnInit {
 
   @Output() section = new EventEmitter<EDevProfileSections>();
 
-  public DevProfileSections = EDevProfileSections;
-  // public activeSection: EDevProfileSections = EDevProfileSections.ContactInfo;
-
   constructor() { }
 
   ngOnInit(): void {
   }
 
   public onSectionCLick(selectedSection: EDevProfileSections): void {
-    // this.activeSection = selectedSection;
     this.section.emit(selectedSection);
   }
 
