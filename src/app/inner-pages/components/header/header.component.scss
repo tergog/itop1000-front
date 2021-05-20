@@ -122,3 +122,17 @@ app-notifications-popup {
   margin-top: 2px;
   margin-left: 15px;
 }
+
+.header-nav {
+  color: $color-2;
+  &__item {
+    color: $text-color-3;
+    text-decoration: none;
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 55px;
+    margin: 0 15px;
+  }
+}
