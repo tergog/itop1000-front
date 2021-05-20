@@ -34,6 +34,7 @@ import { DevCertificatesComponent } from './dev-certificates/dev-certificates.co
 import { ProfileCardComponent } from './profile-sidenav/profile-card/profile-card.component';
 import { DevSidenavComponent } from './profile-sidenav/dev-sidenav/dev-sidenav.component';
 import {PortalModule} from "@angular/cdk/portal";
+import {LandingModule} from "../../../landing/landing.module";
 
 
 const routes: Routes = [
@@ -65,23 +66,23 @@ const routes: Routes = [
     ProfileCardComponent,
     DevSidenavComponent,
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    PagesSharedModule,
-    SharedModule,
-    ReactiveFormsModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatInputModule,
-    ReactiveComponentModule,
-    FormsModule,
-    ReactiveComponentModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSelectModule,
-    PortalModule
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        PagesSharedModule,
+        SharedModule,
+        ReactiveFormsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatInputModule,
+        ReactiveComponentModule,
+        FormsModule,
+        ReactiveComponentModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSelectModule,
+        PortalModule,
+    ],
   providers: [
     DevProfileService
   ],

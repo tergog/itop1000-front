@@ -10,16 +10,20 @@ ul {
     margin-left: 45px;
     cursor: pointer;
     transition: ease 0.1s;
-
-    &.active {
-      cursor: default;
-      transform: scale(1.05, 1.05);
-      span {
-        font-weight: 600;
-        color: $color-2;
-      }
-    }
+    //&.active {
+    //  cursor: default;
+    //  transform: scale(1.05, 1.05);
+    //  color: $color-2 !important;
+    //  span {
+    //    font-weight: 600;
+    //    color: $color-2 !important;
+    //  }
+    //}
   }
+}
+
+.active {
+  color: $color-2;
 }
 
 .active-menu-item {

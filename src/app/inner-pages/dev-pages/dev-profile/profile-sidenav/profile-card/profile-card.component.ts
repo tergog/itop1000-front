@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as fromCore from '../../../../../core/reducers';
 import {Store} from '@ngrx/store';
+import {Observable} from 'rxjs';
+import {UserInfo} from '../../../../../shared/models';
 
 @Component({
   selector: 'app-profile-card',
@@ -9,7 +11,7 @@ import {Store} from '@ngrx/store';
 })
 export class ProfileCardComponent implements OnInit {
 
-  userInfo$
+  userInfo$: Observable<UserInfo>;
   constructor(private store: Store<fromCore.State>) { }
 
   ngOnInit(): void {

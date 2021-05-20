@@ -1,0 +1,25 @@
+@import "src/assets/scss/variables";
+
+.line {
+  max-width: 100%;
+  opacity: 0.9;
+  border-bottom: 1px solid $color-5;
+}
+
+.points {
+  margin-top: -6px;
+}
+
+.light-point {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: $color-5;
+}
+
+.inner-point {
+  background: $color-5;
+  filter: blur(10px);
+  width: 10px;
+  height: 10px;
+}
