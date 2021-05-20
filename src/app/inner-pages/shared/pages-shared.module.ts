@@ -34,6 +34,7 @@ import { GetPaidNowDialogComponent } from './components/get-paid-now-dialog/get-
 import { ActiveProjectsComponent } from './components/active-projects/active-projects.component';
 import { BankAccountDialogComponent } from './components/bank-account-dialog/bank-account-dialog.component';
 import { NotificationsPopupComponent } from './components/notifications-popup/notifications-popup.component';
+import { SidenavSeparatorComponent } from './components/sidenav-separator/sidenav-separator.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { NotificationsPopupComponent } from './components/notifications-popup/no
     BankAccountDialogComponent,
     ActiveProjectsComponent,
     NotificationsPopupComponent,
+    SidenavSeparatorComponent,
   ],
   imports: [
     RouterModule,
