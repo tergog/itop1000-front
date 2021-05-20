@@ -15,7 +15,7 @@ export class DevSidenavComponent implements AfterViewInit {
   domPortal: DomPortal<any>;
 
   public DevProfileSections = EDevProfileSections;
-  public activeSection: EDevProfileSections = EDevProfileSections.ContactInfo;
+  public activeSection: EDevProfileSections = EDevProfileSections.ApprovedProjects;
 
   constructor(private cdr: ChangeDetectorRef) { }
 

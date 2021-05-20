@@ -1,12 +1,16 @@
-<div class="container" *ngrxLet="userInfo$ as user">
-  <i class="sidenav-photo"></i>
-  <div class="profile-name">
+
+
+<div class="d__flex d__flex--direction-column d__flex--justify--items-center w__100per m__bottom--60" *ngrxLet="userInfo$ as user">
+  <i class="sidenav-photo default-sidenav-photo">
+    <div class="light-point"></div>
+  </i>
+  <div class="text__xxlg text__fw--500 text__underline text__uppercase text__color--3 m__bottom--10">
     <span>{{user.firstName}} </span><span>{{user.lastName}}</span>
   </div>
-  <div class="developer-id">{{user.id}}</div>
-  <div class="profile-email">{{user.email}}</div>
-  <div class="profile-price">	<span>$</span><span>40.00</span>/<span>hr</span></div>
+  <div class="text text__md text__color--6 m__bottom--20 text__underline">{{user.id}}</div>
+  <div class="text__lg text__lowercase text__color--3 text__fw--300 m__bottom--30">{{user.email}}</div>
+  <div class="text__fw--500 text__xlg text__color--5 m__bottom--20"><span>$</span><span>40.00</span>/<span>hr</span></div>
   <div class="gray-line"></div>
   <button class="profile-settings-btn">Profile settings</button>
-  <span class="close-account-btn">Close account</span>
+  <span class="text text__fw--300 text__underline text__capitalize text__color--2 cursor__pointer">Close account</span>
 </div>

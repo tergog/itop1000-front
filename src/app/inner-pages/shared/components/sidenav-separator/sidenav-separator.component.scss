@@ -1,13 +1,26 @@
 @import "src/assets/scss/variables";
 
+:host {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 2px;
+  height: 100%;
+}
+
 .line {
-  max-width: 100%;
-  opacity: 0.9;
-  border-bottom: 1px solid $color-5;
+  width: 100%;
+  height: 100%;
+  background: $color-5;
+  position: absolute;
 }
 
 .points {
-  margin-top: -6px;
+  height: 100%;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .light-point {
@@ -20,6 +33,6 @@
 .inner-point {
   background: $color-5;
   filter: blur(10px);
-  width: 10px;
-  height: 10px;
+  width: 20px;
+  height: 20px;
 }

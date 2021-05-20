@@ -76,17 +76,18 @@ import { SidenavSeparatorComponent } from './components/sidenav-separator/sidena
     ReactiveComponentModule,
     MatSelectModule
   ],
-  exports: [
-    ChangePasswordDialogComponent,
-    ProfileChangePasswordComponent,
-    ProfileSectionHeaderComponent,
-    JobComponent,
-    DeveloperResumeComponent,
-    StandardBgWrapComponent,
-    ProjectCardComponent,
-    ActiveProjectsComponent,
-    NotificationsPopupComponent
-  ],
+    exports: [
+        ChangePasswordDialogComponent,
+        ProfileChangePasswordComponent,
+        ProfileSectionHeaderComponent,
+        JobComponent,
+        DeveloperResumeComponent,
+        StandardBgWrapComponent,
+        ProjectCardComponent,
+        ActiveProjectsComponent,
+        NotificationsPopupComponent,
+        SidenavSeparatorComponent
+    ],
   providers: [
     DevProfileService
   ]

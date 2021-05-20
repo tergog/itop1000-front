@@ -1,10 +1,9 @@
-
-<div class="active-menu-item m__bottom--30" >
+<div class="active-menu-item d__flex d__flex--justify--items-center m__bottom--30 w__350 h__50" >
   <ng-template [cdkPortalOutlet]="domPortal"></ng-template>
 </div>
 
 <ul>
-  <li class="d__flex text__color--3"
+  <li class="d__flex text__color--3" #defaultActive
       [class.active]="activeSection === DevProfileSections.ApprovedProjects"
       (click)="onSectionCLick(DevProfileSections.ApprovedProjects, $event.currentTarget)"
   >
