@@ -13,4 +13,5 @@ export interface Job {
   userId?: string;
   dateCreated: string;
   company: string;
+  devProposals: string[];
 }

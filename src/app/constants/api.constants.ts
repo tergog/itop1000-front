@@ -5,6 +5,7 @@ export const ApiConstants = {
   projects: 'projects',
   logo: 'projects/logo',
   jobsSearch: 'jobs/search',
+  jobsApply: 'jobs/apply-dev',
   email: {
     verify: 'email/verify?',
     isAvailable: 'email/is-available'

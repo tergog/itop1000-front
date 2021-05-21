@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
-import { filter, first, map, takeUntil } from 'rxjs/operators';
+import { filter, first, map, takeUntil, tap } from 'rxjs/operators';
 
 import { getUserInfo, State } from 'app/core/reducers/index';
 import { DeleteJobAction, GetJobsAction, UpdateJobAction } from 'app/core/client/store/actions';
@@ -23,9 +23,11 @@ import { EUserRole } from 'app/shared/enums';
 })
 export class JobComponent implements OnInit, OnDestroy {
   @Input() job: Job;
-
+  @Input() applyState: boolean;
+  userID: string;
   userRole$ = this.store.select(getUserInfo).pipe(
     first(),
+    tap(user => this.userID = user.id),
     map((user: UserInfo) => user.role)
   );
   role = EUserRole;
@@ -94,6 +96,15 @@ export class JobComponent implements OnInit, OnDestroy {
 
   public onJobClick(): void {
     this.router.navigate([`/in/c/profile/job/${this.job.id}`]);
+  }
+
+  public applyDev(): void {
+    debugger
+    this.jobsService.applyDevToJob(this.job.id, this.userID)
+      .pipe(takeUntil(this.ngUnsubscribe$))
+      .subscribe(res => {
+        debugger
+      });
   }
 
   ngOnDestroy(): void {

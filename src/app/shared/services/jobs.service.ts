@@ -46,4 +46,8 @@ export class JobsService {
   public updateJob(jobId: string, jobData: Job): Observable<Job> {
     return this.http.patch<Job>(`${this.apiUrl}${ApiConstants.jobs}/${jobId}`, jobData);
   }
+
+  public applyDevToJob(jobId: string, userId: string): Observable<object> {
+    return this.http.post(`${this.apiUrl}${ApiConstants.jobsApply}`, { jobId, userId });
+  }
 }

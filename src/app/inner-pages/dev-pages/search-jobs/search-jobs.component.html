@@ -1,6 +1,7 @@
 <ng-container *ngIf="jobsPaginated.length">
   <app-job *ngFor="let job of jobsPaginated"
            [job]="job"
+           [applyState]="getJobStatus(job)"
            (click)="onJobClick(job.id)">
   </app-job>
 

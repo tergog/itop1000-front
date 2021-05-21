@@ -53,7 +53,6 @@ export class HeaderComponent implements OnInit {
   }
 
   public onSearch(): void {
-    debugger
     if (this.userRole === this.UserRole.Dev) {
       this.store.dispatch(searchJobs(this.searchTerm.value));
     } else {
