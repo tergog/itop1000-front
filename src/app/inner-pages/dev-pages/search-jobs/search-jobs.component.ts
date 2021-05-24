@@ -38,7 +38,6 @@ export class SearchJobsComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe$))
       .subscribe(user => {
         this.userId = user.id;
-        debugger
       });
   }
 

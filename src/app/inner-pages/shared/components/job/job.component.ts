@@ -2,19 +2,20 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { filter, first, map, takeUntil, tap } from 'rxjs/operators';
 
-import { getUserInfo, State } from 'app/core/reducers/index';
-import { DeleteJobAction, GetJobsAction, UpdateJobAction } from 'app/core/client/store/actions';
-import { Job, UserInfo } from 'app/shared/models';
-import { JobsService } from 'app/shared/services/jobs.service';
-import { NotificationsService } from 'app/shared/services/notifications.service';
-import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
-import { EditJobDialogComponent } from '../edit-job-dialog/edit-job-dialog.component';
-import { EJobSections } from '../job-full/job-full.component';
-import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
 import { EUserRole } from 'app/shared/enums';
+import { ActiveProjectsService } from 'app/shared/services';
+import { getUserInfo, State } from 'app/core/reducers/index';
+import { EJobSections } from '../job-full/job-full.component';
+import { JobsService } from 'app/shared/services/jobs.service';
+import { ActiveProject, Job, UserInfo } from 'app/shared/models';
+import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
+import { DeleteJobAction, UpdateJobAction } from 'app/core/client/store/actions';
+import { NotificationsService } from 'app/shared/services/notifications.service';
+import { EditJobDialogComponent } from '../edit-job-dialog/edit-job-dialog.component';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-job',
@@ -25,11 +26,7 @@ export class JobComponent implements OnInit, OnDestroy {
   @Input() job: Job;
   @Input() applyState: boolean;
   userID: string;
-  userRole$ = this.store.select(getUserInfo).pipe(
-    first(),
-    tap(user => this.userID = user.id),
-    map((user: UserInfo) => user.role)
-  );
+  userRole$: Observable<EUserRole>;
   role = EUserRole;
   JobSections = EJobSections;
   activeSection = EJobSections.Project;
@@ -40,10 +37,16 @@ export class JobComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private jobsService: JobsService,
+    private activeProjectService: ActiveProjectsService,
     private matDialog: MatDialog,
     private notificationsService: NotificationsService) { }
 
   ngOnInit(): void {
+    this.userRole$ = this.store.select(getUserInfo).pipe(
+      first(),
+      tap(user => this.userID = user.id),
+      map((user: UserInfo) => user.role)
+    );
   }
 
   onEditClick(): void {
@@ -99,12 +102,29 @@ export class JobComponent implements OnInit, OnDestroy {
   }
 
   public applyDev(): void {
-    debugger
     this.jobsService.applyDevToJob(this.job.id, this.userID)
+      .pipe(takeUntil(this.ngUnsubscribe$))
+      .subscribe(res => {
+        this.applyState = !this.applyState;
+      });
+
+    const activeJob: ActiveProject = {
+      title: this.job.title,
+      employerId: this.job.userId,
+      developerId: this.userID,
+      screenshotsPerHour: 6,
+      workTime: { test : { test: 5 }} ,
+      dayWorkTime: 3,
+      hoursPerWeek: 3,
+      screenshots: [],
+    };
+    debugger
+    this.activeProjectService.setProjects(activeJob)
       .pipe(takeUntil(this.ngUnsubscribe$))
       .subscribe(res => {
         debugger
       });
+
   }
 
   ngOnDestroy(): void {
