@@ -1,0 +1,7 @@
+<div class="d__flex text__capitalize" *ngrxLet="userInfo$">
+  <i class="location m__right--5 text__md"></i>
+  <div  *ngIf="!userInfo$">{{userInfo$.address}}</div>
+  <div *ngIf="userInfo$">Kharkov, Ukraine</div>
+</div>
+<div class="grey-line"></div>
+<div class="text__capitalize text__fw--300 text__sm">28 march</div>

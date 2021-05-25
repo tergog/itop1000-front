@@ -35,6 +35,7 @@ import { ActiveProjectsComponent } from './components/active-projects/active-pro
 import { BankAccountDialogComponent } from './components/bank-account-dialog/bank-account-dialog.component';
 import { NotificationsPopupComponent } from './components/notifications-popup/notifications-popup.component';
 import { SidenavSeparatorComponent } from './components/sidenav-separator/sidenav-separator.component';
+import { DevLocationComponent } from './components/dev-location/dev-location.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { SidenavSeparatorComponent } from './components/sidenav-separator/sidena
     ActiveProjectsComponent,
     NotificationsPopupComponent,
     SidenavSeparatorComponent,
+    DevLocationComponent,
   ],
   imports: [
     RouterModule,
@@ -86,7 +88,8 @@ import { SidenavSeparatorComponent } from './components/sidenav-separator/sidena
         ProjectCardComponent,
         ActiveProjectsComponent,
         NotificationsPopupComponent,
-        SidenavSeparatorComponent
+        SidenavSeparatorComponent,
+        DevLocationComponent
     ],
   providers: [
     DevProfileService

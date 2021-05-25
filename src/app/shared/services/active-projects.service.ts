@@ -15,7 +15,10 @@ export class ActiveProjectsService {
   constructor(private http: HttpClient) { }
 
   public getActiveProjects(id: string): Observable<ActiveProject> {
-    return this.http.get<ActiveProject>(`${this.apiUrl}${ApiConstants.accounts}/${id}`);
+    // return this.http.get<ActiveProject>(`${this.apiUrl}${ApiConstants.accounts}/${id}`);
+    const project = this.http.get<ActiveProject>(`${this.apiUrl}${ApiConstants.accounts}/${id}`);
+    console.log(project.subscribe(data => console.log(data)))
+    return project
   }
 
   public setProjects(project: ActiveProject): Observable<ActiveProject> {

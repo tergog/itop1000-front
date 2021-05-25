@@ -35,6 +35,7 @@ import { ProfileCardComponent } from './profile-sidenav/profile-card/profile-car
 import { DevSidenavComponent } from './profile-sidenav/dev-sidenav/dev-sidenav.component';
 import {PortalModule} from "@angular/cdk/portal";
 import {LandingModule} from "../../../landing/landing.module";
+import { DevApprovedProjectsComponent } from './dev-approved-projects/dev-approved-projects.component';
 
 
 const routes: Routes = [
@@ -65,6 +66,7 @@ const routes: Routes = [
     DevCertificatesComponent,
     ProfileCardComponent,
     DevSidenavComponent,
+    DevApprovedProjectsComponent,
   ],
     imports: [
         CommonModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -15,6 +15,7 @@ import { ActiveProject } from 'app/shared/models';
 })
 export class ActiveProjectsComponent implements OnInit {
 
+  @Input() active: Observable<any>
   public activeProject: ActiveProject;
   projects$: Observable<ActiveProject>;
 
@@ -29,6 +30,10 @@ export class ActiveProjectsComponent implements OnInit {
         map((user: UserInfo) => user.id),
         switchMap((id: string) => this.projectService.getActiveProjects(id))
       );
+    this.projects$.subscribe(data => console.log("active", data))
+    // console.log("active", this.activeProject)
+    console.log('from ngOninit', this.active)
+    this.active.subscribe(data => this.activeProject = data.activeProjects[0])
   }
 
   public onProjectClick(project): void {
