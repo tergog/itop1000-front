@@ -1,0 +1,12 @@
+@import '~assets/scss/variables';
+
+.container-alert {
+  line-height: 25px;
+  height: 25px;
+  padding-left: 15px;
+  color: $text-color-2;
+  font-weight: 400;
+  @media (max-width: 576px) {
+    height: 50px;
+  }
+}

@@ -1,7 +1,8 @@
 export interface ActiveProject {
-  _id: string;
+  _id?: string;
   title: string;
   employerId: string;
+  developerId: string;
   screenshotsPerHour: number;
   workTime: WorkTimeModel;
   dayWorkTime: number;

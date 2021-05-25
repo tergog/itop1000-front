@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, HostListener, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, HostListener, Input, OnInit, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { EUserRole } from 'app/shared/enums';
 
@@ -20,6 +20,8 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
   @Input() options = [EUserRole.Client, EUserRole.Dev];
   value: string;
   isExpand: boolean;
+  overlayUntouched: boolean = true
+
 
   @HostListener('click', ['$event'])
   expand(): void {
@@ -28,12 +30,20 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
 
   constructor() { }
 
+  closeOverlay() {
+    this.isExpand = false;
+  }
+
+  touchedOverlay() {
+    this.overlayUntouched = false;
+  }
+
   ngOnInit(): void {
   }
 
-
   select(event: string): void {
     if (event === this.value) {
+      this.isExpand = false
       return;
     }
     this.value = event;

@@ -78,7 +78,7 @@ export class CreateJobComponent implements OnInit, OnDestroy {
       duration: new FormControl('', [Validators.required, Validators.pattern(/^\d+$/)]),
       contractType: new FormControl('', [Validators.required]),
       price: new FormControl('', [Validators.required, Validators.pattern(/^\d+$/)]),
-      address: new FormControl('', [Validators.required]),
+      address: new FormControl('123', [Validators.required]),
       company: new FormControl('', [Validators.required])
     });
   }

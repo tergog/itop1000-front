@@ -6,7 +6,12 @@
       <i class="search" (click)="onSearch()"></i>
     </app-input>
   </div>
-
+  <nav class="header-nav">
+    <a class="header-nav__item">Services</a> |
+    <a class="header-nav__item">Companies</a> |
+    <a class="header-nav__item" routerLink="search-jobs" (click)="onSearch()">Projects</a> |
+    <a class="header-nav__item">Question-answer</a>
+  </nav>
   <div class="d__flex d__flex--items-center">
     <i class="bell cursor__pointer m__right--30" (click)="isNotificationsOpen = !isNotificationsOpen">
       <div *ngIf="userInfo.notifications" class="dot"></div>

@@ -36,7 +36,6 @@ import { BankAccountDialogComponent } from './components/bank-account-dialog/ban
 import { NotificationsPopupComponent } from './components/notifications-popup/notifications-popup.component';
 import { SidenavSeparatorComponent } from './components/sidenav-separator/sidenav-separator.component';
 
-
 @NgModule({
   declarations: [
     ChangePasswordDialogComponent,
