@@ -1,7 +1,7 @@
 export const ApiConstants = {
   accounts: 'accounts',
   accountsSearch: 'accounts/search',
-  activeProject: 'accounts/project-applications',
+  projectApplications: 'accounts/project-applications',
   jobs: 'jobs',
   projects: 'projects',
   logo: 'projects/logo',

@@ -19,6 +19,6 @@ export class ActiveProjectsService {
   }
 
   public setProjects(project: ActiveProject): Observable<ActiveProject> {
-    return this.http.post<ActiveProject>(`${this.apiUrl}${ApiConstants.activeProject}`, project);
+    return this.http.post<ActiveProject>(`${this.apiUrl}${ApiConstants.projectApplications}`, project);
   }
 }
