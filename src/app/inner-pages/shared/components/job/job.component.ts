@@ -108,6 +108,7 @@ export class JobComponent implements OnInit, OnDestroy {
         this.applyState = !this.applyState;
       });
 
+    //MOCK
     const activeJob: ActiveProject = {
       title: this.job.title,
       employerId: this.job.userId,
@@ -118,12 +119,9 @@ export class JobComponent implements OnInit, OnDestroy {
       hoursPerWeek: 3,
       screenshots: [],
     };
-    debugger
     this.activeProjectService.setProjects(activeJob)
       .pipe(takeUntil(this.ngUnsubscribe$))
-      .subscribe(res => {
-        debugger
-      });
+      .subscribe(res => {});
 
   }
 
