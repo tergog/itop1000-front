@@ -13,7 +13,7 @@
   <p class="border-point border-point--right border-point--1"></p>
   <p class="border-point border-point--right border-point--2"></p>
   <p class="border-point border-point--right border-point--3"></p>
-  <button (click)="applyDev()" [disabled]="applyState" class="accept-btn" [class.accept-btn__default]="applyState">Accept a Job</button>
+  <button *ngIf="(userRole$ | ngrxPush) === role.Dev" (click)="applyDev()" [disabled]="applyState" class="accept-btn" [class.accept-btn__default]="applyState">Accept a Job</button>
 </div>
 
 <div class="right-side">
