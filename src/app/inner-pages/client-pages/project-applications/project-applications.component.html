@@ -1,0 +1,22 @@
+<app-standard-bg-wrap *ngrxLet="developers$ as developers">
+  <div>
+
+    <app-developer-resume *ngFor="let developer of developers"
+                          [developer]="developer"
+                          (profile)="onProfileClick($event)"
+                          class="m__bottom--10">
+    </app-developer-resume>
+
+    <mat-paginator [length]="developers.length"
+                   (page)="onPageChange($event)"
+                   [pageSize]="2"
+                   [pageSizeOptions]="[2, 10, 15, developers.length]">
+    </mat-paginator>
+  </div>
+
+<!--  <ng-template #noDevelopers>-->
+<!--    <span class="text text__color&#45;&#45;2 text__xlg">No Developers found</span>-->
+<!--  </ng-template>-->
+
+</app-standard-bg-wrap>
+

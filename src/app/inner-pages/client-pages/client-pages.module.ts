@@ -6,11 +6,11 @@ export const routes: Routes = [
   { path: '', redirectTo: 'in/c/profile' },
   { path: 'profile', loadChildren: () => import('app/inner-pages/client-pages/client-profile/client-profile.module').then(m => m.ClientProfileModule) },
   { path: 'search-developers', loadChildren: () => import('app/inner-pages/client-pages/search-developers/search-developers.module').then(m => m.SearchDevelopersModule) },
-  { path: 'chat', loadChildren: () => import('app/inner-pages/shared/components/chat/chat.module').then(m => m.ChatModule) }
+  { path: 'chat', loadChildren: () => import('app/inner-pages/shared/components/chat/chat.module').then(m => m.ChatModule) },
+  { path: 'project-applications', loadChildren: () => import('app/inner-pages/client-pages/project-applications/project-applications.module').then(m => m.ProjectApplicationsModule) }
 ];
 
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

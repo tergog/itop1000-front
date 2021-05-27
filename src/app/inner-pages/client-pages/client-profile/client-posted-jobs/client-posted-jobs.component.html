@@ -10,7 +10,8 @@
     <ng-container *ngIf="jobs.length">
       <app-job *ngFor="let job of jobs; trackBy:identify"
                [job]="job"
-               (click)="onJobClick(job.id)">
+               (click)="onJobClick(job.id)"
+      >
       </app-job>
 
       <app-button [text]="'Post new Job'" (buttonClick)="postJobClick()"></app-button>

@@ -17,6 +17,7 @@
 </div>
 
 <div class="right-side">
+
   <div class="d__flex h__100">
     <div>
       <div class="text text__font--2 text__fw--500 text__uppercase text__x4lg">{{ job.title }}</div>
@@ -35,6 +36,7 @@
     <div class="d__flex d__flex--flex-start d__flex--flex-wrap">
       <span class="text__uppercase m--5"
             *ngFor="let requirement of job.requirements.split(' ')">{{ requirement }}</span> <!-- TODO change logic-->
+
     </div>
     <hr class="splitter-line">
   </div>
@@ -50,6 +52,11 @@
     <span>{{ job.address }}</span>
     <span class="m__left--30 text__fw--300 text__font--2 text__capitalize">{{ job.dateCreated | date:'dd MMMM' }}</span>
   </div>
-
+  <button
+    *ngIf="(userRole$ | ngrxPush) === role.Client"
+    (click)="onApplicationsClick()"
+    class="proposals-btn m__top--15"
+  >Proposals {{ this.job.devProposals.length }}
+  </button>
 </div>
 
