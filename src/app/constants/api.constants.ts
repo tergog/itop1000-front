@@ -8,6 +8,20 @@ export const ApiConstants = {
   logo: 'projects/logo',
   jobsSearch: 'jobs/search',
   jobsApply: 'jobs/apply-dev',
+  verifyEmail: 'email/verify-email',
+  upload: 'accounts/upload',
+  uploadProjectImage: 'accounts/upload-project-image',
+  uploadCertificate: 'accounts/upload-certificate',
+  deleteCertificate: 'accounts/delete-certificate',
+  paymentMethod: 'accounts/payment-method',
+  paymentMethods: 'accounts/payment-methods',
+  getDeveloperById: 'accounts/get-developer',
+  chargesList: 'accounts/charges-list',
+  verifyBank: 'accounts/verify-bank',
+  verifyStripe: 'accounts/verify-stripe',
+  payout: 'accounts/payout',
+  paymentIntent: 'accounts/payment-intent',
+  activeProjects: 'accounts/active-projects'
   email: {
     verify: 'email/verify?',
     isAvailable: 'email/is-available'
@@ -40,8 +54,19 @@ export const ApiConstants = {
     conversationsSearch: 'chat/conversations/search',
     messages: 'chat/messages'
   },
+  jobs: {
+    main: 'jobs',
+    search: 'jobs/search',
+    delete: 'jobs'
+  },
   developers: {
     main: 'developers',
     search: 'developers/search'
   }
+  },
+  chat: {
+    createConversation: 'chat/conversations', // POST
+    getConversationsByMemberId: 'chat/conversations/members', // GET
+    getMessagesByConversationId: 'chat/messages', // GET
+    updateChatMember: 'chat/members' // PATCH
 };

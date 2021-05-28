@@ -1,0 +1,31 @@
+<ul class="chat__sidebar__rooms">
+  <li
+    class="chat__sidebar__rooms__room"
+    *ngFor="let conv of chat.conversations.data"
+    (click)="onConversationClick(conv.id)"
+  >
+    <div [ngClass]="{
+      'chat__sidebar__rooms__room__avatar': true,
+      'online': chatUtilsService.isConversationPartnerOnline(user.id, conv)
+    }">
+      <img
+        *ngIf="chatUtilsService.getConversationPartners(user.id, conv)[0].user.photo as avatar"
+        [src]="avatar"
+        alt="Avatar"
+      >
+    </div>
+    <div class="chat__sidebar__rooms__room__meta">
+      <div class="chat__sidebar__rooms__room__meta__name">{{ chatUtilsService.getConversationPartnerName(user.id, conv) }}</div>
+      <div [ngClass]="{
+        'chat__sidebar__rooms__room__meta__counter': true,
+        'chat__sidebar__rooms__room__meta__counter--new-message': conv.messages.unread > 0
+      }">{{ conv.messages.unread }}</div>
+      <div class="chat__sidebar__rooms__room__meta__indicator">
+        <i class="email email-yellow" *ngIf="conv.messages.unread > 0"></i>
+        <i class="email email-yellow-open" *ngIf="conv.messages.unread === 0"></i>
+      </div>
+      <div class="chat__sidebar__rooms__room__meta__time">11:59 AM</div>
+    </div>
+    <div class="chat__sidebar__rooms__room__cut">Lorem ipsum dolor sit amet / consectetur adipiscing elit / sed do eiusmod</div>
+  </li>
+</ul>

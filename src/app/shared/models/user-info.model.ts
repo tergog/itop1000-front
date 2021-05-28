@@ -21,4 +21,5 @@ export interface UserInfo {
   token?: string;
   notifications: Notification[];
   balance: number;
+  lastSeen: string;
 }

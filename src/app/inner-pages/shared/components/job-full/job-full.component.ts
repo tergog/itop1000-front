@@ -80,8 +80,8 @@ export class JobFullComponent implements OnInit, OnDestroy {
     }
   }
 
-  onRespondClick(): void {
-    this.router.navigate(['in/d/chat']);
+  onRespondClick(userId: string): void {
+    this.router.navigate([ `in/d/chat/${userId}`]);
   }
 
   onDeleteClick(): void {

@@ -1,4 +1,4 @@
-@import '~assets/scss/variables';
+@import 'assets/scss/variables';
 
 :host {
   @media (max-width: 576px) {
@@ -25,7 +25,8 @@
     }
 
     &:disabled {
-      background-color: $color-6;
+      background-color: $text-color-6;
+      cursor: not-allowed;
     }
 
     &.main {
@@ -48,6 +49,35 @@
 
       span {
         color: $text-color-2;
+      }
+    }
+
+    &.chat-send {
+      display: block;
+      margin: 0 auto;
+      min-width: 35px;
+      min-height: 35px;
+      width: 90px;
+      height: 40px;
+      padding: 5px;
+      background: none;
+      box-shadow: none;
+      border: none;
+
+      &:not(:disabled):hover,
+      &:not(:disabled):active,
+      &:not(:disabled):focus {
+        background: none; // Reset standart effect
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+      }
+
+      span {
+        float: left;
+        font-weight: 600;
+        color: $text-color-5;
       }
     }
   }

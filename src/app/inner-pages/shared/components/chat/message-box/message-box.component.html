@@ -1,0 +1,84 @@
+<div [@slideInLeft] class="chat__message-box">
+  <div class="chat__message-box__header">
+    <div class="chat__message-box__header__title">
+      {{ getConversationPartnerName(chat.conversations.active) }}
+    </div>
+    <div class="chat__message-box__header__search">
+      <i class="search-alt cursor__pointer"></i>
+    </div>
+    <div class="chat__message-box__header__settings">
+      <i class="gear cursor__pointer"></i>
+    </div>
+    <div class="chat__message-box__header__mark">
+      <i class="star cursor__pointer"></i>
+    </div>
+  </div>
+  <div class="chat__message-box__body">
+    <div class="chat__message-box__body__history" (scroll)="onHistoryScroll($event)" (wheel)="onWheelScroll()" #messages>
+      <div class="chat__message-box__body__history__message-list">
+        <div class="chat__message-box__body__history__message-list__message--empty"
+             *ngIf="chat.messages.data.length === 0">
+          <div class="chat__message-box__body__history__message-list__message--empty__message"
+               *ngIf="chat.conversations.active && !searchFC.value.length">You have no messages yet
+          </div>
+          <div class="chat__message-box__body__history__message-list__message--empty__message"
+               *ngIf="searchFC.value.length > 0">Nothing found :(
+          </div>
+        </div>
+
+        <!-- Message markup -->
+        <div class="chat__message-box__body__history__message-list__message" #messageContainer *ngFor="let message of chat.messages.data">
+          <div class="chat__message-box__body__history__message-list__message__header">
+          <span [ngClass]="{
+              'chat__message-box__body__history__message-list__message__header__avatar': true,
+              'partner': message.sender.user.id !== user.id,
+              'online': message.sender.user.id !== user.id && isConversationPartnerOnline(chat.conversations.active)
+            }">
+            <img *ngIf="message.sender.user.photo" src="{{ message.sender.user.photo }}" alt="Avatar">
+          </span>
+            <span class="chat__message-box__body__history__message-list__message__header__name">
+              {{ message.sender.user.firstName }}
+              {{ message.sender.user.lastName }}
+          </span>
+            <span class="chat__message-box__body__history__message-list__message__header__time">{{ messageTimeFormat(message.date) }}</span>
+          </div>
+          <div class="chat__message-box__body__history__message-list__message__body">
+            <quill-view
+              [content]="message.message"
+              [sanitize]="true"
+              format="html"
+              class="chat__message-box__body__history__message-list__message__body__view"
+            ></quill-view>
+          </div>
+        </div>
+
+        <!-- Loader shows only during first loadging or conversation searching -->
+        <div class="chat__message-box__body__history__message-list__message--empty" *ngIf="chat.messages.loading">
+          <div class="chat__message-box__body__history__message-list__message--empty__message"><i class="loader"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="chat__message-box__body__scroll-bottom"
+      [@slideUpDown]="{ value: ':enter', params: { from: -50, to: 10 } }"
+      *ngIf="isScrollToBottomBtnVisible"
+      (click)="onScrollBottomClick()"
+    >
+      <svg width="20" height="20" viewBox="0 0 4.7625 4.7625" xmlns="http://www.w3.org/2000/svg">
+        <path d="m0.52917 1.5875 1.8521 1.5875 1.8521-1.5875" fill="none" stroke="#F1D261" stroke-linecap="round"
+              stroke-linejoin="round" stroke-width=".52917"/>
+      </svg>
+    </div>
+  </div>
+  <div class="chat__message-box__typing-container">
+    <ng-container *ngIf="typingUsername">{{ typingUsername }} is typing...</ng-container>
+  </div>
+  <div class="chat__message-box__editor">
+    <app-rich-text-editor
+      (shareTextContent)="textContentChange($event)"
+      (shareQuillInstance)="getEditorInstance($event)"
+      (shareSendButtonClick)="sendButtonClick()"
+    ></app-rich-text-editor>
+  </div>
+</div>

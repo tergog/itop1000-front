@@ -1,0 +1,186 @@
+@import '~assets/scss/variables';
+
+$editor-border: 1px solid $color-8;
+
+:host {
+  font-family: $font-2;
+  display: block;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+.chat__text-editor {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 40px 1px minmax(40px, auto);
+  gap: 0 0;
+  grid-template-areas:
+    "chat__text-editor__header chat__text-editor__header"
+    "chat__text-editor__divider chat__text-editor__divider"
+    "chat__text-editor__body chat__text-editor__body";
+
+  &__header {
+    grid-area: chat__text-editor__header;
+    width: 95%;
+    margin: 0 auto;
+
+    &__toolbar {
+      border: none;
+      padding: 5px 0;
+      float: left;
+
+      button {
+        width: 30px;
+        height: 30px;
+        padding: 5px;
+      }
+
+      .ql-align.ql-picker {
+        width: 30px;
+        height: 30px;
+      }
+
+      .ql-attach-file {
+        width: 30px;
+        height: 30px;
+        padding: 5px;
+      }
+    }
+
+    &__send {
+      float: right;
+    }
+  }
+
+  &__divider {
+    width: 95%;
+    height: 1px;
+    margin: 0 auto;
+    background-color: rgba(105, 105, 105, .9);
+    grid-area: chat__text-editor__divider;
+  }
+
+  &__body {
+    grid-area: chat__text-editor__body;
+    max-width: 100%;
+  }
+}
+
+
+::ng-deep {
+  .ql-snow .ql-color-picker .ql-picker-label,
+  .ql-snow .ql-icon-picker .ql-picker-label {
+    padding: 5px;
+  }
+
+  .ql-snow.ql-toolbar,
+  .ql-snow .ql-toolbar {
+    button:hover,
+    button:focus,
+    button.ql-active,
+    .ql-picker-label:hover,
+    .ql-picker-label.ql-active,
+    .ql-picker-item:hover,
+    .ql-picker-item.ql-selected {
+      .ql-stroke,
+      .ql-stroke-miter {
+        stroke: $text-color-5 !important;
+      }
+    }
+  }
+
+  .ql-snow.ql-toolbar,
+  .ql-snow .ql-toolbar {
+    button:hover,
+    button:focus,
+    button.ql-active,
+    .ql-picker-label:hover,
+    .ql-picker-label.ql-active,
+    .ql-picker-item:hover,
+    .ql-picker-item.ql-selected {
+      .ql-fill,
+      .ql-stroke.ql-fill {
+        fill: $text-color-5 !important;
+      }
+    }
+  }
+
+  .ql-snow,
+  .ql-snow.ql-toolbar,
+  .ql-snow .ql-toolbar {
+    a,
+    button:hover,
+    button:focus,
+    button.ql-active,
+    .ql-picker-label:hover,
+    .ql-picker-label.ql-active,
+    .ql-picker-item:hover,
+    .ql-picker-item.ql-selected {
+      color: $text-color-5 !important;
+    }
+  }
+
+  .ql-snow .ql-tooltip {
+    background-color: $bg-color-opacity !important;
+    box-shadow: none;
+    color: $text-color-8;
+  }
+
+  .ql-fill,
+  .ql-emoji .ql-fill {
+    fill: $text-color-8 !important;
+  }
+
+  .ql-stroke,
+  .ql-emoji .ql-stroke {
+    stroke: $text-color-8 !important;
+  }
+
+  .ql-picker-options {
+    background-color: $bg-color-opacity !important;
+  }
+
+  .ql-picker.ql-font {
+    color: $text-color-8;
+    border: $editor-border;
+
+    &.ql-expanded {
+      border: $editor-border !important;
+    }
+  }
+}
+
+.chat__text-editor {
+  ::ng-deep {
+    .ql-container {
+      border: none !important;
+      overflow: auto;
+      max-height: 150px;
+      margin: 10px 0;
+      padding: 0 25px;
+      height: auto;
+    }
+
+    .ql-editor {
+      line-height: 16px;
+      padding: 2px 0;
+      margin: 0;
+      color: $text-color-8 !important;
+
+      &:not(:empty):before {
+        color: $text-color-8 !important;
+        font-style: normal !important;
+        left: 25px !important;
+        right: 25px !important;
+      }
+
+      .ql-file-embedded {
+        margin: 10px auto;
+        padding: 5px 10px;
+        font-size: 14px;
+        border: 1px solid rgba(105, 105, 105, .9);
+        user-select: none;
+      }
+    }
+  }
+}

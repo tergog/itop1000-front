@@ -1,0 +1,210 @@
+@import "~assets/scss/variables";
+
+.chat__message-box {
+  overflow: auto;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 70px 1fr 20px minmax(70px, auto);
+  gap: 0 0;
+  grid-template-areas:
+    "chat__message-box__header"
+    "chat__message-box__body"
+    "chat__message-box__typing-container"
+    "chat__message-box__editor";
+
+  &__header {
+    grid-area: chat__message-box__header;
+    display: grid;
+    grid-template-columns: 1fr repeat(3, 30px);
+    grid-template-rows: 50px;
+    gap: 0 10px;
+    grid-template-areas: ". . . .";
+    padding-bottom: 20px;
+    border-bottom: 1px solid $color-11;
+
+    &__title {
+      line-height: 50px;
+      font-size: 30px;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: $text-color-5;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    &__search i,
+    &__settings i,
+    &__mark i {
+      margin: 10px 0;
+    }
+  }
+
+  &__body {
+    grid-area: chat__message-box__body;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, .1);
+    margin-top: 20px;
+    position: relative;
+
+    &__history {
+      overflow: auto;
+      height: 100%;
+
+      &::-webkit-scrollbar {
+        background-color: transparent;
+        width: 5px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $color-5;
+      }
+
+      &__message-list {
+        overflow: auto;
+        padding: 20px 32px;
+
+        &__message {
+          min-height: 80px;
+
+          & + & {
+            margin-top: 25px;
+          }
+
+          &:not(:last-child) &__body {
+            border-bottom: 1px solid rgba(79, 77, 77, .9);
+          }
+
+          &--empty {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &__message {
+              font-size: 20px;
+              color: $text-color-6;
+            }
+          }
+
+          &__header {
+            line-height: 35px;
+            height: 35px;
+
+            &__avatar {
+              height: 35px;
+              width: 35px;
+              border-radius: 50%;
+              background: url(~assets/icons/profile-photo.svg);
+              background-repeat: no-repeat;
+              background-size: contain;
+              background-color: $color-8;
+              float: left;
+              position: relative;
+
+              img {
+                width: 100%;
+                height: 100%;
+                border-radius: inherit;
+              }
+
+              &.partner:after {
+                content: '';
+                display: block;
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background-color: $color-6;
+                transition: background-color .2s;
+                position: absolute;
+                right: 0;
+                bottom: 0;
+              }
+
+              &.partner.online:after {
+                background-color: $color-5;
+              }
+            }
+
+            &__name {
+              display: inline-block;
+              margin-left: 15px;
+              font-style: normal;
+              font-weight: 500;
+              font-size: 18px;
+              color: $text-color-5;
+            }
+
+            &__time {
+              font-size: 12px;
+              font-weight: 300;
+              color: $text-color-6;
+              float: right;
+            }
+          }
+
+          &__body {
+            margin-left: 50px;
+            color: $text-color-8;
+            min-height: 45px;
+
+            &__view {
+              display: block;
+              height: 100%;
+            }
+          }
+        }
+      }
+    }
+
+    &__scroll-bottom {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: $color-11;
+      text-align: center;
+      cursor: pointer;
+      padding: 12px 10px;
+
+      &.has-unread::after {
+        content: attr(data-unread);
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: $color-5;
+        border-radius: 50%;
+        top: -5px;
+        right: -5px;
+        font-size: .9em;
+        text-align: center;
+        line-height: 20px;
+        color: $color-11;
+        font-weight: 500;
+      }
+    }
+  }
+
+  &__typing-container {
+    grid-area: chat__message-box__typing-container;
+    width: 100%;
+    height: 20px;
+    color: $text-color-6;
+    font-style: italic;
+  }
+
+  &__editor {
+    grid-area: chat__message-box__editor;
+    margin: 0 0 20px 0;
+  }
+}
+
+::ng-deep {
+  .chat__message-box {
+    .ql-container {
+      font-family: $font-1 !important;
+    }
+  }
+}
