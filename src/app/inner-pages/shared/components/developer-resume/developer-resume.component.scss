@@ -45,4 +45,48 @@
       margin-right: 10px;
     }
   }
+
+  .accept-btn {
+    width: 75px;
+    height: 30px;
+
+    border: 1px solid #F31D42;
+    box-sizing: border-box;
+    border-radius: 30px;
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    background: #F31D42;
+    color: $text-color-3;
+    margin-right: 20px;
+    text-transform: uppercase;
+    &__default {
+      border: 1px solid #F31D42;
+      color: #F31D42;
+      background: none;
+    }
+  }
+  .reject-btn {
+    width: 75px;
+    height: 30px;
+
+    border-radius: 30px;
+    border: 1px solid #F31D42;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 24px;
+
+    color: #F31D42;
+    text-align: center;
+    text-transform: uppercase;
+    background-color: black;
+    &__default {
+      border: 1px solid #F31D42;
+      color: #F31D42;
+      background: none;
+    }
+  }
 }

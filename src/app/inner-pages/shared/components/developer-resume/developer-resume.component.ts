@@ -8,7 +8,7 @@ import { Developer } from 'app/shared/models';
   styleUrls: ['./developer-resume.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DeveloperResumeComponent {
+export class DeveloperResumeComponent implements OnInit {
 
   @Input() developer: Developer;
   @Output() profile = new EventEmitter<string>();
@@ -17,6 +17,10 @@ export class DeveloperResumeComponent {
 
   public onProfileClick(): void {
     this.profile.emit(this.developer.id);
+  }
+
+  ngOnInit(): void {
+    console.log(this.developer);
   }
 
 }
