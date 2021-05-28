@@ -120,3 +120,17 @@ hr.splitter-line {
     background: none;
   }
 }
+
+.proposals-btn {
+  width: fit-content;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 20px;
+  /* or 143% */
+
+  text-align: center;
+  text-transform: uppercase;
+
+  color: #F1D261;
+}

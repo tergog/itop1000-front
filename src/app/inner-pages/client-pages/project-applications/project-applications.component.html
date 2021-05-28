@@ -1,0 +1,16 @@
+<app-standard-bg-wrap *ngrxLet="developers$ as developers">
+  <div>
+
+    <app-developer-resume *ngFor="let developer of developers"
+                          [developer]="developer"
+                          (profile)="onProfileClick($event)"
+                          class="m__bottom--10">
+    </app-developer-resume>
+
+    <mat-paginator [length]="developers.length"
+                   (page)="onPageChange($event)"
+                   [pageSize]="2"
+                   [pageSizeOptions]="[2, 10, 15, developers.length]">
+    </mat-paginator>
+  </div>
+</app-standard-bg-wrap>
