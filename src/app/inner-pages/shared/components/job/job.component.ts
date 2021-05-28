@@ -1,16 +1,16 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { filter, first, map, takeUntil, tap } from 'rxjs/operators';
 
 import { EUserRole } from 'app/shared/enums';
-import { ActiveProjectsService } from 'app/shared/services';
 import { getUserInfo, State } from 'app/core/reducers/index';
 import { EJobSections } from '../job-full/job-full.component';
 import { JobsService } from 'app/shared/services/jobs.service';
 import { ActiveProject, Job, UserInfo } from 'app/shared/models';
+import { ActiveProjectsService, DevelopersService } from 'app/shared/services';
 import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
 import { DeleteJobAction, UpdateJobAction } from 'app/core/client/store/actions';
 import { NotificationsService } from 'app/shared/services/notifications.service';
@@ -37,6 +37,7 @@ export class JobComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private jobsService: JobsService,
+    private devService: DevelopersService,
     private activeProjectService: ActiveProjectsService,
     private matDialog: MatDialog,
     private notificationsService: NotificationsService) { }
@@ -108,6 +109,7 @@ export class JobComponent implements OnInit, OnDestroy {
         this.applyState = !this.applyState;
       });
 
+    //MOCK
     const activeJob: ActiveProject = {
       title: this.job.title,
       employerId: this.job.userId,
@@ -118,13 +120,14 @@ export class JobComponent implements OnInit, OnDestroy {
       hoursPerWeek: 3,
       screenshots: [],
     };
-    debugger
     this.activeProjectService.setProjects(activeJob)
       .pipe(takeUntil(this.ngUnsubscribe$))
-      .subscribe(res => {
-        debugger
-      });
+      .subscribe(res => {});
 
+  }
+
+  onApplicationsClick(): void {
+    this.router.navigate([`in/c/project-applications`, this.job]);
   }
 
   ngOnDestroy(): void {
