@@ -1,0 +1,19 @@
+<app-dev-location [date]="today" [address]="userAddress"></app-dev-location>
+
+<mat-tab-group mat-stretch-tabs animationDuration="300ms">
+  <mat-tab label="Active Projects">
+    Active projects
+  </mat-tab>
+
+  <mat-tab label="Approved Projects">
+    <app-dev-approved-projects></app-dev-approved-projects>
+  </mat-tab>
+
+  <mat-tab label="Project Applications">
+    <app-active-projects [active]="projects$"></app-active-projects>
+  </mat-tab>
+
+  <mat-tab label="Archive">
+    Archive
+  </mat-tab>
+</mat-tab-group>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import * as fromCore from "../../../../core/reducers";
 import {Store} from '@ngrx/store';
 
@@ -9,11 +9,11 @@ import {Store} from '@ngrx/store';
 })
 export class DevLocationComponent implements OnInit {
 
-  userInfo$
-  constructor(private store: Store<fromCore.State>) { }
+  @Input() date;
+  @Input() address;
+  constructor() { }
 
   ngOnInit(): void {
-    this.userInfo$ = this.store.select(fromCore.getUserInfo);
   }
 
 }
