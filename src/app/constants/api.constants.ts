@@ -21,7 +21,7 @@ export const ApiConstants = {
   verifyStripe: 'accounts/verify-stripe',
   payout: 'accounts/payout',
   paymentIntent: 'accounts/payment-intent',
-  activeProjects: 'accounts/active-projects'
+  activeProjects: 'accounts/active-projects',
   email: {
     verify: 'email/verify?',
     isAvailable: 'email/is-available'
@@ -48,25 +48,27 @@ export const ApiConstants = {
     developerLanguages: 'data/languages',
     developerSoftSkills: 'data/soft-skills'
   },
-  chat: {
-    conversations: 'chat/conversations',
-    conversationsMembers: 'chat/conversations/members',
-    conversationsSearch: 'chat/conversations/search',
-    messages: 'chat/messages'
-  },
-  jobs: {
-    main: 'jobs',
-    search: 'jobs/search',
-    delete: 'jobs'
-  },
+  // chat: {
+  //   conversations: 'chat/conversations',
+  //   conversationsMembers: 'chat/conversations/members',
+  //   conversationsSearch: 'chat/conversations/search',
+  //   messages: 'chat/messages',
+  //   updateChatMember: 'chat/members'
+  // },
+  // jobs: {
+  //   main: 'jobs',
+  //   search: 'jobs/search',
+  //   delete: 'jobs'
+  // },
   developers: {
     main: 'developers',
     search: 'developers/search'
-  }
   },
+  // },
   chat: {
     createConversation: 'chat/conversations', // POST
     getConversationsByMemberId: 'chat/conversations/members', // GET
     getMessagesByConversationId: 'chat/messages', // GET
     updateChatMember: 'chat/members' // PATCH
-};
+  }
+}

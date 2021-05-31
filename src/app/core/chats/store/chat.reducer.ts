@@ -157,10 +157,10 @@ export const reducer = createReducer(
       data: state.conversations.data.map((conv) => ({
         ...conv,
         participants: conv.participants.map((part) => {
-          return (part.user.id === payload.userId) ? {
+          return (part.account.id === payload.userId) ? {
             ...part,
             user: {
-              ...part.user,
+              ...part.account,
               lastSeen: payload.lastSeen
             }
           } : part;

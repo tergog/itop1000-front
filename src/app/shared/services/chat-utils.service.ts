@@ -9,13 +9,13 @@ import { CHAT_ONLINE_DELTA_MS } from 'app/constants/constants';
 })
 export class ChatUtilsService {
   public getConversationPartners(userId: string, conv: IConversation): IConversationMember[] {
-    return conv.participants.filter((participant) => participant.user.id !== userId);
+    return conv.participants.filter((participant) => participant.account.id !== userId);
   }
 
   public getConversationPartnerName(userId: string, conv: IConversation): string {
     const partners: IConversationMember[] = this.getConversationPartners(userId, conv);
     return (conv.type === EConversationType.Private) ?
-      `${partners[0].user.firstName} ${partners[0].user.lastName}` :
+      `${partners[0].account.firstName} ${partners[0].account.lastName}` :
       `${partners.length} partners`;
   }
 
@@ -23,7 +23,7 @@ export class ChatUtilsService {
     const partners: IConversationMember[] = this.getConversationPartners(userId, conv);
 
     return (conv.type === EConversationType.Private) ?
-      new Date().getTime() - new Date(partners[0].user.lastSeen).getTime() < CHAT_ONLINE_DELTA_MS :
+      new Date().getTime() - new Date(partners[0].account.lastSeen).getTime() < CHAT_ONLINE_DELTA_MS :
       null;
   }
 }

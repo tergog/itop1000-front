@@ -121,10 +121,10 @@ export class UpdateUserLastSeen implements  Action {
   readonly type = UPDATE_LAST_SEEN;
   constructor(public userId: string, public lastSeen: string) {}
 }
-export class UpdateUserLastSeen implements  Action {
-  readonly type = UPDATE_LAST_SEEN;
-  constructor(public userId: string, public lastSeen: string) {}
-}
+// export class UpdateUserLastSeen implements  Action {
+//   readonly type = UPDATE_LAST_SEEN;
+//   constructor(public userId: string, public lastSeen: string) {}
+// }
 
 /**
  * Exports possible core action types
@@ -146,6 +146,5 @@ export type Actions =
   | LoadProjectsErrorAction
   | UpdateProjectAction
   | AddProjectAction
-  | DeleteProjectAction;
-  | UpdateProjectImageAction
+  | DeleteProjectAction
   | UpdateUserLastSeen;

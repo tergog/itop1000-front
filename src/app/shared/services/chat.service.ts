@@ -19,7 +19,7 @@ export class ChatService {
   public createNewConversation(creatorId: string, withId: string): Observable<IConversation> {
     return this.http.post<IConversation>(`${this.apiURL}${ApiConstants.chat.createConversation}`, {
       creatorId,
-      withId
+      partnerId: withId
     });
   }
 

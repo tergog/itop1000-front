@@ -41,11 +41,11 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
 
   private textEditorInstance: ISharedQuillInstance;
   private textContent: ContentChange;
-  private pageLoaded: number = 0;
-  private lastScrollTop: number = 0;
+  private pageLoaded = 0;
+  private lastScrollTop = 0;
 
   public lastScrollStatus: EScrollSource | null = null;
-  public isScrollToBottomBtnVisible: boolean = false;
+  public isScrollToBottomBtnVisible = false;
   public typingUsername: string | null = null;
   public searchFC: FormControl = new FormControl('', [ Validators.maxLength(32) ]);
 
@@ -251,13 +251,13 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
   }
 
   getConversationPartners(conv: IConversation): IConversationMember[] {
-    return conv.participants.filter((participant) => participant.user.id !== this.user.id);
+    return conv.participants.filter((participant) => participant.account.id !== this.user.id);
   }
 
   getConversationPartnerName(activeConv: string): string {
     const conv: IConversation = this.getActiveConversation(activeConv);
     const partner: IConversationMember = this.getConversationPartners(conv)[0];
-    return `${partner.user.firstName} ${partner.user.lastName}`;
+    return `${partner.account.firstName} ${partner.account.lastName}`;
   }
 
   getActiveConversationById(convId: string): IConversation {
@@ -269,7 +269,7 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
     const partners: IConversationMember[] = this.getConversationPartners(conv);
 
     return (conv.type === EConversationType.Private) ?
-      new Date().getTime() - new Date(partners[0].user.lastSeen).getTime() < CHAT_ONLINE_DELTA_MS :
+      new Date().getTime() - new Date(partners[0].account.lastSeen).getTime() < CHAT_ONLINE_DELTA_MS :
       null;
   }
 

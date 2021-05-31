@@ -9,9 +9,9 @@ import { PagesSharedModule } from 'app/inner-pages/shared/pages-shared.module';
 import { RichTextEditorModule } from './message-box/rich-text-editor/rich-text-editor.module';
 
 import { ChatComponent } from './chat.component';
+import { SearchComponent } from './search/search.component';
 import { MessageBoxComponent } from './message-box/message-box.component';
 import { ConversationsComponent } from './conversations/conversations.component';
-import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
   { path: '', component: ChatComponent },

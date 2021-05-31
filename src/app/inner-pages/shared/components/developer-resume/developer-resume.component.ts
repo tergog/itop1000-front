@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Developer } from 'app/shared/models';
 
@@ -13,7 +14,9 @@ export class DeveloperResumeComponent implements OnInit {
   @Input() developer: Developer;
   @Output() profile = new EventEmitter<string>();
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   public onProfileClick(): void {
     this.profile.emit(this.developer.id);
@@ -21,6 +24,10 @@ export class DeveloperResumeComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.developer);
+  }
+
+  openChatWithDev(): void {
+    this.router.navigate([`in/c/chat/${this.developer.id}`]);
   }
 
 }

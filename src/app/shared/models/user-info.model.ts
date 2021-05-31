@@ -22,4 +22,5 @@ export interface UserInfo {
   notifications: Notification[];
   balance: number;
   lastSeen: string;
+  projects: [];
 }

@@ -1,17 +1,20 @@
 import * as coreActions from '../actions/core.actions';
 
 import { Job, UserInfo } from 'app/shared/models';
+import { DevProject } from 'app/shared/models/dev-project.model';
 
 export interface State {
   isAuthenticated: boolean;
   userInfo: UserInfo;
   jobs: Job[];
+  devProjects: DevProject[];
 }
 
 export const INIT_STATE: State = {
   isAuthenticated: null,
   userInfo: null,
   jobs: [],
+  devProjects: []
 };
 
 /**
@@ -82,7 +85,7 @@ export function reducer(state: State = INIT_STATE, action: coreActions.Actions) 
             .map((obj, index) =>  index === action.id ? {...obj, photo: action.image} : obj)]}};
       return {...state, userInfo: account};
     case coreActions.UPDATE_LAST_SEEN:
-      return { ...state, userInfo: { ...state.userInfo, lastSeen: action.lastSeen } }
+      return { ...state, userInfo: { ...state.userInfo, lastSeen: action.lastSeen } };
     default:
       return state;
   }

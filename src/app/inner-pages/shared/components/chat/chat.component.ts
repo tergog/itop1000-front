@@ -5,12 +5,12 @@ import { Store } from '@ngrx/store';
 import { iif, Observable, of } from 'rxjs';
 import { catchError, first, map, switchMap, tap } from 'rxjs/operators';
 
+import { EUserRole } from 'app/shared/enums';
 import * as fromCore from 'app/core/reducers';
-import * as fromChats from 'app/core/chats/store/chat.reducer';
-import * as chatActions from 'app/core/chats/store/chats.actions';
 import { ChatService } from 'app/shared/services';
 import { IConversation, UserInfo } from 'app/shared/models';
-import { EUserRole } from 'app/shared/enums';
+import * as fromChats from 'app/core/chats/store/chat.reducer';
+import * as chatActions from 'app/core/chats/store/chats.actions';
 
 @Component({
   selector: 'app-chat',
@@ -44,7 +44,7 @@ export class ChatComponent implements OnInit, OnDestroy {
             // mergeMap((convs) => convs),
             map((convs: IConversation[]) => {
               return convs.filter((conv) => {
-                return conv.participants.filter((part) => part.user.id === this.route.snapshot.params.id).length;
+                return conv.participants.filter((part) => part.account.id === this.route.snapshot.params.id).length;
               })[0];
             }),
             // filter((conv) => !!conv.participants.filter((part) => part.user.id === this.route.snapshot.params.id).length),
