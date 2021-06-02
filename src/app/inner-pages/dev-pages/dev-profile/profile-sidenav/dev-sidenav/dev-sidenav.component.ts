@@ -7,8 +7,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { DomPortal } from '@angular/cdk/portal';
-import { EDevProfileSections } from '../../dev-profile-sections/dev-profile-sections.enum';
-
+import { EDevProfileSections } from 'app/inner-pages/dev-pages/dev-profile/dev-profile-sections/dev-profile-sections.enum';
 
 @Component({
   selector: 'app-dev-sidenav',
@@ -32,7 +31,7 @@ export class DevSidenavComponent implements AfterViewInit {
   }
 
   public onSectionCLick(selectedSection: EDevProfileSections, elem?): void {
-    this.domPortal = new DomPortal<any>(elem);
+    this.domPortal = new DomPortal(elem);
     this.activeSection = selectedSection;
     this.section.emit(selectedSection);
   }

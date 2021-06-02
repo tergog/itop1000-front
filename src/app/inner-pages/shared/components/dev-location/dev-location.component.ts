@@ -1,6 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
-import * as fromCore from "../../../../core/reducers";
-import {Store} from '@ngrx/store';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-dev-location',

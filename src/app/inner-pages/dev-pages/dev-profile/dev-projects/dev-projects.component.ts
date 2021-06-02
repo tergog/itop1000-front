@@ -3,9 +3,9 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
-import * as fromCore from '../../../../core/reducers';
-import { Job, UserInfo } from '../../../../shared/models';
-import { ActiveProjectsService } from '../../../../shared/services';
+import * as fromCore from 'app/core/reducers';
+import { Job, UserInfo } from 'app/shared/models';
+import { ActiveProjectsService } from 'app/shared/services';
 
 @Component({
   selector: 'app-dev-projects',
@@ -16,7 +16,6 @@ import { ActiveProjectsService } from '../../../../shared/services';
 export class DevProjectsComponent implements OnInit {
 
   projects$: Observable<Job>;
-  active
   userAddress;
   today = new Date();
 

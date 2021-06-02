@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import * as fromCore from "../../../../core/reducers";
-import {map, switchMap} from "rxjs/operators";
-import {ActiveProject, UserInfo} from "../../../../shared/models";
-import {ActiveProjectsService} from "../../../../shared/services";
-import {Store} from "@ngrx/store";
-import {Observable} from "rxjs";
+import { Store } from '@ngrx/store';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+
+import * as fromCore from 'app/core/reducers';
+import { ActiveProject, UserInfo } from 'app/shared/models';
+import { ActiveProjectsService } from 'app/shared/services';
 
 @Component({
   selector: 'app-dev-approved-projects',
@@ -12,7 +13,7 @@ import {Observable} from "rxjs";
   styleUrls: ['./dev-approved-projects.component.scss']
 })
 export class DevApprovedProjectsComponent implements OnInit {
-  projects$: Observable<any>
+  projects$: Observable<ActiveProject>;
 
   constructor(private projectService: ActiveProjectsService,
               private store: Store<fromCore.State>) { }
@@ -22,8 +23,6 @@ export class DevApprovedProjectsComponent implements OnInit {
       map((user: UserInfo) => user.id),
       switchMap((id: string) => this.projectService.getActiveProjects(id))
     );
-    // this.projects$.subscribe(data => console.log('active in approved', data.activeProjects))
-    // console.log("active", this.activeProject)
   }
 
 }

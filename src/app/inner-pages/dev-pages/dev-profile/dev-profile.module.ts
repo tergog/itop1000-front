@@ -24,20 +24,20 @@ import { PagesSharedModule } from 'app/inner-pages/shared/pages-shared.module';
 import { SharedModule } from 'app/shared/shared.module';
 import { DevContactInfoEditComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-contact-info/dev-contact-info-edit/dev-contact-info-edit.component';
 import { DevContactInfoPreviewComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-contact-info/dev-contact-info-preview/dev-contact-info-preview.component';
-import { DevContactInfoAccountPreviewComponent } from './dev-contact-info/dev-contact-info-account-preview/dev-contact-info-account-preview.component';
-import { DevContactInfoLocationPreviewComponent } from './dev-contact-info/dev-contact-info-location-preview/dev-contact-info-location-preview.component';
-import { DevContactInfoLocationEditComponent } from './dev-contact-info/dev-contact-info-location-edit/dev-contact-info-location-edit.component';
-import { DevContactInfoAccountEditComponent } from './dev-contact-info/dev-contact-info-account-edit/dev-contact-info-account-edit.component';
-import { DevWorkExperienceComponent } from './dev-work-experience/dev-work-experience.component';
-import { DevProjectCardComponent } from './dev-work-experience/dev-project-card/dev-project-card.component';
-import { DevProfileEditFormComponent } from './shared/dev-profile-edit-form/dev-profile-edit-form.component';
-import { DevWantToLearnComponent } from './dev-want-to-learn/dev-want-to-learn.component';
-import { DevCertificatesComponent } from './dev-certificates/dev-certificates.component';
-import { ProfileCardComponent } from './profile-sidenav/profile-card/profile-card.component';
-import { DevSidenavComponent } from './profile-sidenav/dev-sidenav/dev-sidenav.component';
-import { DevApprovedProjectsComponent } from './dev-approved-projects/dev-approved-projects.component';
-import {DevProjectsComponent} from './dev-projects/dev-projects.component';
-import { DevProjectApplicationsComponent } from './dev-project-applications/dev-project-applications.component';
+import { DevContactInfoAccountPreviewComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-contact-info/dev-contact-info-account-preview/dev-contact-info-account-preview.component';
+import { DevContactInfoLocationPreviewComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-contact-info/dev-contact-info-location-preview/dev-contact-info-location-preview.component';
+import { DevContactInfoLocationEditComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-contact-info/dev-contact-info-location-edit/dev-contact-info-location-edit.component';
+import { DevContactInfoAccountEditComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-contact-info/dev-contact-info-account-edit/dev-contact-info-account-edit.component';
+import { DevWorkExperienceComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-work-experience/dev-work-experience.component';
+import { DevProjectCardComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-work-experience/dev-project-card/dev-project-card.component';
+import { DevProfileEditFormComponent } from 'app/inner-pages/dev-pages/dev-profile/shared/dev-profile-edit-form/dev-profile-edit-form.component';
+import { DevWantToLearnComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-want-to-learn/dev-want-to-learn.component';
+import { DevCertificatesComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-certificates/dev-certificates.component';
+import { ProfileCardComponent } from 'app/inner-pages/dev-pages/dev-profile/profile-sidenav/profile-card/profile-card.component';
+import { DevSidenavComponent } from 'app/inner-pages/dev-pages/dev-profile/profile-sidenav/dev-sidenav/dev-sidenav.component';
+import { DevApprovedProjectsComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-approved-projects/dev-approved-projects.component';
+import {DevProjectsComponent} from 'app/inner-pages/dev-pages/dev-profile/dev-projects/dev-projects.component';
+import { DevProjectApplicationsComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-project-applications/dev-project-applications.component';
 
 
 const routes: Routes = [
