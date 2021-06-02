@@ -6,7 +6,7 @@
 <div *ngrxLet="projects$; let projects">
   <div *ngIf="!activeProject && projects">
     <app-project-card class="active-project-cards"
-                      *ngFor="let project of projects.activeProjects;"
+                      *ngFor="let project of projects"
                       [project]="project"
                       (click)="onProjectClick(project)">
     </app-project-card>

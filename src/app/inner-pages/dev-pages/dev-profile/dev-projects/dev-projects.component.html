@@ -2,7 +2,7 @@
 
 <mat-tab-group mat-stretch-tabs animationDuration="300ms">
   <mat-tab label="Active Projects">
-    Active projects
+    <app-active-projects></app-active-projects>
   </mat-tab>
 
   <mat-tab label="Approved Projects">
@@ -10,7 +10,7 @@
   </mat-tab>
 
   <mat-tab label="Project Applications">
-    <app-active-projects [active]="projects$"></app-active-projects>
+    <app-dev-project-applications [projects]="projects$"></app-dev-project-applications>
   </mat-tab>
 
   <mat-tab label="Archive">

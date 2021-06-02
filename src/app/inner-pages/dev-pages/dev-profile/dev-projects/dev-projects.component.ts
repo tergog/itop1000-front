@@ -1,10 +1,11 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import * as fromCore from "../../../../core/reducers";
-import {map, switchMap} from "rxjs/operators";
-import {ActiveProject, UserInfo} from "../../../../shared/models";
-import {ActiveProjectsService} from "../../../../shared/services";
-import {Store} from "@ngrx/store";
-import {Observable} from "rxjs";
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+
+import * as fromCore from '../../../../core/reducers';
+import { Job, UserInfo } from '../../../../shared/models';
+import { ActiveProjectsService } from '../../../../shared/services';
 
 @Component({
   selector: 'app-dev-projects',
@@ -14,7 +15,8 @@ import {Observable} from "rxjs";
 })
 export class DevProjectsComponent implements OnInit {
 
-  projects$: Observable<ActiveProject>;
+  projects$: Observable<Job>;
+  active
   userAddress;
   today = new Date();
 
@@ -27,7 +29,7 @@ export class DevProjectsComponent implements OnInit {
         this.userAddress = user.address;
         return user.id;
       }),
-      switchMap((id: string) => this.projectService.getActiveProjects(id))
+      switchMap((id: string) => this.projectService.getProjectApplications(id))
     );
   }
 

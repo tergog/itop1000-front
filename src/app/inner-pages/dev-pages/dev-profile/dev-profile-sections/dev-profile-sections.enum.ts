@@ -25,5 +25,6 @@ export enum EDevProfileSections {
   ProfilePhoto,
   Location,
   ContactInfo,
-  ApprovedProjects
+  ApprovedProjects,
+  ProfileSettings
 }

@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import * as fromCore from '../../../../../core/reducers';
-import {Store} from '@ngrx/store';
-import {Observable} from 'rxjs';
-import {UserInfo} from '../../../../../shared/models';
+import { UserInfo } from '../../../../../shared/models';
+import { EDevProfileSections } from '../../dev-profile-sections/dev-profile-sections.enum';
 
 @Component({
   selector: 'app-profile-card',
@@ -11,11 +13,17 @@ import {UserInfo} from '../../../../../shared/models';
 })
 export class ProfileCardComponent implements OnInit {
 
-  userInfo$: Observable<UserInfo>;
-  constructor(private store: Store<fromCore.State>) { }
+  @Output() section = new EventEmitter<EDevProfileSections>();
+  public DevProfileSections = EDevProfileSections;
+  public userInfo$: Observable<UserInfo>;
+
+  constructor(private store: Store<fromCore.State>, private router: Router) { }
 
   ngOnInit(): void {
     this.userInfo$ = this.store.select(fromCore.getUserInfo);
   }
 
+  public onSectionCLick(selectedSection: EDevProfileSections): void {
+    this.section.emit(selectedSection);
+  }
 }

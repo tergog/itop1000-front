@@ -1,6 +1,7 @@
 import { DevProperties } from 'app/shared/models/dev-properties.model';
 import { Notification } from 'app/shared/models/notification2.model';
 import { EUserRole } from 'app/shared/enums';
+import {Job} from "./job.model";
 
 export interface UserInfo {
   id: string;
@@ -10,6 +11,7 @@ export interface UserInfo {
   firstName: string;
   lastName: string;
   devProperties: DevProperties;
+  projectApplications: Job[]
   stripeAccountId: string;
   stripeVerified: boolean;
   role: EUserRole;

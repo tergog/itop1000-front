@@ -1,0 +1,30 @@
+
+<div *ngFor="let project of projectsApplications">
+  <div class="container">
+    <div class="d__flex d__flex--items-center project-container">
+      <i class="project-logo"></i>
+      <div class="project-info">
+        <div class="project-name">{{project.title}}</div>
+        <div class="project-date">{{project.dateCreated | date:'dd MMMM' }}</div>
+        <div class="project-text"> {{project.description}}</div>
+        <div class="d__flex d__flex--justify-between pos__relative">
+          <div class="project-skills  d__flex--justify-between">
+            <span *ngFor="let category of project.categories; let idx = index" class="category">
+                {{ idx <= 3 ? category.name : ''}}
+            </span>
+<!--            <span>JavaScript</span>-->
+<!--            <span>CSS3</span>-->
+<!--            <span>JavaScript</span>-->
+<!--            <span>HTML5</span>-->
+          </div>
+          <div class="project-btn d__flex d__flex--items-center">
+            <span class="delete-btn">delete project</span>
+            <button class="chat-btn">Go to private chat</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

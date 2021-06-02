@@ -1,6 +1,13 @@
-import {AfterViewInit, ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {DomPortal} from '@angular/cdk/portal';
-import {EDevProfileSections} from '../../dev-profile-sections/dev-profile-sections.enum';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Output,
+  ViewChild
+} from '@angular/core';
+import { DomPortal } from '@angular/cdk/portal';
+import { EDevProfileSections } from '../../dev-profile-sections/dev-profile-sections.enum';
 
 
 @Component({
@@ -15,7 +22,7 @@ export class DevSidenavComponent implements AfterViewInit {
   domPortal: DomPortal<any>;
 
   public DevProfileSections = EDevProfileSections;
-  public activeSection: EDevProfileSections = EDevProfileSections.ApprovedProjects;
+  public activeSection: EDevProfileSections =  EDevProfileSections.ApprovedProjects;
 
   constructor(private cdr: ChangeDetectorRef) { }
 

@@ -8,7 +8,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
+import {MatTabsModule} from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
+import {PortalModule} from '@angular/cdk/portal';
 
 import { DevProfileSectionsComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-profile-sections/dev-profile-sections.component';
 import { ProfileSidenavComponent } from 'app/inner-pages/dev-pages/dev-profile/profile-sidenav/profile-sidenav.component';
@@ -33,11 +35,9 @@ import { DevWantToLearnComponent } from './dev-want-to-learn/dev-want-to-learn.c
 import { DevCertificatesComponent } from './dev-certificates/dev-certificates.component';
 import { ProfileCardComponent } from './profile-sidenav/profile-card/profile-card.component';
 import { DevSidenavComponent } from './profile-sidenav/dev-sidenav/dev-sidenav.component';
-import {PortalModule} from "@angular/cdk/portal";
-import {LandingModule} from "../../../landing/landing.module";
 import { DevApprovedProjectsComponent } from './dev-approved-projects/dev-approved-projects.component';
-import {DevProjectsComponent} from "./dev-projects/dev-projects.component";
-import {MatTabsModule} from "@angular/material/tabs";
+import {DevProjectsComponent} from './dev-projects/dev-projects.component';
+import { DevProjectApplicationsComponent } from './dev-project-applications/dev-project-applications.component';
 
 
 const routes: Routes = [
@@ -70,6 +70,7 @@ const routes: Routes = [
     DevSidenavComponent,
     DevApprovedProjectsComponent,
     DevProjectsComponent,
+    DevProjectApplicationsComponent,
   ],
   imports: [
     CommonModule,
