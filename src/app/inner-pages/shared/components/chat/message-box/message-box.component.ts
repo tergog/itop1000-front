@@ -59,7 +59,7 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
   ngOnInit(): void {
     this.store.dispatch(chatActions.getConverastionMessages({
       convId: this.chat.conversations.active,
-      page: this.pageLoaded++,
+      page: ++this.pageLoaded,
       count: CHAT_MESSAGES_PER_PAGE
     }));
 
@@ -112,7 +112,7 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
 
         this.store.dispatch(chatActions.getConverastionMessages({
           convId: this.chat.conversations.active,
-          page: this.pageLoaded++,
+          page: ++this.pageLoaded,
           count: CHAT_MESSAGES_PER_PAGE
         }));
 
@@ -228,7 +228,7 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
 
   getActiveConversation(chatId: string): IConversation {
     return chatId !== null ?
-      this.chat.conversations.data.filter((conv) => conv.id === chatId)[0] :
+      this.chat.conversations.data.filter((conv) => conv._id === chatId)[0] :
       null;
   }
 
@@ -261,7 +261,7 @@ export class MessageBoxComponent implements OnInit, OnDestroy, AfterViewInit, On
   }
 
   getActiveConversationById(convId: string): IConversation {
-    return this.chat.conversations.data.filter((conv) => conv.id === convId)[0];
+    return this.chat.conversations.data.filter((conv) => conv._id === convId)[0];
   }
 
   isConversationPartnerOnline(convId: string): boolean { // true - online, false - offline, null - not a private conversation

@@ -50,7 +50,7 @@ export class ChatComponent implements OnInit, OnDestroy {
             // filter((conv) => !!conv.participants.filter((part) => part.user.id === this.route.snapshot.params.id).length),
             switchMap((conv: IConversation) => iif(
               () => !!conv,
-              of(conv).pipe(tap((conv) => this.store.dispatch(chatActions.setActiveConversation({ convId: conv.id })))),
+              of(conv).pipe(tap((conv) => this.store.dispatch(chatActions.setActiveConversation({ convId: conv._id })))),
               this.chatService.createNewConversation(user.id, this.route.snapshot.params.id).pipe(
                 tap((conv) => this.store.dispatch(chatActions.createNewConversation({ conv, open: true })))
               )

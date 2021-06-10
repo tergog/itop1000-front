@@ -31,14 +31,14 @@
           <div class="chat__message-box__body__history__message-list__message__header">
           <span [ngClass]="{
               'chat__message-box__body__history__message-list__message__header__avatar': true,
-              'partner': message.sender.account.id !== user.id,
-              'online': message.sender.account.id !== user.id && isConversationPartnerOnline(chat.conversations.active)
+              'partner': message?.sender?.account?.id !== user?.id,
+              'online': message?.sender?.account?.id !== user?.id && isConversationPartnerOnline(chat.conversations.active)
             }">
-            <img *ngIf="message.sender.account.photo" src="{{ message.sender.account.photo }}" alt="Avatar">
+            <img *ngIf="message?.sender?.account?.photo" src="{{ message?.sender?.account?.photo }}" alt="Avatar">
           </span>
             <span class="chat__message-box__body__history__message-list__message__header__name">
-              {{ message.sender.account.firstName }}
-              {{ message.sender.account.lastName }}
+              {{ message?.sender?.account?.firstName }}
+              {{ message?.sender?.account?.lastName }}
           </span>
             <span class="chat__message-box__body__history__message-list__message__header__time">{{ messageTimeFormat(message.date) }}</span>
           </div>

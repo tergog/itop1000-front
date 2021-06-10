@@ -2,7 +2,7 @@
   <li
     class="chat__sidebar__rooms__room"
     *ngFor="let conv of chat.conversations.data"
-    (click)="onConversationClick(conv.id)"
+    (click)="onConversationClick(conv._id)"
   >
     <div [ngClass]="{
       'chat__sidebar__rooms__room__avatar': true,

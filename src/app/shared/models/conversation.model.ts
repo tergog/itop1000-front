@@ -2,7 +2,7 @@ import { IConversationMember } from './conversation-member.model';
 import { EConversationType } from '../enums';
 
 export interface IConversation {
-  id: string;
+  _id: string;
   createdAt: string;
   participants: IConversationMember[];
   messages: {
