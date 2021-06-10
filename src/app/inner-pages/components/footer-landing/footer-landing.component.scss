@@ -1,9 +1,65 @@
 @import 'assets/scss/variables';
 
-:host { 
+:host {
   background-color: $color-1;
   padding: 80px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.logo {
+  display: none;
+}
+
+@media screen and (max-width: 1400px) {
+ .logo {
+    display: block;
+    margin-bottom: 40px;
+ }
+  .logo-inner {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1150px) {
+
+  .footer {
+    flex-direction: column;
+  }
+
+  .first-list {
+    position: relative;
+    left: 22px;
+  }
+
+  .second-list {
+    position: relative;
+    left: 111px;
+  }
+
+  .footer-contacts {
+    margin-top: 40px;
+  }
+
+  .footer-line {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  .text {
+    font-size: 18px;
+  }
+
+  .first-list {
+    position: relative;
+    left: 12px;
+  }
+
+  .second-list {
+    width: 250px;
+    position: relative;
+    left: 50px;
+  }
 }

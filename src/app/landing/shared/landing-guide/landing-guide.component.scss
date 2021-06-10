@@ -1,0 +1,32 @@
+@media screen and (max-width: 470px) {
+  .title {
+    padding-left: 50px;
+  }
+  .title-text {
+    font-size: 50px;
+  }
+  .item-list {
+    padding-left: 40px;
+    align-items: flex-start;
+  }
+}
+
+@media screen and (max-width: 424px) {
+  .title {
+    padding-left: 25px;
+    font-size: 40px;
+  }
+  .title-text {
+    font-size: 40px;
+  }
+  .item-list {
+    padding: 0 20px;
+  }
+  .headline {
+   font-size: 20px;
+  }
+  .description{
+    font-size: 20px;
+  }
+}
+

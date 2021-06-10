@@ -7,6 +7,10 @@
   display: flex;
   justify-content: space-between;
   position: relative;
+
+  @media(max-width: 1150px) {
+    padding: 15px 50px;
+  }
 }
 
 .registration-btn {
@@ -14,4 +18,65 @@
   border-radius: 50px;
   display: block;
   border: 1px solid $text-color-5;
+}
+
+.burger_items {
+    display: none;
+}
+
+@media screen and (max-width: 1024px) {
+
+  :host {
+    padding: 15px 15px;
+  }
+
+  .header-items {
+    padding: 10px 20px;
+  }
+  .burger_items {
+    display: block;
+  }
+
+  .login-btn {
+    font-size: 15px;
+  }
+
+  .registration-btn {
+    width: 100px;
+    height: 40px;
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 950px) {
+
+  :host {
+    padding: 15px 15px;
+  }
+
+  .header-items {
+    display: none;
+  }
+
+  .burger_items {
+    display: block;
+  }
+
+  .login-btn {
+    font-size: 15px;
+  }
+
+  .registration-btn {
+    width: 100px;
+    height: 40px;
+    font-size: 15px;
+  }
+}
+
+
+@media screen and (max-width: 500px) {
+
+  :host {
+    padding: 15px 10px;
+  }
 }

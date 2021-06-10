@@ -1,13 +1,13 @@
-<div class="d__flex text text__fw--700 text__x7lg text__uppercase text__font--2 m__bottom--30">
-  <span class="m__right--20">How</span>
-  <span class="text__color--2 m__right--20">itop 1000</span>
-  <span>works</span>
+<div class="title d__flex--justify-around text text__fw--700 text__x7lg text__uppercase text__font--2 m__bottom--30">
+  <span class="title-text m__right--20">How</span>
+  <span class="title-text text__color--2 m__right--20">itop 1000</span>
+  <span class="title-text">works</span>
 </div>
 
-<div *ngFor="let item of data; let i = index" class="m__top--45 d__flex d__flex--items-center d__flex--direction-column">
-  <div class="d__flex text__fw--400 text__x4lg text__uppercase">
-    <span class="text__color--2 m__right--10">{{ i + 1 }}.</span>
-    <span>{{ item.title }}</span>
+<div *ngFor="let item of data; let i = index" class="item-list m__top--45 d__flex d__flex--items-center d__flex--direction-column">
+  <div class="items d__flex text__fw--400 text__x4lg text__uppercase">
+    <span class="headline text__color--2 m__right--10">{{ i + 1 }}.</span>
+    <span class="description">{{ item.title }}</span>
   </div>
-  <span class="m__top--15 text text__fw--30 text__xlg text__color--6">{{ item.description }}</span>
+  <span class="item-desc m__top--15 text text__fw--30 text__xlg text__color--6">{{ item.description }}</span>
 </div>

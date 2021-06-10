@@ -17,3 +17,44 @@
 .description {
   width: 400px;
 }
+
+.title {
+  @media (max-width: 920px) {
+    font-size: 40px;
+  }
+
+  @media (max-width: 710px) {
+    font-size: 25px;
+  }
+
+  @media (max-width: 360px) {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 400px){
+  .text span {
+    word-wrap: break-word;
+    display: block;
+    max-width: 300px;
+  }
+  .title-wrap {
+      width: 330px;
+  }
+
+  .headline {
+    font-size: 20px;
+  }
+
+  .description {
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 360px){
+
+  .title-wrap {
+    width: 300px;
+    margin-left: 30px;
+  }
+}
