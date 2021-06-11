@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, HostBinding, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-header-landing',
@@ -6,12 +6,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header-landing.component.scss'],
 })
 export class HeaderLandingComponent implements OnInit {
+  isOpened: boolean;
+
+  @Output() sideBarOpened = new EventEmitter<boolean>();
 
   constructor() {
+    this.isOpened = false;
   }
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
+  toggleSidebar() {
+    this.isOpened = !this.isOpened;
+    this.sideBarOpened.emit(this.isOpened);
+  }
 }

@@ -13,6 +13,7 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { NgxPhoneMaskModule } from 'ngx-phone-mask';
 import { ReactiveComponentModule } from '@ngrx/component';
 
+
 import { InputComponent } from 'app/shared/components/input/input.component';
 import { CheckboxComponent } from 'app/shared/components/checkbox/checkbox.component';
 import { ButtonComponent } from 'app/shared/components/button/button.component';
@@ -63,7 +64,7 @@ import { AlertContainerComponent } from 'app/auth/components/alert-container/ale
     SelectComponent,
     DropDownListComponent,
     AlertContainerComponent,
-    ReactiveComponentModule
+    ReactiveComponentModule,
   ],
   imports: [
     ReactiveComponentModule,
@@ -79,7 +80,8 @@ import { AlertContainerComponent } from 'app/auth/components/alert-container/ale
     NgCircleProgressModule,
     GooglePlaceModule,
     ReactiveFormsModule,
-    NgxPhoneMaskModule
+    NgxPhoneMaskModule,
+
   ],
   providers: [
     CircleProgressOptions,

@@ -1,0 +1,33 @@
+ng-sidebar-container {
+  height: 100vh;
+  position: fixed;
+}
+
+.sidebar-inner {
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+}
+
+.sidebar-auth {
+  margin-top: 15px;
+}
+
+::ng-deep .ng-sidebar {
+  background-color: #000000;
+  opacity: 0.8;
+  width: 300px;
+  padding: 2em 3em;
+
+  @media (max-width: 380px) {
+    width: 250px;
+  }
+}
+
+.text {
+  margin-bottom: 20px;
+}
+
+.overlay {
+ background-color: rgba(255, 255, 255, 0.5)
+}

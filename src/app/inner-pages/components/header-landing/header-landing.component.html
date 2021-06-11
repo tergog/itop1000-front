@@ -13,34 +13,10 @@
     <a class="text text__fw--300 text__color--3 text__xlg text__decoration--none" href="">Question-answer</a>
 </div>
 
-<!--<div class="burger-items">-->
-<!--  <label for="toggle">Hello</label>-->
-<!--  <input type="checkbox" id="toggle">-->
-<!--  <nav>-->
-<!--    <ul>-->
-<!--      <li>-->
-<!--        <a class="text text__fw&#45;&#45;300 text__color&#45;&#45;3 text__xlg text__decoration&#45;&#45;none m__right&#45;&#45;20" href="">-->
-<!--          Services-->
-<!--        </a>-->
-<!--      </li>-->
-<!--      <li>-->
-<!--        <a class="text text__fw&#45;&#45;300 text__color&#45;&#45;3 text__xlg text__decoration&#45;&#45;none m__right&#45;&#45;20" href="">-->
-<!--          Specialists-->
-<!--        </a>-->
-<!--      </li>-->
-<!--      <li>-->
-<!--        <a class="text text__fw&#45;&#45;300 text__color&#45;&#45;3 text__xlg text__decoration&#45;&#45;none m__right&#45;&#45;20" href="">-->
-<!--          Projects-->
-<!--        </a>-->
-<!--      </li>-->
-<!--      <li>-->
-<!--        <a class="text text__fw&#45;&#45;300 text__color&#45;&#45;3 text__xlg text__decoration&#45;&#45;none" href="">-->
-<!--          Question-answer-->
-<!--        </a>-->
-<!--      </li>-->
-<!--    </ul>-->
-<!--  </nav>-->
-<!--</div>-->
+  <button mat-icon-button class="visible burger-menu" (click)="toggleSidebar()">
+    <mat-icon class="burger-menu"> {{!isOpened ? 'menu' : 'close'}}</mat-icon>
+  </button>
+
 
 <div class="d__flex d__flex--items-center">
   <a class="login-btn m__right--20 text text__decoration--none text__fw--300 text__xlg text__color--5 cursor__pointer" routerLink="/auth/login">Sign in</a>

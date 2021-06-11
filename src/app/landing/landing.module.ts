@@ -13,6 +13,10 @@ import { LandingClientComponent } from 'app/landing/landing-client/landing-clien
 import { LandingFreelancerComponent } from 'app/landing/landing-freelancer/landing-freelancer.component';
 import { LandingProjectsComponent } from 'app/landing/shared/landing-projects/landing-projects.component';
 import { LandingDescriptionComponent } from 'app/landing/shared/landing-description/landing-description.component';
+import { SidebarComponent } from "app/landing/sidebar/sidebar.component";
+import { SidebarModule } from "ng-sidebar";
+
+
 
 const routes: Routes = [
   {
@@ -46,12 +50,17 @@ const routes: Routes = [
     LandingGuideComponent,
     LandingTopComponent,
     LandingProjectsComponent,
-    LandingDescriptionComponent
+    LandingDescriptionComponent,
+    SidebarComponent,
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    SharedModule
+    SidebarModule.forRoot(),
+    SharedModule,
+  ],
+  exports: [
+    SidebarComponent
   ]
 })
 export class LandingModule { }
