@@ -1,11 +1,30 @@
+// export enum EDevProfileSections {
+//   ContactInfo,
+//   ProfileSettings,
+//   CategoriesAndSkills,
+//   WorkExperience,
+//   ActiveProjects,
+//   WantToLearn,
+//   Certificates,
+//   Balance,
+//   PasswordAndSecurity
+// }
+
 export enum EDevProfileSections {
-  ContactInfo,
-  ProfileSettings,
+  Education,
+  SoftSAndSkills,
   CategoriesAndSkills,
-  WorkExperience,
-  ActiveProjects,
-  WantToLearn,
-  Certificates,
-  Balance,
-  PasswordAndSecurity
+  PasswordAndSecurity,
+  BillingAndPayments,
+  Reviews,
+  Employment,
+  ExpertiseLevel,
+  Contracts,
+  Languages,
+  HourlyRate,
+  ProfilePhoto,
+  Location,
+  ContactInfo,
+  ApprovedProjects,
+  ProfileSettings
 }

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { environment } from 'environments/environment';
 import { ApiConstants } from 'app/constants/api.constants';
-import { ActiveProject } from 'app/shared/models';
+import { ActiveProject, Job } from 'app/shared/models';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,11 @@ export class ActiveProjectsService {
 
   public getActiveProjects(id: string): Observable<ActiveProject> {
     return this.http.get<ActiveProject>(`${this.apiUrl}${ApiConstants.accounts}/${id}`);
+  }
+
+  public getProjectApplications(id: string): Observable<Job> {
+    const project = this.http.get<Job>(`${this.apiUrl}${ApiConstants.accounts}/${id}`);
+    return project
   }
 
   public setProjects(project: ActiveProject): Observable<ActiveProject> {

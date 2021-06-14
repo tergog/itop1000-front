@@ -3,7 +3,7 @@
 <div class="m__top--50 d__flex d__flex--wrap d__flex--justify-center">
 
   <div *ngFor="let item of data" class="box m--5 m__top--30 d__flex d__flex--direction-column d__flex--items-center">
-    <div class="photo m__top--30"></div>
+    <div class="photo m__top--30 default-logo-top-companies"></div>
     <span class="m__top--15 text text__fw--500 text__x4lg text__uppercase text__underline cursor__pointer" *ngIf="type === 'companies'">{{ item }}</span>
     <div *ngIf="type === 'developers'" class="m__top--15 d__flex d__flex--items-center d__flex--direction-column">
       <span class="text text__fw--500 text__x4lg text__uppercase text__underline cursor__pointer">{{ item.name }}</span>

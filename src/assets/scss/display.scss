@@ -26,6 +26,11 @@
       align-items: center;
     }
 
+    &--justify--items-center {
+      align-items: center;
+      justify-content: center;
+    }
+
     &--wrap {
       flex-wrap: wrap;
     }
