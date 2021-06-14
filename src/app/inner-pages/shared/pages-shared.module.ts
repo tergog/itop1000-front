@@ -8,6 +8,7 @@ import { InViewportModule } from '@thisissoon/angular-inviewport';
 import { NgxStripeModule } from 'ngx-stripe';
 import { MatSelectModule } from '@angular/material/select';
 import { ReactiveComponentModule } from '@ngrx/component';
+import { MatButtonModule } from "@angular/material/button";
 
 import { ChangePasswordDialogComponent } from 'app/inner-pages/shared/components//change-password-dialog/change-password-dialog.component';
 import { ProfileChangePasswordComponent } from 'app/inner-pages/shared/components/profile-change-password/profile-change-password.component';
@@ -34,9 +35,7 @@ import { GetPaidNowDialogComponent } from './components/get-paid-now-dialog/get-
 import { ActiveProjectsComponent } from './components/active-projects/active-projects.component';
 import { BankAccountDialogComponent } from './components/bank-account-dialog/bank-account-dialog.component';
 import { NotificationsPopupComponent } from './components/notifications-popup/notifications-popup.component';
-import { MatButtonModule } from "@angular/material/button";
 import { LandingModule } from "../../landing/landing.module";
-
 
 
 @NgModule({

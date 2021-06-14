@@ -13,9 +13,9 @@ export class SidebarComponent implements OnInit, OnChanges {
 
   constructor() {}
 
-  ngOnInit(): void {};
+  ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.opened = this.status
+    this.opened = this.status;
   }
 }
