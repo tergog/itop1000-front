@@ -37,21 +37,24 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
-    LandingClientComponent,
-    LandingFreelancerComponent,
-    LandingTitleComponent,
-    LandingSeparatorComponent,
-    LandingBenefitsComponent,
-    LandingGuideComponent,
-    LandingTopComponent,
-    LandingProjectsComponent,
-    LandingDescriptionComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    SharedModule
-  ]
+    declarations: [
+        LandingClientComponent,
+        LandingFreelancerComponent,
+        LandingTitleComponent,
+        LandingSeparatorComponent,
+        LandingBenefitsComponent,
+        LandingGuideComponent,
+        LandingTopComponent,
+        LandingProjectsComponent,
+        LandingDescriptionComponent
+    ],
+    // exports: [
+    //     LandingSeparatorComponent
+    // ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        SharedModule
+    ]
 })
 export class LandingModule { }

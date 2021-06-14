@@ -34,6 +34,8 @@ import { GetPaidNowDialogComponent } from './components/get-paid-now-dialog/get-
 import { ActiveProjectsComponent } from './components/active-projects/active-projects.component';
 import { BankAccountDialogComponent } from './components/bank-account-dialog/bank-account-dialog.component';
 import { NotificationsPopupComponent } from './components/notifications-popup/notifications-popup.component';
+import { SidenavSeparatorComponent } from './components/sidenav-separator/sidenav-separator.component';
+import { DevLocationComponent } from './components/dev-location/dev-location.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +62,8 @@ import { NotificationsPopupComponent } from './components/notifications-popup/no
     BankAccountDialogComponent,
     ActiveProjectsComponent,
     NotificationsPopupComponent,
+    SidenavSeparatorComponent,
+    DevLocationComponent,
   ],
   imports: [
     RouterModule,
@@ -74,17 +78,19 @@ import { NotificationsPopupComponent } from './components/notifications-popup/no
     ReactiveComponentModule,
     MatSelectModule
   ],
-  exports: [
-    ChangePasswordDialogComponent,
-    ProfileChangePasswordComponent,
-    ProfileSectionHeaderComponent,
-    JobComponent,
-    DeveloperResumeComponent,
-    StandardBgWrapComponent,
-    ProjectCardComponent,
-    ActiveProjectsComponent,
-    NotificationsPopupComponent
-  ],
+    exports: [
+        ChangePasswordDialogComponent,
+        ProfileChangePasswordComponent,
+        ProfileSectionHeaderComponent,
+        JobComponent,
+        DeveloperResumeComponent,
+        StandardBgWrapComponent,
+        ProjectCardComponent,
+        ActiveProjectsComponent,
+        NotificationsPopupComponent,
+        SidenavSeparatorComponent,
+        DevLocationComponent
+    ],
   providers: [
     DevProfileService
   ]
