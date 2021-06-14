@@ -1,4 +1,4 @@
-import { Action } from '@ngrx/store';
+import { Action, createAction, props } from '@ngrx/store';
 
 import { UserInfo } from 'app/shared/models';
 import { DevProject } from 'app/shared/models/dev-project.model';
@@ -26,6 +26,8 @@ export const ADD_CERTIFICATE = '[Core] Add certificate';
 export const DELETE_CERTIFICATE = '[Core] Delete certificate';
 
 export const ON_VALID_SESSION = '[Core] On valid session';
+
+export const UPDATE_LAST_SEEN = '[Core] Update user last seen';
 
 /**
  * Save token to local storage
@@ -115,6 +117,15 @@ export class DeleteProjectAction implements Action {
   }
 }
 
+export class UpdateUserLastSeen implements  Action {
+  readonly type = UPDATE_LAST_SEEN;
+  constructor(public userId: string, public lastSeen: string) {}
+}
+// export class UpdateUserLastSeen implements  Action {
+//   readonly type = UPDATE_LAST_SEEN;
+//   constructor(public userId: string, public lastSeen: string) {}
+// }
+
 /**
  * Exports possible core action types
  */
@@ -135,4 +146,5 @@ export type Actions =
   | LoadProjectsErrorAction
   | UpdateProjectAction
   | AddProjectAction
-  | DeleteProjectAction;
+  | DeleteProjectAction
+  | UpdateUserLastSeen;

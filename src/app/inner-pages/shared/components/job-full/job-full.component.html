@@ -51,7 +51,7 @@
             </div>
           </div>
 
-          <div (click)="onRespondClick()" *ngIf="!canEdit; else canEditButtons">
+          <div (click)="onRespondClick(job.userId)" *ngIf="!canEdit; else canEditButtons">
             <button class="btn-respond">RESPOND</button>
           </div>
 

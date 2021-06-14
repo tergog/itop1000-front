@@ -1,6 +1,5 @@
 <app-standard-bg-wrap *ngrxLet="developers$ as developers">
   <div>
-
     <app-developer-resume *ngFor="let developer of developers"
                           [developer]="developer"
                           (profile)="onProfileClick($event)"

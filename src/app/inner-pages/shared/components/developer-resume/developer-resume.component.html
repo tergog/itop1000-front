@@ -1,5 +1,5 @@
 <div class="d__flex d__flex--direction-column d__flex--items-center photo-wrap">
-  <img [src]="developer.photo" alt="photo" />
+  <img [src]="developer.photo ? developer.photo : 'assets/icons/profile-photo.svg'" alt="photo" />
 
   <div
     class="d__flex d__flex--direction-column d__flex--justify-center text__center m__top--10 cursor__pointer"
@@ -44,4 +44,8 @@
 
     <span class="text text__md text__color--3">{{ developer.dateUpdated }}</span>
   </div>
+</div>
+<div class="m__left--auto m__top--20 m__right--20">
+  <button class="accept-btn" (click)="openChatWithDev()">Reply</button>
+  <button class="reject-btn">Decline</button>
 </div>

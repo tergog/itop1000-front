@@ -19,6 +19,7 @@ import { TokenInterceptor } from 'app/shared/interceptors/token.interceptor';
 import { ClientModule } from './core/client/store/client.module';
 import { SharedModule } from './shared/shared.module';
 import { ProjectApplicationsModule } from './inner-pages/client-pages/project-applications/project-applications.module';
+import { ChatModule } from './core/chats/store/chat.module';
 
 
 @NgModule({
@@ -34,10 +35,10 @@ import { ProjectApplicationsModule } from './inner-pages/client-pages/project-ap
     NgxStripeModule.forRoot('pk_test_51HfRHCEuY58zLN527L8buA0YyVEdwwmwCiPgRNRiMhWdDdXaKgYOYeQ6bDNwDPXMtaAmtSSnbpaSzYYceAl7bSwh00wB02HoJj'),
     StoreModule.forRoot({}),
     SharedModule,
-    ProjectApplicationsModule,
     EffectsModule.forRoot(),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    ReactiveComponentModule
+    ReactiveComponentModule,
+    ChatModule
   ],
   providers: [
     {
@@ -52,6 +53,7 @@ import { ProjectApplicationsModule } from './inner-pages/client-pages/project-ap
     },
     AuthGuard,
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [ AppComponent ],
 })
-export class AppModule {}
+export class AppModule {
+}

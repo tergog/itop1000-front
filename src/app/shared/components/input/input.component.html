@@ -5,7 +5,9 @@
   [type]="isHiddenPassword ? 'password' : 'text'"
   [(ngModel)]="value"
   [placeholder]="placeholder"
+  [disabled]="disabled"
   (blur)="onTouched()"
 >
+
 
 <ng-content></ng-content>

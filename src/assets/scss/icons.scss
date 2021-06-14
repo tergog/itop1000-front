@@ -171,6 +171,16 @@
   &-gray {
     background: url(~assets/icons/email-gray.svg);
   }
+
+  &-yellow {
+    background: url(~assets/icons/email-yellow.svg);
+  }
+
+  &-yellow-open {
+    width: 16px;
+    height: 16px;
+    background: url(~assets/icons/email-yellow-open.svg);
+  }
 }
 
 .email-popup {
@@ -637,3 +647,40 @@
 //end dev sidenav info
 }
 
+.gear {
+  width: 30px;
+  height: 30px;
+  background-image: url(~assets/icons/gear.svg);
+}
+
+.star {
+  width: 30px;
+  height: 30px;
+  background-image: url(~assets/icons/star.svg);
+
+  &-filled {
+    background-image: url(~assets/icons/star-filled.svg);
+  }
+}
+
+i.loader {
+  width: 38px;
+  height: 38px;
+  background-image: url(~assets/icons/loader.svg);
+}
+
+i.send {
+  width: 16px;
+  height: 16px;
+  background-image: url(~assets/icons/send.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+i.search-alt {
+  width: 30px;
+  height: 30px;
+  background-image: url(~assets/icons/search-alt.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}

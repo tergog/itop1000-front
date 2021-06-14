@@ -1,0 +1,46 @@
+@import '~assets/scss/variables.scss';
+
+:host {
+  font-family: $font-2, sans-serif;
+  display: block;
+  height: calc(100% - 80px);
+  overflow: auto;
+  background: url("~assets/img/search-bg.png");
+}
+
+.chat {
+  display: grid;
+  grid-template-rows: 100%;
+  grid-template-columns: 30% 70%;
+  width: 75%;
+  height: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+
+  @media screen and (max-width: $screen-m) {
+    width: 95%;
+  }
+
+  &__sidebar {
+    margin-top: 20px;
+    padding-right: 20px;
+    position: relative;
+
+    &:after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 100%;
+      background: url(~assets/icons/line-sparkl.svg);
+      background-position-y: -40px;
+      position: absolute;
+      top: 0;
+      right: -20px;
+    }
+  }
+
+  &__history {
+    margin-top: 20px;
+    padding-left: 20px;
+  }
+}

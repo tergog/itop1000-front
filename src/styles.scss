@@ -269,7 +269,7 @@ i {
   border-radius: 50%;
 }
 
-.footer-line {
+.line {
   border: 1px solid $color-8;
 }
 
@@ -297,6 +297,12 @@ a:hover {
 .active-link {
   font-weight: 500;
   color: $text-color-5 !important;
+}
+
+.clearfix:after {
+  content: '';
+  display: table;
+  clear: both;
 }
 
 html, body { height: 100%; }
