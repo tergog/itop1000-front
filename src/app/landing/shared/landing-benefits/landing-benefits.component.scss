@@ -48,6 +48,7 @@
 
   .description {
     font-size: 13px;
+    max-width: 370px;
   }
 }
 
@@ -56,5 +57,12 @@
   .title-wrap {
     width: 300px;
     margin-left: 30px;
+  }
+}
+
+@media screen and (max-width: 330px){
+
+  .description {
+    max-width: 310px;
   }
 }

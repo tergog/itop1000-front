@@ -11,6 +11,10 @@
   @media(max-width: 1150px) {
     padding: 15px 50px;
   }
+
+  @media(max-width: 320px) {
+    max-width: 320px;
+  }
 }
 
 .registration-btn {

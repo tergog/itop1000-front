@@ -1,19 +1,21 @@
 <app-header-landing [class]="sidebarStatus? 'header' : ''" (sideBarOpened)="changed($event)"></app-header-landing>
 <app-sidebar [status]="sidebarStatus"></app-sidebar>
-  <div class="red-line w__100per"></div>
-  <div class="container d__flex d__flex--direction-column d__flex--items-center text__color--3 text">
+  <div class="red-line w__100per" [class]="sidebarStatus? 'sidebar-active' : ''"></div>
+  <div class="container d__flex d__flex--direction-column d__flex--items-center text__color--3 text" [class]="sidebarStatus? 'sidebar-opened' : ''">
 
     <div class="m__top--50 d__flex d__flex--items-center text__xxlg">
-        <a routerLink="client" routerLinkActive="active-link" class="text__uppercase text__fw--300 m__right--5 cursor__pointer">Client</a>
-        <span class="text__color--2 m__right--5">|</span>
-        <a routerLink="freelancer" routerLinkActive="active-link" class="text__uppercase text__fw--300 cursor__pointer">Freelancer</a>
-      </div>
+      <a routerLink="client" routerLinkActive="active-link" class="text__uppercase text__fw--300 m__right--5 cursor__pointer">Client</a>
+      <span class="text__color--2 m__right--5">|</span>
+      <a routerLink="freelancer" routerLinkActive="active-link" class="text__uppercase text__fw--300 cursor__pointer">Freelancer</a>
+    </div>
 
     <div class="gray-line m__top--50"></div>
 
-      <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
 
-    </div>
-<div class="red-line"></div>
-<app-footer-landing></app-footer-landing>
+  </div>
+  <div class="red-line"></div>
+  <app-footer-landing></app-footer-landing>
+
+
 

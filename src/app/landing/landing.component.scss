@@ -37,3 +37,12 @@ a {
   z-index: 600;
 }
 
+
+.sidebar-active {
+  position: relative;
+  top: 80px;
+}
+
+.sidebar-opened {
+  margin-top: 80px;
+}
