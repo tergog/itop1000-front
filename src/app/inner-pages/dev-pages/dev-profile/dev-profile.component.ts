@@ -9,7 +9,7 @@ import { EDevProfileSections } from 'app/inner-pages/dev-pages/dev-profile/dev-p
 })
 export class DevProfileComponent implements OnInit {
 
-  public selectedSection: EDevProfileSections = EDevProfileSections.ContactInfo;
+  public selectedSection: EDevProfileSections = EDevProfileSections.ApprovedProjects;
 
   constructor() {
   }

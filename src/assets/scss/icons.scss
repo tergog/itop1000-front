@@ -19,6 +19,10 @@
   }
 }
 
+.default-logo-top-companies {
+  background: url(~assets/icons/default-logo-top-companies.svg) no-repeat center;
+}
+
 .arrow-down {
   min-width: 18px;
   height: 18px;
@@ -105,7 +109,7 @@
 .easy-to-use {
   min-width: 50px;
   height: 50px;
-  background: url(~assets/icons/easy-to-use.svg);
+  background: url(~assets/icons/easy-to-use.svg) no-repeat center;
   background-size: contain;
 }
 
@@ -260,13 +264,6 @@
   }
 }
 
-.settings {
-  width: 15px;
-  height: 15px;
-  opacity: 0.25;
-  background-image: url(~assets/icons/settings.svg);
-}
-
 .payments {
   width: 15px;
   height: 11px;
@@ -280,6 +277,102 @@
   opacity: 0.25;
   background-image: url(~assets/icons/security.svg);
 }
+
+//sidenav-dev
+.default-sidenav-photo {
+  background: url(~assets/icons/default-profile-photo.svg) center no-repeat #252525;
+}
+
+.approved-projects-sidenav {
+  width: 15px;
+  height: 15px;
+  background: url(~assets/icons/approved-projects-light.svg) no-repeat center;
+}
+
+.categories-and-skills-sidenav {
+  width: 15px;
+  height: 15px;
+  background: url(~assets/icons/categories-and-skills-light.svg) no-repeat center;
+}
+
+.password-and-security-sidenav {
+  width: 15px;
+  height: 15px;
+  background: url(~assets/icons/password-and-security-light.svg) no-repeat center;
+}
+
+.education-sidenav {
+  width: 15px;
+  height: 15px;
+  background: url(~assets/icons/education-sidenav-light.svg) no-repeat center;
+}
+
+.soft-skills-sidenav {
+  width: 15px;
+  height: 15px;
+  background: url(~assets/icons/soft-skills-light.svg) no-repeat center;
+}
+
+.reviews-sidenav {
+  width: 15px;
+  height: 15px;
+  background: url(~assets/icons/reviews-sidenav-light.svg) no-repeat center;
+}
+
+.employment-sidenav {
+  width: 15px;
+  height: 15px;
+  background: url(~assets/icons/employment-light.svg) no-repeat center;
+}
+
+.expertise-level-sidenav {
+  width: 15px;
+  height: 15px;
+  background: url(~assets/icons/expertise-level-light.svg) no-repeat center;
+}
+
+.contracts-sidenav {
+  width: 15px;
+  height: 15px;
+  background: url(~assets/icons/contracts-light.svg) no-repeat center;
+}
+
+.languages-sidenav {
+  width: 15px;
+  height: 15px;
+  background: url(~assets/icons/languages-light.svg) no-repeat center;
+}
+
+.hourly-rate-sidenav {
+  width: 15px;
+  height: 15px;
+  background: url(~assets/icons/hourly-rate-light.svg) no-repeat center;
+}
+
+.profile-photo-sidenav {
+  width: 15px;
+  height: 15px;
+  background: url(~assets/icons/profile-photo-light.svg) no-repeat center;
+}
+
+.location-sidenav {
+  width: 15px;
+  height: 15px;
+  background: url(~assets/icons/location-light.svg) no-repeat center;
+}
+
+.contact-info-sidenav {
+  width: 15px;
+  height: 15px;
+  background: url(~assets/icons/contact-info-light.svg) no-repeat center;
+}
+
+.billing-and-payments-sidenav {
+  width: 15px;
+  height: 15px;
+  background: url(~assets/icons/billing-and-payments-light.svg) no-repeat center;
+}
+//end of dev side-nav
 
 .categories {
   width: 15px;
@@ -477,5 +570,70 @@
     background-image: url(~assets/icons/reviews-active.svg);
   }
 
+  //dev sidenav active icons
+  .approved-projects-sidenav {
+    background-image: url(~assets/icons/approved-projects-active.svg);
+  }
+
+  .education-sidenav {
+    background-image: url(~assets/icons/education-dev-active.svg);
+  }
+
+  .soft-skills-sidenav {
+    background-image: url(~assets/icons/soft-skills-active.svg);
+  }
+
+  .categories-and-skills-sidenav {
+    background-image: url(~assets/icons/categories-and-skills-active.svg);
+  }
+
+  .password-and-security-sidenav {
+    background-image: url(~assets/icons/password-and-security-active.svg);
+  }
+
+  .billing-and-payments-sidenav {
+    background-image: url(~assets/icons/billing-and-payment-active.svg);
+  }
+
+  .reviews-sidenav {
+    background-image: url(~assets/icons/reviews-sidenav-active.svg);
+  }
+
+  .employment-sidenav {
+    background-image: url(~assets/icons/employment-active.svg);
+  }
+
+  .expertise-level-sidenav {
+    background-image: url(~assets/icons/expertise-level-light.svg);
+  }
+
+  .languages-sidenav {
+    background-image: url(~assets/icons/language-active.svg);
+  }
+
+  .hourly-rate-sidenav {
+    background-image: url(~assets/icons/hourly-rate-active.svg);
+  }
+
+  .profile-photo-sidenav {
+    background-image: url(~assets/icons/profile-photo-active.svg);
+  }
+
+  .location-sidenav {
+    background-image: url(~assets/icons/location-active.svg);
+  }
+
+  .contact-info-sidenav {
+    background-image: url(~assets/icons/contact-info-dev-active.svg);
+  }
+
+  .contracts-sidenav {
+    background-image: url(~assets/icons/contracts-active.svg);
+  }
+
+  .expertise-level-sidenav {
+    background-image: url(~assets/icons/expirience-level-active.svg);
+  }
+//end dev sidenav info
 }
 

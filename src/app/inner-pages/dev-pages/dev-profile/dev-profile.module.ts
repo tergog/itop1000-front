@@ -8,7 +8,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
+import {MatTabsModule} from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
+import {PortalModule} from '@angular/cdk/portal';
 
 import { DevProfileSectionsComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-profile-sections/dev-profile-sections.component';
 import { ProfileSidenavComponent } from 'app/inner-pages/dev-pages/dev-profile/profile-sidenav/profile-sidenav.component';
@@ -22,15 +24,20 @@ import { PagesSharedModule } from 'app/inner-pages/shared/pages-shared.module';
 import { SharedModule } from 'app/shared/shared.module';
 import { DevContactInfoEditComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-contact-info/dev-contact-info-edit/dev-contact-info-edit.component';
 import { DevContactInfoPreviewComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-contact-info/dev-contact-info-preview/dev-contact-info-preview.component';
-import { DevContactInfoAccountPreviewComponent } from './dev-contact-info/dev-contact-info-account-preview/dev-contact-info-account-preview.component';
-import { DevContactInfoLocationPreviewComponent } from './dev-contact-info/dev-contact-info-location-preview/dev-contact-info-location-preview.component';
-import { DevContactInfoLocationEditComponent } from './dev-contact-info/dev-contact-info-location-edit/dev-contact-info-location-edit.component';
-import { DevContactInfoAccountEditComponent } from './dev-contact-info/dev-contact-info-account-edit/dev-contact-info-account-edit.component';
-import { DevWorkExperienceComponent } from './dev-work-experience/dev-work-experience.component';
-import { DevProjectCardComponent } from './dev-work-experience/dev-project-card/dev-project-card.component';
-import { DevProfileEditFormComponent } from './shared/dev-profile-edit-form/dev-profile-edit-form.component';
-import { DevWantToLearnComponent } from './dev-want-to-learn/dev-want-to-learn.component';
-import { DevCertificatesComponent } from './dev-certificates/dev-certificates.component';
+import { DevContactInfoAccountPreviewComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-contact-info/dev-contact-info-account-preview/dev-contact-info-account-preview.component';
+import { DevContactInfoLocationPreviewComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-contact-info/dev-contact-info-location-preview/dev-contact-info-location-preview.component';
+import { DevContactInfoLocationEditComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-contact-info/dev-contact-info-location-edit/dev-contact-info-location-edit.component';
+import { DevContactInfoAccountEditComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-contact-info/dev-contact-info-account-edit/dev-contact-info-account-edit.component';
+import { DevWorkExperienceComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-work-experience/dev-work-experience.component';
+import { DevProjectCardComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-work-experience/dev-project-card/dev-project-card.component';
+import { DevProfileEditFormComponent } from 'app/inner-pages/dev-pages/dev-profile/shared/dev-profile-edit-form/dev-profile-edit-form.component';
+import { DevWantToLearnComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-want-to-learn/dev-want-to-learn.component';
+import { DevCertificatesComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-certificates/dev-certificates.component';
+import { ProfileCardComponent } from 'app/inner-pages/dev-pages/dev-profile/profile-sidenav/profile-card/profile-card.component';
+import { DevSidenavComponent } from 'app/inner-pages/dev-pages/dev-profile/profile-sidenav/dev-sidenav/dev-sidenav.component';
+import { DevApprovedProjectsComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-approved-projects/dev-approved-projects.component';
+import {DevProjectsComponent} from 'app/inner-pages/dev-pages/dev-profile/dev-projects/dev-projects.component';
+import { DevProjectApplicationsComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-project-applications/dev-project-applications.component';
 
 
 const routes: Routes = [
@@ -59,6 +66,11 @@ const routes: Routes = [
     DevProfileEditFormComponent,
     DevWantToLearnComponent,
     DevCertificatesComponent,
+    ProfileCardComponent,
+    DevSidenavComponent,
+    DevApprovedProjectsComponent,
+    DevProjectsComponent,
+    DevProjectApplicationsComponent,
   ],
   imports: [
     CommonModule,
@@ -74,7 +86,9 @@ const routes: Routes = [
     ReactiveComponentModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSelectModule
+    MatSelectModule,
+    PortalModule,
+    MatTabsModule,
   ],
   providers: [
     DevProfileService

@@ -4,9 +4,10 @@ import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { JobsService } from 'app/shared/services';
 import { Job } from 'app/shared/models';
+import { JobsService } from 'app/shared/services';
 import { getJobs, State } from 'app/core/developers/store/index';
+import { getUserInfo } from '../../../core/reducers';
 
 @Component({
   selector: 'app-search-jobs',
@@ -18,6 +19,7 @@ export class SearchJobsComponent implements OnInit, OnDestroy {
   public jobs: Job[] = [];
   public jobsPaginated: Job[] = [];
   public ngUnsubscribe$ = new Subject<void>();
+  public userId: string;
 
   constructor(
     private jobsService: JobsService,
@@ -32,6 +34,11 @@ export class SearchJobsComponent implements OnInit, OnDestroy {
         this.jobs = jobs;
         this.jobsPaginated = this.jobs.slice(0, 2);
     });
+    this.store.select(getUserInfo)
+      .pipe(takeUntil(this.ngUnsubscribe$))
+      .subscribe(user => {
+        this.userId = user.id;
+      });
   }
 
   onPageChange($event) {
@@ -40,6 +47,10 @@ export class SearchJobsComponent implements OnInit, OnDestroy {
 
   public onJobClick(id: string): void {
     this.router.navigate(['in/d/search-jobs', id]);
+  }
+
+  public getJobStatus(job: Job): boolean {
+    return job.devProposals.includes(this.userId);
   }
 
   ngOnDestroy(): void {

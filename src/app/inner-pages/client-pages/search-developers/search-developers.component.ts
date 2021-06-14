@@ -26,8 +26,7 @@ export class SearchDevelopersComponent implements OnInit, OnDestroy {
     private developersService: DevelopersService,
     private store: Store<State>,
     private router: Router
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.developers$ = this.store.select(getDevelopers)

@@ -51,6 +51,10 @@ export class DevelopersService {
     return this.http.get<Developer[]>(`${this.apiUrl}${ApiConstants.accountsSearch}?searchTerm=${searchTerm}`);
   }
 
+  public getDevelopersById(ids: string[]): Observable<Developer[]> {
+    return this.http.post<Developer[]>(`${this.apiUrl}${ApiConstants.accountsQueue}`, ids);
+  }
+
   public uploadProjectImage(image: FormData, projectId: string): Observable<string> {
     return this.http.post<string>(`${this.apiUrl}${ApiConstants.accounts}/${this.id}/projects/${projectId}/image`, image);
   }

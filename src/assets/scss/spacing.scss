@@ -96,15 +96,27 @@
   }
 
   &__bottom {
+    &--10 {
+      margin-bottom: 10px;
+    }
+
+    &--20 {
+      margin-bottom: 20px;
+    }
+
     &--30 {
       margin-bottom: 30px;
     }
 
-    &--10 {
-      margin-bottom: 10px;
+    &--60 {
+      margin-bottom: 60px;
     }
     &--50 {
       margin-bottom: 50px;
+    }
+
+    &--60 {
+      margin-bottom: 60px;
     }
   }
 }
@@ -124,6 +136,10 @@
 
   &__30 {
     padding: 30px;
+  }
+
+  &__60 {
+    padding: 60px;
   }
 
 }
@@ -203,6 +219,10 @@
 .h {
   &__auto {
     height: auto !important;
+  }
+
+  &__50 {
+    height: 50px;
   }
 
   &__80 {

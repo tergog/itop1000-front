@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as jwtDecode from 'jwt-decode';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
-import { environment } from 'environments/environment';
-import { ApiConstants } from 'app/constants/api.constants';
 import { Job } from 'app/shared/models';
 import { TOKEN } from 'app/constants/constants';
+import { environment } from 'environments/environment';
+import { ApiConstants } from 'app/constants/api.constants';
 
 @Injectable({
   providedIn: 'root'
@@ -45,5 +45,9 @@ export class JobsService {
 
   public updateJob(jobId: string, jobData: Job): Observable<Job> {
     return this.http.patch<Job>(`${this.apiUrl}${ApiConstants.jobs}/${jobId}`, jobData);
+  }
+
+  public applyDevToJob(jobId: string, userId: string): Observable<object> {
+    return this.http.post(`${this.apiUrl}${ApiConstants.jobsApply}`, { jobId, userId });
   }
 }

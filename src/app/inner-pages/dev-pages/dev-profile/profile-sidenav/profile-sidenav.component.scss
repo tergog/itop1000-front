@@ -2,27 +2,9 @@
 
 :host {
   display: inline-block;
-  min-width: 250px;
-}
-
-ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-
-  li {
-    padding: 10px;
-    cursor: pointer;
-    transition: ease 0.1s;
-
-    &.active {
-      cursor: default;
-      transform: scale(1.05, 1.05);
-
-      span {
-        font-weight: 600;
-        color: $color-2;
-      }
-    }
-  }
+  min-width: 420px;
+  min-height: 1377px;
+  background: $color-1;
+  padding: 80px 10px;
+  position: relative;
 }
