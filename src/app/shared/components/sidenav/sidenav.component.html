@@ -1,0 +1,126 @@
+<!--<div class="active-menu-item d__flex d__flex&#45;&#45;justify&#45;&#45;items-center m__bottom&#45;&#45;30 w__350 h__50">-->
+<!--  <ng-template [cdkPortalOutlet]="domPortal"></ng-template>-->
+<!--</div>-->
+
+<ul>
+  <li class="d__flex text__color--3" #defaultActive
+      [class.active]="devActiveSection === devProfileSections.ApprovedProjects"
+      (click)="onSectionCLick(devProfileSections.ApprovedProjects, $event.currentTarget)"
+  >
+    <i class="approved-projects-sidenav m__right--10"></i>
+    <span class="text text__lg">Projects</span>
+  </li>
+
+  <li class="d__flex text__color--3"
+      [class.active]="devActiveSection === devProfileSections.Education"
+      (click)="onSectionCLick(devProfileSections.Education, $event.currentTarget)"
+  >
+    <i class="education-sidenav m__right--10"></i>
+    <span class="text text__lg">Education</span>
+  </li>
+
+  <li class="d__flex text__color--3"
+      [class.active]="devActiveSection === devProfileSections.SoftSAndSkills"
+      (click)="onSectionCLick(devProfileSections.SoftSAndSkills, $event.currentTarget)"
+  >
+    <i class="soft-skills-sidenav m__right--10"></i>
+    <span class="text text__lg">Soft skills</span>
+  </li>
+
+  <li class="d__flex text__color--3"
+      [class.active]="devActiveSection === devProfileSections.CategoriesAndSkills"
+      (click)="onSectionCLick(devProfileSections.CategoriesAndSkills, $event.currentTarget)"
+  >
+    <i class="categories-and-skills-sidenav m__right--10"></i>
+    <span class="text text__lg">Categories & Skills</span>
+  </li>
+
+  <li class="d__flex text__color--3"
+      [class.active]="devActiveSection === devProfileSections.PasswordAndSecurity"
+      (click)="onSectionCLick(devProfileSections.PasswordAndSecurity, $event.currentTarget)"
+  >
+    <i class="password-and-security-sidenav m__right--10"></i>
+    <span class="text text__lg">Password & Security</span>
+  </li>
+
+  <li class="d__flex text__color--3"
+      [class.active]="devActiveSection === devProfileSections.BillingAndPayments"
+      (click)="onSectionCLick(devProfileSections.BillingAndPayments, $event.currentTarget)"
+  >
+    <i class="billing-and-payments-sidenav m__right--10"></i>
+    <span class="text text__lg">Billing & Payments</span>
+  </li>
+
+  <li class="d__flex text__color--3"
+      [class.active]="devActiveSection === devProfileSections.Reviews"
+      (click)="onSectionCLick(devProfileSections.Reviews, $event.currentTarget)"
+  >
+    <i class="reviews-sidenav m__right--10"></i>
+    <span class="text text__lg">Reviews</span>
+  </li>
+
+  <li class="d__flex text__color--3 d__flex--items-center"
+      [class.active]="devActiveSection === devProfileSections.Employment"
+      (click)="onSectionCLick(devProfileSections.Employment, $event.currentTarget)"
+  >
+    <i class="employment-sidenav m__right--10"></i>
+    <span class="text text__lg">Employment</span>
+  </li>
+
+  <li class="d__flex text__color--3"
+      [class.active]="devActiveSection === devProfileSections.ExpertiseLevel"
+      (click)="onSectionCLick(devProfileSections.ExpertiseLevel, $event.currentTarget)"
+  >
+    <i class="expertise-level-sidenav m__right--10"></i>
+    <span class="text text__lg">Expertise Level</span>
+  </li>
+
+  <li class="d__flex text__color--3"
+      [class.active]="devActiveSection === devProfileSections.Contracts"
+      (click)="onSectionCLick(devProfileSections.Contracts, $event.currentTarget)"
+  >
+    <i class="contracts-sidenav m__right--10"></i>
+    <span class="text text__lg">Contracts</span>
+  </li>
+
+  <li class="d__flex text__color--3"
+      [class.active]="devActiveSection === devProfileSections.Languages"
+      (click)="onSectionCLick(devProfileSections.Languages, $event.currentTarget)"
+  >
+    <i class="languages-sidenav m__right--10"></i>
+    <span class="text text__lg">Languages</span>
+  </li>
+
+  <li class="d__flex text__color--3"
+      [class.active]="devActiveSection === devProfileSections.HourlyRate"
+      (click)="onSectionCLick(devProfileSections.HourlyRate, $event.currentTarget)"
+  >
+    <i class="hourly-rate-sidenav m__right--10"></i>
+    <span class="text text__lg">Hourly rate</span>
+  </li>
+
+  <li class="d__flex text__color--3"
+      [class.active]="devActiveSection === devProfileSections.ProfilePhoto"
+      (click)="onSectionCLick(devProfileSections.ProfilePhoto, $event.currentTarget)"
+  >
+    <i class="profile-photo-sidenav m__right--10"></i>
+    <span class="text text__lg">Profile photo</span>
+  </li>
+
+  <li class="d__flex text__color--3"
+      [class.active]="devActiveSection === devProfileSections.Location"
+      (click)="onSectionCLick(devProfileSections.Location, $event.currentTarget)"
+  >
+    <i class="location-sidenav m__right--10"></i>
+    <span class="text text__lg">Location</span>
+  </li>
+
+  <li class="d__flex text__color--3" #defaultActive
+      [class.active]="devActiveSection === devProfileSections.ContactInfo"
+      (click)="onSectionCLick(devProfileSections.ContactInfo, $event.currentTarget)"
+  >
+    <i class="contact-info-sidenav m__right--10"></i>
+    <span class="text text__lg">Contact info</span>
+  </li>
+
+</ul>

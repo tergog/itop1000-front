@@ -13,19 +13,22 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { NgxPhoneMaskModule } from 'ngx-phone-mask';
 import { ReactiveComponentModule } from '@ngrx/component';
 
-import { InputComponent } from 'app/shared/components/input/input.component';
-import { CheckboxComponent } from 'app/shared/components/checkbox/checkbox.component';
-import { ButtonComponent } from 'app/shared/components/button/button.component';
-import { TextareaComponent } from 'app/shared/components/textarea/textarea.component';
-import { ClickedOutsideDirective } from './directives/click-outside.directive';
-import { SeparatorComponent } from './components/separator/separator.component';
-import { TimezoneComponent } from './components/timezone/timezone.component';
-import { AddressComponent } from 'app/shared/components/address/address.component';
-import { PhoneRegexComponent } from './components/phone-regex/phone-regex.component';
 import { ResumeService } from './services/resume.service';
 import { SelectComponent } from './components/select/select.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { InputComponent } from 'app/shared/components/input/input.component';
+import { TimezoneComponent } from './components/timezone/timezone.component';
+import { ClickedOutsideDirective } from './directives/click-outside.directive';
+import { ButtonComponent } from 'app/shared/components/button/button.component';
+import { SeparatorComponent } from './components/separator/separator.component';
+import { AddressComponent } from 'app/shared/components/address/address.component';
+import { PhoneRegexComponent } from './components/phone-regex/phone-regex.component';
+import { CheckboxComponent } from 'app/shared/components/checkbox/checkbox.component';
+import { TextareaComponent } from 'app/shared/components/textarea/textarea.component';
+import { ProfileCardComponent } from './components/profile-card/profile-card.component';
 import { DropDownListComponent } from './components/drop-down-list/drop-down-list.component';
 import { AlertContainerComponent } from 'app/auth/components/alert-container/alert-container.component';
+import { PortalModule } from "@angular/cdk/portal";
 
 @NgModule({
   declarations: [
@@ -33,6 +36,8 @@ import { AlertContainerComponent } from 'app/auth/components/alert-container/ale
     CheckboxComponent,
     ButtonComponent,
     TextareaComponent,
+    ProfileCardComponent,
+    SidenavComponent,
     ClickedOutsideDirective,
     SeparatorComponent,
     TimezoneComponent,
@@ -44,24 +49,26 @@ import { AlertContainerComponent } from 'app/auth/components/alert-container/ale
   ],
   exports: [
     InputComponent,
+    SidenavComponent,
     CheckboxComponent,
     ButtonComponent,
-    MatAutocompleteModule,
-    MatChipsModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatOptionModule,
-    OverlayModule,
     TextareaComponent,
-    NgCircleProgressModule,
     ClickedOutsideDirective,
     SeparatorComponent,
     TimezoneComponent,
     AddressComponent,
     PhoneRegexComponent,
+    ProfileCardComponent,
     SelectComponent,
+    OverlayModule,
+    MatIconModule,
+    MatChipsModule,
+    MatDialogModule,
+    MatOptionModule,
+    MatFormFieldModule,
     DropDownListComponent,
+    MatAutocompleteModule,
+    NgCircleProgressModule,
     AlertContainerComponent,
     ReactiveComponentModule
   ],
@@ -79,7 +86,8 @@ import { AlertContainerComponent } from 'app/auth/components/alert-container/ale
     NgCircleProgressModule,
     GooglePlaceModule,
     ReactiveFormsModule,
-    NgxPhoneMaskModule
+    NgxPhoneMaskModule,
+    PortalModule
   ],
   providers: [
     CircleProgressOptions,
