@@ -1,8 +1,8 @@
-<!--<div class="active-menu-item d__flex d__flex&#45;&#45;justify&#45;&#45;items-center m__bottom&#45;&#45;30 w__350 h__50">-->
-<!--  <ng-template [cdkPortalOutlet]="domPortal"></ng-template>-->
-<!--</div>-->
+<div class="active-menu-item d__flex d__flex--justify--items-center m__bottom--30 w__350 h__50">
+  <ng-template [cdkPortalOutlet]="domPortal"></ng-template>
+</div>
 
-<ul>
+<ul *ngIf="userType === 'developer'">
   <li class="d__flex text__color--3" #defaultActive
       [class.active]="devActiveSection === devProfileSections.ApprovedProjects"
       (click)="onSectionCLick(devProfileSections.ApprovedProjects, $event.currentTarget)"
@@ -122,5 +122,78 @@
     <i class="contact-info-sidenav m__right--10"></i>
     <span class="text text__lg">Contact info</span>
   </li>
+</ul>
 
+<ul *ngIf="userType === 'client'">
+  <li class="d__flex text__color--3" #defaultActive
+      [class.active]="clientActiveSection === clientProfileSections.PostedJobs"
+      (click)="onSectionCLick(clientProfileSections.PostedJobs, $event.currentTarget)"
+  >
+    <i class="approved-projects-sidenav m__right--10"></i>
+    <span class="text text__lg">Posted jobs</span>
+  </li>
+
+  <li class="d__flex text__color--3"
+      [class.active]="clientActiveSection === clientProfileSections.KeySkills"
+      (click)="onSectionCLick(clientProfileSections.KeySkills, $event.currentTarget)"
+  >
+    <i class="education-sidenav m__right--10"></i>
+    <span class="text text__lg">Key skills</span>
+  </li>
+
+  <li class="d__flex text__color--3"
+      [class.active]="clientActiveSection === clientProfileSections.Duration"
+      (click)="onSectionCLick(clientProfileSections.Duration, $event.currentTarget)"
+  >
+    <i class="soft-skills-sidenav m__right--10"></i>
+    <span class="text text__lg">Duration</span>
+  </li>
+
+  <li class="d__flex text__color--3"
+      [class.active]="clientActiveSection === clientProfileSections.Balance"
+      (click)="onSectionCLick(clientProfileSections.Balance, $event.currentTarget)"
+  >
+    <i class="categories-and-skills-sidenav m__right--10"></i>
+    <span class="text text__lg">Balance</span>
+  </li>
+
+  <li class="d__flex text__color--3"
+      [class.active]="clientActiveSection === clientProfileSections.ContactInfo"
+      (click)="onSectionCLick(clientProfileSections.ContactInfo, $event.currentTarget)"
+  >
+    <i class="billing-and-payments-sidenav m__right--10"></i>
+    <span class="text text__lg">Contact info</span>
+  </li>
+
+  <li class="d__flex text__color--3"
+      [class.active]="clientActiveSection === clientProfileSections.Contracts"
+      (click)="onSectionCLick(clientProfileSections.Contracts, $event.currentTarget)"
+  >
+    <i class="reviews-sidenav m__right--10"></i>
+    <span class="text text__lg">Contracts</span>
+  </li>
+
+  <li class="d__flex text__color--3 d__flex--items-center"
+      [class.active]="clientActiveSection === clientProfileSections.Billings"
+      (click)="onSectionCLick(clientProfileSections.Billings, $event.currentTarget)"
+  >
+    <i class="employment-sidenav m__right--10"></i>
+    <span class="text text__lg">Billing & Payments</span>
+  </li>
+
+  <li class="d__flex text__color--3"
+      [class.active]="clientActiveSection === clientProfileSections.PasswordAndSecurity"
+      (click)="onSectionCLick(clientProfileSections.PasswordAndSecurity, $event.currentTarget)"
+  >
+    <i class="password-and-security-sidenav m__right--10"></i>
+    <span class="text text__lg">Password & Security</span>
+  </li>
+
+  <li class="d__flex text__color--3"
+      [class.active]="clientActiveSection === clientProfileSections.ProfilePhoto"
+      (click)="onSectionCLick(clientProfileSections.ProfilePhoto, $event.currentTarget)"
+  >
+    <i class="hourly-rate-sidenav m__right--10"></i>
+    <span class="text text__lg">Profile photo</span>
+  </li>
 </ul>

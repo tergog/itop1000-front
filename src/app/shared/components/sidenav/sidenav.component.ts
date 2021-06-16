@@ -2,7 +2,7 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
-  EventEmitter,
+  EventEmitter, Input,
   Output,
   ViewChild
 } from '@angular/core';
@@ -18,15 +18,16 @@ import { EClientProfileSections } from 'app/inner-pages/client-pages/client-prof
 })
 export class SidenavComponent implements AfterViewInit {
   @ViewChild('defaultActive') defaultActive;
-  @Output() section = new EventEmitter<EDevProfileSections>();
+  @Input() userType: string;
+  @Output() section = new EventEmitter<EDevProfileSections | EClientProfileSections>();
 
   domPortal: DomPortal<any>;
 
   public devProfileSections = EDevProfileSections;
-  public devActiveSection: EDevProfileSections =  EDevProfileSections.ApprovedProjects;
+  public devActiveSection: EDevProfileSections | EClientProfileSections =  EDevProfileSections.ApprovedProjects;
 
   public clientProfileSections = EClientProfileSections;
-  public clientActiveSection: EClientProfileSections =  EClientProfileSections.PostedJobs;
+  public clientActiveSection: EDevProfileSections | EClientProfileSections =  EClientProfileSections.PostedJobs;
 
   constructor(private cdr: ChangeDetectorRef) { }
 
@@ -35,9 +36,15 @@ export class SidenavComponent implements AfterViewInit {
     this.cdr.detectChanges();
   }
 
-  public onSectionCLick(selectedSection: EDevProfileSections, elem?): void {
+  public onSectionCLick(selectedSection: EDevProfileSections | EClientProfileSections, elem?): void {
     this.domPortal = new DomPortal(elem);
-    this.devActiveSection = selectedSection;
+
+    if (this.userType === 'developer') {
+      this.devActiveSection = selectedSection;
+    } else {
+      this.clientActiveSection = selectedSection;
+    }
+
     this.section.emit(selectedSection);
   }
 

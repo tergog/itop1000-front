@@ -29,9 +29,6 @@ export class ActiveProjectsComponent implements OnInit {
         map((user: UserInfo) => user.id),
         switchMap((id: string) => this.projectService.getActiveProjects(id))
       );
-    this.projects$.subscribe(res => {
-      debugger
-    })
   }
 
   public onProjectClick(project): void {
