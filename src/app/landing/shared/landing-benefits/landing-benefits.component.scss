@@ -19,20 +19,20 @@
 }
 
 .title {
-  @media (max-width: 920px) {
+  @media (max-width: 1023px) {
     font-size: 40px;
   }
 
-  @media (max-width: 710px) {
+  @media (max-width: 767px) {
     font-size: 25px;
   }
 
-  @media (max-width: 360px) {
+  @media (max-width: 374px) {
     font-size: 20px;
   }
 }
 
-@media screen and (max-width: 400px){
+@media screen and (max-width: 423px){
   .text span {
     word-wrap: break-word;
     display: block;
@@ -48,11 +48,11 @@
 
   .description {
     font-size: 13px;
-    max-width: 370px;
+    max-width: 310px;
   }
 }
 
-@media screen and (max-width: 360px){
+@media screen and (max-width: 374px){
 
   .title-wrap {
     width: 300px;
@@ -60,12 +60,6 @@
   }
 }
 
-@media screen and (max-width: 330px){
-
-  .description {
-    max-width: 310px;
-  }
-}
 
 @media screen and (max-width: 320px){
 

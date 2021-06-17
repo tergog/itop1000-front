@@ -7,20 +7,23 @@
     max-width: 370px;
   }
 
-  @media (max-width: 330px) {
+  @media (max-width: 374px) {
     max-width: 315px;
   }
 }
 
 .separator {
-  @media(max-width: 500px) {
-    width: 450px;
+  @media(max-width: 767px) {
+    width: 420px;
   }
-  @media(max-width: 460px) {
-    width: 390px;
+  @media(max-width: 423px) {
+    width: 370px;
   }
-  @media(max-width: 400px) {
-    width: 300px;
+  @media(max-width: 374px) {
+    width: 318px;
+  }
+  @media(max-width: 320px) {
+    width: 280px;
   }
 }
 
