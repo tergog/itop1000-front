@@ -1,6 +1,6 @@
 <i class="logo-preview-2 cursor__pointer" routerLink="/landing"></i>
 
-<div class="d__flex d__flex--items-center">
+<div class="d__flex d__flex--items-center header-items">
     <a class="text text__fw--300 text__color--3 text__xlg text__decoration--none m__right--20" href="">Services</a>
     <span class="m__right--20 text__color--2 text__xxlg">|</span>
 
@@ -13,8 +13,13 @@
     <a class="text text__fw--300 text__color--3 text__xlg text__decoration--none" href="">Question-answer</a>
 </div>
 
+  <button mat-icon-button class="visible burger-menu" (click)="toggleSidebar()">
+    <mat-icon class="burger-menu"> {{!isOpened ? 'menu' : 'close'}}</mat-icon>
+  </button>
+
+
 <div class="d__flex d__flex--items-center">
-  <a class="m__right--20 text text__decoration--none text__fw--300 text__xlg text__color--5 cursor__pointer" routerLink="/auth/login">Sign in</a>
+  <a class="login-btn m__right--20 text text__decoration--none text__fw--300 text__xlg text__color--5 cursor__pointer" routerLink="/auth/login">Sign in</a>
   <a class="registration-btn text text__decoration--none text__fw--300 text__xlg text__color--5 cursor__pointer" routerLink="/auth/signup">Sign up</a>
 </div>
 

@@ -8,3 +8,25 @@
 .description {
   max-width: 680px;
 }
+
+@media screen and (max-width: 1023px) {
+  .wrap {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 500px){
+
+  :host {
+    padding: 0 10px;
+  }
+
+  .wrap span:nth-child(1) {
+    font-size: 35px;
+    margin-left: 115px;
+  }
+  .wrap span:nth-child(2) {
+    font-size: 25px;
+  }
+}

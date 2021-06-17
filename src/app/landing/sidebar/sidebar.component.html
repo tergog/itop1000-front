@@ -1,0 +1,17 @@
+<ng-sidebar-container [class]="opened? 'overlay' : ''" [style.zIndex]="!opened? '-500': '500'" >
+  <ng-sidebar [opened]="opened" position="right">
+    <div class="sidebar-inner">
+      <a class="text text__fw--300 text__color--3 text__xlg text__decoration--none m__right--20" href="">Services</a>
+
+      <a class="text text__fw--300 text__color--3 text__xlg text__decoration--none m__right--20" href="">Specialists</a>
+
+      <a class="text text__fw--300 text__color--3 text__xlg text__decoration--none m__right--20" href="">Projects</a>
+
+      <a class="text text__fw--300 text__color--3 text__xlg text__decoration--none" href="">Question-answer</a>
+    </div>
+    <div class="sidebar-auth d__flex d__flex--items-center">
+      <a class="login-btn m__right--20 text text__decoration--none text__fw--300 text__xlg text__color--5 cursor__pointer" routerLink="/auth/login">Sign in</a>
+      <a class="registration-btn text text__decoration--none text__fw--300 text__xlg text__color--5 cursor__pointer" routerLink="/auth/signup">Sign up</a>
+    </div>
+  </ng-sidebar>
+</ng-sidebar-container>

@@ -8,6 +8,13 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 })
 export class LandingComponent {
 
-  constructor() { }
+  sidebarStatus: boolean;
 
+  constructor() {
+    this.sidebarStatus = false;
+  }
+
+  changed(status: boolean): void {
+    this.sidebarStatus = status;
+  }
 }

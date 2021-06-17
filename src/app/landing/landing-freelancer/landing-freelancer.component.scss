@@ -2,4 +2,34 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (max-width: 424px) {
+    max-width: 370px;
+  }
+
+  @media (max-width: 374px) {
+    max-width: 315px;
+  }
+}
+
+.separator {
+  @media(max-width: 767px) {
+    width: 420px;
+  }
+  @media(max-width: 423px) {
+    width: 370px;
+  }
+  @media(max-width: 374px) {
+    width: 318px;
+  }
+  @media(max-width: 320px) {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 424px) {
+
+  .landing-title {
+    width: 320px;
+  }
 }

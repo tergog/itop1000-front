@@ -4,7 +4,7 @@
   padding: 0 220px 100px;
   background: rgb(39, 39, 39) url(~assets/img/search-bg.png);
   background-size: 4300px;
-    @media (max-width: 1440px) {
+    @media (max-width: 1439px) {
       padding: 0 100px 100px;
     }
 }
@@ -22,4 +22,32 @@ a {
   opacity: 0.9;
   width: 430px;
   border: 1px solid $text-color-6;
+
+  @media (max-width: 767px) {
+   width: 350px;
+  }
+
+  @media (max-width: 374px) {
+    width: 315px;
+  }
+
+  @media (max-width: 320px) {
+    width: 300px;
+  }
+}
+
+.header {
+  position: fixed;
+  width: 100%;
+  z-index: 600;
+}
+
+
+.sidebar-active {
+  position: relative;
+  top: 80px;
+}
+
+.sidebar-opened {
+  margin-top: 80px;
 }

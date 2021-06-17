@@ -7,6 +7,8 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { ReactiveComponentModule } from '@ngrx/component';
 import { NgxStripeModule } from 'ngx-stripe';
+import { SidebarModule } from "ng-sidebar";
+
 
 import { AppRoutingModule } from 'app/app-routing.module';
 import { AppComponent } from 'app/app.component';
@@ -32,6 +34,7 @@ import { SharedModule } from './shared/shared.module';
     BrowserAnimationsModule,
     NgxStripeModule.forRoot('pk_test_51HfRHCEuY58zLN527L8buA0YyVEdwwmwCiPgRNRiMhWdDdXaKgYOYeQ6bDNwDPXMtaAmtSSnbpaSzYYceAl7bSwh00wB02HoJj'),
     StoreModule.forRoot({}),
+    SidebarModule.forRoot(),
     SharedModule,
     EffectsModule.forRoot(),
     !environment.production ? StoreDevtoolsModule.instrument() : [],

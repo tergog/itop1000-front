@@ -7,6 +7,14 @@
   display: flex;
   justify-content: space-between;
   position: relative;
+
+  @media(max-width: 1439px) {
+    padding: 10px 20px;
+  }
+
+  @media(max-width: 320px) {
+    max-width: 320px;
+  }
 }
 
 .registration-btn {
@@ -15,3 +23,40 @@
   display: block;
   border: 1px solid $text-color-5;
 }
+
+:host::ng-deep.mat-icon {
+  color: #fff;
+}
+
+.visible {
+    display: none;
+}
+
+@media screen and (max-width: 1023px) {
+
+  .header-items {
+    display: none;
+  }
+
+  .burger-menu {
+    position: absolute;
+    right: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .login-btn {
+    display: none;
+  }
+
+  .registration-btn {
+    display: none;
+  }
+
+  .visible {
+    display: block;
+  }
+}
+
+

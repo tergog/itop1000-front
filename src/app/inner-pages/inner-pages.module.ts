@@ -11,6 +11,7 @@ import { SharedModule } from 'app/shared/shared.module';
 import { DevPagesGuard } from 'app/shared/guards/dev-pages.guard';
 import { ClientPagesGuard } from 'app/shared/guards/client-pages.guard';
 import { PagesSharedModule } from 'app/inner-pages/shared/pages-shared.module';
+;
 
 const routes: Routes = [
   {
@@ -32,7 +33,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, InnerPagesComponent],
+  declarations: [ HeaderComponent, FooterComponent, InnerPagesComponent ],
   imports: [
     CommonModule,
     ReactiveComponentModule,
@@ -42,5 +43,6 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
   ],
+  exports: []
 })
 export class InnerPagesModule {}
