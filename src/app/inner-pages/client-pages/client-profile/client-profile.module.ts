@@ -26,7 +26,8 @@ import { ClientContactInfoLocationPreviewComponent } from 'app/inner-pages/clien
 
 export const routes: Routes = [
   { path: '', component: ClientProfileComponent },
-  { path: 'job/:id', component: JobFullComponent}
+  { path: 'job/:id', component: JobFullComponent },
+  { path: 'create-job', component: CreateJobComponent, pathMatch: 'full' }
 ];
 
 @NgModule({

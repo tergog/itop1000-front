@@ -30,7 +30,8 @@ export class ClientPostedJobsComponent implements OnInit {
   }
 
   public postJobClick(): void {
-    this.isCreateJob = true;
+    // this.isCreateJob = true;
+    this.router.navigate(['/in/c/profile/create-job']);
   }
 
   public onEditClick(): void {

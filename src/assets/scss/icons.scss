@@ -7,7 +7,7 @@
 }
 
 .edit {
-  width: 30px;
+  min-width: 30px;
   height: 30px;
   border-radius: 50%;
   background: url(~assets/icons/edit.svg) no-repeat $color-3 center center;
@@ -683,4 +683,18 @@ i.search-alt {
   background-image: url(~assets/icons/search-alt.svg);
   background-repeat: no-repeat;
   background-position: center;
+}
+
+i.warning-icon-black {
+  width: 2px;
+  height: 15px;
+  background: url(~assets/icons/warning-black.svg) no-repeat;
+  background-size: contain;
+}
+
+i.upload-icon{
+  width: 18px;
+  height: 15px;
+  background: url(~assets/icons/upload.svg) no-repeat;
+  background-size: contain;
 }
