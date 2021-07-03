@@ -12,6 +12,7 @@ import { CircleProgressOptions, NgCircleProgressModule } from 'ng-circle-progres
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { NgxPhoneMaskModule } from 'ngx-phone-mask';
 import { ReactiveComponentModule } from '@ngrx/component';
+import { PortalModule } from '@angular/cdk/portal';
 
 import { ResumeService } from './services/resume.service';
 import { SelectComponent } from './components/select/select.component';
@@ -28,7 +29,7 @@ import { TextareaComponent } from 'app/shared/components/textarea/textarea.compo
 import { ProfileCardComponent } from './components/profile-card/profile-card.component';
 import { DropDownListComponent } from './components/drop-down-list/drop-down-list.component';
 import { AlertContainerComponent } from 'app/auth/components/alert-container/alert-container.component';
-import { PortalModule } from "@angular/cdk/portal";
+
 
 @NgModule({
   declarations: [
