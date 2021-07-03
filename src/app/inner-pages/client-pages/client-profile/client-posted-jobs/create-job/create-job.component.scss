@@ -1,10 +1,9 @@
-@import 'assets/scss/variables';
+@import '~assets/scss/variables';
 
 :host {
-  height: calc(100% - 125px);
+  height: calc(100% - 80px);
   display: flex;
   flex-direction: column;
-  //align-items: center;
   justify-content: flex-start;
   overflow: scroll;
   padding: 20px 12.5% 0;
@@ -26,16 +25,22 @@
       background: #F1D261;
       box-shadow: 0px 4px 4px rgba(224, 224, 224, 0.25);
     }
-    //&__file[type='file'] {
-    //  color: rgba(0, 0, 0, 0);
-    //  width: 200px;
-    //  height: 50px;
-    //  left: 361px;
-    //  top: 1246px;
-    //
-    //  border: 1px solid #F1D261;
-    //  box-sizing: border-box;
-    //}
+    &__properties {
+      padding-bottom: 20px;
+      border-bottom: 1px solid $color-12;
+
+    }
+    &__preferences {
+      &-save {
+        width: fit-content;
+        color: $text-color-2;
+        background-color: rgba(0, 0, 0, 0);
+        border: none;
+        outline: none;
+        justify-content: end;
+        margin-left: 90%;
+      }
+    }
   }
   .example-2 .btn-tertiary {
     color: #F1D261;;
@@ -45,10 +50,6 @@
     display: block;
     border: 1px solid #F1D261;
   }
-  //.example-2 .btn-tertiary:hover,.example-2 .btn-tertiary:focus {
-  //  color:#888;
-  //  border-color:#888
-  //}
 
   .example-2 .input-file {
     width: .1px;
@@ -72,8 +73,8 @@
   .badges {
     flex-wrap: wrap;
   }
-  .badge {
 
+  .badge {
     text-align: center;
     text-transform: capitalize;
     color: #ffffff;
@@ -83,5 +84,25 @@
     padding: 6px 20px 5px 20px ;
     margin-right: 10px;
     margin-bottom: 10px;
+  }
+
+  ::ng-deep {
+    .mat-form-field-label {
+      color: $color-3;
+    }
+    .mat-form-field.mat-focused .mat-form-field-label{
+      color: $text-color-6;
+    }
+    .mat-select-arrow-wrapper {
+      .mat-select-arrow {
+        color: #F31D42;
+      }
+    }
+    .mat-form-field-appearance-fill .mat-form-field-underline::before {
+      background-color: $color-12;
+    }
+    .mat-select {
+      width: 25%;
+    }
   }
 }

@@ -13,7 +13,6 @@ Include your expectations about the task or deliverable, what you are looking fo
 team ,or company. <a class="text__color--5"> Here are several examples </a>that illustrate best practices for effective job posts.</span>
   </div>
 
-
   <div class="d__flex d__flex--direction-column m__top--20 m__bottom--30">
     <app-textarea class="m__top--10" [placeholder]="'Already have a job description? Paste it here!'" formControlName="description"></app-textarea>
     <mat-error *ngIf="showError && form.get('description').errors?.required">Description required</mat-error>
@@ -24,15 +23,6 @@ team ,or company. <a class="text__color--5"> Here are several examples </a>that 
     </div>
     <span class="text text__lg text__color--5 m__top--5">Please add a job description.</span>
   </div>
-
-<!--  <div class="d__flex d__flex&#45;&#45;direction-column m__bottom&#45;&#45;60">-->
-<!--    <input type="file" name="file" id="file" class="input-file">-->
-<!--    <label for="file" class="btn btn-tertiary js-labelFile">-->
-<!--      <i class="icon fa fa-check"></i>-->
-<!--      <span class="js-fileName">Загрузить файл</span>-->
-<!--    </label>-->
-<!--  </div>-->
-
   <div class="example-2 d__flex d__flex--direction-column m__bottom--60">
     <div class="form-group m__bottom--20">
       <input formControlName="file" type="file" name="file" id="file" class="input-file">
@@ -43,13 +33,7 @@ team ,or company. <a class="text__color--5"> Here are several examples </a>that 
     </div>
     <div class="subtext text text__sm text__color--6">Max file size: 100 mb</div>
   </div>
-
-<!--  <div class="d__flex d__flex&#45;&#45;direction-column">-->
-<!--    <span class="text text__lg text__color&#45;&#45;3 text__fw&#45;&#45;600">Categories</span>-->
-<!--      <app-drop-down-list [isEdit]="isEdit" [allData]="allCategories$ | ngrxPush"  formControlName="categories" [placeholder]="'Add Categories...'"></app-drop-down-list>-->
-<!--      <mat-error *ngIf="showError && !form.get('categories').value.length">Categories required</mat-error>-->
-<!--  </div>-->
-  <div class="d__flex m__bottom--50">
+  <div class="d__flex m__bottom--50 job__properties">
     <div class="item w__40per m__right--80">
       <div class="d__flex d__flex--direction-column">
         <h4 class="text text__lg text__color--3 text__fw--600 m__bottom--20">Skills</h4>
@@ -87,58 +71,31 @@ team ,or company. <a class="text__color--5"> Here are several examples </a>that 
       </div>
     </div>
   </div>
-
-
-
   <div class="d__flex d__flex--direction-column">
-    <span class="text text__lg text__color--3 text__fw--600">Requirements</span>
-    <app-input class="m__top--10" [type]="'inner'" [placeholder]="'Requirements'" formControlName="requirements"></app-input>
-    <mat-error *ngIf="showError && form.get('requirements').errors?.required">Requirements required</mat-error>
-  </div>
-
-  <div class="d__flex d__flex--direction-column">
-    <span class="text text__lg text__color--3 text__fw--600">Duration</span>
-    <app-input class="m__top--10" [type]="'inner'" [placeholder]="'Duration'" formControlName="duration"></app-input>
-    <mat-error *ngIf="showError && form.get('duration').errors?.required">Duration required</mat-error>
-    <mat-error *ngIf="showError && form.get('duration').errors?.pattern">Duration should be a number</mat-error>
-  </div>
-
-  <div class="d__flex d__flex--direction-column">
-    <span class="text text__lg text__color--3 text__fw--600">Contract type</span>
     <mat-form-field appearance="fill">
-      <mat-label>Contract type</mat-label>
+      <mat-label>Screening questions (optional)</mat-label>
       <mat-select (selectionChange)="onSelect($event)">
-        <mat-option value="Hourly based">Hourly based</mat-option>
-        <mat-option value="Month based">Month based</mat-option>
+        <mat-option value="First Question">Hourly based</mat-option>
+        <mat-option value="Second Question">Month based</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-error *ngIf="showError && form.get('contractType').errors?.required">Contract type required</mat-error>
   </div>
 
-  <div class="d__flex d__flex--direction-column">
-    <span class="text text__lg text__color--3 text__fw--600">Price</span>
-    <app-input class="m__top--10" [type]="'inner'" [placeholder]="'Price'" formControlName="price"></app-input>
-    <mat-error *ngIf="showError && form.get('price').errors?.required">Price required</mat-error>
-    <mat-error *ngIf="showError && form.get('price').errors?.pattern">Price should be a number</mat-error>
+  <div class="d__flex d__flex--direction-column job__preferences m__bottom--90">
+    <h4 class="text text__lg text__color--3 text__fw--400">Advanced preferences (optional)</h4>
+    <span class="text text__sm text__color--6 text__fw--400">Hours per week, hire date, and more</span>
+    <mat-form-field appearance="fill">
+      <textarea matInput
+                formControlName="preferences"
+                cdkAutosizeMinRows="0"></textarea>
+    </mat-form-field>
+    <button class="job__preferences-save">Save as a draft</button>
   </div>
-
-  <div class="d__flex d__flex--direction-column">
-    <span class="text text__lg text__color--3 text__fw--600">Company</span>
-    <app-input class="m__top--10" [type]="'inner'" [placeholder]="'Company'" formControlName="company"></app-input>
-    <mat-error *ngIf="showError && form.get('company').errors?.required">Company required</mat-error>
-  </div>
-
-  <div class="d__flex d__flex--direction-column">
-    <span class="text text__lg text__color--3 text__fw--600">Address</span>
-    <app-address class="m__top--10" formControlName="address">
-    </app-address>
-    <mat-error *ngIf="showError && form.get('address').errors?.required">Address required</mat-error>
-  </div>
-
 </div>
 
-  <div class="m__top--10 text__right">
-    <app-button [type]="'transparent'" [text]="'Cancel'" (buttonClick)="onCancelClick()"></app-button>
-    <app-button [text]="'Post'" (buttonClick)="onPostClick()"></app-button>
-  </div>
+<div class="m__top--10 text__center m__bottom--50">
+  <app-button [type]="'transparent-gold'" [text]="'Back'" (buttonClick)="onCancelClick()"></app-button>
+  <app-button [text]="'Post your job now'" (buttonClick)="onPostClick()"></app-button>
+</div>
 

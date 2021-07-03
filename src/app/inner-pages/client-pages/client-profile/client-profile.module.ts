@@ -23,6 +23,9 @@ import { ClientContactInfoPreviewComponent } from 'app/inner-pages/client-pages/
 import { ClientContactInfoEditComponent } from 'app/inner-pages/client-pages/client-profile/client-contact-info/client-contact-info-edit/client-contact-info-edit.component';
 import { ClientContactInfoLocationEditComponent } from 'app/inner-pages/client-pages/client-profile/client-contact-info/client-contact-info-location-edit/client-contact-info-location-edit.component';
 import { ClientContactInfoLocationPreviewComponent } from 'app/inner-pages/client-pages/client-profile/client-contact-info/client-contact-info-location-preview/client-contact-info-location-preview.component';
+import { TextFieldModule } from "@angular/cdk/text-field";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
 
 export const routes: Routes = [
   { path: '', component: ClientProfileComponent },
@@ -46,17 +49,20 @@ export const routes: Routes = [
     ClientContactInfoLocationEditComponent,
     ClientContactInfoLocationPreviewComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    PagesSharedModule,
-    SharedModule,
-    ReactiveFormsModule,
-    MatTableModule,
-    MatPaginatorModule,
-    ReactiveComponentModule,
-    MatPaginatorModule,
-    MatSelectModule
-  ]
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        PagesSharedModule,
+        SharedModule,
+        ReactiveFormsModule,
+        MatTableModule,
+        MatPaginatorModule,
+        ReactiveComponentModule,
+        MatPaginatorModule,
+        MatSelectModule,
+        TextFieldModule,
+        MatFormFieldModule,
+        MatInputModule
+    ]
 })
 export class ClientProfileModule { }

@@ -1,4 +1,4 @@
-@import 'assets/scss/variables';
+@import '~assets/scss/variables';
 
 :host {
   @media (max-width: 576px) {
@@ -51,6 +51,14 @@
         color: $text-color-2;
       }
     }
+    &.transparent-gold {
+      background: transparent;
+      box-shadow: none;
+
+      span {
+        color: $text-color-5;
+      }
+    }
 
     &.chat-send {
       display: block;
@@ -80,6 +88,7 @@
         color: $text-color-5;
       }
     }
+
   }
 }
 
