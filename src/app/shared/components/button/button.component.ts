@@ -7,7 +7,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class ButtonComponent implements OnInit {
 
-  @Input() type: 'main' | 'secondary' | 'transparent';
+  @Input() type: 'main' | 'secondary' | 'transparent' | 'chat-send' | 'transparent-gold';
   @Input() text: string;
   @Input() disabled: boolean;
   @Output() buttonClick = new EventEmitter();

@@ -1,4 +1,5 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-footer-landing',
@@ -7,10 +8,12 @@ import { Component, Input, OnChanges, OnInit } from '@angular/core';
 })
 export class FooterLandingComponent implements OnInit {
 
+  @ViewChild('client') client: RouterLinkActive;
+  @ViewChild('freelancer') freelancer: RouterLinkActive;
+
   constructor() {
   }
-  
+
   ngOnInit(): void {
   }
-
 }

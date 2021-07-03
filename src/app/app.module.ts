@@ -18,6 +18,8 @@ import { HttpErrorHandlerService } from 'app/shared/services/http-error-handler.
 import { TokenInterceptor } from 'app/shared/interceptors/token.interceptor';
 import { ClientModule } from './core/client/store/client.module';
 import { SharedModule } from './shared/shared.module';
+import { ProjectApplicationsModule } from './inner-pages/client-pages/project-applications/project-applications.module';
+import { ChatModule } from './core/chats/store/chat.module';
 
 
 @NgModule({
@@ -35,7 +37,8 @@ import { SharedModule } from './shared/shared.module';
     SharedModule,
     EffectsModule.forRoot(),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    ReactiveComponentModule
+    ReactiveComponentModule,
+    ChatModule
   ],
   providers: [
     {
@@ -50,6 +53,7 @@ import { SharedModule } from './shared/shared.module';
     },
     AuthGuard,
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [ AppComponent ],
 })
-export class AppModule {}
+export class AppModule {
+}

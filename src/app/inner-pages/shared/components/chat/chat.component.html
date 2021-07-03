@@ -1,1 +1,19 @@
-<h1>ChatComponent Works</h1>
+<div class="chat">
+
+  <div class="chat__sidebar">
+    <app-search></app-search>
+    <app-conversations
+      [user]="user$ | async"
+      [chat]="chat$ | async"
+    ></app-conversations>
+  </div>
+
+  <div class="chat__history">
+    <app-message-box
+      *ngIf="(chat$ | async).conversations.active"
+      [user]="user$ | async"
+      [chat]="chat$ | async"
+    ></app-message-box>
+  </div>
+
+</div>

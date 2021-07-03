@@ -1,0 +1,41 @@
+@import 'assets/scss/variables';
+
+.sidenav-photo {
+  width: 135px;
+  height: 135px;
+  border-radius: 50%;
+  margin-bottom: 26px;
+  position: relative;
+}
+
+.gray-line {
+  opacity: 0.9;
+  width: 276px;
+  border: 1px solid #4B4949;
+  margin-bottom: 37px;
+}
+
+.profile-settings-btn {
+  border: 1px solid $color-2;
+  border-radius: 30px;
+  color: $color-2;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 10px;
+  background: transparent;
+  outline: none;
+  padding: 20px 30px;
+  margin-bottom: 18px;
+  cursor: pointer;
+}
+
+.light-point {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: $color-5;
+  position: absolute;
+  bottom: 5px;
+  right: 25px;
+}

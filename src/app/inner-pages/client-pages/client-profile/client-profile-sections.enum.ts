@@ -1,7 +1,12 @@
 export enum EClientProfileSections {
-  ContactInfo,
-  Billings,
+  KeySkills,
+  Duration,
   PostedJobs,
+  Balance,
+  ContactInfo,
+  Contracts,
+  Billings,
   Payments,
-  PasswordAndSecurity
+  PasswordAndSecurity,
+  ProfilePhoto
 }

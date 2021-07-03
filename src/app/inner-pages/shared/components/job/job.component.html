@@ -1,42 +1,58 @@
-<div class="left-side">
-  <div class="client-photo">
-    <img src="./assets/img/default-client-photo.svg" alt="client-photo">
+<div *ngIf="(userRole$ | ngrxPush) === role.Client" class="wrapper p__20">
+
+  <div class="d__flex m__bottom--10">
+    <div>
+      <div class="text text__font--2 text__fw--500 text__uppercase text__xlg">{{ job.title }}</div>
+      <div class="text__color--5">
+        <span class="text__md text__color--6">Hourly </span> ${{ job.price }}
+      </div>
+    </div>
+    <div class="d__flex m__left--auto">
+      <button (click)="onApplicationsClick()" class="proposals-btn m__right--10">
+        Proposals
+        <div>{{ this.job.devProposals.length }}</div>
+      </button>
+      <button (click)="onApplicationsClick()" class="proposals-btn m__right--10">
+        Messaged
+        <div>{{ this.job.devProposals.length }}</div>
+      </button>
+      <button (click)="onApplicationsClick()" class="proposals-btn m__right--10">
+        Hired
+        <div>{{ this.job.devProposals.length }}</div>
+      </button>
+    </div>
   </div>
-  <div
-    class="m__top--10 d__table-caption text text__x4lg text__center text__uppercase text__underline text__lighter">
-    {{ job.company || 'No Company' }}
+
+  <div class="text text__font--4 text__color--8">{{ job.description }}</div>
+</div>
+
+
+<div *ngIf="(userRole$ | ngrxPush) === role.Dev" class="left-side">
+  <div class="m__bottom--20">
+    <div class="text text__font--2 text__fw--500 text__uppercase text__x4lg m__bottom--10">{{ job.title }}</div>
+    <div class="text__color--5 text__center">
+      <span class="text__underline text__color--3">Project duration</span> {{ job.duration }} months
+    </div>
   </div>
-  <div class="m__top--10 text__center text__capitalize text__color--5 text__font--2">
-    ${{ job.price }}/{{ job.contractType === "Month based" ? 'Mth' : 'Hrs'}}
+  <div class="m__bottom--20 text__center text__capitalize text__color--5 text__font--2">
+    ${{ job.price }}/{{ job.contractType === "Month based" ? 'Mth' : 'Hrs' }}
   </div>
   <!--  TODO separate point styles, replace to assets/scss-->
   <p class="border-point border-point--right border-point--1"></p>
   <p class="border-point border-point--right border-point--2"></p>
   <p class="border-point border-point--right border-point--3"></p>
+  <button
+    *ngIf="(userRole$ | ngrxPush) === role.Dev"
+    (click)="applyDev()"
+    [disabled]="applyState"
+    class="accept-btn"
+    [class.accept-btn__default]="applyState"
+  >Accept a Job</button>
 </div>
 
-<div class="right-side">
-  <div class="d__flex h__100">
-    <div>
-      <div class="text text__font--2 text__fw--500 text__uppercase text__x4lg">{{ job.title }}</div>
-      <div class="text__color--5">
-        <span class="text__underline text__color--3">Project duration</span> {{ job.duration }} months
-      </div>
-    </div>
-    <div *ngIf="(userRole$ | ngrxPush) === role.Client" class="d__flex m__left--auto">
-      <i class="edit cursor__pointer m__right--10" (click)="$event.stopPropagation();onEditClick()"></i>
-      <i class="delete cursor__pointer" (click)="$event.stopPropagation();onArchiveClick()"></i>
-    </div>
-  </div>
+<div *ngIf="(userRole$ | ngrxPush) === role.Dev" class="right-side">
 
   <div class="text text__font--4 text__color--8">{{ job.description }}</div>
-  <div>
-    <div class="d__flex d__flex--flex-start d__flex--flex-wrap">
-      <span class="text__uppercase m--5"
-            *ngFor="let requirement of job.requirements.split(' ')">{{ requirement }}</span> <!-- TODO change logic-->
-    </div>
-    <hr class="splitter-line">
-  </div>
   <div>
     <div class="d__flex d__flex--flex-start d__flex--flex-wrap">
       <span class="text__uppercase m--5" *ngFor="let category of job.categories">{{ category.name }}</span>
@@ -49,6 +65,10 @@
     <span>{{ job.address }}</span>
     <span class="m__left--30 text__fw--300 text__font--2 text__capitalize">{{ job.dateCreated | date:'dd MMMM' }}</span>
   </div>
-
+  <button
+    *ngIf="(userRole$ | ngrxPush) === role.Client"
+    (click)="onApplicationsClick()"
+    class="proposals-btn m__top--15"
+  >Proposals {{ this.job.devProposals.length }}
+  </button>
 </div>
-

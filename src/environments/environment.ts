@@ -4,7 +4,8 @@
 export const environment = {
   production: false,
   // apiUrl: 'https://itop1000-back.herokuapp.com/'
-  apiUrl: 'http://localhost:4000/'
+  apiUrl: 'http://localhost:4000/',
+  wsUrl: 'http://localhost:1080'
 };
 
 // TODO CHANGE URL BEFORE PUSHING!!!

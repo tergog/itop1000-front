@@ -8,6 +8,10 @@
   }
 
   &__top {
+    &--5 {
+      margin-top: 5px;
+    }
+
     &--10 {
       margin-top: 10px;
     }
@@ -81,6 +85,9 @@
     &--50 {
       margin-right: 60px;
     }
+    &--80 {
+      margin-right: 80px;
+    }
   }
 
   &__left {
@@ -96,15 +103,32 @@
   }
 
   &__bottom {
+    &--10 {
+      margin-bottom: 10px;
+    }
+
+    &--20 {
+      margin-bottom: 20px;
+    }
+
     &--30 {
       margin-bottom: 30px;
     }
 
-    &--10 {
-      margin-bottom: 10px;
-    }
     &--50 {
       margin-bottom: 50px;
+    }
+
+    &--60 {
+      margin-bottom: 60px;
+    }
+
+    &--80 {
+      margin-bottom: 80px;
+    }
+
+    &--90 {
+      margin-bottom: 90px;
     }
   }
 }
@@ -124,6 +148,10 @@
 
   &__30 {
     padding: 30px;
+  }
+
+  &__60 {
+    padding: 60px;
   }
 
 }
@@ -191,6 +219,22 @@
     width: 600px !important;
   }
 
+  &__20per {
+    width: 20%;
+  }
+
+  &__25per {
+    width: 25%;
+  }
+
+  &__30per {
+    width: 30%;
+  }
+
+  &__40per {
+    width: 40%;
+  }
+
   &__50per {
     width: 50%;
   }
@@ -203,6 +247,10 @@
 .h {
   &__auto {
     height: auto !important;
+  }
+
+  &__50 {
+    height: 50px;
   }
 
   &__80 {

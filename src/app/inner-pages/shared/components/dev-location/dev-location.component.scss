@@ -1,0 +1,18 @@
+@import "src/assets/scss/variables";
+
+:host {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: $color-3;
+  width: 100%;
+  white-space: nowrap;
+  margin-bottom: 50px;
+}
+
+.grey-line{
+  width: 100%;
+  height: 1px;
+  margin: 0 30px;
+  background-color: #4B4949;
+}

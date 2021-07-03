@@ -1,7 +1,7 @@
 <ng-container *ngIf="jobsPaginated.length">
   <app-job *ngFor="let job of jobsPaginated"
            [job]="job"
-           (click)="onJobClick(job.id)">
+           [applyState]="getJobStatus(job)">
   </app-job>
 
   <mat-paginator [length]="jobs.length"

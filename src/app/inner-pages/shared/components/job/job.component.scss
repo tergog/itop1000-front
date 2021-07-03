@@ -1,4 +1,4 @@
-@import 'assets/scss/variables';
+@import '~assets/scss/variables';
 
 $min-height: 290px;
 $min-width-left: 170px;
@@ -10,10 +10,11 @@ $min-width-left: 170px;
   color: $text-color-3;
   justify-content: flex-start;
   box-sizing: border-box;
-  padding: 0 4.5%;
+  padding: 0;
   width: 100%;
   background-color: $color-1;
   cursor: pointer;
+  border-bottom: 2px solid $text-color-6;
 }
 
 :host:hover {
@@ -82,11 +83,8 @@ app-button {
 }
 
 .right-side {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   width: 70%;
-  padding: 2% 0 2% 4.5%;
+  padding: 2% 4% 2% 4.5%;
   font-family: 'Work Sans', sans-serif;
 
   div {
@@ -98,4 +96,47 @@ hr.splitter-line {
   height: 0;
   width: 100%;
   border-bottom: 1px solid #4B4949;
+}
+
+.accept-btn {
+  width: 105px;
+  height: 50px;
+
+  border: 1px solid #F31D42;
+  box-sizing: border-box;
+  border-radius: 30px;
+  font-family: Raleway;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  background: #F31D42;
+  color: $text-color-3;
+  &__default {
+    border: 1px solid #F31D42;
+    color: #F31D42;
+    background: none;
+  }
+}
+
+.proposals-btn {
+  width: fit-content;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 20px;
+  min-width: 110px;
+  /* or 143% */
+
+  background-color: $color-1;
+  border: none;
+  outline: none;
+  text-align: center;
+  text-transform: uppercase;
+
+  color: #F1D261;
+}
+
+.wrapper {
+  width: 100%;
 }

@@ -1,6 +1,13 @@
+@import "src/assets/scss/variables";
+
 :host {
   flex: 1;
-  height: 100%;
+  min-height: 100vh;
   position: relative;
+  padding-left: 60px;
+  padding-top: 50px;
+  padding-right: 120px;
+  padding-bottom: 50px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
+  background-color: rgba(0, 0, 0, 0.65);
 }

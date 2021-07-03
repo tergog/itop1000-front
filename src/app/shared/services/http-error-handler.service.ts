@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
+import { Injectable } from '@angular/core';
+import { catchError } from 'rxjs/operators';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 
 import * as fromCore from 'app/core/reducers';
 import { SetOnLogoutAction } from 'app/core/actions/core.actions';
@@ -20,10 +20,10 @@ export class HttpErrorHandlerService implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError((error) => {
         if (error.status === 401) {
-          this.store.dispatch(new SetOnLogoutAction())
+          this.store.dispatch(new SetOnLogoutAction());
         }
         throw error;
       })
-    )
+    );
   }
 }
