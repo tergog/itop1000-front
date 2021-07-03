@@ -1,8 +1,12 @@
-@import '../../../../../assets/scss/variables';
+@import 'assets/scss/variables';
 
 :host {
   display: inline-block;
-  min-width: 250px;
+  min-width: 420px;
+  min-height: 1377px;
+  background: $color-1;
+  padding: 80px 10px;
+  position: relative;
 }
 
 ul {

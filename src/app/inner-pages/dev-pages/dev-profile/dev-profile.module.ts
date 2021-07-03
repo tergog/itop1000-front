@@ -33,8 +33,6 @@ import { DevProjectCardComponent } from 'app/inner-pages/dev-pages/dev-profile/d
 import { DevProfileEditFormComponent } from 'app/inner-pages/dev-pages/dev-profile/shared/dev-profile-edit-form/dev-profile-edit-form.component';
 import { DevWantToLearnComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-want-to-learn/dev-want-to-learn.component';
 import { DevCertificatesComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-certificates/dev-certificates.component';
-import { ProfileCardComponent } from 'app/inner-pages/dev-pages/dev-profile/profile-sidenav/profile-card/profile-card.component';
-import { DevSidenavComponent } from 'app/inner-pages/dev-pages/dev-profile/profile-sidenav/dev-sidenav/dev-sidenav.component';
 import { DevApprovedProjectsComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-approved-projects/dev-approved-projects.component';
 import {DevProjectsComponent} from 'app/inner-pages/dev-pages/dev-profile/dev-projects/dev-projects.component';
 import { DevProjectApplicationsComponent } from 'app/inner-pages/dev-pages/dev-profile/dev-project-applications/dev-project-applications.component';
@@ -66,8 +64,6 @@ const routes: Routes = [
     DevProfileEditFormComponent,
     DevWantToLearnComponent,
     DevCertificatesComponent,
-    ProfileCardComponent,
-    DevSidenavComponent,
     DevApprovedProjectsComponent,
     DevProjectsComponent,
     DevProjectApplicationsComponent,

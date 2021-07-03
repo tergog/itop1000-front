@@ -6,17 +6,17 @@ import {
   Output,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSelectChange } from '@angular/material/select';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { MatSelectChange } from '@angular/material/select';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { JobsService, NotificationsService } from 'app/shared/services';
-import { NameValueModel, NotificationMessage } from 'app/shared/models';
 import { State } from 'app/core/reducers/index';
 import { GetJobsAction } from 'app/core/client/store/actions';
-import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
+import { JobsService, NotificationsService } from 'app/shared/services';
+import { NameValueModel, NotificationMessage } from 'app/shared/models';
 import { ENotificationStatus } from 'app/shared/enums/notification-status.enum';
+import { DevProfileService } from 'app/inner-pages/dev-pages/dev-profile/dev-profile.service';
 
 @Component({
   selector: 'app-create-job',
@@ -78,8 +78,11 @@ export class CreateJobComponent implements OnInit, OnDestroy {
       duration: new FormControl('', [Validators.required, Validators.pattern(/^\d+$/)]),
       contractType: new FormControl('', [Validators.required]),
       price: new FormControl('', [Validators.required, Validators.pattern(/^\d+$/)]),
-      address: new FormControl('123', [Validators.required]),
-      company: new FormControl('', [Validators.required])
+      address: new FormControl('', [Validators.required]),
+      company: new FormControl('', [Validators.required]),
+      file: new FormControl(null, []),
+      preferences: new FormControl(null, []),
+      questions: new FormControl(null, [])
     });
   }
 
